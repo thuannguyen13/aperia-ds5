@@ -67,7 +67,7 @@
   --border: var(--semantic-colors-shadcn-general-border);
   --input: var(--semantic-colors-shadcn-general-input);
   --ring: var(--semantic-colors-shadcn-focus-ring);
-  --radius: var(--border-radii-rounded-md);
+  --radius: var(--border-radii-rounded-lg);
   --sidebar: var(--semantic-colors-shadcn-sidebar-sidebar);
   --sidebar-foreground: var(--semantic-colors-shadcn-sidebar-sidebar-foreground);
   --sidebar-primary: var(--semantic-colors-shadcn-sidebar-sidebar-primary);

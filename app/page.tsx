@@ -3,15 +3,19 @@ import {
   ArrowUp,
   ArrowUpRight,
   ChevronRight,
+  DollarSign,
   Ellipsis,
   GitCompare,
   LoaderCircle,
   Mail,
+  Search,
   Trash2,
+  User,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Input } from "@/components/ui/input"
 
 type Section = {
   title: string
@@ -44,6 +48,31 @@ function Label({ children }: { children: React.ReactNode }) {
 function Caption({ children }: { children: React.ReactNode }) {
   return (
     <span className="font-mono text-[10px] text-muted-foreground">{children}</span>
+  )
+}
+
+function Field({
+  label,
+  description,
+  caption,
+  children,
+}: {
+  label: string
+  description?: string
+  caption?: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="flex w-56 flex-col gap-1.5">
+      <label className="text-sm font-medium text-foreground">{label}</label>
+      {children}
+      {description && (
+        <p className="text-xs text-muted-foreground">{description}</p>
+      )}
+      {caption && (
+        <span className="font-mono text-[10px] text-muted-foreground">{caption}</span>
+      )}
+    </div>
   )
 }
 
@@ -335,11 +364,129 @@ export default function Page() {
 
 
           <section>
-                  <Alert>
-                    <AlertTitle>This is an alert</AlertTitle>
-                    <AlertDescription> alkwd mlaw</AlertDescription>
-                  </Alert>
+            <Alert>
+              <AlertTitle>This is an alert</AlertTitle>
+              <AlertDescription>alkwd mlaw</AlertDescription>
+            </Alert>
           </section>
+        </div>
+
+        {/* ─── Input ───────────────────────────────────────────────────────── */}
+        <div className="space-y-8 rounded-xl border border-border p-6">
+          <h2 className="text-base font-semibold">Input</h2>
+
+          {/* Sizes */}
+          <Section title="Sizes" description="Height varies per size token">
+            <Field label="Mini" description="Compact inputs, table cells." caption="xs · 24px">
+              <Input size="xs" placeholder="Mini input" />
+            </Field>
+            <Field label="Small" description="Tight layouts, toolbars." caption="sm · 32px">
+              <Input size="sm" placeholder="Small input" />
+            </Field>
+            <Field label="Regular" description="Default for most forms." caption="default · 36px">
+              <Input size="default" placeholder="Regular input" />
+            </Field>
+            <Field label="Large" description="Prominent hero inputs." caption="lg · 40px">
+              <Input size="lg" placeholder="Large input" />
+            </Field>
+          </Section>
+
+          {/* Shape */}
+          <Section title="Shape" description="Corner radius variants">
+            <Field label="Default" description="Rounded corners (rounded-lg).">
+              <Input shape="default" placeholder="Default" />
+            </Field>
+            <Field label="Round" description="Fully pill-shaped (rounded-full).">
+              <Input shape="round" placeholder="Round" />
+            </Field>
+          </Section>
+
+          {/* States */}
+          <Section title="States" description="All Figma State variants">
+            <Field label="Empty" description="No value, no placeholder text.">
+              <Input />
+            </Field>
+            <Field label="Placeholder" description="Hint text shown when empty.">
+              <Input placeholder="name@example.com" />
+            </Field>
+            <Field label="Value" description="Input has a filled value.">
+              <Input defaultValue="john@acme.com" />
+            </Field>
+            <Field label="Error" description="Validation failed — use state=&quot;error&quot;.">
+              <Input placeholder="name@example.com" state="error" />
+            </Field>
+            <Field label="Error with value" description="Error state with existing input.">
+              <Input defaultValue="not-an-email" state="error" />
+            </Field>
+            <Field label="Disabled" description="Non-interactive, use state=&quot;disabled&quot;.">
+              <Input placeholder="Unavailable" state="disabled" />
+            </Field>
+          </Section>
+
+          {/* Icons */}
+          <Section title="Icons" description="Left and right icon decorations">
+            <Field label="Left icon" description="Contextual leading icon.">
+              <Input placeholder="Search…" leftIcon={<Search />} />
+            </Field>
+            <Field label="Right icon" description="Trailing action or status icon.">
+              <Input placeholder="Email address" rightIcon={<Mail />} />
+            </Field>
+            <Field label="Both icons" description="Leading and trailing together.">
+              <Input placeholder="Username" leftIcon={<User />} rightIcon={<Search />} />
+            </Field>
+            <Field label="Icon + error" description="Icon decoration in error state.">
+              <Input placeholder="Search…" leftIcon={<Search />} state="error" />
+            </Field>
+            <Field label="Icon + disabled" description="Icon decoration when disabled.">
+              <Input placeholder="Search…" leftIcon={<Search />} state="disabled" />
+            </Field>
+          </Section>
+
+          {/* Prefix / Suffix */}
+          <Section title="Prefix & Suffix" description="Inline text addons">
+            <Field label="Prefix" description="Text prepended inside the field.">
+              <Input placeholder="0.00" prefix="$" />
+            </Field>
+            <Field label="Suffix" description="Text appended inside the field.">
+              <Input placeholder="yourdomain" suffix=".com" />
+            </Field>
+            <Field label="Both" description="Prefix and suffix together.">
+              <Input placeholder="amount" prefix="$" suffix="USD" />
+            </Field>
+            <Field label="Icon + suffix" description="Combines icon decoration with suffix.">
+              <Input placeholder="amount" leftIcon={<DollarSign />} suffix="USD" />
+            </Field>
+          </Section>
+
+          {/* Size × Shape matrix */}
+          <Section title="Size × Shape Matrix" description="Every size at every shape">
+            <div className="w-full overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="py-2 pr-4 text-left font-medium text-muted-foreground">size \ shape</th>
+                    {(["default", "round"] as const).map((s) => (
+                      <th key={s} className="px-4 py-2 font-mono font-medium text-muted-foreground">{s}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {(["xs", "sm", "default", "lg"] as const).map((sz) => (
+                    <tr key={sz} className="border-b border-border/50 last:border-0">
+                      <td className="py-3 pr-4 font-mono text-muted-foreground">{sz}</td>
+                      {(["default", "round"] as const).map((sh) => (
+                        <td key={sh} className="px-4 py-3">
+                          <div className="w-44">
+                            <Input size={sz} shape={sh} placeholder="Input" />
+                          </div>
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Section>
         </div>
       </div>
     </div>
