@@ -21,7 +21,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": ["@figma/code-connect/figma-types"]
   },
   "include": [
     "next-env.d.ts",
@@ -29,6 +30,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-  ],
+, "style-dictionary.config.js"  ],
   "exclude": ["node_modules"]
 }
