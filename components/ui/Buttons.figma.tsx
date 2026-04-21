@@ -4,7 +4,7 @@ import figma from "@figma/code-connect"
 
 figma.connect(
   Button,
-  "https://www.figma.com/design/H4KukL6eIWt21GlJCxA7l9/Obra-shadcn-ui-kit-community-edition--1.6.0---Community-?node-id=9-1071",
+  "https://www.figma.com/design/Rt3p2w3NtM1X7d9NzDlMdO/Aperia-Shadcn?node-id=9-1071&t=Ve4Jlpc5Um6KhzyY-11",
   {
     props: {
       variant: figma.enum("Variant", {
@@ -26,10 +26,10 @@ figma.connect(
         Round:   "round",
       }),
       disabled: figma.enum("State", {
-        Default:            false,
-        "Hover & Active":   false,
-        Focus:              false,
-        Disabled:           true,
+        Default:          false,
+        "Hover & Active": false,
+        Focus:            false,
+        Disabled:         true,
       }),
     },
     example: ({ variant, size, shape, disabled }) => (

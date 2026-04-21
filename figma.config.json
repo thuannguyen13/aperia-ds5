@@ -2,7 +2,7 @@
   "codeConnect": {
     "parser": "react",
     "label": "React",
-    "include": ["components/**/*.figma.ts"],
+    "include": ["components/**/*.ts", "components/**/*.tsx"],
     "language": "jsx",
     "importPaths": {
       "components/**": "@/"
