@@ -2,6 +2,7 @@ import { LogIn } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -50,13 +51,13 @@ export default function LoginPage() {
             </Button>
 
             <div className="flex items-center gap-6">
-              <div className="h-px flex-1 bg-border" />
+              <Separator className="flex-1" />
               <span className="text-sm font-medium text-muted-foreground">Or continue with</span>
-              <div className="h-px flex-1 bg-border" />
+              <Separator className="flex-1" />
             </div>
 
             <Button variant="outline" size="default" className="w-full">
-              <GithubIcon className="size-4" />
+              <GithubIcon />
               Github
             </Button>
           </div>

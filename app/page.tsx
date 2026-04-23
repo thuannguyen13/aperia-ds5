@@ -16,6 +16,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Field, FieldLabel, FieldDescription } from "@/components/ui/field"
 
 type Section = {
   title: string
@@ -48,31 +50,6 @@ function Label({ children }: { children: React.ReactNode }) {
 function Caption({ children }: { children: React.ReactNode }) {
   return (
     <span className="font-mono text-[10px] text-muted-foreground">{children}</span>
-  )
-}
-
-function Field({
-  label,
-  description,
-  caption,
-  children,
-}: {
-  label: string
-  description?: string
-  caption?: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="flex w-56 flex-col gap-1.5">
-      <label className="text-sm font-medium text-foreground">{label}</label>
-      {children}
-      {description && (
-        <p className="text-xs text-muted-foreground">{description}</p>
-      )}
-      {caption && (
-        <span className="font-mono text-[10px] text-muted-foreground">{caption}</span>
-      )}
-    </div>
   )
 }
 
@@ -145,7 +122,7 @@ export default function Page() {
           <Section title="With Icons" description="Leading / trailing icon combinations">
             <Label>
               <Button variant="outline">
-                <GitCompare />
+                <GitCompare data-icon="inline-start" />
                 New Branch
               </Button>
               <Caption>leading icon</Caption>
@@ -153,20 +130,20 @@ export default function Page() {
             <Label>
               <Button variant="default">
                 Send
-                <ArrowUpRight />
+                <ArrowUpRight data-icon="inline-end" />
               </Button>
               <Caption>trailing icon</Caption>
             </Label>
             <Label>
               <Button variant="secondary">
-                <Mail />
+                <Mail data-icon="inline-start" />
                 Compose
               </Button>
               <Caption>secondary + icon</Caption>
             </Label>
             <Label>
               <Button variant="destructive">
-                <Trash2 />
+                <Trash2 data-icon="inline-start" />
                 Delete
               </Button>
               <Caption>destructive + icon</Caption>
@@ -233,7 +210,7 @@ export default function Page() {
             </Label>
             <Label>
               <Button variant="outline" disabled>
-                <LoaderCircle className="animate-spin" />
+                <LoaderCircle className="animate-spin" data-icon="inline-start" />
                 Loading…
               </Button>
               <Caption>loading</Caption>
@@ -371,90 +348,155 @@ export default function Page() {
           </section>
         </div>
 
+        {/* ─── Checkbox ────────────────────────────────────────────────────── */}
+        <div className="space-y-8 rounded-xl border border-border p-6">
+          <h2 className="text-base font-semibold">Checkbox</h2>
+          <Section title="States" description="Default checkbox states">
+            <Label>
+              <Checkbox />
+              <Caption>unchecked</Caption>
+            </Label>
+            <Label>
+              <Checkbox defaultChecked />
+              <Caption>checked</Caption>
+            </Label>
+            <Label>
+              <Checkbox disabled />
+              <Caption>disabled</Caption>
+            </Label>
+          </Section>
+        </div>
+
         {/* ─── Input ───────────────────────────────────────────────────────── */}
         <div className="space-y-8 rounded-xl border border-border p-6">
           <h2 className="text-base font-semibold">Input</h2>
 
           {/* Sizes */}
           <Section title="Sizes" description="Height varies per size token">
-            <Field label="Mini" description="Compact inputs, table cells." caption="xs · 24px">
+            <Field className="w-56">
+              <FieldLabel>Mini</FieldLabel>
               <Input size="xs" placeholder="Mini input" />
+              <FieldDescription>Compact inputs, table cells.</FieldDescription>
+              <span className="font-mono text-[10px] text-muted-foreground">xs · 24px</span>
             </Field>
-            <Field label="Small" description="Tight layouts, toolbars." caption="sm · 32px">
+            <Field className="w-56">
+              <FieldLabel>Small</FieldLabel>
               <Input size="sm" placeholder="Small input" />
+              <FieldDescription>Tight layouts, toolbars.</FieldDescription>
+              <span className="font-mono text-[10px] text-muted-foreground">sm · 32px</span>
             </Field>
-            <Field label="Regular" description="Default for most forms." caption="default · 36px">
+            <Field className="w-56">
+              <FieldLabel>Regular</FieldLabel>
               <Input size="default" placeholder="Regular input" />
+              <FieldDescription>Default for most forms.</FieldDescription>
+              <span className="font-mono text-[10px] text-muted-foreground">default · 36px</span>
             </Field>
-            <Field label="Large" description="Prominent hero inputs." caption="lg · 40px">
+            <Field className="w-56">
+              <FieldLabel>Large</FieldLabel>
               <Input size="lg" placeholder="Large input" />
+              <FieldDescription>Prominent hero inputs.</FieldDescription>
+              <span className="font-mono text-[10px] text-muted-foreground">lg · 40px</span>
             </Field>
           </Section>
 
           {/* Shape */}
           <Section title="Shape" description="Corner radius variants">
-            <Field label="Default" description="Rounded corners (rounded-lg).">
+            <Field className="w-56">
+              <FieldLabel>Default</FieldLabel>
               <Input shape="default" placeholder="Default" />
+              <FieldDescription>Rounded corners (rounded-lg).</FieldDescription>
             </Field>
-            <Field label="Round" description="Fully pill-shaped (rounded-full).">
+            <Field className="w-56">
+              <FieldLabel>Round</FieldLabel>
               <Input shape="round" placeholder="Round" />
+              <FieldDescription>Fully pill-shaped (rounded-full).</FieldDescription>
             </Field>
           </Section>
 
           {/* States */}
           <Section title="States" description="All Figma State variants">
-            <Field label="Empty" description="No value, no placeholder text.">
+            <Field className="w-56">
+              <FieldLabel>Empty</FieldLabel>
               <Input />
+              <FieldDescription>No value, no placeholder text.</FieldDescription>
             </Field>
-            <Field label="Placeholder" description="Hint text shown when empty.">
+            <Field className="w-56">
+              <FieldLabel>Placeholder</FieldLabel>
               <Input placeholder="name@example.com" />
+              <FieldDescription>Hint text shown when empty.</FieldDescription>
             </Field>
-            <Field label="Value" description="Input has a filled value.">
+            <Field className="w-56">
+              <FieldLabel>Value</FieldLabel>
               <Input defaultValue="john@acme.com" />
+              <FieldDescription>Input has a filled value.</FieldDescription>
             </Field>
-            <Field label="Error" description="Validation failed — use state=&quot;error&quot;.">
+            <Field className="w-56">
+              <FieldLabel>Error</FieldLabel>
               <Input placeholder="name@example.com" state="error" />
+              <FieldDescription>Validation failed — use state=&quot;error&quot;.</FieldDescription>
             </Field>
-            <Field label="Error with value" description="Error state with existing input.">
+            <Field className="w-56">
+              <FieldLabel>Error with value</FieldLabel>
               <Input defaultValue="not-an-email" state="error" />
+              <FieldDescription>Error state with existing input.</FieldDescription>
             </Field>
-            <Field label="Disabled" description="Non-interactive, use state=&quot;disabled&quot;.">
+            <Field className="w-56">
+              <FieldLabel>Disabled</FieldLabel>
               <Input placeholder="Unavailable" state="disabled" />
+              <FieldDescription>Non-interactive, use state=&quot;disabled&quot;.</FieldDescription>
             </Field>
           </Section>
 
           {/* Icons */}
           <Section title="Icons" description="Left and right icon decorations">
-            <Field label="Left icon" description="Contextual leading icon.">
+            <Field className="w-56">
+              <FieldLabel>Left icon</FieldLabel>
               <Input placeholder="Search…" leftIcon={<Search />} />
+              <FieldDescription>Contextual leading icon.</FieldDescription>
             </Field>
-            <Field label="Right icon" description="Trailing action or status icon.">
+            <Field className="w-56">
+              <FieldLabel>Right icon</FieldLabel>
               <Input placeholder="Email address" rightIcon={<Mail />} />
+              <FieldDescription>Trailing action or status icon.</FieldDescription>
             </Field>
-            <Field label="Both icons" description="Leading and trailing together.">
+            <Field className="w-56">
+              <FieldLabel>Both icons</FieldLabel>
               <Input placeholder="Username" leftIcon={<User />} rightIcon={<Search />} />
+              <FieldDescription>Leading and trailing together.</FieldDescription>
             </Field>
-            <Field label="Icon + error" description="Icon decoration in error state.">
+            <Field className="w-56">
+              <FieldLabel>Icon + error</FieldLabel>
               <Input placeholder="Search…" leftIcon={<Search />} state="error" />
+              <FieldDescription>Icon decoration in error state.</FieldDescription>
             </Field>
-            <Field label="Icon + disabled" description="Icon decoration when disabled.">
+            <Field className="w-56">
+              <FieldLabel>Icon + disabled</FieldLabel>
               <Input placeholder="Search…" leftIcon={<Search />} state="disabled" />
+              <FieldDescription>Icon decoration when disabled.</FieldDescription>
             </Field>
           </Section>
 
           {/* Prefix / Suffix */}
           <Section title="Prefix & Suffix" description="Inline text addons">
-            <Field label="Prefix" description="Text prepended inside the field.">
+            <Field className="w-56">
+              <FieldLabel>Prefix</FieldLabel>
               <Input placeholder="0.00" prefix="$" />
+              <FieldDescription>Text prepended inside the field.</FieldDescription>
             </Field>
-            <Field label="Suffix" description="Text appended inside the field.">
+            <Field className="w-56">
+              <FieldLabel>Suffix</FieldLabel>
               <Input placeholder="yourdomain" suffix=".com" />
+              <FieldDescription>Text appended inside the field.</FieldDescription>
             </Field>
-            <Field label="Both" description="Prefix and suffix together.">
+            <Field className="w-56">
+              <FieldLabel>Both</FieldLabel>
               <Input placeholder="amount" prefix="$" suffix="USD" />
+              <FieldDescription>Prefix and suffix together.</FieldDescription>
             </Field>
-            <Field label="Icon + suffix" description="Combines icon decoration with suffix.">
+            <Field className="w-56">
+              <FieldLabel>Icon + suffix</FieldLabel>
               <Input placeholder="amount" leftIcon={<DollarSign />} suffix="USD" />
+              <FieldDescription>Combines icon decoration with suffix.</FieldDescription>
             </Field>
           </Section>
 
