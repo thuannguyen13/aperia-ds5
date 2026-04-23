@@ -13,11 +13,7 @@ import {
   User,
 } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Field, FieldLabel, FieldDescription } from "@/components/ui/field"
+import { Button, Alert, AlertDescription, AlertTitle, Input, Checkbox, Field, FieldLabel, FieldDescription } from "@/components/ui"
 
 type Section = {
   title: string
