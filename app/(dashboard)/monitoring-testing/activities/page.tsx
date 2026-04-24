@@ -2,11 +2,12 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Search, Download, Eye, Check } from "lucide-react"
+import { Download, Eye, Check, Search } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { Input } from "@/components/ui/input/input"
 import { StatusBadge } from "@/components/dashboard/StatusBadge"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group/input-group"
 
 type Status = "PLANNED" | "IN_PROGRESS" | "COMPLETED" | "PAST_DUE" | "DEFERRED" | "CANCELLED"
 
@@ -78,7 +79,10 @@ export default function ActivitiesPage() {
 
       {/* Filter bar */}
       <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-white p-3">
-        <Input size="sm" placeholder="Search activities…" leftIcon={<Search />} value={search} onChange={e => { setSearch(e.target.value); setPage(1) }} className="w-52" />
+        <InputGroup className="w-52">
+          <InputGroupAddon><Search /></InputGroupAddon>
+          <InputGroupInput placeholder="Search activities…" value={search} onChange={e => { setSearch(e.target.value); setPage(1) }} />
+        </InputGroup>
         {[
           { label: "Region",      val: regionF,  set: setRegionF,  opts: regions     },
           { label: "LOB",         val: lobF,      set: setLobF,     opts: lobs        },
@@ -87,11 +91,15 @@ export default function ActivitiesPage() {
           { label: "Frequency",   val: freqF,     set: setFreqF,    opts: frequencies },
           { label: "Status",      val: statusF,   set: setStatusF,  opts: ["All","PLANNED","IN_PROGRESS","COMPLETED","PAST_DUE","DEFERRED"] },
         ].map(({ label, val, set, opts }) => (
-          <select key={label} className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-            value={val} onChange={e => { set(e.target.value); setPage(1) }}>
-            <option value="All">{label}</option>
-            {opts.filter(o => o !== "All").map(o => <option key={o} value={o}>{o}</option>)}
-          </select>
+          <Select key={label} value={val} onValueChange={v => { set(v); setPage(1) }}>
+            <SelectTrigger size="sm">
+              <SelectValue placeholder={label} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">{label}</SelectItem>
+              {opts.filter(o => o !== "All").map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+            </SelectContent>
+          </Select>
         ))}
         <div className="ml-auto flex items-center gap-2">
           <span className="text-xs text-slate-400">{filtered.length} results</span>

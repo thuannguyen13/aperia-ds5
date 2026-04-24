@@ -50,11 +50,11 @@
 }
 
 :root {
-  --primary: oklch(61.318% 0.18719 259.734);
+  --primary: oklch(0% 0 0);
   --accent: oklch(0.970 0.000 0.000);
   --background: oklch(1.000 0.000 0.000);
   --border: oklch(0.922 0.000 0.000);
-  --card: oklch(57.878% 0.23169 259.655);
+  --card: oklch(1.000 0.000 0.000);
   --card-foreground: oklch(0.145 0.000 0.000);
   --destructive: oklch(0.577 0.215 27.325);
   --accent-foreground: oklch(0.205 0.000 0.000);

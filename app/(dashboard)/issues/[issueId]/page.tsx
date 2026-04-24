@@ -3,6 +3,8 @@ import { ArrowLeft, AlertTriangle, Calendar, User, Building2, FileText, Clock, C
 import { Button } from "@/components/ui/button/button"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { Badge } from "@/components/ui/badge/badge"
 
 const issue = {
   id: "ISS-45608",
@@ -47,9 +49,9 @@ const auditLog = [
 ]
 
 const mapStatus: Record<string, string> = {
-  COMPLETED: "bg-green-100 text-green-800",
-  IN_PROGRESS: "bg-blue-100 text-blue-800",
-  PENDING: "bg-gray-100 text-gray-700",
+  COMPLETED:   "border-transparent bg-green-100 text-green-800 hover:bg-green-100",
+  IN_PROGRESS: "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  PENDING:     "border-transparent bg-gray-100 text-gray-700 hover:bg-gray-100",
 }
 
 export default function IssueDetailPage({ params }: { params: { issueId: string } }) {
@@ -141,7 +143,7 @@ export default function IssueDetailPage({ params }: { params: { issueId: string 
                     <p className="text-sm font-medium text-slate-800">{map.name}</p>
                     <p className="text-xs text-slate-500">{map.owner} · Due {map.dueDate}</p>
                   </div>
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${mapStatus[map.status]}`}>{map.status.replace("_"," ")}</span>
+                  <Badge variant="outline" className={mapStatus[map.status]}>{map.status.replace("_"," ")}</Badge>
                   {map.completedDate && <span className="text-xs text-green-600">Done {map.completedDate}</span>}
                 </div>
               ))}
@@ -177,12 +179,17 @@ export default function IssueDetailPage({ params }: { params: { issueId: string 
         <div className="flex flex-col gap-4">
           <div className="rounded-xl border border-border bg-white p-4">
             <h2 className="mb-3 text-sm font-semibold text-slate-800">Update Status</h2>
-            <select className="w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-slate-700 mb-3">
-              <option>OPEN</option>
-              <option>IN_REMEDIATION</option>
-              <option>PENDING_VALIDATION</option>
-              <option>CLOSED</option>
-            </select>
+            <Select defaultValue="OPEN">
+              <SelectTrigger className="mb-3 w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="OPEN">OPEN</SelectItem>
+                <SelectItem value="IN_REMEDIATION">IN_REMEDIATION</SelectItem>
+                <SelectItem value="PENDING_VALIDATION">PENDING_VALIDATION</SelectItem>
+                <SelectItem value="CLOSED">CLOSED</SelectItem>
+              </SelectContent>
+            </Select>
             <Button variant="default" size="sm" className="w-full">Save Status</Button>
           </div>
 

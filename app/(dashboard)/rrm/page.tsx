@@ -6,9 +6,14 @@ import { Button } from "@/components/ui/button/button"
 import { KpiCard } from "@/components/dashboard/KpiCard"
 import { SlaProgressBar } from "@/components/dashboard/SlaProgressBar"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Badge } from "@/components/ui/badge/badge"
+import { Card, CardContent } from "@/components/ui/card/card"
+import { Progress } from "@/components/ui/progress/progress"
+import { cn } from "@/lib/utils"
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from "recharts"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
 
 type Priority = "CRITICAL" | "HIGH" | "STANDARD" | "LOW"
 type AlertStatus = "NEW" | "IN_REVIEW" | "ASSESSED" | "CLOSED"
@@ -52,18 +57,23 @@ const jurisdictionData = [
   { name: "EMEA", count: 1 },
 ]
 
-const priorityBadge: Record<Priority, string> = {
-  CRITICAL: "bg-red-100 text-red-800",
-  HIGH: "bg-orange-100 text-orange-800",
-  STANDARD: "bg-blue-100 text-blue-800",
-  LOW: "bg-slate-100 text-slate-700",
+const priorityClass: Record<Priority, string> = {
+  CRITICAL: "border-transparent bg-red-100 text-red-800 hover:bg-red-100",
+  HIGH:     "border-transparent bg-orange-100 text-orange-800 hover:bg-orange-100",
+  STANDARD: "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  LOW:      "border-transparent bg-slate-100 text-slate-700 hover:bg-slate-100",
 }
 
-const statusBadge: Record<AlertStatus, string> = {
-  NEW: "bg-gray-100 text-gray-700",
-  IN_REVIEW: "bg-blue-100 text-blue-800",
-  ASSESSED: "bg-green-100 text-green-800",
-  CLOSED: "bg-slate-100 text-slate-500",
+const statusClass: Record<AlertStatus, string> = {
+  NEW:       "border-transparent bg-gray-100 text-gray-700 hover:bg-gray-100",
+  IN_REVIEW: "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  ASSESSED:  "border-transparent bg-green-100 text-green-800 hover:bg-green-100",
+  CLOSED:    "border-transparent bg-slate-100 text-slate-500 hover:bg-slate-100",
+}
+
+const feedStatusClass: Record<string, string> = {
+  ASSESSED:  "border-transparent bg-green-100 text-green-700 hover:bg-green-100",
+  IN_REVIEW: "border-transparent bg-blue-100 text-blue-700 hover:bg-blue-100",
 }
 
 const slaByPriority = [
@@ -97,165 +107,166 @@ export default function RRMPage() {
 
       {/* Row 2 — Charts */}
       <div className="grid grid-cols-2 gap-4">
-        {/* Jurisdiction bar */}
-        <div className="rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-3 text-sm font-semibold text-slate-800">Alert Volume by Jurisdiction</h2>
-          <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={jurisdictionData} margin={{ top: 4, right: 16, left: 0, bottom: 4 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#94a3b8" }} />
-              <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} allowDecimals={false} />
-              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid #e2e8f0" }} formatter={(v) => [v, "Alerts"]} />
-              <Bar dataKey="count" fill="#2563eb" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <Card>
+          <CardContent className="p-4">
+            <h2 className="mb-3 text-sm font-semibold text-slate-800">Alert Volume by Jurisdiction</h2>
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={jurisdictionData} margin={{ top: 4, right: 16, left: 0, bottom: 4 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#94a3b8" }} />
+                <YAxis tick={{ fontSize: 11, fill: "#94a3b8" }} allowDecimals={false} />
+                <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid #e2e8f0" }} formatter={(v) => [v, "Alerts"]} />
+                <Bar dataKey="count" fill="#2563eb" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
 
-        {/* SLA health */}
-        <div className="rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-3 text-sm font-semibold text-slate-800">SLA Health by Priority</h2>
-          <div className="flex flex-col gap-4 pt-2">
-            {slaByPriority.map((row) => {
-              const pct = Math.round((row.withinSla / row.total) * 100)
-              return (
-                <div key={row.priority} className="flex flex-col gap-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium text-slate-700">{row.priority}</span>
-                    <span className="text-slate-500">{row.withinSla}/{row.total} within SLA ({row.slaDays}d)</span>
+        <Card>
+          <CardContent className="p-4">
+            <h2 className="mb-3 text-sm font-semibold text-slate-800">SLA Health by Priority</h2>
+            <div className="flex flex-col gap-4 pt-2">
+              {slaByPriority.map((row) => {
+                const pct = Math.round((row.withinSla / row.total) * 100)
+                const indicatorClass = pct === 100 ? "bg-green-500" : pct >= 70 ? "bg-amber-400" : "bg-red-500"
+                return (
+                  <div key={row.priority} className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-medium text-slate-700">{row.priority}</span>
+                      <span className="text-slate-500">{row.withinSla}/{row.total} within SLA ({row.slaDays}d)</span>
+                    </div>
+                    <Progress value={pct} className="h-2.5 bg-slate-100" indicatorClassName={indicatorClass} />
+                    <div className="flex justify-between text-xs text-slate-400">
+                      <span>{pct}% within SLA</span>
+                      {row.overdue > 0 && <span className="text-red-600 font-medium">{row.overdue} overdue</span>}
+                    </div>
                   </div>
-                  <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
-                    <div className={`h-full rounded-full ${pct === 100 ? "bg-green-500" : pct >= 70 ? "bg-amber-400" : "bg-red-500"}`} style={{ width: `${pct}%` }} />
-                  </div>
-                  <div className="flex justify-between text-xs text-slate-400">
-                    <span>{pct}% within SLA</span>
-                    {row.overdue > 0 && <span className="text-red-600 font-medium">{row.overdue} overdue</span>}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+                )
+              })}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Row 3 — Regulation Tracker Table */}
-      <div className="rounded-xl border border-border bg-white p-4">
-        <h2 className="mb-3 text-sm font-semibold text-slate-800">Unified Regulation Tracker</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                {["Alert ID", "Title", "Jurisdiction", "Priority", "Received", "Effective Date", "SLA Progress", "Status", "Linked Issues", "Assignee", "Actions"].map((h) => (
-                  <th key={h} className="pb-2 text-left text-xs font-medium uppercase tracking-wider text-slate-500 pr-3 whitespace-nowrap">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {alerts.map((alert) => (
-                <tr key={alert.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="py-2.5 font-mono text-xs text-slate-700 pr-3">{alert.id}</td>
-                  <td className="py-2.5 pr-3 max-w-[200px]">
-                    <p className="truncate text-xs font-medium text-slate-800">{alert.title}</p>
-                  </td>
-                  <td className="py-2.5 text-xs text-slate-600 pr-3">{alert.jurisdiction}</td>
-                  <td className="py-2.5 pr-3">
-                    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold uppercase ${priorityBadge[alert.priority]}`}>
-                      {alert.priority}
-                    </span>
-                  </td>
-                  <td className="py-2.5 text-xs text-slate-500 pr-3 whitespace-nowrap">{alert.received}</td>
-                  <td className="py-2.5 text-xs text-slate-500 pr-3 whitespace-nowrap">{alert.effectiveDate}</td>
-                  <td className="py-2.5 pr-3 w-28">
-                    <SlaProgressBar daysElapsed={alert.daysElapsed} slaDays={alert.slaDays} showLabel />
-                  </td>
-                  <td className="py-2.5 pr-3">
-                    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusBadge[alert.status]}`}>
-                      {alert.status.replace("_", " ")}
-                    </span>
-                  </td>
-                  <td className="py-2.5 pr-3">
-                    {alert.linkedIssues > 0 ? (
-                      <span className="inline-flex items-center rounded-full bg-orange-100 px-2 py-0.5 text-xs font-semibold text-orange-800">
-                        {alert.linkedIssues}
-                      </span>
-                    ) : (
-                      <span className="text-xs text-slate-400">—</span>
-                    )}
-                  </td>
-                  <td className="py-2.5 text-xs text-slate-600 pr-3">{alert.assignee}</td>
-                  <td className="py-2.5">
-                    <div className="flex gap-1">
-                      <Button variant="outline" size="xs" onClick={() => setAssessingId(alert.id === assessingId ? null : alert.id)}>
-                        Assess
-                      </Button>
-                      <Button variant="ghost" size="icon-xs">
-                        <Eye className="size-3" />
-                      </Button>
-                    </div>
-                  </td>
+      <Card>
+        <CardContent className="p-4">
+          <h2 className="mb-3 text-sm font-semibold text-slate-800">Unified Regulation Tracker</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  {["Alert ID", "Title", "Jurisdiction", "Priority", "Received", "Effective Date", "SLA Progress", "Status", "Linked Issues", "Assignee", "Actions"].map((h) => (
+                    <th key={h} className="pb-2 text-left text-xs font-medium uppercase tracking-wider text-slate-500 pr-3 whitespace-nowrap">{h}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {alerts.map((alert) => (
+                  <tr key={alert.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 font-mono text-xs text-slate-700 pr-3">{alert.id}</td>
+                    <td className="py-2.5 pr-3 max-w-[200px]">
+                      <p className="truncate text-xs font-medium text-slate-800">{alert.title}</p>
+                    </td>
+                    <td className="py-2.5 text-xs text-slate-600 pr-3">{alert.jurisdiction}</td>
+                    <td className="py-2.5 pr-3">
+                      <Badge variant="outline" className={cn("uppercase font-semibold", priorityClass[alert.priority])}>
+                        {alert.priority}
+                      </Badge>
+                    </td>
+                    <td className="py-2.5 text-xs text-slate-500 pr-3 whitespace-nowrap">{alert.received}</td>
+                    <td className="py-2.5 text-xs text-slate-500 pr-3 whitespace-nowrap">{alert.effectiveDate}</td>
+                    <td className="py-2.5 pr-3 w-28">
+                      <SlaProgressBar daysElapsed={alert.daysElapsed} slaDays={alert.slaDays} showLabel />
+                    </td>
+                    <td className="py-2.5 pr-3">
+                      <Badge variant="outline" className={statusClass[alert.status]}>
+                        {alert.status.replace("_", " ")}
+                      </Badge>
+                    </td>
+                    <td className="py-2.5 pr-3">
+                      {alert.linkedIssues > 0 ? (
+                        <Badge variant="outline" className="border-transparent bg-orange-100 text-orange-800 font-semibold hover:bg-orange-100">
+                          {alert.linkedIssues}
+                        </Badge>
+                      ) : (
+                        <span className="text-xs text-slate-400">—</span>
+                      )}
+                    </td>
+                    <td className="py-2.5 text-xs text-slate-600 pr-3">{alert.assignee}</td>
+                    <td className="py-2.5">
+                      <div className="flex gap-1">
+                        <Button variant="outline" size="xs" onClick={() => setAssessingId(alert.id === assessingId ? null : alert.id)}>
+                          Assess
+                        </Button>
+                        <Button variant="ghost" size="icon-xs">
+                          <Eye className="size-3" />
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Row 4 — AI Feed + Data Quality */}
       <div className="grid grid-cols-2 gap-4">
-        {/* AI applicability feed */}
-        <div className="rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-3 text-sm font-semibold text-slate-800">Recent Alert Summaries</h2>
-          <div className="flex flex-col gap-3">
-            {alerts.slice(0, 5).map((alert) => (
-              <div key={alert.id} className="flex gap-3 rounded-lg bg-slate-50 p-3">
-                <div className="flex-1 min-w-0">
-                  <p className="truncate text-xs font-semibold text-slate-800">{alert.title}</p>
-                  <div className="mt-1 flex items-center gap-3 text-xs text-slate-500">
-                    <span>{alert.jurisdiction}</span>
-                    {alert.pageCount && (
-                      <span className="flex items-center gap-0.5">
-                        <FileText className="size-3" />
-                        {alert.pageCount}
-                      </span>
-                    )}
-                    <span>{alert.received}</span>
+        <Card>
+          <CardContent className="p-4">
+            <h2 className="mb-3 text-sm font-semibold text-slate-800">Recent Alert Summaries</h2>
+            <div className="flex flex-col gap-3">
+              {alerts.slice(0, 5).map((alert) => (
+                <div key={alert.id} className="flex gap-3 rounded-lg bg-slate-50 p-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="truncate text-xs font-semibold text-slate-800">{alert.title}</p>
+                    <div className="mt-1 flex items-center gap-3 text-xs text-slate-500">
+                      <span>{alert.jurisdiction}</span>
+                      {alert.pageCount && (
+                        <span className="flex items-center gap-0.5">
+                          <FileText className="size-3" />
+                          {alert.pageCount}
+                        </span>
+                      )}
+                      <span>{alert.received}</span>
+                    </div>
                   </div>
-                </div>
-                <span className={`shrink-0 self-start rounded-full px-2 py-0.5 text-xs font-semibold ${
-                  alert.status === "ASSESSED" ? "bg-green-100 text-green-700" :
-                  alert.status === "IN_REVIEW" ? "bg-blue-100 text-blue-700" :
-                  "bg-gray-100 text-gray-600"
-                }`}>
-                  {alert.status === "ASSESSED" ? "Applicable" : alert.status === "IN_REVIEW" ? "Under Review" : "Pending"}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Data quality flags */}
-        <div className="rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-3 text-sm font-semibold text-slate-800">Data Quality Flags</h2>
-          <div className="flex flex-col gap-2">
-            {alerts
-              .filter((a) => !a.effectiveDate || a.linkedIssues === 0)
-              .slice(0, 5)
-              .map((alert) => (
-                <div key={alert.id} className="flex items-start gap-3 rounded-lg border border-amber-100 bg-amber-50 p-3">
-                  <div className="mt-0.5 size-1.5 rounded-full bg-amber-500 shrink-0" />
-                  <div className="min-w-0">
-                    <p className="truncate text-xs font-medium text-slate-800">{alert.title}</p>
-                    <p className="text-xs text-amber-700 mt-0.5">
-                      {alert.linkedIssues === 0 ? "No linked issues — review applicability" : "Missing effective date"}
-                    </p>
-                  </div>
-                  <span className="shrink-0 font-mono text-[10px] text-slate-400">{alert.id}</span>
+                  <Badge variant="outline" className={cn("shrink-0 self-start", feedStatusClass[alert.status] ?? "border-transparent bg-gray-100 text-gray-600 hover:bg-gray-100")}>
+                    {alert.status === "ASSESSED" ? "Applicable" : alert.status === "IN_REVIEW" ? "Under Review" : "Pending"}
+                  </Badge>
                 </div>
               ))}
-            {alerts.filter((a) => !a.effectiveDate || a.linkedIssues === 0).length === 0 && (
-              <div className="py-8 text-center text-sm text-slate-400">No data quality issues detected.</div>
-            )}
-          </div>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <h2 className="mb-3 text-sm font-semibold text-slate-800">Data Quality Flags</h2>
+            <div className="flex flex-col gap-2">
+              {alerts
+                .filter((a) => !a.effectiveDate || a.linkedIssues === 0)
+                .slice(0, 5)
+                .map((alert) => (
+                  <div key={alert.id} className="flex items-start gap-3 rounded-lg border border-amber-100 bg-amber-50 p-3">
+                    <div className="mt-0.5 size-1.5 rounded-full bg-amber-500 shrink-0" />
+                    <div className="min-w-0">
+                      <p className="truncate text-xs font-medium text-slate-800">{alert.title}</p>
+                      <p className="text-xs text-amber-700 mt-0.5">
+                        {alert.linkedIssues === 0 ? "No linked issues — review applicability" : "Missing effective date"}
+                      </p>
+                    </div>
+                    <span className="shrink-0 font-mono text-[10px] text-slate-400">{alert.id}</span>
+                  </div>
+                ))}
+              {alerts.filter((a) => !a.effectiveDate || a.linkedIssues === 0).length === 0 && (
+                <div className="py-8 text-center text-sm text-slate-400">No data quality issues detected.</div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Assessment drawer overlay */}
@@ -267,11 +278,16 @@ export default function RRMPage() {
             <div className="mt-4 flex flex-col gap-4">
               <div>
                 <label className="text-xs font-medium text-slate-700">Verdict</label>
-                <select className="mt-1 w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-slate-700">
-                  <option>Applicable</option>
-                  <option>Not Applicable</option>
-                  <option>Needs Further Review</option>
-                </select>
+                <Select defaultValue="Applicable">
+                  <SelectTrigger className="mt-1 w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Applicable">Applicable</SelectItem>
+                    <SelectItem value="Not Applicable">Not Applicable</SelectItem>
+                    <SelectItem value="Needs Further Review">Needs Further Review</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="text-xs font-medium text-slate-700">Notes</label>

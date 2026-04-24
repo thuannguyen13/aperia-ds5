@@ -3,6 +3,7 @@ import { ArrowLeft, AlertTriangle, Building2, Calendar, User } from "lucide-reac
 import { Button } from "@/components/ui/button/button"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Badge } from "@/components/ui/badge/badge"
 
 const report = {
   id: "GOV-APR-2026",
@@ -150,7 +151,7 @@ export default function GovernanceReportDetailPage({ params }: { params: { repor
                 <span className="text-sm font-medium text-slate-800">{step.name}</span>
               </div>
               <div className="flex items-center justify-between mt-1">
-                <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${step.color}`}>{step.status}</span>
+                <Badge variant="outline" className={`border-transparent hover:opacity-90 ${step.color}`}>{step.status}</Badge>
                 <span className="text-xs text-slate-400">{step.date}</span>
               </div>
             </div>

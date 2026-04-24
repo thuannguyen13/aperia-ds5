@@ -3,14 +3,11 @@ import {
   ArrowUp,
   ArrowUpRight,
   ChevronRight,
-  DollarSign,
   Ellipsis,
   GitCompare,
   LoaderCircle,
   Mail,
-  Search,
   Trash2,
-  User,
 } from "lucide-react"
 
 import { Button, Alert, AlertDescription, AlertTitle, Input, Checkbox, Field, FieldLabel, FieldDescription } from "@/components/ui"
@@ -367,50 +364,8 @@ export default function Page() {
         <div className="space-y-8 rounded-xl border border-border p-6">
           <h2 className="text-base font-semibold">Input</h2>
 
-          {/* Sizes */}
-          <Section title="Sizes" description="Height varies per size token">
-            <Field className="w-56">
-              <FieldLabel>Mini</FieldLabel>
-              <Input size="xs" placeholder="Mini input" />
-              <FieldDescription>Compact inputs, table cells.</FieldDescription>
-              <span className="font-mono text-[10px] text-muted-foreground">xs · 24px</span>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Small</FieldLabel>
-              <Input size="sm" placeholder="Small input" />
-              <FieldDescription>Tight layouts, toolbars.</FieldDescription>
-              <span className="font-mono text-[10px] text-muted-foreground">sm · 32px</span>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Regular</FieldLabel>
-              <Input size="default" placeholder="Regular input" />
-              <FieldDescription>Default for most forms.</FieldDescription>
-              <span className="font-mono text-[10px] text-muted-foreground">default · 36px</span>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Large</FieldLabel>
-              <Input size="lg" placeholder="Large input" />
-              <FieldDescription>Prominent hero inputs.</FieldDescription>
-              <span className="font-mono text-[10px] text-muted-foreground">lg · 40px</span>
-            </Field>
-          </Section>
-
-          {/* Shape */}
-          <Section title="Shape" description="Corner radius variants">
-            <Field className="w-56">
-              <FieldLabel>Default</FieldLabel>
-              <Input shape="default" placeholder="Default" />
-              <FieldDescription>Rounded corners (rounded-lg).</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Round</FieldLabel>
-              <Input shape="round" placeholder="Round" />
-              <FieldDescription>Fully pill-shaped (rounded-full).</FieldDescription>
-            </Field>
-          </Section>
-
           {/* States */}
-          <Section title="States" description="All Figma State variants">
+          <Section title="States" description="Default shadcn input states">
             <Field className="w-56">
               <FieldLabel>Empty</FieldLabel>
               <Input />
@@ -428,102 +383,14 @@ export default function Page() {
             </Field>
             <Field className="w-56">
               <FieldLabel>Error</FieldLabel>
-              <Input placeholder="name@example.com" state="error" />
-              <FieldDescription>Validation failed — use state=&quot;error&quot;.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Error with value</FieldLabel>
-              <Input defaultValue="not-an-email" state="error" />
-              <FieldDescription>Error state with existing input.</FieldDescription>
+              <Input placeholder="name@example.com" aria-invalid />
+              <FieldDescription>Set aria-invalid for error state.</FieldDescription>
             </Field>
             <Field className="w-56">
               <FieldLabel>Disabled</FieldLabel>
-              <Input placeholder="Unavailable" state="disabled" />
-              <FieldDescription>Non-interactive, use state=&quot;disabled&quot;.</FieldDescription>
+              <Input placeholder="Unavailable" disabled />
+              <FieldDescription>Non-interactive.</FieldDescription>
             </Field>
-          </Section>
-
-          {/* Icons */}
-          <Section title="Icons" description="Left and right icon decorations">
-            <Field className="w-56">
-              <FieldLabel>Left icon</FieldLabel>
-              <Input placeholder="Search…" leftIcon={<Search />} />
-              <FieldDescription>Contextual leading icon.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Right icon</FieldLabel>
-              <Input placeholder="Email address" rightIcon={<Mail />} />
-              <FieldDescription>Trailing action or status icon.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Both icons</FieldLabel>
-              <Input placeholder="Username" leftIcon={<User />} rightIcon={<Search />} />
-              <FieldDescription>Leading and trailing together.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Icon + error</FieldLabel>
-              <Input placeholder="Search…" leftIcon={<Search />} state="error" />
-              <FieldDescription>Icon decoration in error state.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Icon + disabled</FieldLabel>
-              <Input placeholder="Search…" leftIcon={<Search />} state="disabled" />
-              <FieldDescription>Icon decoration when disabled.</FieldDescription>
-            </Field>
-          </Section>
-
-          {/* Prefix / Suffix */}
-          <Section title="Prefix & Suffix" description="Inline text addons">
-            <Field className="w-56">
-              <FieldLabel>Prefix</FieldLabel>
-              <Input placeholder="0.00" prefix="$" />
-              <FieldDescription>Text prepended inside the field.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Suffix</FieldLabel>
-              <Input placeholder="yourdomain" suffix=".com" />
-              <FieldDescription>Text appended inside the field.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Both</FieldLabel>
-              <Input placeholder="amount" prefix="$" suffix="USD" />
-              <FieldDescription>Prefix and suffix together.</FieldDescription>
-            </Field>
-            <Field className="w-56">
-              <FieldLabel>Icon + suffix</FieldLabel>
-              <Input placeholder="amount" leftIcon={<DollarSign />} suffix="USD" />
-              <FieldDescription>Combines icon decoration with suffix.</FieldDescription>
-            </Field>
-          </Section>
-
-          {/* Size × Shape matrix */}
-          <Section title="Size × Shape Matrix" description="Every size at every shape">
-            <div className="w-full overflow-x-auto">
-              <table className="w-full text-xs">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="py-2 pr-4 text-left font-medium text-muted-foreground">size \ shape</th>
-                    {(["default", "round"] as const).map((s) => (
-                      <th key={s} className="px-4 py-2 font-mono font-medium text-muted-foreground">{s}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {(["xs", "sm", "default", "lg"] as const).map((sz) => (
-                    <tr key={sz} className="border-b border-border/50 last:border-0">
-                      <td className="py-3 pr-4 font-mono text-muted-foreground">{sz}</td>
-                      {(["default", "round"] as const).map((sh) => (
-                        <td key={sh} className="px-4 py-3">
-                          <div className="w-44">
-                            <Input size={sz} shape={sh} placeholder="Input" />
-                          </div>
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </Section>
         </div>
       </div>

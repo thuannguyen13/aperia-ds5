@@ -5,6 +5,11 @@ import Link from "next/link"
 import { Plus, GitFork, ChevronRight, Clock, CheckCircle2, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { Badge } from "@/components/ui/badge/badge"
+import { Card, CardContent } from "@/components/ui/card/card"
+import { Progress } from "@/components/ui/progress/progress"
+import { cn } from "@/lib/utils"
 
 type WfStatus = "IN_PROGRESS" | "COMPLETED" | "CANCELLED"
 
@@ -29,10 +34,10 @@ const instances: WorkflowInstance[] = [
   { id: "WF-006", name: "BCP Update — Merchant Solutions 2025",   template: "BCP Update",                          status: "COMPLETED",   dueDate: "Dec 31, 2025", tasksRemaining: 0, tasksTotal: 3, createdAt: "Nov 1, 2025"  },
 ]
 
-const wfStatusStyle: Record<WfStatus, string> = {
-  IN_PROGRESS: "bg-blue-100 text-blue-800",
-  COMPLETED: "bg-green-100 text-green-800",
-  CANCELLED: "bg-slate-100 text-slate-600",
+const wfStatusClass: Record<WfStatus, string> = {
+  IN_PROGRESS: "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  COMPLETED:   "border-transparent bg-green-100 text-green-800 hover:bg-green-100",
+  CANCELLED:   "border-transparent bg-slate-100 text-slate-600 hover:bg-slate-100",
 }
 
 const wfStatusIcon: Record<WfStatus, React.ElementType> = {
@@ -74,63 +79,72 @@ export default function WorkflowsPage() {
           const Icon = wfStatusIcon[wf.status]
           const progress = Math.round(((wf.tasksTotal - wf.tasksRemaining) / wf.tasksTotal) * 100)
           return (
-            <Link key={wf.id} href={`/workflows/${wf.id}`}
-              className="flex items-center gap-4 rounded-xl border border-border bg-white p-4 hover:shadow-sm transition-shadow">
-              <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${wf.status === "IN_PROGRESS" ? "bg-blue-100" : wf.status === "COMPLETED" ? "bg-green-100" : "bg-slate-100"}`}>
-                <GitFork className={`size-5 ${wf.status === "IN_PROGRESS" ? "text-blue-600" : wf.status === "COMPLETED" ? "text-green-600" : "text-slate-400"}`} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <p className="font-medium text-slate-900 truncate">{wf.name}</p>
-                  <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${wfStatusStyle[wf.status]}`}>
-                    <Icon className="mr-1 inline size-2.5" />{wf.status.replace("_"," ")}
-                  </span>
-                </div>
-                <p className="mt-0.5 text-xs text-slate-500">{wf.template} · Created {wf.createdAt}</p>
-                <div className="mt-2 flex items-center gap-3">
-                  <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-slate-100">
-                    <div className={`h-full rounded-full ${progress === 100 ? "bg-green-500" : "bg-blue-500"}`} style={{ width: `${progress}%` }} />
+            <Link key={wf.id} href={`/workflows/${wf.id}`}>
+              <Card className="p-0 hover:shadow-sm transition-shadow">
+                <CardContent className="flex items-center gap-4 p-4">
+                  <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${wf.status === "IN_PROGRESS" ? "bg-blue-100" : wf.status === "COMPLETED" ? "bg-green-100" : "bg-slate-100"}`}>
+                    <GitFork className={`size-5 ${wf.status === "IN_PROGRESS" ? "text-blue-600" : wf.status === "COMPLETED" ? "text-green-600" : "text-slate-400"}`} />
                   </div>
-                  <span className="shrink-0 text-xs text-slate-500">{wf.tasksTotal - wf.tasksRemaining}/{wf.tasksTotal} tasks</span>
-                </div>
-              </div>
-              <div className="flex flex-col items-end gap-1">
-                <span className="text-xs text-slate-500">Due {wf.dueDate}</span>
-                {wf.tasksRemaining > 0 && (
-                  <span className="text-xs font-medium text-blue-600">{wf.tasksRemaining} pending</span>
-                )}
-                <ChevronRight className="mt-1 size-4 text-slate-300" />
-              </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="font-medium text-slate-900 truncate">{wf.name}</p>
+                      <Badge variant="outline" className={cn("shrink-0", wfStatusClass[wf.status])}>
+                        <Icon className="mr-1 inline size-2.5" />{wf.status.replace("_"," ")}
+                      </Badge>
+                    </div>
+                    <p className="mt-0.5 text-xs text-slate-500">{wf.template} · Created {wf.createdAt}</p>
+                    <div className="mt-2 flex items-center gap-3">
+                      <Progress
+                        value={progress}
+                        className="flex-1 h-1.5 bg-slate-100"
+                        indicatorClassName={progress === 100 ? "bg-green-500" : "bg-blue-500"}
+                      />
+                      <span className="shrink-0 text-xs text-slate-500">{wf.tasksTotal - wf.tasksRemaining}/{wf.tasksTotal} tasks</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="text-xs text-slate-500">Due {wf.dueDate}</span>
+                    {wf.tasksRemaining > 0 && (
+                      <span className="text-xs font-medium text-blue-600">{wf.tasksRemaining} pending</span>
+                    )}
+                    <ChevronRight className="mt-1 size-4 text-slate-300" />
+                  </div>
+                </CardContent>
+              </Card>
             </Link>
           )
         })}
         {filtered.length === 0 && (
-          <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-border bg-white py-16">
-            <GitFork className="size-10 text-slate-300" />
-            <p className="text-sm text-slate-500">No workflows in this category.</p>
-            <Button variant="outline" size="sm" onClick={() => setShowLaunch(true)}><Plus className="size-3.5" />Launch New Workflow</Button>
-          </div>
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center gap-3 py-16">
+              <GitFork className="size-10 text-slate-300" />
+              <p className="text-sm text-slate-500">No workflows in this category.</p>
+              <Button variant="outline" size="sm" onClick={() => setShowLaunch(true)}><Plus className="size-3.5" />Launch New Workflow</Button>
+            </CardContent>
+          </Card>
         )}
       </div>
 
       {/* Template reference */}
-      <div className="rounded-xl border border-border bg-white p-4">
-        <h2 className="mb-3 text-sm font-semibold text-slate-800">Available Templates</h2>
-        <div className="grid grid-cols-2 gap-3">
-          {templates.map(t => (
-            <div key={t.id} className="rounded-lg border border-border p-3">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-slate-800">{t.name}</p>
-                <span className="text-xs text-slate-400">{t.steps} steps</span>
+      <Card>
+        <CardContent className="p-4">
+          <h2 className="mb-3 text-sm font-semibold text-slate-800">Available Templates</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {templates.map(t => (
+              <div key={t.id} className="rounded-lg border border-border p-3">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-slate-800">{t.name}</p>
+                  <span className="text-xs text-slate-400">{t.steps} steps</span>
+                </div>
+                <p className="mt-1 text-xs text-slate-500">{t.description}</p>
+                <Button variant="outline" size="xs" className="mt-2" onClick={() => { setSelectedTemplate(t.id); setShowLaunch(true) }}>
+                  Use Template
+                </Button>
               </div>
-              <p className="mt-1 text-xs text-slate-500">{t.description}</p>
-              <Button variant="outline" size="xs" className="mt-2" onClick={() => { setSelectedTemplate(t.id); setShowLaunch(true) }}>
-                Use Template
-              </Button>
-            </div>
-          ))}
-        </div>
-      </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Launch modal */}
       {showLaunch && (
@@ -140,11 +154,14 @@ export default function WorkflowsPage() {
             <div className="mt-4 flex flex-col gap-4">
               <div>
                 <label className="text-xs font-medium text-slate-700">Template</label>
-                <select className="mt-1 w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-slate-700"
-                  value={selectedTemplate} onChange={e => setSelectedTemplate(e.target.value)}>
-                  <option value="">Select a template…</option>
-                  {templates.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
-                </select>
+                <Select value={selectedTemplate} onValueChange={setSelectedTemplate}>
+                  <SelectTrigger className="mt-1 w-full">
+                    <SelectValue placeholder="Select a template…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {templates.map(t => <SelectItem key={t.id} value={t.id}>{t.name}</SelectItem>)}
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="text-xs font-medium text-slate-700">Workflow Title</label>

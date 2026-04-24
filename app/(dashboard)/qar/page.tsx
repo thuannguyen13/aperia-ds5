@@ -3,9 +3,11 @@
 import { useState } from "react"
 import { Plus, Search, ScanSearch } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { Input } from "@/components/ui/input/input"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group/input-group"
+import { Badge } from "@/components/ui/badge/badge"
 
 type QarStatus = "SCHEDULED" | "IN_PROGRESS" | "COMPLETED" | "FINDINGS_ISSUED" | "CLOSED"
 type QarResult = "SATISFACTORY" | "NEEDS_IMPROVEMENT" | "UNSATISFACTORY" | "PENDING"
@@ -27,12 +29,12 @@ const reviews: QarReview[] = [
   { id: "QAR-008", title: "Issue Remediation Quality Check — Q4 2025",            scope: "Issue Management", lob: "Corporate",region: "Global",        reviewer: "Thomas Bennington",   status: "FINDINGS_ISSUED", result: "UNSATISFACTORY",    scheduledDate: "Nov 10, 2025", completedDate: "Nov 22, 2025", findingsCount: 8  },
 ]
 
-const statusStyle: Record<QarStatus, string> = {
-  SCHEDULED:       "bg-gray-100 text-gray-700",
-  IN_PROGRESS:     "bg-blue-100 text-blue-800",
-  COMPLETED:       "bg-green-100 text-green-800",
-  FINDINGS_ISSUED: "bg-amber-100 text-amber-800",
-  CLOSED:          "bg-slate-100 text-slate-600",
+const statusClass: Record<QarStatus, string> = {
+  SCHEDULED:       "border-transparent bg-gray-100 text-gray-700 hover:bg-gray-100",
+  IN_PROGRESS:     "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  COMPLETED:       "border-transparent bg-green-100 text-green-800 hover:bg-green-100",
+  FINDINGS_ISSUED: "border-transparent bg-amber-100 text-amber-800 hover:bg-amber-100",
+  CLOSED:          "border-transparent bg-slate-100 text-slate-600 hover:bg-slate-100",
 }
 
 const resultStyle: Record<QarResult, string> = {
@@ -88,15 +90,28 @@ export default function QARPage() {
       {/* Table */}
       <div className="rounded-xl border border-border bg-white p-4">
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <Input size="sm" placeholder="Search reviews…" leftIcon={<Search />} value={search} onChange={e => setSearch(e.target.value)} className="w-52" />
-          <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-            value={statusF} onChange={e => setStatusF(e.target.value)}>
-            {["All","SCHEDULED","IN_PROGRESS","COMPLETED","FINDINGS_ISSUED","CLOSED"].map(s => <option key={s}>{s.replace("_"," ")}</option>)}
-          </select>
-          <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-            value={lobF} onChange={e => setLobF(e.target.value)}>
-            {lobs.map(l => <option key={l}>{l}</option>)}
-          </select>
+          <InputGroup className="w-52">
+            <InputGroupAddon><Search /></InputGroupAddon>
+            <InputGroupInput placeholder="Search reviews…" value={search} onChange={e => setSearch(e.target.value)} />
+          </InputGroup>
+          <Select value={statusF} onValueChange={setStatusF}>
+            <SelectTrigger size="sm">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {["All","SCHEDULED","IN_PROGRESS","COMPLETED","FINDINGS_ISSUED","CLOSED"].map(s => (
+                <SelectItem key={s} value={s}>{s.replace(/_/g, " ")}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={lobF} onValueChange={setLobF}>
+            <SelectTrigger size="sm">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {lobs.map(l => <SelectItem key={l} value={l}>{l}</SelectItem>)}
+            </SelectContent>
+          </Select>
           <div className="ml-auto">
             <Button variant="default" size="sm"><Plus className="size-3.5" />Schedule QAR</Button>
           </div>
@@ -126,7 +141,7 @@ export default function QARPage() {
                   <td className="py-2.5 pr-3 text-xs text-slate-500">{r.region}</td>
                   <td className="py-2.5 pr-3 text-xs text-slate-600 whitespace-nowrap">{r.reviewer}</td>
                   <td className="py-2.5 pr-3">
-                    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusStyle[r.status]}`}>{r.status.replace("_"," ")}</span>
+                    <Badge variant="outline" className={statusClass[r.status]}>{r.status.replace("_"," ")}</Badge>
                   </td>
                   <td className="py-2.5 pr-3 text-xs">
                     <span className={resultStyle[r.result]}>{r.result.replace("_"," ")}</span>
@@ -135,7 +150,7 @@ export default function QARPage() {
                   <td className="py-2.5 pr-3 text-xs text-slate-500 whitespace-nowrap">{r.completedDate}</td>
                   <td className="py-2.5 pr-3">
                     {r.findingsCount > 0
-                      ? <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">{r.findingsCount}</span>
+                      ? <Badge variant="outline" className="border-transparent bg-amber-100 text-amber-800 font-semibold hover:bg-amber-100">{r.findingsCount}</Badge>
                       : <span className="text-xs text-slate-400">—</span>}
                   </td>
                   <td className="py-2.5">

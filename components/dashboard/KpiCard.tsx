@@ -1,5 +1,7 @@
 import { TrendingDown, TrendingUp, Minus, type LucideIcon } from "lucide-react"
+import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { Card } from "@/components/ui/card/card"
 
 interface KpiCardProps {
   label: string
@@ -12,19 +14,28 @@ interface KpiCardProps {
   onClick?: () => void
 }
 
-const accentBorder: Record<string, string> = {
-  blue: "border-l-blue-600",
-  orange: "border-l-orange-500",
-  red: "border-l-red-600",
-  green: "border-l-green-500",
-  slate: "border-l-slate-400",
-}
+const accentVariants = cva("border-l-4", {
+  variants: {
+    accentColor: {
+      blue:   "border-l-blue-600",
+      orange: "border-l-orange-500",
+      red:    "border-l-red-600",
+      green:  "border-l-green-500",
+      slate:  "border-l-slate-400",
+    },
+  },
+  defaultVariants: { accentColor: "blue" },
+})
 
-const trendColor: Record<string, string> = {
-  up: "text-red-500",
-  down: "text-green-500",
-  flat: "text-slate-400",
-}
+const trendVariants = cva("flex items-center gap-0.5 text-xs font-medium", {
+  variants: {
+    trend: {
+      up:   "text-red-500",
+      down: "text-green-500",
+      flat: "text-slate-400",
+    },
+  },
+})
 
 export function KpiCard({
   label,
@@ -39,11 +50,11 @@ export function KpiCard({
   const TrendIcon = trend === "up" ? TrendingUp : trend === "down" ? TrendingDown : Minus
 
   return (
-    <div
+    <Card
       className={cn(
-        "flex flex-col gap-2 rounded-lg border border-border bg-white p-4 border-l-4 shadow-sm",
-        accentBorder[accentColor],
-        onClick && "cursor-pointer hover:shadow-md transition-shadow",
+        accentVariants({ accentColor }),
+        "gap-2 p-4 shadow-sm",
+        onClick && "cursor-pointer hover:shadow-md transition-shadow"
       )}
       onClick={onClick}
     >
@@ -55,12 +66,12 @@ export function KpiCard({
       <div className="flex items-center gap-1.5">
         {subtitle && <span className="text-sm text-slate-400">{subtitle}</span>}
         {trend && trendLabel && (
-          <span className={cn("flex items-center gap-0.5 text-xs font-medium", trendColor[trend])}>
+          <span className={trendVariants({ trend })}>
             <TrendIcon className="size-3" />
             {trendLabel}
           </span>
         )}
       </div>
-    </div>
+    </Card>
   )
 }

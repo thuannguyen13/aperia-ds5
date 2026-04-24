@@ -3,8 +3,10 @@
 import { useState } from "react"
 import { Plus, FileText, Download, Search } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { Input } from "@/components/ui/input/input"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group/input-group"
+import { Badge } from "@/components/ui/badge/badge"
 
 type PolicyStatus = "DRAFT" | "IN_REVIEW" | "APPROVED" | "ACTIVE" | "ARCHIVED"
 
@@ -28,12 +30,12 @@ const policies: Policy[] = [
   { id: "POL-012", title: "Financial Crimes Escalation Policy",       owner: "Jason Hollingsworth", lob: "FCC",      region: "Global",        status: "ARCHIVED",   effectiveDate: "Jan 1, 2022",  nextReviewDate: "—",            version: "v2.0" },
 ]
 
-const statusStyle: Record<PolicyStatus, string> = {
-  DRAFT:     "bg-gray-100 text-gray-700",
-  IN_REVIEW: "bg-amber-100 text-amber-800",
-  APPROVED:  "bg-blue-100 text-blue-800",
-  ACTIVE:    "bg-green-100 text-green-800",
-  ARCHIVED:  "bg-slate-100 text-slate-500",
+const statusClass: Record<PolicyStatus, string> = {
+  DRAFT:     "border-transparent bg-gray-100 text-gray-700 hover:bg-gray-100",
+  IN_REVIEW: "border-transparent bg-amber-100 text-amber-800 hover:bg-amber-100",
+  APPROVED:  "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  ACTIVE:    "border-transparent bg-green-100 text-green-800 hover:bg-green-100",
+  ARCHIVED:  "border-transparent bg-slate-100 text-slate-500 hover:bg-slate-100",
 }
 
 const dueForReview = policies.filter(p => (p.status === "ACTIVE" && p.nextReviewDate.includes("2026")) || p.status === "IN_REVIEW")
@@ -84,15 +86,28 @@ export default function PoliciesPage() {
       {/* Table */}
       <div className="rounded-xl border border-border bg-white p-4">
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <Input size="sm" placeholder="Search policies…" leftIcon={<Search />} value={search} onChange={e => setSearch(e.target.value)} className="w-52" />
-          <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-            value={statusF} onChange={e => setStatusF(e.target.value)}>
-            {["All","ACTIVE","APPROVED","IN_REVIEW","DRAFT","ARCHIVED"].map(s => <option key={s}>{s}</option>)}
-          </select>
-          <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-            value={regionF} onChange={e => setRegionF(e.target.value)}>
-            {regions.map(r => <option key={r}>{r}</option>)}
-          </select>
+          <InputGroup className="w-52">
+            <InputGroupAddon><Search /></InputGroupAddon>
+            <InputGroupInput placeholder="Search policies…" value={search} onChange={e => setSearch(e.target.value)} />
+          </InputGroup>
+          <Select value={statusF} onValueChange={setStatusF}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {["All","ACTIVE","APPROVED","IN_REVIEW","DRAFT","ARCHIVED"].map(s => (
+                <SelectItem key={s} value={s}>{s}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={regionF} onValueChange={setRegionF}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {regions.map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+            </SelectContent>
+          </Select>
           <div className="ml-auto flex gap-2">
             <Button variant="outline" size="sm"><Download className="size-3.5" />Export</Button>
             <Button variant="default" size="sm"><Plus className="size-3.5" />New Policy</Button>
@@ -122,7 +137,7 @@ export default function PoliciesPage() {
                   <td className="py-2.5 pr-4 text-xs text-slate-500">{p.lob}</td>
                   <td className="py-2.5 pr-4 text-xs text-slate-500">{p.region}</td>
                   <td className="py-2.5 pr-4">
-                    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusStyle[p.status]}`}>{p.status.replace("_"," ")}</span>
+                    <Badge variant="outline" className={statusClass[p.status]}>{p.status.replace("_"," ")}</Badge>
                   </td>
                   <td className="py-2.5 pr-4 text-xs text-slate-500 whitespace-nowrap">{p.effectiveDate}</td>
                   <td className="py-2.5 pr-4 text-xs text-slate-500 whitespace-nowrap">

@@ -3,6 +3,9 @@
 import { useState } from "react"
 import { Bell, Save, Plus, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { Switch } from "@/components/ui/switch/switch"
+import { Card, CardContent } from "@/components/ui/card/card"
 
 interface ReminderRule {
   id: string; event: string; trigger: string; recipients: string
@@ -30,7 +33,8 @@ export default function AdminAlertsPage() {
   return (
     <div className="flex flex-col gap-6">
       {/* Trigger rules */}
-      <div className="rounded-xl border border-border bg-white p-5">
+      <Card>
+      <CardContent className="p-5">
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h2 className="text-sm font-semibold text-slate-800">Notification Trigger Rules</h2>
@@ -61,10 +65,7 @@ export default function AdminAlertsPage() {
                   <td className="py-2.5 pr-4 text-xs text-slate-500">{rule.frequency}</td>
                   <td className="py-2.5 pr-4 text-xs text-slate-500">{rule.channel}</td>
                   <td className="py-2.5 pr-4">
-                    <button onClick={() => toggleRule(rule.id)}
-                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${rule.active ? "bg-blue-600" : "bg-slate-300"}`}>
-                      <span className={`inline-block size-3.5 rounded-full bg-white shadow transition-transform ${rule.active ? "translate-x-4.5" : "translate-x-0.5"}`} />
-                    </button>
+                    <Switch checked={rule.active} onCheckedChange={() => toggleRule(rule.id)} />
                   </td>
                   <td className="py-2.5">
                     <Button variant="ghost" size="icon-xs" onClick={() => setRules(rules.filter(r => r.id !== rule.id))}>
@@ -76,19 +77,27 @@ export default function AdminAlertsPage() {
             </tbody>
           </table>
         </div>
-      </div>
+      </CardContent>
+      </Card>
 
       {/* Weekly digest config */}
-      <div className="rounded-xl border border-border bg-white p-5">
+      <Card>
+      <CardContent className="p-5">
         <h2 className="mb-4 text-sm font-semibold text-slate-800">Weekly Digest Settings</h2>
         <div className="grid grid-cols-2 gap-6">
           <div className="flex flex-col gap-3">
             <div>
               <label className="text-xs font-medium text-slate-700">Send Day</label>
-              <select className="mt-1 w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-slate-700"
-                value={digest.sendDay} onChange={e => setDigest({ ...digest, sendDay: e.target.value })}>
-                {["Monday","Tuesday","Wednesday","Thursday","Friday"].map(d => <option key={d}>{d}</option>)}
-              </select>
+              <Select value={digest.sendDay} onValueChange={v => setDigest({ ...digest, sendDay: v })}>
+                <SelectTrigger className="mt-1 w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {["Monday","Tuesday","Wednesday","Thursday","Friday"].map(d => (
+                    <SelectItem key={d} value={d}>{d}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="text-xs font-medium text-slate-700">Send Time</label>
@@ -110,10 +119,12 @@ export default function AdminAlertsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </CardContent>
+      </Card>
 
       {/* Template preview */}
-      <div className="rounded-xl border border-border bg-white p-5">
+      <Card>
+      <CardContent className="p-5">
         <h2 className="mb-3 text-sm font-semibold text-slate-800">Email Template Preview</h2>
         <div className="rounded-lg border border-border bg-slate-50 p-4 font-mono text-xs leading-relaxed text-slate-700 whitespace-pre-wrap">
 {`Subject: Your Compliance Weekly Digest — Week of [DATE]
@@ -135,7 +146,8 @@ Hi [Name],
 ---
 Sends every ${digest.sendDay} at ${digest.sendTime}.`}
         </div>
-      </div>
+      </CardContent>
+      </Card>
 
       <div className="flex justify-end gap-2">
         <Button variant="outline" size="sm">Send Test Digest</Button>

@@ -1,9 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, Search, Edit, UserX, KeyRound, Shield } from "lucide-react"
+import { Plus, Edit, UserX, KeyRound, Shield, Search } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { Input } from "@/components/ui/input/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group/input-group"
+import { Badge } from "@/components/ui/badge/badge"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar/avatar"
+import { Card, CardContent } from "@/components/ui/card/card"
+import { cn } from "@/lib/utils"
 
 type UserRole = "ADMIN" | "PROGRAM_LEAD" | "LEAD_OFFICER" | "OFFICER" | "READ_ONLY"
 
@@ -27,12 +32,12 @@ const users: AppUser[] = [
   { id: "USR-012", name: "Dawn Dale",           email: "dawn.dale@fiserv.com",           role: "OFFICER",       region: "EMEA",          lob: "FIG",     createdAt: "Jan 5, 2025",  lastLogin: "Mar 15, 2026", active: false },
 ]
 
-const roleStyle: Record<UserRole, string> = {
-  ADMIN:        "bg-red-100 text-red-800",
-  PROGRAM_LEAD: "bg-purple-100 text-purple-800",
-  LEAD_OFFICER: "bg-blue-100 text-blue-800",
-  OFFICER:      "bg-green-100 text-green-800",
-  READ_ONLY:    "bg-gray-100 text-gray-600",
+const roleClass: Record<UserRole, string> = {
+  ADMIN:        "border-transparent bg-red-100 text-red-800 hover:bg-red-100",
+  PROGRAM_LEAD: "border-transparent bg-purple-100 text-purple-800 hover:bg-purple-100",
+  LEAD_OFFICER: "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  OFFICER:      "border-transparent bg-green-100 text-green-800 hover:bg-green-100",
+  READ_ONLY:    "border-transparent bg-gray-100 text-gray-600 hover:bg-gray-100",
 }
 
 export default function AdminUsersPage() {
@@ -49,27 +54,38 @@ export default function AdminUsersPage() {
       {/* Role summary */}
       <div className="grid grid-cols-5 gap-3">
         {(["ADMIN","PROGRAM_LEAD","LEAD_OFFICER","OFFICER","READ_ONLY"] as UserRole[]).map(role => (
-          <div key={role} className="rounded-lg border border-border bg-white p-3 text-center shadow-sm">
-            <div className="text-2xl font-bold text-slate-900">{users.filter(u => u.role === role && u.active).length}</div>
-            <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-xs font-medium ${roleStyle[role]}`}>{role.replace("_"," ")}</span>
-          </div>
+          <Card key={role}>
+            <CardContent className="p-3 text-center">
+              <div className="text-2xl font-bold text-slate-900">{users.filter(u => u.role === role && u.active).length}</div>
+              <Badge variant="outline" className={cn("mt-1", roleClass[role])}>{role.replace("_"," ")}</Badge>
+            </CardContent>
+          </Card>
         ))}
       </div>
 
       {/* Controls */}
       <div className="flex items-center gap-2">
-        <Input size="sm" placeholder="Search users…" leftIcon={<Search />} value={search} onChange={e => setSearch(e.target.value)} className="w-52" />
-        <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-          value={roleF} onChange={e => setRoleF(e.target.value)}>
-          {["All","ADMIN","PROGRAM_LEAD","LEAD_OFFICER","OFFICER","READ_ONLY"].map(r => <option key={r}>{r.replace("_"," ")}</option>)}
-        </select>
+        <InputGroup className="w-52">
+          <InputGroupAddon><Search /></InputGroupAddon>
+          <InputGroupInput placeholder="Search users…" value={search} onChange={e => setSearch(e.target.value)} />
+        </InputGroup>
+        <Select value={roleF} onValueChange={setRoleF}>
+          <SelectTrigger size="sm">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {["All","ADMIN","PROGRAM_LEAD","LEAD_OFFICER","OFFICER","READ_ONLY"].map(r => (
+              <SelectItem key={r} value={r}>{r.replace(/_/g, " ")}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <div className="ml-auto">
           <Button variant="default" size="sm" onClick={() => setShowAdd(true)}><Plus className="size-3.5" />Add User</Button>
         </div>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-xl border border-border bg-white">
+      <Card className="overflow-x-auto p-0">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border">
@@ -83,24 +99,29 @@ export default function AdminUsersPage() {
               <tr key={u.id} className={`hover:bg-slate-50 transition-colors ${!u.active ? "opacity-50" : ""}`}>
                 <td className="px-4 py-2.5">
                   <div className="flex items-center gap-2">
-                    <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-700">
-                      {u.name.split(" ").map(n => n[0]).join("").slice(0,2)}
-                    </div>
+                    <Avatar size="sm">
+                      <AvatarFallback className="bg-slate-200 text-slate-700">
+                        {u.name.split(" ").map(n => n[0]).join("").slice(0,2)}
+                      </AvatarFallback>
+                    </Avatar>
                     <span className="text-xs font-medium text-slate-800">{u.name}</span>
                   </div>
                 </td>
                 <td className="px-4 py-2.5 text-xs text-slate-500">{u.email}</td>
                 <td className="px-4 py-2.5">
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${roleStyle[u.role]}`}>{u.role.replace("_"," ")}</span>
+                  <Badge variant="outline" className={roleClass[u.role]}>{u.role.replace("_"," ")}</Badge>
                 </td>
                 <td className="px-4 py-2.5 text-xs text-slate-600">{u.region}</td>
                 <td className="px-4 py-2.5 text-xs text-slate-500">{u.lob}</td>
                 <td className="px-4 py-2.5 text-xs text-slate-500 whitespace-nowrap">{u.createdAt}</td>
                 <td className="px-4 py-2.5 text-xs text-slate-500 whitespace-nowrap">{u.lastLogin}</td>
                 <td className="px-4 py-2.5">
-                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${u.active ? "bg-green-100 text-green-800" : "bg-slate-100 text-slate-500"}`}>
+                  <Badge variant="outline" className={u.active
+                    ? "border-transparent bg-green-100 text-green-800 hover:bg-green-100"
+                    : "border-transparent bg-slate-100 text-slate-500 hover:bg-slate-100"
+                  }>
                     {u.active ? "Active" : "Inactive"}
-                  </span>
+                  </Badge>
                 </td>
                 <td className="px-4 py-2.5">
                   <div className="flex gap-1">
@@ -116,7 +137,7 @@ export default function AdminUsersPage() {
           </tbody>
         </table>
         {filtered.length === 0 && <div className="py-10 text-center text-sm text-slate-400">No users match the filters.</div>}
-      </div>
+      </Card>
 
       {/* Add user modal */}
       {showAdd && (
@@ -140,9 +161,14 @@ export default function AdminUsersPage() {
               ].map(({ label, opts }) => (
                 <div key={label}>
                   <label className="text-xs font-medium text-slate-700">{label}</label>
-                  <select className="mt-1 w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-slate-700">
-                    {opts.map(o => <option key={o}>{o.replace("_"," ")}</option>)}
-                  </select>
+                  <Select>
+                    <SelectTrigger className="mt-1 w-full">
+                      <SelectValue placeholder={`Select ${label}…`} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {opts.map(o => <SelectItem key={o} value={o}>{o.replace(/_/g, " ")}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
                 </div>
               ))}
               <div className="flex gap-2 pt-2">

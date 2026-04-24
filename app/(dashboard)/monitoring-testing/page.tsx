@@ -1,14 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, Search, Filter, Eye, Check } from "lucide-react"
+import { CheckCircle2, Filter, Eye, Check, Search } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { Input } from "@/components/ui/input/input"
 import { KpiCard } from "@/components/dashboard/KpiCard"
 import { StatusBadge } from "@/components/dashboard/StatusBadge"
 import { MonthlyVelocityChart } from "@/components/dashboard/MonthlyVelocityChart"
 import { RegionalCompletionChart } from "@/components/dashboard/RegionalCompletionChart"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group/input-group"
 
 type Status = "PLANNED" | "IN_PROGRESS" | "COMPLETED" | "PAST_DUE" | "DEFERRED" | "CANCELLED"
 type ActivityType = "MONITORING" | "TESTING"
@@ -138,16 +139,34 @@ export default function MonitoringTestingPage() {
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <Input size="sm" placeholder="Search…" leftIcon={<Search />} value={search} onChange={(e) => setSearch(e.target.value)} className="w-44" />
-            <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs" value={regionFilter} onChange={(e) => setRegionFilter(e.target.value)}>
-              {regions.map((r) => <option key={r}>{r}</option>)}
-            </select>
-            <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs" value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
-              {["All", "MONITORING", "TESTING"].map((t) => <option key={t}>{t}</option>)}
-            </select>
-            <select className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-              {["All", "PLANNED", "IN_PROGRESS", "COMPLETED", "PAST_DUE"].map((s) => <option key={s}>{s}</option>)}
-            </select>
+            <InputGroup className="w-44">
+              <InputGroupAddon><Search /></InputGroupAddon>
+              <InputGroupInput placeholder="Search…" value={search} onChange={(e) => setSearch(e.target.value)} />
+            </InputGroup>
+            <Select value={regionFilter} onValueChange={setRegionFilter}>
+              <SelectTrigger size="sm">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {regions.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            <Select value={typeFilter} onValueChange={setTypeFilter}>
+              <SelectTrigger size="sm">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {["All", "MONITORING", "TESTING"].map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+              </SelectContent>
+            </Select>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger size="sm">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {["All", "PLANNED", "IN_PROGRESS", "COMPLETED", "PAST_DUE"].map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

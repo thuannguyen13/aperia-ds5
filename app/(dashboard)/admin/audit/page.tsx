@@ -1,6 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { Badge } from "@/components/ui/badge/badge"
+import { Card, CardContent } from "@/components/ui/card/card"
+import { cn } from "@/lib/utils"
 
 const auditLogs = [
   { date: "Apr 23, 2026 09:14", user: "Admin User",         action: "UPDATE", entity: "user",      entityId: "USR-007",       detail: "Role changed: OFFICER → LEAD_OFFICER"              },
@@ -17,12 +21,12 @@ const auditLogs = [
   { date: "Apr 16, 2026 09:30", user: "Admin User",         action: "UPDATE", entity: "user",      entityId: "USR-009",       detail: "LOB updated: FCC → APAC"                           },
 ]
 
-const actionStyle: Record<string, string> = {
-  CREATE:  "bg-green-100 text-green-800",
-  UPDATE:  "bg-blue-100 text-blue-800",
-  DELETE:  "bg-red-100 text-red-800",
-  APPROVE: "bg-purple-100 text-purple-800",
-  EXPORT:  "bg-slate-100 text-slate-700",
+const actionClass: Record<string, string> = {
+  CREATE:  "border-transparent bg-green-100 text-green-800 hover:bg-green-100",
+  UPDATE:  "border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100",
+  DELETE:  "border-transparent bg-red-100 text-red-800 hover:bg-red-100",
+  APPROVE: "border-transparent bg-purple-100 text-purple-800 hover:bg-purple-100",
+  EXPORT:  "border-transparent bg-slate-100 text-slate-700 hover:bg-slate-100",
 }
 
 export default function AdminAuditPage() {
@@ -44,58 +48,66 @@ export default function AdminAuditPage() {
       {/* Summary */}
       <div className="grid grid-cols-5 gap-3">
         {(["CREATE","UPDATE","DELETE","APPROVE","EXPORT"] as const).map(action => (
-          <div key={action} className="rounded-lg border border-border bg-white p-3 text-center shadow-sm">
-            <div className="text-2xl font-bold text-slate-900">{auditLogs.filter(l => l.action === action).length}</div>
-            <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-xs font-medium ${actionStyle[action]}`}>{action}</span>
-          </div>
+          <Card key={action}>
+            <CardContent className="p-3 text-center">
+              <div className="text-2xl font-bold text-slate-900">{auditLogs.filter(l => l.action === action).length}</div>
+              <Badge variant="outline" className={cn("mt-1", actionClass[action])}>{action}</Badge>
+            </CardContent>
+          </Card>
         ))}
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border border-border bg-white p-5">
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <h2 className="mr-2 text-sm font-semibold text-slate-800">Audit Events</h2>
-          {[
-            { label: "User",   val: userF,   set: setUserF,   opts: users    },
-            { label: "Entity", val: entityF, set: setEntityF, opts: entities },
-            { label: "Action", val: actionF, set: setActionF, opts: actions  },
-          ].map(({ label, val, set, opts }) => (
-            <select key={label} className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-              value={val} onChange={e => set(e.target.value)}>
-              <option value="All">{label}</option>
-              {opts.filter(o => o !== "All").map(o => <option key={o}>{o}</option>)}
-            </select>
-          ))}
-          <span className="ml-auto text-xs text-slate-400">{filtered.length} events</span>
-        </div>
+      <Card>
+        <CardContent className="p-5">
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <h2 className="mr-2 text-sm font-semibold text-slate-800">Audit Events</h2>
+            {[
+              { label: "User",   val: userF,   set: setUserF,   opts: users    },
+              { label: "Entity", val: entityF, set: setEntityF, opts: entities },
+              { label: "Action", val: actionF, set: setActionF, opts: actions  },
+            ].map(({ label, val, set, opts }) => (
+              <Select key={label} value={val} onValueChange={set}>
+                <SelectTrigger size="sm">
+                  <SelectValue placeholder={label} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="All">{label}</SelectItem>
+                  {opts.filter(o => o !== "All").map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            ))}
+            <span className="ml-auto text-xs text-slate-400">{filtered.length} events</span>
+          </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                {["Timestamp","User","Action","Entity","Entity ID","Detail"].map(h => (
-                  <th key={h} className="pb-2 pr-4 text-left text-xs font-medium uppercase tracking-wider text-slate-500 whitespace-nowrap">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              {filtered.map((log, i) => (
-                <tr key={i} className="hover:bg-slate-50 transition-colors">
-                  <td className="py-2.5 pr-4 font-mono text-xs text-slate-500 whitespace-nowrap">{log.date}</td>
-                  <td className="py-2.5 pr-4 text-xs font-medium text-slate-800">{log.user}</td>
-                  <td className="py-2.5 pr-4">
-                    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${actionStyle[log.action] ?? "bg-slate-100 text-slate-600"}`}>{log.action}</span>
-                  </td>
-                  <td className="py-2.5 pr-4 text-xs text-slate-500">{log.entity}</td>
-                  <td className="py-2.5 pr-4 font-mono text-xs text-blue-600">{log.entityId}</td>
-                  <td className="py-2.5 text-xs text-slate-600">{log.detail}</td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border">
+                  {["Timestamp","User","Action","Entity","Entity ID","Detail"].map(h => (
+                    <th key={h} className="pb-2 pr-4 text-left text-xs font-medium uppercase tracking-wider text-slate-500 whitespace-nowrap">{h}</th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          {filtered.length === 0 && <div className="py-10 text-center text-sm text-slate-400">No events match the filters.</div>}
-        </div>
-      </div>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {filtered.map((log, i) => (
+                  <tr key={i} className="hover:bg-slate-50 transition-colors">
+                    <td className="py-2.5 pr-4 font-mono text-xs text-slate-500 whitespace-nowrap">{log.date}</td>
+                    <td className="py-2.5 pr-4 text-xs font-medium text-slate-800">{log.user}</td>
+                    <td className="py-2.5 pr-4">
+                      <Badge variant="outline" className={cn(actionClass[log.action] ?? "border-transparent bg-slate-100 text-slate-600 hover:bg-slate-100")}>{log.action}</Badge>
+                    </td>
+                    <td className="py-2.5 pr-4 text-xs text-slate-500">{log.entity}</td>
+                    <td className="py-2.5 pr-4 font-mono text-xs text-blue-600">{log.entityId}</td>
+                    <td className="py-2.5 text-xs text-slate-600">{log.detail}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {filtered.length === 0 && <div className="py-10 text-center text-sm text-slate-400">No events match the filters.</div>}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }

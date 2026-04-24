@@ -1,9 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Download, CheckCircle, ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-react"
+import { Download, CheckCircle, ChevronUp, ChevronDown, ChevronsUpDown, Search } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { Input } from "@/components/ui/input/input"
 import { KpiCard } from "@/components/dashboard/KpiCard"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
 import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
@@ -11,6 +10,8 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell,
 } from "recharts"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select/select"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group/input-group"
 
 // ── Mock Data ─────────────────────────────────────────────────────────────────
 
@@ -119,11 +120,16 @@ export default function GovernancePage() {
 
       {/* Report selector */}
       <div className="flex items-center gap-3">
-        <select className="rounded-lg border border-border bg-white px-3 py-2 text-sm text-slate-700 shadow-sm">
-          <option>April 2026 Governance Forum</option>
-          <option>March 2026 Governance Forum</option>
-          <option>February 2026 Governance Forum</option>
-        </select>
+        <Select defaultValue="April 2026 Governance Forum">
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="April 2026 Governance Forum">April 2026 Governance Forum</SelectItem>
+            <SelectItem value="March 2026 Governance Forum">March 2026 Governance Forum</SelectItem>
+            <SelectItem value="February 2026 Governance Forum">February 2026 Governance Forum</SelectItem>
+          </SelectContent>
+        </Select>
         <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">DRAFT</span>
         <div className="ml-auto flex gap-2">
           <Button variant="outline" size="sm">
@@ -229,14 +235,20 @@ export default function GovernancePage() {
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-sm font-semibold text-slate-800">All Issues</h2>
           <div className="flex items-center gap-2">
-            <Input size="sm" placeholder="Search issues…" value={search} onChange={(e) => { setSearch(e.target.value); setPage(1) }} className="w-48" />
-            <select
-              className="rounded-lg border border-border bg-white px-2 py-1.5 text-xs text-slate-700"
-              value={severityFilter}
-              onChange={(e) => { setSeverityFilter(e.target.value); setPage(1) }}
-            >
-              {["All", "CRITICAL", "HIGH", "MODERATE", "LOW"].map((s) => <option key={s}>{s}</option>)}
-            </select>
+            <InputGroup className="w-48">
+              <InputGroupAddon><Search /></InputGroupAddon>
+              <InputGroupInput placeholder="Search issues…" value={search} onChange={(e) => { setSearch(e.target.value); setPage(1) }} />
+            </InputGroup>
+            <Select value={severityFilter} onValueChange={v => { setSeverityFilter(v); setPage(1) }}>
+              <SelectTrigger size="sm">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {["All", "CRITICAL", "HIGH", "MODERATE", "LOW"].map((s) => (
+                  <SelectItem key={s} value={s}>{s}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <label className="flex items-center gap-1.5 text-xs text-slate-600 cursor-pointer">
               <input type="checkbox" checked={pastDueOnly} onChange={(e) => { setPastDueOnly(e.target.checked); setPage(1) }} className="size-3.5" />
               Past due only
