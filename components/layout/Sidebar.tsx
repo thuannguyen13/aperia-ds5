@@ -18,6 +18,7 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useSidebar } from "@/contexts/SidebarContext"
 
 const navItems = [
   { href: "/", icon: LayoutDashboard, label: "Dashboard" },
@@ -47,12 +48,14 @@ function NavItem({
   label,
   badge,
   collapsed,
+  onClick,
 }: {
   href: string
   icon: React.ElementType
   label: string
   badge?: number
   collapsed: boolean
+  onClick?: () => void
 }) {
   const pathname = usePathname()
   const active = pathname === href || (href !== "/" && pathname.startsWith(href))
@@ -60,6 +63,7 @@ function NavItem({
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={cn(
         "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all",
         active
@@ -86,61 +90,62 @@ function NavItem({
 
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
+  const { mobileOpen, closeMobile } = useSidebar()
 
   return (
     <aside
       className={cn(
         "flex h-screen flex-col border-r border-border bg-white transition-all duration-200",
-        collapsed ? "w-16" : "w-60",
+        // Mobile: fixed overlay, slides in/out
+        "fixed inset-y-0 left-0 z-30 w-60",
+        mobileOpen ? "translate-x-0" : "-translate-x-full",
+        // Desktop: in-flow, collapsible
+        "md:relative md:inset-auto md:z-auto md:translate-x-0",
+        collapsed ? "md:w-16" : "md:w-60",
       )}
     >
       {/* Logo */}
-      <div className={cn("flex h-14 items-center border-b border-border px-4", collapsed && "justify-center px-2")}>
-        {!collapsed && (
-          <div className="flex items-center gap-2">
-            <div className="flex size-7 items-center justify-center rounded-md bg-blue-600">
-              <Scale className="size-4 text-white" />
-            </div>
-            <span className="text-sm font-semibold text-slate-900">Fiserv Compliance</span>
-          </div>
-        )}
-        {collapsed && (
+      <div className={cn("flex h-14 items-center border-b border-border px-4", collapsed && "md:justify-center md:px-2")}>
+        <div className="flex items-center gap-2">
           <div className="flex size-7 items-center justify-center rounded-md bg-blue-600">
             <Scale className="size-4 text-white" />
           </div>
-        )}
+          <span className={cn("text-sm font-semibold text-slate-900", collapsed && "md:hidden")}>
+            Fiserv Compliance
+          </span>
+        </div>
       </div>
 
       {/* Nav */}
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-3">
         {navItems.map((item) => (
-          <NavItem key={item.href} {...item} collapsed={collapsed} />
+          <NavItem key={item.href} {...item} collapsed={collapsed} onClick={closeMobile} />
         ))}
 
-        <div className={cn("my-2 border-t border-border", collapsed && "mx-1")} />
+        <div className={cn("my-2 border-t border-border", collapsed && "md:mx-1")} />
 
         {programItems.map((item) => (
-          <NavItem key={item.href} {...item} collapsed={collapsed} />
+          <NavItem key={item.href} {...item} collapsed={collapsed} onClick={closeMobile} />
         ))}
 
-        <div className={cn("my-2 border-t border-border", collapsed && "mx-1")} />
+        <div className={cn("my-2 border-t border-border", collapsed && "md:mx-1")} />
 
         {toolItems.map((item) => (
-          <NavItem key={item.href} {...item} collapsed={collapsed} />
+          <NavItem key={item.href} {...item} collapsed={collapsed} onClick={closeMobile} />
         ))}
 
-        <div className={cn("my-2 border-t border-border", collapsed && "mx-1")} />
+        <div className={cn("my-2 border-t border-border", collapsed && "md:mx-1")} />
 
         {adminItems.map((item) => (
-          <NavItem key={item.href} {...item} collapsed={collapsed} />
+          <NavItem key={item.href} {...item} collapsed={collapsed} onClick={closeMobile} />
         ))}
       </nav>
 
-      {/* Collapse toggle */}
+      {/* Collapse toggle — desktop only */}
       <div className="border-t border-border p-3">
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="flex w-full items-center justify-center rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+          className="hidden md:flex w-full items-center justify-center rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
         >
           {collapsed ? <ChevronRight className="size-4" /> : (
             <div className="flex items-center gap-2">

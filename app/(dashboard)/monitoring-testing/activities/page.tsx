@@ -6,7 +6,7 @@ import { Search, Download, Eye, Check } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input/input"
 import { StatusBadge } from "@/components/dashboard/StatusBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 type Status = "PLANNED" | "IN_PROGRESS" | "COMPLETED" | "PAST_DUE" | "DEFERRED" | "CANCELLED"
 
@@ -74,7 +74,7 @@ export default function ActivitiesPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="All Activities" breadcrumb={["M&T", "Activities"]} />
+      <PageHeaderSetter title="All Activities" breadcrumb={["M&T", "Activities"]} />
 
       {/* Filter bar */}
       <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-white p-3">

@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, CheckCircle2, Clock, Circle, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 type TaskStatus = "PENDING" | "IN_PROGRESS" | "COMPLETED" | "OVERDUE"
 
@@ -51,7 +51,7 @@ export default function WorkflowDetailPage({ params }: { params: { workflowId: s
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title={workflow.name} breadcrumb={["Workflows", params.workflowId]} />
+      <PageHeaderSetter title={workflow.name} breadcrumb={["Workflows", params.workflowId]} />
 
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" asChild>

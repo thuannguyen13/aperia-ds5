@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Plus, FileText, Download, Search } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input/input"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 type PolicyStatus = "DRAFT" | "IN_REVIEW" | "APPROVED" | "ACTIVE" | "ARCHIVED"
 
@@ -52,7 +52,7 @@ export default function PoliciesPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="Policies" breadcrumb={["Tools", "Policies"]} />
+      <PageHeaderSetter title="Policies" breadcrumb={["Tools", "Policies"]} />
 
       {/* Summary cards */}
       <div className="grid grid-cols-4 gap-4">

@@ -5,7 +5,7 @@ import { FileText, Eye } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { KpiCard } from "@/components/dashboard/KpiCard"
 import { SlaProgressBar } from "@/components/dashboard/SlaProgressBar"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
 } from "recharts"
@@ -84,7 +84,7 @@ export default function RRMPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="RRM — Regulatory Rules Management" breadcrumb={["Programs", "RRM"]} />
+      <PageHeaderSetter title="RRM — Regulatory Rules Management" breadcrumb={["Programs", "RRM"]} />
 
       {/* Row 1 — KPI Cards */}
       <div className="grid grid-cols-5 gap-4">

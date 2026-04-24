@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input/input"
 import { KpiCard } from "@/components/dashboard/KpiCard"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell,
@@ -115,7 +115,7 @@ export default function GovernancePage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="Governance Reporting" breadcrumb={["Programs", "Governance"]} />
+      <PageHeaderSetter title="Governance Reporting" breadcrumb={["Programs", "Governance"]} />
 
       {/* Report selector */}
       <div className="flex items-center gap-3">

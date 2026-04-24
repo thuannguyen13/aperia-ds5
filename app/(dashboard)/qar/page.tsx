@@ -5,7 +5,7 @@ import { Plus, Search, ScanSearch } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input/input"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 type QarStatus = "SCHEDULED" | "IN_PROGRESS" | "COMPLETED" | "FINDINGS_ISSUED" | "CLOSED"
 type QarResult = "SATISFACTORY" | "NEEDS_IMPROVEMENT" | "UNSATISFACTORY" | "PENDING"
@@ -58,7 +58,7 @@ export default function QARPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="Quality Assurance Reviews" breadcrumb={["Tools", "QAR"]} />
+      <PageHeaderSetter title="Quality Assurance Reviews" breadcrumb={["Tools", "QAR"]} />
 
       {/* Summary */}
       <div className="grid grid-cols-4 gap-4">

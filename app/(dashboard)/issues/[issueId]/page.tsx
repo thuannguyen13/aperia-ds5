@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowLeft, AlertTriangle, Calendar, User, Building2, FileText, Clock, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 const issue = {
   id: "ISS-45608",
@@ -55,7 +55,7 @@ const mapStatus: Record<string, string> = {
 export default function IssueDetailPage({ params }: { params: { issueId: string } }) {
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title={`Issue — ${params.issueId}`} breadcrumb={["Issues", params.issueId]} />
+      <PageHeaderSetter title={`Issue — ${params.issueId}`} breadcrumb={["Issues", params.issueId]} />
 
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" asChild>

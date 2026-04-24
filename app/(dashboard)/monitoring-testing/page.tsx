@@ -8,7 +8,7 @@ import { KpiCard } from "@/components/dashboard/KpiCard"
 import { StatusBadge } from "@/components/dashboard/StatusBadge"
 import { MonthlyVelocityChart } from "@/components/dashboard/MonthlyVelocityChart"
 import { RegionalCompletionChart } from "@/components/dashboard/RegionalCompletionChart"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 type Status = "PLANNED" | "IN_PROGRESS" | "COMPLETED" | "PAST_DUE" | "DEFERRED" | "CANCELLED"
 type ActivityType = "MONITORING" | "TESTING"
@@ -69,7 +69,7 @@ export default function MonitoringTestingPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="Monitoring & Testing" breadcrumb={["Programs", "M&T"]} />
+      <PageHeaderSetter title="Monitoring & Testing" breadcrumb={["Programs", "M&T"]} />
 
       {/* Row 1 — KPI Cards */}
       <div className="grid grid-cols-4 gap-4">

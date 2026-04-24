@@ -5,7 +5,7 @@ import { CheckCircle2, Upload, Bell, FileText, AlertTriangle, GitFork } from "lu
 import { Button } from "@/components/ui/button/button"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
 import { StatusBadge } from "@/components/dashboard/StatusBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 type Status = "PLANNED" | "IN_PROGRESS" | "COMPLETED" | "PAST_DUE" | "DEFERRED" | "CANCELLED"
 type Severity = "LOW" | "MODERATE" | "HIGH" | "CRITICAL"
@@ -63,7 +63,7 @@ export default function MyWorkPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="My Work" breadcrumb={["My Work"]} />
+      <PageHeaderSetter title="My Work" breadcrumb={["My Work"]} />
 
       {/* Personal summary strip */}
       <div className="flex items-center gap-6 rounded-xl border border-blue-200 bg-blue-50 px-6 py-4">

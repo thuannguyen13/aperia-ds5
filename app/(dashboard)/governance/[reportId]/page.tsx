@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowLeft, AlertTriangle, Building2, Calendar, User } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 const report = {
   id: "GOV-APR-2026",
@@ -39,7 +39,7 @@ const highlights = [
 export default function GovernanceReportDetailPage({ params }: { params: { reportId: string } }) {
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title={report.title} breadcrumb={["Governance", params.reportId]} />
+      <PageHeaderSetter title={report.title} breadcrumb={["Governance", params.reportId]} />
 
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" asChild>

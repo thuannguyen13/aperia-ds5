@@ -13,7 +13,7 @@ import { IssueSourceBarChart } from "@/components/dashboard/IssueSourceBarChart"
 import { RegionalCompletionChart } from "@/components/dashboard/RegionalCompletionChart"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
 import { StatusBadge } from "@/components/dashboard/StatusBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 const recentCompletions = [
   { id: "EMEA-2025-061", name: "Daily Sanctions Upload Review", officer: "Richard Pooley", region: "EMEA", date: "Mar 28, 2026" },
@@ -39,140 +39,141 @@ const pastDueItems = [
 
 export default function UnifiedDashboard() {
   return (
-    <div className="flex flex-col gap-6">
-      <TopNav title="Compliance Dashboard" breadcrumb={["Home"]} />
-
-      {/* Row 1 — KPI Cards */}
-      <div className="grid grid-cols-6 gap-4">
-        <KpiCard
-          label="Open Issues"
-          value={139}
-          subtitle="+2 vs last mo."
-          trend="up"
-          trendLabel="+1.5%"
-          accentColor="orange"
-          icon={AlertTriangle}
-        />
-        <KpiCard
-          label="Critical / High"
-          value={29}
-          subtitle="20.9% of total"
-          trend="down"
-          trendLabel="-41%"
-          accentColor="red"
-          icon={TrendingUp}
-        />
-        <KpiCard
-          label="M&T Completion"
-          value="99.2%"
-          subtitle="705 / 711"
-          trend="up"
-          trendLabel="+0.8%"
-          accentColor="green"
-          icon={CheckCircle2}
-        />
-        <KpiCard
-          label="Past Due"
-          value={4}
-          subtitle="2.9% of total"
-          accentColor="red"
-          icon={Clock}
-        />
-        <KpiCard
-          label="RRM Alerts"
-          value={9}
-          subtitle="In-SLA: 8 · Overdue: 1"
-          accentColor="blue"
-          icon={Bell}
-        />
-        <KpiCard
-          label="Policies Due for Review"
-          value={3}
-          subtitle="Next 30 days"
-          accentColor="slate"
-          icon={FileText}
-        />
-      </div>
-
-      {/* Row 2 — Charts */}
-      <div className="grid grid-cols-4 gap-4">
-        <div className="col-span-2 rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-3 text-sm font-semibold text-slate-800">M&T Monthly Velocity</h2>
-          <MonthlyVelocityChart />
+    <div className="flex flex-col">
+      <PageHeaderSetter title="Compliance Dashboard" breadcrumb={["Home"]} />
+      <div className="grid gap-4">
+        {/* Row 1 — KPI Cards */}
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <KpiCard
+            label="Open Issues"
+            value={139}
+            subtitle="+2 vs last mo."
+            trend="up"
+            trendLabel="+1.5%"
+            accentColor="orange"
+            icon={AlertTriangle}
+          />
+          <KpiCard
+            label="Critical / High"
+            value={29}
+            subtitle="20.9% of total"
+            trend="down"
+            trendLabel="-41%"
+            accentColor="red"
+            icon={TrendingUp}
+          />
+          <KpiCard
+            label="M&T Completion"
+            value="99.2%"
+            subtitle="705 / 711"
+            trend="up"
+            trendLabel="+0.8%"
+            accentColor="green"
+            icon={CheckCircle2}
+          />
+          <KpiCard
+            label="Past Due"
+            value={4}
+            subtitle="2.9% of total"
+            accentColor="red"
+            icon={Clock}
+          />
+          <KpiCard
+            label="RRM Alerts"
+            value={9}
+            subtitle="In-SLA: 8 · Overdue: 1"
+            accentColor="blue"
+            icon={Bell}
+          />
+          <KpiCard
+            label="Policies Due for Review"
+            value={3}
+            subtitle="Next 30 days"
+            accentColor="slate"
+            icon={FileText}
+          />
         </div>
-        <div className="col-span-1 rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-1 text-sm font-semibold text-slate-800">Issues by Severity</h2>
-          <SeverityDonutChart />
-        </div>
-        <div className="col-span-1 rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-1 text-sm font-semibold text-slate-800">Issues by Source</h2>
-          <IssueSourceBarChart />
-        </div>
-      </div>
 
-      {/* Row 3 — Regional Completion */}
-      <div className="rounded-xl border border-border bg-white p-4">
-        <h2 className="mb-3 text-sm font-semibold text-slate-800">Regional M&T Completion by LOB</h2>
-        <RegionalCompletionChart />
-      </div>
-
-      {/* Row 4 — Feed + Past Due */}
-      <div className="grid grid-cols-5 gap-4">
-        {/* Recent completions */}
-        <div className="col-span-3 rounded-xl border border-border bg-white p-4">
-          <h2 className="mb-3 text-sm font-semibold text-slate-800">Recent Activity Completions</h2>
-          <div className="divide-y divide-border">
-            {recentCompletions.map((item) => (
-              <div key={item.id} className="flex items-center gap-3 py-2.5">
-                <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-green-100">
-                  <CheckCircle2 className="size-3.5 text-green-600" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-slate-800">{item.name}</p>
-                  <p className="text-xs text-slate-400">{item.officer} · {item.region}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-slate-500">{item.date}</p>
-                  <p className="font-mono text-[10px] text-slate-400">{item.id}</p>
-                </div>
-              </div>
-            ))}
+        {/* Row 2 — Charts */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="col-span-1 rounded-xl border border-border bg-white p-4 md:col-span-2">
+            <h2 className="mb-3 text-sm font-semibold text-slate-800">M&T Monthly Velocity</h2>
+            <MonthlyVelocityChart />
+          </div>
+          <div className="rounded-xl border border-border bg-white p-4">
+            <h2 className="mb-1 text-sm font-semibold text-slate-800">Issues by Severity</h2>
+            <SeverityDonutChart />
+          </div>
+          <div className="rounded-xl border border-border bg-white p-4">
+            <h2 className="mb-1 text-sm font-semibold text-slate-800">Issues by Source</h2>
+            <IssueSourceBarChart />
           </div>
         </div>
 
-        {/* Past Due Alerts */}
-        <div className="col-span-2 rounded-xl border border-border bg-white p-4">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-slate-800">Past-Due Alerts</h2>
-            <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">
-              {pastDueItems.length} items
-            </span>
-          </div>
-          <div className="flex flex-col gap-2">
-            {pastDueItems.map((item) => (
-              <div
-                key={item.id}
-                className={`rounded-lg border p-3 ${
-                  item.daysPastDue >= 91 ? "border-red-200 bg-red-50" :
-                  item.daysPastDue >= 31 ? "border-amber-200 bg-amber-50" :
-                  "border-yellow-200 bg-yellow-50"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <p className="truncate text-xs font-medium text-slate-800">{item.label}</p>
-                    <p className="font-mono text-[10px] text-slate-500">{item.id}</p>
+        {/* Row 3 — Regional Completion */}
+        <div className="rounded-xl border border-border bg-white p-4">
+          <h2 className="mb-3 text-sm font-semibold text-slate-800">Regional M&T Completion by LOB</h2>
+          <RegionalCompletionChart />
+        </div>
+
+        {/* Row 4 — Feed + Past Due */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+          {/* Recent completions */}
+          <div className="rounded-xl border border-border bg-white p-4 lg:col-span-3">
+            <h2 className="mb-3 text-sm font-semibold text-slate-800">Recent Activity Completions</h2>
+            <div className="divide-y divide-border">
+              {recentCompletions.map((item) => (
+                <div key={item.id} className="flex items-center gap-3 py-2.5">
+                  <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-green-100">
+                    <CheckCircle2 className="size-3.5 text-green-600" />
                   </div>
-                  <SeverityBadge severity={item.severity} />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium text-slate-800">{item.name}</p>
+                    <p className="text-xs text-slate-400">{item.officer} · {item.region}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500">{item.date}</p>
+                    <p className="font-mono text-[10px] text-slate-400">{item.id}</p>
+                  </div>
                 </div>
-                <div className="mt-1 flex items-center gap-2">
-                  <span className={`text-xs font-semibold ${item.daysPastDue >= 91 ? "text-red-700" : item.daysPastDue >= 31 ? "text-amber-700" : "text-yellow-700"}`}>
-                    {item.daysPastDue}d past due
-                  </span>
-                  <span className="text-xs text-slate-400">· {item.type}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Past Due Alerts */}
+          <div className="rounded-xl border border-border bg-white p-4 lg:col-span-2">
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-sm font-semibold text-slate-800">Past-Due Alerts</h2>
+              <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">
+                {pastDueItems.length} items
+              </span>
+            </div>
+            <div className="flex flex-col gap-2">
+              {pastDueItems.map((item) => (
+                <div
+                  key={item.id}
+                  className={`rounded-lg border p-3 ${
+                    item.daysPastDue >= 91 ? "border-red-200 bg-red-50" :
+                    item.daysPastDue >= 31 ? "border-amber-200 bg-amber-50" :
+                    "border-yellow-200 bg-yellow-50"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <p className="truncate text-xs font-medium text-slate-800">{item.label}</p>
+                      <p className="font-mono text-[10px] text-slate-500">{item.id}</p>
+                    </div>
+                    <SeverityBadge severity={item.severity} />
+                  </div>
+                  <div className="mt-1 flex items-center gap-2">
+                    <span className={`text-xs font-semibold ${item.daysPastDue >= 91 ? "text-red-700" : item.daysPastDue >= 31 ? "text-amber-700" : "text-yellow-700"}`}>
+                      {item.daysPastDue}d past due
+                    </span>
+                    <span className="text-xs text-slate-400">· {item.type}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

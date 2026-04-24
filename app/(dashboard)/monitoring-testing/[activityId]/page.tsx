@@ -6,7 +6,7 @@ import { ArrowLeft, Upload, FileText, CheckCircle2, Clock, Link as LinkIcon, Use
 import { Button } from "@/components/ui/button/button"
 import { StatusBadge } from "@/components/dashboard/StatusBadge"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 const activity = {
   id: "EMEA-2025-061",
@@ -54,7 +54,7 @@ export default function ActivityDetailPage({ params }: { params: { activityId: s
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title={`Activity — ${params.activityId}`} breadcrumb={["M&T", params.activityId]} />
+      <PageHeaderSetter title={`Activity — ${params.activityId}`} breadcrumb={["M&T", params.activityId]} />
 
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" asChild>

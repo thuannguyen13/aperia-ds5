@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Plus, GitFork, ChevronRight, Clock, CheckCircle2, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 type WfStatus = "IN_PROGRESS" | "COMPLETED" | "CANCELLED"
 
@@ -51,7 +51,7 @@ export default function WorkflowsPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="Workflows" breadcrumb={["Tools", "Workflows"]} />
+      <PageHeaderSetter title="Workflows" breadcrumb={["Tools", "Workflows"]} />
 
       {/* Header actions */}
       <div className="flex items-center justify-between">

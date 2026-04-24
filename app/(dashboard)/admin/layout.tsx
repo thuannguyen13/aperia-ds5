@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Users, Bell, Plug, ScrollText, Shield } from "lucide-react"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 import { cn } from "@/lib/utils"
 
 const subNav = [
@@ -17,8 +17,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname()
 
   return (
-    <div className="flex flex-col gap-0">
-      <TopNav title="Admin Panel" breadcrumb={["Admin"]} />
+    <div className="flex flex-col gap-0 -mx-6 -mt-6">
+      <PageHeaderSetter title="Admin Panel" breadcrumb={["Admin"]} />
 
       {/* Admin banner */}
       <div className="flex items-center gap-2 border-b border-red-100 bg-red-50 px-6 py-2.5">

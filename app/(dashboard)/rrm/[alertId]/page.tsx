@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ArrowLeft, FileText, Globe, Calendar, User, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button/button"
 import { SlaProgressBar } from "@/components/dashboard/SlaProgressBar"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 
 const alert = {
   id: "RRM-001",
@@ -49,7 +49,7 @@ const severityStyle: Record<string, string> = {
 export default function AlertDetailPage({ params }: { params: { alertId: string } }) {
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title={`Alert — ${params.alertId}`} breadcrumb={["RRM", params.alertId]} />
+      <PageHeaderSetter title={`Alert — ${params.alertId}`} breadcrumb={["RRM", params.alertId]} />
 
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" asChild>

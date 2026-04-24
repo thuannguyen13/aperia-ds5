@@ -1,24 +1,31 @@
 "use client"
 
-import { Bell, Search, ChevronDown, User, LogOut } from "lucide-react"
+import { Bell, Search, ChevronDown, User, LogOut, Menu } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input/input"
-import { cn } from "@/lib/utils"
+import { useSidebar } from "@/contexts/SidebarContext"
+import { usePageHeader } from "@/contexts/PageHeaderContext"
 
-interface TopNavProps {
-  title: string
-  breadcrumb?: string[]
-}
-
-export function TopNav({ title, breadcrumb }: TopNavProps) {
+export function TopNav() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const { toggleMobile } = useSidebar()
+  const { title, breadcrumb } = usePageHeader()
   const unreadCount = 3
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b border-border bg-white px-6">
+    <header className="flex h-14 items-center gap-3 border-b border-border bg-white px-4 md:px-6">
+      {/* Hamburger — mobile only */}
+      <button
+        onClick={toggleMobile}
+        className="flex md:hidden items-center justify-center rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 transition-colors"
+        aria-label="Open navigation"
+      >
+        <Menu className="size-5" />
+      </button>
+
       {/* Left: title + breadcrumb */}
-      <div className="flex flex-1 flex-col justify-center">
+      <div className="flex flex-1 flex-col justify-center min-w-0">
         {breadcrumb && breadcrumb.length > 0 && (
           <div className="flex items-center gap-1">
             {breadcrumb.map((crumb, i) => (
@@ -28,11 +35,11 @@ export function TopNav({ title, breadcrumb }: TopNavProps) {
             ))}
           </div>
         )}
-        <h1 className="text-base font-semibold text-slate-900">{title}</h1>
+        <h1 className="truncate text-base font-semibold text-slate-900">{title}</h1>
       </div>
 
-      {/* Center: global search */}
-      <div className="w-72">
+      {/* Center: global search — hidden on mobile */}
+      <div className="hidden md:block w-72">
         <Input
           size="sm"
           placeholder="Search activities, issues, alerts…"
@@ -59,7 +66,7 @@ export function TopNav({ title, breadcrumb }: TopNavProps) {
             <div className="flex size-7 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white">
               SB
             </div>
-            <span className="text-sm text-slate-700">Susie B.</span>
+            <span className="hidden sm:block text-sm text-slate-700">Susie B.</span>
             <ChevronDown className="size-3 text-slate-400" />
           </button>
 

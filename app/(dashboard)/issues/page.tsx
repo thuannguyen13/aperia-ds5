@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button/button"
 import { Input } from "@/components/ui/input/input"
 import { KpiCard } from "@/components/dashboard/KpiCard"
 import { SeverityBadge } from "@/components/dashboard/SeverityBadge"
-import { TopNav } from "@/components/layout/TopNav"
+import { PageHeaderSetter } from "@/components/layout/PageHeaderSetter"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 
 type Severity = "LOW" | "MODERATE" | "HIGH" | "CRITICAL"
@@ -130,7 +130,7 @@ export default function IssuesPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <TopNav title="Issues" breadcrumb={["Programs", "Issues"]} />
+      <PageHeaderSetter title="Issues" breadcrumb={["Programs", "Issues"]} />
 
       {/* KPI row */}
       <div className="grid grid-cols-5 gap-4">
