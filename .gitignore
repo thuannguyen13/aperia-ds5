@@ -3,6 +3,7 @@
 
 # build output
 /dist
+/storybook-static
 
 # misc
 .DS_Store
