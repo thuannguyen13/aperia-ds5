@@ -4,45 +4,48 @@ import figma from "@figma/code-connect"
 
 figma.connect(
   Button,
-  "https://www.figma.com/design/Rt3p2w3NtM1X7d9NzDlMdO/Aperia-Shadcn?node-id=9-1071",
+  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=37-931",
   {
+    imports: ['import { Button } from "aperia-ds5"'],
     props: {
       variant: figma.enum("Variant", {
-        Primary:     "default",
+        Default:     "default",
         Secondary:   "secondary",
+        Destructive: "destructive",
         Outline:     "outline",
         Ghost:       "ghost",
-        Destructive: "destructive",
+        Link:        "link",
       }),
       size: figma.enum("Size", {
-        Mini:          "xs",
-        Small:         "sm",
-        Default:       "default",
-        Large:         "lg",
-        "Extra Large": "xl",
-      }),
-      shape: figma.enum("Roundness", {
-        Default: "default",
-        Round:   "round",
+        default:   "default",
+        xs:        "xs",
+        sm:        "sm",
+        lg:        "lg",
+        icon:      "icon",
+        "icon-xs": "icon-xs",
+        "icon-sm": "icon-sm",
+        "icon-lg": "icon-lg",
       }),
       disabled: figma.enum("State", {
-        Default:          false,
-        "Hover & Active": false,
-        Focus:            false,
-        Disabled:         true,
+        Default:  false,
+        Hover:    false,
+        Focus:    false,
+        Loading:  false,
+        Disabled: true,
+        Pressed:  false,
       }),
-      label: figma.textContent("Label"),
-      iconLeft: figma.boolean("Show left icon", {
-        true: figma.instance("⮑ Left icon"),
+      label: figma.textContent("Button"),
+      iconLeft: figma.boolean("Show Left Icon", {
+        true:  figma.instance("IconPlaceholder--left"),
         false: undefined,
       }),
-      iconRight: figma.boolean("Show right icon", {
-        true: figma.instance("⮑ Right icon"),
+      iconRight: figma.boolean("Show Right Icon", {
+        true:  figma.instance("IconPlaceholder--right"),
         false: undefined,
       }),
     },
-    example: ({ variant, size, shape, disabled, label, iconLeft, iconRight }) => (
-      <Button variant={variant} size={size} shape={shape} disabled={disabled}>
+    example: ({ variant, size, disabled, label, iconLeft, iconRight }) => (
+      <Button variant={variant} size={size} disabled={disabled}>
         {iconLeft}
         {label}
         {iconRight}

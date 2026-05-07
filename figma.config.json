@@ -7,6 +7,9 @@
     "importPaths": {
       "components/**": "@/"
     },
+    "paths": {
+      "@/*": ["./*"]
+    },
     "compilerOptions": {
       "types": ["@figma/code-connect/figma-types"]
     }
