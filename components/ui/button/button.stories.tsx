@@ -4,8 +4,16 @@ import { Button } from "./button"
 const meta: Meta<typeof Button> = {
   title: "UI/Button",
   component: Button,
+  tags: ["autodocs"],
   args: {
     children: "Button",
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: "[View in Figma](https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=37-931)",
+      },
+    },
   },
   argTypes: {
     variant: {
