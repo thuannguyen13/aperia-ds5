@@ -4,9 +4,6 @@
     "label": "React",
     "include": ["components/**/*.ts", "components/**/*.tsx"],
     "language": "jsx",
-    "importPaths": {
-      "components/**": "@/"
-    },
     "paths": {
       "@/*": ["./*"]
     },
