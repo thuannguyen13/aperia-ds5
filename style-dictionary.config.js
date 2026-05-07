@@ -1,11 +1,11 @@
 import StyleDictionary from "style-dictionary"
 
 const sd = new StyleDictionary({
-  source: ["./app/figma-variable.json"],
+  source: ["./styles/figma-variable.json"],
   platforms: {
     css: {
       transformGroup: "css",
-      buildPath: "app/styles/",
+      buildPath: "styles/",
       files: [
         {
           destination: "token.css",

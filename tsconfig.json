@@ -12,24 +12,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    },
-    "types": ["@figma/code-connect/figma-types"]
+    }
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
-, "style-dictionary.config.js"  ],
-  "exclude": ["node_modules"]
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "lib/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.figma.tsx",
+    "**/*.figma.ts"
+  ]
 }
