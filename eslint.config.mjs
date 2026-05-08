@@ -1,9 +1,13 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import { defineConfig } from "eslint/config"
-import js from "@eslint/js"
+import tseslint from "typescript-eslint"
 
 export default defineConfig([
-  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     ignores: ["dist/**", "node_modules/**"],
   },
+  ...storybook.configs["flat/recommended"],
 ])

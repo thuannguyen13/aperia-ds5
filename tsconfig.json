@@ -15,7 +15,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": ["@figma/code-connect/figma-types"]
   },
   "include": [
     "components/**/*.ts",

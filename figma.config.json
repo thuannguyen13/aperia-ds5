@@ -3,6 +3,7 @@
     "parser": "react",
     "label": "React",
     "include": ["components/**/*.ts", "components/**/*.tsx"],
+    "exclude": ["components/ui/icon/**"],
     "language": "jsx",
     "paths": {
       "@/*": ["./*"]

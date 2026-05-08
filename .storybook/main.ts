@@ -1,17 +1,22 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/react-vite"
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
-import path from "path"
+import path, { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const config: StorybookConfig = {
-  stories: ["../components/**/*.stories.@(ts|tsx)"],
-  addons: ["@storybook/addon-essentials"],
+  stories: ["../docs/**/*.mdx", "../components/**/*.mdx", "../components/**/*.stories.@(ts|tsx)"],
+  addons: ["@storybook/addon-docs"],
   framework: {
     name: "@storybook/react-vite",
     options: {},
   },
   async viteFinal(config) {
-    config.plugins = [react(), tailwindcss(), ...(config.plugins ?? [])]
+    config.plugins = [...(config.plugins ?? []), react({ exclude: /\.mdx?$/ }), tailwindcss()]
     config.resolve = {
       ...config.resolve,
       alias: {
