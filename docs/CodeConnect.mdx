@@ -40,6 +40,8 @@ A **connected** component shows real code snippets in Figma Dev Mode instead of 
     <tr><td>Separator</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Switch</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Table</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Tabs</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=21133-27311">21133-27311</a></td></tr>
+
     <tr><td>Textarea</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
   </tbody>
 </table>
@@ -63,6 +65,15 @@ npx figma connect publish -f components/ui/icon/icons.figma.tsx --skip-validatio
 ---
 
 ## Changelog
+
+### 2026-05-07 (update 2)
+- Added Storybook stories for **Tabs** (Default, Line, Vertical, WithIcons, Disabled)
+- Added Code Connect mappings for **Tabs**, **TabsTrigger**
+  - `Variant` (Default/Line) drives `TabsList variant` prop
+  - `Orientation` (Default/Vertical) drives `Tabs orientation` prop
+  - `Items` SLOT renders trigger children inside `TabsList`
+  - `TabsTrigger` uses `State=Disabled` → `disabled` prop; Badge/Active/Variant omitted (no code equivalent)
+  - Icon resolved dynamically via `findInstance('IconPlaceholder')` → `executeTemplate()`
 
 ### 2026-05-07 (update)
 - Added Code Connect mappings for **Avatar**, **AvatarBadge**, **AvatarGroup**

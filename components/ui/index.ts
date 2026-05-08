@@ -15,3 +15,4 @@ export { Avatar, AvatarImage, AvatarFallback, AvatarGroup, AvatarGroupCount, Ava
 export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent } from "./card/card"
 export { Switch } from "./switch/switch"
 export { Progress } from "./progress/progress"
+export { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs/tabs"
