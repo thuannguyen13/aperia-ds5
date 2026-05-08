@@ -19,29 +19,28 @@ A **connected** component shows real code snippets in Figma Dev Mode instead of 
       <th>Component</th>
       <th align="center">Stories</th>
       <th align="center">Code Connect</th>
-      <th>Figma Node</th>
+      <th>View Figma</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>Alert</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=26-160">26-160</a></td></tr>
-    <tr><td>Avatar</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=296-5188">296-5188</a></td></tr>
+    <tr><td>Alert</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=26-160">View Figma</a></td></tr>
+    <tr><td>Avatar</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=296-5188">View Figma</a></td></tr>
     <tr><td>Badge</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
-    <tr><td>Button</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=37-931">37-931</a></td></tr>
+    <tr><td>Button</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=37-931">View Figma</a></td></tr>
     <tr><td>Card</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Checkbox</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>DropdownMenu</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Field</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
-    <tr><td>Icon</td><td align="center">—</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library">icons</a></td></tr>
-    <tr><td>Input</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
-    <tr><td>InputGroup</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Icon</td><td align="center">—</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library">View Figma</a></td></tr>
+    <tr><td>Input</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=65-533">View Figma</a></td></tr>
+    <tr><td>InputGroup</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18723-14231">View Figma</a></td></tr>
     <tr><td>Label</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Progress</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Select</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Separator</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Switch</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Table</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
-    <tr><td>Tabs</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=21133-27311">21133-27311</a></td></tr>
-
+    <tr><td>Tabs</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=21133-27311">View Figma</a></td></tr>
     <tr><td>Textarea</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
   </tbody>
 </table>
@@ -65,6 +64,14 @@ npx figma connect publish -f components/ui/icon/icons.figma.tsx --skip-validatio
 ---
 
 ## Changelog
+
+### 2026-05-08
+- Added Code Connect mapping for **Input** (`input.figma.ts`)
+  - `Variant` (Default/Password/File) → `type` prop (omitted for Default, `"password"` or `"file"` otherwise)
+  - `State` (Disabled) → `disabled`; (Invalid) → `aria-invalid`; Focus/Filled are visual-only with no code equivalent
+- Added Code Connect mappings for **InputGroup** (`input-group-addon-inline.figma.ts`, `input-group-addon-block.figma.ts`)
+  - Addon Inline: `Variant` drives addon content — Text variant uses `<InputGroupText>`, Button/Spinner resolved via `executeTemplate()`
+  - Addon Block: `Align` (Start/End) → `align="block-start|block-end"`; addon slots controlled by four BOOLEAN props; nested Addon Inline instances resolved via `findConnectedInstances`
 
 ### 2026-05-07 (update 2)
 - Added Storybook stories for **Tabs** (Default, Line, Vertical, WithIcons, Disabled)
