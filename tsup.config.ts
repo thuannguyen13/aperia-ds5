@@ -20,7 +20,6 @@ export default defineConfig([
     },
     dts: true,
     banner: { js: '"use client";' },
-    clean: true,
   },
   {
     ...shared,

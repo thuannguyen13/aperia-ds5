@@ -1,8 +1,11 @@
 {
   "name": "aperia-ds5",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
-  "private": true,
+  "files": [
+    "dist",
+    "styles"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -22,7 +25,7 @@
     "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
-    "build:lib": "tsup",
+    "build:lib": "rm -rf dist && tsup",
     "prepare": "npm run build:lib",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
