@@ -133,7 +133,7 @@ export const IconCollapsible: Story = {
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1">
             <div className="size-6 shrink-0 rounded-md bg-primary" />
-            <span className="text-sm font-semibold">Aperia</span>
+            <span className="text-sm font-semibold group-data-[collapsible=icon]:hidden">Aperia</span>
           </div>
         </SidebarHeader>
         <SidebarContent>
