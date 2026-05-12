@@ -24,6 +24,13 @@ const config: StorybookConfig = {
         "@": path.resolve(__dirname, ".."),
       },
     }
+    config.optimizeDeps = {
+      ...config.optimizeDeps,
+      include: [
+        ...(config.optimizeDeps?.include ?? []),
+        "recharts",
+      ],
+    }
     return config
   },
 }
