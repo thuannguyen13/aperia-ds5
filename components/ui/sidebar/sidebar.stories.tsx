@@ -23,6 +23,7 @@ import {
   SidebarSeparator,
   SidebarInput,
 } from "./sidebar"
+import { Separator } from "@/components/ui/separator/separator"
 import {
   HomeIcon,
   InboxIcon,
@@ -30,19 +31,22 @@ import {
   SettingsIcon,
   UsersIcon,
   ChevronRightIcon,
-  PlusIcon,
   MoreHorizontalIcon,
-  FolderIcon,
-  BookOpenIcon,
   BotIcon,
+  BookOpenIcon,
   SquareTerminalIcon,
   FrameIcon,
   PieChartIcon,
   MapIcon,
-  GalleryVerticalEndIcon,
-  AudioWaveformIcon,
-  CommandIcon,
 } from "lucide-react"
+
+// CSS transform trick: makes fixed-position children treat this div as their
+// containing block instead of the viewport, so the sidebar stays within the frame.
+const SidebarFrame = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ transform: "scale(1)", height: 600, overflow: "hidden" }}>
+    {children}
+  </div>
+)
 
 const meta: Meta<typeof Sidebar> = {
   title: "UI/Sidebar",
@@ -50,7 +54,15 @@ const meta: Meta<typeof Sidebar> = {
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
+    docs: { story: { height: "600px" } },
   },
+  decorators: [
+    (Story) => (
+      <SidebarFrame>
+        <Story />
+      </SidebarFrame>
+    ),
+  ],
 }
 
 export default meta
@@ -66,7 +78,7 @@ const navItems = [
 
 export const Default: Story = {
   render: () => (
-    <SidebarProvider style={{ height: "100vh" }}>
+    <SidebarProvider style={{ height: "100%" }}>
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1">
@@ -103,7 +115,7 @@ export const Default: Story = {
       <SidebarInset>
         <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
-          <SidebarSeparator orientation="vertical" className="mr-2 h-4" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
           <span className="text-sm font-medium">Home</span>
         </header>
         <div className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground">
@@ -116,7 +128,7 @@ export const Default: Story = {
 
 export const IconCollapsible: Story = {
   render: () => (
-    <SidebarProvider defaultOpen={false} style={{ height: "100vh" }}>
+    <SidebarProvider defaultOpen={false} style={{ height: "100%" }}>
       <Sidebar collapsible="icon">
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1">
@@ -148,7 +160,7 @@ export const IconCollapsible: Story = {
       <SidebarInset>
         <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
-          <SidebarSeparator orientation="vertical" className="mr-2 h-4" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
           <span className="text-sm font-medium">Dashboard</span>
         </header>
         <div className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground">
@@ -161,7 +173,7 @@ export const IconCollapsible: Story = {
 
 export const Floating: Story = {
   render: () => (
-    <SidebarProvider style={{ height: "100vh" }}>
+    <SidebarProvider style={{ height: "100%" }}>
       <Sidebar variant="floating">
         <SidebarHeader>
           <div className="px-2 py-1 text-sm font-semibold">Aperia</div>
@@ -198,7 +210,7 @@ export const Floating: Story = {
 
 export const Inset: Story = {
   render: () => (
-    <SidebarProvider style={{ height: "100vh" }}>
+    <SidebarProvider style={{ height: "100%" }}>
       <Sidebar variant="inset">
         <SidebarHeader>
           <div className="px-2 py-1 text-sm font-semibold">Aperia</div>
@@ -238,20 +250,12 @@ const navMain = [
     title: "Playground",
     icon: SquareTerminalIcon,
     isActive: true,
-    items: [
-      { title: "History" },
-      { title: "Starred" },
-      { title: "Settings" },
-    ],
+    items: [{ title: "History" }, { title: "Starred" }, { title: "Settings" }],
   },
   {
     title: "Models",
     icon: BotIcon,
-    items: [
-      { title: "Genesis" },
-      { title: "Explorer" },
-      { title: "Quantum" },
-    ],
+    items: [{ title: "Genesis" }, { title: "Explorer" }, { title: "Quantum" }],
   },
   {
     title: "Documentation",
@@ -283,7 +287,7 @@ const projects = [
 
 export const WithSubmenus: Story = {
   render: () => (
-    <SidebarProvider style={{ height: "100vh" }}>
+    <SidebarProvider style={{ height: "100%" }}>
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1">
@@ -317,9 +321,7 @@ export const WithSubmenus: Story = {
             </SidebarMenu>
           </SidebarGroup>
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-            <SidebarGroupLabel>
-              Projects
-            </SidebarGroupLabel>
+            <SidebarGroupLabel>Projects</SidebarGroupLabel>
             <SidebarMenu>
               {projects.map((item) => (
                 <SidebarMenuItem key={item.name}>
@@ -333,12 +335,6 @@ export const WithSubmenus: Story = {
                   </SidebarMenuAction>
                 </SidebarMenuItem>
               ))}
-              <SidebarMenuItem>
-                <SidebarMenuButton className="text-sidebar-foreground/70">
-                  <MoreHorizontalIcon className="text-sidebar-foreground/70" />
-                  <span>More</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroup>
         </SidebarContent>
@@ -357,7 +353,7 @@ export const WithSubmenus: Story = {
       <SidebarInset>
         <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
-          <SidebarSeparator orientation="vertical" className="mr-2 h-4" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
           <span className="text-sm font-medium">Dashboard</span>
         </header>
         <div className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground">
@@ -370,7 +366,7 @@ export const WithSubmenus: Story = {
 
 export const WithSkeleton: Story = {
   render: () => (
-    <SidebarProvider style={{ height: "100vh" }}>
+    <SidebarProvider style={{ height: "100%" }}>
       <Sidebar>
         <SidebarHeader>
           <SidebarMenuSkeleton showIcon />
@@ -405,10 +401,11 @@ export const WithSkeleton: Story = {
 
 export const RightSide: Story = {
   render: () => (
-    <SidebarProvider style={{ height: "100vh" }}>
+    <SidebarProvider style={{ height: "100%" }}>
       <SidebarInset>
         <header className="flex h-12 shrink-0 items-center justify-end gap-2 border-b px-4">
           <span className="text-sm font-medium">Dashboard</span>
+          <Separator orientation="vertical" className="ml-2 h-4" />
           <SidebarTrigger className="-mr-1" />
         </header>
         <div className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground">
