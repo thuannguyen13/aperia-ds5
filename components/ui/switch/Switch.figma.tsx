@@ -1,4 +1,3 @@
-import React from "react"
 import { Switch } from "./switch"
 import figma from "@figma/code-connect"
 
