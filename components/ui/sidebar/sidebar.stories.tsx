@@ -86,7 +86,7 @@ export const Default: Story = {
             <span className="text-sm font-semibold">Aperia</span>
           </div>
         </SidebarHeader>
-        <SidebarSeparator />
+        <Separator/>
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel>Application</SidebarGroupLabel>
