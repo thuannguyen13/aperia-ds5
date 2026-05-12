@@ -9,9 +9,16 @@ Tracks which components have Figma Code Connect mappings and Storybook stories.
 
 A **connected** component shows real code snippets in Figma Dev Mode instead of the default inspect panel.
 
+> **Keeping this table in sync**
+> Run `node scripts/check-coverage.mjs` from `aperia-ds5/` at any time to print an up-to-date
+> Markdown table derived directly from the filesystem. Copy the output into the table below,
+> or pipe it: `node scripts/check-coverage.mjs > /tmp/coverage.md`.
+
 ---
 
 ## Component Status
+
+_Last updated: 2026-05-11 — 48 components total · Storybook: 46/48 · Code Connect: 7/48_
 
 <table>
   <thead>
@@ -23,25 +30,54 @@ A **connected** component shows real code snippets in Figma Dev Mode instead of 
     </tr>
   </thead>
   <tbody>
+    <tr><td>Accordion</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Alert</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=26-160">View Figma</a></td></tr>
+    <tr><td>AlertDialog</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>AspectRatio</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Avatar</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=296-5188">View Figma</a></td></tr>
     <tr><td>Badge</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Breadcrumb</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Button</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=37-931">View Figma</a></td></tr>
+    <tr><td>Calendar</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Card</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Carousel</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Chart</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Checkbox</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Collapsible</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Command</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>ContextMenu</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Dialog</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Drawer</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>DropdownMenu</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Field</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
-    <tr><td>Icon</td><td align="center">—</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library">View Figma</a></td></tr>
+    <tr><td>HoverCard</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Icon</td><td align="center">❌</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library">View Figma</a></td></tr>
     <tr><td>Input</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=65-533">View Figma</a></td></tr>
     <tr><td>InputGroup</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18723-14231">View Figma</a></td></tr>
+    <tr><td>InputOtp</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Label</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Menubar</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>NavigationMenu</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Pagination</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Popover</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Progress</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>RadioGroup</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Resizable</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>ScrollArea</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Select</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Separator</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Sheet</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Sidebar</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Skeleton</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Slider</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Sonner</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Switch</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Table</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
     <tr><td>Tabs</td><td align="center">✅</td><td align="center">✅</td><td><a href="https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=21133-27311">View Figma</a></td></tr>
     <tr><td>Textarea</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Toggle</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>ToggleGroup</td><td align="center">✅</td><td align="center">❌</td><td>—</td></tr>
+    <tr><td>Tooltip</td><td align="center">❌</td><td align="center">❌</td><td>—</td></tr>
   </tbody>
 </table>
 
@@ -64,6 +100,15 @@ npx figma connect publish -f components/ui/icon/icons.figma.tsx --skip-validatio
 ---
 
 ## Changelog
+
+### 2026-05-11
+- Expanded table to all 48 components (was 19)
+- Added newly shipped components: Accordion, AlertDialog, AspectRatio, Breadcrumb, Calendar,
+  Carousel, Chart, Collapsible, Command, ContextMenu, Dialog, Drawer, HoverCard, InputOtp,
+  Menubar, NavigationMenu, Pagination, Popover, RadioGroup, Resizable, ScrollArea, Sheet,
+  Sidebar, Skeleton, Slider, Sonner, Toggle, ToggleGroup, Tooltip
+- Added `scripts/check-coverage.mjs` — run `node scripts/check-coverage.mjs` to regenerate
+  this table from the filesystem without editing the MDX by hand
 
 ### 2026-05-08
 - Added Code Connect mapping for **Input** (`input.figma.ts`)
