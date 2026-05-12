@@ -1,4 +1,4 @@
-import { Switch } from "./switch"
+import { Checkbox } from "./checkbox"
 import {
   Field,
   FieldContent,
@@ -8,45 +8,42 @@ import {
 } from "../field/field"
 import figma from "@figma/code-connect"
 
-// Type=Default — plain switch with optional label/description in a Field
+// Type=Default — plain checkbox with optional label/description in a Field
 figma.connect(
-  Switch,
-  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=60-450",
+  Checkbox,
+  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=46-112",
   {
     variant: { Type: "Default" },
-    imports: ['import { Switch, Field, FieldContent, FieldTitle, FieldDescription } from "aperia-ds5"'],
+    imports: ['import { Checkbox, Field, FieldContent, FieldTitle, FieldDescription } from "aperia-ds5"'],
     props: {
-      size: figma.enum("Size", {
-        default: "default",
-        sm: "sm",
-      }),
-      defaultChecked: figma.enum("Active", {
-        On: true,
-        Off: false,
+      defaultChecked: figma.enum("Checked", {
+        Yes: true,
+        No: false,
       }),
       disabled: figma.enum("State", {
         Default: false,
         Focus: false,
+        Pressed: false,
         Invalid: false,
         Disabled: true,
       }),
       invalid: figma.enum("State", {
         Default: false,
         Focus: false,
+        Pressed: false,
         Invalid: true,
         Disabled: false,
       }),
       label: figma.string("Label Text"),
       description: figma.string("Description Text"),
     },
-    example: ({ size, defaultChecked, disabled, invalid, label, description }) => (
+    example: ({ defaultChecked, disabled, invalid, label, description }) => (
       <Field orientation="horizontal">
         <FieldContent>
           <FieldTitle>{label}</FieldTitle>
           <FieldDescription>{description}</FieldDescription>
         </FieldContent>
-        <Switch
-          size={size}
+        <Checkbox
           defaultChecked={defaultChecked}
           disabled={disabled}
           aria-invalid={invalid}
@@ -56,46 +53,43 @@ figma.connect(
   }
 )
 
-// Type=Box — choice card: switch wrapped in a bordered FieldLabel card
+// Type=Box — choice card: checkbox wrapped in a bordered FieldLabel card
 figma.connect(
-  Switch,
-  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=60-450",
+  Checkbox,
+  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=46-112",
   {
     variant: { Type: "Box" },
-    imports: ['import { Switch, Field, FieldLabel, FieldContent, FieldTitle, FieldDescription } from "aperia-ds5"'],
+    imports: ['import { Checkbox, Field, FieldLabel, FieldContent, FieldTitle, FieldDescription } from "aperia-ds5"'],
     props: {
-      size: figma.enum("Size", {
-        default: "default",
-        sm: "sm",
-      }),
-      defaultChecked: figma.enum("Active", {
-        On: true,
-        Off: false,
+      defaultChecked: figma.enum("Checked", {
+        Yes: true,
+        No: false,
       }),
       disabled: figma.enum("State", {
         Default: false,
         Focus: false,
+        Pressed: false,
         Invalid: false,
         Disabled: true,
       }),
       invalid: figma.enum("State", {
         Default: false,
         Focus: false,
+        Pressed: false,
         Invalid: true,
         Disabled: false,
       }),
       label: figma.string("Label Text"),
       description: figma.string("Description Text"),
     },
-    example: ({ size, defaultChecked, disabled, invalid, label, description }) => (
+    example: ({ defaultChecked, disabled, invalid, label, description }) => (
       <FieldLabel>
         <Field orientation="horizontal">
           <FieldContent>
             <FieldTitle>{label}</FieldTitle>
             <FieldDescription>{description}</FieldDescription>
           </FieldContent>
-          <Switch
-            size={size}
+          <Checkbox
             defaultChecked={defaultChecked}
             disabled={disabled}
             aria-invalid={invalid}

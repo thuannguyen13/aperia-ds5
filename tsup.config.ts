@@ -1,19 +1,30 @@
 import { defineConfig } from "tsup"
 import path from "path"
 
-export default defineConfig({
-  entry: {
-    index: "components/ui/index.ts",
-    utils: "lib/utils.ts",
-    "theme-provider": "components/theme-provider.tsx",
-  },
-  format: ["esm"],
-  dts: true,
+const shared = {
+  format: ["esm"] as const,
   external: ["react", "react-dom", "next", "next-themes"],
-  esbuildOptions(options) {
+  esbuildOptions(options: { alias?: Record<string, string> }) {
     options.alias = { "@": path.resolve("./") }
   },
   tsconfig: "tsconfig.lib.json",
   outDir: "dist",
-  clean: true,
-})
+}
+
+export default defineConfig([
+  {
+    ...shared,
+    entry: {
+      index: "components/ui/index.ts",
+      "theme-provider": "components/theme-provider.tsx",
+    },
+    dts: true,
+    banner: { js: '"use client";' },
+    clean: true,
+  },
+  {
+    ...shared,
+    entry: { utils: "lib/utils.ts" },
+    dts: true,
+  },
+])

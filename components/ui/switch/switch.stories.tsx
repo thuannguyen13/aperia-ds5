@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Switch } from "./switch"
 import { Label } from "../label/label"
+import { Field, FieldContent, FieldDescription, FieldTitle } from "../field/field"
 
 const meta: Meta<typeof Switch> = {
   title: "UI/Switch",
@@ -42,6 +43,15 @@ export const WithLabel: Story = {
     <div className="flex items-center gap-2">
       <Switch id="mode" defaultChecked />
       <Label htmlFor="mode">Dark mode</Label>
+      <Field orientation="horizontal">
+        <Switch size="default" />
+<FieldContent>
+  
+<FieldTitle>Switch Text</FieldTitle>
+<FieldDescription>This is a switch description.</FieldDescription>  
+</FieldContent>
+
+</Field>    
     </div>
   ),
 }
