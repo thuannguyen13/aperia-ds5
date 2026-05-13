@@ -17,7 +17,7 @@ const buttonVariants = cva(
           "border-border bg-background text-foreground shadow-xs hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         // Secondary — muted bg, subtle hover via opacity
         secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:opacity-80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-secondary text-secondary-foreground hover:opacity-80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         // Ghost — no bg/border at rest; accent bg on hover
         ghost:
           "hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground dark:hover:bg-muted/50",

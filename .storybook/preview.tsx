@@ -4,6 +4,11 @@ import "./preview.css"
 const preview: Preview = {
   parameters: {
     layout: "centered",
+    options: {
+      storySort: {
+        method: "alphabetical",
+      },
+    },
   },
 }
 
