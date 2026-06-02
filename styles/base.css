@@ -1,3 +1,7 @@
+@source "../dist";
+
+@import "tw-animate-css";
+
 /* ─── shadcn/ui Tailwind v4 helpers (inlined so consumers don't need shadcn) ─ */
 @theme inline {
   @keyframes accordion-down {
