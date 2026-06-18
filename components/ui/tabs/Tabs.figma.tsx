@@ -16,7 +16,7 @@ figma.connect(
         Default: "default",
         Line: "line",
       }),
-      items: figma.children("*"),
+      items: figma.slot("Items"),
     },
     example: ({ orientation, variant, items }) => (
       <Tabs defaultValue="tab1" orientation={orientation}>

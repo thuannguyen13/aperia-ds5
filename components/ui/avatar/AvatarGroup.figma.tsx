@@ -8,7 +8,7 @@ figma.connect(
   {
     imports: ['import { Avatar, AvatarFallback, AvatarGroup } from "aperia-ds5"'],
     props: {
-      items: figma.children("*"),
+      items: figma.slot("Items"),
     },
     example: ({ items }) => <AvatarGroup>{items}</AvatarGroup>,
   },

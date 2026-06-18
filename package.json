@@ -1,6 +1,6 @@
 {
   "name": "aperia-ds5",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "files": [
     "dist",
@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@figma/code-connect": "^1.4.4",
+    "@figma/code-connect": "^1.4.7",
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",
     "@tailwindcss/vite": "^4.2.4",
