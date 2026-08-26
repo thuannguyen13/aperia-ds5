@@ -6,6 +6,7 @@ export { Avatar, AvatarImage, AvatarFallback, AvatarGroup, AvatarGroupCount, Ava
 export { Badge, badgeVariants } from "./badge/badge"
 export { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis } from "./breadcrumb/breadcrumb"
 export { Button, buttonVariants } from "./button/button"
+export { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants } from "./button-group/button-group"
 export { Calendar, CalendarDayButton } from "./calendar/calendar"
 export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent } from "./card/card"
 export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, useCarousel } from "./carousel/carousel"

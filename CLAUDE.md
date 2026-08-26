@@ -58,3 +58,47 @@ The `--skip-validation` flag is required because the Figma API response for this
 
 ## Design tokens
 Tokens are hand-authored in `styles/base.css` as CSS custom properties. Do not run Style Dictionary or any token build script — the token pipeline was removed.
+
+## What this library is for
+
+Aperia's internal React component library (shadcn/ui + Tailwind v4 + Radix), published as an npm
+package from `dist/` and consumed by other Aperia products — notably `../aperia-ask-nanci`. It is
+the single source of truth for UI across those apps: consumers import from `"aperia-ds5"` directly
+and must never wrap or re-export a component locally.
+
+## Figma library reference
+
+File: **Aperia Shadcn Library**, key `XERddNbyfcDl7jAmRDbgqt`
+(`https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=`).
+
+Top-level page IDs — pass these to `get_metadata` to drill into component node IDs:
+
+```
+580:9181     Documentation      18684:15122  Field           61:169       Slider
+23:988       Avatar             65:520       Input           18665:1996   Spinner
+23:995       Badge              18677:11182  Input Group     60:438       Switch
+34:6         Button             18672:6033   Item            184:890      Table
+18672:217548 Button Group       18665:239    Kbd             177:367      Textarea
+46:67        Checkbox           64:316       Radio Group     122:10       Tooltip
+89:189       Dropdown Menu      118:1264     Select          22:1400      Typography
+18672:1039   Empty              118:2682     Separator       40:153       Utility Components
+21003:22055  Icons              1:433        Lucide Icons
+```
+
+No dedicated page exists for accordion, alert, alert-dialog, breadcrumb, calendar, card, carousel,
+chart, collapsible, command, context-menu, dialog, drawer, hover-card, input-otp, label, menubar,
+navigation-menu, pagination, popover, progress, resizable, scroll-area, sheet, sidebar, skeleton,
+sonner, table, tabs, toggle, toggle-group — they're under Utility Components or not yet designed.
+
+**Already mapped** (need only a shadcn refresh, not a new mapping): alert `26-160` · avatar
+`17100-29935` (+ `AvatarBadge` `21122-16180`, `AvatarGroup` `17100-83077`) · badge `26-169`,
+`17100-10130` · button `37-931` · checkbox `46-112` · empty `18672-2962` (+ `EmptyMedia`
+`18672-1781`) · input `65-533` · input-group `18672-226415`, `18677-9902`, `18677-10743` ·
+radio-group `65-326`, `65-341` · tabs `21133-27311` (+ `TabsTrigger` `183-532`) · select, switch,
+textarea (verify).
+
+## Refreshing a component from shadcn
+
+`npx shadcn@latest add <name> --overwrite` writes to `components/ui/<name>.tsx` — the **wrong**
+location. Diff it against `components/ui/<name>/<name>.tsx`, update the correct file if it differs,
+then delete the stray. Code Connect examples import via `import { X } from "aperia-ds5"`.
