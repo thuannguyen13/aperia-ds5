@@ -67,6 +67,7 @@ const channels = [
   { channel: "chat", tickets: 310, fill: "var(--color-chat)" },
   { channel: "phone", tickets: 180, fill: "var(--color-phone)" },
   { channel: "portal", tickets: 120, fill: "var(--color-portal)" },
+  { channel: "sms", tickets: 90, fill: "var(--color-sms)" },
   { channel: "other", tickets: 60, fill: "var(--color-other)" },
 ]
 
@@ -76,7 +77,8 @@ const channelConfig: ChartConfig = {
   chat: { label: "Chat", color: "var(--chart-2)" },
   phone: { label: "Phone", color: "var(--chart-3)" },
   portal: { label: "Portal", color: "var(--chart-4)" },
-  other: { label: "Other", color: "var(--chart-5)" },
+  sms: { label: "SMS", color: "var(--chart-5)" },
+  other: { label: "Other", color: "var(--chart-6)" },
 }
 
 const skills = [
