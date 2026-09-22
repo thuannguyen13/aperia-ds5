@@ -26,6 +26,22 @@ All shadcn components live under `components/ui/<name>/<name>.tsx` and are re-ex
 
 Code Connect mappings (`.figma.tsx` files) live alongside their component in the same subfolder.
 
+### Charts
+
+Charts are imported from the `aperia-ds5/chart` subpath, not the root barrel:
+
+```ts
+import { BarChart, Bar, XAxis, ChartContainer, ChartGrid, ChartTip, chartAxisProps, CHART_MARGIN } from "aperia-ds5/chart"
+```
+
+The subpath re-exports all of recharts alongside the DS5 chart components and the house chrome, so a chart needs one import line. The recharts primitives cannot go in the root barrel: recharts exports `Label` and `Tooltip`, which collide with the DS5 components of those names, and a star export loses to an explicit one, so `import { Label } from "aperia-ds5"` would silently resolve to the form label.
+
+The root barrel still exports `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, `ChartLegendContent`, `ChartStyle` and `ChartConfig` so 0.1.6 consumers keep working. Both paths resolve to the same module, so mixing them is safe, but new code uses the subpath.
+
+`recharts` is a **peer** dependency. It passes chart state through React context, so the app and DS5 must resolve one copy: two copies break tooltips and axes with no error. Keep it out of `dependencies`.
+
+The chrome (`CHART_AXIS`, `CHART_MARGIN`, `ChartGrid`, `ChartTip`, `chartAxisProps`) lives in `components/ui/chart/chart-defaults.tsx`, beside `chart.tsx` rather than inside it, because `chart.tsx` is refreshed with `--overwrite` and diffed.
+
 ### Lib / Hooks
 - `lib/utils.ts` — `cn()` utility (clsx + tailwind-merge)
 - `hooks/` — custom React hooks

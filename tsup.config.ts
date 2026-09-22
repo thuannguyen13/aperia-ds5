@@ -16,6 +16,7 @@ export default defineConfig([
     ...shared,
     entry: {
       index: "components/ui/index.ts",
+      chart: "components/ui/chart/index.ts",
       "theme-provider": "components/theme-provider.tsx",
     },
     dts: true,
