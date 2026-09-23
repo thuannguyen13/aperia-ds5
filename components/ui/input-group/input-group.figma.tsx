@@ -2,10 +2,18 @@ import React from "react"
 import {
   InputGroup,
   InputGroupAddon,
+  InputGroupButton,
   InputGroupInput,
   InputGroupTextarea,
   InputGroupText,
 } from "./input-group"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../tooltip/tooltip"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../dropdown-menu/dropdown-menu"
 import figma from "@figma/code-connect"
 
 // ─── Main InputGroup (node 18672-226415) ─────────────────────────────────────
@@ -76,7 +84,7 @@ figma.connect(InputGroup, inlineUrl, {
 figma.connect(InputGroup, inlineUrl, {
   variant: { Variant: "Button" },
   imports,
-  props: { button: figma.instance("Button") },
+  props: { button: figma.children("Button") },
   example: ({ button }) => (
     <InputGroup>
       <InputGroupAddon>{button}</InputGroupAddon>
@@ -88,10 +96,12 @@ figma.connect(InputGroup, inlineUrl, {
 figma.connect(InputGroup, inlineUrl, {
   variant: { Variant: "Icon" },
   imports,
-  props: { icon: figma.instance("IconPlaceholder") },
+  props: {
+    icon: figma.nestedProps("IconPlaceholder", { icon: figma.instance("Lucide Icon") }),
+  },
   example: ({ icon }) => (
     <InputGroup>
-      <InputGroupAddon>{icon}</InputGroupAddon>
+      <InputGroupAddon>{icon.icon}</InputGroupAddon>
       <InputGroupInput placeholder="Search..." />
     </InputGroup>
   ),
@@ -100,11 +110,11 @@ figma.connect(InputGroup, inlineUrl, {
 figma.connect(InputGroup, inlineUrl, {
   variant: { Variant: "Kbd" },
   imports,
-  props: { icon: figma.instance("IconPlaceholder") },
-  example: ({ icon }) => (
+  props: { kbd: figma.children("KbdGroup") },
+  example: ({ kbd }) => (
     <InputGroup>
-      <InputGroupAddon>{icon}</InputGroupAddon>
       <InputGroupInput placeholder="Search..." />
+      <InputGroupAddon align="inline-end">{kbd}</InputGroupAddon>
     </InputGroup>
   ),
 })
@@ -112,11 +122,11 @@ figma.connect(InputGroup, inlineUrl, {
 figma.connect(InputGroup, inlineUrl, {
   variant: { Variant: "Spinner" },
   imports,
-  props: { icon: figma.instance("IconPlaceholder") },
-  example: ({ icon }) => (
+  props: { spinner: figma.children("Spinner") },
+  example: ({ spinner }) => (
     <InputGroup>
-      <InputGroupAddon>{icon}</InputGroupAddon>
       <InputGroupInput placeholder="Search..." />
+      <InputGroupAddon align="inline-end">{spinner}</InputGroupAddon>
     </InputGroup>
   ),
 })
@@ -124,35 +134,62 @@ figma.connect(InputGroup, inlineUrl, {
 figma.connect(InputGroup, inlineUrl, {
   variant: { Variant: "Check Circle" },
   imports,
-  props: { icon: figma.instance("IconPlaceholder") },
+  props: {
+    icon: figma.nestedProps("IconPlaceholder", { icon: figma.instance("Lucide Icon") }),
+  },
   example: ({ icon }) => (
     <InputGroup>
-      <InputGroupAddon>{icon}</InputGroupAddon>
       <InputGroupInput placeholder="Search..." />
+      <InputGroupAddon align="inline-end">{icon.icon}</InputGroupAddon>
     </InputGroup>
   ),
 })
 
 figma.connect(InputGroup, inlineUrl, {
   variant: { Variant: "Tooltip" },
-  imports,
-  props: { icon: figma.instance("IconPlaceholder") },
-  example: ({ icon }) => (
+  imports: [
+    'import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupTextarea, InputGroupText, InputGroupButton } from "aperia-ds5"',
+    'import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "aperia-ds5"',
+  ],
+  props: {
+    icon: figma.nestedProps("IconPlaceholder", { icon: figma.instance("Lucide Icon") }),
+    tooltip: figma.nestedProps("Tooltip", { content: figma.string("Tooltip Text") }),
+  },
+  example: ({ icon, tooltip }) => (
     <InputGroup>
-      <InputGroupAddon>{icon}</InputGroupAddon>
       <InputGroupInput placeholder="Search..." />
+      <InputGroupAddon align="inline-end">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <InputGroupButton size="icon-xs">{icon.icon}</InputGroupButton>
+            </TooltipTrigger>
+            <TooltipContent>{tooltip.content}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </InputGroupAddon>
     </InputGroup>
   ),
 })
 
 figma.connect(InputGroup, inlineUrl, {
   variant: { Variant: "Dropdown" },
-  imports,
-  props: { icon: figma.instance("IconPlaceholder") },
-  example: ({ icon }) => (
+  imports: [
+    'import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupTextarea, InputGroupText, InputGroupButton } from "aperia-ds5"',
+    'import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "aperia-ds5"',
+  ],
+  props: { button: figma.children("Button") },
+  example: ({ button }) => (
     <InputGroup>
-      <InputGroupAddon>{icon}</InputGroupAddon>
       <InputGroupInput placeholder="Search..." />
+      <InputGroupAddon align="inline-end">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>{button}</DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Item</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </InputGroupAddon>
     </InputGroup>
   ),
 })

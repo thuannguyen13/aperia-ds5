@@ -2,10 +2,7 @@ import figma from "@figma/code-connect"
 import {
   Menubar,
   MenubarContent,
-  MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
   MenubarTrigger,
 } from "./menubar"
 

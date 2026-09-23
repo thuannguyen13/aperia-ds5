@@ -19,7 +19,7 @@ figma.connect(Avatar, url, {
       xs: "sm",
     }),
     badge: figma.boolean("Show Badge", {
-      true: figma.instance("Badge"),
+      true: figma.children("Avatar / Avatar Badge"),
       false: undefined,
     }),
   },
@@ -44,7 +44,7 @@ figma.connect(Avatar, url, {
     }),
     fallback: figma.string("Fallback Text"),
     badge: figma.boolean("Show Badge", {
-      true: figma.instance("Badge"),
+      true: figma.children("Avatar / Avatar Badge"),
       false: undefined,
     }),
   },
@@ -67,15 +67,17 @@ figma.connect(Avatar, url, {
       sm: "sm",
       xs: "sm",
     }),
-    icon: figma.instance("IconPlaceholder"),
+    icon: figma.nestedProps("IconPlaceholder", {
+      icon: figma.instance("Lucide Icon"),
+    }),
     badge: figma.boolean("Show Badge", {
-      true: figma.instance("Badge"),
+      true: figma.children("Avatar / Avatar Badge"),
       false: undefined,
     }),
   },
   example: ({ size, icon, badge }) => (
     <Avatar size={size}>
-      <AvatarFallback>{icon}</AvatarFallback>
+      <AvatarFallback>{icon.icon}</AvatarFallback>
       {badge}
     </Avatar>
   ),

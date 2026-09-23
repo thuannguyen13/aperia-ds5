@@ -8,22 +8,27 @@ figma.connect(
     imports: ['import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from "aperia-ds5"'],
     props: {
       media: figma.boolean("Show Media", {
-        true: figma.instance("Empty / Media"),
+        true: figma.children("Empty / Media"),
         false: undefined,
       }),
-      titleText: figma.string("Title Text"),
-      descriptionText: figma.string("Description Text"),
+      titleText: figma.boolean("Show Title", {
+        true: figma.string("Title Text"),
+        false: undefined,
+      }),
+      descriptionText: figma.boolean("Show Description", {
+        true: figma.string("Description Text"),
+        false: undefined,
+      }),
+      content: figma.slot("Empty Content"),
     },
-    example: ({ media, titleText, descriptionText }) => (
+    example: ({ media, titleText, descriptionText, content }) => (
       <Empty>
         <EmptyHeader>
           {media}
           <EmptyTitle>{titleText}</EmptyTitle>
           <EmptyDescription>{descriptionText}</EmptyDescription>
         </EmptyHeader>
-        <EmptyContent>
-          {/* action buttons */}
-        </EmptyContent>
+        <EmptyContent>{content}</EmptyContent>
       </Empty>
     ),
   }

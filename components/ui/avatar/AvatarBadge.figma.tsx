@@ -17,7 +17,9 @@ figma.connect(AvatarBadge, url, {
   variant: { Type: "Icon" },
   imports,
   props: {
-    icon: figma.instance("IconPlaceholder"),
+    icon: figma.nestedProps("IconPlaceholder", {
+      icon: figma.instance("Lucide Icon"),
+    }),
   },
-  example: ({ icon }) => <AvatarBadge>{icon}</AvatarBadge>,
+  example: ({ icon }) => <AvatarBadge>{icon.icon}</AvatarBadge>,
 })

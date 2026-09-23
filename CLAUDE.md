@@ -60,7 +60,7 @@ Mappings are scanned from `components/**/*.ts` and `components/**/*.tsx` per `fi
 - `&&` or ternary conditional rendering in JSX children
 - Multiple return statements
 
-Use separate `figma.connect()` calls with `variant` filters to handle structural differences (e.g. `Type=Default` vs `Type=Box`). Keep connects to 2 or fewer per component to avoid duplicate entries in the Figma sidebar.
+Use separate `figma.connect()` calls with `variant` filters to handle structural differences (e.g. `Type=Default` vs `Type=Box`). No two connects may match the same variant: overlapping filters are what produce duplicate entries in the Figma sidebar. Any number of connects is fine as long as their filters are disjoint and together cover every variant.
 
 **Publish command:**
 ```bash

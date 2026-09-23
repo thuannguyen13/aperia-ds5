@@ -1,5 +1,5 @@
 import React from "react"
-import { Alert, AlertTitle, AlertDescription, AlertAction } from "./alert"
+import { Alert, AlertTitle, AlertDescription } from "./alert"
 import figma from "@figma/code-connect"
 
 figma.connect(
@@ -13,15 +13,17 @@ figma.connect(
         Destructive: "destructive",
       }),
       icon: figma.boolean("Icon", {
-        true: figma.instance("IconPlaceholder"),
-        false: undefined,
+        true: figma.nestedProps("IconPlaceholder", {
+          icon: figma.instance("Lucide Icon"),
+        }),
+        false: { icon: undefined },
       }),
       title: figma.string("Title Text"),
       description: figma.string("Description Text"),
     },
     example: ({ variant, icon, title, description }) => (
       <Alert variant={variant}>
-        {icon}
+        {icon.icon}
         <AlertTitle>{title}</AlertTitle>
         <AlertDescription>{description}</AlertDescription>
       </Alert>

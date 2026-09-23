@@ -16,14 +16,21 @@ figma.connect(
         Disabled: true,
       }),
       icon: figma.boolean("Show Icon", {
-        true: figma.instance("IconPlaceholder"),
+        true: figma.nestedProps("IconPlaceholder", {
+          icon: figma.instance("Lucide Icon"),
+        }),
+        false: { icon: undefined },
+      }),
+      badge: figma.boolean("Badge", {
+        true: figma.children("Badge Number"),
         false: undefined,
       }),
     },
-    example: ({ label, disabled, icon }) => (
+    example: ({ label, disabled, icon, badge }) => (
       <TabsTrigger value="..." disabled={disabled}>
-        {icon}
+        {icon.icon}
         {label}
+        {badge}
       </TabsTrigger>
     ),
   },

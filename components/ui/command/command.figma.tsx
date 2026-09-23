@@ -12,7 +12,7 @@ import {
 
 figma.connect(
   Command,
-  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=430-20061",
+  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=204-1144",
   {
     variant: { Variant: "Suggestions" },
     imports: [
@@ -41,7 +41,7 @@ figma.connect(
 
 figma.connect(
   Command,
-  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=430-20061",
+  "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=204-1144",
   {
     variant: { Variant: "Empty" },
     imports: [

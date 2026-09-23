@@ -1,5 +1,5 @@
 import React from "react"
-import { ToggleGroup, ToggleGroupItem } from "./toggle-group"
+import { ToggleGroup } from "./toggle-group"
 import figma from "@figma/code-connect"
 
 figma.connect(
@@ -13,10 +13,9 @@ figma.connect(
         Vertical: "vertical",
       }),
       spacing: figma.enum("Type", {
-        Default: 2,
-        Outline: 2,
-        "With Spacing": 2,
+        Default: 0,
         Fill: 0,
+        "With Spacing": 2,
       }),
       items: figma.slot("Items"),
     },

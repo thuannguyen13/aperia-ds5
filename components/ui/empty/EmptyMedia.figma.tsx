@@ -6,18 +6,23 @@ const url = "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-L
 figma.connect(EmptyMedia, url, {
   variant: { Type: "Icon" },
   imports: ['import { EmptyMedia } from "aperia-ds5"'],
-  example: () => (
+  props: {
+    icon: figma.nestedProps("IconPlaceholder", {
+      icon: figma.instance("Lucide Icon"),
+    }),
+  },
+  example: ({ icon }) => (
     <EmptyMedia variant="icon">
-      {/* icon */}
+      {icon.icon}
     </EmptyMedia>
   ),
 })
 
 figma.connect(EmptyMedia, url, {
   variant: { Type: "Avatar" },
-  imports: ['import { EmptyMedia } from "aperia-ds5"', 'import { Avatar, AvatarImage, AvatarFallback } from "aperia-ds5"'],
+  imports: ['import { EmptyMedia } from "aperia-ds5"'],
   props: {
-    avatar: figma.instance("Avatar"),
+    avatar: figma.children("Avatar"),
   },
   example: ({ avatar }) => (
     <EmptyMedia>
@@ -28,9 +33,9 @@ figma.connect(EmptyMedia, url, {
 
 figma.connect(EmptyMedia, url, {
   variant: { Type: "AvatarGroup" },
-  imports: ['import { EmptyMedia } from "aperia-ds5"', 'import { Avatar, AvatarFallback, AvatarGroup } from "aperia-ds5"'],
+  imports: ['import { EmptyMedia } from "aperia-ds5"'],
   props: {
-    avatarGroup: figma.instance("Avatar Group"),
+    avatarGroup: figma.children("Avatar Group"),
   },
   example: ({ avatarGroup }) => (
     <EmptyMedia>

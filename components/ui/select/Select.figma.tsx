@@ -95,7 +95,7 @@ figma.connect(
   }
 )
 
-// Select / Menu — Figma-only open-state component; children resolved from actual design instances
+// Select / Menu — Figma-only open-state component; SelectMenu Group slot holds the items
 figma.connect(
   Select,
   "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=21473-104411",
@@ -104,7 +104,7 @@ figma.connect(
       'import { Select, SelectTrigger, SelectValue, SelectContent } from "aperia-ds5"',
     ],
     props: {
-      children: figma.children(["Select Menu / Item", "Select Menu / Label", "Select Menu / Separator"]),
+      children: figma.slot("SelectMenu Group"),
     },
     example: ({ children }) => (
       <Select>

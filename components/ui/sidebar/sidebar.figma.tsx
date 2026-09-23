@@ -1,11 +1,5 @@
 import figma from "@figma/code-connect"
-import {
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-} from "./sidebar"
+import { SidebarMenuButton, SidebarMenuItem } from "./sidebar"
 
 figma.connect(
   SidebarMenuButton,
@@ -14,7 +8,7 @@ figma.connect(
     variant: { Type: "Simple" },
     imports: ['import { SidebarMenuButton } from "aperia-ds5"'],
     props: {
-      label: figma.string("Text#3278:82"),
+      label: figma.string("Text"),
     },
     example: ({ label }) => (
       <SidebarMenuButton>
@@ -34,13 +28,15 @@ figma.connect(
       'import { SidebarMenuItem, SidebarMenuButton } from "aperia-ds5"',
     ],
     props: {
-      label: figma.string("Text#3278:82"),
+      button: figma.nestedProps("Sidebar / SidebarMenuButton", {
+        label: figma.string("Text"),
+      }),
     },
-    example: ({ label }) => (
+    example: ({ button }) => (
       <SidebarMenuItem>
         <SidebarMenuButton>
           {/* Place an icon here */}
-          <span>{label}</span>
+          <span>{button.label}</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
     ),
