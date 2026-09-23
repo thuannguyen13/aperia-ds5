@@ -34,9 +34,9 @@ npm run dev      # start Storybook at http://localhost:6006
 | `npm run lint` | ESLint |
 | `npm run format` | Prettier |
 | `npm run typecheck` | TypeScript check (no emit) |
-| `npm run cc:publish` | Publish all Code Connect mappings to Figma |
-| `npm run generate:icons` | Regenerate icon Code Connect from Figma (needs `FIGMA_ACCESS_TOKEN` in `.env.local`) |
-| `npm run publish:icons` | Publish icon Code Connect mappings to Figma |
+| `npm run cc:publish` | Publish all Code Connect templates to Figma |
+| `npm run generate:icons` | Regenerate the icon Code Connect templates from Figma (needs `FIGMA_ACCESS_TOKEN` in `.env.local`) |
+| `npm run publish:icons` | Publish the icon Code Connect templates to Figma |
 
 ### Adding a new component
 
@@ -44,7 +44,7 @@ npm run dev      # start Storybook at http://localhost:6006
 2. Move into `components/ui/<name>/<name>.tsx`
 3. Re-export from `components/ui/index.ts`
 4. Run `npm run build:lib`
-5. Optionally add `<name>.figma.tsx` alongside it for Code Connect
+5. Optionally add a `<name>.figma.ts` Code Connect template beside it
 
 ### Design tokens
 
@@ -52,13 +52,12 @@ All tokens are CSS custom properties defined directly in `styles/base.css` (`:ro
 
 ### Figma Code Connect
 
-`.figma.tsx` files live next to their component in `components/ui/<name>/`. They import the component from the local relative path and use the `imports` option to show the correct npm import to designers in Dev Mode.
+Each Figma component maps to one template, `<kebab-name>.figma.ts`, beside its code component in `components/ui/<name>/`. A template reads the selected instance's properties and returns a `figma.code` snippet; its `imports` show the `aperia-ds5` import in Dev Mode.
 
-```bash
-npm run cc:publish        # publish all mappings
-npm run publish:icons     # publish icons only
-npm run generate:icons    # regenerate icon mappings from Figma
-```
+- `npm run cc:publish -- --dry-run`: list what would publish, upload nothing
+- `npm run cc:publish`: publish all component templates
+- `npm run publish:icons`: publish the icon templates
+- `npm run generate:icons`: regenerate the icon templates from Figma
 
 ---
 

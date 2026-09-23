@@ -35,7 +35,7 @@
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "generate:icons": "node --env-file=.env.local scripts/generate-icon-code-connect.mjs",
-    "publish:icons": "npx figma connect publish -f components/ui/icon/icons.figma.tsx --skip-validation --batch-size 100",
+    "publish:icons": "npx figma connect publish -r components/ui/icon --skip-validation --batch-size 100",
     "cc:publish": "npx figma connect publish --skip-validation --batch-size 100"
   },
   "peerDependencies": {
@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@figma/code-connect": "^1.4.7",
+    "@figma/code-connect": "^2.0.1",
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",
     "@tailwindcss/vite": "^4.2.4",

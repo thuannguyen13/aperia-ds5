@@ -1,15 +1,8 @@
 {
   "codeConnect": {
-    "parser": "react",
-    "label": "React",
-    "include": ["components/**/*.ts", "components/**/*.tsx"],
+    "include": ["components/**/*.figma.ts"],
     "exclude": ["components/ui/icon/**"],
-    "language": "jsx",
-    "paths": {
-      "@/*": ["./*"]
-    },
-    "compilerOptions": {
-      "types": ["@figma/code-connect/figma-types"]
-    }
+    "label": "React",
+    "language": "jsx"
   }
 }

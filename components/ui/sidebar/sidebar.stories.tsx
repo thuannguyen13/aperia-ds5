@@ -20,7 +20,6 @@ import {
   SidebarMenuSkeleton,
   SidebarInset,
   SidebarRail,
-  SidebarSeparator,
   SidebarInput,
 } from "./sidebar"
 import { Separator } from "@/components/ui/separator/separator"

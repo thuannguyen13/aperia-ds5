@@ -3,7 +3,7 @@
  * check-coverage.mjs
  *
  * Scans components/ui/ and prints a Markdown table showing which components
- * have Storybook stories (.stories.tsx) and Figma Code Connect (.figma.tsx).
+ * have Storybook stories (.stories.tsx) and Figma Code Connect (.figma.ts).
  *
  * Usage (from aperia-ds5/):
  *   node scripts/check-coverage.mjs
@@ -12,28 +12,13 @@
  *   node scripts/check-coverage.mjs > /tmp/coverage.md
  */
 
-import { readdirSync, existsSync } from "fs"
+import { readdirSync, readFileSync } from "fs"
 import { join, dirname } from "path"
 import { fileURLToPath } from "url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const UI_DIR = join(__dirname, "..", "components", "ui")
-
-// Known Figma URLs per component (update when Code Connect is published)
-const FIGMA_URLS = {
-  alert:
-    "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=26-160",
-  avatar:
-    "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=296-5188",
-  button:
-    "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=37-931",
-  icon: "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library",
-  input:
-    "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=65-533",
-  "input-group":
-    "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18723-14231",
-  tabs: "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=21133-27311",
-}
+const MAX_LINKS = 10
 
 const entries = readdirSync(UI_DIR, { withFileTypes: true })
   .filter((d) => d.isDirectory())
@@ -42,11 +27,26 @@ const entries = readdirSync(UI_DIR, { withFileTypes: true })
 
 const rows = entries.map((name) => {
   const dir = join(UI_DIR, name)
-  const files = readdirSync(dir)
+  const files = readdirSync(dir, { recursive: true })
 
   const hasStories = files.some((f) => f.endsWith(".stories.tsx"))
-  const hasFigma = files.some((f) => f.endsWith(".figma.tsx"))
-  const figmaUrl = FIGMA_URLS[name]
+  const figmaUrls = [
+    ...new Set(
+      files
+        .sort()
+        .flatMap((f) => {
+          if (f.endsWith(".figma.ts")) {
+            return readFileSync(join(dir, f), "utf8").match(/^\/\/ url=(\S+)/m)?.[1] ?? []
+          }
+          // Batch templates (icons) carry one url per entry instead of a header
+          if (f.endsWith(".figma.batch.json")) {
+            return JSON.parse(readFileSync(join(dir, f), "utf8")).components.map((c) => c.url)
+          }
+          return []
+        })
+    ),
+  ]
+  const hasFigma = figmaUrls.length > 0
 
   const label = name
     .split("-")
@@ -55,7 +55,12 @@ const rows = entries.map((name) => {
 
   const storiesCell = hasStories ? "✅" : "❌"
   const figmaCell = hasFigma ? "✅" : "❌"
-  const linkCell = figmaUrl ? `[View Figma](${figmaUrl})` : "—"
+  const shownUrls = figmaUrls.slice(0, MAX_LINKS)
+  const moreCount = figmaUrls.length - shownUrls.length
+  const linkCell = hasFigma
+    ? shownUrls.map((url, i) => `[${i === 0 ? "View Figma" : i + 1}](${url})`).join(" ") +
+      (moreCount > 0 ? ` +${moreCount} more` : "")
+    : "—"
 
   return { label, storiesCell, figmaCell, linkCell }
 })
