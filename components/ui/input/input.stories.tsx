@@ -35,7 +35,7 @@ export const Disabled: Story = {
 }
 
 export const Invalid: Story = {
-  args: { "aria-invalid": true, value: "Bad input" } as never,
+  args: { "aria-invalid": true, defaultValue: "Bad input" } as never,
 }
 
 export const WithValue: Story = {
