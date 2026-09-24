@@ -229,10 +229,11 @@ All overridable tokens and their defaults:
   --sidebar-ring: oklch(0.705 0.015 286.067);
 
   /* Charts */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --chart-1: oklch(0.528 0.152 264.943); /* #3F65C2 */
+  --chart-2: oklch(0.722 0.155 49.32); /* #F18442 */
+  --chart-3: oklch(0.436 0.158 27.445); /* #951B19 */
+  --chart-4: oklch(0.819 0.119 137.085); /* #9FD689 */
+  --chart-5: oklch(0.896 0.063 313.549); /* #ECD1FB */
+  --chart-6: oklch(0.317 0.135 282.036);
 }
 ```
