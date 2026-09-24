@@ -29,6 +29,7 @@ const meta: Meta<typeof Button> = {
     },
   },
   argTypes: {
+    asChild: { control: false },
     variant: {
       control: "select",
       options: ["default", "secondary", "outline", "ghost", "destructive", "link"],

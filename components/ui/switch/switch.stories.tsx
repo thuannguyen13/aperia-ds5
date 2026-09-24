@@ -6,6 +6,9 @@ import { Field, FieldContent, FieldDescription, FieldTitle } from "../field/fiel
 const meta: Meta<typeof Switch> = {
   title: "UI/Switch",
   component: Switch,
+  args: {
+    size: "default",
+  },
   tags: ["autodocs"],
   argTypes: {
     size: {

@@ -5,6 +5,11 @@ import { AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon, BoldI
 const meta: Meta<typeof ToggleGroup> = {
   title: "UI/Toggle Group",
   component: ToggleGroup,
+  args: {
+    type: "single",
+    variant: "default",
+    size: "default",
+  },
   tags: ["autodocs"],
   argTypes: {
     type: {

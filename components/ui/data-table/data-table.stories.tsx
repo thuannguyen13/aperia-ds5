@@ -305,7 +305,7 @@ export const PlainColumns: Story = {
   },
 }
 
-export const WithoutFilter: Story = { args: { filterColumn: undefined } }
+export const WithoutFilter: Story = { args: { filterColumn: "none" } }
 
 export const Empty: Story = { args: { data: [] } }
 

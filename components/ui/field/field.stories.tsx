@@ -6,6 +6,9 @@ import { Checkbox } from "../checkbox/checkbox"
 const meta: Meta<typeof Field> = {
   title: "UI/Field",
   component: Field,
+  args: {
+    orientation: "vertical",
+  },
   tags: ["autodocs"],
   argTypes: {
     orientation: {

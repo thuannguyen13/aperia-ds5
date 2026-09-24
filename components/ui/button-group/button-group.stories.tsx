@@ -6,6 +6,9 @@ import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from "./button-gro
 const meta: Meta<typeof ButtonGroup> = {
   title: "UI/ButtonGroup",
   component: ButtonGroup,
+  args: {
+    orientation: "horizontal",
+  },
   tags: ["autodocs"],
   parameters: {
     docs: {

@@ -5,6 +5,9 @@ import { Button } from "../button/button"
 const meta: Meta<typeof Card> = {
   title: "UI/Card",
   component: Card,
+  args: {
+    size: "default",
+  },
   tags: ["autodocs"],
   argTypes: {
     size: {

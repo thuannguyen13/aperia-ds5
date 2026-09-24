@@ -4,6 +4,9 @@ import { Separator } from "./separator"
 const meta: Meta<typeof Separator> = {
   title: "UI/Separator",
   component: Separator,
+  args: {
+    orientation: "horizontal",
+  },
   tags: ["autodocs"],
   argTypes: {
     orientation: {

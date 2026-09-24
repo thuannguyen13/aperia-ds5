@@ -7,6 +7,7 @@ const meta: Meta<typeof TooltipContent> = {
   component: TooltipContent,
   tags: ["autodocs"],
   args: {
+    side: "top",
     children: "Tooltip text",
     sideOffset: 4,
   },

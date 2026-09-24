@@ -4,6 +4,9 @@ import { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from "./native
 const meta: Meta<typeof NativeSelect> = {
   title: "UI/NativeSelect",
   component: NativeSelect,
+  args: {
+    size: "default",
+  },
   tags: ["autodocs"],
   argTypes: {
     size: {

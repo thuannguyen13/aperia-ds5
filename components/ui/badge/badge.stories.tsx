@@ -6,9 +6,11 @@ const meta: Meta<typeof Badge> = {
   component: Badge,
   tags: ["autodocs"],
   args: {
+    variant: "default",
     children: "Badge",
   },
   argTypes: {
+    asChild: { control: false },
     variant: {
       control: "select",
       options: ["default", "secondary", "destructive", "outline", "ghost", "link"],

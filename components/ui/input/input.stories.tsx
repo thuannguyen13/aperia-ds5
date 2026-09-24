@@ -6,6 +6,7 @@ const meta: Meta<typeof Input> = {
   component: Input,
   tags: ["autodocs"],
   args: {
+    type: "text",
     placeholder: "Type something...",
   },
   argTypes: {
@@ -31,7 +32,7 @@ export const Password: Story = {
 }
 
 export const Disabled: Story = {
-  args: { disabled: true, value: "Disabled value" },
+  args: { disabled: true, defaultValue: "Disabled value" },
 }
 
 export const Invalid: Story = {

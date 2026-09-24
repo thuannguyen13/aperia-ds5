@@ -5,6 +5,10 @@ import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react"
 const meta: Meta<typeof Toggle> = {
   title: "UI/Toggle",
   component: Toggle,
+  args: {
+    variant: "default",
+    size: "default",
+  },
   tags: ["autodocs"],
   argTypes: {
     variant: {

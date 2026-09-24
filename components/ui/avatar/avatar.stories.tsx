@@ -4,6 +4,9 @@ import { Avatar, AvatarImage, AvatarFallback, AvatarBadge, AvatarGroup, AvatarGr
 const meta: Meta<typeof Avatar> = {
   title: "UI/Avatar",
   component: Avatar,
+  args: {
+    size: "default",
+  },
   tags: ["autodocs"],
   argTypes: {
     size: {
