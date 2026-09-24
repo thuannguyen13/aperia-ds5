@@ -111,6 +111,8 @@ package from `dist/` and consumed by other Aperia products — notably `../aperi
 the single source of truth for UI across those apps: consumers import from `"aperia-ds5"` directly
 and must never wrap or re-export a component locally.
 
+The library targets React 19: `react` and `react-dom` are peer dependencies (`^19.0.0`) and dev dependencies, never `dependencies`, because a second React copy in the consumer breaks every hook with "Invalid hook call". Components use the React 19 style from current shadcn (`ref` as a prop, no `forwardRef`).
+
 ## Figma library reference
 
 File: **Aperia Shadcn Library**, key `XERddNbyfcDl7jAmRDbgqt`
