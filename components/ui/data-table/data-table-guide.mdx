@@ -1,0 +1,93 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import * as DataTableStories from "./data-table.stories"
+
+<Meta of={DataTableStories} name="Build your own" />
+
+# Build your own data table
+
+Use `DataTable` first. Build your own only when a screen needs one of these:
+
+- A different layout: the filter on the right, extra buttons in the toolbar, no pagination.
+- Actions on the selected rows, such as export or bulk edit.
+- State the app owns: server-side paging, sorting or filtering, or selection that other parts of the page read.
+
+`DataTable` is made from the same parts listed below, so a table you build looks the same as the ready one.
+
+## Rearrange the parts
+
+`useDataTable` holds the sorting, filter, column visibility, selection and paging state. Pass the table it returns to the parts and place them anywhere.
+
+<Canvas of={DataTableStories.CustomLayout} sourceState="none" />
+
+```tsx
+import { Button } from "aperia-ds5"
+import {
+  DataTableContent,
+  DataTableFilter,
+  DataTablePagination,
+  DataTableViewOptions,
+  useDataTable,
+} from "aperia-ds5/data-table"
+
+export function MerchantTable() {
+  const table = useDataTable({ columns, data: merchants })
+  const selected = table.getFilteredSelectedRowModel().rows
+
+  return (
+    <div className="w-full">
+      <div className="flex items-center gap-2 py-4">
+        <DataTableViewOptions table={table} />
+        <Button variant="outline" disabled={!selected.length} onClick={() => exportRows(selected)}>
+          Export {selected.length || ""}
+        </Button>
+        <DataTableFilter table={table} column="email" placeholder="Filter emails..." className="ml-auto" />
+      </div>
+      <DataTableContent table={table} />
+      <DataTablePagination table={table} />
+    </div>
+  )
+}
+```
+
+`columns` is the same array you would pass to `DataTable`. Leave out any part you don't need.
+
+## Own the state
+
+When the server does the paging, sorting or filtering, call TanStack's `useTable` with `dataTableFeatures` and hold the state yourself. The parts accept that table too.
+
+```tsx
+import { dataTableFeatures, useTable, DataTableContent, DataTablePagination } from "aperia-ds5/data-table"
+
+const [pagination, setPagination] = React.useState({ pageIndex: 0, pageSize: 20 })
+const { rows, pageCount } = useMerchants(pagination) // your API call
+
+const table = useTable({
+  features: dataTableFeatures,
+  data: rows,
+  columns,
+  manualPagination: true,
+  pageCount,
+  state: { pagination },
+  onPaginationChange: setPagination,
+})
+
+<DataTableContent table={table} />
+<DataTablePagination table={table} />
+```
+
+The [TanStack Table docs](https://tanstack.com/table/latest) cover the other options: `manualSorting`, `manualFiltering`, controlled `rowSelection`.
+
+## Parts
+
+| Part | What it renders |
+|---|---|
+| `DataTable` | The ready table: filter, Columns menu, table, count and Previous/Next |
+| `useDataTable` | No UI. Returns a table with sorting, filter, visibility, selection and paging state |
+| `DataTableContent` | The table: header row, body rows, and "No results." when empty |
+| `DataTableFilter` | The search input for one column |
+| `DataTableViewOptions` | The Columns menu that shows and hides columns |
+| `DataTablePagination` | The selected-row count with Previous and Next |
+| `DataTableColumnHeader` | A header button that sorts its column; use it in a column's `header` |
+| `dataTableFeatures` | The TanStack feature set the parts expect, for `useTable` |
+
+Everything else from `@tanstack/react-table` is re-exported from `aperia-ds5/data-table`, so one import line covers a table.

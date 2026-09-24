@@ -45,7 +45,9 @@ The chrome (`CHART_AXIS`, `CHART_MARGIN`, `ChartGrid`, `ChartTip`, `chartAxisPro
 
 ### Data table
 
-`DataTable` is imported from the `aperia-ds5/data-table` subpath, which re-exports all of `@tanstack/react-table` beside `DataTable`, `DataTableColumnHeader`, `DataTablePagination`, `DataTableViewOptions` and the `DataTableFeatures` type. TanStack exports a `Table` type, so it stays out of the root barrel for the same reason recharts does.
+`DataTable` is imported from the `aperia-ds5/data-table` subpath, which re-exports all of `@tanstack/react-table` beside `DataTable` and the parts it is built from: `useDataTable`, `DataTableContent`, `DataTableFilter`, `DataTableViewOptions`, `DataTablePagination`, `DataTableColumnHeader` and `dataTableFeatures`. TanStack exports a `Table` type, so it stays out of the root barrel for the same reason recharts does.
+
+Use `DataTable` by default. Build from the parts only for a different layout, actions on selected rows, or state the app owns (server paging): the "Build your own" docs page beside the DataTable stories shows both. `DataTable` must stay built only from those exported parts, so a hand-built table looks the same. The layout follows the Figma Data Table node (`18719:212930`): toolbar and footer `py-4`, no border around the table, count plus Previous and Next in the footer.
 
 shadcn ships Data Table as a guide, not a registry component, so `components/ui/data-table/data-table.tsx` is DS-owned code built from that guide (TanStack Table v9, `useTable` with `tableFeatures`). There is nothing to refresh with `shadcn add`. `@tanstack/react-table` is a **peer** dependency like `recharts`: consumer column definitions are typed against the app's copy, so both must resolve one.
 

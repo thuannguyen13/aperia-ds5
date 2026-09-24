@@ -23,17 +23,7 @@ import {
   type RowData,
   type SortingState,
 } from "@tanstack/react-table"
-import {
-  ArrowDown,
-  ArrowUp,
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-  ChevronsUpDown,
-  EyeOff,
-  Settings2,
-} from "lucide-react"
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -41,19 +31,9 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import {
   Table,
   TableBody,
@@ -78,17 +58,17 @@ const features = tableFeatures({
 
 type DataTableFeatures = typeof features
 
-function DataTable<TData extends RowData>({
+type DataTableInstance<TData extends RowData> = ReactTable<
+  DataTableFeatures,
+  TData
+>
+
+function useDataTable<TData extends RowData>({
   columns,
   data,
-  filterColumn,
-  filterPlaceholder = "Filter...",
 }: {
   columns: ColumnDef<DataTableFeatures, TData>[]
   data: TData[]
-  /** Column id the search input filters on. Omit to hide the input. */
-  filterColumn?: string
-  filterPlaceholder?: string
 }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -98,7 +78,7 @@ function DataTable<TData extends RowData>({
     React.useState<ColumnVisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const table = useTable({
+  return useTable({
     features,
     data,
     columns,
@@ -113,68 +93,111 @@ function DataTable<TData extends RowData>({
       rowSelection,
     },
   })
+}
+
+function DataTable<TData extends RowData>({
+  columns,
+  data,
+  filterColumn,
+  filterPlaceholder,
+}: {
+  columns: ColumnDef<DataTableFeatures, TData>[]
+  data: TData[]
+  /** Column id the search input filters on. Omit to hide the input. */
+  filterColumn?: string
+  filterPlaceholder?: string
+}) {
+  const table = useDataTable({ columns, data })
 
   return (
-    <div data-slot="data-table" className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
+    <div data-slot="data-table" className="w-full">
+      <div className="flex items-center gap-2 py-4">
         {filterColumn && (
-          <Input
+          <DataTableFilter
+            table={table}
+            column={filterColumn}
             placeholder={filterPlaceholder}
-            value={
-              (table.getColumn(filterColumn)?.getFilterValue() as string) ?? ""
-            }
-            onChange={(event) =>
-              table.getColumn(filterColumn)?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
           />
         )}
-        <DataTableViewOptions table={table} />
+        <DataTableViewOptions table={table} className="ml-auto" />
       </div>
-      <div className="overflow-hidden rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder ? null : (
-                      <table.FlexRender header={header} />
-                    )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      <table.FlexRender cell={cell} />
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+      <DataTableContent table={table} />
       <DataTablePagination table={table} />
     </div>
+  )
+}
+
+function DataTableFilter<TData extends RowData>({
+  table,
+  column,
+  placeholder = "Filter...",
+  className,
+}: {
+  table: DataTableInstance<TData>
+  column: string
+  placeholder?: string
+  className?: string
+}) {
+  return (
+    <Input
+      placeholder={placeholder}
+      value={(table.getColumn(column)?.getFilterValue() as string) ?? ""}
+      onChange={(event) =>
+        table.getColumn(column)?.setFilterValue(event.target.value)
+      }
+      className={cn("max-w-sm", className)}
+    />
+  )
+}
+
+function DataTableContent<TData extends RowData>({
+  table,
+  className,
+}: {
+  table: DataTableInstance<TData>
+  className?: string
+}) {
+  return (
+    <Table className={className}>
+      <TableHeader>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <TableRow key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <TableHead key={header.id}>
+                {header.isPlaceholder ? null : (
+                  <table.FlexRender header={header} />
+                )}
+              </TableHead>
+            ))}
+          </TableRow>
+        ))}
+      </TableHeader>
+      <TableBody>
+        {table.getRowModel().rows.length ? (
+          table.getRowModel().rows.map((row) => (
+            <TableRow
+              key={row.id}
+              data-state={row.getIsSelected() && "selected"}
+            >
+              {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id}>
+                  <table.FlexRender cell={cell} />
+                </TableCell>
+              ))}
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell
+              colSpan={table.getVisibleLeafColumns().length}
+              className="h-24 text-center"
+            >
+              No results.
+            </TableCell>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
   )
 }
 
@@ -188,155 +211,81 @@ function DataTableColumnHeader<TData extends RowData, TValue>({
   className?: string
 }) {
   if (!column.getCanSort()) {
-    return <div className={cn(className)}>{title}</div>
+    return <div className={className}>{title}</div>
   }
 
+  const sorted = column.getIsSorted()
+
   return (
-    <div className={cn("flex items-center gap-2", className)}>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="-ml-3 h-8 data-[state=open]:bg-accent"
-          >
-            <span>{title}</span>
-            {column.getIsSorted() === "desc" ? (
-              <ArrowDown />
-            ) : column.getIsSorted() === "asc" ? (
-              <ArrowUp />
-            ) : (
-              <ChevronsUpDown />
-            )}
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-            <ArrowUp />
-            Asc
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-            <ArrowDown />
-            Desc
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
-            <EyeOff />
-            Hide
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+    <Button
+      variant="ghost"
+      className={className}
+      onClick={() => column.toggleSorting(sorted === "asc")}
+    >
+      {title}
+      {sorted === "asc" ? (
+        <ArrowUp data-icon="inline-end" />
+      ) : sorted === "desc" ? (
+        <ArrowDown data-icon="inline-end" />
+      ) : (
+        <ArrowUpDown data-icon="inline-end" />
+      )}
+    </Button>
   )
 }
 
 function DataTablePagination<TData extends RowData>({
   table,
+  className,
 }: {
-  table: ReactTable<DataTableFeatures, TData>
+  table: DataTableInstance<TData>
+  className?: string
 }) {
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className={cn("flex items-center gap-2 py-4", className)}>
       <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
-      <div className="flex items-center gap-6 lg:gap-8">
-        <div className="flex items-center gap-2">
-          <p className="text-sm font-medium">Rows per page</p>
-          <Select
-            value={`${table.state.pagination.pageSize}`}
-            onValueChange={(value) => table.setPageSize(Number(value))}
-          >
-            <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue placeholder={table.state.pagination.pageSize} />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[10, 20, 25, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {table.state.pagination.pageIndex + 1} of{" "}
-          {Math.max(table.getPageCount(), 1)}
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            className="hidden size-8 lg:flex"
-            onClick={() => table.setPageIndex(0)}
-            disabled={!table.getCanPreviousPage()}
-          >
-            <span className="sr-only">Go to first page</span>
-            <ChevronsLeft />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="size-8"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            <span className="sr-only">Go to previous page</span>
-            <ChevronLeft />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="size-8"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            <span className="sr-only">Go to next page</span>
-            <ChevronRight />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="hidden size-8 lg:flex"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}
-          >
-            <span className="sr-only">Go to last page</span>
-            <ChevronsRight />
-          </Button>
-        </div>
-      </div>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => table.previousPage()}
+        disabled={!table.getCanPreviousPage()}
+      >
+        Previous
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => table.nextPage()}
+        disabled={!table.getCanNextPage()}
+      >
+        Next
+      </Button>
     </div>
   )
 }
 
 function DataTableViewOptions<TData extends RowData>({
   table,
+  className,
 }: {
-  table: ReactTable<DataTableFeatures, TData>
+  table: DataTableInstance<TData>
+  className?: string
 }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="ml-auto hidden h-8 lg:flex"
-        >
-          <Settings2 />
-          View
+        <Button variant="outline" className={className}>
+          Columns
+          <ChevronDown data-icon="inline-end" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+      <DropdownMenuContent align="end">
         {table
           .getAllColumns()
-          .filter(
-            (column) =>
-              typeof column.accessorFn !== "undefined" && column.getCanHide()
-          )
+          .filter((column) => column.getCanHide())
           .map((column) => (
             <DropdownMenuCheckboxItem
               key={column.id}
@@ -355,8 +304,12 @@ function DataTableViewOptions<TData extends RowData>({
 export {
   DataTable,
   DataTableColumnHeader,
+  DataTableContent,
+  DataTableFilter,
   DataTablePagination,
   DataTableViewOptions,
   features as dataTableFeatures,
+  useDataTable,
   type DataTableFeatures,
+  type DataTableInstance,
 }

@@ -8,8 +8,12 @@ export * from "@tanstack/react-table"
 export {
   DataTable,
   DataTableColumnHeader,
+  DataTableContent,
+  DataTableFilter,
   DataTablePagination,
   DataTableViewOptions,
   dataTableFeatures,
+  useDataTable,
   type DataTableFeatures,
+  type DataTableInstance,
 } from "./data-table"

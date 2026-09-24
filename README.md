@@ -131,7 +131,7 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
 <DataTable columns={columns} data={merchants} filterColumn="merchant" filterPlaceholder="Filter merchants..." />
 ```
 
-Sorting, filtering, pagination, row selection and column visibility are built in.
+Sorting, filtering, pagination, row selection and column visibility are built in. For a different layout or server-side paging, build from the same parts: see the DataTable "Build your own" page in Storybook.
 
 ### Package exports
 

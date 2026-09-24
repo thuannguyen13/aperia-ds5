@@ -1,9 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { Download, MoreHorizontal } from "lucide-react"
 import { Badge } from "../badge/badge"
+import { Button } from "../button/button"
 import { Checkbox } from "../checkbox/checkbox"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../dropdown-menu/dropdown-menu"
 import {
   DataTable,
   DataTableColumnHeader,
+  DataTableContent,
+  DataTableFilter,
+  DataTablePagination,
+  DataTableViewOptions,
+  useDataTable,
   type ColumnDef,
   type DataTableFeatures,
 } from "."
@@ -109,7 +122,7 @@ const statusVariant = {
   closed: "destructive",
 } as const
 
-// 57 rows, so paging and the rows-per-page select have several pages to move through
+// 57 rows, so Previous and Next have six pages to move through
 const manyMerchants: Merchant[] = Array.from({ length: 57 }, (_, i) => {
   const base = merchants[i % merchants.length]
   return {
@@ -151,9 +164,7 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
   },
   {
     accessorKey: "status",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
-    ),
+    header: "Status",
     cell: ({ row }) => {
       const status = row.getValue<Merchant["status"]>("status")
       return (
@@ -170,11 +181,9 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
   {
     accessorKey: "volume",
     header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title="Volume"
-        className="justify-end"
-      />
+      <div className="text-right">
+        <DataTableColumnHeader column={column} title="Volume" />
+      </div>
     ),
     cell: ({ row }) => (
       <div className="text-right tabular-nums">
@@ -186,7 +195,54 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
       </div>
     ),
   },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon-xs">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem
+            onClick={() => navigator.clipboard.writeText(row.original.email)}
+          >
+            Copy email
+          </DropdownMenuItem>
+          <DropdownMenuItem>View merchant</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
 ]
+
+function CustomLayoutExample() {
+  const table = useDataTable({ columns, data: merchants })
+  const selected = table.getFilteredSelectedRowModel().rows.length
+
+  return (
+    <div className="w-full">
+      <div className="flex items-center gap-2 py-4">
+        <DataTableViewOptions table={table} />
+        <Button variant="outline" disabled={!selected}>
+          <Download data-icon="inline-start" />
+          Export {selected || ""}
+        </Button>
+        <DataTableFilter
+          table={table}
+          column="email"
+          placeholder="Filter emails..."
+          className="ml-auto"
+        />
+      </div>
+      <DataTableContent table={table} />
+      <DataTablePagination table={table} />
+    </div>
+  )
+}
 
 const meta: Meta<typeof DataTable<Merchant>> = {
   title: "UI/DataTable",
@@ -197,7 +253,7 @@ const meta: Meta<typeof DataTable<Merchant>> = {
     docs: {
       description: {
         component:
-          "Import from `aperia-ds5/data-table`. Pass `columns` and `data`; sorting, filtering, pagination, row selection and column visibility are built in. [View in Figma](https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18719-212930)",
+          "Import from `aperia-ds5/data-table`. Pass `columns` and `data`; sorting, filtering, pagination, row selection and column visibility are built in. For a different layout, see Build your own. [View in Figma](https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18719-212930)",
       },
     },
   },
@@ -252,3 +308,16 @@ export const PlainColumns: Story = {
 export const WithoutFilter: Story = { args: { filterColumn: undefined } }
 
 export const Empty: Story = { args: { data: [] } }
+
+export const CustomLayout: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          "Built from the parts with useDataTable: the Columns menu and an Export button that reads the selection sit on the left, the filter on the right.",
+      },
+    },
+  },
+  render: () => <CustomLayoutExample />,
+}
