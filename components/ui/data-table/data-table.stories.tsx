@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { Badge } from "../badge/badge"
 import { Checkbox } from "../checkbox/checkbox"
 import {
   DataTable,
@@ -102,6 +103,23 @@ const merchants: Merchant[] = [
   },
 ]
 
+const statusVariant = {
+  active: "secondary",
+  review: "outline",
+  closed: "destructive",
+} as const
+
+// 57 rows, so paging and the rows-per-page select have several pages to move through
+const manyMerchants: Merchant[] = Array.from({ length: 57 }, (_, i) => {
+  const base = merchants[i % merchants.length]
+  return {
+    ...base,
+    id: `m${i + 1}`,
+    merchant: `${base.merchant} #${Math.floor(i / merchants.length) + 1}`,
+    volume: Math.round(base.volume * (0.6 + ((i * 37) % 80) / 100)),
+  }
+})
+
 const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
   {
     id: "select",
@@ -136,9 +154,14 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
-    cell: ({ row }) => (
-      <span className="capitalize">{row.getValue("status")}</span>
-    ),
+    cell: ({ row }) => {
+      const status = row.getValue<Merchant["status"]>("status")
+      return (
+        <Badge variant={statusVariant[status]} className="capitalize">
+          {status}
+        </Badge>
+      )
+    },
   },
   {
     accessorKey: "email",
@@ -184,12 +207,47 @@ const meta: Meta<typeof DataTable<Merchant>> = {
     filterColumn: "merchant",
     filterPlaceholder: "Filter merchants...",
   },
+  argTypes: {
+    columns: {
+      control: false,
+      description:
+        "TanStack column definitions: which fields show, how cells render, and which columns sort or hide.",
+    },
+    data: {
+      control: "object",
+      description: "The rows. Edit the JSON to change what the table shows.",
+    },
+    filterColumn: {
+      control: "select",
+      options: ["none", "merchant", "status", "email"],
+      mapping: { none: undefined },
+      description:
+        "Column id the search input filters on. Omit to hide the input.",
+    },
+    filterPlaceholder: { control: "text" },
+  },
 }
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
+
+export const ManyRows: Story = { args: { data: manyMerchants } }
+
+export const FilterByEmail: Story = {
+  args: { filterColumn: "email", filterPlaceholder: "Filter emails..." },
+}
+
+export const PlainColumns: Story = {
+  args: {
+    columns: [
+      { accessorKey: "merchant", header: "Merchant" },
+      { accessorKey: "email", header: "Email" },
+      { accessorKey: "volume", header: "Volume" },
+    ],
+  },
+}
 
 export const WithoutFilter: Story = { args: { filterColumn: undefined } }
 
