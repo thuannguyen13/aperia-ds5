@@ -12,13 +12,34 @@
  *   node scripts/check-coverage.mjs > /tmp/coverage.md
  */
 
-import { readdirSync, readFileSync } from "fs"
+import { readdirSync } from "fs"
 import { join, dirname } from "path"
 import { fileURLToPath } from "url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const UI_DIR = join(__dirname, "..", "components", "ui")
-const MAX_LINKS = 10
+const FILE_URL = "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id="
+
+// Figma page per component folder, same IDs as the page list in CLAUDE.md.
+// Checked against the Figma API: every template node sits on its folder's page.
+// Folders with no Figma page (attachment, bubble, marker, message,
+// native-select) are left out and render "—".
+const PAGES = {
+  accordion: "1:434", alert: "21:322", "alert-dialog": "22:307", "aspect-ratio": "21:535",
+  avatar: "23:988", badge: "23:995", breadcrumb: "23:1004", button: "34:6",
+  "button-group": "18672:217548", calendar: "37:1900", card: "46:65", carousel: "46:66",
+  chart: "449:6176", checkbox: "46:67", collapsible: "60:434", combobox: "60:435",
+  command: "60:436", "context-menu": "60:437", dialog: "112:477", direction: "21192:433238",
+  drawer: "112:454", "dropdown-menu": "89:189", empty: "18672:1039", field: "18684:15122",
+  "hover-card": "216:2886", icon: "21003:22055", input: "65:520", "input-group": "18677:11182",
+  "input-otp": "76:89", item: "18672:6033", kbd: "18665:239", label: "65:517",
+  menubar: "210:2486", "navigation-menu": "209:1883", pagination: "65:516", popover: "193:1388",
+  progress: "65:441", "radio-group": "64:316", resizable: "296:243", "scroll-area": "296:207",
+  select: "118:1264", separator: "118:2682", sheet: "216:3314", sidebar: "5143:200",
+  skeleton: "64:243", slider: "61:169", sonner: "118:2756", spinner: "18665:1996",
+  switch: "60:438", table: "184:890", tabs: "183:417", textarea: "177:367",
+  toggle: "132:1671", "toggle-group": "123:75", tooltip: "122:10",
+}
 
 const entries = readdirSync(UI_DIR, { withFileTypes: true })
   .filter((d) => d.isDirectory())
@@ -30,23 +51,7 @@ const rows = entries.map((name) => {
   const files = readdirSync(dir, { recursive: true })
 
   const hasStories = files.some((f) => f.endsWith(".stories.tsx"))
-  const figmaUrls = [
-    ...new Set(
-      files
-        .sort()
-        .flatMap((f) => {
-          if (f.endsWith(".figma.ts")) {
-            return readFileSync(join(dir, f), "utf8").match(/^\/\/ url=(\S+)/m)?.[1] ?? []
-          }
-          // Batch templates (icons) carry one url per entry instead of a header
-          if (f.endsWith(".figma.batch.json")) {
-            return JSON.parse(readFileSync(join(dir, f), "utf8")).components.map((c) => c.url)
-          }
-          return []
-        })
-    ),
-  ]
-  const hasFigma = figmaUrls.length > 0
+  const hasFigma = files.some((f) => f.endsWith(".figma.ts") || f.endsWith(".figma.batch.json"))
 
   const label = name
     .split("-")
@@ -55,12 +60,8 @@ const rows = entries.map((name) => {
 
   const storiesCell = hasStories ? "✅" : "❌"
   const figmaCell = hasFigma ? "✅" : "❌"
-  const shownUrls = figmaUrls.slice(0, MAX_LINKS)
-  const moreCount = figmaUrls.length - shownUrls.length
-  const linkCell = hasFigma
-    ? shownUrls.map((url, i) => `[${i === 0 ? "View Figma" : i + 1}](${url})`).join(" ") +
-      (moreCount > 0 ? ` +${moreCount} more` : "")
-    : "—"
+  const page = PAGES[name]
+  const linkCell = page ? `[View Figma](${FILE_URL}${page.replace(":", "-")})` : "—"
 
   return { label, storiesCell, figmaCell, linkCell }
 })
