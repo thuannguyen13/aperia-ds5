@@ -15,6 +15,10 @@
       "types": "./dist/chart.d.ts",
       "import": "./dist/chart.js"
     },
+    "./data-table": {
+      "types": "./dist/data-table.d.ts",
+      "import": "./dist/data-table.js"
+    },
     "./utils": {
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.js"
@@ -41,7 +45,8 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "recharts": "^3.8.0"
+    "recharts": "^3.8.0",
+    "@tanstack/react-table": "^9.2.4"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -69,6 +74,7 @@
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",
     "@tailwindcss/vite": "^4.2.4",
+    "@tanstack/react-table": "^9.2.4",
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

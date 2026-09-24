@@ -29,7 +29,7 @@ const PAGES = {
   avatar: "23:988", badge: "23:995", breadcrumb: "23:1004", button: "34:6",
   "button-group": "18672:217548", calendar: "37:1900", card: "46:65", carousel: "46:66",
   chart: "449:6176", checkbox: "46:67", collapsible: "60:434", combobox: "60:435",
-  command: "60:436", "context-menu": "60:437", dialog: "112:477", direction: "21192:433238",
+  command: "60:436", "context-menu": "60:437", "data-table": "244:2897", dialog: "112:477", direction: "21192:433238",
   drawer: "112:454", "dropdown-menu": "89:189", empty: "18672:1039", field: "18684:15122",
   "hover-card": "216:2886", icon: "21003:22055", input: "65:520", "input-group": "18677:11182",
   "input-otp": "76:89", item: "18672:6033", kbd: "18665:239", label: "65:517",

@@ -43,6 +43,12 @@ The root barrel still exports `ChartContainer`, `ChartTooltip`, `ChartTooltipCon
 
 The chrome (`CHART_AXIS`, `CHART_MARGIN`, `ChartGrid`, `ChartTip`, `chartAxisProps`) lives in `components/ui/chart/chart-defaults.tsx`, beside `chart.tsx` rather than inside it, because `chart.tsx` is refreshed with `--overwrite` and diffed.
 
+### Data table
+
+`DataTable` is imported from the `aperia-ds5/data-table` subpath, which re-exports all of `@tanstack/react-table` beside `DataTable`, `DataTableColumnHeader`, `DataTablePagination`, `DataTableViewOptions` and the `DataTableFeatures` type. TanStack exports a `Table` type, so it stays out of the root barrel for the same reason recharts does.
+
+shadcn ships Data Table as a guide, not a registry component, so `components/ui/data-table/data-table.tsx` is DS-owned code built from that guide (TanStack Table v9, `useTable` with `tableFeatures`). There is nothing to refresh with `shadcn add`. `@tanstack/react-table` is a **peer** dependency like `recharts`: consumer column definitions are typed against the app's copy, so both must resolve one.
+
 ### Lib / Hooks
 - `lib/utils.ts` — `cn()` utility (clsx + tailwind-merge)
 - `hooks/` — custom React hooks

@@ -116,11 +116,30 @@ import { Button, Badge, Card, Input } from "aperia-ds5"
 import { cn } from "aperia-ds5/utils"
 ```
 
+### Data table
+
+Install the peer dependency once: `npm install @tanstack/react-table`. Then define columns and pass your rows:
+
+```tsx
+import { DataTable, DataTableColumnHeader, type ColumnDef, type DataTableFeatures } from "aperia-ds5/data-table"
+
+const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
+  { accessorKey: "merchant", header: ({ column }) => <DataTableColumnHeader column={column} title="Merchant" /> },
+  { accessorKey: "email", header: "Email" },
+]
+
+<DataTable columns={columns} data={merchants} filterColumn="merchant" filterPlaceholder="Filter merchants..." />
+```
+
+Sorting, filtering, pagination, row selection and column visibility are built in.
+
 ### Package exports
 
 | Import | Contents |
 |---|---|
 | `aperia-ds5` | All UI components |
+| `aperia-ds5/chart` | Chart components and all of recharts (needs `recharts` installed) |
+| `aperia-ds5/data-table` | `DataTable` and all of TanStack Table (needs `@tanstack/react-table` installed) |
 | `aperia-ds5/utils` | `cn()` (clsx + tailwind-merge) |
 | `aperia-ds5/theme-provider` | `ThemeProvider` |
 | `aperia-ds5/base.css` | Styles, tokens, and Tailwind config |

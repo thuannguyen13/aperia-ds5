@@ -17,6 +17,7 @@ export default defineConfig([
     entry: {
       index: "components/ui/index.ts",
       chart: "components/ui/chart/index.ts",
+      "data-table": "components/ui/data-table/index.ts",
       "theme-provider": "components/theme-provider.tsx",
     },
     dts: true,
