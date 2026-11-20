@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=430-4114
+// url=https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=430-4114
 // source=https://github.com/thuannguyen13/aperia-ds5/blob/main/components/ui/combobox/combobox.tsx
 // component=ComboboxInput
 
@@ -13,20 +13,40 @@ if (figma.selectedInstance.getPropertyValue("Type") === "Default") {
     Active: false,
     Disabled: true,
   })
-  const addon = figma.selectedInstance.getBoolean("Addon Inline", {
-    true: figma.properties.children(["InputGroup / Addon Inline"]),
-    false: undefined,
-  })
+  // ComboboxInput already renders its own InputGroup and input, so only the
+  // addon's icon is read here. Rendering the Addon Inline instance through its
+  // template would nest a second InputGroup and input.
+  const iconSlot = figma.selectedInstance.getBoolean("Addon Inline")
+    ? figma.selectedInstance.findInstance("IconPlaceholder", {
+        traverseInstances: true,
+      })
+    : undefined
+  const icon =
+    iconSlot?.type === "INSTANCE"
+      ? iconSlot.getInstanceSwap("Lucide Icon")
+      : undefined
+  // executeTemplate() returns the icon's JSX without its import, so the
+  // lucide import is rebuilt from the icon template's id (the export name).
+  const iconName = icon?.type === "INSTANCE" ? icon.codeConnectId() : null
 
   template = {
     id: "ComboboxInput",
-    imports: ['import { ComboboxInput } from "aperia-ds5"'],
-    example: figma.code`<ComboboxInput${figma.helpers.react.renderProp(
-      "placeholder",
-      placeholder,
-    )}${figma.helpers.react.renderProp("disabled", disabled)}>
-      ${figma.helpers.react.renderChildren(addon)}
-    </ComboboxInput>`,
+    imports: [
+      'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
+      ...(iconName ? [`import { ${iconName} } from "lucide-react"`] : []),
+    ],
+    example:
+      icon?.type === "INSTANCE"
+        ? figma.code`<ComboboxInput${figma.helpers.react.renderProp(
+            "placeholder",
+            placeholder,
+          )}${figma.helpers.react.renderProp("disabled", disabled)}>
+      <InputGroupAddon>${icon.executeTemplate().example}</InputGroupAddon>
+    </ComboboxInput>`
+        : figma.code`<ComboboxInput${figma.helpers.react.renderProp(
+            "placeholder",
+            placeholder,
+          )}${figma.helpers.react.renderProp("disabled", disabled)} />`,
     metadata: { nestable: true },
   }
 } else if (figma.selectedInstance.getPropertyValue("Type") === "Invalid") {
@@ -40,7 +60,9 @@ if (figma.selectedInstance.getPropertyValue("Type") === "Default") {
 
   template = {
     id: "ComboboxInput",
-    imports: ['import { ComboboxInput } from "aperia-ds5"'],
+    imports: [
+      'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
+    ],
     example: figma.code`<ComboboxInput${figma.helpers.react.renderProp(
       "placeholder",
       placeholder,
@@ -54,7 +76,7 @@ if (figma.selectedInstance.getPropertyValue("Type") === "Default") {
   template = {
     id: "ComboboxChips",
     imports: [
-      'import { ComboboxChips, ComboboxChip, ComboboxChipsInput } from "aperia-ds5"',
+      'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
     ],
     example: figma.code`<ComboboxChips>
       {/* pass ref={useComboboxAnchor()} here and anchor={ref} to ComboboxContent */}
@@ -73,7 +95,7 @@ if (figma.selectedInstance.getPropertyValue("Type") === "Default") {
   template = {
     id: "ComboboxChips",
     imports: [
-      'import { ComboboxChips, ComboboxChip, ComboboxChipsInput } from "aperia-ds5"',
+      'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
     ],
     example: figma.code`<ComboboxChips>
       {/* pass ref={useComboboxAnchor()} here and anchor={ref} to ComboboxContent */}

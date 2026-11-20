@@ -22,7 +22,7 @@ const meta: Meta<typeof Item> = {
     docs: {
       description: {
         component:
-          "[View in Figma](https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18672-198607)",
+          "[View in Figma](https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=18672-198607)",
       },
     },
   },

@@ -10,7 +10,7 @@ const meta: Meta<typeof Spinner> = {
     docs: {
       description: {
         component:
-          "[View in Figma](https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18665-25956)",
+          "[View in Figma](https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=18665-25956)",
       },
     },
   },

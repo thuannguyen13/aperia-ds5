@@ -67,7 +67,7 @@ Templates are Code Connect v2 parserless files: `components/ui/<dir>/<kebab-name
 **File shape.** The header comments are read by tooling: `// url=` is the Figma node the template attaches to (`scripts/check-coverage.mjs` reads it too), `// component=` is the code component name Dev Mode shows.
 
 ```ts
-// url=https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=26-160
+// url=https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=26-160
 // source=https://github.com/thuannguyen13/aperia-ds5/blob/main/components/ui/alert/alert.tsx
 // component=Alert
 
@@ -113,10 +113,80 @@ and must never wrap or re-export a component locally.
 
 The library targets React 19: `react` and `react-dom` are peer dependencies (`^19.0.0`) and dev dependencies, never `dependencies`, because a second React copy in the consumer breaks every hook with "Invalid hook call". Components use the React 19 style from current shadcn (`ref` as a prop, no `forwardRef`).
 
+## Design language and agent skill (0.3.0)
+
+`base.css` and the component classes carry the shared Aperia look that used to live in Sales Portal's `globals.css` (`data-slot` overrides). Apps set only their brand slots: `--brand` (the light sidebar), chart palette and their own status colours. The primary `#0058cc` is shared in both modes (decided 2026-11-19, final).
+
+- Put a look in the component's classes, not in `data-slot` CSS, so an app's `className` can still override it through `cn()`. `base.css` keeps only tokens, the `surface` and `control` utilities, base element rules and panel motion (unlayered, keyed on `data-slot`).
+- Edges are `ring-[0.5px]` with no border; focus and invalid are `inset-ring-1` plus a 3 px `ring` halo, so nothing shifts. Exceptions keep a border: Toggle `outline` (the joined toggle group relies on it), Badge, Input OTP slots, Switch track.
+- Left in Sales Portal for now (not in Figma yet, or app-specific): the segmented toggle-group track, read-only fields (`data-readonly`), stacked sheets, the sidebar fine-tuning (separator width, rail timing, menu text clip), destructive button colours in Dark, the chart focus outline, `.plain`, and its status and access-level colours.
+- `skills/aperia-app-design` is the design language for coding agents and ships in the package (`files`). Apps link it into `.claude/skills/` (README, Agent skill). Change it in the same change as the code it describes; it must never contradict `base.css` or a component.
+
 ## Figma library reference
 
-File: **Aperia Shadcn Library**, key `XERddNbyfcDl7jAmRDbgqt`
-(`https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=`).
+### Two libraries: Enhanced is live, the original is frozen (2026-11-19)
+
+The design audit lands in a duplicate of the library, not in place, because Ask Nanci production uses the original Figma library and Figma has no version pinning: a publish there reaches its new files and offers updates to its existing ones.
+
+- **Live: Aperia Shadcn Library (Enhanced)**, key `uXivJU4N3R0LWu0mbimHWt`
+  (`https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=`). All Figma work and every Code Connect template from here on targets this file. The code release that matches it is 0.3.0.
+- **Frozen: Aperia Shadcn Library (original)**, key `XERddNbyfcDl7jAmRDbgqt`. It matches 0.2.x, which Ask Nanci production runs from a copy in its own repo. Do not edit, publish or unpublish it, and do not publish Code Connect to it. If Ask Nanci production needs a fix there, make the same fix in Enhanced and note it.
+- **Code Connect points at Enhanced** (repointed 2026-11-19 for 0.3.0): every `// url=` header, story link and script names `uXivJU4N3R0LWu0mbimHWt`. Accordion, Combobox List, ContextMenu and Select Menu point at the single components that replaced their sets. The mappings already published to the original stay there, and they match 0.2.x. Publishing still needs approval (above).
+- **Keep Enhanced swappable.** Ask Nanci will later move to Enhanced with Figma's Swap library, which matches by name. Add tokens and variant values freely, but do not rename or delete existing ones; record any rename the audit forces (old → new) in the 0.3.0 release notes. A product that needs its own look (for example Ask Nanci keeping a blue primary) gets a variable mode, not a second library. Once no file uses the original, unpublish and archive it, and give Enhanced the plain name.
+
+### The audit in Enhanced: Sales Portal is the source (2026-11-19)
+
+Enhanced now carries the design audit (Figma file `chnRsxcMfjWOmSpd7LdueI`), with Sales Portal's shipped styling as the source of truth: `../aperia-sale-portal/app/globals.css` plus its `data-slot` overrides. Titan is left out; it is based on Sales Portal. 0.3.0 moves that styling into this library, so Sales Portal can delete its overrides.
+
+**One styling model, expressible in both code and Figma.** Each property is built the same way on both sides, so Figma, Dev Mode and Code Connect describe what the code renders:
+
+| Property | Code | Figma |
+|---|---|---|
+| Color | CSS variable | Variable of the same name |
+| Derived color | `color-mix(in oklab, var(--x) N%, transparent)` | Alias of `x` at N% opacity |
+| Edge | `ring-[0.5px]`, no border | Stroke bound to `border-width/default` (0.5), Outside, not in layout |
+| Elevation | Shadow tokens | Effect styles with the same values |
+| State | Variant changing tokens | Variant changing bindings |
+
+- Never store a computed value in Figma. A color code derives from another token is an alias (plus opacity) in Figma; a literal in code (hex or oklch) is that literal. Each changed or new variable's description holds its code source.
+- Mix with `transparent`, not into a surface. A see-through mix composites the same in the browser and Figma on every surface; `color-mix(..., var(--card))` cannot be expressed in Figma. Sales Portal's `--border` and `--input` still mix into `var(--card)`; 0.3.0 changes them.
+- No transparent `border` under a ring. Sales Portal keeps a 1 px transparent border on controls, which shifts their text 1 px and has no Figma equivalent; 0.3.0 drops it, and focus and error use the ring alone.
+- Before calling a token reuse or merge safe, trace every place it renders in Sales Portal (library classes, `globals.css` overrides, app components) and list the visible effects with file:line.
+
+**Tokens.** Values follow Sales Portal (surfaces, muted text, destructive, sidebar), except `primary`: #0058cc in both modes, white text on it in Dark (decided 2026-11-19; in code since 0.3.0). The sidebar keeps the navy through hidden `colors/brand` #002f67 (code `--brand`): `sidebar` and `sidebar-primary-foreground` in Light alias it, not `primary`. New tokens, kept to what no existing token covers:
+
+| Token | Light / Dark | Why it exists |
+|---|---|---|
+| `control` | `var(--card)` / `oklch(0.31 0.006 286)` | Fill of controls and chosen items. Dark needs a step between `card` and `popover` so fields show on cards and inside popovers |
+| `overlay` | black 10% / black 50% | Dim behind dialog, sheet and drawer, no blur. A 10% dim disappears in Dark |
+| `--default-border-width` | 0.5px | Every hairline |
+| shadow colors | `foreground` 2% and 5% / black 20% and 30% | Shadows that deepen in Dark; hidden from publishing in Figma |
+
+Merged or dropped instead of added: `border-strong` folded into `input` (`foreground` at 16%, the edge of every control); `sheet` dropped (dialog and sheet use `background`); the access-level colors stay in Sales Portal; so do the status colors (`--color-status-*`) and the amber warning alert (decided 2026-11-19: apps color the ds5 `Badge` and `Alert` through `className`, so colors are per project, not shared; Figma's Badge and Alert keep only their original variants).
+
+**Recipes.** Ship as utilities here, used by the components:
+- `surface`: `card` fill, `border` edge, `shadow-sm`, `rounded-xl`. Card, and tables and empty states on a page.
+- `control`: `control` fill, `input` edge, `shadow-sm`. Every control has the fill (white in Light): input, textarea, select trigger, input group, combobox chips, checkbox, radio, outline button, outline toggle, Input OTP slot, the chosen tab. Sales Portal's rule leaves out the outline toggle and the OTP slot (transparent there); 0.3.0 adds them. A pressed toggle keeps `bg-muted`.
+- Choice cards (Checkbox, Radio and Switch with Type=Box; code: `FieldLabel` wrapping a `Field`): `control` fill under the card in every state, `border` edge; checked adds `primary` 5% (Dark 10%) on top and a `primary` 30% (Dark 20%) edge. Figma stacks two fills; code needs one opaque mix, `color-mix(in oklab, var(--primary) 5%, var(--control))`, since CSS can't stack two background colors. ds5's FieldLabel is transparent unchecked; 0.3.0 gives it the control recipe (`bg-control ring-[0.5px] ring-input shadow-sm`). Figma stacks the selected edge too (`input`, then `primary` 30% on top); code: `ring-[color-mix(in_oklab,var(--primary)_30%,var(--input))]`, which composites the same.
+- Panels (dialog, alert dialog, sheet): `background` fill, `border` edge, `shadow-lg`, `overlay` dim.
+- Shadows have four steps (resting `sm`, menu `md`, panel `lg`, dragging `xl`); `md`, `lg` and `xl` each include `sm`.
+
+**Figma has no props the code lacks** (decided 2026-11-19). Every variant property maps to a ds5 prop or a real state; looks the code gets from context (Dark mode, a project's own colors) stay out of the components. Removed: menu `Color=Inverted` and `Appearance=Translucent` (Combobox List, ContextMenu, DropdownMenu Menu, Select Menu are now single components; Inverted is Dark mode on the frame) and item `State=Hover (Translucent)`, plus their only tokens `custom/popover\70` and `custom/foreground\10`. The original (production) library gets the same removal by hand; everything else stays name-compatible so Swap library keeps working.
+Also removed as not in code: Badge `Variant=Verified` (a shadcn demo: secondary + icon + `bg-blue-500`; use any variant with Show Left Icon and color per project) and `custom/blue-500 dark:blue-600`; Accordion `Variant=Border` (Accordion is now a single component); ButtonGroup `Variant` (only `Orientation` left; the Buttons inside carry the variant, as in code); Toggle Group `Type=Fill` (`w-full` by className). Kept because they map to code: Toggle Group `Type` (`spacing` 0 vs >0; note ds5 defaults `spacing` to 2, Figma's default is joined), Alert Dialog `Destructive` (`AlertDialogAction variant`), Kbd `Background=Primary` (the in-tooltip look ds5 applies by context).
+
+**Outline variants have a fill** (decided 2026-11-19): every `outline` variant sits on `control` (white in Light) so it doesn't fade into the page: Button, Toggle, Badge and Badge Number. Done in code (0.3.0): Badge `outline` gets `bg-control` (Sales Portal's control rule only matches `button`/`a`, and the badge is a `span`); Toggle `outline` gets the control recipe.
+
+**Component changes.** Card title semibold. Disabled fields: Light keeps full opacity with `foreground` 4% fill and muted text at 70%; Dark is `control` at 50% opacity. Icons stay at Lucide's default stroke in code (strokeWidth 2 on the 24 grid, about 1.33 px at 16 px). In Figma every Lucide icon vector is bound to `stroke-width/stroke-[1-25]` (1.25, decided 2026-11-19); Figma does not scale a stroke when an instance is resized, so the bound value is what renders at every size.
+
+**Done in Figma (2026-11-19):** 0.5 px edges of surfaces, controls and panels sit Outside (dividers such as footer top lines stay Inside); focus and invalid states of controls use `focus/control` and `focus/control-destructive` (shadow-sm plus the halo; `focus/default` stays for non-controls such as primary buttons and tabs); Button and Toggle at default, lg, icon and icon-lg sizes are `rounded-lg` (10 px), xs and sm sizes `rounded-md`, as in code; the switch thumb is white in both modes with the control edge and shadow-sm (done in code (0.3.0): thumb `bg-white`, not `--card`/`bg-background`, which turned it dark in Dark).
+
+**Item muted fill (2026-11-19):** ds5's Item `muted` and Card footer are `bg-muted/50`, but the Figma Item Muted used full `muted` (too dark). Added `custom/muted\50` (muted @50, both modes) and bound Item Muted to it.
+
+**Not done yet in Figma:** the floating Sheet component layout (16 px inset, rounded, 56 px header; only the Theme Combinations preview shows it), the toggle group track, and table header without hover.
+
+**Known gaps carried from the original library:** `destructive-foreground` (Figma `#fef2f2`, code `#fafafa`), `secondary` in Dark (`#262626` vs `#27272a`), no `chart-6` mode variable, and the Input OTP slot fill pointing at `background` where code is transparent.
+
+Page IDs below were read from the original. Expect the same IDs in Enhanced.
 
 Page IDs, to pass to `get_metadata` for component node IDs. `get_metadata` without a node ID lists only some of the 72 pages; `use_figma` returning `figma.root.children` gives the live list.
 

@@ -18,7 +18,7 @@ import { fileURLToPath } from "url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const UI_DIR = join(__dirname, "..", "components", "ui")
-const FILE_URL = "https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id="
+const FILE_URL = "https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id="
 
 // Figma page per component folder, same IDs as the page list in CLAUDE.md.
 // Checked against the Figma API: every template node sits on its folder's page.

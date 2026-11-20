@@ -1,0 +1,41 @@
+/*
+  An app's brand slots, the only colours an Aperia app sets for itself (references/brand-slots.md).
+  These are the Sales Portal's values; copy the file and change the values, not the names.
+  The primary (#0058cc) is shared and stays in aperia-ds5/base.css.
+*/
+
+:root {
+  /* The light sidebar is the brand. base.css derives --sidebar and --sidebar-primary-foreground from it. */
+  --brand: #002f67;
+  --sidebar-accent: #0d3f7f;
+  --sidebar-border: #1a4e8f;
+  --sidebar-ring: #7fb4e0;
+}
+
+/* Status colours: a pale fill with deep text, one pair per state, each with a dark-mode pair.
+   Use them on Badge and Alert through className, e.g. className="bg-status-green text-status-green-foreground". */
+@theme {
+  --color-status-gray: #eceef2;
+  --color-status-gray-foreground: #454a54;
+  --color-status-blue: #dceefb;
+  --color-status-blue-foreground: #0b5a91;
+  --color-status-green: #dcf3e4;
+  --color-status-green-foreground: #14663a;
+  --color-status-amber: #fbeed3;
+  --color-status-amber-foreground: #7a4c07;
+  --color-status-red: #fbe3e3;
+  --color-status-red-foreground: #8f1f1f;
+}
+
+.dark {
+  --color-status-gray: #3b3c41;
+  --color-status-gray-foreground: #c9cdd6;
+  --color-status-blue: #123349;
+  --color-status-blue-foreground: #96cdf1;
+  --color-status-green: #12331f;
+  --color-status-green-foreground: #86dca8;
+  --color-status-amber: #3a2c0c;
+  --color-status-amber-foreground: #e8c470;
+  --color-status-red: #3b1717;
+  --color-status-red-foreground: #f3a6a6;
+}

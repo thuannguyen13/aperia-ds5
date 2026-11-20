@@ -253,7 +253,7 @@ const meta: Meta<typeof DataTable<Merchant>> = {
     docs: {
       description: {
         component:
-          "Import from `aperia-ds5/data-table`. Pass `columns` and `data`; sorting, filtering, pagination, row selection and column visibility are built in. For a different layout, see Build your own. [View in Figma](https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=18719-212930)",
+          "Import from `aperia-ds5/data-table`. Pass `columns` and `data`; sorting, filtering, pagination, row selection and column visibility are built in. For a different layout, see Build your own. [View in Figma](https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=18719-212930)",
       },
     },
   },

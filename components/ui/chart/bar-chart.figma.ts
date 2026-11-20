@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=449-7503
+// url=https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=449-7503
 // source=https://github.com/thuannguyen13/aperia-ds5/blob/main/node_modules/recharts/types/chart/BarChart.d.ts
 // component=BarChart
 

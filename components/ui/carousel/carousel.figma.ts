@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=241-1368
+// url=https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=241-1368
 // source=https://github.com/thuannguyen13/aperia-ds5/blob/main/components/ui/carousel/carousel.tsx
 // component=Carousel
 

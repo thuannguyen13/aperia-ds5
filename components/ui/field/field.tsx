@@ -106,7 +106,7 @@ function FieldLabel({
     <Label
       data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
+        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:bg-control has-[>[data-slot=field]]:shadow-sm has-[>[data-slot=field]]:ring-[0.5px] has-[>[data-slot=field]]:ring-input has-data-checked:bg-[color-mix(in_oklab,var(--primary)_5%,var(--control))] has-data-checked:ring-[color-mix(in_oklab,var(--primary)_30%,var(--input))] *:data-[slot=field]:p-2.5 dark:has-data-checked:bg-[color-mix(in_oklab,var(--primary)_10%,var(--control))] dark:has-data-checked:ring-[color-mix(in_oklab,var(--primary)_20%,var(--input))]",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         className
       )}

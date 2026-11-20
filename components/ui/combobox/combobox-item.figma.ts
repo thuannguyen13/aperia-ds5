@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=17379-199232
+// url=https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=17379-199232
 // source=https://github.com/thuannguyen13/aperia-ds5/blob/main/components/ui/combobox/combobox.tsx
 // component=ComboboxItem
 
@@ -10,7 +10,9 @@ if (figma.selectedInstance.getPropertyValue("Type") === "Simple") {
 
   template = {
     id: "ComboboxItem",
-    imports: ['import { ComboboxItem } from "aperia-ds5"'],
+    imports: [
+      'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
+    ],
     example: figma.code`<ComboboxItem${figma.helpers.react.renderProp(
       "value",
       label,
@@ -24,7 +26,8 @@ if (figma.selectedInstance.getPropertyValue("Type") === "Simple") {
   template = {
     id: "ComboboxItem",
     imports: [
-      'import { ComboboxItem, Item, ItemContent, ItemTitle, ItemDescription } from "aperia-ds5"',
+      'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
+      'import { Item, ItemContent, ItemTitle, ItemDescription } from "aperia-ds5"',
     ],
     example: figma.code`<ComboboxItem${figma.helpers.react.renderProp(
       "value",
@@ -48,7 +51,8 @@ if (figma.selectedInstance.getPropertyValue("Type") === "Simple") {
   template = {
     id: "ComboboxItem",
     imports: [
-      'import { ComboboxItem, Item, ItemContent, ItemTitle, ItemDescription } from "aperia-ds5"',
+      'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
+      'import { Item, ItemContent, ItemTitle, ItemDescription } from "aperia-ds5"',
     ],
     example: figma.code`<ComboboxItem${figma.helpers.react.renderProp(
       "value",

@@ -71,6 +71,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-control: var(--control);
+  --color-overlay: var(--overlay);
+  --color-brand: var(--brand);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -104,94 +107,126 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-/* ─── Color tokens: light (shadcn zinc) ──────────────────────────────────── */
+/* ─── Color tokens ─────────────────────────────────────────────────────────
+   Values follow Sales Portal, the source of the 0.3.0 audit, and match the
+   Figma library "Aperia Shadcn Library (Enhanced)". An app sets only its
+   brand slots (--brand, sidebar, chart palette, its own status colors); see
+   skills/aperia-app-design/references/brand-slots.md.
+   Tokens derived with var() are declared again under .dark, so a .dark
+   subtree inside a light page resolves them too. */
 :root {
-  --background: oklch(1 0 0);
+  --brand: #002f67;
+
+  --background: oklch(0.975 0.002 286);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
+  --card-foreground: var(--foreground);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
+  --popover-foreground: var(--foreground);
+  --control: var(--card);
   --primary: oklch(0.492 0.194 259.33); /* #0058CC */
-  --primary-foreground: oklch(0.985 0 0);
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
+  --muted: oklch(0.945 0.001 286.375);
+  --muted-foreground: #66666e;
+  --accent: var(--muted);
   --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #c10007;
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
+  --border: color-mix(in oklab, var(--foreground) 12%, transparent);
+  --input: color-mix(in oklab, var(--foreground) 16%, transparent);
+  --ring: var(--primary);
+  --ghost-hover: color-mix(in oklab, currentColor 5%, transparent);
+  --overlay: oklch(0 0 0 / 10%);
+
   --chart-1: oklch(0.528 0.152 264.943); /* #3F65C2 */
   --chart-2: oklch(0.722 0.155 49.32); /* #F18442 */
   --chart-3: oklch(0.436 0.158 27.445); /* #951B19 */
   --chart-4: oklch(0.819 0.119 137.085); /* #9FD689 */
   --chart-5: oklch(0.896 0.063 313.549); /* #ECD1FB */
   --chart-6: oklch(0.317 0.135 282.036);
+
+  --sidebar: var(--brand);
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: var(--brand);
+  --sidebar-accent: #0d3f7f;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1a4e8f;
+  --sidebar-ring: #7fb4e0;
+
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0.002 247.839);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* Shadows: md, lg and xl each include sm. Dark deepens them through
+     --shadow-color, --shadow-depth and --shadow-base. */
+  --shadow-color: var(--foreground);
+  --shadow-depth: 2%;
+  --shadow-base: 5%;
   --shadow-2xs: 0 1px rgb(0 0 0 / 0.05);
   --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-sm:
+    0 3px 6px -2px color-mix(in oklab, var(--shadow-color) var(--shadow-depth), transparent),
+    0 1px 1px color-mix(in oklab, var(--shadow-color) var(--shadow-base), transparent);
+  --shadow-md: var(--shadow-sm), 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: var(--shadow-sm), 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: var(--shadow-sm), 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* Motion: panels ease out over 220ms and close over 150ms. */
+  --panel-in: 220ms;
+  --panel-out: 150ms;
+  --rail-duration: 250ms;
+  --rail-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* ─── Color tokens: dark (shadcn zinc) ───────────────────────────────────── */
 .dark {
-  --background: oklch(0.141 0.005 285.823);
+  --background: oklch(0.244 0.006 286);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.492 0.194 259.33); /* #0058CC */
-  --primary-foreground: oklch(0.985 0 0);
+  --card: oklch(0.281 0.006 286);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.33 0.006 286);
+  --popover-foreground: var(--foreground);
+  --control: oklch(0.31 0.006 286);
   --secondary: oklch(0.274 0.006 286.618);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.618);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.618);
+  --muted: oklch(0.36 0.006 286);
+  --muted-foreground: #a8a8b2;
+  --accent: var(--muted);
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --chart-1: oklch(0.528 0.152 264.943); /* #3F65C2 */
-  --chart-2: oklch(0.722 0.155 49.32); /* #F18442 */
-  --chart-3: oklch(0.436 0.158 27.445); /* #951B19 */
-  --chart-4: oklch(0.819 0.119 137.085); /* #9FD689 */
-  --chart-5: oklch(0.896 0.063 313.549); /* #ECD1FB */
+  --destructive: #ff8a8c;
+  --border: color-mix(in oklab, var(--foreground) 12%, transparent);
+  --input: color-mix(in oklab, var(--foreground) 16%, transparent);
+  --ring: var(--primary);
+  --ghost-hover: color-mix(in oklab, currentColor 10%, transparent);
+  --overlay: oklch(0 0 0 / 50%);
+
   --chart-6: oklch(0.673 0.182 276.935);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+
+  --sidebar: oklch(0.215 0.006 286);
+  --sidebar-foreground: oklch(0.85 0.008 286);
+  --sidebar-primary: oklch(0.3 0.006 286);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.618);
+  --sidebar-accent: oklch(0.26 0.006 286);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-border: oklch(1 0 0 / 6%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
-  --shadow-2xs: 0 1px rgb(0 0 0 / 0.05);
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  --shadow-color: oklch(0 0 0);
+  --shadow-depth: 20%;
+  --shadow-base: 30%;
+  --shadow-sm:
+    0 3px 6px -2px color-mix(in oklab, var(--shadow-color) var(--shadow-depth), transparent),
+    0 1px 1px color-mix(in oklab, var(--shadow-color) var(--shadow-base), transparent);
+  --shadow-md: var(--shadow-sm), 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: var(--shadow-sm), 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: var(--shadow-sm), 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Every hairline is 0.5px: `border` and the surface and control edges. */
+@theme {
+  --default-border-width: 0.5px;
 }
 
 /* ─── Base element styles ────────────────────────────────────────────────── */
@@ -199,7 +234,87 @@
   * {
     @apply border-border outline-ring/50;
   }
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+  html,
+  body {
+    overscroll-behavior: none;
+  }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Everything clickable shows the pointer. */
+  :is(
+    button,
+    [role="button"],
+    [role="tab"],
+    [role="checkbox"],
+    [role="radio"],
+    [role="switch"],
+    [role="menuitem"],
+    [role="menuitemcheckbox"],
+    [role="menuitemradio"],
+    [role="option"],
+    summary,
+    select,
+    input:is([type="checkbox"], [type="radio"], [type="file"])
+  ):not(:disabled, [aria-disabled="true"], [data-disabled]) {
+    cursor: pointer;
+  }
+  input:is([type="date"], [type="time"], [type="datetime-local"], [type="month"])[value=""] {
+    color: var(--color-muted-foreground);
+  }
+  input[type="number"] {
+    appearance: textfield;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+}
+
+/* ─── Recipes ───────────────────────────────────────────────────────────────
+   The components already use these looks; the utilities are for app markup
+   that needs the same box (a table or empty state on a page, a custom
+   control). */
+@utility surface {
+  @apply rounded-xl bg-card shadow-sm ring-[0.5px] ring-border;
+}
+@utility control {
+  @apply bg-control shadow-sm ring-[0.5px] ring-input;
+}
+
+/* ─── Panel motion ──────────────────────────────────────────────────────────
+   Dialogs, alert dialogs and sheets open over --panel-in on --rail-ease and
+   close over --panel-out. Reduced motion only fades. */
+:is(
+  [data-slot="dialog-content"],
+  [data-slot="alert-dialog-content"],
+  [data-slot="sheet-content"],
+  [data-slot="dialog-overlay"],
+  [data-slot="alert-dialog-overlay"],
+  [data-slot="sheet-overlay"],
+  [data-slot="drawer-overlay"]
+) {
+  &:is([data-state="open"], [data-open]:not([data-open="false"])) {
+    --tw-animation-duration: var(--panel-in);
+    --tw-ease: var(--rail-ease);
+  }
+  &:is([data-state="closed"], [data-closed]:not([data-closed="false"])) {
+    --tw-animation-duration: var(--panel-out);
+    --tw-ease: cubic-bezier(0.4, 0, 1, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    --tw-enter-scale: 1;
+    --tw-exit-scale: 1;
+    --tw-enter-translate-x: 0;
+    --tw-exit-translate-x: 0;
+    --tw-enter-translate-y: 0;
+    --tw-exit-translate-y: 0;
   }
 }

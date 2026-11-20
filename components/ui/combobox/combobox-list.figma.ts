@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=21473-103072
+// url=https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=17379-199778
 // source=https://github.com/thuannguyen13/aperia-ds5/blob/main/components/ui/combobox/combobox.tsx
 // component=ComboboxList
 
@@ -15,7 +15,7 @@ const items = figma.properties.slot("Items")
 export default {
   id: "ComboboxList",
   imports: [
-    'import { ComboboxContent, ComboboxInput, ComboboxList } from "aperia-ds5"',
+    'import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput, useComboboxAnchor, InputGroupAddon } from "aperia-ds5"',
   ],
   example: figma.code`<ComboboxContent>
       ${figma.helpers.react.renderChildren(search)}

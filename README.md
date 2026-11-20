@@ -148,111 +148,45 @@ Sorting, filtering, pagination, row selection and column visibility are built in
 
 ## Theming
 
-`aperia-ds5` ships a zinc/shadcn default palette. Every color, radius, and chart color is a plain CSS custom property — override any of them in your `globals.css` after the import.
+`base.css` carries the shared Aperia look (Sales Portal's styling since 0.3.0): the tokens, the 0.5px edges, shadows,
+overlay and motion, and the blue primary `#0058cc` in both modes. The components already use it, so an app adds nothing
+for the shared look.
 
-### How it works
+An app sets only its **brand slots**, in one file imported after the library:
 
-`base.css` defines tokens at two layers:
+```css
+@import "tailwindcss";
+@import "aperia-ds5/base.css";
+@source "../node_modules/aperia-ds5/dist";
+@import "./brand.css";
+```
 
-| Layer | What it does |
+| Slot | Variables |
 |---|---|
-| `:root { --primary: … }` | Actual token values — override these |
-| `@theme inline { --color-primary: var(--primary) }` | Bridges tokens into Tailwind utilities (`bg-primary`, `text-foreground`, …) |
+| Brand colour (the light sidebar) | `--brand`, optionally the `--sidebar-*` steps |
+| Chart palette | `--chart-1` to `--chart-6` |
+| Status colours | the app's own, e.g. `--color-status-*`, applied to `Badge` and `Alert` through `className` |
 
-Overriding a `:root` token flows through automatically to every component that uses the matching utility.
+The model file is [skills/aperia-app-design/assets/brand.example.css](skills/aperia-app-design/assets/brand.example.css),
+and the rules are in [brand-slots.md](skills/aperia-app-design/references/brand-slots.md). Don't override shared tokens or
+restyle components with `[data-slot=…]` CSS; raise it here instead.
 
-### Quick start — brand color only
+For your own markup, `surface` (card fill, edge, shadow, `rounded-xl`) and `control` (control fill, edge, shadow) give
+the same box as the components.
 
-```css
-@import "tailwindcss";
-@import "aperia-ds5/base.css";
-@source "../node_modules/aperia-ds5/dist";
+## Agent skill
 
-@theme inline {
-  --color-primary: #218800;
-  --color-primary-foreground: oklch(0.985 0 0);
-}
+`skills/aperia-app-design` is the design language for coding agents: what's shared, what an app owns, patterns, copy and
+the checks before a UI change is done. It ships in the package, so it always matches the installed version. Link it once
+per app and commit the link:
+
+```bash
+mkdir -p .claude/skills
+ln -s ../../node_modules/aperia-ds5/skills/aperia-app-design .claude/skills/aperia-app-design
 ```
 
-> Skip `:root` when you only need light mode and don't need dark mode to differ.
+Claude Code picks it up from there. For other agents (Codex, Cursor), add this line to the app's `AGENTS.md`:
 
-### With dark mode support
-
-```css
-@import "tailwindcss";
-@import "aperia-ds5/base.css";
-@source "../node_modules/aperia-ds5/dist";
-
-:root {
-  --primary: oklch(0.5 0.22 142);
-  --primary-foreground: oklch(0.98 0 0);
-  --ring: oklch(0.5 0.22 142);
-}
-
-.dark {
-  --primary: oklch(0.65 0.18 142);
-  --primary-foreground: oklch(0.141 0 0);
-}
-
-@theme inline {
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-ring: var(--ring);
-}
-```
-
-### Token reference
-
-All overridable tokens and their defaults:
-
-```css
-:root {
-  /* Surfaces */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-
-  /* Brand */
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-
-  /* Secondary / muted / accent */
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-
-  /* Destructive */
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-
-  /* Chrome */
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
-  --radius: 0.625rem;
-
-  /* Sidebar */
-  --sidebar: oklch(0.985 0.002 247.839);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
-
-  /* Charts */
-  --chart-1: oklch(0.528 0.152 264.943); /* #3F65C2 */
-  --chart-2: oklch(0.722 0.155 49.32); /* #F18442 */
-  --chart-3: oklch(0.436 0.158 27.445); /* #951B19 */
-  --chart-4: oklch(0.819 0.119 137.085); /* #9FD689 */
-  --chart-5: oklch(0.896 0.063 313.549); /* #ECD1FB */
-  --chart-6: oklch(0.317 0.135 282.036);
-}
+```md
+Before building or reviewing UI, read node_modules/aperia-ds5/skills/aperia-app-design/SKILL.md and follow it.
 ```

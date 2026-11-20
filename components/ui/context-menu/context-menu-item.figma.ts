@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/XERddNbyfcDl7jAmRDbgqt/Aperia-Shadcn-Library?node-id=419-4521
+// url=https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=419-4521
 // source=https://github.com/thuannguyen13/aperia-ds5/blob/main/components/ui/context-menu/context-menu.tsx
 // component=ContextMenuItem
 
@@ -28,7 +28,6 @@ if (figma.selectedInstance.getPropertyValue("Variant") === "Default") {
   const disabled = figma.selectedInstance.getEnum("State", {
     Default: false,
     Hover: false,
-    "Hover (Translucent)": false,
     Disabled: true,
   })
 
@@ -92,7 +91,6 @@ if (figma.selectedInstance.getPropertyValue("Variant") === "Default") {
   const disabled = figma.selectedInstance.getEnum("State", {
     Default: false,
     Hover: false,
-    "Hover (Translucent)": false,
     Disabled: true,
   })
 
@@ -112,7 +110,6 @@ if (figma.selectedInstance.getPropertyValue("Variant") === "Default") {
   const disabled = figma.selectedInstance.getEnum("State", {
     Default: false,
     Hover: false,
-    "Hover (Translucent)": false,
     Disabled: true,
   })
 

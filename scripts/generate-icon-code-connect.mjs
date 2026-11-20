@@ -13,7 +13,7 @@ import fs from "fs"
 import path from "path"
 import * as lucideReact from "lucide-react"
 
-const FILE_KEY  = "XERddNbyfcDl7jAmRDbgqt"
+const FILE_KEY  = "uXivJU4N3R0LWu0mbimHWt"
 const FILE_NAME = "Aperia-Shadcn-Library"
 const OUTPUT    = "components/ui/icon/icons.figma.batch.json"
 const TEMPLATE  = "./icons.figma.batch.ts"
