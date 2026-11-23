@@ -1,3 +1,4 @@
+export * from "./app-shell"
 export { Alert, AlertTitle, AlertDescription, AlertAction } from "./alert/alert"
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./accordion/accordion"
 export { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger } from "./alert-dialog/alert-dialog"

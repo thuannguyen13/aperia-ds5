@@ -2,39 +2,61 @@
 
 ## Pages
 
+- **The shell comes from aperia-ds5.** Don't rebuild it. Wire these once in the app's layout and every page gets them:
+  - `AppSidebar` inside `SidebarProvider`: the logo and product name, Search (`AppSidebarSearch`, ⌘K), the app's pages,
+    Notifications (`AppSidebarNotifications`) and the account menu at the foot. Routes, the router's `link` and the
+    user come in as props; the search dialog and the notifications panel are the app's own.
+  - `AppHeader` around the page content, inside `SidebarInset`: the sidebar toggle and the breadcrumb, **nothing
+    else**. No title, status chips, filters, dates or buttons in the top bar.
+  - `PageHeader` at the top of every page: the title (which fills the breadcrumb's last crumb, so the title is never
+    written twice), a one-line subtitle, the page's actions and its labelled `properties`. A record's actions are
+    `RecordActions` in its `menu`. A page that names its record in its content uses `PageCrumb` instead.
 - **Every record has a page.** Forms open in a sheet. Tables show and sheets edit, so checks and errors live in one place.
 - **One scroll.** The page scrolls as one. Never nest a scroll area: it traps the wheel. Long histories show the latest
   ten, with View All opening a sheet.
-- **One page header:**
-  - the breadcrumb alone in the top bar;
+- **One page header** (`PageHeader`):
+  - the breadcrumb alone in the top bar, and one title on the page;
   - then the title, a one-line subtitle, the page's actions and its labelled properties;
-  - tiles, toolbars and tabs are content, not header.
+  - tiles, toolbars, filters and tabs are content, not header. A filter such as a report date is a control in the
+    page's toolbar, not a stacked label and field in the header.
 - **A record with a number** leads its header line with the kind and number ("Opportunity #659"). Tables keep the bare
   number.
 - **People in a header** show as avatars: three at most, then "+N". A card listing them opens on hover, focus and tap.
-- **Record actions** are header buttons: Edit, then the rest, then Delete in red. They fold into More actions on narrow
-  screens.
+- **Record actions** are `RecordActions`: Edit, then the rest, then Delete in red, as header buttons that fold into More
+  actions below lg.
 - **Width:** a centred column up to 1440px. Boards and list tables run full width.
+- **Never show internal scope, phase or demo labels** ("MVP", "Not in MVP", "Phase 2", "Demo Data", "Mock") to users.
+  What isn't built yet is left out, not labelled. Sample data in a demo build isn't marked on screen.
 
 ## Cards
 
-- Head every card with `TitledCard`: title, an optional figure such as a count, and an action. A table inside runs to
-  the card's edges (`pb-0`); other content is padded (`pb-3`).
+- Head every card with `TitledCard`: title, an optional figure such as a count, and an action. Its header is 56px and
+  carries its own space; a table follows it straight to the card's edges, and other content brings its own padding
+  (`<CardContent className="pb-4">`).
 - **Add** goes in the card header beside the records. While the card is empty, Add goes in the centre of the empty state,
   and the header has none.
 - A list worked from a card, such as tasks, is edited in the card with the same editor as its own page: an Edit button on
   each row, shown on hover or focus, and always on touch devices.
 - Tabs that switch a card's content sit **inside** the card, under its header.
+- **A collapsible section** is a disclosure in the card's own `TitledCard` header (`collapsible`): the title and a
+  chevron are one button. Never "Show" / "Hide" text buttons, and never a header the card draws for itself.
 
 ## Lists and tables
 
-- **A row opens its record.** It's a focusable row, not a button that contains controls. Edit and Delete live on the
-  record page.
+- **A row opens its record.** Spread `opensOnClick(label, open)` from aperia-ds5 on the `TableRow` (or `openable` for a
+  row with no controls inside): the whole row is one focusable target with the pointer. No per-row "Open" or "View
+  [Thing]" button, and no link on one cell only: the name is plain text like the rest of the row. Edit and Delete live
+  on the record page.
+- **A table in a card has no top border.** The card's `TitledCard` header sits directly above the column headings, with
+  no line, `Separator` or `border-t` between them. The first hairline is the one under the column headings.
 - **One Sort per list**, at the right end of the toolbar: a field and a direction. Column headings don't sort. An empty
   value sorts lowest.
 - **Filters** are in the toolbar. On a phone they go behind one Filters button that counts those on, open in a sheet and
   show as chips that clear on a tap.
 - **Several names in a cell** show a count. Clicking it lists them.
+- **Contact values are plain text.** Phone numbers, emails and websites read in the body colour like any value. In a
+  table they stay plain (the row opens its record). On a record's page, a value tapping does something with is a link
+  (`tel:`, `mailto:`, the website, in a new tab): body colour, `hover:underline`, never blue or underlined at rest.
 - **No zebra stripes.** Rows are separated by hairlines and hover with a muted tint. A group of rows is headed by a quiet
   band.
 
@@ -53,11 +75,19 @@
 
 ## Pictures
 
-- One component draws every record's picture:
-  - a person: their photo, else their initials, in a circle; no one is a dashed circle;
-  - a company or product: its logo, else a monogram on a rounded square, in a colour fixed by its id.
-- Sizes come from one scale, from 14px in a link to 40px in a page header.
-- No ring, border or shadow. An uploaded logo keeps a white ground, so a transparent mark shows in dark mode.
+- Every record's picture is the ds5 `Avatar`. **People are circles; companies, products and teams are
+  `shape="square"`.** The square's corner steps down with the size on its own; don't add `rounded-*`.
+  - A person: their photo (`AvatarImage`), else their initials (`AvatarFallback`). No one is `empty`, a dashed outline.
+  - A company or product: its logo (`AvatarImage className="bg-white object-contain"`, so a transparent mark shows in
+    Dark), else a monogram.
+  - Initials and monograms take the app's colours through `colors={{ fill, text }}`, picked by the record's id so they
+    never change between pages.
+  - The app keeps one small adapter that maps a record to its picture (URL, letters, colours) and renders `Avatar`;
+    every page calls that.
+- Sizes: `xs` 20px (a picker row), `sm` 24px (beside a name), `default` 32px, `lg` 40px, `xl` 48px (a page header).
+  Smaller, such as a 16px chip, is the app's `className`.
+- Beside its name an avatar is hidden from screen readers; alone, give it `label`.
+- No ring, border or shadow.
 - Pickers show each record's picture beside its name.
 
 ## Buttons and actions
@@ -65,6 +95,9 @@
 - Icon-only buttons use `IconButton` (`assets/components/icon-button.tsx`): the label is the tooltip and the accessible
   name.
 - A button disabled for a reason stays focusable, with `aria-disabled`, and its tooltip says why.
+- **Colour never carries meaning on its own.** Pair it with a badge, an icon or a label, so it reads in greyscale and to
+  a colour-blind user: an amber count says what it counts ("3 overdue"), a red dot sits beside a word. A colour used for
+  a state on a chart or table has a legend.
 - Status is a badge in its status colour, never a solid primary button. Changing a status is an action on the record,
   such as "Change to In Progress".
 - Destructive actions use precise verbs (Delete, Remove, Revoke) and red text.
@@ -103,8 +136,8 @@
 
 ## Navigation
 
-- The sidebar holds the app's pages and what concerns the user: search first (⌘K too), notifications, and their account
-  at the foot (name, role, settings, theme, sign out).
+- The sidebar is `AppSidebar`: the app's pages and what concerns the user: search first (⌘K too), notifications, and
+  their account at the foot (name, role, settings, theme, sign out).
 - **Global search** opens in a dialog:
   - the field is flush with the panel (no fill, edge or ring), with a clear (×) mirroring the search icon;
   - results are grouped by kind, each with its picture, and what matched is bold;

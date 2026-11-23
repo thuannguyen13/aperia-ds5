@@ -111,7 +111,7 @@
    Values follow Sales Portal, the source of the 0.3.0 audit, and match the
    Figma library "Aperia Shadcn Library (Enhanced)". An app sets only its
    brand slots (--brand, sidebar, chart palette, its own status colors); see
-   skills/aperia-app-design/references/brand-slots.md.
+   plugins/aperia-ds5/skills/design/references/brand-slots.md.
    Tokens derived with var() are declared again under .dark, so a .dark
    subtree inside a light page resolves them too. */
 :root {
@@ -151,10 +151,12 @@
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #ffffff;
   --sidebar-primary-foreground: var(--brand);
-  --sidebar-accent: #0d3f7f;
+  /* The sidebar's steps are white over the brand, so an app sets only --brand and they follow it. Declared here in
+     Light only: Dark's sidebar is neutral (.dark below), and an app never sets these, so nothing it sets leaks into Dark. */
+  --sidebar-accent: color-mix(in oklab, white 8%, transparent);
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #1a4e8f;
-  --sidebar-ring: #7fb4e0;
+  --sidebar-border: color-mix(in oklab, white 15%, transparent);
+  --sidebar-ring: color-mix(in oklab, white 60%, transparent);
 
   --radius: 0.625rem;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -247,10 +249,11 @@
   body {
     @apply bg-background text-foreground;
   }
-  /* Everything clickable shows the pointer. */
+  /* Everything clickable shows the pointer, including a row that opens its record (data-opens, opensOnClick). */
   :is(
     button,
     [role="button"],
+    [data-opens],
     [role="tab"],
     [role="checkbox"],
     [role="radio"],

@@ -6,7 +6,7 @@ and isn't overridden per app.
 | Slot | CSS variables | Rule |
 |---|---|---|
 | Brand colour | `--brand` | The app's own colour. It fills the sidebar in light mode and nothing else. It isn't the primary. |
-| Sidebar | `--sidebar`, `--sidebar-foreground`, `--sidebar-primary(-foreground)`, `--sidebar-accent(-foreground)`, `--sidebar-border`, `--sidebar-ring` | Light mode: the brand colour, with white text and a white selected item in brand text. Dark mode: the darkest neutral, not the brand. `base.css` already does this from `--brand`; set the others only when the brand needs different steps. |
+| Sidebar | None: set `--brand` only | Light mode: the brand colour, with white text, a white selected item in brand text, and hover, border and focus ring in white over the brand. Dark mode: the darkest neutral, not the brand. `base.css` derives every step from `--brand`. Don't set a `--sidebar-*` variable: set under `:root`, it also wins in Dark. |
 | Logo and name | The sidebar header | The app's own mark and product name, in the sidebar's top row. |
 | Chart palette | `--chart-1` to `--chart-6` | The app's series colours. Check them against the app's status colours so a series never reads as a state. |
 | Status colours | The app's own, for example `--color-status-*` | Pairs of a pale fill and deep text, each with a dark-mode pair, applied to `Badge` and `Alert` through `className`. The library ships none. |

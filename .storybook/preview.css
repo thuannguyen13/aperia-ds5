@@ -1,5 +1,18 @@
+@import "@fontsource-variable/inter";
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../styles/base.css";
 
 @source "../components";
+
+/* ds5 leaves the font to the app (`--font-sans`); Sales Portal sets Inter. Storybook does the same, so stories render
+   as they do there instead of in Storybook's own font. */
+:root {
+  --font-sans:
+    "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+body {
+  font-family: var(--font-sans);
+}

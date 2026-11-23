@@ -35,6 +35,7 @@ Clear, direct, professional, human. Confident without trying to impress.
   "so" clause, and don't name what uses it. On a disabled Delete it's the button's tooltip.
 - A hidden amount: **$XX,XXX**.
 - An optional field's label ends with **"(Optional)"**.
+- A missing value: **—**, an em dash with no spaces around it, in muted text. Not `-`, N/A or 0.
 - An empty optional value: **"No [field]"** (No priority, No assignee).
 - A change of state says **Change** (Change to Demo, Reason for Change). **Move** is for physically moving rows or cards.
 - A status says the state (Draft, Active, Completed), not "Successfully Completed".

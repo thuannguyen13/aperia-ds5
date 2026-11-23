@@ -1,11 +1,11 @@
 {
   "name": "aperia-ds5",
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0-rc.2",
   "type": "module",
   "files": [
     "dist",
     "styles",
-    "skills"
+    "plugins"
   ],
   "exports": {
     ".": {
@@ -70,6 +70,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@figma/code-connect": "^2.0.1",
+    "@fontsource-variable/inter": "^5.3.0",
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",
     "@tailwindcss/vite": "^4.2.4",

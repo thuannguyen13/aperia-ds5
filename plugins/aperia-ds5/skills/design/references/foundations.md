@@ -18,6 +18,12 @@ The values live in `aperia-ds5/base.css` and the components. This file says what
   its own dark-mode pair. They mean state only. The library ships none.
 - **Brand** (the sidebar), the chart palette and status colours are the only colours an app chooses.
 
+## Font
+
+- **Inter**, in every Aperia app. The library sets no font of its own: its text uses `--font-sans`, which the app sets.
+  Sales Portal loads Inter with `next/font/google` (`variable: "--font-sans"`) on `<html>`. Without it, text falls back to
+  whatever the page inherits.
+
 ## Surfaces and edges
 
 - Every edge is 0.5px: a `ring` outside the box, never a 1px border. It's `--border` (12% foreground) on surfaces and
@@ -58,7 +64,8 @@ The values live in `aperia-ds5/base.css` and the components. This file says what
 - Headings and card titles are **semibold**.
 - Title Case for titles, headings, tabs, table headers, labels and buttons. Sentence case for sentences, descriptions and
   values.
-- A missing value reads `-` in muted text. An empty optional field reads "No [field]" in muted text, such as No priority.
+- A missing value reads `—` (an em dash, no spaces around it) in muted text, which is different from 0 (UI Style Guide
+  V4.3). An empty optional field reads "No [field]" in muted text, such as No priority.
 - Numbers in tables and tiles use `tabular-nums`.
 
 ## Alignment and rhythm
@@ -69,6 +76,11 @@ The values live in `aperia-ds5/base.css` and the components. This file says what
 - Work each x out from the design system's real classes (padding plus border plus gap). Write the shared lines in a
   one-line comment, then measure them in the browser.
 - `TitledCard` puts every card's first line on a 2rem row, so cards side by side line up.
+- **Each part owns its space.** In a composition (a card, a panel, a section), the space between parts comes from the
+  parts themselves: a header's own padding or height, the content's own padding. Avoid `gap` (or `space-y`) on the
+  parent for it. When a part hides, a collapsed card's content or an error that clears, its space goes with it and the
+  rest stays where it was, with no padding added back for the hidden state. A gap is fine between items that always
+  show together, such as buttons in a row or a title and its count.
 
 ## Sizes and pointer
 

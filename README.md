@@ -167,26 +167,91 @@ An app sets only its **brand slots**, in one file imported after the library:
 | Chart palette | `--chart-1` to `--chart-6` |
 | Status colours | the app's own, e.g. `--color-status-*`, applied to `Badge` and `Alert` through `className` |
 
-The model file is [skills/aperia-app-design/assets/brand.example.css](skills/aperia-app-design/assets/brand.example.css),
-and the rules are in [brand-slots.md](skills/aperia-app-design/references/brand-slots.md). Don't override shared tokens or
+The model file is [plugins/aperia-ds5/skills/design/assets/brand.example.css](plugins/aperia-ds5/skills/design/assets/brand.example.css),
+and the rules are in [brand-slots.md](plugins/aperia-ds5/skills/design/references/brand-slots.md). Don't override shared tokens or
 restyle components with `[data-slot=…]` CSS; raise it here instead.
 
 For your own markup, `surface` (card fill, edge, shadow, `rounded-xl`) and `control` (control fill, edge, shadow) give
 the same box as the components.
 
-## Agent skill
+## App shell
 
-`skills/aperia-app-design` is the design language for coding agents: what's shared, what an app owns, patterns, copy and
-the checks before a UI change is done. It ships in the package, so it always matches the installed version. Link it once
-per app and commit the link:
+Every Aperia app uses the same sidebar, top bar and page header. Wire them once in the app's layout (Next.js shown; any
+router works through `link`):
 
-```bash
-mkdir -p .claude/skills
-ln -s ../../node_modules/aperia-ds5/skills/aperia-app-design .claude/skills/aperia-app-design
+```tsx
+import Link from "next/link"
+import { AppSidebar, AppSidebarSearch, AppHeader, SidebarInset, SidebarProvider } from "aperia-ds5"
+
+<SidebarProvider className="h-svh min-h-0">
+  <AppSidebar
+    brand={{ name: "Aperia Sales Portal", logo: <Logo /> }}
+    groups={[{ items: NAV }]}            // { href, label, icon }
+    currentPath={pathname}
+    link={Link}
+    search={<AppSidebarSearch onOpen={openSearch} />}
+    notifications={<YourNotifications />} // AppSidebarNotifications inside your popover
+    user={{ name: user.name, role: user.roleName }}
+    onSignOut={signOut}
+  />
+  <SidebarInset className="min-h-0 overflow-hidden">
+    <AppHeader crumbs={crumbsBeforeTitle} link={Link}>
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto p-5">{children}</div>
+    </AppHeader>
+  </SidebarInset>
+</SidebarProvider>
 ```
 
-Claude Code picks it up from there. For other agents (Codex, Cursor), add this line to the app's `AGENTS.md`:
+Each page then starts with `PageHeader` (title, subtitle, `actions`, `menu={<RecordActions … />}`, `properties`); its
+title fills the breadcrumb's last crumb. A table row opens its record with `<TableRow {...opensOnClick(label, open)}>`.
+The stories under UI/App Shell show a list page, a record page, Dark and phone width.
+
+## Agent skill
+
+`aperia-ds5:design` is the design language for coding agents: what's shared, what an app owns, the app shell,
+patterns, copy and the screenshot review before a UI change is done. It's the `design` skill of the `aperia-ds5` Claude
+Code plugin in this repo's marketplace (`.claude-plugin/marketplace.json`, plugin in `plugins/aperia-ds5`), so it
+updates without a library release.
+
+**In an app**, commit this to `.claude/settings.json`. It registers the marketplace for everyone who trusts the folder,
+enables the plugin and keeps it updated from `main`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "aperia": {
+      "source": { "source": "github", "repo": "thuannguyen13/aperia-ds5", "ref": "main" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": { "aperia-ds5@aperia": true }
+}
+```
+
+Each teammate then installs it once (needs GitHub access to this repo, through `gh auth login` and `gh auth setup-git`
+or an SSH key):
+
+```bash
+claude plugin install aperia-ds5@aperia --scope project
+```
+
+Also add this line to the app's `CLAUDE.md`, so the agent uses the skill on every UI change rather than when it judges
+the task matches:
 
 ```md
-Before building or reviewing UI, read node_modules/aperia-ds5/skills/aperia-app-design/SKILL.md and follow it.
+Before building, changing or reviewing any UI, use the aperia-ds5:design skill and finish with its screenshot review.
+```
+
+If the app linked the skill into `.claude/skills/` (0.3.0-rc.1), delete that link: with the plugin enabled the skill would
+load twice.
+
+**Updating the skill:** edit `plugins/aperia-ds5/skills/design/` and merge to `main`. The plugin has no
+`version`, so each commit is a new version. Apps with `autoUpdate` pick it up within a session and load it at the next
+launch (or `/reload-plugins`). No npm release is needed. The skill checks the app's installed aperia-ds5 version and
+says so when the app is behind.
+
+**Other agents** (Codex, Cursor) read the copy in the npm package. Add this line to the app's `AGENTS.md`:
+
+```md
+Before building or reviewing UI, read node_modules/aperia-ds5/plugins/aperia-ds5/skills/design/SKILL.md and follow it.
 ```

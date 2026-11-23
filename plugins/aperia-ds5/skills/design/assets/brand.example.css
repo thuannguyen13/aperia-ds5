@@ -5,11 +5,9 @@
 */
 
 :root {
-  /* The light sidebar is the brand. base.css derives --sidebar and --sidebar-primary-foreground from it. */
+  /* The light sidebar is the brand. base.css derives every sidebar step from it (hover, border, focus ring), in Light
+     only; Dark's sidebar is neutral. Set --brand alone: a sidebar step set here would also win in Dark. */
   --brand: #002f67;
-  --sidebar-accent: #0d3f7f;
-  --sidebar-border: #1a4e8f;
-  --sidebar-ring: #7fb4e0;
 }
 
 /* Status colours: a pale fill with deep text, one pair per state, each with a dark-mode pair.

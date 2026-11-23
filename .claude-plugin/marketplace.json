@@ -1,0 +1,14 @@
+{
+  "name": "aperia",
+  "description": "Agent skills for Aperia apps built on aperia-ds5.",
+  "owner": {
+    "name": "Aperia"
+  },
+  "plugins": [
+    {
+      "name": "aperia-ds5",
+      "source": "./plugins/aperia-ds5",
+      "description": "The Aperia design language for apps built on aperia-ds5: look, layout patterns, the app shell, UI copy and a screenshot review before a screen is done."
+    }
+  ]
+}

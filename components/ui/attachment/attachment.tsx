@@ -6,7 +6,7 @@ import { Slot } from "radix-ui"
 import { Button } from "@/components/ui/button"
 
 const attachmentVariants = cva(
-  "group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-xl border bg-card text-card-foreground transition-colors focus-within:ring-1 focus-within:ring-ring/50 has-[>a,>button]:hover:bg-muted/50 data-[state=error]:border-destructive/30 data-[state=idle]:border-dashed",
+  "group/attachment relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-xl bg-control text-card-foreground shadow-sm ring-[0.5px] ring-input transition-[color,background-color,box-shadow] focus-within:inset-ring-1 focus-within:inset-ring-ring focus-within:ring-3 focus-within:ring-ring/50 has-[>a,>button]:hover:bg-muted/50 data-[state=error]:ring-destructive/30 data-[state=idle]:shadow-none data-[state=idle]:outline-[0.5px] data-[state=idle]:outline-input data-[state=idle]:outline-dashed data-[state=idle]:not-focus-within:ring-0",
   {
     variants: {
       size: {
