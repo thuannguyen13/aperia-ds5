@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
+import { useTapOpen } from "../tooltip/use-tap-open"
 import { ago, formatDate, formatMoment, ZONE } from "@/lib/format"
 import { cn } from "@/lib/utils"
 
@@ -16,7 +17,7 @@ const minuteNow = () => Math.floor(Date.now() / MINUTE) * MINUTE
 const noClock = () => null
 
 /**
- * How long ago, as "3d ago", with the exact date on hover, and the time and zone for a moment: "3d ago" alone cannot be
+ * How long ago, as "3d ago", with the exact date on hover or on a tap on a touch screen, and the time and zone for a moment: "3d ago" alone cannot be
  * checked. `value` is a YYYY-MM-DD day, an ISO moment string or a Date. `label` leads it inside the hover target, so
  * "Created 4mo ago" shows the date wherever it is pointed at; after a label it reads lowercase, "Created today", as the
  * middle of a sentence.
@@ -37,6 +38,7 @@ export function RelativeTime({
   const moment =
     value instanceof Date ? value : value.includes("T") ? new Date(value) : null
   const now = useSyncExternalStore(subscribe, minuteNow, noClock)
+  const tap = useTapOpen()
   const dateTime = moment ? moment.toISOString() : (value as string)
   if (now === null) {
     // Before the browser has the clock: a stand-in of about the same width, unseen, so nothing moves when it lands.
@@ -48,8 +50,8 @@ export function RelativeTime({
   }
   const said = ago(value, zone, now)
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
+    <Tooltip {...tap.root}>
+      <TooltipTrigger asChild {...tap.trigger}>
         <time dateTime={dateTime} className={className}>
           {label ? `${label} ${said.toLowerCase()}` : said}
         </time>

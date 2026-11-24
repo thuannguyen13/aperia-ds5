@@ -16,6 +16,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip/tooltip"
+import { useTapOpen } from "@/components/ui/tooltip/use-tap-open"
 import { renderIcon, type IconProp } from "@/lib/icon"
 
 /** The one reason a Delete is refused, on every disabled Delete. */
@@ -135,8 +136,12 @@ export function RecordActions({
   )
 }
 
-/** An action as a header button. Blocked, it stays focusable through aria-disabled, so the tooltip saying why opens. */
+/**
+ * An action as a header button. Blocked, it stays focusable through aria-disabled, so the tooltip saying why opens, on
+ * hover, focus or a tap.
+ */
 function ActionButton({ action }: { action: RecordAction }) {
+  const tap = useTapOpen()
   const button = (
     <Button
       type="button"
@@ -154,16 +159,18 @@ function ActionButton({ action }: { action: RecordAction }) {
   )
   if (!action.blocked) return button
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>{button}</TooltipTrigger>
+    <Tooltip {...tap.root}>
+      <TooltipTrigger asChild {...tap.trigger}>
+        {button}
+      </TooltipTrigger>
       <TooltipContent>{action.blocked}</TooltipContent>
     </Tooltip>
   )
 }
 
 /**
- * A menu item the viewer cannot take, with why in a tooltip that opens on hover and as the keyboard lands on it. It
- * stays focusable, marked aria-disabled, and refuses its own select.
+ * A menu item the viewer cannot take, with why in a tooltip that opens on hover, as the keyboard lands on it, and on a
+ * tap on a touch screen. It stays focusable, marked aria-disabled, and refuses its own select, so the menu stays open.
  */
 export function BlockedMenuItem({
   reason,
@@ -172,9 +179,10 @@ export function BlockedMenuItem({
   reason: string
   children: React.ReactNode
 }) {
+  const tap = useTapOpen()
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
+    <Tooltip {...tap.root}>
+      <TooltipTrigger asChild {...tap.trigger}>
         <DropdownMenuItem
           aria-disabled
           className="cursor-not-allowed text-muted-foreground focus:bg-muted/50 not-data-[variant=destructive]:focus:**:text-muted-foreground"
