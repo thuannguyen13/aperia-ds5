@@ -49,7 +49,7 @@ export const emptyStateExamples = {
       </InCard>
     </Example>
   ),
-  "Something went wrong": (
+  "Could not load": (
     <Example>
       <InCard>
         <EmptyState
@@ -80,7 +80,7 @@ export const emptyStateExamples = {
       badNote="the line repeats the title"
     />
   ),
-  "Always the same component": (
+  "Use the same component every time": (
     <DoDont
       good={
         <InCard>
@@ -94,7 +94,7 @@ export const emptyStateExamples = {
       }
     />
   ),
-  "No permission hints": (
+  "Leave out permission hints": (
     <DoDont
       good={
         <InCard>

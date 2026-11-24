@@ -16,3 +16,10 @@
 body {
   font-family: var(--font-sans);
 }
+
+/* "On this page": wide enough that a rule's heading fits on one or two lines (Storybook's own is 160px). */
+.sbdocs.sbdocs-toc--custom,
+.sbdocs.sbdocs-toc--custom > nav,
+.sbdocs.sbdocs-toc--custom .toc-wrapper {
+  width: 15rem;
+}

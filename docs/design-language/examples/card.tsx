@@ -1,4 +1,4 @@
-import { InboxIcon, PlusIcon } from "lucide-react"
+import { PlusIcon } from "lucide-react"
 import {
   Button,
   Card,
@@ -10,7 +10,7 @@ import {
   TabsTrigger,
 } from "aperia-ds5"
 import { DoDont, Example } from "../blocks"
-import { EmptyState, TaskTable, TitledCard, Wide } from "./shared"
+import { TaskTable, TitledCard, Wide } from "./shared"
 
 const add = (
   <Button variant="outline">
@@ -18,9 +18,7 @@ const add = (
     Add
   </Button>
 )
-const count = (
-  <span className="text-sm text-muted-foreground tabular-nums">3</span>
-)
+const count = <span>3</span>
 
 function Details() {
   return (
@@ -35,7 +33,7 @@ function Details() {
       </div>
       <div>
         <dt className="text-muted-foreground">Monthly Volume</dt>
-        <dd className="tabular-nums">$4.2M</dd>
+        <dd className="tabular-nums">$4,200,000</dd>
       </div>
       <div>
         <dt className="text-muted-foreground">Next Step</dt>
@@ -77,6 +75,7 @@ export const cardExamples = {
   ),
   "Head every card the same way": (
     <DoDont
+      stack
       good={
         <Wide>
           <TitledCard title="Tasks" figure={count} action={add}>
@@ -98,8 +97,9 @@ export const cardExamples = {
       badNote="its own header, as large as a page title"
     />
   ),
-  "A table runs to the card's edges": (
+  "Run a table to the card's edges": (
     <DoDont
+      stack
       good={
         <Wide>
           <TitledCard title="Tasks" figure={count}>
@@ -153,7 +153,7 @@ export const cardExamples = {
       }
     />
   ),
-  "Tabs go inside the card": (
+  "Put tabs inside the card": (
     <DoDont
       good={
         <Wide>
@@ -199,27 +199,6 @@ export const cardExamples = {
         </Wide>
       }
       badNote="tabs floating above the card"
-    />
-  ),
-  "An empty card keeps its place": (
-    <DoDont
-      good={
-        <Wide>
-          <TitledCard title="Tasks">
-            <EmptyState
-              icon={InboxIcon}
-              title="No Tasks"
-              action={
-                <Button variant="outline">
-                  <PlusIcon />
-                  Add Task
-                </Button>
-              }
-            />
-          </TitledCard>
-        </Wide>
-      }
-      bad={<span className="text-muted-foreground">(the card is gone)</span>}
     />
   ),
 }

@@ -226,7 +226,7 @@ export function AppSidebar({
             {/* The name fills what the toggle leaves, so as the rail narrows it is cut and fades while the toggle
                 rides the rail's edge. Collapsed, 3px of padding keeps the toggle over the icons. */}
             <SidebarMenuItem className="flex items-center gap-1 transition-[padding] duration-(--rail-duration) ease-(--rail-ease) group-data-[collapsible=icon]:gap-0 group-data-[collapsible=icon]:pr-0.75">
-              {/* The 24px logo centres on the 16px icon column and the name starts on the labels' line. */}
+              {/* The 24px logo centers on the 16px icon column and the name starts on the labels' line. */}
               <SidebarMenuButton
                 size="lg"
                 className="h-10 min-w-0 flex-1 gap-1 pl-1 transition-[height,padding,opacity,visibility] group-data-[collapsible=icon]:invisible group-data-[collapsible=icon]:p-0! group-data-[collapsible=icon]:opacity-0"

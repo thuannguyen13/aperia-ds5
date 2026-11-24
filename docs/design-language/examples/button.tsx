@@ -102,16 +102,13 @@ export const buttonExamples = {
       <IconButton
         label="Delete Task"
         disabled
-        reason="This item is in use and can't be deleted."
+        reason="This item is in use and cannot be deleted."
       >
         <Trash2Icon />
       </IconButton>
     </Example>
   ),
-  "Name the action": (
-    <DoDont good={<Button>Add Member</Button>} bad={<Button>Submit</Button>} />
-  ),
-  "One primary per area": (
+  "Use one primary button per area": (
     <DoDont
       good={
         <>
@@ -133,7 +130,7 @@ export const buttonExamples = {
         <IconButton
           label="Delete Task"
           disabled
-          reason="This item is in use and can't be deleted."
+          reason="This item is in use and cannot be deleted."
         >
           <Trash2Icon />
         </IconButton>
@@ -143,7 +140,7 @@ export const buttonExamples = {
       badNote="no reason given"
     />
   ),
-  "An icon button always has a tooltip": (
+  "Give every icon button a tooltip": (
     <DoDont
       good={
         <IconButton label="Edit Task">
@@ -159,7 +156,7 @@ export const buttonExamples = {
       badNote="no tooltip"
     />
   ),
-  "A state is a badge, not a button": (
+  "Show a state as a badge, not a button": (
     <DoDont
       good={
         <>

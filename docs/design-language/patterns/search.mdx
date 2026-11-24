@@ -1,0 +1,11 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/search.md?raw"
+import { SkillDoc } from "../skill-doc"
+import { SearchExample } from "../examples/search-and-notifications.example"
+
+<Meta title="Design Language/Patterns/Search" />
+
+<SkillDoc
+  source={source}
+  after={{ "How it looks and behaves": <SearchExample /> }}
+/>

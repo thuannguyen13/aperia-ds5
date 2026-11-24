@@ -58,27 +58,30 @@ function Contacts({ links }: { links: boolean }) {
   )
 }
 
-const count = (
-  <span className="text-sm text-muted-foreground tabular-nums">3</span>
-)
+const count = <span>3</span>
 
 const DEALS = [
   {
     name: "Northwind Payments",
     stage: "Proposal",
     overdue: 3,
-    volume: "$4.2M",
+    volume: "$4,200,000",
   },
-  { name: "Blue Harbor Bank", stage: "Discovery", overdue: 0, volume: "$1.8M" },
+  {
+    name: "Blue Harbor Bank",
+    stage: "Discovery",
+    overdue: 0,
+    volume: "$1,800,000",
+  },
   {
     name: "Cedar Credit Union",
     stage: "Negotiation",
     overdue: null,
-    volume: "$650K",
+    volume: "$650,000",
   },
 ]
 
-function Deals({ signal }: { signal: "word" | "colour" }) {
+function Deals({ signal }: { signal: "word" | "color" }) {
   return (
     <Table>
       <TableHeader>
@@ -150,8 +153,9 @@ export const tableExamples = {
       </div>
     </Example>
   ),
-  "A row opens its record": (
+  "Open the record from the whole row": (
     <DoDont
+      stack
       good={inCard(<TaskTable />)}
       bad={inCard(
         <TaskTable
@@ -167,6 +171,7 @@ export const tableExamples = {
   ),
   "Edit and delete on the record's page": (
     <DoDont
+      stack
       good={inCard(<TaskTable />)}
       bad={inCard(
         <TaskTable
@@ -184,8 +189,9 @@ export const tableExamples = {
       )}
     />
   ),
-  "No line above the column headings": (
+  "Put the column headings right under the card header": (
     <DoDont
+      stack
       good={inCard(<TaskTable />)}
       bad={inCard(
         <>
@@ -196,8 +202,9 @@ export const tableExamples = {
       badNote="a line between the title and the headings"
     />
   ),
-  "No zebra stripes": (
+  "Keep table rows plain": (
     <DoDont
+      stack
       good={inCard(<TaskTable />)}
       bad={
         <Wide>
@@ -210,8 +217,9 @@ export const tableExamples = {
       }
     />
   ),
-  "Colour isn't the only signal": (
+  "Pair every color with a word or an icon": (
     <DoDont
+      stack
       good={
         <div className="w-full max-w-xl">
           <TitledCard title="Prospects">
@@ -222,15 +230,16 @@ export const tableExamples = {
       bad={
         <div className="w-full max-w-xl">
           <TitledCard title="Prospects">
-            <Deals signal="colour" />
+            <Deals signal="color" />
           </TitledCard>
         </div>
       }
       badNote="a red or green number, with nothing saying what it means"
     />
   ),
-  "Contact details are plain text": (
+  "Show contact details as plain text": (
     <DoDont
+      stack
       good={
         <div className="w-full max-w-xl">
           <TitledCard title="Contacts">

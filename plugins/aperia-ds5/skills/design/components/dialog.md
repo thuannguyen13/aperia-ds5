@@ -1,96 +1,108 @@
 # Dialog
 
-A dialog is a small window over the page for a short task or a question the user must answer before going on, such as
-confirming a delete. The page stays in view behind it, dimmed.
+A dialog is a small window over the page for a short task or a question that needs an answer first.
 
 ## When to use
 
-- **A confirmation:** "Delete Project?" with Cancel and the action.
-- **A short task:** one or two choices, such as picking a reason.
-- **Global search:** the search panel opened from the sidebar or ⌘K.
+Use a dialog in three cases:
 
-## When to use something else
+| Case | Example |
+|---|---|
+| Confirmation | "Delete Project?" with Cancel and the action |
+| Short task | One or two choices, such as picking a reason |
+| Global search | The search panel opened from the sidebar or ⌘K |
 
 ### Dialog or sheet?
 
-- **A form that adds or edits a record** opens in a **sheet** from the right, never a dialog. A record has one form,
-  used everywhere it's added or edited.
-- **Reading a record** is its own page, not a dialog.
-- **A confirmation or a short question** is a **dialog**.
+A dialog and a sheet hold different work:
+
+| Work | Where it opens |
+|---|---|
+| A form that adds or edits a record | A sheet from the right, never a dialog |
+| Reading a record | The record's own page, not a dialog |
+| A confirmation or a short question | A dialog |
 
 ### Dialog or alert dialog?
 
-An **alert dialog** is a dialog that must be answered: it has no close (×), and clicking outside doesn't close it. Use
-it for a confirmation, above all a destructive one. Use a plain dialog for everything else.
+An alert dialog is a dialog that must be answered. It has no close (×), and clicking outside it does not close it. Use
+an alert dialog for a confirmation, above all a destructive one. Use a plain dialog for everything else.
 
-## Parts
+## What is available
 
-- **Title:** short, naming the change or the task: "Delete Project?"
-- **Description:** one line on the consequence the user must know: "This permanently deletes the project and its
-  files."
-- **Content**, when there is any.
-- **Footer:** Cancel and the action, at the bottom right, on a light grey band.
-- **Close (×)** at the top right, in a plain dialog only.
+A dialog has five parts, listed from top to bottom:
 
-## Behaviour
+| Part | Content |
+|---|---|
+| Title | A short title naming the change or the task, such as "Delete Project?" |
+| Close (×) | A close button at the top right, in a plain dialog only |
+| Description | One line on the consequence the user must know, such as "This permanently deletes the project and its files." |
+| Content | Any content the task needs, when there is any |
+| Footer | Cancel and the action at the bottom right, on a band in the muted color at 50% |
 
-- **Overlay:** the page dims behind the dialog: 10% black in light mode, 50% in dark mode. It never blurs.
-- **Opening and closing:** the dialog fades in and grows from 97% over 220ms, and closes faster, over 150ms. With
-  reduced motion it only fades.
-- **Closing:** Cancel, the close (×) or the Escape key. Clicking outside closes a plain dialog, never an alert dialog.
-- **Focus:** moves into the dialog when it opens, stays inside while it's open, and goes back to the button that
-  opened it.
-- **Errors** show in the dialog, above the buttons, and the dialog stays open. Never a toast.
-
-## Rules
-
-### Name the consequence
-
-- **Do:** "Delete Project?" / "This permanently deletes the project and its files." / **Delete Project** · Cancel.
-- **Don't:** "Are you sure?" / OK, when the consequence can be named.
-
-### A destructive action is red
-
-- **Do:** the action button in red, named with a precise verb: Delete, Remove, Revoke.
-- **Don't:** a blue Delete, or a vague Confirm.
-
-### Forms open in a sheet
-
-- **Do:** Add Contact opens the contact form in a sheet.
-- **Don't:** a long form squeezed into a dialog.
-
-### One dialog at a time
-
-- **Do:** finish or close one dialog before another opens.
-- **Don't:** a dialog opened from a dialog. When a form needs a missing record, it's added in a sheet stacked on the
-  first.
-
-## Works with
-
-- **Button:** Cancel in outline, then the action in blue, or red when it's destructive.
-- **Sheet:** forms and record editing. Dialogs and sheets look alike: the page fill, a fine edge and a large shadow.
-- **Toast:** never for an error; the error shows in the dialog.
-- **Command:** global search is a command list inside a dialog.
-
-## Accessibility
-
-- The title is read when the dialog opens; the description is read after it.
-- **Tab** moves between the dialog's controls and never leaves it while it's open.
-- **Escape** closes it, and focus returns to the button that opened it.
-- The close (×) is named "Close" for screen readers.
-
-## Specs
+### Specs
 
 | Part | Value |
 |---|---|
-| Width | Up to 384px on desktop; the screen less 16px a side on phones |
-| Corners | 14px |
+| Width | Up to 384px on desktop. On phones, the screen width less 16px a side. |
+| Corners | Extra large corner |
 | Padding | 16px |
-| Fill | Page background, 0.5px border edge, large shadow |
+| Fill | Page background, Border hairline edge, and the Large shadow |
 | Title | 16px, medium weight |
-| Footer | Light grey band (muted at 50%) under a hairline; buttons at the right, stacked on phones |
-| Overlay | Black 10% (light), 50% (dark), no blur |
-| Motion | In 220ms, out 150ms, from 97% |
+| Footer | Muted at 50%, under the hairline. Buttons at the right, stacked on phones. |
+| Overlay | The overlay, with no blur |
+| Motion | The panel opening and closing timings, growing from slightly under full size |
+
+## How it looks and behaves
+
+A dialog opens over a dimmed page, holds focus while it is open, and closes back to the page.
+
+1. The overlay dims the page behind the dialog. The page never blurs.
+2. The dialog fades in and grows from slightly under full size, over the panel opening timing. With reduced motion,
+   it only fades.
+3. Focus moves into the dialog. A screen reader reads the title, then the description.
+4. **Tab** moves between the dialog's controls and never leaves the dialog while it is open.
+5. An error shows in the dialog, above the buttons, and the dialog stays open. See
+   [Message Templates](../foundations/copy-templates.md) for where errors show.
+6. Cancel, the close (×), or the **Escape** key closes the dialog. Clicking outside closes a plain dialog, never an
+   alert dialog.
+7. The dialog closes over the shorter closing timing. Focus goes back to the button that opened it.
+
+A screen reader names the close (×) "Close".
+
+On a phone, the footer buttons stack, with the action on top.
+
+## Rules
+
+### Open forms in a sheet
+
+- **Do:** Open a form in a sheet (Add Contact opens the contact form in a sheet), so people have room to fill it in.
+- **Don't:** Squeeze a long form into a dialog. Open it in a sheet, so no one scrolls inside a small box.
+
+### Open one dialog at a time
+
+- **Do:** Finish or close one dialog before another opens, so people know which question they are answering.
+- **Don't:** Open a dialog from a dialog. Close the first dialog before the next one opens, so people keep their place.
+
+## When you can do it differently
+
+- An alert dialog has no close (×) and stays open when someone clicks outside it, because it must be answered.
+
+## Works with
+
+| Component | How it works with a dialog |
+|---|---|
+| Button | Cancel is Outline. The action is Primary, or Destructive when the action is destructive. |
+| Sheet | A sheet holds forms and record editing. A dialog and a sheet look alike, with the page fill, the hairline edge, and the Large shadow. |
+| Toast | A dialog's error shows in the dialog, not in a toast. |
+| Command | Global search is a command list inside a dialog. |
+
+See [Forms in Sheets](../patterns/forms-in-sheets.md) for the one form each record has, used everywhere it is added or
+edited.
+
+See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for naming the change and its consequence in a
+confirmation, and for the destructive color on removal. See [Copy](../foundations/copy.md) for asking with the action's
+name. See [Shape and Edges](../foundations/shape-and-edges.md), [Elevation](../foundations/elevation.md), and
+[Motion](../foundations/motion.md) for the corner, edge, shadow, overlay, and timings the Specs name.
 
 ## In code
 

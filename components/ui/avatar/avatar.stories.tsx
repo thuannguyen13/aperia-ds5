@@ -56,7 +56,7 @@ const LOGO =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#0f766e"/><path d="M20 34h24M32 22v24" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg>'
   )
 
-// An app's own colours, picked by the record's id; plain values here.
+// An app's own colors, picked by the record's id; plain values here.
 const TEAL = { fill: "oklch(0.93 0.05 190)", text: "oklch(0.42 0.08 190)" }
 
 export const Sizes: Story = {
@@ -79,11 +79,11 @@ function Matrix() {
   const columns = [
     ["Photo", "circle"],
     ["Initials", "circle"],
-    ["Coloured", "circle"],
+    ["Colored", "circle"],
     ["No one", "circle"],
     ["Logo", "square"],
     ["Monogram", "square"],
-    ["Coloured", "square"],
+    ["Colored", "square"],
     ["None", "square"],
   ] as const
   return (
@@ -110,7 +110,7 @@ function Matrix() {
                   size={size}
                   shape={shape}
                   empty={name === "No one" || name === "None"}
-                  colors={name === "Coloured" ? TEAL : undefined}
+                  colors={name === "Colored" ? TEAL : undefined}
                 >
                   {name === "Photo" && (
                     <AvatarImage src="https://github.com/shadcn.png" />
@@ -134,8 +134,8 @@ function Matrix() {
   )
 }
 
-/** Every shape and size: a person with a photo, initials, an app's colours and no one; a company's logo, monogram,
- *  colours and none. Light, then Dark. */
+/** Every shape and size: a person with a photo, initials, an app's colors and no one; a company's logo, monogram,
+ *  colors and none. Light, then Dark. */
 export const ShapesAndStates: Story = {
   parameters: { layout: "fullscreen" },
   render: () => (

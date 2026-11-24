@@ -16,6 +16,7 @@ import {
   AppSidebarSearch,
   type AppNavGroup,
 } from "./app-sidebar"
+import { AppContent } from "./app-content"
 import { AppHeader, PageHeader, type AppCrumbs } from "./app-header"
 import { RecordActions } from "./record-actions"
 import { opensOnClick } from "./open-record"
@@ -61,28 +62,28 @@ const PROSPECTS = [
     name: "Northwind Payments",
     owner: "Dana Whitfield",
     stage: "Proposal",
-    volume: "$4.2M",
+    volume: "$4,200,000",
   },
   {
     id: 102,
     name: "Blue Harbor Bank",
     owner: "Sam Ortega",
     stage: "Discovery",
-    volume: "$1.8M",
+    volume: "$1,800,000",
   },
   {
     id: 103,
     name: "Cedar Credit Union",
     owner: "Dana Whitfield",
     stage: "Negotiation",
-    volume: "$6.5M",
+    volume: "$6,500,000",
   },
   {
     id: 104,
     name: "Lumen Card Services",
     owner: "Priya Nair",
     stage: "Discovery",
-    volume: "$950K",
+    volume: "$950,000",
   },
 ]
 
@@ -147,11 +148,7 @@ function Shell({
       </CommandDialog>
       <SidebarInset className="min-h-0 overflow-hidden">
         <AppHeader crumbs={crumbs} link={StoryLink}>
-          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain p-5">
-            <div className="mx-auto flex w-full max-w-360 flex-1 flex-col gap-5">
-              {children}
-            </div>
-          </div>
+          <AppContent>{children}</AppContent>
         </AppHeader>
       </SidebarInset>
     </SidebarProvider>
@@ -169,10 +166,10 @@ function ProspectsTable({ onOpen }: { onOpen: (name: string) => void }) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
+            <TableHead className="pl-4">Name</TableHead>
             <TableHead>Owner</TableHead>
             <TableHead>Stage</TableHead>
-            <TableHead className="text-right">Monthly Volume</TableHead>
+            <TableHead className="pr-4 text-right">Monthly Volume</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -182,12 +179,12 @@ function ProspectsTable({ onOpen }: { onOpen: (name: string) => void }) {
               key={row.id}
               {...opensOnClick(`Open ${row.name}`, () => onOpen(row.name))}
             >
-              <TableCell className="font-medium">{row.name}</TableCell>
+              <TableCell className="pl-4 font-medium">{row.name}</TableCell>
               <TableCell>{row.owner}</TableCell>
               <TableCell>
                 <Badge variant="outline">{row.stage}</Badge>
               </TableCell>
-              <TableCell className="text-right tabular-nums">
+              <TableCell className="pr-4 text-right tabular-nums">
                 {row.volume}
               </TableCell>
             </TableRow>
@@ -205,7 +202,7 @@ function ListPage() {
       <PageHeader
         title="Prospects"
         subtitle={
-          opened ? `Opened ${opened}` : "Companies you're working to sign."
+          opened ? `Opened ${opened}` : "Companies you are working to sign."
         }
         actions={<Button>Add Prospect</Button>}
       />
@@ -241,7 +238,7 @@ function RecordPage() {
         properties={[
           ["Owner", "Dana Whitfield"],
           ["Stage", <Badge variant="outline">Proposal</Badge>],
-          ["Monthly Volume", "$4.2M"],
+          ["Monthly Volume", "$4,200,000"],
           ["Next Step", "Pricing review, Dec 2"],
         ]}
       />

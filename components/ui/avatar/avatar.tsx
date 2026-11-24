@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 // through. The square's radius steps down with the size, so a small square never reads as a circle.
 //
 // The image fades in over the fallback once it has loaded, so the initials show at once and stay wherever there is no
-// picture or it fails. What the picture is and which colours the initials take (by record id, say) belong to the app;
+// picture or it fails. What the picture is and which colors the initials take (by record id, say) belong to the app;
 // Avatar only draws them.
 
 type AvatarSize = "xs" | "sm" | "default" | "lg" | "xl"
@@ -38,7 +38,7 @@ function Avatar({
 }: React.ComponentProps<typeof AvatarPrimitive.Root> & {
   size?: AvatarSize
   shape?: "circle" | "square"
-  /** The fallback's fill and text, as CSS colours the app picks, such as a pair fixed by the record's id. */
+  /** The fallback's fill and text, as CSS colors the app picks, such as a pair fixed by the record's id. */
   colors?: { fill: string; text: string }
   /** No one, such as an unassigned owner: a dashed outline in the avatar's shape. */
   empty?: boolean
@@ -139,7 +139,7 @@ function AvatarFallback({
         "flex size-full items-center justify-center rounded-[inherit] bg-muted text-sm text-muted-foreground transition-opacity duration-200 group-data-empty/avatar:hidden group-data-[size=sm]/avatar:text-xs group-data-[size=xl]/avatar:text-base group-data-[size=xs]/avatar:text-[10px] data-covered:opacity-0 motion-reduce:transition-none",
         className
       )}
-      // Inline, so a highlighted menu or picker row, which recolours the text in it, leaves the initials alone.
+      // Inline, so a highlighted menu or picker row, which recolors the text in it, leaves the initials alone.
       style={
         colors
           ? { backgroundColor: colors.fill, color: colors.text, ...style }

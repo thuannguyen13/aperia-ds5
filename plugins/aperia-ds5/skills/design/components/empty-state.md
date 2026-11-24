@@ -1,77 +1,107 @@
 # Empty State
 
-An empty state shows where content would be when there's none: a card with no tasks, a search with no results. It says
-what's missing and, when there's one, what to do about it.
+An empty state replaces missing content and says what is missing and what to do next.
 
-## Cases
+## When to use
+
+Use an empty state in place of content that is missing, in three cases:
+
+- Nothing has been added yet.
+- A search or filter matched nothing.
+- The content could not load.
+
+## What is available
+
+An empty state has an icon, a title, an optional line, and an optional action. Each case fills them differently.
 
 ### No records yet
 
-Nothing has been added.
+This case applies when nothing has been added.
 
-- **Title:** "No [Items]": No Tasks, No Contacts.
-- **Line:** only when it says what the title can't. Whose: "No tasks assigned to you." Which: "No lost opportunities in
-  this range."
-- **Action:** the button that fills it, such as Add Task, when the user can add one.
+| Part | Content |
+|---|---|
+| Title | "No [Items]", such as No Tasks or No Contacts |
+| Line | Only when it says what the title cannot. It can say whose, such as "No tasks assigned to you." It can say which, such as "No lost opportunities in this range." |
+| Action | The button that fills it, such as Add Task, when the user can add one |
 
 ### No results
 
-A search or filter matched nothing.
+This case applies when a search or filter matched nothing.
 
-- **Title:** "No Results", with a search icon.
-- **Line and action:** "No matching results." and Clear Filters, only where there are filters to clear.
+| Part | Content |
+|---|---|
+| Title | "No Results", with a search icon |
+| Line and action | "No matching results." and Clear Filters, only where there are filters to clear |
 
-### Something went wrong
+### Could not load
 
-The content couldn't load.
+This case applies when the content could not load.
 
-- **Title and line:** say what happened, and what to do: "Try again."
-- **Action:** a way out, such as Try Again or a way home.
+| Part | Content |
+|---|---|
+| Title | What failed, as Failed to Load [Items], such as Failed to Load Tasks |
+| Line | What to do, such as "Try again." |
+| Action | A way out, such as Try Again or a way home |
+
+### Specs
+
+| Part | Value |
+|---|---|
+| Icon | 16px, on a 32px square in the muted color with the Large corner |
+| Title | 14px, medium weight |
+| Line | 14px, muted text |
+| Width | Up to 384px, centered |
+
+## How it looks and behaves
+
+An empty state sits in the place of the content it replaces. A screen reader skips the icon, because the title and the
+line carry the meaning.
+
+The action is an ordinary button. A keyboard user reaches it with **Tab**.
 
 ## Rules
 
 ### Say only what helps
 
-- **Do:** "No Tasks", alone, when the title says it all.
-- **Don't:** "No tasks yet." under "No Tasks", repeating the title.
+- **Do:** Show "No Tasks" alone when the title says it all, so people take it in at a glance.
+- **Don't:** Repeat the title ("No tasks yet." under "No Tasks"). Add a second line only when it says something new, so
+  no one reads it twice.
 
-### Always the same component
+### Use the same component every time
 
-- **Do:** the icon, the title and the line, in the same place every time.
-- **Don't:** bare text such as "No data", or a different layout per screen.
+- **Do:** Show the icon, the title, and the line in the same place every time, so people recognize an empty state at
+  once.
+- **Don't:** Show bare text ("No data") or a different layout per screen. Use the empty state, so no one mistakes empty
+  for broken.
 
-### No permission hints
+### Leave out permission hints
 
-- **Do:** "No Tasks."
-- **Don't:** "Ask your administrator for access to see tasks."
+- **Do:** Say only that there are none ("No Tasks"), so people see it is empty and move on.
+- **Don't:** Hint at permissions ("Ask your administrator for access to see tasks."). Say only what is empty, so no one
+  chases access they cannot act on.
 
 ### Keep the place
 
-- **Do:** the empty state fills the card or table it replaces, so nothing shifts when records arrive.
-- **Don't:** a card that disappears when it's empty.
+- **Do:** Let the empty state fill the card or table it replaces, so nothing shifts when records arrive.
+- **Don't:** Let a card disappear when it is empty. Keep the card with the empty state inside, so the page does not
+  jump.
+
+## When you can do it differently
+
+A whole page shows an empty state when it has nothing on it. It offers a way home. See [Empty and
+Missing](../patterns/empty-and-missing.md) for a page the user cannot reach.
 
 ## Works with
 
-- **Card:** fills an empty card. While a card is empty, its Add button moves from the header into the empty state.
-- **Table:** shown in place of the rows.
-- **Search and filters:** "No Results" with Clear Filters.
-- **Pages:** a page with nothing on it, or one the user can't reach, says why and offers a way home.
-
-## Accessibility
-
-- The icon is decoration; the title and line carry the meaning.
-- The action is an ordinary button, reached with **Tab**.
-
-## Specs
-
-| Part | Value |
+| Component | How it works with an empty state |
 |---|---|
-| Icon | 16px, on a 32px grey square with 10px corners |
-| Title | 14px, medium weight |
-| Line | 14px, muted text |
-| Width | Up to 384px, centred |
+| Card | An empty state fills an empty card. While a card is empty, its Add button moves from the header into the empty state. |
+| Table | An empty state shows in place of the rows. |
+| Search and filters | A search or filter with no match shows "No Results" with Clear Filters. |
+
+See [Shape and Edges](../foundations/shape-and-edges.md) for the corner the Specs name.
 
 ## In code
 
-- `EmptyState` (`assets/components/empty-state.tsx`): `icon`, `title`, `description`, `action`. It's built from
+- `EmptyState` from aperia-ds5: `icon`, `title`, `description`, `action`. It's built from
   `Empty`, `EmptyHeader`, `EmptyMedia`, `EmptyTitle`, `EmptyDescription` and `EmptyContent` in `aperia-ds5`.

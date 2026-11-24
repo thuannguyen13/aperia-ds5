@@ -1,11 +1,16 @@
 {
   "name": "aperia-ds5",
   "version": "0.3.0-rc.2",
+  "description": "Aperia React component library (shadcn/ui, Tailwind v4). Coding agents: run `npx aperia-ds5 init` in the app, then read plugins/aperia-ds5/skills/design/SKILL.md before writing UI.",
   "type": "module",
+  "bin": {
+    "aperia-ds5": "bin/aperia-ds5.mjs"
+  },
   "files": [
     "dist",
     "styles",
-    "plugins"
+    "plugins",
+    "bin"
   ],
   "exports": {
     ".": {
@@ -24,6 +29,14 @@
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.js"
     },
+    "./format": {
+      "types": "./dist/format.d.ts",
+      "import": "./dist/format.js"
+    },
+    "./list": {
+      "types": "./dist/list.d.ts",
+      "import": "./dist/list.js"
+    },
     "./theme-provider": {
       "types": "./dist/theme-provider.d.ts",
       "import": "./dist/theme-provider.js"
@@ -34,7 +47,7 @@
     "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
-    "build:lib": "rm -rf dist && tsup",
+    "build:lib": "rm -rf dist && tsup && node scripts/agent-hint.mjs",
     "prepare": "npm run build:lib",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
@@ -51,6 +64,9 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

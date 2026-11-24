@@ -1,0 +1,27 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/list-page.md?raw"
+import * as AppShell from "../../../components/ui/app-shell/app-shell.stories"
+import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.stories"
+import { SkillDoc } from "../skill-doc"
+import { tableExamples } from "../examples/table"
+
+<Meta title="Design Language/Patterns/List Page" />
+
+<SkillDoc
+  source={source}
+  after={{
+    "@intro": (
+      <Canvas
+        of={AppShell.List}
+        story={{ inline: false, height: "560px" }}
+        sourceState="none"
+      />
+    ),
+    "What is available": (
+      <Canvas of={ListToolbar.AppControls} sourceState="none" />
+    ),
+    "When you can do it differently": (
+      <Canvas of={ListToolbar.WithLayoutSwitch} sourceState="none" />
+    ),
+  }}
+/>

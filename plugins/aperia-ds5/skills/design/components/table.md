@@ -1,102 +1,111 @@
 # Table
 
-A table lists records in rows with the same columns, so they can be scanned and compared: prospects, tasks,
-transactions. Each row is one record, and clicking it opens that record.
+A table lists records in rows with shared columns so people can scan and compare them. See
+[Tables](../patterns/tables.md) for how tables sit on a page.
 
 ## When to use
 
-- To list records the user scans, compares, sorts or filters.
-- Not for one record's details. Those are labelled values on the record's page.
-- Not for a few items with no columns to compare. Use a simple list.
+Use a table to list records the user scans, compares, sorts, or filters.
 
-## Parts
+Use something else in two cases:
 
-- **Toolbar**, above the table: search, filters and Sort.
-- **Column headings:** Title Case, one hairline under them.
-- **Rows:** separated by hairlines, and tinted grey when the pointer is over them.
-- **Footer**, for a long list: the count, with Previous and Next.
+| Case | Use instead |
+|---|---|
+| One record's details | Labeled values on the record's page |
+| A few items with no columns to compare | A simple list |
 
-## Rules
+## What is available
 
-### A row opens its record
+A table has four parts, listed from top to bottom:
 
-- **Do:** a click anywhere on the row, or Enter, opens the record. The name is plain text like the rest of the row.
-- **Don't:** an Open or View button on each row, or a link on the name only.
+| Part | Content |
+|---|---|
+| Toolbar | Search, filters, and Sort, above the table |
+| Column headings | Headings in Title Case, with one hairline under them |
+| Rows | Records separated by hairlines |
+| Footer, when the rows run past one page | The count, with Previous and Next |
 
-### Edit and delete on the record's page
-
-- **Do:** Edit and Delete in the record page's header.
-- **Don't:** Edit and Delete buttons on every row.
-
-### No line above the column headings
-
-- **Do:** in a card, the column headings sit straight under the card header. The first line is the one under the
-  headings.
-- **Don't:** a border, a divider or a header line between the card's title and the table.
-
-### No zebra stripes
-
-- **Do:** hairlines between rows and a grey tint on hover.
-- **Don't:** alternating row colours.
-
-### Sort from the toolbar
-
-- **Do:** one Sort control at the right end of the toolbar: a field and a direction. An empty value sorts lowest.
-- **Don't:** a different way of sorting on each table.
-
-### Colour isn't the only signal
-
-- **Do:** a coloured value also has a word, an icon or a badge: "3 overdue", a red dot beside a word.
-- **Don't:** a red number alone, or coloured cells with no legend.
-
-### Contact details are plain text
-
-- **Do:** phone numbers, emails and websites read as plain text in the body colour, like every other value. In a table
-  the row opens the record, so they stay plain. On a record's page each is a link where tapping it does something (call,
-  write, open the website), still in the body colour, underlined only under the pointer.
-- **Don't:** blue, underlined phone numbers, emails or websites down a column.
-
-## Content
-
-- A missing value is an em dash (—) in grey, which is different from 0.
-- Numbers line up in their column (tabular figures).
-- Several names in one cell show a count, and clicking it lists them.
-- A group of rows is headed by a quiet grey band.
-- A record with a number shows the bare number in the table ("659"), and "Opportunity #659" on its page.
-
-## Filters
-
-- Filters sit in the toolbar.
-- On a phone they go behind one Filters button that counts the filters on, open in a sheet, and show as chips that
-  clear when tapped.
-- A search or filter with no match shows the empty state "No Results".
-
-## Works with
-
-- **Card:** a table in a card runs to the card's edges, with no top border.
-- **Empty State:** shown in place of the rows when there are none.
-- **Badge:** a state in a cell is a badge in its state colour.
-- **Avatar:** a person or company in a cell shows its picture beside the name.
-- **Button:** none on rows to open or edit.
-- **Page:** a list table runs the page's full width.
-
-## Accessibility
-
-- Column headings are real table headings, so screen readers read each cell with its column.
-- A row that opens its record can be reached with **Tab**, has the record's name as its label, and opens with **Enter**
-  or **Space**.
-- A control inside a row (a checkbox, a menu) keeps its own keys and clicks; it doesn't open the row.
-
-## Specs
+### Specs
 
 | Part | Value |
 |---|---|
 | Heading row | 40px tall, medium weight |
 | Cell padding | 8px |
 | Text | 14px |
-| Row lines | 0.5px hairlines |
+| Row lines | The hairline |
 | Hover | Muted at 50% |
 | Selected | Muted |
+
+## How it looks and behaves
+
+A table shows its values in a fixed way, opens a record from its row, and filters from its toolbar.
+
+Values in a table follow five conventions:
+
+- A missing value is an em dash (—) in the muted text color. An em dash is different from 0.
+- Numbers line up in their column, with tabular figures.
+- A cell with several names shows a count. Selecting the count lists the names.
+- A band in the muted color heads a group of rows.
+- A record with a number shows the bare number in the table, such as "659". Its page shows the full name, such as
+  "Opportunity #659".
+
+A row takes the muted color at 50% when the pointer is over it. Selecting anywhere on a row opens its record. A
+keyboard user reaches a row with **Tab**. The row has the record's name as its label and opens with **Enter** or
+**Space**.
+
+Column headings are real table headings, so a screen reader reads each cell with its column.
+
+Filters sit in the toolbar. On a phone, they go behind one Filters button that counts the filters that are on. The
+button opens the filters in a sheet. Active filters show as chips, and tapping a chip clears its filter. A search or
+filter with no match shows the empty state "No Results".
+
+## Rules
+
+### Open the record from the whole row
+
+- **Do:** Open the record on a click anywhere on the row or on Enter, with the name in plain text, so people do not have
+  to aim.
+- **Don't:** Put an Open or View button on each row, or a link on the name only. Make the whole row open the record, so
+  the table holds no extra buttons.
+
+### Edit and delete on the record's page
+
+- **Do:** Put Edit and Delete in the record page's header, so people act on a record after seeing it.
+- **Don't:** Put Edit and Delete buttons on every row. Keep them on the record's page, so no slip changes the wrong
+  record.
+
+### Keep table rows plain
+
+- **Do:** Separate rows with hairlines and tint a row in the muted color on hover, so people can follow a row across.
+- **Don't:** Alternate row colors. Use hairlines between rows, so no stripe looks like it means something.
+
+### Show contact details as plain text
+
+- **Do:** Show phone numbers, emails, and websites as plain text in the body color, like every other value, so the row
+  still opens the record.
+- **Don't:** Make contact details Primary and underlined down a column. Keep them plain in a table and link them only
+  on a record's page, so a column of contact details reads like every other value.
+
+## When you can do it differently
+
+- A control inside a row, such as a checkbox or a menu, keeps its own keys and clicks. Using it does not open the row.
+
+## Works with
+
+| Component | How it works with a table |
+|---|---|
+| Card | A table in a card runs to the card's edges, with no top border. |
+| Empty State | An empty state shows in place of the rows when there are none. |
+| Badge | A state in a cell is a badge in its state color. |
+| Avatar | A person or company in a cell shows its picture beside the name. |
+| Button | A row has no button to open or edit it. |
+| Page | A list table fills the page column. |
+
+See [Tables](../patterns/tables.md) for the column headings right under a card header, with no line above them, and for
+a table too wide for the page column. See [Sort](../patterns/sort.md) for sorting from the toolbar. See
+[Copy](../foundations/copy.md) for how contact details link on a record's page. See [Color](../foundations/color.md) for
+pairing every color with a word or an icon. See [Shape and Edges](../foundations/shape-and-edges.md) for the hairline
+the Specs name.
 
 ## In code
 

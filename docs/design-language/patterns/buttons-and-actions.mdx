@@ -1,0 +1,46 @@
+import { Meta, Canvas, Story } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/buttons-and-actions.md?raw"
+import * as IconButtonStories from "../../../components/ui/icon-button/icon-button.stories"
+import * as AppShell from "../../../components/ui/app-shell/app-shell.stories"
+import { Example } from "../blocks"
+import * as Panels from "../examples/dialog.stories"
+import { buttonExamples } from "../examples/button"
+import { actionExamples } from "../examples/forms-and-values"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Design Language/Patterns/Buttons and Actions" />
+
+export const frame = "block min-h-0 overflow-hidden p-0"
+
+<SkillDoc
+  source={source}
+  after={{
+    "@intro": buttonExamples["@intro"],
+    "What is available": (
+      <Canvas of={IconButtonStories.Variants} sourceState="none" />
+    ),
+    "How it looks and behaves": (
+      <>
+        <Example
+          className={frame}
+          caption="On a page: the record's actions on the title's line."
+        >
+          <Story of={AppShell.Record} inline={false} height="420px" />
+        </Example>
+        <Example
+          className={frame}
+          caption="In a sheet: Delete at the start, Cancel then Save at the right."
+        >
+          <Story of={Panels.RecordSheet} inline={false} height="520px" />
+        </Example>
+        <Example
+          className={frame}
+          caption="In a dialog: Cancel, then the named action."
+        >
+          <Story of={Panels.Confirmation} inline={false} height="300px" />
+        </Example>
+      </>
+    ),
+    "Use one primary button per area": buttonExamples["Use one primary button per area"],
+  }}
+/>

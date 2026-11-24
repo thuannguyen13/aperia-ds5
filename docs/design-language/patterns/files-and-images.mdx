@@ -1,0 +1,28 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/files-and-images.md?raw"
+import * as FilePickerStories from "../../../components/ui/file-picker/file-picker.stories"
+import * as FileDropStories from "../../../components/ui/file-drop/file-drop.stories"
+import * as ImageStories from "../../../components/ui/image-picker/image-picker.stories"
+import { fileExamples } from "../examples/forms-and-values"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Design Language/Patterns/Files and Images" />
+
+<SkillDoc
+  source={source}
+  after={{
+    "@intro": <Canvas of={FilePickerStories.Default} sourceState="none" />,
+    "What is available": (
+      <>
+        <Canvas of={FileDropStories.Default} sourceState="none" />
+        <Canvas of={ImageStories.Default} sourceState="none" />
+        <Canvas of={ImageStories.EmailHeader} sourceState="none" />
+      </>
+    ),
+    "How it looks and behaves": (
+      <Canvas of={FilePickerStories.States} sourceState="none" />
+    ),
+    "Say what the drop zone accepts":
+      fileExamples["Say what the drop zone accepts"],
+  }}
+/>

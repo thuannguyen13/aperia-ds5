@@ -1,0 +1,36 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/filters.md?raw"
+import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.stories"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Design Language/Patterns/Filters" />
+
+<SkillDoc
+  source={source}
+  after={{
+    Chips: (
+      <>
+        <Canvas of={ListToolbar.Default} sourceState="none" />
+        <Canvas of={ListToolbar.ChipsOn} sourceState="none" />
+      </>
+    ),
+    Dropdowns: (
+      <>
+        <Canvas of={ListToolbar.DropdownsOn} sourceState="none" />
+        <Canvas of={ListToolbar.SwitchAndDates} sourceState="none" />
+      </>
+    ),
+    "On a phone": (
+      <div style={{ maxWidth: 400 }}>
+        <Canvas
+          of={ListToolbar.Phone}
+          story={{ inline: false, height: "520px" }}
+          sourceState="none"
+        />
+      </div>
+    ),
+    "When nothing matches": (
+      <Canvas of={ListToolbar.NoMatch} sourceState="none" />
+    ),
+  }}
+/>

@@ -1,12 +1,13 @@
 ---
 name: design
-description: The shared design language of Aperia's internal apps built on aperia-ds5 (shadcn/ui on Tailwind v4): its look, motion, layout patterns and UI copy, with each app keeping its own brand (sidebar colour, logo, charts, status colours). Use whenever building, changing or reviewing any screen, component, page or style in an Aperia app, before writing the UI, and again before calling a UI change done.
+description: The shared design language of Aperia's internal apps built on aperia-ds5 (shadcn/ui on Tailwind v4): its look, motion, layout patterns and UI copy, one structure for every app (the same sidebar, primary, shell and patterns), each app keeping only its logo, name, charts and status colors. Use whenever building, changing or reviewing any screen, component, page or style in an Aperia app, before writing the UI, and again before calling a UI change done.
 ---
 
 # Aperia App Design
 
-Every Aperia app speaks one design language and wears its own brand. This skill tells you what is shared and what an
-app may set for itself. Defaults from shadcn/ui are not this language: where this skill and a default differ, this skill
+Every Aperia app shares one structure and one design language: the same sidebar, primary, shell, patterns and
+interactions. Apps differ in their features, not their look. This skill tells you what is shared and the little an app
+sets for itself. Defaults from shadcn/ui are not this language: where this skill and a default differ, this skill
 wins.
 
 **Version.** This skill is written for **aperia-ds5 0.3.x** (0.3.0-rc.2 and later). It is delivered separately from the
@@ -17,7 +18,7 @@ follow the component guidance; the look, copy and review rules still apply.
 ## Spirit
 
 - **Calm and dense.** It's a work tool used all day. Content is the loudest thing on screen. Chrome is quiet: hairline
-  edges, soft shadows, muted labels, one accent colour: the shared blue primary.
+  edges, soft shadows, muted labels, one accent color: the shared blue primary.
 - **One way to do each thing.** The same concept gets the same control everywhere in the app.
 - **Nothing moves unexpectedly.** Layouts don't shift when data lands, panels ease in and out, and empty cards keep their
   place.
@@ -26,17 +27,46 @@ follow the component guidance; the look, copy and review rules still apply.
 
 When a case isn't covered here, choose what keeps these five true.
 
-## What the app owns: its brand
+## What the app owns
 
-An app sets **only** these. The full list and how to set them are in
-[references/brand-slots.md](references/brand-slots.md).
+An app sets **only** these ([foundations/color.md](foundations/color.md), What an app can change).
 
-- The **brand colour** (`--brand`), which fills the sidebar in light mode, and the sidebar's logo and product name.
+- Its **logo and product name**, in the sidebar's top row. The sidebar itself is the shared Aperia navy.
 - Its **chart palette**, if it draws charts.
-- Its **status colours**, if it shows states: tinted pairs applied to `Badge` and `Alert` through `className`.
+- Its **status colors**, if it shows states: tinted pairs applied to `Badge` and `Alert` through `className`.
 
-Everything else is shared and comes from `aperia-ds5`: the primary (`#0058cc` in both modes), neutrals, surfaces, edges,
-shadows, overlay, motion, density, alignment, patterns and copy. Don't restyle these per app. If the app's CSS overrides one, that override is drift.
+Everything else is shared and comes from `aperia-ds5`: the primary, neutrals, surfaces, edges, shadows, overlay, motion,
+density, alignment, patterns and copy. Don't restyle these per app. If the app's CSS overrides one, that override is drift.
+
+## The pages
+
+Every rule lives on one page; read the page before placing what it covers. Values live only in `aperia-ds5/base.css`.
+
+- **Foundations** (the building blocks): [Color](foundations/color.md), [Typography](foundations/typography.md),
+  [Spacing](foundations/spacing.md), [Shape and Edges](foundations/shape-and-edges.md),
+  [Elevation](foundations/elevation.md), [Motion](foundations/motion.md), [Sizes](foundations/sizes.md),
+  [Icons](foundations/icons.md), [Copy](foundations/copy.md) and [Message Templates](foundations/copy-templates.md).
+- **Patterns** (how things fit together and behave): [App Shell](patterns/app-shell.md),
+  [Page Layout](patterns/page-layout.md), [Page Header](patterns/page-header.md), [List Page](patterns/list-page.md),
+  [Filters](patterns/filters.md), [Sort](patterns/sort.md), [Tables](patterns/tables.md),
+  [Loading](patterns/loading.md), [Empty and Missing](patterns/empty-and-missing.md),
+  [Record Page](patterns/record-page.md), [Search](patterns/search.md), [Notifications](patterns/notifications.md),
+  [Forms in Sheets](patterns/forms-in-sheets.md), [Confirmations and Delete](patterns/confirmations-and-delete.md),
+  [Pickers](patterns/pickers.md), [Disabled With a Reason](patterns/disabled-with-a-reason.md),
+  [Money and Numbers](patterns/money-and-numbers.md), [Files and Images](patterns/files-and-images.md),
+  [Reordering](patterns/reordering.md), [Switches in a Grid](patterns/switches-in-a-grid.md),
+  [Buttons and Actions](patterns/buttons-and-actions.md), [Cards and Tiles](patterns/cards-and-tiles.md),
+  [People and Pictures](patterns/people-and-pictures.md).
+- **Components** (one component in depth): [Button](components/button.md), [Card](components/card.md),
+  [Dialog](components/dialog.md), [Empty State](components/empty-state.md), [Table](components/table.md).
+- **Examples** (screens an app builds from the patterns, with before and after): [List Page](examples/list-page.md),
+  [Record Page](examples/record-page.md), [Saved Views](examples/saved-views.md),
+  [Status Change With a Reason](examples/status-change.md), [Notes on a Record](examples/notes.md),
+  [Board of Cards](examples/board.md), [Line Items With Totals](examples/line-items.md),
+  [Import Wizard](examples/import.md), [Date Range and Report Date](examples/date-range.md),
+  [Task Checklist](examples/task-checklist.md), [Roles and Permissions](examples/roles-and-permissions.md),
+  [Editable Option List](examples/option-list.md), [Audit Log](examples/audit-log.md),
+  [Funnel Chart](examples/funnel-chart.md), [Search and Notifications](examples/search-and-notifications.md).
 
 ## Order of work
 
@@ -46,19 +76,28 @@ shadows, overlay, motion, density, alignment, patterns and copy. Don't restyle t
 2. **Find the sibling.** Before adding any control, find where the app already shows the same concept (an empty list, a
    delete, a picker, a person, a status). Use that pattern. If two differ, propose one and convert both.
 3. **Use the shell and the compositions**, not raw primitives. The shell ships in aperia-ds5: `AppSidebar`,
-   `AppHeader`, `PageHeader` with `RecordActions`, and `opensOnClick` for rows (wiring in
-   [references/patterns.md](references/patterns.md), Pages). Never rebuild the sidebar, top bar or page header.
-   `assets/components/` has portable compositions (`EmptyState`, `IconButton`, `TitledCard`, `StatTile`,
-   `FormSection`). Copy them in if the app lacks them.
-4. **Apply the invariants** below. The detail is in [references/foundations.md](references/foundations.md) and
-   [references/patterns.md](references/patterns.md). Before you place a component that has a page in `components/`
-   ([button](components/button.md), [card](components/card.md), [dialog](components/dialog.md),
-   [empty-state](components/empty-state.md), [table](components/table.md)), read it: its types, rules and what it works
-   with. [practices/buttons.md](practices/buttons.md) says where buttons go.
-5. **Write the copy** by [references/copy.md](references/copy.md).
+   `AppHeader`, `AppContent` (the page column, 20px between sections), `PageHeader` with `RecordActions`, and
+   `opensOnClick` for rows (wiring in [App Shell](patterns/app-shell.md)). Never rebuild the sidebar, top bar or page
+   header. The system-wide patterns ship in aperia-ds5 too, each named in its pattern page's In code:
+   - cards and values: `TitledCard`, `StatTile`, `EmptyState`, `NoResults`, `EmptyValue`, `NoneText`, `HiddenValue`,
+     `DetailSection`, `PeopleStack`, `RecordActivity` with `Timeline`, `RelativeTime`;
+   - lists: `ListToolbar` (search, filters, Sort), `SortControl`, `DayRangeFields`, `ListSkeleton`,
+     `TableGroupRow`, `ScrollTable`;
+   - forms and confirms: `FormSheet`, `SheetForm`, `SheetDelete`, `ConfirmDialog`, `FormSection`, `EntityPicker`,
+     `PickField`, `DraftField`, `MoneyInput`, `FileDrop`, `FilePicker`, `ImagePicker`, `FlagSwitch`, `SortableList`,
+     `LengthCount`, `ReasonTooltip`, `IconButton`;
+   - formatters in `aperia-ds5/format` (dates, times, money, "3d ago"), and sorting and filtering in
+     `aperia-ds5/list`.
+   Use them; never rebuild or copy one in the app. When the app needs a system-wide pattern the library lacks, raise
+   it on aperia-ds5. Feature patterns (saved views, status changes, notes, boards, import wizards, settings lists) are
+   built in the app from these parts, the way the Examples pages show.
+4. **Apply the invariants** below, and the page for what you're placing: its pattern page, and its component page when
+   there is one. [Buttons and Actions](patterns/buttons-and-actions.md) says where buttons go.
+5. **Write the copy** by [Copy](foundations/copy.md), with the fixed wording in
+   [Message Templates](foundations/copy-templates.md).
 6. **Measure alignment** in the browser (`getBoundingClientRect`). Check both themes and phone width.
 7. **Review a screenshot** of every screen you changed, in Light and Dark, against the screenshot review below.
-8. **Run the checklist** at the end, and the drift table in [references/drifts.md](references/drifts.md).
+8. **Run the checklist** at the end. Each pattern page's Don'ts are the mistakes to look for.
 
 ## Invariants
 
@@ -66,11 +105,10 @@ shadows, overlay, motion, density, alignment, patterns and copy. Don't restyle t
    shadow. The aperia-ds5 components already have it; for your own markup use the `surface` (cards, a table or empty
    state on the page) and `control` utilities. Never put a bordered box inside a bordered card: a table sits flush in
    its card.
-2. **The page is light grey and cards are white.** Sheets and dialogs share one fill.
-3. **One overlay for every floating panel:** 10% black, 50% in dark mode. **Never blur.** Dialogs, alerts and sheets look
-   alike.
-4. **Motion eases out:** panels open over 220ms on `cubic-bezier(0.32, 0.72, 0, 1)` and close over 150ms, a dialog
-   growing from 97%. Reduced motion only fades. Nothing pops in or snaps shut.
+2. **The page is light gray and cards are white.** Sheets and dialogs share one fill.
+3. **One overlay for every floating panel** (`--overlay`). **Never blur.** Dialogs, alerts and sheets look alike.
+4. **Motion eases out:** panels open and close on the shared timing ([Motion](foundations/motion.md)), a dialog growing
+   slightly as it opens. Reduced motion only fades. Nothing pops in or snaps shut.
 5. **Card headers come from one component** (`TitledCard`): title, optional figure and action on one 2rem row, so every
    card's first line aligns. Each part owns its space (the header its 56px, the content its padding), never a gap on
    the card. Card titles are semibold and smaller than the page title.
@@ -81,16 +119,19 @@ shadows, overlay, motion, density, alignment, patterns and copy. Don't restyle t
    (no ring, border or shadow), and never a `rounded-*` class to square one by hand.
 8. **Icon-only buttons always have a tooltip** naming the action (`IconButton`). A disabled button with a reason stays
    focusable and its tooltip says why.
-9. **Status colour means state,** from the app's tinted pairs (a pale fill with deep text). Never use it to decorate,
+9. **Status color means state,** from the app's tinted pairs (a pale fill with deep text). Never use it to decorate,
    and never use solid primary buttons as status pills.
 10. **Tables show, sheets edit.** A row opens its record. Edit and Delete live on the record page, not the row.
-11. **Errors in place:** a refused save shows beside its field, or above the buttons. The form stays open with what was
-    typed. No toast for errors.
+11. **Errors in place:** an error shows where its action happened, such as beside its field, above a form's or
+    dialog's buttons, or above the grid for a control that saves on change. The form stays open with what was typed. A toast
+    shows an error only when nothing on screen holds it, and then it stays until closed. See Message Templates.
 12. **Title Case** for titles, headings, tabs, table headers, labels and buttons. Sentence case for sentences,
     descriptions and values.
 13. **Everything clickable shows the pointer,** rows and menu items included.
 14. **Phones get 40px targets** (32px on desktop), and sheets fill the screen.
 15. **Vertical alignment holds across containers:** icons, pictures, headings, text and footers in one column share an x.
+    A card's content starts on its title's line; a part with its own padding (a hover row, a ghost button) takes an
+    equal negative margin to stay on it. Indents only show hierarchy ([Page Layout](patterns/page-layout.md)).
 16. **Use aperia-ds5 components directly.** Don't wrap them, copy them in, or restyle them with `data-slot` CSS. A look
     that's wrong everywhere is fixed in aperia-ds5 (an issue there), not in the app.
 
@@ -107,12 +148,12 @@ screen is done; fix what fails and look again.
 - [ ] **Cards use `TitledCard`.** No card draws its own header, and a collapsible card uses its disclosure, not Show /
       Hide text buttons. A table in a card starts with its column headings, not a line.
 - [ ] **No internal labels.** Nothing says MVP, Not in MVP, Phase, Demo Data or Mock.
-- [ ] **Colour isn't the only signal.** Every coloured count, dot or cell also has a word, icon or badge, or a legend.
+- [ ] **Color isn't the only signal.** Every colored count, dot or cell also has a word, icon or badge, or a legend.
 - [ ] **Light and Dark both checked**, and the screen holds at phone width.
 
 ## Checklist before calling UI done
 
-- [ ] The only colours the app overrides are its brand slots, and no app CSS restyles an aperia-ds5 component.
+- [ ] The only colors the app sets are its status and chart colors, and no app CSS restyles an aperia-ds5 component.
 - [ ] No 1px border on a surface, and no bordered box inside a card.
 - [ ] Every empty or no-match state is `EmptyState`, and its second line adds something.
 - [ ] Every icon-only button has a tooltip.
@@ -120,4 +161,8 @@ screen is done; fix what fails and look again.
 - [ ] Panels use the shared overlay and motion, with no blur.
 - [ ] Shared lines are measured in the browser, not eyeballed. Both themes and phone width are checked.
 - [ ] Copy has no narrative, uses the app's words and is Title Case where it should be.
-- [ ] The concept matches its sibling elsewhere in the app.
+- [ ] The concept matches its sibling elsewhere in the app; no new control for a concept the app already shows.
+- [ ] No app-built or copied version of a library pattern (its own card header, empty state, toolbar, sort, sheet form,
+      confirm, picker, money field or "x days ago"): the aperia-ds5 component instead.
+- [ ] UI text follows [Copy](foundations/copy.md): no contractions, "No [Items]", confirms as questions, amounts in
+      full.

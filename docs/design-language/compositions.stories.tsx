@@ -2,6 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { InboxIcon, PencilIcon, PlusIcon, Trash2Icon } from "lucide-react"
 import {
   Button,
+  EmptyState,
+  FormSection,
+  IconButton,
+  StatTile,
+  TitledCard,
   Field,
   FieldLabel,
   Input,
@@ -13,13 +18,8 @@ import {
   TableRow,
   opensOnClick,
 } from "aperia-ds5"
-import { EmptyState } from "../../plugins/aperia-ds5/skills/design/assets/components/empty-state"
-import { FormSection } from "../../plugins/aperia-ds5/skills/design/assets/components/form-section"
-import { IconButton } from "../../plugins/aperia-ds5/skills/design/assets/components/icon-button"
-import { StatTile } from "../../plugins/aperia-ds5/skills/design/assets/components/stat-tile"
-import { TitledCard } from "../../plugins/aperia-ds5/skills/design/assets/components/titled-card"
 
-// The skill's copy-in compositions (assets/components), rendered from the skill's own files.
+// The Aperia patterns aperia-ds5 ships, which every app uses instead of building its own.
 
 const meta: Meta = {
   title: "Design Language/Compositions",
@@ -79,9 +79,7 @@ export const TitledCardWithTable: Story = {
   render: () => (
     <TitledCard
       title="Tasks"
-      figure={
-        <span className="text-sm text-muted-foreground tabular-nums">3</span>
-      }
+      figure={<span>3</span>}
       action={
         <Button variant="outline" size="sm">
           <PlusIcon />
@@ -148,10 +146,10 @@ export const StatTiles: Story = {
       <StatTile label="Open Opportunities" value="24" />
       <StatTile
         label="Won This Quarter"
-        value="$1.2M"
+        value="$1,240,000"
         hint="Up 8% on last quarter"
       />
-      <StatTile label="Average Deal" value="$48K" />
+      <StatTile label="Average Deal" value="$48,300" />
     </div>
   ),
 }

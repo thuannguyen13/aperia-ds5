@@ -55,19 +55,24 @@ function Verdict({ good, children }: { good: boolean; children?: ReactNode }) {
   )
 }
 
-/** A Do and a Don't, side by side (stacked on a narrow window). */
+/**
+ * A Do and a Don't, side by side (stacked on a narrow window). `stack` puts the Do above the Don't at every width, for
+ * a pair too wide for half the page (a table, a page header with a toolbar).
+ */
 export function DoDont({
   good,
   bad,
   goodNote,
   badNote,
   className,
+  stack,
 }: {
   good: ReactNode
   bad: ReactNode
   goodNote?: ReactNode
   badNote?: ReactNode
   className?: string
+  stack?: boolean
 }) {
   const frame = cn(
     "flex min-h-40 flex-wrap items-center justify-center gap-3 rounded-xl bg-background p-6 text-sm text-foreground ring-[0.5px] ring-border",
@@ -76,7 +81,7 @@ export function DoDont({
   return (
     <Unstyled>
       <TooltipProvider>
-        <div className="my-4 grid gap-4 sm:grid-cols-2">
+        <div className={cn("my-4 grid gap-4", !stack && "sm:grid-cols-2")}>
           <figure>
             <div className={frame}>{good}</div>
             <Verdict good>{goodNote}</Verdict>

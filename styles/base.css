@@ -73,7 +73,6 @@
   --color-ring: var(--ring);
   --color-control: var(--control);
   --color-overlay: var(--overlay);
-  --color-brand: var(--brand);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -109,14 +108,13 @@
 
 /* ─── Color tokens ─────────────────────────────────────────────────────────
    Values follow Sales Portal, the source of the 0.3.0 audit, and match the
-   Figma library "Aperia Shadcn Library (Enhanced)". An app sets only its
-   brand slots (--brand, sidebar, chart palette, its own status colors); see
-   plugins/aperia-ds5/skills/design/references/brand-slots.md.
+   Figma library "Aperia Shadcn Library (Enhanced)". Every token is shadcn's,
+   with Aperia's value; an app sets only its chart palette and status colors
+   (plugins/aperia-ds5/skills/design/foundations/color.md, What an app can
+   change).
    Tokens derived with var() are declared again under .dark, so a .dark
    subtree inside a light page resolves them too. */
 :root {
-  --brand: #002f67;
-
   --background: oklch(0.975 0.002 286);
   --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
@@ -147,12 +145,12 @@
   --chart-5: oklch(0.896 0.063 313.549); /* #ECD1FB */
   --chart-6: oklch(0.317 0.135 282.036);
 
-  --sidebar: var(--brand);
+  /* The sidebar is the Aperia navy in every app, in Light; Dark's is the darkest neutral (.dark below). */
+  --sidebar: #002f67;
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #ffffff;
-  --sidebar-primary-foreground: var(--brand);
-  /* The sidebar's steps are white over the brand, so an app sets only --brand and they follow it. Declared here in
-     Light only: Dark's sidebar is neutral (.dark below), and an app never sets these, so nothing it sets leaks into Dark. */
+  --sidebar-primary-foreground: #002f67;
+  /* The sidebar's hover, divider and focus line are white over the navy, so they read on it. */
   --sidebar-accent: color-mix(in oklab, white 8%, transparent);
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: color-mix(in oklab, white 15%, transparent);

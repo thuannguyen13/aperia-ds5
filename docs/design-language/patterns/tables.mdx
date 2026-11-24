@@ -1,0 +1,25 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/tables.md?raw"
+import * as TableGroupRow from "../../../components/ui/table-group-row/table-group-row.stories"
+import * as ScrollTable from "../../../components/ui/scroll-table/scroll-table.stories"
+import { SkillDoc } from "../skill-doc"
+import { tableExamples } from "../examples/table"
+import { cardExamples } from "../examples/card"
+
+<Meta title="Design Language/Patterns/Tables" />
+
+<SkillDoc
+  source={source}
+  after={{
+    "What is available": (
+      <>
+        <Canvas of={TableGroupRow.WithLeadingAndTrailing} sourceState="none" />
+        <Canvas of={ScrollTable.InTitledCard} sourceState="none" />
+      </>
+    ),
+    "Put the column headings right under the card header":
+      tableExamples["Put the column headings right under the card header"],
+    "Run a table to the card's edges":
+      cardExamples["Run a table to the card's edges"],
+  }}
+/>

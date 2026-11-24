@@ -9,9 +9,7 @@ import {
   opensOnClick,
 } from "aperia-ds5"
 
-export { EmptyState } from "../../../plugins/aperia-ds5/skills/design/assets/components/empty-state"
-export { IconButton } from "../../../plugins/aperia-ds5/skills/design/assets/components/icon-button"
-export { TitledCard } from "../../../plugins/aperia-ds5/skills/design/assets/components/titled-card"
+export { EmptyState, IconButton, TitledCard } from "aperia-ds5"
 
 export const TASKS = [
   {
@@ -67,7 +65,7 @@ export function TaskTable({
   )
 }
 
-/** A frame wide enough for a card, inside a Do / Don't half. */
+/** A frame wide enough for a card: half the page in a Do / Don't pair, up to 42rem when the pair stacks. */
 export function Wide({ children }: { children: ReactNode }) {
-  return <div className="w-full max-w-md">{children}</div>
+  return <div className="w-full max-w-2xl">{children}</div>
 }

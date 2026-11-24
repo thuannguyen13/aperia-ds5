@@ -1,0 +1,20 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/loading.md?raw"
+import * as ListSkeleton from "../../../components/ui/list-skeleton/list-skeleton.stories"
+import { SkillDoc } from "../skill-doc"
+import { loadingExamples } from "../examples/page-patterns"
+
+<Meta title="Design Language/Patterns/Loading" />
+
+<SkillDoc
+  source={source}
+  after={{
+    ...loadingExamples,
+    "What is available": (
+      <>
+        <Canvas of={ListSkeleton.Table} sourceState="none" />
+        <Canvas of={ListSkeleton.Board} sourceState="none" />
+      </>
+    ),
+  }}
+/>

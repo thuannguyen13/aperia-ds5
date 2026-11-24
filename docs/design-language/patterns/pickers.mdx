@@ -1,0 +1,32 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/pickers.md?raw"
+import * as PickerStories from "../../../components/ui/entity-picker/entity-picker.stories"
+import * as PickFieldStories from "../../../components/ui/pick-field/pick-field.stories"
+import { pickerExamples } from "../examples/forms-and-values"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Design Language/Patterns/Pickers" />
+
+<SkillDoc
+  source={source}
+  after={{
+    "@intro": <Canvas of={PickerStories.Default} sourceState="none" />,
+    "What is available": (
+      <>
+        <Canvas of={PickerStories.Several} sourceState="none" />
+        <Canvas of={PickFieldStories.Default} sourceState="none" />
+      </>
+    ),
+    "Show each record's picture":
+      pickerExamples["Show each record's picture"],
+    "Add a missing record from the picker": (
+      <Canvas of={PickerStories.AddFromPicker} sourceState="none" />
+    ),
+    "Say why a row or chip cannot be used": (
+      <Canvas of={PickerStories.DisabledWithReason} sourceState="none" />
+    ),
+    "When you can do it differently": (
+      <Canvas of={PickFieldStories.Drafted} sourceState="none" />
+    ),
+  }}
+/>

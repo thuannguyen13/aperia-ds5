@@ -1,0 +1,28 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/people-and-pictures.md?raw"
+import * as AvatarStories from "../../../components/ui/avatar/avatar.stories"
+import * as PeopleStories from "../../../components/ui/people-stack/people-stack.stories"
+import { peopleExamples } from "../examples/forms-and-values"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Design Language/Patterns/People and Pictures" />
+
+export const frame = "block min-h-0 overflow-hidden p-0"
+
+<SkillDoc
+  source={source}
+  after={{
+    "@intro": <Canvas of={AvatarStories.ShapesAndStates} sourceState="none" />,
+    "What is available": (
+      <>
+        <Canvas of={PeopleStories.Default} sourceState="none" />
+        <Canvas of={PeopleStories.NoOne} sourceState="none" />
+      </>
+    ),
+    "Show people as circles and companies, products, and teams as squares":
+      peopleExamples[
+        "People are circles; companies, products and teams are squares"
+      ],
+    "Show a picture without a frame": peopleExamples["Show a picture without a frame"],
+  }}
+/>

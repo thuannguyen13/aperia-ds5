@@ -1,0 +1,42 @@
+import { Meta, Canvas, Story } from "@storybook/addon-docs/blocks"
+import * as SheetFormStories from "../../../components/ui/sheet-form/sheet-form.stories"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/confirmations-and-delete.md?raw"
+import * as ConfirmStories from "../../../components/ui/confirm-dialog/confirm-dialog.stories"
+import * as SheetDeleteStories from "../../../components/ui/sheet-delete/sheet-delete.stories"
+import { DoDont } from "../blocks"
+import * as Panels from "../examples/dialog.stories"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Design Language/Patterns/Confirmations and Delete" />
+
+export const frame = "block min-h-0 overflow-hidden p-0"
+
+<SkillDoc
+  source={source}
+  after={{
+    "@intro": <Canvas of={ConfirmStories.Destructive} sourceState="none" />,
+    "What is available": (
+      <Canvas of={ConfirmStories.Positive} sourceState="none" />
+    ),
+    "Name the change, as a question": (
+      <DoDont
+        className={frame}
+        good={<Story of={Panels.Confirmation} inline={false} height="300px" />}
+        bad={<Story of={Panels.AreYouSure} inline={false} height="300px" />}
+      />
+    ),
+    "Use the destructive color for removal": (
+      <DoDont
+        className={frame}
+        good={<Story of={Panels.Confirmation} inline={false} height="300px" />}
+        bad={<Story of={Panels.BlueDelete} inline={false} height="300px" />}
+      />
+    ),
+    "Keep Delete on the record": (
+      <Canvas of={SheetFormStories.EditWithDelete} sourceState="none" />
+    ),
+    "Say why a record cannot be deleted": (
+      <Canvas of={SheetDeleteStories.Blocked} sourceState="none" />
+    ),
+  }}
+/>

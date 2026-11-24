@@ -25,7 +25,7 @@ export default defineConfig([
   },
   {
     ...shared,
-    entry: { utils: "lib/utils.ts" },
+    entry: { utils: "lib/utils.ts", format: "lib/format.ts", list: "lib/list.ts" },
     dts: true,
   },
 ])
