@@ -1,6 +1,6 @@
-# Search and Notifications
+# Global Search and Notifications
 
-Search and notifications are two panels that open from the sidebar to find records and review recent changes.
+Global search and notifications are two panels that open from the sidebar to find records and review recent changes.
 
 ## When to use
 
@@ -82,7 +82,7 @@ Search and notifications have no exceptions.
 
 ## Which patterns it uses
 
-- See [Search](../patterns/search.md) for the search panel, its results, and its keys.
+- See [Global Search](../patterns/global-search.md) for the search panel, its results, and its keys.
 - See [Notifications](../patterns/notifications.md) for the panel, its rows, and its pop-ups.
 - See [App Shell](../patterns/app-shell.md) for the sidebar entries both panels open from.
 - See [Switches in a Grid](../patterns/switches-in-a-grid.md) for Notification Settings, which the settings button

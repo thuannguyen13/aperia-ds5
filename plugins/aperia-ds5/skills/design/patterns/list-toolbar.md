@@ -24,7 +24,8 @@ that bar.
 A list toolbar needs at least one control. Every control is optional, and the controls a list shows keep this order.
 The search and the filters sit at the left end. Sort and the list's actions sit at the right end.
 
-1. **Search** (optional). It is a search box that names what it searches, such as "Search prospects".
+1. **Search** (optional). It is a search box that names what it searches, such as "Search prospects", and finds rows
+   in this list only.
 2. **Filters** (optional). They follow the search, as the Filter button or as fixed controls. See
    [Filters](filters.md).
 3. **Sort** (optional). It is the Sort control. See [Sort](sort.md).
@@ -73,7 +74,8 @@ can be a board, and its switch goes in the slot. The board fills the full width 
 
 ## Works with
 
-- See [Filters](filters.md), [Sort](sort.md), and [Search](search.md) for the toolbar's controls.
+- See [Filters](filters.md) and [Sort](sort.md) for the toolbar's controls. The toolbar's search finds rows in this list
+  only. See [Global Search](global-search.md) for finding any record in the app.
 - See [Paging](paging.md) for the count and the pages under the list.
 - See [Tables](tables.md) for the table under the toolbar.
 - See [Page Header](page-header.md) for the header above it.

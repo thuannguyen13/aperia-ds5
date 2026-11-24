@@ -1,17 +1,18 @@
-# Search
+# Global Search
 
-Search finds any record in the app from one field that opens from the sidebar or with ⌘K.
+Global search finds any record in the app from one field that opens from the sidebar or with ⌘K.
 
 ## When to use
 
-Use search to find any record in the app, across every kind of record. Every app offers it behind the Search entry in
+Use global search to find any record in the app, across every kind of record. Every app offers it behind the Search entry in
 the sidebar.
 
-To narrow one list, use that list's own toolbar search instead. See [List Toolbar](list-toolbar.md) for the toolbar search.
+To narrow one list, use the list search in that list's toolbar instead. See [List Toolbar](list-toolbar.md) for the list
+search.
 
 ## What is available
 
-Search has four parts, listed from top to bottom:
+Global search has four parts, listed from top to bottom:
 
 | Part | Content |
 |---|---|
@@ -22,9 +23,9 @@ Search has four parts, listed from top to bottom:
 
 ## How it looks and behaves
 
-Search opens as a dialog, updates as the user types, and closes when a result opens:
+Global search opens as a dialog, updates as the user types, and closes when a result opens:
 
-1. Search opens as a dialog over the dimmed page.
+1. Global search opens as a dialog over the dimmed page.
 2. The field is flush with the panel. It has no fill, edge, or ring of its own.
 3. A divider separates the key hint from the results.
 4. A result highlights like a menu item when the pointer or the arrow keys reach it.
@@ -39,10 +40,10 @@ Search opens as a dialog, updates as the user types, and closes when a result op
 
 ## Rules
 
-### Search from one place
+### Open global search from one place
 
-- **Do:** Let Search in the sidebar and ⌘K open the same panel from any page, so search is always one step away.
-- **Don't:** Give search a page of its own. Use the shared panel, so people never leave what they are doing.
+- **Do:** Let Search in the sidebar and ⌘K open the same panel from any page, so global search is always one step away.
+- **Don't:** Give global search a page of its own. Use the shared panel, so people never leave what they are doing.
 
 ### Show each result with its picture
 
@@ -64,7 +65,7 @@ This pattern has no exceptions.
 
 ## Works with
 
-Search works with three other pages:
+Global search works with three other pages:
 
 - See [App Shell](app-shell.md) for the Search entry in the sidebar that opens it.
 - See [Empty States](../foundations/empty-states.md) for "No Results".

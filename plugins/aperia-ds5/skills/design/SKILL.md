@@ -63,7 +63,7 @@ rest, on hover, on focus, when pressed, and when disabled.
   [Table](components/table.md). A pattern's components (such as `ListToolbar` or `ReasonTooltip`) are on that pattern's
   page.
 - **Patterns** (how components combine into the parts of a screen; whole screens are in Examples): Navigation:
-  [App Shell](patterns/app-shell.md), [Search](patterns/search.md), [Notifications](patterns/notifications.md); Content:
+  [App Shell](patterns/app-shell.md), [Global Search](patterns/global-search.md), [Notifications](patterns/notifications.md); Content:
   [Page Header](patterns/page-header.md), [Banner Alerts](patterns/banner-alerts.md),
   [Cards and Tiles](patterns/cards-and-tiles.md), [Charts](patterns/charts.md), [Details](patterns/details.md),
   [Status](patterns/status.md), [History](patterns/history.md), [People and Pictures](patterns/people-and-pictures.md); Lists:
@@ -74,7 +74,7 @@ rest, on hover, on focus, when pressed, and when disabled.
   [Files and Images](patterns/files-and-images.md), [Switches in a Grid](patterns/switches-in-a-grid.md).
 - **Examples** (screens an app builds from the patterns, with before and after): Lists: [List
   Page](examples/list-page.md), [Board of Cards](examples/board.md), [Audit
-  Log](examples/audit-log.md), [Search and Notifications](examples/search-and-notifications.md); Records: [Record
+  Log](examples/audit-log.md), [Global Search and Notifications](examples/search-and-notifications.md); Records: [Record
   Page](examples/record-page.md), [Notes on a Record](examples/notes.md), [Task Checklist](examples/task-checklist.md),
   [Status Change With a Reason](examples/status-change.md), [Line Items With Totals](examples/line-items.md); Settings:
   [Settings Page](examples/settings-page.md), [Roles and Permissions](examples/roles-and-permissions.md),

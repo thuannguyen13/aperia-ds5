@@ -119,8 +119,8 @@ An amount that the user may not see can be left out of a sentence or a summary. 
 
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for an empty card and where its Add button sits.
 - See [Tables](../patterns/tables.md) for a missing value in a table, and for a table with no rows.
-- See [Filters](../patterns/filters.md) and [Search](../patterns/search.md) for Clear Filters and a search that finds
-  nothing.
+- See [Filters](../patterns/filters.md) for Clear Filters, and [Global Search](../patterns/global-search.md) for a search
+  across the app that finds nothing.
 - See [Copy](copy.md) and [Message Templates](copy-templates.md) for the fixed phrases for missing, empty, and hidden
   values.
 - See [Money and Numbers](money-and-numbers.md) for a hidden amount.

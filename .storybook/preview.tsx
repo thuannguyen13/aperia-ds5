@@ -146,7 +146,7 @@ const preview: Preview = {
           [
             "Overview",
             "Navigation",
-            ["App Shell", "Search", "Notifications"],
+            ["App Shell", "Global Search", "Notifications"],
             "Content",
             [
               "Page Header",
@@ -188,7 +188,7 @@ const preview: Preview = {
               "List Page",
               "Board of Cards",
               "Audit Log",
-              "Search and Notifications",
+              "Global Search and Notifications",
             ],
             "Records",
             [

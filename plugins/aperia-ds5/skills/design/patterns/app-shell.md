@@ -25,7 +25,7 @@ parts are listed from top to bottom.
 1. **Sidebar**. It runs down the left edge in the sidebar color.
 2. **Header**. It holds the app logo, the product name, and the collapse button. Selecting the logo opens the home page.
 3. **Search** (optional). It shows the search entry and its shortcut, ⌘K or Ctrl K, and opens search. See
-   [Search](search.md).
+   [Global Search](global-search.md).
 4. **Notifications** (optional). It follows Search and shows the unread count in a badge in the destructive color. It
    opens the notifications panel. See [Notifications](notifications.md).
 5. **Pages**. Each page shows its icon and name, in optional groups with headings. Selecting one opens the page and
@@ -111,7 +111,7 @@ Every other part of the shell is the same in every app.
   of thing goes.
 - See [Page Layout](../foundations/page-layout.md) for what goes in the page column.
 - See [Page Header](page-header.md) for the page title that fills the breadcrumb.
-- See [Search](search.md) and [Notifications](notifications.md) for what opens from the sidebar.
+- See [Global Search](global-search.md) and [Notifications](notifications.md) for what opens from the sidebar.
 
 ## In code
 

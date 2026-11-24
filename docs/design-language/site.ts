@@ -465,7 +465,7 @@ export const PATTERNS: Section<SkillPage> = {
       title: "Navigation",
       pages: [
         { file: "patterns/app-shell.md" },
-        { file: "patterns/search.md" },
+        { file: "patterns/global-search.md" },
         { file: "patterns/notifications.md" },
       ],
     },

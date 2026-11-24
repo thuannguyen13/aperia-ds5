@@ -57,7 +57,7 @@ Each kind of thing on a screen has one place. This table names that place and th
 | What | Where it goes | Owner |
 |---|---|---|
 | Moving between pages | The app's pages in the sidebar. The breadcrumb in the top bar links to the pages above this one. | [App Shell](../patterns/app-shell.md) |
-| Search across the app | Search in the sidebar, or ⌘K from any page, which opens a dialog | [Search](../patterns/search.md) |
+| Search across the app | Search in the sidebar, or ⌘K from any page, which opens a dialog | [Global Search](../patterns/global-search.md) |
 | Notifications | Notifications in the sidebar, after Search, which opens a panel beside the sidebar | [Notifications](../patterns/notifications.md) |
 | The account and the theme | The account at the foot of the sidebar. Its menu holds Dark Theme or Light Theme, and Log Out. | [App Shell](../patterns/app-shell.md) |
 | The page's title and facts | The page header, the first section of the page column | [Page Header](../patterns/page-header.md) |

@@ -43,7 +43,7 @@ too, so the column does not widen when the page lands.
 ## When you can do it differently
 
 A list that changes while the user types keeps its last results, shown at reduced opacity, while new ones load. See
-[Search](../patterns/search.md) for search results.
+[Global Search](../patterns/global-search.md) for its results.
 
 ## Works with
 
