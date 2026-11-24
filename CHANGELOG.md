@@ -16,6 +16,27 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
    teammate installs the plugin once: README, Agent skill.
 4. Compare the app before and after in Light, Dark and at phone width.
 
+### Breaking since rc.2: DataTable is a list
+
+`DataTable` is now built from the list's own parts: `ListToolbar` (through the new `DataTableToolbar`), `Table`, and
+`ListPager`. Its toolbar is the one every list has: the search and the filters on the left; the slot with the Columns
+menu, Sort, and the list's actions on the right. Column headings no longer sort; Sort does.
+
+Migrate a table:
+
+1. Write each heading as plain text: `header: "Merchant"`. `DataTableColumnHeader` still renders, as plain text, and is
+   deprecated.
+2. Move sorting to Sort: `sort={[{ value: "volume", label: "Volume", starts: "desc" }]}`, each `value` a column's id.
+3. Replace `filterColumn` and `filterPlaceholder` with `search={{ placeholder: "Search merchants" }}`, which looks in
+   every column, or `search={{ placeholder, column: "email" }}` for one column. The old props still work, deprecated.
+4. Add filters with `filters={{ fields }}` (`FilterField`, each `id` a column's id; `form: "simple"` for fixed
+   controls). They are stored in TanStack's `columnFilters` as `{ type, rules }`.
+5. Put the list's buttons in `actions` and any other control in `children` (the toolbar's slot, before the Columns
+   menu). `columnsMenu={false}` hides the Columns menu.
+6. A hand-built table puts `DataTableToolbar` where its own toolbar was, in place of `DataTableFilter` (deprecated) and
+   `DataTableViewOptions`, which now sits in the toolbar's slot. A table on TanStack's `useTable` that filters its own
+   rows passes `defaultColumn: dataTableDefaultColumn<Row>()`.
+
 ### Changed
 
 - **Tokens** (`base.css`): Sales Portal's values. Page `oklch(0.975 0.002 286)`, cards white, darker muted and muted
@@ -235,7 +256,34 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
 - `npx aperia-ds5 init` (rc.2): sets an app up for coding agents (plugin settings, `CLAUDE.md`, `AGENTS.md`), adding only
   what is missing. The package description, README and type definitions tell agents to run it and read the skill.
 - Storybook renders in Inter, the font Aperia apps set through `--font-sans`, instead of Storybook's own Nunito Sans
-  (rc.2). The library still sets no font: apps keep setting `--font-sans`, and the skill's Foundations now says so.
+  (rc.2).
+- **Font** (after rc.2): `--font-sans` defaults to Inter (`"Inter Variable", Inter`), then the system sans serif, and
+  `body` uses it. The library loads no font file: an app that wants Inter loads it, through `next/font/google` with
+  `variable: "--font-sans"` on `<html>`, or `@fontsource-variable/inter` imported once. An app's own `--font-sans`
+  still wins. The old `--font-sans: var(--font-sans)` referred to itself, so an app that set nothing got the system
+  font, never Inter.
+- **Link color and focus line in Dark** (after rc.2): new token `--link` (`text-link`), primary in Light and
+  `oklch(0.74 0.13 259.33)` (#78ABFC) in Dark, at least 4.5:1 on Dark's background, card, control, popover and muted.
+  The Link button and badge variants and the hover color of links in Field, Item and Empty use it. Dark `--ring` is
+  `oklch(0.65 0.16 259.33)` (#508DEF), at least 3:1 on the same fills. Primary stays `#0058cc` as a fill.
+- **Named widths** (after rc.2): `--container-page-md` (48rem) and `--container-page-lg` (60rem) for a page's sections
+  (`@min-page-md:grid-cols-4`), `--container-popover-sm` (15rem) for Sort and a filter's value picker, and
+  `--container-popover-lg` (24rem) for a wide panel such as Notifications (`w-popover-lg`).
+- Button and Toggle `sm` text is `text-xs` (was `text-[0.8rem]`).
+- **Toasts** (after rc.2): `Toaster` sits at the top right, and on a phone spans the top, 16px from each side. It shows
+  three toasts at most. New `toast` from `aperia-ds5` (sonner's, with a close button on any toast that stays until it is
+  closed; `toast.error` stays until closed by default) and `toastNotification` (a new notification in the same stack;
+  past three, one toast reads "4 more new notifications."). Import `toast` from `aperia-ds5` instead of `sonner`.
+- **Tap to explain** (after rc.2): `ReasonTooltip`, `BlockedMenuItem`, a blocked `RecordActions` button or
+  `SheetDelete`, a disabled `IconButton`'s reason, and `RelativeTime`'s exact time open on a tap on a touch screen. A
+  tap elsewhere closes them.
+- **ConfirmDialog working state** (after rc.2): `onConfirm` may return a Promise. While it runs, the action shows a
+  spinner beside its label, Cancel is disabled, and the dialog stays open. A rejected Promise keeps the dialog open
+  with a red line above the buttons (`error`, "Delete Contact failed. Try again." by default). `pending` shows the same
+  state for an action the app tracks. `SheetDelete`'s `onDelete` may return a Promise too.
+- **RecordActions** (after rc.2): three actions or fewer are buttons; with four or more, the first two stay buttons and
+  the rest, Delete included, go into More actions. The same at every width.
+- **CommandDialog** (after rc.2): 576px wide from `sm`; on a phone it fills the screen.
 
 ### Not in the library
 
