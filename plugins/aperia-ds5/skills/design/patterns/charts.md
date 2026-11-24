@@ -1,7 +1,6 @@
 # Charts
 
-A chart shows how numbers change over time or compare across groups, as bars or lines in a card. See
-[Dashboard](../examples/dashboard.md) for a page of charts.
+A chart shows how numbers change over time or compare across groups, as bars or lines in a card.
 
 ## When to use
 
@@ -23,7 +22,7 @@ Charts come in four forms. Pick the form by the data it shows:
 | Bar chart | A count or an amount per period or per group, with up to three series side by side | Opportunities by Month, as created and won |
 | Line chart | A rate or a running value over many periods | Win Rate by Month |
 | Stacked bar chart | The parts of a whole, per period or per group | Opportunities by Month, as won, lost, and open |
-| Funnel chart | How many records reach each stage of a process | Pipeline Funnel. See [Funnel Chart](../examples/funnel-chart.md). |
+| Funnel chart | How many records reach each stage of a process | Pipeline Funnel. |
 
 A bar chart whose groups have long names, such as sales reps, lays its bars across. The names then run down the left
 side.
@@ -115,7 +114,6 @@ issue on aperia-ds5 before an app draws one.
 - See [Accessibility](../foundations/accessibility.md) for pairing every color with a word.
 - See [Empty States](../foundations/empty-states.md) for a chart with nothing to count.
 - See [Money and Numbers](../foundations/money-and-numbers.md) for the axis labels.
-- See [Dashboard](../examples/dashboard.md) and [Funnel Chart](../examples/funnel-chart.md) for charts on a page.
 
 ## In code
 

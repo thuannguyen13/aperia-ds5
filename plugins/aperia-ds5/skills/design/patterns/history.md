@@ -5,7 +5,7 @@ History lists what happened to a record, newest first, as a timeline in a card.
 ## When to use
 
 Use history for the changes, notes, and events on one record, such as a stage change, a new note, or a finished task.
-Use it on the record's page, in its own card. See [Notes on a Record](../examples/notes.md) for notes shown as history.
+Use it on the record's page, in its own card.
 
 ## What is available
 

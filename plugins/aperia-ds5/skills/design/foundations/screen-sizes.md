@@ -113,8 +113,7 @@ A new part goes through five steps before it ships:
 ## When you can do it differently
 
 A grid of switches too wide for a phone, such as roles and their permissions, can show one column at a time instead
-of scrolling sideways. A select above the table picks the column. See
-[Roles and Permissions](../examples/roles-and-permissions.md) for that grid.
+of scrolling sideways. A select above the table picks the column.
 
 ## Works with
 

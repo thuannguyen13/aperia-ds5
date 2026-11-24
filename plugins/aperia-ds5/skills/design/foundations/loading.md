@@ -47,7 +47,6 @@ A list that changes while the user types keeps its last results, shown at reduce
 
 ## Works with
 
-- See [List Page](../examples/list-page.md) for the page a loading state stands in for.
 - See [Page Layout](page-layout.md) for the spacing and width it keeps.
 
 ## In code

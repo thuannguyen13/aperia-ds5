@@ -192,8 +192,7 @@ The filter sheet on a phone shows the five steps at work:
 
 ## When you can do it differently
 
-A board's columns are a tint over the page, not surfaces. Its cards sit in the columns as they would on the page. See
-[Board of Cards](../examples/board.md) for the board.
+A board's columns are a tint over the page, not surfaces. Its cards sit in the columns as they would on the page.
 
 A row that people drag lifts off its surface while it moves, with the Extra large shadow. The row drops back onto the
 surface when people let go. See [Reordering](../patterns/reordering.md) for dragging rows.

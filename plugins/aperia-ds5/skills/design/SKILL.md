@@ -75,15 +75,8 @@ rest, on hover, on focus, when pressed, and when disabled.
   [Buttons and Actions](patterns/buttons-and-actions.md), [Forms in Sheets](patterns/forms-in-sheets.md),
   [Pickers](patterns/pickers.md), [Confirmations and Delete](patterns/confirmations-and-delete.md),
   [Files and Images](patterns/files-and-images.md), [Switches in a Grid](patterns/switches-in-a-grid.md).
-- **Examples** (screens an app builds from the patterns, with before and after): Lists: [List
-  Page](examples/list-page.md), [Board of Cards](examples/board.md), [Audit
-  Log](examples/audit-log.md), [Global Search and Notifications](examples/search-and-notifications.md); Records: [Record
-  Page](examples/record-page.md), [Notes on a Record](examples/notes.md), [Task Checklist](examples/task-checklist.md),
-  [Status Change With a Reason](examples/status-change.md), [Line Items With Totals](examples/line-items.md); Settings:
-  [Settings Page](examples/settings-page.md), [Roles and Permissions](examples/roles-and-permissions.md),
-  [Editable Option List](examples/option-list.md); Data and Charts: [Dashboard](examples/dashboard.md),
-  [Import Wizard](examples/import.md), [Date Range](examples/date-range.md), [Funnel
-  Chart](examples/funnel-chart.md).
+- **Examples**: [Titan and Sales Portal](examples/titan-and-sales-portal.md), the two apps before and after
+  aperia-ds5.
 
 ## Order of work
 

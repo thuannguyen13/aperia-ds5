@@ -1,7 +1,6 @@
 # Status
 
-A status shows the state a record is in, such as Draft, Active, or Overdue, as a word in a badge. See
-[Status Change With a Reason](../examples/status-change.md) for changing a record's status.
+A status shows the state a record is in, such as Draft, Active, or Overdue, as a word in a badge.
 
 ## When to use
 
@@ -79,8 +78,7 @@ button. See [Button](../components/button.md) for a state shown as a badge.
 ## When you can do it differently
 
 An option list that admins edit can let them pick a color for each option, such as each stage of a pipeline. The
-picked colors still come from the app's status pairs. See [Editable Option List](../examples/option-list.md) for that
-list.
+picked colors still come from the app's status pairs.
 
 ## Works with
 
@@ -89,7 +87,6 @@ list.
 - See [Accessibility](../foundations/accessibility.md) for pairing every color with a word.
 - See [Tables](tables.md) for the status column.
 - See [Page Header](page-header.md) for the status as a property.
-- See [Status Change With a Reason](../examples/status-change.md) for changing a status.
 - See [Copy](../foundations/copy.md) for how a status is worded.
 
 ## In code

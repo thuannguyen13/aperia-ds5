@@ -510,47 +510,11 @@ export const PATTERNS: Section<SkillPage> = {
 
 export const EXAMPLES: Section<SkillPage> = {
   title: "Examples",
-  lead: "Examples are whole screens that an app builds from the patterns, each with a before and an after.",
+  lead: "Examples show the Aperia apps before and after aperia-ds5.",
   groups: [
     {
       title: "Apps",
       pages: [{ file: "examples/titan-and-sales-portal.md" }],
-    },
-    {
-      title: "Lists",
-      pages: [
-        { file: "examples/list-page.md" },
-        { file: "examples/board.md" },
-        { file: "examples/audit-log.md" },
-        { file: "examples/search-and-notifications.md" },
-      ],
-    },
-    {
-      title: "Records",
-      pages: [
-        { file: "examples/record-page.md" },
-        { file: "examples/notes.md" },
-        { file: "examples/task-checklist.md" },
-        { file: "examples/status-change.md" },
-        { file: "examples/line-items.md" },
-      ],
-    },
-    {
-      title: "Settings",
-      pages: [
-        { file: "examples/settings-page.md" },
-        { file: "examples/roles-and-permissions.md" },
-        { file: "examples/option-list.md" },
-      ],
-    },
-    {
-      title: "Data and Charts",
-      pages: [
-        { file: "examples/dashboard.md" },
-        { file: "examples/import.md" },
-        { file: "examples/date-range.md" },
-        { file: "examples/funnel-chart.md" },
-      ],
     },
   ],
 }

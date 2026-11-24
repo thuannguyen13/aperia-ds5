@@ -20,10 +20,10 @@ question. Find the situation in this table:
 | Deleting or removing something, or a step whose consequence people must know first | A confirmation, which is a dialog | It must be answered before the change happens. See [Confirmations and Delete](confirmations-and-delete.md). |
 | Closing a sheet after typing in it | "Discard Changes?" in a dialog over the sheet | No one loses what they typed by accident. |
 | A short question that needs an answer before people go on | A dialog | It holds one decision and closes. See [Dialog](../components/dialog.md) for the four kinds of dialog. |
-| Changing a record's status with a reason | A small panel under the status from a table row, or the reason dialog from the record's page or a board drop | A status change is not a record form, so it never opens a sheet. See [Status Change With a Reason](../examples/status-change.md). |
-| Editing rows of amounts that add up, such as an opportunity's line items | One wider sheet, with a titled card per group | The page shows the lines read-only, so no one changes an amount by accident. See [Line Items With Totals](../examples/line-items.md). |
+| Changing a record's status with a reason | A small panel under the status from a table row, or the reason dialog from the record's page or a board drop | A status change is not a record form, so it never opens a sheet. |
+| Editing rows of amounts that add up, such as an opportunity's line items | One wider sheet, with a titled card per group | The page shows the lines read-only, so no one changes an amount by accident. |
 | Turning settings on and off, such as Notification Settings | A sheet of switches with no Save button | Each switch saves as it is flipped. See [Switches in a Grid](switches-in-a-grid.md). |
-| Bringing records in from a file | A small panel under the Import button, then the review dialog | The review saves nothing, and the list refreshes when the dialog closes. See [Import Wizard](../examples/import.md). |
+| Bringing records in from a file | A small panel under the Import button, then the review dialog | The review saves nothing, and the list refreshes when the dialog closes. |
 
 ## What is available
 

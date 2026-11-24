@@ -22,9 +22,9 @@ A dialog comes in four kinds. Each kind has its own width, its own layout on a p
 | Kind | Use for | Width | On a phone | Component |
 |---|---|---|---|---|
 | Confirmation | Asking before a delete, a removal, or a step whose consequence people must know first, such as "Delete Project?" | Up to 384px | 320px wide, in the middle of the screen, with its buttons stacked | `ConfirmDialog`. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
-| Reason | Picking a new status and writing the reason for it, such as "Change to Lost?" | Up to 384px | 320px wide, in the middle of the screen, with its buttons stacked | The reason dialog that the app builds. See [Status Change With a Reason](../examples/status-change.md). |
+| Reason | Picking a new status and writing the reason for it, such as "Change to Lost?" | Up to 384px | 320px wide, in the middle of the screen, with its buttons stacked | The reason dialog that the app builds. |
 | Search | Finding any record in the app from the sidebar or ⌘K | Up to 576px, a third of the way down the screen | Fills the screen | The app's search dialog. See [Global Search](../patterns/global-search.md). |
-| Review | Checking many rows in a wide table before they save, such as the rows of an imported file | Up to 72rem | Fills the screen | One dialog for every step. See [Import Wizard](../examples/import.md). |
+| Review | Checking many rows in a wide table before they save, such as the rows of an imported file | Up to 72rem | Fills the screen | One dialog for every step. |
 
 A dialog has five parts, listed from top to bottom:
 
@@ -118,7 +118,7 @@ name. See [Border and Radius](../styles/border-and-radius.md), [Elevation](../st
   `DialogClose` from `aperia-ds5`. `showCloseButton={false}` drops the ×.
 - A confirmation is `ConfirmDialog` from `aperia-ds5`, never an `AlertDialog` built in the app. Its `variant` is
   `"destructive"` by default.
-- A reason dialog is an `AlertDialog` built as on [Status Change With a Reason](../examples/status-change.md).
+- A reason dialog is an `AlertDialog` that the app builds, with the reason field above its buttons.
 - A search dialog is `CommandDialog` with `className="sm:max-w-xl"`, as on [Global Search](../patterns/global-search.md).
-- A review dialog is one `DialogContent`, full screen below `sm`, as on [Import Wizard](../examples/import.md).
+- A review dialog is one `DialogContent` for every step, full screen below `sm`.
 - A form is `FormSheet` with `SheetForm` from `aperia-ds5`, never a raw `Sheet` or a dialog.

@@ -60,7 +60,6 @@ under the page header.
 - See [List Toolbar](../patterns/list-toolbar.md), [Paging](../patterns/paging.md), and
   [Tables](../patterns/tables.md) for the lists.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the figures and the cards.
-- See [List Page](list-page.md), [Record Page](record-page.md), and [Dashboard](dashboard.md) for each screen in detail.
 
 ## In code
 

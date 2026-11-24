@@ -40,23 +40,33 @@ const preview: Preview = {
             "For Designers",
             "For Developers",
             "What's New",
-            "Code Connect Status",
+            "Code Connect Status"
           ],
           "Foundations",
           [
             "Overview",
             "Accessibility",
             "Layout",
-            ["Scaffold", "Page Layout", "Screen Sizes", "Spacing", "Sizes"],
+            [
+              "Scaffold",
+              "Page Layout",
+              "Screen Sizes",
+              "Spacing",
+              "Sizes"
+            ],
             "Content Design",
-            ["Copy", "Message Templates", "Money and Numbers"],
+            [
+              "Copy",
+              "Message Templates",
+              "Money and Numbers"
+            ],
             "States",
             [
               "Loading",
               "Saving and Feedback",
               "Empty States",
-              "Disabled With a Reason",
-            ],
+              "Disabled With a Reason"
+            ]
           ],
           "Styles",
           [
@@ -67,7 +77,7 @@ const preview: Preview = {
             "Border and Radius",
             "Elevation",
             "Motion",
-            "Icons",
+            "Icons"
           ],
           "Components",
           [
@@ -80,7 +90,7 @@ const preview: Preview = {
               "Toggle Group",
               "Dropdown Menu",
               "Context Menu",
-              "Menubar",
+              "Menubar"
             ],
             "Communication",
             [
@@ -93,7 +103,7 @@ const preview: Preview = {
               "Spinner",
               "Skeleton",
               "Empty",
-              "Kbd",
+              "Kbd"
             ],
             "Containment",
             [
@@ -106,7 +116,7 @@ const preview: Preview = {
               "Popover",
               "Accordion",
               "Collapsible",
-              "Tabs",
+              "Tabs"
             ],
             "Navigation",
             [
@@ -115,7 +125,7 @@ const preview: Preview = {
               "Breadcrumb",
               "Navigation Menu",
               "Pagination",
-              "Command",
+              "Command"
             ],
             "Selection",
             [
@@ -127,26 +137,56 @@ const preview: Preview = {
               "Combobox",
               "Slider",
               "Calendar",
-              "Day Range Fields",
+              "Day Range Fields"
             ],
             "Text Inputs",
-            ["Input", "Input Group", "Input OTP", "Textarea", "Field", "Label"],
+            [
+              "Input",
+              "Input Group",
+              "Input OTP",
+              "Textarea",
+              "Field",
+              "Label"
+            ],
             "Files and Media",
-            ["Avatar", "Attachment", "Carousel", "Aspect Ratio"],
+            [
+              "Avatar",
+              "Attachment",
+              "Carousel",
+              "Aspect Ratio"
+            ],
             "Lists and Tables",
-            ["Table", "Data Table"],
+            [
+              "Table",
+              "Data Table"
+            ],
             "Charts",
-            ["Chart"],
+            [
+              "Chart"
+            ],
             "Chat",
-            ["Message", "Bubble", "Marker"],
+            [
+              "Message",
+              "Bubble",
+              "Marker"
+            ],
             "Layout",
-            ["Separator", "Scroll Area", "Resizable", "Direction"],
+            [
+              "Separator",
+              "Scroll Area",
+              "Resizable",
+              "Direction"
+            ]
           ],
           "Patterns",
           [
             "Overview",
             "Navigation",
-            ["App Shell", "Global Search", "Notifications"],
+            [
+              "App Shell",
+              "Global Search",
+              "Notifications"
+            ],
             "Content",
             [
               "Page Header",
@@ -156,7 +196,7 @@ const preview: Preview = {
               "Details",
               "Status",
               "History",
-              "People and Pictures",
+              "People and Pictures"
             ],
             "Lists",
             [
@@ -166,7 +206,7 @@ const preview: Preview = {
               "Paging",
               "Tables",
               "Selecting Rows",
-              "Reordering",
+              "Reordering"
             ],
             "Editing",
             [
@@ -175,34 +215,17 @@ const preview: Preview = {
               "Pickers",
               "Confirmations and Delete",
               "Files and Images",
-              "Switches in a Grid",
-            ],
+              "Switches in a Grid"
+            ]
           ],
           "Examples",
           [
             "Overview",
             "Apps",
-            ["Titan and Sales Portal"],
-            "Lists",
             [
-              "List Page",
-              "Board of Cards",
-              "Audit Log",
-              "Global Search and Notifications",
-            ],
-            "Records",
-            [
-              "Record Page",
-              "Notes on a Record",
-              "Task Checklist",
-              "Status Change With a Reason",
-              "Line Items With Totals",
-            ],
-            "Settings",
-            ["Settings Page", "Roles and Permissions", "Editable Option List"],
-            "Data and Charts",
-            ["Dashboard", "Import Wizard", "Date Range", "Funnel Chart"],
-          ],
+              "Titan and Sales Portal"
+            ]
+          ]
         ],
         // sidebar-order:end
       },

@@ -17,14 +17,14 @@ a reason, or a decision first. Find the change in this table:
 |---|---|---|
 | A filter, a sort, or a search on a list | It applies at once, with no button to apply. It is kept in the page's address, not saved to a record. | The list is the result, and it changes as people choose. See [Filters](../patterns/filters.md). |
 | A switch in a grid, such as a notification setting | At once, as it is flipped | The grid has no Save button. See [Switches in a Grid](../patterns/switches-in-a-grid.md). |
-| A pick in a grid, such as a role's level | At once, as it is picked | The grid has no Save button. See [Roles and Permissions](../examples/roles-and-permissions.md). |
-| A ticked task | At once, as the box is ticked | Ticking a task is one click and easy to take back. See [Task Checklist](../examples/task-checklist.md). |
+| A pick in a grid, such as a role's level | At once, as it is picked | The grid has no Save button. |
+| A ticked task | At once, as the box is ticked | Ticking a task is one click and easy to take back. |
 | A new order of options | At once, as the row is dropped | What people see is the saved order. See [Reordering](../patterns/reordering.md). |
-| A card dropped on another column of a board | At once, as the card is dropped, with Undo. A new status that needs a reason asks for it first. | A move is one drag and easy to take back. See [Board of Cards](../examples/board.md). |
-| A status change with a reason | When its button is pressed, in a small panel or a dialog | It waits for the reason. See [Status Change With a Reason](../examples/status-change.md). |
+| A card dropped on another column of a board | At once, as the card is dropped, with Undo. A new status that needs a reason asks for it first. | A move is one drag and easy to take back. |
+| A status change with a reason | When its button is pressed, in a small panel or a dialog | It waits for the reason. |
 | A delete, or another step whose consequence people must know first | When the confirmation's action is pressed | It cannot be taken back. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
 | Adding or editing a record | When the save button is pressed, in a form in a sheet | No record is saved half-filled. See [Forms in Sheets](../patterns/forms-in-sheets.md). |
-| A setting that is not a list, such as the app's default currency | When Save Changes is pressed, in the sheet that Edit opens from the setting's card | Its values change together, so they save together. See [Settings Page](../examples/settings-page.md). |
+| A setting that is not a list, such as the app's default currency | When Save Changes is pressed, in the sheet that Edit opens from the setting's card | Its values change together, so they save together. |
 | A file on a form | It uploads as soon as it is picked, and it is saved with the form. | See [Files and Images](../patterns/files-and-images.md). |
 
 ## What is available
@@ -169,8 +169,8 @@ A new order inside a form saves with the form, not at once. See [Reordering](../
 - A confirmation that saves: `ConfirmDialog`'s `onConfirm` may return a Promise. While it runs, the action shows a
   spinner and Cancel is disabled. When it fails, the dialog stays open with the error above its buttons.
 - The reason dialog of a status change is an `AlertDialog` built in the app, with `Spinner`
-  (`data-icon="inline-start"`) in the action, Cancel `disabled`, and the close ignored while pending, as on
-  [Status Change With a Reason](../examples/status-change.md).
+  (`data-icon="inline-start"`) in the action, Cancel `disabled`, and the close ignored while pending, as the reason dialog
+  on [Dialog](../components/dialog.md) is built.
 - A switch in a grid: the flag switch on [Switches in a Grid](../patterns/switches-in-a-grid.md), `disabled` while it
   saves. A refusal sets it back and shows an `Alert` (`variant="destructive"`) above the table.
 - Files: hold the save while `isUploading(files)`, and delete `stagedIds(files)` when the form closes unsaved.

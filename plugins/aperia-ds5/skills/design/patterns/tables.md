@@ -26,7 +26,7 @@ in this table:
 
 | Record | Opens in | Why |
 |---|---|---|
-| A record with its own related content, such as a prospect with contacts, activity, and line items | Its own page. The row opens the page. | The record's cards need a whole page. See [Record Page](../examples/record-page.md). |
+| A record with its own related content, such as a prospect with contacts, activity, and line items | Its own page. The row opens the page. | The record's cards need a whole page. |
 | A small record, such as an option, a note, a line item, or a task | A sheet. The row opens the sheet. | The record is a few fields, so people read and edit it in one panel without leaving the page. See [Forms in Sheets](forms-in-sheets.md). |
 
 A small record is also read in its sheet. A person who may not change it gets the sheet read-only. See
