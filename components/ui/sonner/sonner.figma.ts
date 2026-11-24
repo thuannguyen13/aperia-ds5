@@ -8,9 +8,6 @@ import figma from "figma"
 // then trigger toasts anywhere with: toast("Title", { description: "..." })
 export default {
   id: "Toaster",
-  imports: [
-    'import { Toaster } from "aperia-ds5"',
-    'import { toast } from "sonner"',
-  ],
+  imports: ['import { Toaster, toast } from "aperia-ds5"'],
   example: figma.code`<Toaster />`,
 }
