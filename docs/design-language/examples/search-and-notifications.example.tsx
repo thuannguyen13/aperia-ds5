@@ -348,18 +348,16 @@ function NotificationsPanel() {
           >
             <TabsTrigger
               value="unread"
-              className="h-full min-w-12 flex-none gap-1 px-1"
+              className="h-full min-w-12 flex-none gap-1 px-1 group-data-horizontal/tabs:after:bottom-[-1px]"
             >
               Unread
               {unread.length > 0 && (
-                <span className="text-primary tabular-nums">
-                  {unread.length}
-                </span>
+                <span className="tabular-nums">{unread.length}</span>
               )}
             </TabsTrigger>
             <TabsTrigger
               value="all"
-              className="h-full min-w-12 flex-none gap-1 px-1"
+              className="h-full min-w-12 flex-none gap-1 px-1 group-data-horizontal/tabs:after:bottom-[-1px]"
             >
               All
             </TabsTrigger>
