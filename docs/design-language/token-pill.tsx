@@ -212,7 +212,7 @@ function Pill({
           <a
             href={`./?path=/docs/${token.owner}--docs`}
             target="_top"
-            className="relative inline-flex translate-y-[-1px] items-center gap-1.5 rounded-full bg-muted py-0.5 pr-2 pl-1 align-middle font-mono text-[0.8125rem] leading-5 text-foreground no-underline ring-[0.5px] ring-border transition-colors hover:bg-muted/70"
+            className="relative inline-flex translate-y-[-1px] items-center gap-1.5 rounded-full bg-muted py-0.5 pr-2 pl-1 align-middle font-mono text-[0.8125rem] leading-5 whitespace-nowrap text-foreground no-underline ring-[0.5px] ring-border transition-colors hover:bg-muted/70"
           >
             {probe}
             <Thumb token={token} />
