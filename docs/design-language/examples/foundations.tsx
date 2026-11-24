@@ -49,71 +49,13 @@ const cssVar =
   (style) =>
     style.getPropertyValue(name).trim()
 
-/** Renders `children` and prints what `read` finds on the element marked `data-measure` inside it (or the wrapper). */
-function Measured({
-  read,
-  children,
-  className,
-  label,
-}: {
-  read: Read
-  children: ReactNode
-  className?: string
-  label?: ReactNode
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [value, setValue] = useState("")
-  useLayoutEffect(() => {
-    const root = ref.current
-    if (!root) return
-    const el = root.querySelector<HTMLElement>("[data-measure]") ?? root
-    setValue(read(getComputedStyle(el), el))
-  }, [read])
-  return (
-    <div ref={ref} className={cn("grid min-w-0 gap-1.5", className)}>
-      {children}
-      {label && <span className="text-xs text-muted-foreground">{label}</span>}
-      <code className="font-mono text-[11px] leading-snug break-words text-muted-foreground">
-        {value}
-      </code>
-    </div>
-  )
-}
-
-/** One frame for an example whose values are the same in Light and Dark, such as sizes, type, spacing or motion. */
+/** One frame for an example, such as a spec table. A value that changes with the mode shows both samples (`InModes`). */
 function Frame({ children }: { children: ReactNode }) {
   return (
     <Unstyled>
       <TooltipProvider>
         <div className="my-4 rounded-xl bg-background p-5 text-sm text-foreground ring-[0.5px] ring-border">
           {children}
-        </div>
-      </TooltipProvider>
-    </Unstyled>
-  )
-}
-
-/**
- * The same content in a Light frame and a Dark frame, side by side (stacked on a narrow window). Only for an example
- * whose values change with the mode, such as shadows; everything else uses `Frame`.
- */
-function LightDark({ children }: { children: ReactNode }) {
-  const frame =
-    "rounded-xl bg-background p-5 text-sm text-foreground ring-[0.5px] ring-border"
-  return (
-    <Unstyled>
-      <TooltipProvider>
-        <div className="my-4 grid gap-4 lg:grid-cols-2">
-          {(["Light", "Dark"] as const).map((mode) => (
-            <figure key={mode} className="min-w-0">
-              <div className={mode === "Dark" ? `dark ${frame}` : frame}>
-                {children}
-              </div>
-              <figcaption className="mt-2 text-sm text-muted-foreground">
-                {mode}
-              </figcaption>
-            </figure>
-          ))}
         </div>
       </TooltipProvider>
     </Unstyled>
@@ -221,27 +163,33 @@ const WEIGHTS = [
   { weight: "Bold", className: "font-bold" },
 ]
 
-/** A table row that prints what the browser gives its sample: `read` turns the computed style into the value. */
+/**
+ * One row of a spec table: the value's name and class, what the browser reads from its sample (`read`, given the
+ * sample's computed style and the element marked `data-measure` inside it), what it is used for, and the sample.
+ */
 function SpecRow({
   name,
-  className,
-  sample,
+  code,
   read,
   note,
-  code = className,
+  sample,
 }: {
   name: string
-  className: string
-  /** The class to print, when the sample needs more classes than the one it shows. */
-  code?: string
-  sample: string
-  read: (style: CSSStyleDeclaration) => string
-  note: string
+  code: string
+  read?: Read
+  note?: ReactNode
+  sample: ReactNode
 }) {
-  const ref = useRef<HTMLSpanElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [value, setValue] = useState("")
   useLayoutEffect(() => {
-    if (ref.current) setValue(read(getComputedStyle(ref.current)))
+    const root = ref.current
+    if (!root || !read) return
+    const el =
+      root.querySelector<HTMLElement>("[data-measure]") ??
+      (root.firstElementChild as HTMLElement | null) ??
+      root
+    setValue(read(getComputedStyle(el), el))
   }, [read])
   return (
     <tr className="border-b last:border-b-0">
@@ -251,29 +199,33 @@ function SpecRow({
           {code}
         </code>
       </td>
-      <td className="py-3 pr-4 align-middle font-mono text-[11px] whitespace-nowrap text-muted-foreground tabular-nums">
-        {value}
-      </td>
-      <td className="py-3 pr-4 align-middle text-muted-foreground">{note}</td>
+      {read && (
+        <td className="max-w-48 py-3 pr-4 align-middle font-mono text-[11px] break-words text-muted-foreground tabular-nums">
+          {value}
+        </td>
+      )}
+      {note !== undefined && (
+        <td className="py-3 pr-4 align-middle text-muted-foreground">{note}</td>
+      )}
       <td className="py-3 align-middle">
-        <span ref={ref} className={cn(className, "block whitespace-nowrap")}>
+        <div ref={ref} className="flex items-center">
           {sample}
-        </span>
+        </div>
       </td>
     </tr>
   )
 }
 
-const sizeAndLine = (s: CSSStyleDeclaration) =>
-  `${px(s.fontSize)} / ${px(s.lineHeight)}`
-const weightValue = (s: CSSStyleDeclaration) => s.fontWeight
-
+/** A spec table in its frame: one row per value, the columns named by `head`, the sample last. */
 function SpecTable({
   head,
   children,
+  sample = "Sample",
 }: {
-  head: [string, string, string]
+  head: string[]
   children: ReactNode
+  /** The sample column's heading, such as "Light and Dark" for a value that changes with the mode. */
+  sample?: string
 }) {
   return (
     <Frame>
@@ -281,7 +233,7 @@ function SpecTable({
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b text-xs text-muted-foreground">
-              {[...head, "Sample"].map((cell) => (
+              {[...head, sample].map((cell) => (
                 <th key={cell} className="pr-4 pb-2 font-medium">
                   {cell}
                 </th>
@@ -295,6 +247,10 @@ function SpecTable({
   )
 }
 
+const sizeAndLine = (s: CSSStyleDeclaration) =>
+  `${px(s.fontSize)} / ${px(s.lineHeight)}`
+const weightValue = (s: CSSStyleDeclaration) => s.fontWeight
+
 export const typographyExamples = {
   "Type scale": (
     <SpecTable head={["Step", "Size / line height", "In an Aperia app"]}>
@@ -302,8 +258,10 @@ export const typographyExamples = {
         <SpecRow
           key={step.step}
           name={step.step}
-          className={step.className}
-          sample="Aa"
+          code={step.className}
+          sample={
+            <span className={cn(step.className, "whitespace-nowrap")}>Aa</span>
+          }
           read={sizeAndLine}
           note={step.used ? "Used" : "Not used"}
         />
@@ -316,9 +274,14 @@ export const typographyExamples = {
         <SpecRow
           key={weight.weight}
           name={weight.weight}
-          className={cn("text-base", weight.className)}
           code={weight.className}
-          sample="Recent Activity"
+          sample={
+            <span
+              className={cn("text-base whitespace-nowrap", weight.className)}
+            >
+              Recent Activity
+            </span>
+          }
           read={weightValue}
           note={weight.weight === "Bold" ? "Sidebar logo only" : "Used"}
         />
@@ -350,7 +313,33 @@ export const typographyExamples = {
 // ─── Spacing ───────────────────────────────────────────────────────────────
 
 // The steps as Tailwind writes them, so each bar is exactly a step wide.
-const SPACE_STEPS = ["w-1", "w-2", "w-3", "w-4", "w-5"]
+const SPACE_STEPS = [
+  {
+    className: "w-1",
+    code: "gap-1",
+    use: "Between an icon and its label, or between chips",
+  },
+  {
+    className: "w-2",
+    code: "gap-2",
+    use: "Between buttons or controls in a row",
+  },
+  {
+    className: "w-3",
+    code: "gap-3 · p-3",
+    use: "Inside a component; a small card's and a popover's inset",
+  },
+  {
+    className: "w-4",
+    code: "gap-4 · p-4",
+    use: "A card's, a sheet's, and a dialog's inset; between cards",
+  },
+  {
+    className: "w-5",
+    code: "gap-5 · p-5",
+    use: "Between page sections; the page column's inset",
+  },
+]
 
 function Sections({ gap }: { gap: string }) {
   return (
@@ -390,18 +379,25 @@ export const spacingExamples = {
     />
   ),
   "What is available": (
-    <Frame>
-      <div className="grid gap-4">
-        <Measured read={cssVar("--spacing")} label="The spacing unit">
-          {null}
-        </Measured>
-        {SPACE_STEPS.map((w, i) => (
-          <Measured key={w} read={(s) => px(s.width)} label={`Step ${i + 1}`}>
-            <div data-measure className={`h-6 ${w} bg-primary/40`} />
-          </Measured>
-        ))}
-      </div>
-    </Frame>
+    <SpecTable head={["Step", "Size", "Used for"]}>
+      <SpecRow
+        name="Unit"
+        code="--spacing"
+        read={cssVar("--spacing")}
+        note="Every step is a multiple of it"
+        sample={<span className="text-muted-foreground">—</span>}
+      />
+      {SPACE_STEPS.map((step, at) => (
+        <SpecRow
+          key={step.className}
+          name={`Step ${at + 1}`}
+          code={step.code}
+          read={(style) => px(style.width)}
+          note={step.use}
+          sample={<div className={`h-4 ${step.className} bg-primary/40`} />}
+        />
+      ))}
+    </SpecTable>
   ),
   "Leave space between sections": (
     <DoDont
@@ -417,49 +413,94 @@ export const spacingExamples = {
 // ─── Border and Radius ─────────────────────────────────────────────────────
 
 const CORNERS = [
-  { name: "Small", className: "rounded-sm" },
-  { name: "Medium", className: "rounded-md" },
-  { name: "Large", className: "rounded-lg" },
-  { name: "Extra large", className: "rounded-xl" },
-  { name: "Round", className: "rounded-full" },
+  {
+    name: "Small",
+    className: "rounded-sm",
+    use: "The smallest square picture",
+  },
+  {
+    name: "Medium",
+    className: "rounded-md",
+    use: "Menu items, tooltips, small buttons, and loading blocks",
+  },
+  {
+    name: "Large",
+    className: "rounded-lg",
+    use: "Buttons, fields, dropdowns, menus, and popovers",
+  },
+  {
+    name: "Extra large",
+    className: "rounded-xl",
+    use: "Cards, dialogs, sheets, and empty states",
+  },
+  {
+    name: "Round",
+    className: "rounded-full",
+    use: "People's pictures, switches, and badges",
+  },
 ]
 
 const radius: Read = (s) =>
   parseFloat(s.borderTopLeftRadius) > 999 ? "full" : px(s.borderTopLeftRadius)
 
 export const borderExamples = {
-  "What is available": (
-    <Frame>
-      <div className="grid gap-6">
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-3">
-          {CORNERS.map((c) => (
-            <Measured key={c.name} read={radius} label={c.name}>
-              <div data-measure className={`size-14 surface ${c.className}`} />
-            </Measured>
-          ))}
-        </div>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
-          <Measured read={cssVar("--default-border-width")} label="Border and divider width">
-            <div className="h-8 surface" />
-          </Measured>
-          <Measured read={cssVar("--border")} label="Border">
-            <div className="h-8 surface" />
-          </Measured>
-          <Measured read={cssVar("--input")} label="Input">
-            <Input placeholder="Input" />
-          </Measured>
-          <Measured read={cssVar("--ring")} label="Focus">
-            <Input
-              placeholder="Focus"
-              className="ring-3 inset-ring-1 ring-ring/50 inset-ring-ring"
-            />
-          </Measured>
-          <Measured read={cssVar("--destructive")} label="Invalid">
-            <Input placeholder="Invalid" aria-invalid />
-          </Measured>
-        </div>
-      </div>
-    </Frame>
+  Radius: (
+    <SpecTable head={["Radius", "Value", "Used for"]}>
+      {CORNERS.map((corner) => (
+        <SpecRow
+          key={corner.name}
+          name={corner.name}
+          code={corner.className}
+          read={radius}
+          note={corner.use}
+          sample={<div className={`size-10 surface ${corner.className}`} />}
+        />
+      ))}
+    </SpecTable>
+  ),
+  Borders: (
+    <SpecTable head={["Border", "Value", "Used for"]}>
+      <SpecRow
+        name="Width"
+        code="--default-border-width"
+        read={cssVar("--default-border-width")}
+        note="Every border and divider"
+        sample={<div className="h-8 w-28 surface" />}
+      />
+      <SpecRow
+        name="Border"
+        code="ring-border · border"
+        read={cssVar("--border")}
+        note="Cards, tables, dialogs, sheets, and dividers"
+        sample={<div className="h-8 w-28 surface" />}
+      />
+      <SpecRow
+        name="Input"
+        code="ring-input"
+        read={cssVar("--input")}
+        note="Fields, outline buttons, checkboxes, and radios"
+        sample={<Input placeholder="Input" className="w-28" />}
+      />
+      <SpecRow
+        name="Focus"
+        code="inset-ring-ring · ring-ring/50"
+        read={cssVar("--ring")}
+        note="Any control with keyboard focus"
+        sample={
+          <Input
+            placeholder="Focus"
+            className="w-28 ring-3 inset-ring-1 ring-ring/50 inset-ring-ring"
+          />
+        }
+      />
+      <SpecRow
+        name="Invalid"
+        code="aria-invalid"
+        read={cssVar("--destructive")}
+        note="A field with an error"
+        sample={<Input placeholder="Invalid" aria-invalid className="w-28" />}
+      />
+    </SpecTable>
   ),
   "Use the thin border": (
     <DoDont
@@ -487,11 +528,44 @@ export const borderExamples = {
 // ─── Elevation ─────────────────────────────────────────────────────────────
 
 const SHADOWS = [
-  { name: "Small", token: "--shadow-sm", className: "shadow-sm" },
-  { name: "Medium", token: "--shadow-md", className: "shadow-md" },
-  { name: "Large", token: "--shadow-lg", className: "shadow-lg" },
-  { name: "Extra large", token: "--shadow-xl", className: "shadow-xl" },
+  {
+    name: "Small",
+    token: "--shadow-sm",
+    className: "shadow-sm",
+    use: "Cards, fields, outline buttons, and tables on the page",
+  },
+  {
+    name: "Medium",
+    token: "--shadow-md",
+    className: "shadow-md",
+    use: "Menus, popovers, hover cards, and select lists",
+  },
+  {
+    name: "Large",
+    token: "--shadow-lg",
+    className: "shadow-lg",
+    use: "Dialogs, alert dialogs, and sheets",
+  },
+  {
+    name: "Extra large",
+    token: "--shadow-xl",
+    className: "shadow-xl",
+    use: "A row or card while it is dragged",
+  },
 ]
+
+/** A sample drawn twice, on the Light page and on the Dark page, for a value that changes with the mode. */
+function InModes({ children }: { children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-2 gap-3">
+      {["", "dark"].map((mode) => (
+        <div key={mode} className={cn(mode, "rounded-lg bg-background p-3")}>
+          {children}
+        </div>
+      ))}
+    </div>
+  )
+}
 
 function Panel() {
   return (
@@ -524,24 +598,35 @@ function Behind({ blur }: { blur?: boolean }) {
 
 export const elevationExamples = {
   "What is available": (
-    <LightDark>
-      <div className="grid gap-6">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-5">
-          {SHADOWS.map((s) => (
-            <Measured key={s.name} read={cssVar(s.token)} label={s.name}>
+    <SpecTable head={["Shadow", "Used for"]} sample="Light and Dark">
+      {SHADOWS.map((shadow) => (
+        <SpecRow
+          key={shadow.name}
+          name={shadow.name}
+          code={shadow.className}
+          note={shadow.use}
+          sample={
+            <InModes>
               <div
-                className={`h-16 rounded-xl bg-card ring-[0.5px] ring-border ${s.className}`}
+                className={`h-10 w-20 rounded-xl bg-card ring-[0.5px] ring-border ${shadow.className}`}
               />
-            </Measured>
-          ))}
-        </div>
-        <Measured read={cssVar("--overlay")} label="Overlay">
-          <div className="relative h-16 overflow-hidden rounded-xl bg-card ring-[0.5px] ring-border">
-            <div className="absolute inset-y-0 right-0 left-1/2 bg-overlay" />
-          </div>
-        </Measured>
-      </div>
-    </LightDark>
+            </InModes>
+          }
+        />
+      ))}
+      <SpecRow
+        name="Overlay"
+        code="bg-overlay"
+        note="Behind dialogs and sheets, with no blur"
+        sample={
+          <InModes>
+            <div className="relative h-10 w-20 overflow-hidden rounded-xl bg-card ring-[0.5px] ring-border">
+              <div className="absolute inset-y-0 right-0 left-1/2 bg-overlay" />
+            </div>
+          </InModes>
+        }
+      />
+    </SpecTable>
   ),
   "Use one overlay without blur": (
     <DoDont
@@ -582,27 +667,46 @@ function Play() {
   )
 }
 
+const MOTION = [
+  {
+    name: "Panel opening",
+    token: "--panel-in",
+    use: "Dialogs, sheets, menus, and popovers as they open",
+  },
+  {
+    name: "Panel closing",
+    token: "--panel-out",
+    use: "The same panels as they close, a little faster",
+  },
+  {
+    name: "Sidebar rail",
+    token: "--rail-duration",
+    use: "The sidebar folding to its rail and back",
+  },
+  {
+    name: "Easing",
+    token: "--rail-ease",
+    use: "Every move: fast at first, then easing out",
+  },
+]
+
 export const motionExamples = {
   "What is available": (
     <>
+      <SpecTable head={["Timing", "Value", "Used for"]}>
+        {MOTION.map((timing) => (
+          <SpecRow
+            key={timing.name}
+            name={timing.name}
+            code={timing.token}
+            read={cssVar(timing.token)}
+            note={timing.use}
+            sample={<span className="text-muted-foreground">—</span>}
+          />
+        ))}
+      </SpecTable>
       <Frame>
-        <div className="grid gap-4">
-          <div className="grid grid-cols-2 gap-3">
-            <Measured read={cssVar("--panel-in")} label="Panel opening">
-              {null}
-            </Measured>
-            <Measured read={cssVar("--panel-out")} label="Panel closing">
-              {null}
-            </Measured>
-            <Measured read={cssVar("--rail-duration")} label="Sidebar rail">
-              {null}
-            </Measured>
-            <Measured read={cssVar("--rail-ease")} label="Easing">
-              {null}
-            </Measured>
-          </div>
-          <Play />
-        </div>
+        <Play />
       </Frame>
       <Example caption="A real dialog and sheet, on the same timing.">
         <Dialog>
@@ -640,48 +744,83 @@ export const motionExamples = {
 
 const height: Read = (s) => px(s.height)
 
-/** Sets a control on a 36px stage, bottom-aligned, so every label below it sits on one line. */
-const Stage = ({ children }: { children: ReactNode }) => (
-  <div className="flex h-9 items-end">{children}</div>
-)
+const CONTROL_SIZES = [
+  {
+    name: "Extra small",
+    code: 'size="xs"',
+    use: "Inside a compact component, when it sets it",
+    sample: (
+      <Button size="xs" variant="outline">
+        <PlusIcon />
+        Add
+      </Button>
+    ),
+  },
+  {
+    name: "Small",
+    code: 'size="sm"',
+    use: "Inside a compact component, such as a card's header",
+    sample: (
+      <Button size="sm" variant="outline">
+        <PlusIcon />
+        Add
+      </Button>
+    ),
+  },
+  {
+    name: "Default",
+    code: "the default",
+    use: "Every field, select, and button on a page, sheet, or dialog",
+    sample: (
+      <Button variant="outline">
+        <PlusIcon />
+        Add
+      </Button>
+    ),
+  },
+  {
+    name: "Large",
+    code: 'size="lg"',
+    use: "No Aperia use yet",
+    sample: (
+      <Button size="lg" variant="outline">
+        <PlusIcon />
+        Add
+      </Button>
+    ),
+  },
+  {
+    name: "Field",
+    code: "Input",
+    use: "The same height as a default button",
+    sample: <Input placeholder="Search" className="w-32" />,
+  },
+  {
+    name: "Icon button",
+    code: "IconButton",
+    use: "An icon with no text, such as Edit on a row",
+    sample: (
+      <IconButton label="Edit Task" variant="outline">
+        <PencilIcon />
+      </IconButton>
+    ),
+  },
+]
 
 export const sizesExamples = {
   "What is available": (
-    <Frame>
-      <div className="flex flex-wrap items-start gap-x-12 gap-y-6">
-        <div className="flex items-start gap-6">
-          {(["xs", "sm", "default", "lg"] as const).map((size) => (
-            <Measured key={size} read={height} label={size}>
-              <Stage>
-                <Button data-measure size={size} variant="outline">
-                  <PlusIcon />
-                  Add
-                </Button>
-              </Stage>
-            </Measured>
-          ))}
-        </div>
-        <div className="flex items-start gap-6">
-          <Measured read={height} label="Field">
-            <Stage>
-              <Input data-measure placeholder="Search" className="w-40" />
-            </Stage>
-          </Measured>
-          <Measured read={height} label="Button">
-            <Stage>
-              <Button data-measure>Add Task</Button>
-            </Stage>
-          </Measured>
-          <Measured read={height} label="Icon button">
-            <Stage>
-              <IconButton data-measure label="Edit Task" variant="outline">
-                <PencilIcon />
-              </IconButton>
-            </Stage>
-          </Measured>
-        </div>
-      </div>
-    </Frame>
+    <SpecTable head={["Size", "Height", "Used for"]}>
+      {CONTROL_SIZES.map((size) => (
+        <SpecRow
+          key={size.name}
+          name={size.name}
+          code={size.code}
+          read={height}
+          note={size.use}
+          sample={size.sample}
+        />
+      ))}
+    </SpecTable>
   ),
 }
 
@@ -692,23 +831,38 @@ const iconSize: Read = (_, el) =>
 
 export const iconsExamples = {
   "What is available": (
-    <Frame>
-      <div className="flex flex-wrap items-start gap-4">
-        {(["default", "sm", "xs"] as const).map((size) => (
-          <Measured key={size} read={iconSize} label={size}>
-            <Button data-measure variant="outline" size={size}>
+    <SpecTable head={["Place", "Icon size", "Used for"]}>
+      {(["default", "sm", "xs"] as const).map((size) => (
+        <SpecRow
+          key={size}
+          name={`Button, ${size === "default" ? "default" : size === "sm" ? "small" : "extra small"}`}
+          code={size === "default" ? "Button" : `Button size="${size}"`}
+          read={iconSize}
+          note={
+            size === "default"
+              ? "Buttons, menu items, and fields"
+              : "Compact buttons"
+          }
+          sample={
+            <Button variant="outline" size={size}>
               <SearchIcon />
               Search
             </Button>
-          </Measured>
-        ))}
-        <Measured read={iconSize} label="Empty state" className="w-40">
-          <div data-measure>
+          }
+        />
+      ))}
+      <SpecRow
+        name="Empty state"
+        code="EmptyState"
+        read={iconSize}
+        note="The icon above an empty state's title"
+        sample={
+          <div className="w-40">
             <EmptyState icon={InboxIcon} title="No Tasks" />
           </div>
-        </Measured>
-      </div>
-    </Frame>
+        }
+      />
+    </SpecTable>
   ),
   "Name every icon-only button": (
     <DoDont

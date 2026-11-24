@@ -10,15 +10,10 @@ page sections sit further apart still. Every app uses the same steps.
 
 ## What is available
 
-The spacing scale has five steps. Each step is a multiple of one spacing unit, set once in the library. The live scale
-on this page shows each step's size as the browser reads it.
-
-| Step | Used for |
-|---|---|
-| 1 and 2 | Inside a component, such as between an icon and its label, between chips, or between buttons in a row |
-| 3 | Inside a component, and a small card's padding |
-| 4 | Inside a component, a card's padding, and the gap between cards or tiles side by side or in a grid |
-| 5 | The gap between the page's sections, such as the page header, tiles, toolbar, and cards, and the space around the page column |
+The spacing scale has five steps, each a multiple of one spacing unit set once in the library. Steps 1 and 2 space
+parts inside a component, such as an icon and its label. Step 3 is a small container's inset. Step 4 is a card's inset
+and the gap between cards. Step 5 separates the page's sections. The live table on this page shows each step's size as
+the browser reads it.
 
 Each space comes from one source, listed below.
 

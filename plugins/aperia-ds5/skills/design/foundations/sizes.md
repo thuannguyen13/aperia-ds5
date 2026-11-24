@@ -12,14 +12,9 @@ are the same height.
 Sizes cover controls, icon buttons, fixed heights, and the page width. The components set these sizes themselves, so
 this page states each one once.
 
-Controls come in four sizes, the same on every screen, a phone included.
-
-| Size | Height |
-|---|---|
-| Default, for fields, selects, and buttons | 32px |
-| Large button | 36px |
-| Small button | 28px |
-| Extra small button | 24px |
+Controls come in four sizes, the same on every screen, a phone included. Default is for fields, selects, and buttons.
+Small and Extra small are for compact components, and Large has no use in an Aperia app yet. The live table on this
+page shows each height as the browser reads it.
 
 An icon button shows an icon with no text and is square. It is 28px by default. Its other sizes, 24px, 32px, and 36px,
 match the button heights, so an icon button can sit beside a button of the same height.

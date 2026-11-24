@@ -9,14 +9,9 @@ kind of thing an empty state is missing. Use an icon only where it helps someone
 
 ## What is available
 
-Icons come in three sizes. The components set these sizes, and the live samples on this page print each one as the
-browser reads it.
-
-| Where | Icon size |
-|---|---|
-| Buttons, fields, menus, and most controls | The default icon size |
-| Small buttons | A step smaller |
-| Extra small buttons | Smaller again |
+Icons come in three sizes, set by the components. Buttons, fields, menus, and most controls take the default size.
+Small buttons take a step smaller, and extra small buttons smaller again. The live table on this page shows each size as
+the browser reads it.
 
 An empty state shows its icon at the default size, on a Muted tile.
 

@@ -8,30 +8,24 @@ Use these borders and radii for every card, control, and panel.
 
 ## What is available
 
-Border and radius come in two sets, radii and borders.
+Border and radius come in two sets, radii and borders. The live tables on this page show each value as the browser
+reads it, with what uses it.
 
-Radii come in five steps. Every step is worked out from one base radius, set once in the library. The live samples
-on this page show each radius as the browser reads it.
+### Radius
 
-| Step | Where you see it |
-|---|---|
-| Small | The smallest square picture |
-| Medium | Menu items and search (⌘K) rows, tooltips, small and extra-small buttons, and loading placeholders |
-| Large (the base) | Buttons, fields, dropdowns, menus, and popovers |
-| Extra large | Cards, dialogs, sheets, and empty states |
-| Round | People's pictures, switches, and badges (a pill) |
+Radii come in five steps, Small, Medium, Large, Extra large, and Round, each worked out from one base radius set once in
+the library. Large is the base, for buttons, fields, dropdowns, menus, and popovers. Extra large is for cards, dialogs,
+sheets, and empty states. Round is for people's pictures, switches, and badges.
 
 A square picture, such as a company, product, or team picture, takes its radius from its size. It uses Large at the
 default size and larger, Medium when small, and Small when extra small. A checkbox has a tighter radius of its own.
 
-Borders come in four kinds. Every border and divider has the same width, set once in the library.
+### Borders
 
-| Border | What it outlines | Color |
-|---|---|---|
-| Border | Cards, tables, dialogs, and sheets | The Border color |
-| Input | Fields, outline buttons, checkboxes, radios, and the chosen tab | The Input color, a little stronger than Border |
-| Focus | Any control while it has keyboard focus | A thin primary line inside, plus a primary halo |
-| Invalid | A field with an error | The same line and halo in the destructive red |
+Every border and divider has the same width, set once in the library. Borders come in four kinds. Border outlines cards,
+tables, dialogs, and sheets, and draws dividers. Input outlines fields, outline buttons, checkboxes, radios, and the
+chosen tab, a little stronger than Border. Focus draws a thin primary line inside any control that has keyboard focus,
+plus a primary halo. Invalid draws the same line and halo in the destructive red on a field with an error.
 
 ## How it looks and behaves
 

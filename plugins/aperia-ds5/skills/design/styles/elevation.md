@@ -11,15 +11,9 @@ dialog, sheet, or drawer opens over the page.
 
 ## What is available
 
-Elevation has four shadow steps and one overlay. Each is set once in the library, for Light and Dark. The live samples
-on this page show each one as the browser reads it.
-
-| Step | What sits there |
-|---|---|
-| Small (resting) | Cards, fields, outline buttons, and tables or empty states on the page |
-| Medium (menu) | Dropdowns, menus, popovers, hover cards, and select and combobox lists |
-| Large (panel) | Dialogs, alert dialogs, and sheets |
-| Extra large (dragging) | A row or card while it is being dragged |
+Elevation has four shadow steps and one overlay, each set once in the library for Light and Dark. Small is for what
+rests on the page, such as cards and fields. Medium is for menus and popovers. Large is for dialogs and sheets. Extra
+large is for a row or card while it is dragged. The live table on this page shows each one in Light and Dark.
 
 Medium, Large, and Extra large each include the Small shadow beneath them. Drawers use the overlay but no shadow
 step.
