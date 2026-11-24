@@ -121,8 +121,8 @@ export const TwoActions: Story = {
 export const LoadError: Story = {
   args: {
     icon: CircleAlertIcon,
-    title: "Tasks Didn't Load",
-    description: "Try again.",
+    title: "Failed to Load",
+    description: undefined,
   },
   render: (args) => (
     <TitledCard title="Tasks">

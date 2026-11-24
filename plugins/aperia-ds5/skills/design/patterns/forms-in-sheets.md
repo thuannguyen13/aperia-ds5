@@ -7,7 +7,22 @@ A form in a sheet is a panel that slides in from the right to add or edit a reco
 Use a form in a sheet to add a record or change one, such as Add Contact or Edit Prospect. Open it from anywhere the
 record is added or edited, such as its list, its page, a card, or a picker in another form.
 
-Do not use a sheet to show a record. A record is read on its own page. Tables show records, and sheets edit them.
+### A sheet, a dialog, or a page of its own
+
+Where a task opens depends on what people do in it. Tables show records, sheets edit them, and dialogs ask a short
+question. Find the situation in this table:
+
+| Situation | Choice | Why |
+|---|---|---|
+| Adding or editing a record, such as Add Contact or Edit Prospect | A form in a sheet from the right | Each record has one form, the same wherever the record is added or edited. |
+| Reading a record | The record's own page, never a sheet or a dialog | The whole record is in view on one page of cards. |
+| Deleting or removing something, or a step whose consequence people must know first | A confirmation, which is a dialog | It must be answered before the change happens. See [Confirmations and Delete](confirmations-and-delete.md). |
+| Closing a sheet after typing in it | "Discard Changes?" in a dialog over the sheet | No one loses what they typed by accident. |
+| A short task, such as one or two choices | A dialog | It needs an answer before people go on. See [Dialog](../components/dialog.md). |
+| Changing a record's status with a reason | A small panel under the status from a table row, or a dialog from the record's page or a board | A status change is not a record form, so it never opens a sheet. See [Status Change With a Reason](../examples/status-change.md). |
+| Editing rows of amounts that add up, such as an opportunity's line items | One wider sheet, with a titled card per group | The page shows the lines read-only, so no one changes an amount by accident. See [Line Items With Totals](../examples/line-items.md). |
+| Turning settings on and off, such as Notification Settings | A sheet of switches with no Save button | Each switch saves as it is flipped. See [Switches in a Grid](switches-in-a-grid.md). |
+| Bringing records in from a file | A small panel under the Import button, then one large dialog for the review | The review saves nothing, and the list refreshes when the dialog closes. See [Import Wizard](../examples/import.md). |
 
 ## What is available
 
@@ -87,14 +102,8 @@ A form in a sheet goes through these steps, from opening to closing:
 
 ## When you can do it differently
 
-Three cases use another form:
-
-- Changing a record's status with a reason is not a record form. From the status in a table row, it opens in a small
-  panel under the status. From the record's page, it opens in a dialog.
-- Rows of amounts that add up, such as an opportunity's line items, are edited in one wider sheet, with a titled card
-  per group.
-- A settings sheet of on/off switches, such as Notification Settings, saves each switch as it is flipped and has no
-  Save button. See [Switches in a Grid](switches-in-a-grid.md) for the switches.
+A status change with a reason, rows of amounts that add up, and a settings sheet of switches each use another form.
+Each one is a row of the table under When to use.
 
 ## Works with
 
@@ -102,6 +111,7 @@ Three cases use another form:
 - See [Pickers](pickers.md) for fields that pick a record, and for adding a missing one from the picker.
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for a field that waits on another.
 - See [Buttons and Actions](buttons-and-actions.md) for the footer's buttons.
+- See [Message Templates](../foundations/copy-templates.md) for choosing a toast, an alert, or a message on the field.
 
 ## In code
 

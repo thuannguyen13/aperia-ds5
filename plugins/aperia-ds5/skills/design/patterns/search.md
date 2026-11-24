@@ -66,7 +66,7 @@ This pattern has no exceptions.
 Search works with three other pages:
 
 - See [App Shell](app-shell.md) for the Search entry in the sidebar that opens it.
-- See [Empty and Missing](../foundations/empty-and-missing.md) for "No Results".
+- See [Empty States](../foundations/empty-states.md) for "No Results".
 - See [Motion](../styles/motion.md) for how the panel opens and closes.
 
 ## In code

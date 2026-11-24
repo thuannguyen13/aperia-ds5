@@ -12,15 +12,8 @@ Use a dialog in three cases:
 | Short task | One or two choices, such as picking a reason |
 | Global search | The search panel opened from the sidebar or ⌘K |
 
-### Dialog or sheet?
-
-A dialog and a sheet hold different work:
-
-| Work | Where it opens |
-|---|---|
-| A form that adds or edits a record | A sheet from the right, never a dialog |
-| Reading a record | The record's own page, not a dialog |
-| A confirmation or a short question | A dialog |
+See [Forms in Sheets](../patterns/forms-in-sheets.md) for choosing a sheet, a dialog, or a page of its own, such as for
+a form that adds or edits a record.
 
 ### Dialog or alert dialog?
 

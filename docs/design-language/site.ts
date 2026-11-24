@@ -57,8 +57,7 @@ export const FOUNDATIONS: Section<SkillPage> = {
       title: "States",
       pages: [
         { file: "foundations/loading.md" },
-        { file: "foundations/empty-and-missing.md" },
-        { file: "foundations/empty-state.md" },
+        { file: "foundations/empty-states.md" },
         { file: "foundations/disabled-with-a-reason.md" },
       ],
     },

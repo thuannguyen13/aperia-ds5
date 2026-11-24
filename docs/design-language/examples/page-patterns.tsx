@@ -174,7 +174,7 @@ export const loadingExamples = {
   ),
 }
 
-export const emptyAndMissingExamples = {
+export const missingValueExamples = {
   "Show a missing value as a dash": (
     <DoDont
       good={<Details right />}

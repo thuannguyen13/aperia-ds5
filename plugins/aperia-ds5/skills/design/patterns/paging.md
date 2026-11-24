@@ -36,7 +36,7 @@ number is part of the page's address, so a link or the browser's Back button ret
 
 On the first page, Previous is disabled and says "This is the first page." when people point at it. On the last page,
 Next says "This is the last page." When nothing matches, the footer is gone and the list shows No Results. See
-[Empty and Missing](../foundations/empty-and-missing.md) for that state.
+[Empty States](../foundations/empty-states.md) for that state.
 
 ## Rules
 

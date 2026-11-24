@@ -89,7 +89,7 @@ after the change, such as "Change to Lost".
 ## Works with
 
 - See [Forms in Sheets](forms-in-sheets.md) for Delete in the sheet's footer and for Discard Changes?, which guards what
-  was typed.
+  was typed. Forms in Sheets also holds the choice between a sheet, a dialog, and a page of its own.
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the in-use phrases.
 - See [Buttons and Actions](buttons-and-actions.md) for button types and labels.
 - See [Dialog](../components/dialog.md) for the dialog itself.

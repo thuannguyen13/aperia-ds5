@@ -379,7 +379,7 @@ Send questions these rules do not answer to the VP of Product Innovation and Des
   hand.
 - Values: `RelativeTime` ("3d ago" with the date on hover). It reads the clock only in the browser, so it works in a
   server component and in a prerendered page with no `Suspense` around it. Use it, not `ago()`, on a page: `ago()` reads
-  the clock when it is called. Build the empty value (—) and "No [field]" text in the app from [Empty and
-  Missing](empty-and-missing.md), and the hidden value ($XX,XXX) from [Money and Numbers](money-and-numbers.md).
+  the clock when it is called. Build the empty value (—) and "No [field]" text in the app from
+  [Empty States](empty-states.md), and the hidden value ($XX,XXX) from [Money and Numbers](money-and-numbers.md).
 - The project's own glossary and copy decisions, when it has them: `docs/glossary.md`, `docs/screens.md`, or a
   project-level `ui-copy` skill.

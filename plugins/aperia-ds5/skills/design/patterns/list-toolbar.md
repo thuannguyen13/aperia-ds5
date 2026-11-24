@@ -31,7 +31,7 @@ footer.
 The toolbar is a section of its own between the page header and the list, 20px from each. It is one row on a desktop.
 
 When nothing matches, the list shows "No Results" with Clear Filters. See
-[Empty and Missing](../foundations/empty-and-missing.md) for that state. While the list is empty, the toolbar is gone,
+[Empty States](../foundations/empty-states.md) for that state. While the list is empty, the toolbar is gone,
 and the empty state holds Add instead.
 
 On a phone, the toolbar is at most three short rows:

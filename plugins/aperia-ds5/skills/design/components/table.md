@@ -7,12 +7,8 @@ A table lists records in rows with shared columns so people can scan and compare
 
 Use a table to list records the user scans, compares, sorts, or filters.
 
-Use something else in two cases:
-
-| Case | Use instead |
-|---|---|
-| One record's details | Labeled values on the record's page |
-| A few items with no columns to compare | A simple list |
+See [Tables](../patterns/tables.md) for choosing a table on the page, a table in a card, or a simple list, and for
+the cases that use no table.
 
 ## What is available
 
