@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from "react"
 import { Unstyled } from "@storybook/addon-docs/blocks"
-import { ToggleGroup, ToggleGroupItem } from "aperia-ds5"
+import { Separator, ToggleGroup, ToggleGroupItem } from "aperia-ds5"
 import { cn } from "@/lib/utils"
 
 import titanQueue1280 from "../assets/before/titan-queue-1280.jpg"
@@ -112,10 +112,12 @@ function Compare({
     <Unstyled>
       <figure className="my-4 flex flex-col gap-3 text-sm text-foreground">
         <div className="flex flex-wrap items-center gap-2">
+          {/* Two choices, each a joined group, with a line between them. */}
           <ToggleGroup
             type="single"
             variant="outline"
             size="sm"
+            spacing={0}
             aria-label="App"
             value={app}
             onValueChange={(next) => next && setApp(next as typeof app)}
@@ -123,10 +125,12 @@ function Compare({
             <ToggleGroupItem value="Titan">Titan</ToggleGroupItem>
             <ToggleGroupItem value="Sales Portal">Sales Portal</ToggleGroupItem>
           </ToggleGroup>
+          <Separator orientation="vertical" className="mx-1 h-5" />
           <ToggleGroup
             type="single"
             variant="outline"
             size="sm"
+            spacing={0}
             aria-label="Screen width"
             value={device}
             onValueChange={(next) => next && setDevice(next as Device)}
