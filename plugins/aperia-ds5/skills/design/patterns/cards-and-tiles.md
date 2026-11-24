@@ -24,7 +24,7 @@ Cards and tiles come in seven parts and forms:
 | Tabs inside a card | Tabs under the card header that switch the card's content. |
 | Tile | A label above the number says what it counts. A line below the number says what it means, when that needs saying, such as "Up 8% on last quarter". A progress bar can go under the number. |
 | Red tile | The number in the destructive color. It shows only with a label that says what it counts, such as "3 overdue". |
-| Tiles inside a card | The card is the surface, so the tiles drop their own surface. |
+| Tiles inside a card | The tiles drop their surface inside the card. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for why. |
 | Chart tooltip | A card with a gap between the name of each series and its value. A chart that takes keyboard focus shows the focus ring. |
 
 ## How it looks and behaves
@@ -92,6 +92,8 @@ Cards and tiles work with these pages:
 
 - See [Card](../components/card.md) for the card's types and specs, for heading every card the same way, for tabs
   inside the card, and for collapsing a card with its title.
+- See [Surfaces and Layers](../styles/surfaces-and-layers.md) for grouping rows inside a card, and for separate groups in
+  separate cards.
 - See [Money and Numbers](../foundations/money-and-numbers.md) for how a tile's number is written.
 - See [Buttons and Actions](buttons-and-actions.md) for Add in the header.
 - See [Empty States](../foundations/empty-states.md) for an empty card.

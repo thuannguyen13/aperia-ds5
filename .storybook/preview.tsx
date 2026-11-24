@@ -56,6 +56,7 @@ const preview: Preview = {
           "Styles",
           [
             "Overview",
+            "Surfaces and Layers",
             "Color",
             "Typography",
             "Border and Radius",

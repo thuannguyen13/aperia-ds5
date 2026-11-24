@@ -112,6 +112,8 @@ An app never changes it only to look different. No other shared color changes pe
 
 ## Works with
 
+- See [Surfaces and Layers](surfaces-and-layers.md) for which fill each part of a screen sits on, and where a status
+  color goes.
 - See [Elevation](elevation.md) for shadows and the overlay.
 - See [Border and Radius](border-and-radius.md) for where Border and Input draw.
 - See [Typography](typography.md) for which text is foreground and which is muted.

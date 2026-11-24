@@ -54,9 +54,9 @@ rest, on hover, on focus, when pressed, and when disabled.
   [Copy](foundations/copy.md), [Message Templates](foundations/copy-templates.md), [Money and
   Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Empty
   States](foundations/empty-states.md), [Disabled With a Reason](foundations/disabled-with-a-reason.md).
-- **Styles** (the visual values): [Color](styles/color.md), [Typography](styles/typography.md),
-  [Border and Radius](styles/border-and-radius.md), [Elevation](styles/elevation.md), [Motion](styles/motion.md),
-  [Icons](styles/icons.md).
+- **Styles** (the visual values): [Surfaces and Layers](styles/surfaces-and-layers.md), [Color](styles/color.md),
+  [Typography](styles/typography.md), [Border and Radius](styles/border-and-radius.md), [Elevation](styles/elevation.md),
+  [Motion](styles/motion.md), [Icons](styles/icons.md).
 - **Components** (one building block in depth; every other building block's props and live examples are in
   Storybook): [Button](components/button.md), [Card](components/card.md), [Dialog](components/dialog.md),
   [Table](components/table.md). A pattern's components (such as `ListToolbar` or `ReasonTooltip`) are on that pattern's
@@ -115,7 +115,8 @@ rest, on hover, on focus, when pressed, and when disabled.
    built in the app from these parts, the way the Examples pages show.
 4. **Apply the invariants** below, and the page for what you are placing: its pattern page, and its component page when
    there is one. [Scaffold](foundations/scaffold.md) says which region and which place each kind of thing goes in,
-   and [Buttons and Actions](patterns/buttons-and-actions.md) says where buttons go.
+   and [Buttons and Actions](patterns/buttons-and-actions.md) says where buttons go. For a part no page shows, follow
+   Styling something new on [Surfaces and Layers](styles/surfaces-and-layers.md).
 5. **Write the copy** by [Copy](foundations/copy.md), with the fixed wording in
    [Message Templates](foundations/copy-templates.md).
 6. **Measure alignment** in the browser (`getBoundingClientRect`). Check both themes and phone width.
@@ -128,7 +129,8 @@ rest, on hover, on focus, when pressed, and when disabled.
    shadow. The aperia-ds5 components already have it; for your own markup use the `surface` (cards, a table or empty
    state on the page) and `control` utilities. Never put a bordered box inside a bordered card: a table sits flush in
    its card.
-2. **The page is light gray and cards are white.** Sheets and dialogs share one fill.
+2. **The page is light gray and cards are white.** Sheets and dialogs share one fill. A list of rows in a sheet sits on
+   a surface ([Surfaces and Layers](styles/surfaces-and-layers.md)).
 3. **One overlay for every floating panel** (`--overlay`). **Never blur.** Dialogs, alerts and sheets look alike.
 4. **Motion eases out:** panels open and close on the shared timing ([Motion](styles/motion.md)), a dialog growing
    slightly as it opens. Reduced motion only fades. Nothing pops in or snaps shut.

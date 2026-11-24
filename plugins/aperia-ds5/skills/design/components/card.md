@@ -9,7 +9,8 @@ Use a card to group content that belongs together and has a name, such as Detail
 
 Do not use a card for a whole page. See [Tables](../patterns/tables.md) for where a list's table sits.
 
-Do not put a card inside another card. A card never holds a second bordered box, so each group has one frame.
+Do not put a card inside another card. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for how to set parts
+apart inside a card instead.
 
 ## What is available
 
