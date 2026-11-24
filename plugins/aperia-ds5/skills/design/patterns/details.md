@@ -31,6 +31,9 @@ A phone number, email, or website in details is a link. Selecting it calls, writ
 The link uses the body color and is underlined only under the pointer. In a table, the same values are plain text. See
 [Table](../components/table.md) for values in a table.
 
+On a phone, each label stays beside its value. A long value wraps inside its own column, so the values still line up
+down the block. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
 ## Rules
 
 ### Line the values up in one column

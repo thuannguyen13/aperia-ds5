@@ -31,7 +31,7 @@ Cards and tiles come in seven parts and forms:
 
 A card is built from a header and its content. A card header is 56px high. Its title, figure, and action sit on one
 32px row. Card titles are semibold and one step smaller than the page title. On a phone, an action that does not fit
-beside the title drops under it.
+beside the title drops under it. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 Add sits at the right of the header. When the card's list also has Sort, Sort sits before Add. See
 [Sort](sort.md) for the Sort control. While the card is empty, Add moves to the middle of the empty state, and the

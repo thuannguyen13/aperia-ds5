@@ -47,6 +47,9 @@ A cell with several names shows a count. Selecting the count lists the names.
 
 A missing value is a muted em dash (—). See [Empty States](../foundations/empty-states.md) for missing values.
 
+On a phone, a table keeps every column and scrolls sideways inside its box, so the page never scrolls sideways.
+See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
 ## Rules
 
 ### Put the column headings right under the card header

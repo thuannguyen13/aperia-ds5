@@ -44,7 +44,8 @@ On a phone, the toolbar is at most three short rows:
 2. The search comes next, with Filter and Sort as icon buttons at its end. Sort opens the same panel as on a desktop.
 3. The filters that are on come last, as chips on one line that scrolls sideways.
 
-See [Filters](filters.md) for the sheet that the Filter button opens.
+See [Filters](filters.md) for the sheet that the Filter button opens. See [Screen Sizes](../foundations/screen-sizes.md)
+for every part on a phone.
 
 ## Rules
 

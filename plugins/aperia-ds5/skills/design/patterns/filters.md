@@ -106,6 +106,7 @@ The Filter button opens a sheet from the bottom in two steps:
 
 Every change applies at once, so the sheet has no button to apply or show results. Its header holds the count, Clear
 All, and the close button. Clear All is disabled while no filter is on, and says "No filters to clear."
+See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ### When nothing matches
 

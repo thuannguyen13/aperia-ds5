@@ -43,6 +43,10 @@ A picker has six behaviors, listed in the order people meet them:
 6. A picker that waits on another pick is disabled and keeps its placeholder. A line under it says why, such as "Pick a
    prospect first."
 
+On a phone, the list is as wide as the field and never taller than the space left on the screen. Add opens the
+record's form in a sheet that fills the screen. See [Screen Sizes](../foundations/screen-sizes.md)
+for every part on a phone.
+
 ## Rules
 
 ### Show each record's picture

@@ -45,7 +45,8 @@ An action the user cannot take still shows. It is disabled and says why on hover
 record cannot have says "This item is in use and cannot be deleted."
 
 On a phone, the record actions stay on the title's line. The other buttons take a full-width row under it, with the
-primary action first. Properties sit in two columns.
+primary action first. Properties sit in two columns. See [Screen Sizes](../foundations/screen-sizes.md) for every
+part on a phone.
 
 ## Rules
 

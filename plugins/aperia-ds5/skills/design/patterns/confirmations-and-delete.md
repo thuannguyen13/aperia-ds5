@@ -34,6 +34,7 @@ A confirmation opens, waits for a choice, and closes in this order:
 
 1. The dialog opens centered over a dimmed page and grows in slightly.
 2. Cancel, then the action, sit at the bottom right. On a phone the buttons stack, with the action on top.
+   See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 3. Closing the dialog by Cancel, Escape, or the action puts focus back on what opened it.
 4. A confirmation opened from a record's sheet sits over the sheet, which stays as it was under it. Once the record is
    deleted, the sheet closes too.

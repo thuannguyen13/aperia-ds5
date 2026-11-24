@@ -50,7 +50,7 @@ rest, on hover, on focus, when pressed, and when disabled.
 - **Get Started**: [Overview](overview.md), [For Designers](get-started/for-designers.md) and
   [For Developers](get-started/for-developers.md).
 - **Foundations** (rules across every screen): [Accessibility](foundations/accessibility.md); Layout:
-  [Scaffold](foundations/scaffold.md), [Page Layout](foundations/page-layout.md), [Spacing](foundations/spacing.md), [Sizes](foundations/sizes.md); Content Design:
+  [Scaffold](foundations/scaffold.md), [Page Layout](foundations/page-layout.md), [Screen Sizes](foundations/screen-sizes.md), [Spacing](foundations/spacing.md), [Sizes](foundations/sizes.md); Content Design:
   [Copy](foundations/copy.md), [Message Templates](foundations/copy-templates.md), [Money and
   Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Empty
   States](foundations/empty-states.md), [Disabled With a Reason](foundations/disabled-with-a-reason.md).
@@ -152,7 +152,8 @@ rest, on hover, on focus, when pressed, and when disabled.
 12. **Title Case** for titles, headings, tabs, table headers, labels and buttons. Sentence case for sentences,
     descriptions and values.
 13. **Everything clickable shows the pointer,** rows and menu items included.
-14. **Controls keep their size on a phone** (32px, icon buttons 28px), and sheets fill the screen.
+14. **Controls keep their size on a phone** (32px, icon buttons 28px), and sheets fill the screen
+    ([Screen Sizes](foundations/screen-sizes.md)).
 15. **Vertical alignment holds across containers:** icons, pictures, headings, text and footers in one column share an
     x. A card's content starts on its title's line; a part with its own padding (a hover row, a ghost button) takes an
     equal negative margin to stay on it. Indents only show hierarchy ([Page Layout](foundations/page-layout.md)).

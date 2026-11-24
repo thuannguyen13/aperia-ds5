@@ -42,6 +42,7 @@ export const FOUNDATIONS: Section<SkillPage> = {
       pages: [
         { file: "foundations/scaffold.md" },
         { file: "foundations/page-layout.md" },
+        { file: "foundations/screen-sizes.md" },
         { file: "foundations/spacing.md" },
         { file: "foundations/sizes.md" },
       ],

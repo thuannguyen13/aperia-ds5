@@ -34,7 +34,8 @@ Search opens as a dialog, updates as the user types, and closes when a result op
 8. "No Results" shows only once typing has paused for about 400ms.
 9. Opening a result closes the panel. On a phone, it also closes the sidebar.
 10. Closing the panel clears what was typed.
-11. On a phone, the panel fills the screen, and the key hint is hidden.
+11. On a phone, the panel fills the screen, and the key hint is hidden. See
+    [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ## Rules
 

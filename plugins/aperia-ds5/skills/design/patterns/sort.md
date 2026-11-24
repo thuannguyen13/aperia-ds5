@@ -33,7 +33,7 @@ Names sort as people read them. Capitals and accents do not split them, and "Que
 keep their order.
 
 On a phone, Sort is an icon button at the end of the search's line. It shows a dot while the list is sorted, and it
-opens the same panel.
+opens the same panel. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ## Rules
 

@@ -47,7 +47,7 @@ const preview: Preview = {
             "Overview",
             "Accessibility",
             "Layout",
-            ["Scaffold", "Page Layout", "Spacing", "Sizes"],
+            ["Scaffold", "Page Layout", "Screen Sizes", "Spacing", "Sizes"],
             "Content Design",
             ["Copy", "Message Templates", "Money and Numbers"],
             "States",
