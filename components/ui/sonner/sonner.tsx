@@ -74,7 +74,7 @@ const withClose = (data?: ExternalToast): ExternalToast | undefined =>
  * default, since only a success closes on its own. Import it from `aperia-ds5` rather than `sonner`, so it reaches the
  * library's `Toaster` even when the app resolves its own copy of sonner.
  */
-const toast = Object.assign(
+const toast: typeof sonnerToast = Object.assign(
   (message: Message, data?: ExternalToast) =>
     sonnerToast(message, withClose(data)),
   {
