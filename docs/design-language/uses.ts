@@ -141,8 +141,12 @@ const ORDER = [...HOMES.keys()]
 export function componentsOf(file: string): Home[] {
   const page = USES.find((each) => each.file === file)
   if (!page) return []
-  return ORDER.filter((dir) => page.dirs.has(dir)).map(
+  // Several folders can share one home, such as two pattern components on one pattern page: list that home once.
+  const homes = ORDER.filter((dir) => page.dirs.has(dir)).map(
     (dir) => HOMES.get(dir) as Home
+  )
+  return homes.filter(
+    (home, at) => homes.findIndex((each) => each.id === home.id) === at
   )
 }
 
