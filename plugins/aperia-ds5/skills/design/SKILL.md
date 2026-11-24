@@ -52,8 +52,9 @@ rest, on hover, on focus, when pressed, and when disabled.
 - **Foundations** (rules across every screen): [Accessibility](foundations/accessibility.md); Layout:
   [Scaffold](foundations/scaffold.md), [Page Layout](foundations/page-layout.md), [Spacing](foundations/spacing.md), [Sizes](foundations/sizes.md); Content Design:
   [Copy](foundations/copy.md), [Message Templates](foundations/copy-templates.md), [Money and
-  Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Empty
-  States](foundations/empty-states.md), [Disabled With a Reason](foundations/disabled-with-a-reason.md).
+  Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Saving and
+  Feedback](foundations/saving-and-feedback.md), [Empty States](foundations/empty-states.md), [Disabled With a
+  Reason](foundations/disabled-with-a-reason.md).
 - **Styles** (the visual values): [Color](styles/color.md), [Typography](styles/typography.md),
   [Border and Radius](styles/border-and-radius.md), [Elevation](styles/elevation.md), [Motion](styles/motion.md),
   [Icons](styles/icons.md).
@@ -187,6 +188,10 @@ lines below for the user to check in their browser.
 - [ ] No 1px border on a surface, and no bordered box inside a card.
 - [ ] Every empty or no-match state is `EmptyState`, and its second line adds something.
 - [ ] Every icon-only button has a tooltip.
+- [ ] An action the role can never take is left out; one blocked for now is disabled with its reason
+      ([Disabled With a Reason](foundations/disabled-with-a-reason.md)).
+- [ ] A switch, pick or tick saves at once with no Save button; a form shows its working state and asks before
+      discarding ([Saving and Feedback](foundations/saving-and-feedback.md)).
 - [ ] Every record picture comes from the one picture component, with no frame.
 - [ ] Panels use the shared overlay and motion, with no blur.
 - [ ] Shared lines are measured in the browser, not eyeballed. Both themes and phone width are checked.

@@ -4,6 +4,7 @@ import * as ReasonStories from "../../../components/ui/reason-tooltip/reason-too
 import * as FieldNoteStories from "../../../components/ui/field-note/field-note.stories"
 import { buttonExamples } from "../examples/button"
 import { disabledExamples } from "../examples/forms-and-values"
+import { roleLimitExamples } from "../examples/behavior"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
 
@@ -13,6 +14,7 @@ import { PatternCode } from "../component-page"
   source={source}
   code={<PatternCode components={[{ name: "ReasonTooltip", stories: ReasonStories }, { name: "FieldNote", stories: FieldNoteStories }]} />}
   after={{
+    ...roleLimitExamples,
     "@intro": <Canvas of={ReasonStories.Default} sourceState="none" />,
     "What is available": (
       <>

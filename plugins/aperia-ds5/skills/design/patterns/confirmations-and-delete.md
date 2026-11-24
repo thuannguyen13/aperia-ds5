@@ -93,6 +93,7 @@ after the change, such as "Change to Lost".
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the in-use phrases.
 - See [Buttons and Actions](buttons-and-actions.md) for button types and labels.
 - See [Dialog](../components/dialog.md) for the dialog itself.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for a change that offers Undo instead of asking.
 
 ## In code
 

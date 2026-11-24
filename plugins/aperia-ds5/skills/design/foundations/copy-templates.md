@@ -180,6 +180,9 @@ A screen may depart from a template only for a business reason the app has recor
 
 - See [Copy](copy.md) for voice, case, punctuation, and formats. Copy also holds the rules for naming the action on a
   button and for asking with the action's name.
+- See [Saving and Feedback](saving-and-feedback.md) for when a change saves, its working state, and when it offers
+  Undo.
+- See [Disabled With a Reason](disabled-with-a-reason.md) for when an action is left out instead of disabled.
 
 ## In code
 

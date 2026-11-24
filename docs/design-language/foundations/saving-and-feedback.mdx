@@ -1,0 +1,26 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import { Toaster } from "aperia-ds5"
+import source from "../../../plugins/aperia-ds5/skills/design/foundations/saving-and-feedback.md?raw"
+import * as SheetFormStories from "../../../components/ui/sheet-form/sheet-form.stories"
+import { savingExamples } from "../examples/behavior"
+import { NotificationSettingsExample } from "../examples/roles-and-permissions.example"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Foundations/States/Saving and Feedback" />
+
+<SkillDoc
+  source={source}
+  after={{
+    ...savingExamples,
+    "@intro": (
+      <>
+        <Toaster />
+        <Canvas of={SheetFormStories.Saving} sourceState="none" />
+      </>
+    ),
+    "When it is refused": <NotificationSettingsExample />,
+    "When a sheet closes before it saves": (
+      <Canvas of={SheetFormStories.AddContact} sourceState="none" />
+    ),
+  }}
+/>

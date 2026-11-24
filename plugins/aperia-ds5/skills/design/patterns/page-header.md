@@ -41,8 +41,9 @@ that close the record's work, such as Close as Lost, come next, set apart in the
 On narrower screens, the record actions fold into one More actions (…) button. Its menu keeps the same order, with a
 line above the destructive actions.
 
-An action the user cannot take still shows. It is disabled and says why on hover and keyboard focus. A Delete that the
-record cannot have says "This item is in use and cannot be deleted."
+An action that is blocked on this record still shows. It is disabled and says why on hover and keyboard focus. A
+Delete that the record cannot have says "This item is in use and cannot be deleted." An action that the person's role
+can never take is left out. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for that choice.
 
 On a phone, the record actions stay on the title's line. The other buttons take a full-width row under it, with the
 primary action first. Properties sit in two columns.
