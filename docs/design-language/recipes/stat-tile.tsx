@@ -8,28 +8,20 @@ export function StatTile({
   label,
   value,
   hint,
-  tone,
   plain = false,
   children,
 }: {
   label: string
   value: React.ReactNode
   hint?: string
-  tone?: "red"
   plain?: boolean
   children?: React.ReactNode
 }) {
   return (
     <div className={cn("flex flex-col gap-0.5", !plain && "surface px-4 py-3")}>
       <span className="text-xs text-muted-foreground">{label}</span>
-      <span
-        className={cn(
-          "text-2xl font-semibold tabular-nums",
-          tone === "red" && "text-destructive"
-        )}
-      >
-        {value}
-      </span>
+      {/* Always the body color: the label says what it counts, and status color stays on badges. */}
+      <span className="text-2xl font-semibold tabular-nums">{value}</span>
       {children}
       {/* Pinned to the foot, so hints line up across a row of tiles whether or not one has a bar. */}
       {hint && (

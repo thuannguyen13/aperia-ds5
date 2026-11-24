@@ -14,7 +14,7 @@ Choose by what the content is:
 
 ## What is available
 
-Cards and tiles come in six parts and forms:
+Cards and tiles come in five parts and forms:
 
 | Part | What it shows |
 |---|---|
@@ -22,7 +22,6 @@ Cards and tiles come in six parts and forms:
 | Collapsible card | The title and a chevron, which form one button. The button opens and closes the card. |
 | Tabs inside a card | Tabs under the card header that switch the card's content. |
 | Tile | A label above the number says what it counts. A line below the number says what it means, when that needs saying, such as "Up 8% on last quarter". A progress bar can go under the number. |
-| Red tile | The number in the destructive color. It shows only with a label that says what it counts, such as "3 overdue". |
 | Tiles inside a card | The tiles drop their surface inside the card. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for why. |
 
 ## How it looks and behaves
@@ -40,6 +39,9 @@ A card's header, content, and footer each hold their own space, so a part that h
 
 Tiles sit in rows, and tiles in a row line up. The line that says what each number means is pinned to the foot of the
 tile, whether or not the tile has a bar. Tile numbers use tabular figures.
+
+A tile's number is always in the body color, whatever it counts. Its label says what it counts, such as Overdue Tasks,
+so the number needs no color. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for where status color goes.
 
 A page of cards, such as a record's page, stacks the page header, a row of tiles, and the cards, 20px apart. The cards
 sit in one column, or in a main column with a side column. The content decides, not the number of cards. A page gets a
@@ -63,8 +65,9 @@ with an empty state inside.
 
 ### Label what a tile's number counts
 
-- **Do:** Label a tile's number ("Overdue Tasks" above a red 3, "3 overdue" under it), so people know what it counts.
-- **Don't:** Show a bare red number, or a number with no label. Add the label, so the number means something.
+- **Do:** Label a tile's number ("Overdue Tasks" above a 3 in the body color), so people know what it counts.
+- **Don't:** Show a bare number, or color the number red or in a status color. Add the label, so the words carry the
+  meaning and color stays for badges.
 
 ### Use one page of cards, not page tabs
 
@@ -105,7 +108,6 @@ Cards and tiles work with these pages:
   `gap-4` column or space them with margins.
 - A side column: a grid from a 60rem container, three quarters and one quarter, `grid-cols-[minmax(0,1fr)]` on a
   phone, `gap-4`. Build every card, the details card too, as the titled card recipe on [Card](../components/card.md).
-Build every card's header as the titled card recipe on [Card](../components/card.md).
 
 Build the stat tile in the app from plain elements with the `surface` utility from `aperia-ds5`. A bar under the
 number is a `Progress` from `aperia-ds5`.
@@ -113,14 +115,13 @@ number is a `Progress` from `aperia-ds5`.
 ```tsx
 <div className="surface flex flex-col gap-0.5 px-4 py-3">
   <span className="text-xs text-muted-foreground">Overdue Tasks</span>
-  <span className="text-2xl font-semibold tabular-nums text-destructive">3</span>
+  <span className="text-2xl font-semibold tabular-nums">3</span>
   {/* An optional bar goes here, under the number. */}
-  <span className="mt-auto text-xs text-muted-foreground">3 overdue</span>
+  <span className="mt-auto text-xs text-muted-foreground">Oldest was due 11/02/2026</span>
 </div>
 ```
 
-- The red number (`text-destructive`) shows only with a label that says what it counts. An app can use its own status
-  color in its place.
+- The number never takes `text-destructive` or a status color. The label says what it counts.
 - Inside a card, drop `surface px-4 py-3` and keep `flex flex-col gap-0.5`, because the card is the surface.
 - The line under the number has `mt-auto`, so the lines of a row of tiles stay level whether or not a tile has a bar.
 - A row of tiles is a grid with `gap-4`, two columns on a phone.

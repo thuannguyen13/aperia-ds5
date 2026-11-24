@@ -276,21 +276,28 @@ export const switchExamples = {
   ),
 }
 
-export const actionExamples = {
-  "Pair every color with a word or an icon": (
+// Buttons and Actions imports this; its rules have no pair in this file.
+export const actionExamples = {}
+
+export const cardTileExamples = {
+  "Label what a tile's number counts": (
     <DoDont
       good={
-        <StatTile label="Overdue Tasks" value="3" hint="3 overdue" tone="red" />
+        <div className="w-48">
+          <StatTile label="Overdue Tasks" value="3" />
+        </div>
       }
-      bad={<span className="text-2xl font-semibold text-destructive">3</span>}
+      bad={
+        <div className="flex w-48 flex-col gap-0.5 surface px-4 py-3">
+          <span className="text-2xl font-semibold text-destructive tabular-nums">
+            3
+          </span>
+        </div>
+      }
+      goodNote="the label says what it counts, in the body color"
       badNote="a red number that says nothing"
     />
   ),
-}
-
-export const cardTileExamples = {
-  "Label what a tile's number counts":
-    actionExamples["Pair every color with a word or an icon"],
   "Put Add in the header, beside the records": (
     <DoDont
       good={

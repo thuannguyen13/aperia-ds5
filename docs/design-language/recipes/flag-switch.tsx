@@ -14,7 +14,8 @@ import { cn } from "@/lib/utils"
 /**
  * An on/off choice in a grid, such as a role's permission or a notification's channel: a small switch with its Yes or
  * No beside it, one target lit on hover. With a `reason` it can't change: locked, with a lock, and the reason in a
- * tooltip that keyboard reaches too. `className` goes on the switch, for an app's own "on" color.
+ * tooltip that keyboard reaches too.
+ * The switch is on in the primary color, the same in every app.
  */
 export function FlagSwitch({
   on,
@@ -22,7 +23,6 @@ export function FlagSwitch({
   disabled = false,
   reason,
   onChange,
-  className,
 }: {
   on: boolean
   /** What the switch sets, read out by a screen reader: "Sales Rep: Prospects, Delete". */
@@ -31,7 +31,6 @@ export function FlagSwitch({
   /** Why it can't change; locks it. */
   reason?: string | null
   onChange: (on: boolean) => void
-  className?: string
 }) {
   const id = useId()
   const locked = disabled || Boolean(reason)
@@ -54,7 +53,7 @@ export function FlagSwitch({
         disabled={locked}
         onCheckedChange={onChange}
         // The label fades the whole target, so the switch doesn't fade twice.
-        className={cn("data-disabled:opacity-100", className)}
+        className="data-disabled:opacity-100"
       />
       <span className={cn(!on && "text-muted-foreground")}>
         {on ? "Yes" : "No"}

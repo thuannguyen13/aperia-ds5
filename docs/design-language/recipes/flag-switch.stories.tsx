@@ -18,7 +18,7 @@ const meta: Meta<typeof FlagSwitch> = {
     docs: {
       description: {
         component:
-          "An on/off choice in a grid, such as a role's permission or a notification's channel: a small switch with Yes or No beside it, so the state reads without color, and the switch and its word are one target, lit on hover. `label` names the cell for a screen reader (row and column). With a `reason` it can't change: faded, with a lock, and the reason in a tooltip that keyboard reaches too. `disabled` alone fades it with no reason, such as while the grid loads. `className` goes on the switch, for an app's own \"on\" color.",
+          "An on/off choice in a grid, such as a role's permission or a notification's channel: a small switch with Yes or No beside it, so the state reads without color, and the switch and its word are one target, lit on hover. `label` names the cell for a screen reader (row and column). With a `reason` it can't change: faded, with a lock, and the reason in a tooltip that keyboard reaches too. `disabled` alone fades it with no reason, such as while the grid loads. The switch is on in the primary color, the same in every app.",
       },
     },
   },
@@ -31,7 +31,6 @@ const meta: Meta<typeof FlagSwitch> = {
     on: { control: "boolean" },
     disabled: { control: "boolean" },
     reason: { control: "text" },
-    className: { control: "text" },
     onChange: { control: false },
   },
 }

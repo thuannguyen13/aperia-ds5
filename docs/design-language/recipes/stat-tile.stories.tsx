@@ -5,13 +5,6 @@ import { Progress } from "@/components/ui/progress/progress"
 import { TitledCard } from "./titled-card"
 import { money } from "@/lib/format"
 
-// Status colors are the app's own (brand.example.css), which the library doesn't ship. An app defines them in
-// its @theme; Storybook doesn't, so this stands in for the app's Sales Portal values.
-const APP_STATUS_RED = `
-.text-status-red-foreground { color: #8f1f1f; }
-.dark .text-status-red-foreground { color: #f3a6a6; }
-`
-
 const meta: Meta<typeof StatTile> = {
   title: "Design Language/Recipes/StatTile",
   component: StatTile,
@@ -33,7 +26,6 @@ const meta: Meta<typeof StatTile> = {
     label: { control: "text" },
     value: { control: "text" },
     hint: { control: "text" },
-    tone: { control: "select", options: [undefined, "red"] },
     plain: { control: "boolean" },
     children: { control: false },
   },
@@ -74,23 +66,6 @@ export const WithBar: Story = {
     <StatTile {...args}>
       <Progress value={68} className="mt-2" aria-label="Quota attained" />
     </StatTile>
-  ),
-}
-
-/** Red only with a label saying what it counts; the color is the app's own status slot. */
-export const Red: Story = {
-  decorators: oneTile,
-  args: {
-    label: "Overdue Tasks",
-    value: "3",
-    hint: "3 overdue",
-    tone: "red",
-  },
-  render: (args) => (
-    <>
-      <style>{APP_STATUS_RED}</style>
-      <StatTile {...args} />
-    </>
   ),
 }
 

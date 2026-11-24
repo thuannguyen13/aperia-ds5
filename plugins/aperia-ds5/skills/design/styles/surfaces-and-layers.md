@@ -74,33 +74,51 @@ cards, each with its own Add. See [Spacing](../foundations/spacing.md) for the g
 
 ### Emphasis
 
-Every area has one element that leads, the element people should see first. An area is a card, a sheet, a dialog, or
-the page header. The lead is marked in this order:
+Every area has one element that leads, the element people should see first. See
+[Buttons and Actions](../patterns/buttons-and-actions.md) for what an area is. The lead is marked in this order:
 
 1. Weight and size come first. A title is semibold, and a stat tile's figure is larger than its label. See
    [Typography](typography.md) for each role's weight.
 2. Muted text lowers every secondary part, such as labels, descriptions, and times.
-3. Color comes last. The primary color marks the main action, links, focus, and the selected item, and nothing else.
-   See [Color](color.md) for that rule.
-4. Status color sits only on a badge, on a dot beside its word, or on an alert. A card, a row, or a tile is never
-   filled with a status color.
+3. Color comes last. The primary color marks the main button and the mark of a chosen option, and nothing else. Links
+   take the Link color. See [Color](color.md) for that rule.
+4. Status color sits only on a badge, on a dot beside its word, or on an alert. A card, a row, a tile's number, or a
+   switch never takes a status color.
 
 ### States on a surface
 
-Rows and items on a surface show their state with the Muted fill. The primary color draws only the focus line. The
-states below are the ones the components draw.
+Rows and items on a surface show their state with the Muted fill. The primary color draws only the mark of a chosen
+option, and the Ring color draws the focus line. The states below are the ones the components draw.
 
 | State | How it looks | Where it shows |
 |---|---|---|
 | Hover | Muted at half strength | A table row, and a row in a list on a surface |
 | Highlighted | Muted in full | A menu row under the pointer or the arrow keys, a search result, and an item that is a link under the pointer |
 | Selected | Muted in full | A selected table row, and a pressed toggle |
-| Focus on a row | Muted at half strength, with a primary line just inside the row's edge | A row that opens its record, and a row in a list on a surface |
-| Focus on a control | A thin primary line inside and a primary halo around | Fields, buttons, and items |
-| Current page | White with navy text in Light | The app's pages in the sidebar |
+| Chosen option | The primary color on the option's mark | A ticked checkbox, a picked radio, a switch that is on, and the tint and border of a choice card that is picked |
+| Current tab | The Control fill with its border on the chosen tab, or a line in the text color under it in line tabs | The tab whose content shows |
+| Focus on a row | Muted at half strength, with a focus line just inside the row's edge | A row that opens its record, and a row in a list on a surface |
+| Focus on a control | A thin focus line inside and a halo around | Fields, buttons, and items |
+| Current page | White with navy text in Light, and a lighter gray than the sidebar in Dark | The app's pages in the sidebar |
 
-A row's focus line sits inside the row, because the surface cuts off anything outside its edge. No state changes a
-row's height or moves its text.
+A selected row and a pressed toggle never take the primary color, and neither does the current tab. A row's focus line
+sits inside the row, because the surface cuts off anything outside its edge. No state changes a row's height or moves
+its text.
+
+### Showing what responds
+
+Anything that responds looks different at rest from something that does not. Hover can confirm that a part responds,
+but hover is never the only signal, because a touch screen has no hover and a keyboard never points.
+
+| Element | At rest | Hover (mouse) | Keyboard |
+|---|---|---|---|
+| A button, a link, or a tab | Its fill, its border, or its blue text | Its hover state | The focus line |
+| A table row that opens a record | The record's name in medium weight, as the row's title | The Muted fill and the hand cursor | The focus line |
+| A row in a list on a surface, or any row on a phone | A chevron at the row's end | The Muted fill | The focus line |
+| Something that only shows information | Nothing | No hand cursor and no fill | Not focusable |
+
+Everything clickable shows the hand cursor, including menu items and rows that open a record. Disabled controls do
+not show it.
 
 ### Styling something new
 
@@ -152,6 +170,19 @@ The filter sheet on a phone shows the five steps at work:
 - **Don't:** Fill a card, a row, or a tile with a status color. Keep the fill neutral and add a badge, so the content
   keeps its contrast.
 
+### Show what responds before the pointer reaches it
+
+- **Do:** Mark every part that responds at rest, such as a table whose name column is medium weight, so people see
+  which rows open before they point at one.
+- **Don't:** Leave a plain table where nothing marks the rows that open. Give each row its title, so the rows read as
+  records on a touch screen and with a keyboard too.
+
+### Show the hand cursor on everything clickable
+
+- **Do:** Show the hand over a button, a tab, a menu item, or a row that opens, so people know they can click it.
+- **Don't:** Leave the arrow on a clickable row, or show the hand over a disabled button. Show the hand only on what
+  responds, so the pointer never misleads.
+
 ### Let one element lead each area
 
 - **Do:** Give each card, sheet, or dialog one lead, such as its title by weight and its main action as the one
@@ -177,6 +208,7 @@ surface when people let go. See [Reordering](../patterns/reordering.md) for drag
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) and [Card](../components/card.md) for the card.
 - See [Buttons and Actions](../patterns/buttons-and-actions.md) for one primary button per area.
 - See [Filters](../patterns/filters.md) for the filter sheet on a phone.
+- See [Tables](../patterns/tables.md) for the rows that open a record.
 
 ## In code
 
@@ -207,4 +239,10 @@ surface when people let go. See [Reordering](../patterns/reordering.md) for drag
   `bg-status-*` class on a `Card`, a `TableRow` or a tile.
 - States, as drawn: `TableRow` is `hover:bg-muted/50` and `data-[state=selected]:bg-muted`; menu rows are
   `focus:bg-accent` (`--accent` is `--muted`); a `CommandItem` is `data-selected:bg-muted`; the sidebar's current page
-  is `data-active` on `AppSidebar`'s menu buttons.
+  is `data-active` on `AppSidebar`'s menu buttons. A ticked `Checkbox` or `RadioGroupItem` and a `Switch` that is on are
+  `data-checked:bg-primary`. The chosen `TabsTrigger` is `data-active:bg-control`, or a
+  `bg-foreground` line in `variant="line"`.
+- The name cell of a row that opens is `font-medium`. A row in a list on a surface that opens ends with a
+  `ChevronRightIcon` in `text-muted-foreground`.
+- `base.css` gives every clickable element the pointer, including a row marked with `opensOnClick` (`data-opens`). It
+  skips `:disabled`, `aria-disabled` and `data-disabled`.

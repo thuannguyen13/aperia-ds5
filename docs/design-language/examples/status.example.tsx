@@ -98,7 +98,7 @@ export const statusExamples = {
           <Status key={state} state={state} />
         ))}
         <Badge variant="outline">Proposal</Badge>
-        <StatusDot dot="bg-status-red-foreground">3 overdue</StatusDot>
+        <StatusDot dot="bg-status-red-foreground">2 failed</StatusDot>
       </WithColors>
     </Example>
   ),

@@ -167,9 +167,7 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
   {
     accessorKey: "name",
     header: "Merchant",
-    cell: ({ row }) => (
-      <span className="font-medium">{row.original.name}</span>
-    ),
+    cell: ({ row }) => <span className="font-medium">{row.original.name}</span>,
   },
   {
     accessorKey: "stage",

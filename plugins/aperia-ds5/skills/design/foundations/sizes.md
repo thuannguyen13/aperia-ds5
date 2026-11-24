@@ -16,8 +16,8 @@ Controls come in four sizes, the same on every screen, a phone included. Default
 Small and Extra small are for compact components, and Large has no use in an Aperia app yet. The live table on this
 page shows each height as the browser reads it.
 
-An icon button shows an icon with no text and is square. It is 28px by default. Its other sizes, 24px, 32px, and 36px,
-match the button heights, so an icon button can sit beside a button of the same height.
+An icon button is a square button with only an icon. Its sizes match the button heights, and it takes the height of
+the controls beside it. See [Button](../components/button.md) for which height goes where.
 
 A phone changes how a page is laid out, such as a sheet that fills the screen, but not the size of a control. See
 [Screen Sizes](screen-sizes.md) for the widths and what changes at each.
@@ -29,18 +29,15 @@ The page sits in one centered column, at most 1440px wide, with the page spacing
 
 ## How it looks and behaves
 
-Everything clickable shows the hand cursor, including menu items and rows that open a record. Disabled controls do
-not show it.
-
 A page title's line is at least a button's height, so a page without actions lines up with a page that has them.
 
 ## Rules
 
-### Show the hand cursor on everything clickable
+### Give controls side by side one height
 
-- **Do:** Show the hand over a button, a tab, a menu item, or a row that opens, so people know they can click it.
-- **Don't:** Leave the arrow on a clickable row, or show the hand over a disabled button. Show the hand only on what
-  responds, so the pointer never misleads.
+- **Do:** Use the default size for a field, a select, and a button on one row, so their edges and text line up.
+- **Don't:** Set a large button beside a default field, or give a control its own height in the app's CSS. Use the
+  shared sizes, so every row of controls lines up.
 
 ## When you can do it differently
 
@@ -52,6 +49,7 @@ A page may fill the whole width in place of the centered column when it shows a 
 - See [Typography](../styles/typography.md) for the text inside them.
 - See [Icons](../styles/icons.md) for icon buttons.
 - See [Screen Sizes](screen-sizes.md) for what changes on a phone and a tablet.
+- See [Surfaces and Layers](../styles/surfaces-and-layers.md) for the hand cursor and the other signs of what responds.
 
 ## In code
 
@@ -62,8 +60,7 @@ A page may fill the whole width in place of the centered column when it shows a 
 - `Button` sizes: `xs` (`h-6`), `sm` (`h-7`), `default` (`h-8`), `lg` (`h-9`); icon sizes `icon-xs`, `icon-sm`, `icon`
   and `icon-lg`. `Input` and `SelectTrigger` are `h-8`. No control changes height on a phone; never add a `max-sm:`
   height.
-- An icon button (the recipe on [Button](../components/button.md)) is `size="icon-sm"`.
+- An icon button (the recipe on [Button](../components/button.md)) takes the `icon` size beside a field and `icon-sm` on a
+  row or in a card header.
 - `AppContent` is the page column (`max-w-360`, with `p-5`); render `<FullWidth />` in a page that needs the whole pane.
   `AppHeader`'s bar is `h-14`.
-- `base.css` gives every clickable element the pointer, including a row marked with `opensOnClick` (`data-opens`); it
-  skips `:disabled`, `aria-disabled` and `data-disabled`.
