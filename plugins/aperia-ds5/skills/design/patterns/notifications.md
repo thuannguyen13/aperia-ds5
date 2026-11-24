@@ -28,13 +28,14 @@ The panel opens from the sidebar, and each notification leads to its record:
 2. The panel takes focus as it opens, so the first tab shows no focus ring after a click.
 3. Mark All as Read is disabled while nothing is unread.
 4. Opening a notification marks it read at once. It also closes the panel and opens its record.
-5. A new notification also shows as a toast that links to its record. Three toasts show at most. Past three, one toast
-   says how many more arrived, such as "4 more new notifications."
+5. A new notification also shows as a toast that links to its record. It joins the one stack of toasts at the top
+   right, with save confirmations and errors. Three toasts show at most. Past three, one toast says how many more
+   arrived, such as "4 more new notifications."
 6. Notification Settings opens from the settings button in the panel and from the account menu. See
    [Switches in a Grid](switches-in-a-grid.md) for the settings grid.
 
-On a phone, Notifications sits in the sidebar's panel, which the button at the start of the top bar opens. A new
-notification's toast spans the screen, 16px from each side. See [Screen Sizes](../foundations/screen-sizes.md)
+On a phone, Notifications sits in the sidebar's panel, which the button at the start of the top bar opens. The
+stack of toasts runs across the top of the screen, 16px from each side. See [Screen Sizes](../foundations/screen-sizes.md)
 for every part on a phone.
 
 ## Rules
@@ -53,8 +54,9 @@ for every part on a phone.
 
 ### Keep toasts to three
 
-- **Do:** Show three toasts at most, then one "4 more new notifications.", so the page stays usable.
-- **Don't:** Let a stack of toasts cover the page when many arrive. Cap them at three, so people can keep working.
+- **Do:** Show three toasts at most in the one stack, then one "4 more new notifications.", so the page stays usable.
+- **Don't:** Give notifications a stack of their own, or let toasts cover the page when many arrive. Keep one stack of
+  three, so people can keep working.
 
 ## When you can do it differently
 
@@ -78,4 +80,7 @@ Notifications work with four other pages:
   "Notification Settings" (the icon button recipe on [Button](../components/button.md)).
 - Each notification is an `Item` (`size="sm"`) linking to its record: `Avatar`, the sentence in `text-muted-foreground`
   with names `text-foreground font-medium`, `RelativeTime` under it, and the unread dot with an sr-only "Unread".
-- Empty tabs are `EmptyState` with a bell icon. New ones also toast, three at most.
+- Empty tabs are `EmptyState` with a bell icon.
+- A new notification calls `toast()` from sonner, through the app's one `Toaster` (`position="top-right"`), which
+  shows three at most (`visibleToasts`, 3 by default). Past three, the app replaces the waiting ones with one toast,
+  "4 more new notifications.".
