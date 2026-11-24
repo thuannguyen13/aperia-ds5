@@ -4,8 +4,6 @@ import {
   Button,
   ListPager,
   ListToolbar,
-  ToggleGroup,
-  ToggleGroupItem,
   UNSORTED,
   type FilterField,
   type FilterRule,
@@ -38,7 +36,6 @@ function ToolbarDrawing() {
   const [query, setQuery] = useState("")
   const [rules, setRules] = useState<FilterRule[]>([])
   const [sort, setSort] = useState(UNSORTED)
-  const [layout, setLayout] = useState("table")
   return (
     <div className="w-[52rem] max-w-full">
       <ListToolbar
@@ -49,21 +46,8 @@ function ToolbarDrawing() {
         }}
         filters={{ fields: FIELDS, value: rules, onChange: setRules }}
         sort={{ fields: SORTS, value: sort, onChange: setSort }}
-        layout={
-          <ToggleGroup
-            data-anatomy="3"
-            type="single"
-            variant="outline"
-            aria-label="Layout"
-            value={layout}
-            onValueChange={(next) => next && setLayout(next)}
-          >
-            <ToggleGroupItem value="board">Board</ToggleGroupItem>
-            <ToggleGroupItem value="table">Table</ToggleGroupItem>
-          </ToggleGroup>
-        }
         actions={
-          <span data-anatomy="5" className="flex items-center gap-2">
+          <span data-anatomy="4" className="flex items-center gap-2">
             <Button variant="outline">
               <UploadIcon data-icon="inline-start" />
               Import
@@ -88,11 +72,8 @@ export const listToolbarAnatomy = (
         selector: "button[aria-haspopup=dialog], button[aria-label^=Filter]",
         side: "bottom",
       },
-      // SortControl on a desktop, and the Sort icon button on a phone.
-      4: {
-        selector: 'div:has(> [aria-label="Sort by"]), button[aria-label^=Sort]',
-        side: "bottom",
-      },
+      // The Sort button on a desktop, and the Sort icon button on a phone.
+      3: { selector: "button[aria-label^=Sort]", side: "bottom" },
     }}
   >
     <ToolbarDrawing />

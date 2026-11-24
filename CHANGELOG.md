@@ -143,9 +143,9 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
 - Controls keep one size on every screen: the default is 32px and an icon button 28px, on a phone too. The phone-only
   40px heights are gone from `Button`, `Input`, `InputGroup`, `SelectTrigger`, the icon button recipe, `RecordActions`
   and the top bar's sidebar button. A phone changes a page's layout, not a control's size.
-- `ListToolbar` holds only the list's own controls: the search and filters on the left; then `layout` (a Board / Table
-  switch), Sort, and `actions` (the list's buttons, such as Import and Add Prospect, primary last) on the right.
-  **Breaking:** `start` and `children` are gone. A control that picks the list's scope, such as a report date or a saved
+- `ListToolbar` holds only the list's own controls: the search and filters on the left; then Sort and `actions` (the list's buttons, such as Import and Add Prospect, primary last) on the right.
+  **Breaking:** `start` is gone, and `children` is now a slot before Sort for a control only one app needs, such as a
+  board's Board / Table switch. A control that picks the list's scope, such as a report date or a saved
   view, is the app's own, outside the toolbar; a list's Add moves from `PageHeader`'s `actions` to the toolbar's
   `actions`. The toolbar shows no count; `shown`, `total` and `noun` now feed the phone's Filter sheet only.
 - `ItemGroup`: plain items (the default variant) sit flush, spaced by their own padding, so a list of people or records

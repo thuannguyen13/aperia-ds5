@@ -179,18 +179,6 @@ export function BoardExample() {
       }
     >
       <ListToolbar
-        layout={
-          <ToggleGroup
-            type="single"
-            variant="outline"
-            aria-label="Layout"
-            value={layout}
-            onValueChange={(next) => next && setLayout(next)}
-          >
-            <ToggleGroupItem value="board">Board</ToggleGroupItem>
-            <ToggleGroupItem value="table">Table</ToggleGroupItem>
-          </ToggleGroup>
-        }
         search={{
           placeholder: "Search opportunities",
           value: query,
@@ -199,7 +187,18 @@ export function BoardExample() {
         shown={count}
         total={count}
         noun={["opportunity", "opportunities"]}
-      />
+      >
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          aria-label="Layout"
+          value={layout}
+          onValueChange={(next) => next && setLayout(next)}
+        >
+          <ToggleGroupItem value="board">Board</ToggleGroupItem>
+          <ToggleGroupItem value="table">Table</ToggleGroupItem>
+        </ToggleGroup>
+      </ListToolbar>
       <div className="overflow-x-auto pb-1">
         <div className="grid auto-cols-[minmax(16rem,1fr)] grid-flow-col gap-4">
           {STAGES.map((stage) => {

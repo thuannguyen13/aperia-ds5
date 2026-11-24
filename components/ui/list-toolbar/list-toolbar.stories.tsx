@@ -32,7 +32,7 @@ const meta: Meta<typeof ListToolbar> = {
     docs: {
       description: {
         component:
-          'Every list page\'s one toolbar, a section of the page above its table or board: the search and the filters on the left; then, at the right end, `layout` (a Board and Table switch), one Sort (`SortControl`, sorted with `sortRows`), and `actions`, the list\'s own buttons such as Import and Add Merchant, the primary last. It holds nothing else: the count is under the list (`ListPager`), and a control that picks the list\'s scope, such as a report date, is the app\'s own.\n\nFilters are one model in two forms. A list describes what it can filter by (`FilterField`: an id, a label and a type, `text`, `number`, `money`, `enum`, `day` or `boolean`), and holds the filters on as `FilterRule`s (a field, an operator, its values). **Advanced** (the default): one Filter button counts the filters on and opens them in a popover as rows of Column, Operator and Value, each changed in place (a new column starts that filter over) and removed with ×, with Add Filter and Remove All under them. **Simple** (`form: \"simple\"`), for a list with four filters or fewer: each field is a fixed select, switch or From and To on the row, one click to pick. Apply the rules with `filterRows`, or send them to the server.\n\nOn a phone, in either form, the filters go behind one Filter icon button that counts those on, beside a Sort icon button. They are set in a sheet from the bottom that opens on one line per filter, a tap opening that filter alone, and those on show as chips that clear on a tap. When nothing matches, the list shows `NoResults` with Clear Filters.',
+          "Every list page's one toolbar, a section of the page above its table or board: the search and the filters on the left; then, at the right end, `layout` (a Board and Table switch), one Sort (`SortControl`, sorted with `sortRows`), and `actions`, the list's own buttons such as Import and Add Merchant, the primary last. It holds nothing else: the count is under the list (`ListPager`), and a control that picks the list's scope, such as a report date, is the app's own.\n\nFilters are one model in two forms. A list describes what it can filter by (`FilterField`: an id, a label and a type, `text`, `number`, `money`, `enum`, `day` or `boolean`), and holds the filters on as `FilterRule`s (a field, an operator, its values). **Advanced** (the default): one Filter button counts the filters on and opens them in a popover as rows of Column, Operator and Value, each changed in place (a new column starts that filter over) and removed with ×, with Add Filter and Remove All under them. **Simple** (`form: \"simple\"`), for a list with four filters or fewer: each field is a fixed select, switch or From and To on the row, one click to pick. Apply the rules with `filterRows`, or send them to the server.\n\nOn a phone, in either form, the filters go behind one Filter icon button that counts those on, beside a Sort icon button. They are set in a sheet from the bottom that opens on one line per filter, a tap opening that filter alone, and those on show as chips that clear on a tap. When nothing matches, the list shows `NoResults` with Clear Filters.",
       },
     },
   },
@@ -40,7 +40,7 @@ const meta: Meta<typeof ListToolbar> = {
     search: { control: false },
     filters: { control: false },
     sort: { control: false },
-    layout: { control: false },
+    children: { control: false },
     actions: { control: false },
   },
 }
@@ -705,31 +705,30 @@ export const SwitchAndDates: Story = {
   },
 }
 
-/** A board's toolbar: the Board and Table switch in `layout`, before Sort. */
-export const WithLayoutSwitch: Story = {
+/** The slot: a control only this app needs, such as a board's Board and Table switch, as `children`. It sits before Sort. */
+export const WithSlot: Story = {
   render: function Render() {
     const [layout, setLayout] = useState("board")
     const [query, setQuery] = useState("")
     return (
       <ListToolbar
-        layout={
-          <ToggleGroup
-            type="single"
-            variant="outline"
-            aria-label="Layout"
-            value={layout}
-            onValueChange={(next) => next && setLayout(next)}
-          >
-            <ToggleGroupItem value="board">Board</ToggleGroupItem>
-            <ToggleGroupItem value="table">Table</ToggleGroupItem>
-          </ToggleGroup>
-        }
         search={{
           placeholder: "Search opportunities",
           value: query,
           onChange: setQuery,
         }}
-      />
+      >
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          aria-label="Layout"
+          value={layout}
+          onValueChange={(next) => next && setLayout(next)}
+        >
+          <ToggleGroupItem value="board">Board</ToggleGroupItem>
+          <ToggleGroupItem value="table">Table</ToggleGroupItem>
+        </ToggleGroup>
+      </ListToolbar>
     )
   },
 }

@@ -77,8 +77,9 @@ export type ListFilters = {
 }
 
 /**
- * A list's one toolbar: its search and filters on the left; its layout switch, Sort, and the list's own actions (such as
- * Import or Add Prospect) on the right. Every list page has this one, above its table or board, as a section of the
+ * A list's one toolbar: its search and filters on the left; Sort and the list's own actions (such as Import or Add
+ * Prospect) on the right. `children` is a slot for a control only one app needs, such as a Board and Table switch; it
+ * sits before Sort. Every list page has this one, above its table or board, as a section of the
  * page. It holds only what changes or adds to the list: what picks a list's scope, such as a report date, is the app's
  * own, outside it. The list's count is under the list, with its pages (`ListPager`).
  *
@@ -87,7 +88,7 @@ export type ListFilters = {
  * row of Column, Operator and Value, added from Add Filter. Simple filters (`form: "simple"`), for a list with four
  * filters or fewer, are fixed controls on the toolbar. Apply them with `filterRows`, or send them to the server.
  *
- * On a phone the actions and the layout switch take the first row, when the list has any. The next row is the search,
+ * On a phone the slot's controls and the actions take the first row, when the list has any. The next row is the search,
  * then Filter (counting those on) and Sort as icon buttons; under it the filters that are on show as chips on one line
  * that scrolls sideways. The filters are set in a sheet from the bottom that opens on one line per filter, and a tap
  * opens that filter alone.
@@ -102,8 +103,8 @@ export function ListToolbar({
   total,
   noun,
   sort,
-  layout,
   actions,
+  children,
 }: {
   search?: {
     placeholder: string
@@ -118,10 +119,10 @@ export function ListToolbar({
   noun?: readonly [string, string]
   /** The list's Sort: what it sorts by, from the list's own order, and which way (`SortControl`). */
   sort?: React.ComponentProps<typeof SortControl>
-  /** How the list shows, such as a Board and Table switch, before Sort. */
-  layout?: React.ReactNode
   /** The list's own actions, such as Import or Add Prospect, at the right end with the primary last. */
   actions?: React.ReactNode
+  /** A slot for a control only this app needs, such as a Board and Table switch, before Sort. */
+  children?: React.ReactNode
 }) {
   const [open, setOpen] = useState(false)
   // The sheet shows its list of filters, or one step: "add" (pick a column), a rule's id (advanced filters), or a
@@ -205,9 +206,9 @@ export function ListToolbar({
                 onRulesChange={filters.onChange}
               />
             )}
-        {(layout || sorting || actions) && (
+        {(children || sorting || actions) && (
           <div className="ml-auto flex items-center gap-3">
-            {layout}
+            {children}
             {sorting}
             {actions && (
               <div className="flex items-center gap-2">{actions}</div>
@@ -216,12 +217,12 @@ export function ListToolbar({
         )}
       </div>
 
-      {/* A phone: the actions and the layout switch, when the list has any; then the search with Filter and Sort as icon
+      {/* A phone: the slot's controls and the actions, when the list has any; then the search with Filter and Sort as icon
           buttons; then the filters that are on as chips that scroll sideways. The sheet sets the filters. */}
       <div className="flex shrink-0 flex-col gap-2 sm:hidden">
-        {(layout || actions) && (
+        {(children || actions) && (
           <div className="flex flex-wrap items-center gap-2">
-            {layout}
+            {children}
             {actions && (
               <div className="ml-auto flex items-center gap-2">{actions}</div>
             )}

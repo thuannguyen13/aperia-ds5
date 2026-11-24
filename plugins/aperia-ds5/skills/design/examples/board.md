@@ -85,7 +85,7 @@ A board has no exceptions.
 
 The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- `ListToolbar` above, with a `ToggleGroup` (Board / Table) in `layout`; render `<FullWidth />` on the page; load with
+- `ListToolbar` above, with a `ToggleGroup` (Board / Table) as the toolbar's `children` (its slot); render `<FullWidth />` on the page; load with
   the list skeleton from [Loading](../foundations/loading.md) in its board shape, full width.
 - Columns: a grid of `auto-cols-[minmax(16rem,1fr)] grid-flow-col`, each column tinted with
   `color-mix(in oklab, var(--shadow-color) 3%, transparent)` (18% in Dark), its header `sticky` with the stage

@@ -21,14 +21,13 @@ footer.
 ## Anatomy
 
 A list toolbar needs at least one control. Every control is optional, and the controls a list shows keep this order.
-The search and the filters sit at the left end. The layout switch, Sort, and the list's actions sit at the right end.
+The search and the filters sit at the left end. Sort and the list's actions sit at the right end.
 
 1. **Search** (optional). It is a search box that names what it searches, such as "Search prospects".
 2. **Filters** (optional). They follow the search, as the Filter button or as fixed controls. See
    [Filters](filters.md).
-3. **Layout switch** (optional). It switches a list between Board and Table, before Sort.
-4. **Sort** (optional). It is the Sort control. See [Sort](sort.md).
-5. **Actions** (optional). They are the list's own actions, such as Import and Add Prospect, with the primary action
+3. **Sort** (optional). It is the Sort control. See [Sort](sort.md).
+4. **Actions** (optional). They are the list's own actions, such as Import and Add Prospect, with the primary action
    last.
 
 ## How it looks and behaves
@@ -41,7 +40,7 @@ and the empty state holds Add instead.
 
 On a phone, the toolbar is at most three short rows:
 
-1. The list's actions come first, when the list has any.
+1. The slot's controls and the list's actions come first, when the list has any.
 2. The search comes next, with Filter and Sort as icon buttons at its end. Sort opens the same panel as on a desktop.
 3. The filters that are on come last, as chips on one line that scrolls sideways.
 
@@ -66,8 +65,9 @@ See [Filters](filters.md) for the sheet that the Filter button opens.
 
 ## When you can do it differently
 
-A list that people work by moving records between states, such as opportunities by stage, can be a board. A Board /
-Table switch then sits before Sort, and the board fills the full width of the page.
+An app can add a control that only it needs to the toolbar's slot, which sits before Sort. A board's Board / Table
+switch is one such control. A list that people work by moving records between states, such as opportunities by stage,
+can be a board, and its switch goes in the slot. The board fills the full width of the page.
 
 ## Works with
 
@@ -80,10 +80,11 @@ Table switch then sits before Sort, and the board fills the full width of the pa
 ## In code
 
 - `ListToolbar` from `aperia-ds5`, as a direct child of `AppContent`: `search` (`{ placeholder, value, onChange }`),
-  `filters`, `sort` (`SortControl`'s props), `layout` (a Board / Table switch), and `actions` (the list's buttons,
+  `filters`, `sort` (`SortControl`'s props), `actions` (the list's buttons,
   primary last). `shown`, `total`, and `noun` (`["prospect", "prospects"]`) give the phone's Filter sheet its count.
   Never build a toolbar row by hand.
-- Controls in `layout` and `actions` render twice (the wide row and the phone's rows), so keep their state with the
+- The slot is `children`: a control only the app needs, placed before Sort on a desktop and in the first row on a phone.
+- Controls in `children` and `actions` render twice (the wide row and the phone's rows), so keep their state with the
   list, not in themselves.
 - Filter and sort with `filterRows` and `sortRows` from `aperia-ds5/list`, the same fields on the server.
 - Put `ListPager` under the list for its count and pages.
