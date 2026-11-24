@@ -32,7 +32,7 @@ alert dialogs, sheets, and drawers all use the same overlay.
 Shadows deepen in Dark. In Light, they are a small share of the text color. In Dark, they are black and stronger, so
 they still show on dark fills.
 
-Dialogs, alert dialogs, and sheets share one look. Each has the page's own fill, the hairline edge, and the Large
+Dialogs, alert dialogs, and sheets share one look. Each has the page's own fill, the border, and the Large
 shadow, over the overlay.
 
 A sheet is a panel that opens on the right, inset from the window's edges, with rounded corners. On a phone, a sheet
@@ -49,7 +49,7 @@ Shell](../patterns/app-shell.md) for the top bar.
 
 ### Give dialogs and sheets the same look
 
-- **Do:** Give dialogs, alert dialogs, and sheets the page fill, the hairline edge, and the large shadow, so every
+- **Do:** Give dialogs, alert dialogs, and sheets the page fill, the border, and the large shadow, so every
   panel reads as one family.
 - **Don't:** Make a dialog look different from a sheet. Take the look from the component, so no one expects them to
   behave differently.

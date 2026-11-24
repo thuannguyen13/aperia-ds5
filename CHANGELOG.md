@@ -27,7 +27,7 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   `--sidebar-*` from the app's CSS (Titan's `#002454` goes). On the navy the steps shift slightly (hover `#0d3f7f` →
   `#144073`).
 - `--border` and `--input` are foreground at 12% and 16% mixed with `transparent`, so they composite the same on every
-  surface. Every hairline is 0.5px (`--default-border-width`).
+  surface. Every border and divider is 0.5px (`--default-border-width`).
 - **Shadows**: `shadow-sm` is two soft shadows that deepen in Dark; `md`, `lg` and `xl` include it.
 - **Controls** (input, textarea, select, native select, input group, combobox chips, checkbox, radio, outline button,
   outline toggle, OTP slot, active tab, attachment): `control` fill (white in Light), 0.5px `input` edge, `shadow-sm`. No transparent

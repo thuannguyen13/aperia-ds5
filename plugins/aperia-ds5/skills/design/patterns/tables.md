@@ -35,11 +35,11 @@ Tables come in five forms:
 
 A table lines up with its card and keeps each row to one line.
 
-In a card, the column headings sit right under the card's title. The first hairline is the one under the headings.
+In a card, the column headings sit right under the card's title. The first divider is the one under the headings.
 
 The first column starts on the card title's line, 16px in. The last column ends 16px from the right edge.
 
-Hairlines separate the rows. A row takes a muted fill under the pointer.
+Dividers separate the rows. A row takes a muted fill under the pointer.
 
 Numbers, including amounts, line up in their column and are right-aligned.
 
@@ -54,7 +54,7 @@ See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ### Put the column headings right under the card header
 
-- **Do:** Put the column headings straight under the card header, with the first hairline under the headings, so the
+- **Do:** Put the column headings straight under the card header, with the first divider under the headings, so the
   table belongs to its card.
 - **Don't:** Put a border, divider, or header line between the card's title and the table. Leave it out, so the card
   does not look split.

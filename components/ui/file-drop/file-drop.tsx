@@ -61,7 +61,7 @@ export function FileDrop({
           if (!disabled) take(event.dataTransfer.files)
         }}
         className={cn(
-          // A dashed hairline, as an attachment waiting to be picked has: an outline, since a ring cannot be dashed.
+          // A dashed border, as an attachment waiting to be picked has: an outline, since a ring cannot be dashed.
           "flex cursor-pointer flex-col items-center gap-1 rounded-xl bg-control px-4 py-6 text-center outline-[0.5px] outline-input transition-[color,background-color,box-shadow] outline-dashed hover:bg-muted/50 has-focus-visible:ring-3 has-focus-visible:inset-ring-1 has-focus-visible:ring-ring/50 has-focus-visible:inset-ring-ring",
           over && "bg-muted/50 outline-ring",
           // Disabled as a field is: recessed in Light, faded in Dark, not-allowed over all of it.

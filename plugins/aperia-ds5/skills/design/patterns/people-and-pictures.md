@@ -39,7 +39,7 @@ Wherever the photo or logo fails to load, the initials stay.
 
 Every picture looks the same across the app. Initials and monograms take the app's colors. The colors are picked by
 the record, so they never change between pages. A square's corners get smaller with its size, so a small square never
-reads as a circle. A picture has an inner hairline and no other edge.
+reads as a circle. A picture has a thin inner border and no other edge.
 
 A screen reader skips a picture that sits beside its name. A picture that stands alone is named.
 
@@ -58,7 +58,7 @@ everyone. See
 
 ### Show a picture without a frame
 
-- **Do:** Show the picture as it is, with its inner hairline, so it looks the same on any surface.
+- **Do:** Show the picture as it is, with its thin inner border, so it looks the same on any surface.
 - **Don't:** Put a ring, border, or shadow around a picture. Leave it unframed, so pictures look the same everywhere.
 
 ### Use one picture for a record everywhere

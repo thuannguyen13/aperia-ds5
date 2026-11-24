@@ -26,7 +26,7 @@ header, after its Outline buttons. A sheet or a dialog puts it at the end of the
 
 ### Outline
 
-An Outline button has the control fill and the Input hairline edge. Use it for every other action beside the Primary
+An Outline button has the control fill and a border in the Input color. Use it for every other action beside the Primary
 button, such as Cancel, Edit, or Export, and the other actions in a page header. Use it also where no action is the
 main one, such as Add in a card header.
 
@@ -80,7 +80,7 @@ action.
 | Type | Fill | Text | Edge |
 |---|---|---|---|
 | Primary | Primary | Primary foreground | None |
-| Outline | Control | Foreground | Input hairline edge and the Small shadow |
+| Outline | Control | Foreground | A border in the Input color and the Small shadow |
 | Ghost | None. On hover, the ghost hover tint. | Foreground | None |
 | Destructive | Destructive at 10% (20% in dark mode) | Destructive | None |
 | Disabled | Any type at 50% opacity | | |

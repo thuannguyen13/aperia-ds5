@@ -439,7 +439,7 @@ export const borderExamples = {
           ))}
         </div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
-          <Measured read={cssVar("--default-border-width")} label="Hairline">
+          <Measured read={cssVar("--default-border-width")} label="Border and divider width">
             <div className="h-8 surface" />
           </Measured>
           <Measured read={cssVar("--border")} label="Border">
@@ -461,7 +461,7 @@ export const borderExamples = {
       </div>
     </Frame>
   ),
-  "Use the hairline, not a border": (
+  "Use the thin border": (
     <DoDont
       good={
         <div className="w-full max-w-56 surface p-4">
@@ -478,7 +478,7 @@ export const borderExamples = {
           <div className="text-sm text-muted-foreground">Owner</div>
         </div>
       }
-      goodNote="The hairline edge and a soft shadow."
+      goodNote="The thin border and a soft shadow."
       badNote="A thick gray border."
     />
   ),

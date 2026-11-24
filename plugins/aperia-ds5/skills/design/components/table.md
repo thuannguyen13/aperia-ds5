@@ -17,8 +17,8 @@ A table has four parts, listed from top to bottom:
 | Part | Content |
 |---|---|
 | Toolbar | Search, filters, and Sort, above the table |
-| Column headings | Headings in Title Case, with one hairline under them |
-| Rows | Records separated by hairlines |
+| Column headings | Headings in Title Case, with one divider under them |
+| Rows | Records separated by dividers |
 | Footer | The count, with the page numbers once the rows run past one page. See [Paging](../patterns/paging.md). |
 
 ### Specs
@@ -28,7 +28,7 @@ A table has four parts, listed from top to bottom:
 | Heading row | 40px tall, medium weight |
 | Cell padding | 8px |
 | Text | 14px |
-| Row lines | The hairline |
+| Row lines | The divider |
 | Hover | Muted at 50% |
 | Selected | Muted |
 
@@ -62,7 +62,7 @@ pointer and no focus.
 
 | State | Look |
 |---|---|
-| Default | Body text on the page or card fill, with a hairline under the row. |
+| Default | Body text on the page or card fill, with a divider under the row. |
 | Hover | The row takes the muted color at 50%. |
 | Focus, from the keyboard | The row takes the muted color at 50%, with a focus-color line just inside its edge. |
 | Selected | The row takes the muted color. |
@@ -84,8 +84,8 @@ pointer and no focus.
 
 ### Keep table rows plain
 
-- **Do:** Separate rows with hairlines and tint a row in the muted color on hover, so people can follow a row across.
-- **Don't:** Alternate row colors. Use hairlines between rows, so no stripe looks like it means something.
+- **Do:** Separate rows with dividers and tint a row in the muted color on hover, so people can follow a row across.
+- **Don't:** Alternate row colors. Use dividers between rows, so no stripe looks like it means something.
 
 ### Show contact details as plain text
 
@@ -113,7 +113,7 @@ pointer and no focus.
 See [Tables](../patterns/tables.md) for the column headings right under a card header, with no line above them, and for
 a table too wide for the page column. See [Sort](../patterns/sort.md) for sorting from the toolbar. See
 [Copy](../foundations/copy.md) for how contact details link on a record's page. See [Color](../styles/color.md) for
-pairing every color with a word or an icon. See [Border and Radius](../styles/border-and-radius.md) for the hairline
+pairing every color with a word or an icon. See [Border and Radius](../styles/border-and-radius.md) for the border
 the Specs name.
 
 ## In code

@@ -24,7 +24,7 @@ A card has three parts, listed from top to bottom:
 |---|---|
 | Header | One line with the title, an optional figure such as a count, and an optional action such as Add |
 | Content | A table, a list, fields, or a chart |
-| Footer, when there is one | A band at the bottom of the card, under the hairline |
+| Footer, when there is one | A band at the bottom of the card, under a divider |
 
 Each part holds its own space. The header has a fixed height, and the content and the footer have their own padding.
 The card adds no space between the parts. When a part hides, such as the content of a collapsed card or an error that
@@ -51,7 +51,7 @@ A small card has tighter padding, 12px instead of 16px, and a smaller title.
 | Corners | Extra large corner | Extra large corner |
 | Padding | 16px | 12px |
 | Fill | Card | |
-| Edge | Border hairline edge and the Small shadow | |
+| Edge | A border in the Border color and the Small shadow | |
 | Title | 16px, semibold | 14px, semibold |
 | Header | 56px, made of 12px above and below a 32px row, so cards side by side line up | |
 | Content | Its own padding, 16px | |

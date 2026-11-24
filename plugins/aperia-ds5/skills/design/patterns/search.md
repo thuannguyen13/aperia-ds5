@@ -26,7 +26,7 @@ Search opens as a dialog, updates as the user types, and closes when a result op
 
 1. Search opens as a dialog over the dimmed page.
 2. The field is flush with the panel. It has no fill, edge, or ring of its own.
-3. A hairline separates the key hint from the results.
+3. A divider separates the key hint from the results.
 4. A result highlights like a menu item when the pointer or the arrow keys reach it.
 5. The search runs after a short pause in typing.
 6. While new results load, the last results stay, shown at reduced opacity.

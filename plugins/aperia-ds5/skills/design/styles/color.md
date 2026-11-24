@@ -25,8 +25,8 @@ Light and In Dark columns show each color live, with the value the browser reads
 | **Muted** `--muted` | Recessed fills, such as an outline button on hover, a highlighted menu row, and a card footer at half strength. A highlighted menu row uses Accent, another name for Muted. | A pale gray | A mid gray |
 | **Muted foreground** `--muted-foreground` | Labels, descriptions, hints, and a missing value (—) | A mid gray | A light gray |
 | **Destructive** `--destructive` | Delete actions and errors | A deep red | A light red |
-| **Border** `--border` | The hairline edge of cards, tables, and panels | A see-through share of the text color | The same share of the Dark text color |
-| **Input** `--input` | The hairline edge of controls | A slightly stronger share than Border | The same, in Dark |
+| **Border** `--border` | The border of cards, tables, and panels, and the dividers between rows | A see-through share of the text color | The same share of the Dark text color |
+| **Input** `--input` | The border of controls | A slightly stronger share than Border | The same, in Dark |
 | **Ring** `--ring` | The focus line | The primary blue | The primary blue |
 | **Overlay** `--overlay` | The dim behind dialogs, sheets, and drawers | A light black tint | A deeper black tint |
 | **Sidebar** `--sidebar` | The sidebar's fill | The Aperia navy, the same in every app | The darkest neutral |
@@ -39,7 +39,7 @@ an app can change" below.
 
 ## How it looks and behaves
 
-Color frames content with neutral grays, hairline edges, and one accent color, the primary color. Content therefore
+Color frames content with neutral grays, thin borders, and one accent color, the primary color. Content therefore
 has the most contrast on screen.
 
 Every role has a Dark value, and the whole screen switches between Light and Dark at once. Shadows deepen in Dark. See

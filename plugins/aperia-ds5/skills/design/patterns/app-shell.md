@@ -64,7 +64,7 @@ a 288px panel from the left. Opening a search result closes the panel. See
 
 ### Top bar
 
-The top bar is 56px tall, on the page background, with a hairline under it.
+The top bar is 56px tall, on the page background, with a divider under it.
 
 The breadcrumb shows where the page sits. It starts with the page's section as a link, such as Prospects. It ends with
 the page's own title, which comes from the page header. A section's own page shows its title alone. A page outside

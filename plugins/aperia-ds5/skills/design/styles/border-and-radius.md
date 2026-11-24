@@ -1,6 +1,6 @@
 # Border and Radius
 
-Border and radius define the hairline border and the corner radius of cards, controls, and panels.
+Border and radius define the thin border and the corner radius of cards, controls, and panels.
 
 ## When to use
 
@@ -24,7 +24,7 @@ on this page show each radius as the browser reads it.
 A square picture, such as a company, product, or team picture, takes its radius from its size. It uses Large at the
 default size and larger, Medium when small, and Small when extra small. A checkbox has a tighter radius of its own.
 
-Borders come in four kinds. Every hairline border has the same width, set once in the library.
+Borders come in four kinds. Every border and divider has the same width, set once in the library.
 
 | Border | What it outlines | Color |
 |---|---|---|
@@ -35,10 +35,10 @@ Borders come in four kinds. Every hairline border has the same width, set once i
 
 ## How it looks and behaves
 
-A hairline border and a small shadow outline a box in place of a thick gray border. Larger boxes have larger radii, so
+A thin border and a small shadow outline a box in place of a thick gray border. Larger boxes have larger radii, so
 a card is rounder than the button inside it.
 
-Borders never change the size of a box. Every hairline border sits outside the box, so it never moves the box's text.
+Borders never change the size of a box. Every border sits outside the box, so it never moves the box's text.
 
 Focus and error lines draw inside and around the control, so nothing shifts when they appear.
 
@@ -46,10 +46,10 @@ A picture has a thin see-through line inside its border and no other frame.
 
 ## Rules
 
-### Use the hairline border
+### Use the thin border
 
-- **Do:** Give cards, fields, and tables the hairline border and a small shadow, so the box shows on any fill.
-- **Don't:** Put thick gray borders on cards, fields, and tables. Use the hairline border, so the content has the
+- **Do:** Give cards, fields, and tables the thin border and a small shadow, so the box shows on any fill.
+- **Don't:** Put thick gray borders on cards, fields, and tables. Use the thin border, so the content has the
   most contrast.
 
 ### Take the radius from the component
@@ -77,7 +77,7 @@ Border and radius have no exceptions. Every app uses these borders and radii.
 - Borders are `ring-[0.5px]`, never a 1px `border`: `ring-border` on surfaces and panels, `ring-input` on controls. The
   `surface` utility (`rounded-xl bg-card shadow-sm ring-[0.5px] ring-border`) and the `control` utility
   (`bg-control shadow-sm ring-[0.5px] ring-input`) are for your own markup that should look like a card or a field.
-- `--default-border-width` in `styles/base.css` sets the hairline, so a plain `border` is a hairline too. Hairlines
+- `--default-border-width` in `styles/base.css` sets the border width, so a plain `border` is thin too. Borders
   that stay borders: the Toggle `outline` (a joined toggle group relies on it), Badge, Input OTP slots and the Switch
   track.
 - Focus is `focus-visible:inset-ring-1 inset-ring-ring ring-3 ring-ring/50`; invalid is the same in `destructive`.

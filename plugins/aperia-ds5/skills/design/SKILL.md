@@ -17,7 +17,7 @@ follow the component guidance; the look, copy and review rules still apply.
 
 ## Spirit
 
-- **Calm and dense.** It is a work tool used all day. Content is the loudest thing on screen. Chrome is quiet: hairline
+- **Calm and dense.** It is a work tool used all day. Content is the loudest thing on screen. Chrome is quiet: thin
   edges, soft shadows, muted labels, one accent color: the shared blue primary.
 - **One way to do each thing.** The same concept gets the same control everywhere in the app.
 - **Nothing moves unexpectedly.** Layouts do not shift when data lands, panels ease in and out, and empty cards keep

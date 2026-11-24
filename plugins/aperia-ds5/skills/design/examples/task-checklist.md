@@ -13,7 +13,7 @@ On a record, the tasks sit in a card titled "Tasks". The task progress sits besi
 of the card's header, after Apply Template when the app offers task templates. With no tasks, the card shows "No Tasks"
 with the same buttons centered under it.
 
-Each task is a row directly under the card's header. Rows run to the card's edges, with a hairline between them. Each
+Each task is a row directly under the card's header. Rows run to the card's edges, with a divider between them. Each
 row's content lines up with the card's title. A row contains three parts, from left to right:
 
 | Part | Content |
@@ -74,7 +74,7 @@ A page of one person's tasks across their records, such as To Do, contains four 
 
 ### Run rows to the card's edges
 
-- **Do:** Run rows straight under the header, divided by hairlines to the card's edges, with their content on the
+- **Do:** Run rows straight under the header, divided by dividers to the card's edges, with their content on the
   title's line, so tasks and card read as one list.
 - **Don't:** Box or indent the rows inside the card. Let the rows run to the card's edges, so there is no frame inside a
   frame.

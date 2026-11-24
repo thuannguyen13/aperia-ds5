@@ -91,7 +91,7 @@ function FilterLine({
   )
 }
 
-/** A sheet's panel (the page fill, the hairline edge and the Large shadow) titled at the top. */
+/** A sheet's panel (the page fill, the border and the Large shadow) titled at the top. */
 function Panel({
   title,
   className,
@@ -376,7 +376,7 @@ export const surfacesExamples = {
     <DoDont
       good={<FilterSheet onSurface />}
       bad={<FilterSheet onSurface={false} />}
-      goodNote="The filters on one surface, a hairline between rows."
+      goodNote="The filters on one surface, a divider between rows."
       badNote="Rows loose on the sheet's gray fill, where the hover barely shows."
     />
   ),
@@ -388,12 +388,12 @@ export const surfacesExamples = {
       badNote="A surface inside the card."
     />
   ),
-  "Run a line between groups edge to edge": (
+  "Run every divider edge to edge": (
     <DoDont
       good={<SortPanel sections />}
       bad={<SortPanel sections={false} />}
-      goodNote="Two sections, the line from edge to edge."
-      badNote="The line stops at the inset and reads as one more row."
+      goodNote="Two sections, the divider from edge to edge."
+      badNote="The divider stops at the inset and reads as one more row."
     />
   ),
   "Show a status on a badge, not a filled area": (

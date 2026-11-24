@@ -39,9 +39,9 @@ A dialog has five parts, listed from top to bottom:
 | Width | Up to 384px on desktop. On phones, the screen width less 16px a side. |
 | Corners | Extra large corner |
 | Padding | 16px |
-| Fill | Page background, Border hairline edge, and the Large shadow |
+| Fill | Page background, a border in the Border color, and the Large shadow |
 | Title | 16px, medium weight |
-| Footer | Muted at 50%, under the hairline. Buttons at the right, stacked on phones. |
+| Footer | Muted at 50%, under a divider. Buttons at the right, stacked on phones. |
 | Overlay | The overlay, with no blur |
 | Motion | The panel opening and closing timings, growing from slightly under full size |
 
@@ -95,7 +95,7 @@ A dialog has three states. Its buttons have their own states. See [Button](butto
 | Component | How it works with a dialog |
 |---|---|
 | Button | Cancel is Outline. The action is Primary, or Destructive when the action is destructive. |
-| Sheet | A sheet holds forms and record editing. A dialog and a sheet look alike, with the page fill, the hairline edge, and the Large shadow. |
+| Sheet | A sheet holds forms and record editing. A dialog and a sheet look alike, with the page fill, the border, and the Large shadow. |
 | Toast | A dialog's error shows in the dialog, not in a toast. |
 | Command | Global search is a command list inside a dialog. |
 

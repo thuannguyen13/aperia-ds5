@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
 import { Screen } from "./before-after"
 
 // The Scaffold page's diagram: the screen's three kinds of region (bars, rails and panes), drawn small from the shell's
-// own tokens (the sidebar navy, the page background, the hairline, the overlay, the panel shadow), on a desktop and on
+// own tokens (the sidebar navy, the page background, the border, the overlay, the panel shadow), on a desktop and on
 // a phone. The frames are inert: a picture of a screen, not one to use.
 
 type Layer = "page" | "sheet" | "dialog" | "sidebar"

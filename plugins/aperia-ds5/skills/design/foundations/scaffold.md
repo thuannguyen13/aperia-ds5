@@ -34,7 +34,7 @@ Prospect?", and closes before people go on. Menus, popovers, and toasts also flo
 Every screen places the regions the same way, on a desktop and on a phone.
 
 On a desktop, the sidebar runs down the left edge. It is 256px wide, or 48px when people collapse it to its icons. The
-top bar runs across the rest of the screen. It is 56px tall, with a hairline under it. The page column fills the space
+top bar runs across the rest of the screen. It is 56px tall, with a divider under it. The page column fills the space
 under the top bar and scrolls as one. It is centered and up to 1440px wide, with 20px of space around it. A board or a
 wide list table fills the full width beside the sidebar instead.
 

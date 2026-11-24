@@ -261,6 +261,7 @@ const LONG = 30
 const VAGUE = [
   [/\bthe rest\b/gi, 'say what it is ("every entry", "the other filters")'],
   [/\bthe system\b/gi, 'name the thing ("the app", "an import")'],
+  [/\bhairlines?\b/gi, 'say "divider" for a line between rows or sections, "border" for the line around a box'],
   [
     /\bowns\b|\bown space\b/gi,
     "define the parts instead of saying what a part owns",
