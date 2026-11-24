@@ -101,7 +101,7 @@ Pickers work with three other patterns:
 
 - `EntityPicker` from `aperia-ds5` for every record: `items` (or `groups`), `value`, `onChange`, `placeholder`,
   `multiple` for chips, `clearable` for an optional pick, `add` for the Add row, `disabled` with `reason` for the line
-  under it. Each item takes `reason` (why it can't be picked) and `kept` (why its chip can't come off). Put it in a
+  under it. Each item takes `reason` (why it cannot be picked) and `kept` (why its chip cannot come off). Put it in a
   `Field` with `FieldLabel htmlFor={id}` and `FieldError`.
 - `PickField` for a short fixed list (`none` says what an empty list means). Records are never a `PickField`.
 - Add: pass `add={{ label: "Add Prospect", form: <ProspectForm /> }}` (a `PickerAdd`, built by the feature that owns

@@ -73,4 +73,4 @@ This pattern has no exceptions.
   size="sm" … />` then `<Button variant="outline" size="sm">…</Button>` in `CardAction`).
 - Sort with `sortRows(rows, fields, value)` from `aperia-ds5/list`, the same fields on the server. A `SortField` adds
   `read`, a row's value; null, undefined or "" sorts lowest. `UNSORTED` is the default order.
-- Don't make `TableHead`s sortable.
+- Do not make `TableHead`s sortable.

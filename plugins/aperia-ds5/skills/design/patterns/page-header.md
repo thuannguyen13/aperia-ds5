@@ -109,7 +109,7 @@ ends its breadcrumb with the record's name.
 - A page that names its record in its content renders `PageCrumb` (`title`, `parents`) instead of `PageHeader`.
 - `RecordActions`: `onEdit`, `onDelete`, `deleteBlocked` (`true` for `IN_USE_DELETE`, or the reason as a string) and
   `actions` (`{ label, icon, onSelect, destructive?, disabled?, blocked? }`; `blocked` is the reason it shows).
-  `BlockedMenuItem` is a menu item the viewer can't take, with its reason.
+  `BlockedMenuItem` is a menu item the viewer cannot take, with its reason.
 - People go in the `subtitle` or a `properties` value as the people stack recipe on
   [People and Pictures](people-and-pictures.md), built in the app: named by their role here (such as "Sales Reps"),
   pictures from the app's picture adapter (`shape="square"` for companies and products), "No assignee" when empty, and

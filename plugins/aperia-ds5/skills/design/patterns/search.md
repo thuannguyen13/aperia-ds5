@@ -75,6 +75,6 @@ Search works with three other pages:
   (Ctrl K off a Mac).
 - Build the dialog from `CommandDialog` and `Command` with `shouldFilter={false}`, since the server already matched:
   one `CommandGroup` per kind, each `CommandItem` with the app's `Avatar` adapter, the name with the match
-  `font-semibold`, and a muted detail line. Use `NoResults` for nothing found. Don't filter the server's results again
+  `font-semibold`, and a muted detail line. Use `NoResults` for nothing found. Do not filter the server's results again
   in the browser.
 - Render new results in a React transition and memoize rows, so a frame never blocks; aim for 60fps.

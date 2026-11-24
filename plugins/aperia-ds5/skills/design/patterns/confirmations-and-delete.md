@@ -101,6 +101,6 @@ after the change, such as "Change to Lost".
   and `cancel` to rename Cancel. Its buttons are
   `type="button"`, so it never submits a form it opens in, and it returns focus to its opener.
 - A record sheet's Delete is `SheetDelete` in `SheetForm`'s `start`, with its own confirm. Close the sheet yourself
-  once the delete went through. When it can't be deleted pass `reason` (`IN_USE_DELETE` for one in use); it stays
+  once the delete went through. When it cannot be deleted pass `reason` (`IN_USE_DELETE` for one in use); it stays
   focusable through `aria-disabled` and its tooltip says why.
 - A record page's Delete is the last of `RecordActions`; `deleteBlocked` blocks it with `IN_USE_DELETE` or a reason.

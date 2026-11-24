@@ -100,7 +100,7 @@ Cards and tiles work with these pages:
 
 ## In code
 
-- Sections are direct children of `AppContent`: the row of tiles first, then the body. Don't wrap them in a
+- Sections are direct children of `AppContent`: the row of tiles first, then the body. Do not wrap them in a
   `gap-4` column or space them with margins.
 - A side column: a grid from a 60rem container, three quarters and one quarter, `grid-cols-[minmax(0,1fr)]` on a
   phone, `gap-4`. Build every card, the details card too, as the titled card recipe on [Card](../components/card.md).

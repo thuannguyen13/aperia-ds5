@@ -93,7 +93,7 @@ A disabled control works with four other patterns:
 
 ## In code
 
-- `ReasonTooltip` (`reason`) around anything that can't be picked, removed or changed; with no reason it renders its
+- `ReasonTooltip` (`reason`) around anything that cannot be picked, removed or changed; with no reason it renders its
   content as it is.
 - An icon button shows its reason as the tooltip while disabled (the icon button recipe on
   [Button](../components/button.md)). `SheetDelete` and `RecordActions` block Delete with

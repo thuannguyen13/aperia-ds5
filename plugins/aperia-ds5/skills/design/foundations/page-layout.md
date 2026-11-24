@@ -101,5 +101,5 @@ Items that always show together, such as buttons in a row or a title and its cou
   the heading sets the row's height.
 - Work each x out from the real classes (padding plus border plus gap), write the shared lines in a one-line comment,
   then measure them in the browser (`getBoundingClientRect`).
-- Don't put `gap` or `space-y` on a card or panel to space its parts; a gap is fine between items that always show
+- Do not put `gap` or `space-y` on a card or panel to space its parts; a gap is fine between items that always show
   together.

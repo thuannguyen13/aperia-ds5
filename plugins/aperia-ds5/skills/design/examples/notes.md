@@ -104,5 +104,5 @@ The app builds it from aperia-ds5 parts and the recipes on the pattern and compo
   `group-hover`, `group-focus-within`, and always under `pointer-coarse`), asking with `ConfirmDialog` (title "Delete
   Note?", action "Delete Note").
 - The preview is the box with `line-clamp-3` (12px, `bg-muted/60`, `rounded-lg`). Measure `scrollHeight >
-  clientHeight` in a `ResizeObserver`; when it's cut, View Note opens a `Sheet` titled "Note" whose
+  clientHeight` in a `ResizeObserver`; when it is cut, View Note opens a `Sheet` titled "Note" whose
   `SheetDescription` says what, when and who.

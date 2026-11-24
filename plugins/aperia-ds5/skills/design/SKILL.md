@@ -13,20 +13,20 @@ wins.
 
 **Version.** This skill is written for **aperia-ds5 0.3.x** (0.3.0-rc.2 and later). It is delivered separately from the
 library, so first read `version` in the app's `node_modules/aperia-ds5/package.json`. If it is older, or a component
-this skill names (such as `AppSidebar` or `opensOnClick`) isn't exported, tell the user to upgrade aperia-ds5 before you
+this skill names (such as `AppSidebar` or `opensOnClick`) is not exported, tell the user to upgrade aperia-ds5 before you
 follow the component guidance; the look, copy and review rules still apply.
 
 ## Spirit
 
-- **Calm and dense.** It's a work tool used all day. Content is the loudest thing on screen. Chrome is quiet: hairline
+- **Calm and dense.** It is a work tool used all day. Content is the loudest thing on screen. Chrome is quiet: hairline
   edges, soft shadows, muted labels, one accent color: the shared blue primary.
 - **One way to do each thing.** The same concept gets the same control everywhere in the app.
-- **Nothing moves unexpectedly.** Layouts don't shift when data lands, panels ease in and out, and empty cards keep
+- **Nothing moves unexpectedly.** Layouts do not shift when data lands, panels ease in and out, and empty cards keep
   their place.
 - **Say only what the user needs to act.** No narrative, no explaining the system, no marketing tone.
 - **Alignment is the taste.** Content and box edges line up across containers, to the pixel.
 
-When a case isn't covered here, choose what keeps these five true.
+When a case is not covered here, choose what keeps these five true.
 
 ## What the app owns
 
@@ -37,7 +37,7 @@ An app sets **only** these ([styles/color.md](styles/color.md), What an app can 
 - Its **status colors**, if it shows states: tinted pairs applied to `Badge` and `Alert` through `className`.
 
 Everything else is shared and comes from `aperia-ds5`: the primary, neutrals, surfaces, edges, shadows, overlay, motion,
-density, alignment, patterns and copy. Don't restyle these per app. If the app's CSS overrides one, that override is
+density, alignment, patterns and copy. Do not restyle these per app. If the app's CSS overrides one, that override is
 drift.
 
 ## The pages
@@ -110,7 +110,7 @@ The pages are in six sections, the same as the Storybook sidebar.
    Build a recipe once in the app and reuse it on every screen; never import it from aperia-ds5, which does not ship
    it. Feature patterns (status changes, notes, boards, import wizards, settings lists) are
    built in the app from these parts, the way the Examples pages show.
-4. **Apply the invariants** below, and the page for what you're placing: its pattern page, and its component page when
+4. **Apply the invariants** below, and the page for what you are placing: its pattern page, and its component page when
    there is one. [Buttons and Actions](patterns/buttons-and-actions.md) says where buttons go.
 5. **Write the copy** by [Copy](foundations/copy.md), with the fixed wording in
    [Message Templates](foundations/copy-templates.md).
@@ -131,7 +131,7 @@ The pages are in six sections, the same as the Storybook sidebar.
 5. **Card headers come from one recipe**, the titled card on [Card](components/card.md): title, optional figure and
    action on one 2rem row, so every card's first line aligns. The header, content and footer each hold their own
    space (the header its height, the content its padding), never a gap on the card. Card titles are semibold and smaller than the page title.
-6. **Empty means `EmptyState`:** an icon and "No [Items]". A second line only when it says what the title can't (whose,
+6. **Empty means `EmptyState`:** an icon and "No [Items]". A second line only when it says what the title cannot (whose,
    which range, what to do). Never bare text, and never a line that repeats the title.
 7. **Every record's picture is the ds5 `Avatar`.** People are circles; companies, products and teams are
    `shape="square"`. A photo or logo goes in `AvatarImage`, the initials in `AvatarFallback`. Pictures have no frame
@@ -152,8 +152,8 @@ The pages are in six sections, the same as the Storybook sidebar.
 15. **Vertical alignment holds across containers:** icons, pictures, headings, text and footers in one column share an
     x. A card's content starts on its title's line; a part with its own padding (a hover row, a ghost button) takes an
     equal negative margin to stay on it. Indents only show hierarchy ([Page Layout](foundations/page-layout.md)).
-16. **Use aperia-ds5 components directly.** Don't wrap them, copy them in, or restyle them with `data-slot` CSS. A look
-    that's wrong everywhere is fixed in aperia-ds5 (an issue there), not in the app.
+16. **Use aperia-ds5 components directly.** Do not wrap them, copy them in, or restyle them with `data-slot` CSS. A look
+    that is wrong everywhere is fixed in aperia-ds5 (an issue there), not in the app.
 
 ## Screenshot review
 
@@ -168,13 +168,13 @@ lines below for the user to check in their browser.
 
 - [ ] **The top bar holds the breadcrumb only** (and the sidebar toggle on a phone): no title, status chips, dates,
       filters or buttons.
-- [ ] **One title.** The page names itself once, in `PageHeader`; it isn't repeated in the top bar or a card.
+- [ ] **One title.** The page names itself once, in `PageHeader`; it is not repeated in the top bar or a card.
 - [ ] **Rows open records.** A click anywhere on a row opens it. No per-row "Open" or "View" button, and no row whose
       name alone is a link.
 - [ ] **Cards use the titled card recipe.** No card draws its own header, and a collapsible card uses its disclosure,
       not Show / Hide text buttons. A table in a card starts with its column headings, not a line.
 - [ ] **No internal labels.** Nothing says MVP, Not in MVP, Phase, Demo Data or Mock.
-- [ ] **Color isn't the only signal.** Every colored count, dot or cell also has a word, icon or badge, or a legend.
+- [ ] **Color is not the only signal.** Every colored count, dot or cell also has a word, icon or badge, or a legend.
 - [ ] **Light and Dark both checked**, and the screen holds at phone width.
 
 ## Checklist before calling UI done

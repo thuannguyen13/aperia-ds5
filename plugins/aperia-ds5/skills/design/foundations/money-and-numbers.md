@@ -76,7 +76,7 @@ Numbers work with three other patterns:
   with its label (`reason` hides the amount and puts the reason under it). Never `type="number"` for money.
 - Format with `aperia-ds5/format`: `money(value)` shows cents only when the amount has them; `{ cents: true }` or
   `{ cents: false }` forces one form,
-  `percent(part, whole)` (null when there's nothing to divide by: show the empty value from
+  `percent(part, whole)` (null when there is nothing to divide by: show the empty value from
   [Empty States](empty-states.md)), `plural(count, one, many)`.
 - Numbers in tables and tiles carry `tabular-nums`.
 
