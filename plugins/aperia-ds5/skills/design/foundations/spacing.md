@@ -30,6 +30,18 @@ Each space comes from one source, listed below.
 | Fields in a form | The form's own field spacing |
 | A card's header and its content | The header's fixed height and the content's own padding |
 
+Each container keeps its content a fixed distance in from its edge, its inset. Insets come in three steps, each on
+the 4px grid, and a smaller container takes a smaller step.
+
+| Container | Inset |
+|---|---|
+| The page column | Step 5 (20px) |
+| A card, a sheet, and a dialog | Step 4 (16px) |
+| A small card, a popover, and a hover card | Step 3 (12px) |
+
+A menu is the one exception. Its items carry the inset themselves, so the menu adds only a thin border of space around
+them.
+
 ## How it looks and behaves
 
 Cards sit at step 4, closer than sections at step 5, because each card has its own padding.

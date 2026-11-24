@@ -174,6 +174,11 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   and Descending once a field is picked. The button reads "Sort", or "Sort: <field>" with an arrow for the direction.
   The separate direction arrow is gone, and `iconOnly` draws it as an icon with a dot while sorted, which
   `ListToolbar` uses on a phone in place of its own sort menu.
+- `PopoverContent` and `HoverCardContent` pad and space their content at 12px, on the 4px grid (shadcn's default was
+  10px). The Insets table on Spacing lists every container's inset: the page 20px, a card, sheet or dialog 16px, a small
+  card, popover or hover card 12px.
+- Spacing: controls in a row are spaced box to box, and an icon button at a row's end lets its padding reach past the
+  edge so its icon lines up. The filter popover follows both.
 - New `ListPager`: the footer under a list, with its count ("6 merchants", or "26–50 of 312 merchants") and, once the
   rows run past one page (25 rows, `PAGE_SIZE`), Previous, the page numbers ("1 … 6 7 8 … 13") and Next, built from
   `Pagination`. `pageRows` and `pageCount` in `aperia-ds5/list` cut

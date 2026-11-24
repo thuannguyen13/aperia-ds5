@@ -86,7 +86,7 @@ export function SortControl({
           </Button>
         )}
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-60 gap-3 p-3">
+      <PopoverContent align="end" className="w-60">
         <p className="text-sm font-medium">Sort By</p>
         <RadioGroup
           value={value.by || UNSORTED_VALUE}
