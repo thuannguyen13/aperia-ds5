@@ -26,8 +26,8 @@ Cards and tiles come in five parts and forms:
 
 ## How it looks and behaves
 
-A card is built from a header and its content. A card header is 56px high. Its title, figure, and action sit on one
-32px row. Card titles are semibold and one step smaller than the page title. On a phone, an action that does not fit
+A card is built from a header and its content. A card header is one `min-h-8` row with `py-3` above and below it. Its title,
+figure, and action sit on that row. Card titles are semibold and one step smaller than the page title. On a phone, an action that does not fit
 beside the title drops under it. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 Add sits at the right of the header. When the card's list also has Sort, Sort sits before Add. See
@@ -43,11 +43,11 @@ tile, whether or not the tile has a bar. Tile numbers use tabular figures.
 A tile's number is always in the body color, whatever it counts. Its label says what it counts, such as Overdue Tasks,
 so the number needs no color. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for where status color goes.
 
-A page of cards, such as a record's page, stacks the page header, a row of tiles, and the cards, 20px apart. The cards
+A page of cards, such as a record's page, stacks the page header, a row of tiles, and the cards, `gap-5` apart. The cards
 sit in one column, or in a main column with a side column. The content decides, not the number of cards. A page gets a
 side column when it has related records or people to show beside its main work. The side column appears once the page
-is 960px wide. The main column takes three quarters and the side column one quarter, lined up under the tiles. A phone
-gets one column. Cards in a grid are 16px apart.
+is `@min-page-lg` wide. The main column takes three quarters and the side column one quarter, lined up under the tiles. A phone
+gets one column. Cards in a grid are `gap-4` apart.
 
 Cards are ordered by what the user does. The main column holds the record's own content first, such as what is sold
 and its details. The work on the record follows, with two short cards side by side once both fit, such as Tasks and

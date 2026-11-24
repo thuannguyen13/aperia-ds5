@@ -27,9 +27,9 @@ Every block has the size of the real part it stands in for. The title is about a
 toolbar shows as many filters as it has. The columns have their real widths. The rows have their real height, which is
 taller for rows with a second line.
 
-Stat tiles sit in one row from 768px wide, as the real tiles do.
+Stat tiles sit in one row once the page column is `@min-page-md` wide, as the real tiles do.
 
-The blocks are spaced like the page's sections, 20px apart. A page that fills the full width loads at the full width
+The blocks are spaced like the page's sections, `gap-5` apart. A page that fills the full width loads at the full width
 too, so the column does not widen when the page lands.
 
 ## Rules
@@ -52,7 +52,7 @@ A list that changes while the user types keeps its last results, shown at reduce
 ## In code
 
 - Build the list skeleton in the app from `Skeleton` from `aperia-ds5`. Put it inside `AppContent` where the page
-  would be, so it gets the same 20px between parts as the page's sections.
+  would be, so it gets the same `gap-5` between parts as the page's sections.
 
 ```tsx
 <p role="status" className="sr-only">Loading</p>

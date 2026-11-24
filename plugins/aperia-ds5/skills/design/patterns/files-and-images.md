@@ -21,7 +21,7 @@ Files and images use four parts:
 | Drop zone | A box that takes a dropped file, or opens a file chooser when selected. What it accepts shows underneath, such as "PDF or XLSX, up to 4 MB each." |
 | Files on a form | The files, listed above the drop zone. Each file downloads when selected. Its delete button removes it. |
 | Image picker | The image's preview beside Upload and, once an image is set, Remove. The buttons name the image, such as "Upload Logo" and "Remove Logo". |
-| Preview | A logo shows as the record's square picture. A wide picture, such as an email header, shows small, 48px high. A picture icon holds its place until one is set. |
+| Preview | A logo shows as the record's square picture. A wide picture, such as an email header, shows small, `h-12` high. A picture icon holds its place until one is set. |
 
 ## How it looks and behaves
 

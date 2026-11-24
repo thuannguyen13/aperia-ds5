@@ -23,8 +23,8 @@ Notifications have five parts:
 
 The panel opens from the sidebar, and each notification leads to its record:
 
-1. The panel opens beside the sidebar. It is up to 384px wide and never wider than the screen. Its header row is 48px
-   high.
+1. The panel opens beside the sidebar. It is up to `max-w-popover-lg` wide and never wider than the screen. Its header row is
+   `h-12` high.
 2. The panel takes focus as it opens, so the first tab shows no focus ring after a click.
 3. Mark All as Read is disabled while nothing is unread.
 4. Opening a notification marks it read at once. It also closes the panel and opens its record.

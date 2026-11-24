@@ -17,11 +17,11 @@ A screen has three sizes, set by the width of the browser window.
 
 | Screen size | Window width | What changes |
 |---|---|---|
-| Phone | Narrower than 640px | The layout changes the most. Sheets fill the screen, and toolbars and buttons move onto rows of their own. |
-| Tablet | 640px to 1023px | The desktop layout, with a record's actions folded into one More actions button. The sidebar shows only on a wide tablet. |
-| Desktop | 1024px and wider | Every part shows its desktop layout, with a record's actions as buttons. |
+| Phone | Narrower than `--breakpoint-sm` | The layout changes the most. Sheets fill the screen, and toolbars and buttons move onto rows of their own. |
+| Tablet | From `--breakpoint-sm` up to `--breakpoint-lg` | The desktop layout, with a record's actions folded into one More actions button. The sidebar shows only on a wide tablet. |
+| Desktop | `--breakpoint-lg` and wider | Every part shows its desktop layout, with a record's actions as buttons. |
 
-Every "phone" on these pages means a window narrower than 640px.
+Every "phone" on these pages means a window narrower than `--breakpoint-sm`.
 
 Two widths decide a layout. The app shell and the shared components change by the window's width. The sections inside a
 page, such as a row of tiles or a grid of cards, change by the page column's width. The page column is the window less
@@ -37,11 +37,11 @@ Each region of the scaffold changes as the window narrows. See [Scaffold](scaffo
 
 | Region | Phone | Tablet | Desktop |
 |---|---|---|---|
-| Sidebar | Hidden. The button at the start of the top bar opens it as a 288px panel from the left. | Hidden below 768px, as on a phone. From 768px, it shows at 256px or as a 48px rail. | 256px wide, or a 48px rail of icons |
-| Top bar | 56px tall. The breadcrumb keeps its last two crumbs. | 56px tall, with the whole breadcrumb | 56px tall, with the whole breadcrumb |
-| Page column | Fills the window under the top bar, with 20px around it | Fills the space beside the sidebar, or the whole window while the sidebar is hidden, with 20px around it | Centered and up to 1440px wide, with 20px around it |
-| Sheet | Fills the screen, with square corners | 16px in from the window's edges, three quarters of the window wide, up to 576px for a form | 16px in from the window's edges, 576px wide for a form |
-| Dialog | A confirmation or a dialog that asks for a reason sits in the middle, 320px wide and at least 16px from each side. A search or a review dialog fills the screen. | In the middle, up to 384px wide | In the middle, up to 384px wide |
+| Sidebar | Hidden. The button at the start of the top bar opens it as a 288px panel from the left. | Hidden below `--breakpoint-md`, as on a phone. From `--breakpoint-md`, it shows at `--sidebar-width` or as a rail of `--sidebar-width-icon`. | `--sidebar-width` wide, or a rail of icons `--sidebar-width-icon` wide |
+| Top bar | `h-14` tall. The breadcrumb keeps its last two crumbs. | `h-14` tall, with the whole breadcrumb | `h-14` tall, with the whole breadcrumb |
+| Page column | Fills the window under the top bar, with `p-5` around it | Fills the space beside the sidebar, or the whole window while the sidebar is hidden, with `p-5` around it | Centered and up to `max-w-360` wide, with `p-5` around it |
+| Sheet | Fills the screen, with square corners | In from the window's edges by `right-4`, three quarters of the window wide, up to `max-w-xl` for a form | In from the window's edges by `right-4`, `max-w-xl` wide for a form |
+| Dialog | A confirmation or a dialog that asks for a reason sits in the middle, `max-w-xs` wide and at least 16px from each side. A search or a review dialog fills the screen. | In the middle, up to `max-w-sm` wide | In the middle, up to `max-w-sm` wide |
 | Toast | Across the top of the screen, 16px from each side | At the top right of the window | At the top right of the window |
 
 See [Dialog](../components/dialog.md) for the kinds of dialog. See
@@ -54,19 +54,19 @@ Each shared part has one phone layout, set by its component. The page in the Own
 | Part | On a phone | Owner |
 |---|---|---|
 | Page header's buttons | They take a full-width row under the title, with the primary action first and every button the same width. | [Page Header](../patterns/page-header.md) |
-| Record actions | They fold into one More actions (…) button on the title's line. This happens below 1024px, so tablets fold them too. | [Page Header](../patterns/page-header.md) |
+| Record actions | They fold into one More actions (…) button on the title's line. This happens below `--breakpoint-lg`, so tablets fold them too. | [Page Header](../patterns/page-header.md) |
 | Page header's properties | They sit in two columns. | [Page Header](../patterns/page-header.md) |
 | List toolbar | It takes up to three rows. The list's actions come first, then the search with Filter and Sort as icon buttons, then the filters that are on as chips. | [List Toolbar](../patterns/list-toolbar.md) |
 | Filters | They are set in a sheet from the bottom, up to 85% of the screen's height. The chips sit on one line that scrolls sideways. | [Filters](../patterns/filters.md) |
 | Sort | It is an icon button that shows a dot while the list is sorted. | [Sort](../patterns/sort.md) |
 | Table | It keeps every column and scrolls sideways inside its box. | [Tables](../patterns/tables.md) |
 | Pager | The pages move under the count when they do not fit beside it. Previous and Next show their arrows without words. | [Paging](../patterns/paging.md) |
-| Row of tiles | The tiles sit two to a row until the page column is 768px wide. | [Cards and Tiles](../patterns/cards-and-tiles.md) |
-| Grid of cards | The cards stack in one column until the page column is 960px wide. | [Cards and Tiles](../patterns/cards-and-tiles.md) |
+| Row of tiles | The tiles sit two to a row until the page column is `@min-page-md` wide. | [Cards and Tiles](../patterns/cards-and-tiles.md) |
+| Grid of cards | The cards stack in one column until the page column is `@min-page-lg` wide. | [Cards and Tiles](../patterns/cards-and-tiles.md) |
 | Card header | An action that does not fit beside the title drops under it, at the right. | [Card](../components/card.md) |
 | Sheet's footer | A record's Delete takes a line of its own, above Cancel and the save button. | [Forms in Sheets](../patterns/forms-in-sheets.md) |
 | Dialog's footer | The buttons stack, with the action on top. | [Dialog](../components/dialog.md) |
-| Text typed in a field | It is 16px below 768px and 14px from 768px, so a phone never zooms into the field. | [Typography](../styles/typography.md) |
+| Text typed in a field | It is `text-base` below `--breakpoint-md` and `text-sm` from `--breakpoint-md`, so a phone never zooms into the field. | [Typography](../styles/typography.md) |
 
 ### What stays the same
 
@@ -81,8 +81,8 @@ own box.
 A new part goes through five steps before it ships:
 
 1. Build it from the shared components. They already change at these widths, so most new parts need nothing more.
-2. Check the screen at 390px wide for a phone, then at 640px and at 1024px, where layouts change.
-3. Lay out its sections by the page column's width, at the same steps as tiles and cards, 768px and 960px.
+2. Check the screen at 390px wide for a phone, then at `--breakpoint-sm` and at `--breakpoint-lg`, where layouts change.
+3. Lay out its sections by the page column's width, at the same steps as tiles and cards, `@min-page-md` and `@min-page-lg`.
 4. Move whatever does not fit to its phone place. Actions go into a More actions menu, controls go into a sheet, and a
    wide table goes into a box that scrolls sideways.
 5. Check that every control keeps its size and that the page never scrolls sideways.
@@ -105,7 +105,7 @@ A new part goes through five steps before it ships:
 
 ### Lay out a page by its column's width
 
-- **Do:** Change a page's sections by the page column's width (tiles two to a row until the column is 768px wide), so
+- **Do:** Change a page's sections by the page column's width (tiles two to a row until the column is `@min-page-md` wide), so
   a page fits beside an open sidebar.
 - **Don't:** Change a page's sections by the window's width. Use the column's width, so an open sidebar never squeezes
   four tiles into a narrow column.
@@ -146,6 +146,6 @@ of scrolling sideways. A select above the table picks the column.
 - `Toaster` (`sonner`) takes `position="top-right"` once, at the app's root. It spans the screen below its own 600px
   breakpoint, 16px from each side.
 - Page sections use container queries on `AppContent`'s column, never `md:` or `lg:`. Tiles are
-  `grid grid-cols-2 gap-4 @min-[48rem]:grid-cols-4`; a side column or two cards side by side start at `@min-[60rem]`.
+  `grid grid-cols-2 gap-4 @min-page-md:grid-cols-4`; a side column or two cards side by side start at `@min-page-lg`.
 - Check a screen at 390px wide. `Devices` in `docs/design-language/examples/before-after.tsx` shows a story at 1280px
   and 390px, each in its own window, since the components follow the window and not a frame.

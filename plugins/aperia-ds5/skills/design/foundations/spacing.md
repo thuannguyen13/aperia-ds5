@@ -15,6 +15,9 @@ parts inside a component, such as an icon and its label. Step 3 is a small conta
 and the gap between cards. Step 5 separates the page's sections. The live table on this page shows each step's size as
 the browser reads it.
 
+One half step sits between steps 1 and 2. Step 1.5, `gap-1.5`, spaces the parts of a compact row. Examples are an icon
+and its label, a menu item's parts, and a status dot and its word.
+
 Each space comes from one source, listed below.
 
 | Between | Space |
@@ -25,14 +28,14 @@ Each space comes from one source, listed below.
 | Fields in a form | The form's own field spacing |
 | A card's header and its content | The header's fixed height and the content's own padding |
 
-Each container keeps its content a fixed distance in from its edge, its inset. Insets come in three steps, each on
-the 4px grid, and a smaller container takes a smaller step.
+Each container keeps its content a fixed distance in from its edge, its inset. Insets come in three steps, each a
+multiple of `--spacing`, and a smaller container takes a smaller step.
 
 | Container | Inset |
 |---|---|
-| The page column | Step 5 (20px) |
-| A card, a sheet, and a dialog | Step 4 (16px) |
-| A small card, a popover, and a hover card | Step 3 (12px) |
+| The page column | Step 5, `p-5` |
+| A card, a sheet, and a dialog | Step 4, `p-4` |
+| A small card, a popover, and a hover card | Step 3, `p-3` |
 
 A menu is the one exception. Its items carry the inset themselves, so the menu adds only a thin border of space around
 them.
@@ -67,9 +70,10 @@ of a row, that same padding reaches past the row's edge, so the icon itself line
 
 ### Stay on the grid
 
-- **Do:** Pick a step from the scale, so spacing repeats from screen to screen.
-- **Don't:** Use a size between the steps, or add a margin to push one section away. Use the nearest step, so gaps do
-  not drift from screen to screen.
+- **Do:** Pick a step from the scale, so spacing repeats from screen to screen. Use the half step, `gap-1.5`, only
+  inside a compact row, such as an icon and its label.
+- **Don't:** Use any other size between the steps, or add a margin to push one section away. Use the nearest step, so
+  gaps do not drift from screen to screen.
 
 ## When you can do it differently
 
@@ -82,7 +86,8 @@ Spacing has no exceptions. Every app uses these steps.
 
 ## In code
 
-- Steps are Tailwind's `gap-1` to `gap-5`, multiples of `--spacing`.
+- Steps are Tailwind's `gap-1` to `gap-5`, multiples of `--spacing`. The half step is `gap-1.5`, which the library uses for
+  compact rows (a button's icon and text, menu items, tabs, tooltips, chart legends).
 - The page's sections: `AppContent` puts `gap-5` between them and `p-5` around the column. Do not space sections with
   margins.
 - Cards or tiles in a grid: `gap-4`.

@@ -25,9 +25,9 @@ A table has four parts, listed from top to bottom:
 
 | Part | Value |
 |---|---|
-| Heading row | 40px tall, medium weight |
-| Cell padding | 8px |
-| Text | 14px |
+| Heading row | `h-10` tall, medium weight |
+| Cell padding | `p-2` |
+| Text | `text-sm` |
 | Row lines | The divider |
 | Hover | Muted at 50% |
 | Selected | Muted |

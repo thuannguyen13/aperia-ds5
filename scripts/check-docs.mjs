@@ -257,11 +257,21 @@ const CONTRACTION =
 const VERDICT_NAME =
   /\*\*Don['’]t:?\*\*|\bDon['’]ts?\b(?=\W|$)(?<=(?:\ba |\band |\/ |\bDo, |^)Don['’]ts?)/g
 
+/**
+ * A literal length, duration, or color: `16px`, `2rem`, `250ms`, `#0058cc`. A three-digit hex needs a letter, so a
+ * record number such as "#659" is not read as a color.
+ */
+const HARD_CODED =
+  /(?<![\w.-])\d+(?:\.\d+)?\s?(?:px|rem|ms)\b|(?<![\w&])#(?:[0-9a-f]{8}|[0-9a-f]{6}|(?=[0-9]*[a-f])[0-9a-f]{3})\b/gi
+
 const LONG = 30
 const VAGUE = [
   [/\bthe rest\b/gi, 'say what it is ("every entry", "the other filters")'],
   [/\bthe system\b/gi, 'name the thing ("the app", "an import")'],
-  [/\bhairlines?\b/gi, 'say "divider" for a line between rows or sections, "border" for the line around a box'],
+  [
+    /\bhairlines?\b/gi,
+    'say "divider" for a line between rows or sections, "border" for the line around a box',
+  ],
   [
     /\bowns\b|\bown space\b/gi,
     "define the parts instead of saying what a part owns",
@@ -552,6 +562,22 @@ function checkPage(file, text, ctx) {
           text: original.replace(/\s+/g, " ").trim(),
         })
     }
+  }
+
+  // Hard-coded values: a size, a duration, or a color written as a number outside code. The docs name the token in
+  // backticks (`p-4`, `h-14`, `--breakpoint-lg`), which Storybook draws as a pill with the live value, so a value
+  // lives only in base.css. In code and fenced code may keep their numbers.
+  for (const line of lines) {
+    if (!["prose", "table", "heading"].includes(line.kind)) continue
+    if (line.section === "In code") continue
+    const masked = maskOf(line.text)
+    for (const m of masked.matchAll(HARD_CODED))
+      add(
+        line.n,
+        "warning",
+        "value",
+        `hard-coded "${m[0]}": name the token it stands for in backticks, such as \`p-4\` or \`--breakpoint-lg\``
+      )
   }
 
   // A rule's heading, for the same rule stated on another page.

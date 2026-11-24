@@ -53,7 +53,7 @@ A table lines up with its card and keeps each row to one line.
 
 In a card, the column headings sit right under the card's title. The first divider is the one under the headings.
 
-The first column starts on the card title's line, 16px in. The last column ends 16px from the right edge.
+The first column starts on the card title's line, `pl-4` in. The last column ends `pr-4` from the right edge.
 
 Dividers separate the rows. A row takes a muted fill under the pointer.
 
@@ -156,7 +156,7 @@ Build the group row in the app from `TableRow` and `TableCell` from `aperia-ds5`
 table with a quiet band that holds the group's name.
 
 ```tsx
-<TableRow className="bg-foreground/4 hover:bg-foreground/4">
+<TableRow className="bg-muted hover:bg-muted">
   <TableCell colSpan={columnCount} className="pl-4 pr-4 text-xs font-medium text-muted-foreground">
     <div className="flex items-center justify-between gap-3">
       <span className="flex items-center gap-1.5">{logo}Acme Bank</span>
@@ -166,6 +166,8 @@ table with a quiet band that holds the group's name.
 </TableRow>
 ```
 
+- The band is the Muted fill in full, `bg-muted`, and keeps it under the pointer, so it never reads as a hovered row
+  (`bg-muted/50`).
 - `colSpan` is the table's column count, so the band crosses the whole table.
 - The name starts on the first column's `pl-4` line. A total or buttons at the end stop on the last column's `pr-4`
   line. With nothing before or after the name, drop the inner `div` and `pr-4`.

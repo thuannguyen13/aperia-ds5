@@ -86,7 +86,7 @@ rest, on hover, on focus, when pressed, and when disabled.
 2. **Find the sibling.** Before adding any control, find where the app already shows the same concept (an empty list, a
    delete, a picker, a person, a status). Use that pattern. If two differ, propose one and convert both.
 3. **Use the shell and the compositions**, not raw primitives. The shell ships in aperia-ds5: `AppSidebar`,
-   `AppHeader`, `AppContent` (the page column, 20px between sections), `PageHeader` with `RecordActions`, and
+   `AppHeader`, `AppContent` (the page column, `gap-5` between sections), `PageHeader` with `RecordActions`, and
    `opensOnClick` for rows (wiring in [App Shell](patterns/app-shell.md)). Never rebuild the sidebar, top bar or page
    header. The system-wide patterns ship in aperia-ds5 too, each named in its pattern page's In code:
    - cards and values: `EmptyState`, `NoResults`, `RelativeTime`;
@@ -124,7 +124,7 @@ rest, on hover, on focus, when pressed, and when disabled.
 
 ## Invariants
 
-1. **No 1px borders on surfaces.** Cards, fields, outline buttons and the selected tab have a 0.5px edge plus a soft
+1. **No border thicker than `--default-border-width` on surfaces.** Cards, fields, outline buttons and the selected tab have a `--default-border-width` edge plus a soft
    shadow. The aperia-ds5 components already have it; for your own markup use the `surface` (cards, a table or empty
    state on the page) and `control` utilities. Never put a bordered box inside a bordered card: a table sits flush in
    its card.
@@ -134,7 +134,7 @@ rest, on hover, on focus, when pressed, and when disabled.
 4. **Motion eases out:** panels open and close on the shared timing ([Motion](styles/motion.md)), a dialog growing
    slightly as it opens. Reduced motion only fades. Nothing pops in or snaps shut.
 5. **Card headers come from one recipe**, the titled card on [Card](components/card.md): title, optional figure and
-   action on one 2rem row, so every card's first line aligns. The header, content and footer each hold their own
+   action on one `min-h-8` row, so every card's first line aligns. The header, content and footer each hold their own
    space (the header its height, the content its padding), never a gap on the card. Card titles are semibold and smaller than the page title.
 6. **Empty means `EmptyState`:** an icon and "No [Items]". A second line only when it says what the title cannot (whose,
    which range, what to do). Never bare text, and never a line that repeats the title.
@@ -157,9 +157,9 @@ rest, on hover, on focus, when pressed, and when disabled.
     Sentence case for sentences, descriptions, values, and a tooltip that says why.
 13. **What responds looks different at rest,** and everything clickable shows the pointer, rows and menu items included
     ([Surfaces and Layers](styles/surfaces-and-layers.md), Showing what responds).
-14. **Controls keep their size on a phone** (32px), and sheets fill the screen
-    ([Screen Sizes](foundations/screen-sizes.md)). An icon button takes the height of the controls beside it, 32px
-    beside a field and 28px on a row or in a card header ([Button](components/button.md)).
+14. **Controls keep their size on a phone** (`h-8`), and sheets fill the screen
+    ([Screen Sizes](foundations/screen-sizes.md)). An icon button takes the height of the controls beside it, `size-8`
+    beside a field and `size-7` on a row or in a card header ([Button](components/button.md)).
 15. **Vertical alignment holds across containers:** icons, pictures, headings, text and footers in one column share an
     x. A card's content starts on its title's line; a part with its own padding (a hover row, a ghost button) takes an
     equal negative margin to stay on it. Indents only show hierarchy ([Page Layout](foundations/page-layout.md)).
@@ -192,7 +192,7 @@ lines below for the user to check in their browser.
 
 - [ ] The only colors the app sets are its status, chart and avatar colors, the app loads Inter, and no app CSS
       restyles an aperia-ds5 component.
-- [ ] No 1px border on a surface, and no bordered box inside a card.
+- [ ] No border thicker than `--default-border-width` on a surface, and no bordered box inside a card.
 - [ ] Every empty or no-match state is `EmptyState`, and its second line adds something.
 - [ ] Every icon-only button has a tooltip.
 - [ ] An action the role can never take is left out; one blocked for now is disabled with its reason

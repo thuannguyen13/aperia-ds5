@@ -23,9 +23,9 @@ A phone changes how a page is laid out, such as a sheet that fills the screen, b
 [Screen Sizes](screen-sizes.md) for the widths and what changes at each.
 
 The top bar, a card's header, and a sheet's title-only header share one fixed height, so they line up across the
-screen. A page header can show a 48px picture beside its title, such as a record's avatar.
+screen. A page header can show a `size-12` picture beside its title, such as a record's avatar.
 
-The page sits in one centered column, at most 1440px wide, with the page spacing around it.
+The page sits in one centered column, at most `max-w-360` wide, with the page spacing around it.
 
 ## How it looks and behaves
 

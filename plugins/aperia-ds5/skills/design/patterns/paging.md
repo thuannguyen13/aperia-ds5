@@ -30,7 +30,7 @@ A footer needs its count. The pages, parts 2 to 6, appear only when the list has
 
 ## How it looks and behaves
 
-The footer sits under the list, 20px from it. On a phone, the pages move to a line under the count, and Previous and
+The footer sits under the list, `gap-5` from it. On a phone, the pages move to a line under the count, and Previous and
 Next show their arrows without words. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone. The
 count is the only count of the list.
 The toolbar above the list has none.

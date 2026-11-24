@@ -13,8 +13,8 @@ A page header has seven parts, listed from start to end and top to bottom:
 
 | Part | Position | Content |
 |---|---|---|
-| Picture | Before the title, on a record's page | A 48px picture. A person is a circle, and a company or product is a square. |
-| Title | Start of the title's line | The page's name in 24px semibold. It also fills the last crumb of the breadcrumb in the top bar. |
+| Picture | Before the title, on a record's page | A `size-12` picture. A person is a circle, and a company or product is a square. |
+| Title | Start of the title's line | The page's name in `text-2xl` semibold. It also fills the last crumb of the breadcrumb in the top bar. |
 | Actions | End of the title's line | Other actions as outline buttons, then the page's primary action, such as Export Report. A list's actions, such as Add Prospect, sit in its toolbar instead. |
 | Record actions | End of the title's line, on a record's page | Edit, the record's other actions, then the destructive ones and Delete. |
 | Subtitle | Under the title | One line of muted text. |
@@ -26,7 +26,7 @@ A page header has seven parts, listed from start to end and top to bottom:
 A page header keeps one height for its title's line and one order for its actions.
 
 The title's line is at least a button's height, so a page without actions lines up with a page that has them. Buttons
-are 8px apart.
+are `gap-2` apart.
 
 A record with a number leads its subtitle with its kind and number, then its parent record, then its stacks of
 pictures, such as its products and its sales reps. An example is "Opportunity #659 · Northwind Merchant Services ·
@@ -36,7 +36,7 @@ People show as three avatars at most, then "+N". Pointing at the stack, focusing
 card lists everyone with their picture, name, and role. When no one is assigned, the stack shows an empty avatar and
 "No [role]", such as "No assignee".
 
-On screens 1024px and wider, up to three record actions are buttons. Edit comes first, then the record's other
+On screens `--breakpoint-lg` and wider, up to three record actions are buttons. Edit comes first, then the record's other
 actions. With four or more, the rest go into More actions (…), as
 [Buttons and Actions](buttons-and-actions.md) says. Actions
 that close the record's work, such as Close as Lost, come next, set apart in the destructive color. Delete comes last.

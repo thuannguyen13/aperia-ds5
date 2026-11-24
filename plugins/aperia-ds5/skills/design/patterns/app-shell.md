@@ -41,7 +41,7 @@ parts are listed from top to bottom.
 
 ### Sidebar
 
-The sidebar is 256px wide and collapses to a 48px rail of icons. It uses the sidebar color, which is the shared Aperia
+The sidebar is `--sidebar-width` wide and collapses to a rail of icons, `--sidebar-width-icon` wide. It uses the sidebar color, which is the shared Aperia
 navy in Light and a dark neutral in Dark. The current page uses the sidebar's highlight color, which is white in Light.
 
 People collapse and open the sidebar in three ways:
@@ -51,7 +51,7 @@ People collapse and open the sidebar in three ways:
 - A click on the sidebar's edge collapses and opens it.
 - The shortcut ⌘B, or Ctrl B off a Mac, collapses and opens it.
 
-Collapsing and opening take 250ms on the ease-out curve. The sidebar, its buttons, and the page beside it move
+Collapsing and opening take `--rail-duration` on the ease-out curve, `--rail-ease`. The sidebar, its buttons, and the page beside it move
 together. As the rail narrows, the product name is cut off and fades. The collapse button moves with the rail's edge.
 
 On the rail, each entry shows its name in a tooltip. The unread count moves to the corner of the Notifications icon.
@@ -64,7 +64,7 @@ a 288px panel from the left. Opening a search result closes the panel. See
 
 ### Top bar
 
-The top bar is 56px tall, on the page background, with a divider under it.
+The top bar is `h-14` tall, on the page background, with a divider under it.
 
 The breadcrumb shows where the page sits. It starts with the page's section as a link, such as Prospects. It ends with
 the page's own title, which comes from the page header. A section's own page shows its title alone. A page outside
@@ -76,8 +76,8 @@ On a phone, a long trail keeps only the last two crumbs, so neither crumb is cut
 
 ### Page column
 
-The page column scrolls as one, under the top bar, with 20px of space around it. The column is centered and up to
-1440px wide. See [Page Layout](../foundations/page-layout.md) for the sections inside it.
+The page column scrolls as one, under the top bar, with `p-5` around it. The column is centered and up to
+`max-w-360` wide. See [Page Layout](../foundations/page-layout.md) for the sections inside it.
 
 ## Rules
 
