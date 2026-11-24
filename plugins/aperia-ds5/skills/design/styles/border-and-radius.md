@@ -64,6 +64,8 @@ Border and radius have no exceptions. Every app uses these borders and radii.
 
 ## Works with
 
+- See [Surfaces and Layers](surfaces-and-layers.md) for which parts take the surface edge and which take the control
+  edge.
 - See [Elevation](elevation.md) for the shadow that goes with each border.
 - See [Color](color.md) for the Border and Input roles.
 - See [Sizes](../foundations/sizes.md) for the heights these boxes come in.

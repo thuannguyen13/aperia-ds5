@@ -69,6 +69,7 @@ export const STYLES: Section<SkillPage> = {
   title: "Styles",
   lead: "Styles are the visual values that every component uses, such as color, type, shape, elevation, motion, and icons.",
   pages: [
+    { file: "styles/surfaces-and-layers.md" },
     { file: "styles/color.md" },
     { file: "styles/typography.md" },
     { file: "styles/border-and-radius.md" },
