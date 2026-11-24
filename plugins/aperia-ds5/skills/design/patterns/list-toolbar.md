@@ -16,7 +16,8 @@ filters are one Filter button that opens the filters in a popover. Simple filter
 list with four filters or fewer. See [Filters](filters.md) for choosing between them.
 
 The toolbar holds nothing else. The list's count sits in the footer under the list. See [Paging](paging.md) for the
-footer.
+footer. While rows are selected, a selection bar takes the toolbar's place. See [Selecting Rows](selecting-rows.md) for
+that bar.
 
 ## Anatomy
 

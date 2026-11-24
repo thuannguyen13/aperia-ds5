@@ -153,6 +153,7 @@ result that needs nothing more from people shows as a toast. Find the situation 
 | An action succeeds | A toast that closes on its own, with the result, such as "Note added." | People see what happened at a glance and carry on. |
 | A change saves at once and can be taken back, such as a ticked task or a status change | A toast with the result and Undo, such as "Changed to Demo." | People see the change take effect and can take it back. |
 | A new notification arrives | A toast with the notification's sentence that links to its record, three at most. See [Notifications](../patterns/notifications.md). | People see it on any page, and the page stays usable. |
+| Something holds for the whole page, such as a read-only record or an outage | A banner alert under the page header. See [Banner Alerts](../patterns/banner-alerts.md). | People read it before they start working on the page. |
 
 A toast that closes on its own is only for a success. An error is never a toast while its place is still on screen.
 
@@ -183,6 +184,7 @@ A screen may depart from a template only for a business reason the app has recor
 - See [Saving and Feedback](saving-and-feedback.md) for when a change saves, its working state, and when it offers
   Undo.
 - See [Disabled With a Reason](disabled-with-a-reason.md) for when an action is left out instead of disabled.
+- See [Banner Alerts](../patterns/banner-alerts.md) for where a message about the whole page sits.
 
 ## In code
 

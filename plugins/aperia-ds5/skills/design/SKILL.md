@@ -64,10 +64,11 @@ rest, on hover, on focus, when pressed, and when disabled.
   page.
 - **Patterns** (how components combine into the parts of a screen; whole screens are in Examples): Navigation:
   [App Shell](patterns/app-shell.md), [Search](patterns/search.md), [Notifications](patterns/notifications.md); Content:
-  [Page Header](patterns/page-header.md), [Cards and Tiles](patterns/cards-and-tiles.md), [Details](patterns/details.md),
-  [History](patterns/history.md), [People and Pictures](patterns/people-and-pictures.md); Lists:
+  [Page Header](patterns/page-header.md), [Banner Alerts](patterns/banner-alerts.md),
+  [Cards and Tiles](patterns/cards-and-tiles.md), [Charts](patterns/charts.md), [Details](patterns/details.md),
+  [Status](patterns/status.md), [History](patterns/history.md), [People and Pictures](patterns/people-and-pictures.md); Lists:
   [List Toolbar](patterns/list-toolbar.md), [Filters](patterns/filters.md), [Sort](patterns/sort.md), [Paging](patterns/paging.md),
-  [Tables](patterns/tables.md), [Reordering](patterns/reordering.md); Editing:
+  [Tables](patterns/tables.md), [Selecting Rows](patterns/selecting-rows.md), [Reordering](patterns/reordering.md); Editing:
   [Buttons and Actions](patterns/buttons-and-actions.md), [Forms in Sheets](patterns/forms-in-sheets.md),
   [Pickers](patterns/pickers.md), [Confirmations and Delete](patterns/confirmations-and-delete.md),
   [Files and Images](patterns/files-and-images.md), [Switches in a Grid](patterns/switches-in-a-grid.md).
@@ -108,7 +109,8 @@ rest, on hover, on focus, when pressed, and when disabled.
      and hidden value on [Money and Numbers](foundations/money-and-numbers.md);
    - the detail section, detail row, and fact on [Details](patterns/details.md), and the timeline and history card on
      [History](patterns/history.md);
-   - the scroll table and table group row on [Tables](patterns/tables.md), the people stack on
+   - the scroll table and table group row on [Tables](patterns/tables.md), the selection bar on
+     [Selecting Rows](patterns/selecting-rows.md), the status dot on [Status](patterns/status.md), the people stack on
      [People and Pictures](patterns/people-and-pictures.md), the list skeleton on [Loading](foundations/loading.md), and
      the flag switch on [Switches in a Grid](patterns/switches-in-a-grid.md).
    Build a recipe once in the app and reuse it on every screen; never import it from aperia-ds5, which does not ship
@@ -146,8 +148,9 @@ rest, on hover, on focus, when pressed, and when disabled.
 8. **Icon-only buttons always have a tooltip** naming the action (the icon button recipe on
    [Button](components/button.md)). A disabled button with a reason stays
    focusable and its tooltip says why.
-9. **Status color means state,** from the app's tinted pairs (a pale fill with deep text). Never use it to decorate,
-   and never use solid primary buttons as status pills.
+9. **Status color means state,** from the app's tinted pairs (a pale fill with deep text), one word and one color per
+   state across screens ([Status](patterns/status.md)). Never use it to decorate, and never use solid primary buttons
+   as status pills.
 10. **Tables show, sheets edit.** A row opens its record. Edit and Delete live on the record page, not the row.
 11. **Errors in place:** an error shows where its action happened, such as beside its field, above a form's or dialog's
     buttons, or above the grid for a control that saves on change. The form stays open with what was typed. A toast

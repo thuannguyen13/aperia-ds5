@@ -19,5 +19,7 @@ export {
 export { RecordActivity } from "./record-activity"
 export { ListSkeleton } from "./list-skeleton"
 export { FlagSwitch } from "./flag-switch"
+export { SelectionBar } from "./selection-bar"
+export { StatusDot } from "./status-dot"
 // An icon-only button with its tooltip: private to the library (ListToolbar and SortControl use it), a recipe for apps.
 export { IconButton } from "@/components/ui/icon-button/icon-button"

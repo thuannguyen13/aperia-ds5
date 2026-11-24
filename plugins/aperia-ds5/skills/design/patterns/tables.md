@@ -81,6 +81,8 @@ This pattern has no exceptions.
 - See [Page Layout](../foundations/page-layout.md) for lining the first column up with the title.
 - See [Card](../components/card.md) for the titled card a table sits in.
 - See [Table](../components/table.md) for plain rows without stripes.
+- See [Selecting Rows](selecting-rows.md) for ticking rows and acting on them together.
+- See [Status](status.md) for a status column.
 
 ## In code
 

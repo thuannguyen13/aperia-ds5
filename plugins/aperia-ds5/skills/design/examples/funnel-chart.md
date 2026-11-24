@@ -45,26 +45,14 @@ When nobody reached the first stage, the card shows an empty state instead of ba
 
 ## Rules
 
-### Explain every color
+A funnel chart follows the rules on [Charts](../patterns/charts.md) for its colors, its legend, and its figures as
+text. The funnel adds one rule of its own.
 
-- **Do:** Put a legend for the three fills in the card's header, so people know which part of each bar moved on, was
-  lost, or is still there.
-- **Don't:** Color the stages without a legend. Name every fill in the card's header, so no one has to guess what a
-  color means.
+### Show what became of each stage's records
 
-### Stay in the chart palette
-
-- **Do:** Use the app's chart colors (the first for moved on, the third for lost, stripes for still there), so the
-  funnel reads like every other chart in the app.
-- **Don't:** Use colors from outside the app's chart palette, or a new color per stage. Keep to the app's chart colors,
-  so no color reads as a meaning it does not have.
-
-### Let everyone reach the numbers
-
-- **Do:** Make each stage one stop for the Tab key with one spoken sentence, shown again in a card on hover, focus, or
-  tap, so everyone gets the numbers.
-- **Don't:** Show the numbers only when a mouse points at the bar. Let each stage be reached by Tab and by a tap, so
-  keyboard, screen reader, and phone users see them too.
+- **Do:** Split each stage's bar into moved on, lost, and still there, so people see at which stage records dropped
+  out.
+- **Don't:** Show one solid bar for each stage. Split the bar, so a drop between two stages says why it happened.
 
 ## When you can do it differently
 
@@ -72,6 +60,7 @@ A funnel chart has no exceptions.
 
 ## Which patterns it uses
 
+- See [Charts](../patterns/charts.md) for the chart colors, the legend, and the figures as text.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the titled card, its legend as the header's action, and the
   empty state inside it.
 - See [Page Layout](../foundations/page-layout.md) for where the card sits on a dashboard.

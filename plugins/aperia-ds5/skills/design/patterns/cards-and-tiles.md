@@ -11,11 +11,10 @@ Choose by what the content is:
 |---|---|
 | Content that belongs together and has a name, such as Details, Tasks, or Recent Activity | Card |
 | One number the user checks at a glance, such as Open Prospects or Overdue Tasks | Tile |
-| Values that a chart shows on hover | Chart tooltip |
 
 ## What is available
 
-Cards and tiles come in seven parts and forms:
+Cards and tiles come in six parts and forms:
 
 | Part | What it shows |
 |---|---|
@@ -25,7 +24,6 @@ Cards and tiles come in seven parts and forms:
 | Tile | A label above the number says what it counts. A line below the number says what it means, when that needs saying, such as "Up 8% on last quarter". A progress bar can go under the number. |
 | Red tile | The number in the destructive color. It shows only with a label that says what it counts, such as "3 overdue". |
 | Tiles inside a card | The tiles drop their surface inside the card. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for why. |
-| Chart tooltip | A card with a gap between the name of each series and its value. A chart that takes keyboard focus shows the focus ring. |
 
 ## How it looks and behaves
 
@@ -98,6 +96,7 @@ Cards and tiles work with these pages:
 - See [Buttons and Actions](buttons-and-actions.md) for Add in the header.
 - See [Empty States](../foundations/empty-states.md) for an empty card.
 - See [Tables](tables.md) for choosing a table in a card, a simple list, or a table on the page.
+- See [Charts](charts.md) for a chart in a card and its tooltip.
 - See [Details](details.md) and [History](history.md) for the cards a record's page holds.
 
 ## In code
@@ -125,4 +124,3 @@ number is a `Progress` from `aperia-ds5`.
 - Inside a card, drop `surface px-4 py-3` and keep `flex flex-col gap-0.5`, because the card is the surface.
 - The line under the number has `mt-auto`, so the lines of a row of tiles stay level whether or not a tile has a bar.
 - A row of tiles is a grid with `gap-4`, two columns on a phone.
-- A chart's tooltip is `ChartTip` from `aperia-ds5/chart`.

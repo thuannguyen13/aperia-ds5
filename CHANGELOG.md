@@ -189,6 +189,9 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
     what confirms a save, Undo, and what a closing sheet does with typed input.
   - Disabled With a Reason now says when to leave an action out (a role can never take it), disable it with its reason,
     or show a record read-only.
+- Docs: new pattern pages Selecting Rows (Lists), and Charts, Status and Banner Alerts (Content), with live examples,
+  and two recipes, the selection bar and the status dot. The chart rules moved from Dashboard and Funnel Chart to
+  Charts, and "Use status color only for state" moved from Color to Status.
 - New `ListPager`: the footer under a list, with its count ("6 merchants", or "26–50 of 312 merchants") and, once the
   rows run past one page (25 rows, `PAGE_SIZE`), Previous, the page numbers ("1 … 6 7 8 … 13") and Next, built from
   `Pagination`. `pageRows` and `pageCount` in `aperia-ds5/list` cut
