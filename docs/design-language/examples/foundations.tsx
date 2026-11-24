@@ -33,6 +33,7 @@ import {
 } from "aperia-ds5"
 import { cn } from "@/lib/utils"
 import { DoDont, Example } from "../blocks"
+import { DocTable, DocTD, DocTH } from "../skill-doc"
 import { EmptyState, IconButton, TaskTable, TitledCard, Wide } from "./shared"
 
 // Live examples for the Foundations pages, keyed by the skill files' headings. base.css is the only place a value
@@ -195,27 +196,24 @@ function SpecRow({
     setValue(read(getComputedStyle(el), el))
   }, [read])
   return (
-    <tr className="border-b last:border-b-0">
-      <td className="py-3 pr-4 align-middle font-medium whitespace-nowrap">
+    <tr>
+      <DocTD className="align-middle whitespace-nowrap">
         {name}
-        <code className="mt-1 block font-mono text-[11px] font-normal text-muted-foreground">
+        <code className="mt-0.5 block font-mono text-xs text-muted-foreground">
           {code}
         </code>
-      </td>
+      </DocTD>
       {(read || given) && (
-        <td className="max-w-48 py-3 pr-4 align-middle font-mono text-[11px] break-words text-muted-foreground tabular-nums">
+        <DocTD className="max-w-48 align-middle font-mono text-xs break-words text-muted-foreground tabular-nums">
           {given ?? value}
-        </td>
+        </DocTD>
       )}
-      {note !== undefined && (
-        <td className="py-3 pr-4 align-middle text-muted-foreground">{note}</td>
-      )}
-      {/* Room on the right, so a sample's border and its focus or error halo are not clipped by the table's scroll box. */}
-      <td className="py-3 pr-1 align-middle">
-        <div ref={ref} className="flex items-center">
+      {note !== undefined && <DocTD className="align-middle">{note}</DocTD>}
+      <DocTD className="align-middle">
+        <div ref={ref} className="flex items-center py-1">
           {sample}
         </div>
-      </td>
+      </DocTD>
     </tr>
   )
 }
@@ -248,22 +246,20 @@ function SpecTable({
   sample?: string
 }) {
   return (
-    <Frame>
-      <div className="-mx-1 overflow-x-auto px-1 py-1">
-        <table className="w-full text-left text-sm">
+    <Unstyled>
+      <TooltipProvider>
+        <DocTable>
           <thead>
-            <tr className="border-b text-xs text-muted-foreground">
+            <tr>
               {[...head, sample].map((cell) => (
-                <th key={cell} className="pr-4 pb-2 font-medium">
-                  {cell}
-                </th>
+                <DocTH key={cell}>{cell}</DocTH>
               ))}
             </tr>
           </thead>
           <tbody>{children}</tbody>
-        </table>
-      </div>
-    </Frame>
+        </DocTable>
+      </TooltipProvider>
+    </Unstyled>
   )
 }
 

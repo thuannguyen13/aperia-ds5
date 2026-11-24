@@ -889,3 +889,6 @@ export function SkillDoc({
     </Here.Provider>
   )
 }
+
+/** The docs' one table style, so a live spec table in an example draws exactly as a Markdown table does. */
+export { TableFrame as DocTable, TH as DocTH, TD as DocTD }
