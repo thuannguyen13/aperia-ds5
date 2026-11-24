@@ -10,8 +10,9 @@ Use an audit log when admins need to check who changed a record, what changed, a
 
 An audit log has a toolbar, a table under it, and a count under the table.
 
-The toolbar contains a search and filters. The filters usually cover the record, the person, the action, and the day,
-such as Record, Who, Action, and Day. The count under the table shows how many entries match, such as "1–25 of 500
+The toolbar contains a search and the Filter button. The filters usually cover the kind of record, the person, the
+action, and the day, such as Record, Who, Action, and Day. Who lists every person in the app, so the filters take the
+advanced form. The count under the table shows how many entries match, such as "1–25 of 500
 entries".
 
 The table sits in a box with the card fill on the page. The newest entry comes first. The table has three columns:
@@ -57,8 +58,8 @@ A row does not open when the record it is about no longer exists.
 
 The app builds it from aperia-ds5 parts:
 
-- `ListToolbar` with `search`, `filters` (`form: "simple"`: Record, Who and Action as `enum` fields, Day as a `day`
-  field, which shows From and To), `shown`, `total` and `noun={["entry", "entries"]}`.
+- `ListToolbar` with `search`, `filters` in the advanced form (Record, Who and Action as `enum` fields, Day as a
+  `day` field), `shown`, `total` and `noun={["entry", "entries"]}`.
 - `ListPager` under the table, with `noun={["entry", "entries"]}`.
 - The `Table` in a `surface` box. When: `RelativeTime` in `text-muted-foreground`. What: the sentence in `font-medium`,
   then a list in `text-xs text-muted-foreground`.

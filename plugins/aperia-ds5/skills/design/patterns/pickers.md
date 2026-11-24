@@ -77,7 +77,7 @@ for every part on a phone.
 
 ### Say why a row or chip cannot be used
 
-- **Do:** Show a blocked row disabled, with its reason on hover ("Away until Dec 1. Pick someone else."), and make a
+- **Do:** Show a blocked row disabled, with its reason on hover ("Away until 12/01/2026. Pick someone else."), and make a
   chip with no remove button say "This item is in use and cannot be removed.", so people know why.
 - **Don't:** Make rows disappear, or do nothing when they are selected. Show them with their reason, so people do not
   think the app is broken.

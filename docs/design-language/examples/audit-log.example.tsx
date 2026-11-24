@@ -197,7 +197,6 @@ export function AuditLogExample() {
               fields: FIELDS,
               value: rules,
               onChange: setRules,
-              form: "simple",
             }}
             shown={rows.length}
             total={entries.length}

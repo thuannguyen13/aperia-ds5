@@ -60,7 +60,7 @@ part on a phone.
 
 ### Keep the header to the page's name, actions, and facts
 
-- **Do:** Keep the header to the title, subtitle, actions, and properties, with tiles, toolbars, filters, and tabs
+- **Do:** Keep the header to the title, subtitle, actions, and properties, with tiles, toolbars, and cards
   after it, so the header stays about the page.
 - **Don't:** Put a filter in the header, such as a label over a field. Move it to the list's toolbar, so controls stay
   where people look for them.

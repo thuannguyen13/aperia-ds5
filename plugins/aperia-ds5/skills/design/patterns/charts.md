@@ -131,13 +131,14 @@ issue on aperia-ds5 before an app draws one.
   render `EmptyState` there instead.
 
 ```tsx
-<TitledCard title="Opportunities by Month" figure="142">
+// AppCard is the app's own titled card, built once as Card shows.
+<AppCard title="Opportunities by Month" figure="142">
   <div className="px-4 pb-4">
     <ChartContainer config={config} className="h-64 w-full">
       <BarChart data={months} margin={CHART_MARGIN}>
         <ChartGrid />
-        <XAxis dataKey="month" {...axis} />
-        <YAxis allowDecimals={false} {...axis} />
+        <XAxis dataKey="month" {...chartAxisProps(narrow)} />
+        <YAxis allowDecimals={false} {...chartAxisProps(narrow)} />
         <ChartTip />
         <ChartLegend content={<ChartLegendContent />} />
         <Bar dataKey="created" fill="var(--color-created)" radius={4} />
@@ -145,7 +146,7 @@ issue on aperia-ds5 before an app draws one.
       </BarChart>
     </ChartContainer>
   </div>
-</TitledCard>
+</AppCard>
 ```
 
 - A stacked bar gives each `Bar` the same `stackId`. A bar chart laid across is `<BarChart layout="vertical">`, with
