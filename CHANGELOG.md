@@ -179,6 +179,16 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   card, popover or hover card 12px.
 - Spacing: controls in a row are spaced box to box, and an icon button at a row's end lets its padding reach past the
   edge so its icon lines up. The filter popover follows both.
+- Docs, new pages:
+  - Screen Sizes (Foundations › Layout): the phone, tablet and desktop widths, what each region and shared part does at
+    each, and a path for adapting something new. Every pattern page now says what it does on a phone.
+  - Surfaces and Layers (Styles, first): which fill each part sits on (page, surface, control, panel), how parts group
+    (a line between groups runs edge to edge; a line stopped at the inset is only for rows of a list), how one element
+    leads, the row states, and five steps for styling something no page shows.
+  - Saving and Feedback (Foundations › States): what saves at once and what waits for its button, the working state,
+    what confirms a save, Undo, and what a closing sheet does with typed input.
+  - Disabled With a Reason now says when to leave an action out (a role can never take it), disable it with its reason,
+    or show a record read-only.
 - New `ListPager`: the footer under a list, with its count ("6 merchants", or "26–50 of 312 merchants") and, once the
   rows run past one page (25 rows, `PAGE_SIZE`), Previous, the page numbers ("1 … 6 7 8 … 13") and Next, built from
   `Pagination`. `pageRows` and `pageCount` in `aperia-ds5/list` cut

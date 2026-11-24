@@ -90,6 +90,7 @@ A task checklist has no exceptions.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for where the Tasks card sits, beside Notes.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the Edit sheet and its Delete.
 - See [List Toolbar](../patterns/list-toolbar.md) for the task page's toolbar.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for a tick that saves at once and offers Undo.
 
 ## In code
 

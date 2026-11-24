@@ -63,12 +63,7 @@ A refused save flips the switch back and shows the reason above the table. No me
 
 ## Rules
 
-### Save each choice as it is made
-
-- **Do:** Save a pick or a switch at once (with Undo for a role's permission), so people see the change take effect and
-  can take it back.
-- **Don't:** Add a Save Changes button under the grid. Save each choice the moment it is made, so no one leaves and
-  loses their changes.
+See [Saving and Feedback](../foundations/saving-and-feedback.md) for saving each choice as it is made, with Undo.
 
 ### Lay out choices the same way
 
@@ -98,6 +93,7 @@ Show one role at a time, picked above the table, when the space is too narrow fo
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for a level that cannot change and a role in
   use.
 - See [Message Templates](../foundations/copy-templates.md) for where a refused save shows.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for a pick or a switch that saves at once.
 
 ## In code
 

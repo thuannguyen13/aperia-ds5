@@ -59,6 +59,7 @@ Switches in a grid work with three other patterns:
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the lock and its tooltip.
 - See [Pickers](pickers.md) for a cell with more than on and off.
 - See [Forms in Sheets](forms-in-sheets.md) for the sheet that a settings grid opens in.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for a switch that saves as it is flipped.
 
 ## In code
 

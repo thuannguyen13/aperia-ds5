@@ -38,7 +38,8 @@ A form in a sheet has four parts, listed from top to bottom:
 | Footer | Cancel, then the save button (such as "Save Changes" or "Add Contact"), at the right. On an existing record, Delete sits at the left. See [Confirmations and Delete](confirmations-and-delete.md). |
 
 A read-only sheet serves someone who may not change the record. Its fields stay disabled. Its footer holds Close, plus
-Delete when the person may delete.
+Delete when the person may delete. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for when a
+sheet opens read-only.
 
 ## How it looks and behaves
 
@@ -47,20 +48,20 @@ A form in a sheet goes through these steps, from opening to closing:
 1. The sheet slides in from the right, set 16px in from the window, with a 56px header. On a phone it fills the
    screen. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 2. The fields scroll between the header and the footer. The footer never scrolls away.
-3. While the save runs, every field is disabled, and the save button keeps its label beside a spinner. Closing waits
-   until the save is done.
+3. While the save runs, the fields and the save button show the working state on
+   [Saving and Feedback](../foundations/saving-and-feedback.md).
 4. A save that goes through closes the sheet.
 5. A save that is refused leaves the sheet open with everything that was typed. The message sits under the field it
    names, such as "A contact with this email already exists." When no field shows it, the message sits above the
    buttons. Focus moves to the first field in error.
 6. A message under a field goes away as soon as the value changes. It comes back when the field loses focus, if the
    value is still wrong.
-7. Closing a sheet after typing in it first asks "Discard Changes?" with the line "What you entered in this form is
-   lost." The dialog offers Continue Editing and Discard Changes. Cancel, the ×, Escape, and a click outside all count
-   as closing. An untouched sheet closes at once.
-8. Closing forgets what was typed. The next opening starts fresh.
+7. Closing after typing asks "Discard Changes?" first, and closing forgets what was typed. See
+   [Saving and Feedback](../foundations/saving-and-feedback.md) for every way a sheet closes.
 
 ## Rules
+
+See [Saving and Feedback](../foundations/saving-and-feedback.md) for discarding a closed form's input.
 
 ### Use one form for each record
 
@@ -93,13 +94,6 @@ A form in a sheet goes through these steps, from opening to closing:
 - **Don't:** Put boxes or cards inside the sheet to group fields. Use section titles, so the sheet stays flat and easy
   to scan.
 
-### Discard a closed form's input
-
-- **Do:** Let a closed sheet forget what was typed, asking first if something was typed, so no one loses work by
-  accident.
-- **Don't:** Reopen a sheet with last week's half-finished form. Start fresh each time, so people do not save stale
-  data.
-
 ## When you can do it differently
 
 A status change with a reason, rows of amounts that add up, and a settings sheet of switches each use another form.
@@ -112,6 +106,8 @@ Each one is a row of the table under When to use.
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for a field that waits on another.
 - See [Buttons and Actions](buttons-and-actions.md) for the footer's buttons.
 - See [Message Templates](../foundations/copy-templates.md) for choosing a toast, an alert, or a message on the field.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for the working state, the toast after a save, and
+  Discard Changes?.
 
 ## In code
 

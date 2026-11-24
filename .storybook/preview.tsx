@@ -51,7 +51,12 @@ const preview: Preview = {
             "Content Design",
             ["Copy", "Message Templates", "Money and Numbers"],
             "States",
-            ["Loading", "Empty States", "Disabled With a Reason"],
+            [
+              "Loading",
+              "Saving and Feedback",
+              "Empty States",
+              "Disabled With a Reason",
+            ],
           ],
           "Styles",
           [
