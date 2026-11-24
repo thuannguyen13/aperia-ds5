@@ -9,12 +9,13 @@ Use filters on a list page, in its toolbar, when people need to narrow the list 
 
 ## What is available
 
-Filters come in two forms. Each list uses one of them, picked by what the list filters on:
+Filters come in two forms. Each list uses one of them, picked by what the list filters on, as set out under Simple or
+advanced filters below.
 
-| Form | Use when | What people do |
-|---|---|---|
-| Simple filters | The list has four filters or fewer, and each one picks one choice from a short list, is yes or no, or is a span of dates | Change a value straight on the toolbar, in one click, such as picking a product from an "All products" select. |
-| Advanced filters | Any other list: a fifth filter, a filter on text, a number, or an amount, or a choice where people pick several values | Open the Filter button, then set each filter as a row of Column, Operator, and Value, such as MC Band, is, High, Critical. |
+| Form | What people do |
+|---|---|
+| Simple filters | Change a value straight on the toolbar, in one click, such as picking a product from an "All products" select. |
+| Advanced filters | Open the Filter button, then set each filter as a row of Column, Operator, and Value, such as MC Band, is, High, Critical. |
 
 Simple filters keep a short list of filters one click away. Advanced filters keep a list with many ways to filter in
 one short toolbar.
@@ -28,6 +29,22 @@ Each kind of column offers its own ways to compare:
 | Choices | is, is not |
 | Dates | is, is before, is after, is between |
 | Yes or No | is |
+
+### Simple or advanced filters
+
+Most lists fit one form at once. A list uses one form, never both, so simple filters never sit beside a Filter button.
+Find the list's situation in this table:
+
+| Situation | Choice | Why |
+|---|---|---|
+| Four filters or fewer, each a pick from a short list, a yes or no, or a span of dates | Simple filters | Each filter stays on the toolbar, one click away. |
+| A fifth filter | Advanced filters, for the whole list | The toolbar stays one short row however many filters are on. |
+| A filter on text, a number, or an amount | Advanced filters, for the whole list | It needs a way to compare, such as contains or ≥, which only a row of Column, Operator, and Value offers. |
+| A choice where people need several values at once, such as Stage is Demo or Proposal | Advanced filters | A simple filter picks one value. |
+| A long list of choices that people need to search, such as every owner in a large team | Advanced filters | Its value list has a search, and a simple filter does not. |
+| Some filters fit simple filters and others do not | Advanced filters for every filter, never both forms | People find every filter in one place. |
+| A yes or no filter among simple filters | A switch with its label on the toolbar, such as "Assigned to me" | It turns on or off in one click. |
+| A span of dates | A From and a To | Either one can stay empty, so "before" and "after" need no other control. |
 
 ## How it looks and behaves
 
@@ -65,19 +82,7 @@ capitals, so "acme" finds "Acme Payments".
 Every simple filter is always on the toolbar, so picking a value takes one click. A select's first choice narrows
 nothing, such as "All products". A switch is on or off. From and To narrow the list by a span of days.
 
-### Choosing between the two forms
-
-Most lists fit one form at once. These cases decide the others:
-
-- A list uses one form, never both. Simple filters never sit beside a Filter button.
-- A list that outgrows simple filters moves to advanced filters as a whole. That happens with a fifth filter, or with
-  a filter on text, a number, or an amount.
-- A choice where people need several values at once, such as Stage is Demo or Proposal, needs advanced filters. A simple
-  filter picks one value.
-- A long list of choices that people need to search, such as every owner in a large team, needs advanced filters. Its
-  value list has a search, and a simple filter does not.
-- A yes or no filter is a switch with its label on the toolbar, such as "Assigned to me".
-- A span of dates is a From and a To. Either one can stay empty, so "before" and "after" need no other control.
+### Clearing filters
 
 Both forms clear the same ways. A simple filter goes back to its first choice, such as "All products". Advanced
 filters have Remove All. When nothing matches, Clear Filters clears every filter in either form. The count under the
@@ -105,7 +110,7 @@ All, and the close button. Clear All is disabled while no filter is on, and says
 ### When nothing matches
 
 When nothing matches, the list shows "No Results", with "No matching results." and Clear Filters. See
-[Empty and Missing](../foundations/empty-and-missing.md) for the empty state.
+[Empty States](../foundations/empty-states.md) for the empty state.
 
 ## Rules
 
@@ -139,14 +144,14 @@ When nothing matches, the list shows "No Results", with "No matching results." a
 
 ## When you can do it differently
 
-Filters have no other exceptions. Every list uses simple or advanced filters, as decided under "Choosing between
-the two forms".
+Filters have no other exceptions. Every list uses simple or advanced filters, as decided under "Simple or advanced
+filters".
 
 ## Works with
 
 - See [List Toolbar](list-toolbar.md) for the toolbar the filters sit in.
 - See [Sort](sort.md) for the control at the toolbar's right end.
-- See [Empty and Missing](../foundations/empty-and-missing.md) for "No Results" when nothing matches.
+- See [Empty States](../foundations/empty-states.md) for "No Results" when nothing matches.
 
 ## In code
 

@@ -7,7 +7,7 @@ for how cards sit on a page.
 
 Use a card to group content that belongs together and has a name, such as Details, Tasks, or Recent Activity.
 
-Do not use a card for a whole page. A list page's table sits on the page in its own surface, not in a card.
+Do not use a card for a whole page. See [Tables](../patterns/tables.md) for where a list's table sits.
 
 Do not put a card inside another card. A card never holds a second bordered box, so each group has one frame.
 
@@ -97,7 +97,7 @@ controls.
 | Page header | The page title is larger. A card's title is one step below it. |
 
 See [Tables](../patterns/tables.md) for running a table to the card's edges, with the column headings right under the
-card header. See [Empty State](../foundations/empty-state.md) for keeping an empty card in its place. See [Border and
+card header. See [Empty States](../foundations/empty-states.md) for keeping an empty card in its place. See [Border and
 Radius](../styles/border-and-radius.md) and [Elevation](../styles/elevation.md) for the corner, edge, and shadow
 the Specs name.
 

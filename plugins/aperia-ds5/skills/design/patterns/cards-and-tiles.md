@@ -94,7 +94,8 @@ Cards and tiles work with these pages:
   inside the card, and for collapsing a card with its title.
 - See [Money and Numbers](../foundations/money-and-numbers.md) for how a tile's number is written.
 - See [Buttons and Actions](buttons-and-actions.md) for Add in the header.
-- See [Empty State](../foundations/empty-state.md) for an empty card.
+- See [Empty States](../foundations/empty-states.md) for an empty card.
+- See [Tables](tables.md) for choosing a table in a card, a simple list, or a table on the page.
 - See [Details](details.md) and [History](history.md) for the cards a record's page holds.
 
 ## In code

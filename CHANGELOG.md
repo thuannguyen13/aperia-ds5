@@ -151,6 +151,15 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
 - `ItemGroup`: plain items (the default variant) sit flush, spaced by their own padding, so a list of people or records
   reads as one list; outline and muted items keep a 10px gap. An app that set `gap-0` on a plain group can drop it.
 - Docs: Shape and Edges is now Border and Radius (`styles/border-and-radius.md`).
+- Docs: Empty and Missing and Empty State are now one page, Empty States (Foundations › States), by case: a missing
+  value, an empty container (card, list, or page), and no matches. The empty state's specs are on its Code tab.
+- Docs: a load failure's empty state is titled "Failed to Load", with no item name and no line; its action is Try
+  Again, or a way home.
+- Docs: decision tables for the choices people get wrong: a sheet, a dialog, or a page of its own (Forms in Sheets);
+  simple or advanced filters (Filters); a toast, an alert, or a message on the field (Message Templates); a table on the
+  page, a table in a card, or a list (Tables).
+- Docs: Typography shows the whole type scale and the four weights, measured live, then the step and weight each role
+  in an Aperia app uses.
 - New `ListPager`: the footer under a list, with its count ("6 merchants", or "26–50 of 312 merchants") and, once the
   rows run past one page (25 rows, `PAGE_SIZE`), Previous, the page numbers ("1 … 6 7 8 … 13") and Next, built from
   `Pagination`. `pageRows` and `pageCount` in `aperia-ds5/list` cut

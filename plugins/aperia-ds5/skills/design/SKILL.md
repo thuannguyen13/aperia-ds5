@@ -50,9 +50,8 @@ The pages are in six sections, the same as the Storybook sidebar.
 - **Foundations** (rules across every screen): [Accessibility](foundations/accessibility.md); Layout: [Page
   Layout](foundations/page-layout.md), [Spacing](foundations/spacing.md), [Sizes](foundations/sizes.md); Content Design:
   [Copy](foundations/copy.md), [Message Templates](foundations/copy-templates.md), [Money and
-  Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Empty and
-  Missing](foundations/empty-and-missing.md), [Empty State](foundations/empty-state.md),
-  [Disabled With a Reason](foundations/disabled-with-a-reason.md).
+  Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Empty
+  States](foundations/empty-states.md), [Disabled With a Reason](foundations/disabled-with-a-reason.md).
 - **Styles** (the visual values): [Color](styles/color.md), [Typography](styles/typography.md),
   [Border and Radius](styles/border-and-radius.md), [Elevation](styles/elevation.md), [Motion](styles/motion.md),
   [Icons](styles/icons.md).
@@ -101,7 +100,7 @@ The pages are in six sections, the same as the Storybook sidebar.
    - the titled card on [Card](components/card.md) and the icon button on [Button](components/button.md);
    - the stat tile on [Cards and Tiles](patterns/cards-and-tiles.md), and the form section and length count on
      [Forms in Sheets](patterns/forms-in-sheets.md);
-   - the empty value and "No [field]" text on [Empty and Missing](foundations/empty-and-missing.md), and the money value
+   - the empty value and "No [field]" text on [Empty States](foundations/empty-states.md), and the money value
      and hidden value on [Money and Numbers](foundations/money-and-numbers.md);
    - the detail section, detail row, and fact on [Details](patterns/details.md), and the timeline and history card on
      [History](patterns/history.md);

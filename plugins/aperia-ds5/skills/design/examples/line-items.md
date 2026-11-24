@@ -94,6 +94,6 @@ The app builds it from aperia-ds5 parts and the recipes on the pattern and compo
 - The sheet: `FormSheet` with `className="data-[side=right]:sm:max-w-6xl"`, a titled card per group (its figure the
   group total, its action Apply Template and Add Line), rows of `Input`, `MoneyInput` and `Select`, and Remove as an
   icon button (the recipe from [Button](../components/button.md)). Work subtotals out with the same function the server
-  uses; show the empty value from [Empty and Missing](../foundations/empty-and-missing.md) when one cannot be.
+  uses; show the empty value from [Empty States](../foundations/empty-states.md) when one cannot be.
 - A hidden amount: leave the column out, or the hidden value ($XX,XXX) from [Money and
   Numbers](../foundations/money-and-numbers.md). `MoneyInput` takes `amountHidden`.

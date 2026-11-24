@@ -5,9 +5,19 @@ parts and specs.
 
 ## When to use
 
-Use a table on a list page for the list's records, under its toolbar. See [List Toolbar](list-toolbar.md) for the toolbar.
+Use a table for records that people scan and compare by their columns, on a list page or inside a card.
 
-Use a table in a card for records that belong to the page's record, such as its tasks or line items.
+### A table on the page, a table in a card, or a list
+
+Where a list of records sits depends on whose records they are and whether people compare them. Find the records in
+this table:
+
+| Situation | Choice | Why |
+|---|---|---|
+| The records are the page's subject, such as a list page of prospects | A table on the page, on its own surface, under the list toolbar | The toolbar's search, filters, and Sort sit above it, and a whole page never sits in a card. See [List Toolbar](list-toolbar.md). |
+| Records that belong to the page's record and that people compare by columns, such as an opportunity's line items | A table in a card, running to the card's edges | The card's title names the records, and its header holds Sort and Add, so the list needs no toolbar. |
+| A few items with no columns to compare, such as a record's tasks or notes | A simple list of rows in a card | A table is for comparing records by columns, and these items have none to compare. |
+| One record's own values, such as its details | Labeled values in a card, never a table | A table compares many records, and here there is one. See [Details](details.md). |
 
 ## What is available
 
@@ -35,7 +45,7 @@ Numbers, including amounts, line up in their column and are right-aligned.
 
 A cell with several names shows a count. Selecting the count lists the names.
 
-A missing value is a muted em dash (—). See [Empty and Missing](../foundations/empty-and-missing.md) for missing values.
+A missing value is a muted em dash (—). See [Empty States](../foundations/empty-states.md) for missing values.
 
 ## Rules
 
@@ -75,7 +85,7 @@ This pattern has no exceptions.
   and last cells `pl-4` and `pr-4`. Build the card as the titled card recipe on [Card](../components/card.md). On the
   page, give the table the `surface` utility.
 - Figures are `tabular-nums` and right-aligned. A missing value is the empty value from
-  [Empty and Missing](../foundations/empty-and-missing.md).
+  [Empty States](../foundations/empty-states.md).
 
 ### Scroll table
 

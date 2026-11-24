@@ -53,17 +53,15 @@ Each part's rules live on its pattern page, listed under Which patterns it uses.
 
 ## When you can do it differently
 
-- A list may use simple filters, fixed controls on the toolbar, instead of the Filter button. It does so when it has
-  four filters or fewer, and every one picks from a list, is yes or no, or is a date. A fifth filter, or any filter on
-  text, a number, or an amount, means the Filter button. See [Filters](../patterns/filters.md) for why the limit is
-  four.
+- A list may use simple filters, fixed controls on the toolbar, instead of the Filter button. See
+  [Filters](../patterns/filters.md) for when a list uses simple or advanced filters.
 - A board or a wide table fills the whole width of the page instead of the centered column.
 
 ## Which patterns it uses
 
 - See [Page Layout](../foundations/page-layout.md) for the header and the 20px between sections.
 - See [List Toolbar](../patterns/list-toolbar.md) for the toolbar.
-- See [Loading](../foundations/loading.md) and [Empty and Missing](../foundations/empty-and-missing.md) for the empty
+- See [Loading](../foundations/loading.md) and [Empty States](../foundations/empty-states.md) for the empty
   and loading states.
 - See [Filters](../patterns/filters.md) and [Sort](../patterns/sort.md) for the Filter button and the Sort control.
 - See [Tables](../patterns/tables.md) for rows that open their record.

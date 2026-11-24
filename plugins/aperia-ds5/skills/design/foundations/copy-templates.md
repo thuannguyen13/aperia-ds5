@@ -72,7 +72,7 @@ An error message follows three rules.
   tense for both.
 - A dialog that stops an operation has **Cancel**. A dialog that only informs has **Close**.
 
-See How it looks and behaves for where an error shows.
+See "A toast, an alert, or a message on the field" under How it looks and behaves for where an error shows.
 
 ### Failures
 
@@ -138,16 +138,21 @@ Values and working states use the fixed wording in this table.
 
 ## How it looks and behaves
 
-An error or a failure shows where the action happened, so people see what went wrong at the place they were working.
-The place depends on where the action started:
+### A toast, an alert, or a message on the field
 
-| Action started from | Where the message shows |
-|---|---|
-| A field in a form | Beside the field it names. |
-| A form or a dialog, with no one field at fault | Above the buttons. The form or dialog stays open with what was typed. |
-| A control that saves on change, such as a switch in a grid | The control returns to its saved value. The message shows above the grid and names the row, such as "Pipeline: Email could not be saved. Try again." |
-| A file in a drop zone | Under the drop zone, beside the refused file. |
-| Nothing left on screen, such as a background job, a closed menu, or a page the person has left | A toast that stays until it is closed, names what failed, and offers the fix, such as "Report export failed. Try again." |
+An error or a failure shows where the action happened, so people see what went wrong at the place they were working. A
+result that needs nothing more from people shows as a toast. Find the situation in this table:
+
+| Situation | Choice | Why |
+|---|---|---|
+| A field in a form or a dialog holds a wrong or missing value | A message beside the field it names | People fix the value where they typed it. |
+| A form or a dialog is refused, with no one field at fault | A message above the buttons. The form or dialog stays open with what was typed. | Nothing typed is lost, and people try again in place. |
+| A control that saves on change is refused, such as a switch in a grid | The control returns to its saved value, and an alert above the grid names the row, such as "Pipeline: Email could not be saved. Try again." | The control shows what is saved, and the message stays beside the work. |
+| A file is refused in a drop zone | A message under the drop zone, beside the refused file | It stays where the file was dropped until it is read. |
+| An action fails and nothing on screen holds it, such as a background job, a closed menu, or a page the person has left | A toast that stays until it is closed, names what failed, and offers the fix, such as "Report export failed. Try again." | No place is left on screen to show it. |
+| An action succeeds | A toast that closes on its own, with the result, such as "Note added." | People see what happened at a glance and carry on. |
+| A change saves at once and can be taken back, such as a ticked task or a status change | A toast with the result and Undo, such as "Changed to Demo." | People see the change take effect and can take it back. |
+| A new notification arrives | A toast with the notification's sentence that links to its record, three at most. See [Notifications](../patterns/notifications.md). | People see it on any page, and the page stays usable. |
 
 A toast that closes on its own is only for a success. An error is never a toast while its place is still on screen.
 

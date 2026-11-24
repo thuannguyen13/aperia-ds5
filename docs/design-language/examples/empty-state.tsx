@@ -25,19 +25,30 @@ const addTask = (
 )
 
 export const emptyStateExamples = {
-  "No records yet": (
-    <Example>
-      <InCard>
-        <EmptyState
-          icon={InboxIcon}
-          title="No Tasks"
-          description="No tasks assigned to you."
-          action={addTask}
-        />
-      </InCard>
-    </Example>
+  "An empty container": (
+    <>
+      <Example>
+        <InCard>
+          <EmptyState
+            icon={InboxIcon}
+            title="No Tasks"
+            description="No tasks assigned to you."
+            action={addTask}
+          />
+        </InCard>
+      </Example>
+      <Example>
+        <InCard>
+          <EmptyState
+            icon={CircleAlertIcon}
+            title="Failed to Load"
+            action={<Button variant="outline">Try Again</Button>}
+          />
+        </InCard>
+      </Example>
+    </>
   ),
-  "No results": (
+  "No matches": (
     <Example>
       <InCard title="Prospects">
         <EmptyState
@@ -45,17 +56,6 @@ export const emptyStateExamples = {
           title="No Results"
           description="No matching results."
           action={<Button variant="outline">Clear Filters</Button>}
-        />
-      </InCard>
-    </Example>
-  ),
-  "Could not load": (
-    <Example>
-      <InCard>
-        <EmptyState
-          icon={CircleAlertIcon}
-          title="Failed to Load"
-          action={<Button variant="outline">Try Again</Button>}
         />
       </InCard>
     </Example>
@@ -79,7 +79,7 @@ export const emptyStateExamples = {
       badNote="the line repeats the title"
     />
   ),
-  "Use the same component every time": (
+  "Use the empty state, never bare text": (
     <DoDont
       good={
         <InCard>

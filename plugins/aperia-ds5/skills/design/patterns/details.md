@@ -25,7 +25,7 @@ The labels are muted, and the values use the body color. The label column is nev
 values sit close to their labels and line up down the block.
 
 A value that is missing shows the empty value, a muted em dash (—), never a blank. See
-[Empty and Missing](../foundations/empty-and-missing.md) for missing values.
+[Empty States](../foundations/empty-states.md) for missing values.
 
 A phone number, email, or website in details is a link. Selecting it calls, writes, or opens the website in a new tab.
 The link uses the body color and is underlined only under the pointer. In a table, the same values are plain text. See
@@ -47,7 +47,7 @@ Details have no exceptions. Every record shows its facts as detail rows or as fa
 
 - See [Card](../components/card.md) for the card that holds the details.
 - See [Page Header](page-header.md) for facts in a record's header.
-- See [Empty and Missing](../foundations/empty-and-missing.md) for the empty value.
+- See [Empty States](../foundations/empty-states.md) for the empty value.
 
 ## In code
 

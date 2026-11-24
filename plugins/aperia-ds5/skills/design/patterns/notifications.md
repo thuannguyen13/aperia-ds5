@@ -58,11 +58,12 @@ This pattern has no exceptions.
 
 ## Works with
 
-Notifications work with three other patterns:
+Notifications work with four other pages:
 
 - See [App Shell](app-shell.md) for the sidebar entry that opens the panel.
 - See [Switches in a Grid](switches-in-a-grid.md) for Notification Settings.
-- See [Empty and Missing](../foundations/empty-and-missing.md) for the empty tabs.
+- See [Empty States](../foundations/empty-states.md) for the empty tabs.
+- See [Message Templates](../foundations/copy-templates.md) for when a message is a toast.
 
 ## In code
 
