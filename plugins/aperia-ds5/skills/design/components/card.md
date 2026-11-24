@@ -42,19 +42,19 @@ opens and closes the content.
 
 ### Small card
 
-A small card has tighter padding, 12px instead of 16px, and a smaller title.
+A small card has tighter padding, `p-3` instead of `p-4`, and a smaller title.
 
 ### Specs
 
 | | Default | Small |
 |---|---|---|
 | Corners | Extra large corner | Extra large corner |
-| Padding | 16px | 12px |
+| Padding | `p-4` | `p-3` |
 | Fill | Card | |
 | Edge | A border in the Border color and the Small shadow | |
-| Title | 16px, semibold | 14px, semibold |
-| Header | 56px, made of 12px above and below a 32px row, so cards side by side line up | |
-| Content | Its own padding, 16px | |
+| Title | `text-base`, semibold | `text-sm`, semibold |
+| Header | A `min-h-8` row with `py-3` above and below it, so cards side by side line up | |
+| Content | Its own padding, `px-4` | |
 | Footer | Muted at 50% | |
 
 ## How it looks and behaves

@@ -34,7 +34,7 @@ The search and the filters sit at the left end. Sort and the list's actions sit 
 
 ## How it looks and behaves
 
-The toolbar is a section of its own between the page header and the list, 20px from each. It is one row on a desktop.
+The toolbar is a section of its own between the page header and the list, `gap-5` from each. It is one row on a desktop.
 
 A search or a filter that matches nothing keeps the toolbar, and "No Results" takes the list's place. When the list
 has no records at all, the toolbar is gone, its slot's controls included. See

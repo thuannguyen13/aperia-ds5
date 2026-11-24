@@ -41,7 +41,7 @@ A banner alert has four parts, listed from start to end.
 
 ## How it looks and behaves
 
-A banner alert is a section of its own, under the page header and above the page's content, 20px from each. On a list
+A banner alert is a section of its own, under the page header and above the page's content, `gap-5` from each. On a list
 page, it sits between the page header and the list toolbar. A banner alert runs the full width of the page column.
 
 A page shows one banner alert at a time. When two apply, the page shows the one that stops the most work, with an

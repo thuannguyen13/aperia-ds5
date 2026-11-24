@@ -57,26 +57,26 @@ A button has four sizes:
 
 | Size | Height | Use |
 |---|---|---|
-| Default | 32px | Every action on a page, sheet, dialog, or card |
-| Small | 28px | Inside a compact component, such as a filter chip |
-| Extra small | 24px | Inside a compact component, when the component sets it |
-| Large | 36px | No Aperia use yet. Use Default. |
+| Default | `h-8` | Every action on a page, sheet, dialog, or card |
+| Small | `h-7` | Inside a compact component, such as a filter chip |
+| Extra small | `h-6` | Inside a compact component, when the component sets it |
+| Large | `h-9` | No Aperia use yet. Use Default. |
 
 ### Icon button
 
 An icon button shows an icon with no text. Use it for an action that repeats on many rows or has a well-known icon, such
-as edit, delete, close, or more. An icon button is square and takes the height of the controls beside it. It is 32px in
-a toolbar beside a field, and 28px on a row or in a card header. It always has a tooltip that names the action.
+as edit, delete, close, or more. An icon button is square and takes the height of the controls beside it. It is `size-8` in
+a toolbar beside a field, and `size-7` on a row or in a card header. It always has a tooltip that names the action.
 
 ### Specs
 
 | | Default | Small |
 |---|---|---|
-| Height | 32px | 28px |
+| Height | `h-8` | `h-7` |
 | Corners | Large corner | Medium corner |
-| Text | 14px, medium weight | 13px, medium weight |
-| Side padding | 10px | 10px |
-| Icon | 16px, 6px from the text | 14px, 4px from the text |
+| Text | `text-sm`, medium weight | `text-xs`, medium weight |
+| Side padding | `px-2.5` | `px-2.5` |
+| Icon | `size-4`, `gap-1.5` from the text | `size-3.5`, `gap-1` from the text |
 
 | Type | Fill | Text | Edge |
 |---|---|---|---|
@@ -105,7 +105,7 @@ A screen reader reads an icon button's tooltip label as its name.
 A button disabled for a reason stays reachable. Its tooltip says why it is disabled, so keyboard and screen reader
 users get the reason too.
 
-A button is 32px tall on every screen. An icon button keeps the height of the controls beside it on every screen.
+A button is `h-8` tall on every screen. An icon button keeps the height of the controls beside it on every screen.
 
 On a phone, a dialog's buttons stack, with the action on top.
 
@@ -138,7 +138,7 @@ A button has five states. Each type shows them in its own colors.
 ## When you can do it differently
 
 - While a card is empty, its Add button moves from the card header to the middle of the empty state.
-- On screens narrower than 1024px, a page header's actions fold into a More actions (…) menu. See [Page
+- On screens narrower than `--breakpoint-lg`, a page header's actions fold into a More actions (…) menu. See [Page
   Header](../patterns/page-header.md) for that menu.
 
 ## Works with

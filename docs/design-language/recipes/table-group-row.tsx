@@ -22,10 +22,7 @@ export function TableGroupRow({
   children: ReactNode
 }) {
   return (
-    <TableRow
-      data-slot="table-group-row"
-      className="bg-foreground/4 hover:bg-foreground/4"
-    >
+    <TableRow data-slot="table-group-row" className="bg-muted hover:bg-muted">
       <TableCell
         colSpan={colSpan}
         className={cn(

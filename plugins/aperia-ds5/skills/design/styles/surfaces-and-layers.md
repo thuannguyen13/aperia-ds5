@@ -69,7 +69,7 @@ moves and highlights as one piece, and its divider spans it. Inside a sheet, a p
 sections, such as a sheet's header and body, a popover's column list and its Ascending and Descending, or a card's
 footer. Each section keeps the inset, and the divider between two sections spans the container.
 
-Groups with their own title and their own actions are separate cards, 16px apart. Two products' line items are two
+Groups with their own title and their own actions are separate cards, `gap-4` apart. Two products' line items are two
 cards, each with its own Add. See [Spacing](../foundations/spacing.md) for the gaps between cards and between sections.
 
 ### Emphasis

@@ -17,14 +17,14 @@ A page has one of two widths:
 
 | Width | Use when |
 |---|---|
-| Centered column, up to 1440px wide | Most pages |
+| Centered column, up to `max-w-360` wide | Most pages |
 | Full width of the window beside the sidebar | A board or a wide list table |
 
 ## How it looks and behaves
 
 A page follows five layout rules for spacing, scrolling, width, alignment, and the space inside a card.
 
-The page column has 20px of space around it and 20px between its sections. Cards or tiles side by side are 16px apart.
+The page column has `p-5` around it and `gap-5` between its sections. Cards or tiles side by side are `gap-4` apart.
 This gap is smaller than the gap between sections, because a card already has space inside it.
 
 The whole page scrolls as one. No part of the page has a scroll of its own, because a part that scrolls catches the
@@ -36,13 +36,13 @@ screen and stacked tiles on a phone.
 
 Content and box edges line up across containers, to the pixel. Three cases apply inside a card:
 
-- Everything in a card starts on the card title's line, 16px in from the card's edge. This includes a table's first
+- Everything in a card starts on the card title's line, `px-4` in from the card's edge. This includes a table's first
   column, a list's pictures, and a form's labels.
 - A part with its own padding, such as a row that highlights under the pointer or a ghost button, is pulled back onto
   that line. Its text sits on the line, and its highlight reaches past it. The same holds at a row's right end, where
   an icon button's padding reaches past the line and the icon ends on it. See [Spacing](spacing.md) for the gap before
   it.
-- Rows divided to a card's edges, such as a table's rows, keep the 16px inside each row. Their text lines up with the
+- Rows divided to a card's edges, such as a table's rows, keep the `px-4` inside each row. Their text lines up with the
   title, and the lines between rows run edge to edge.
 
 A card's header, content, and footer each hold their own space, so a part that hides takes its space with it and
@@ -52,8 +52,8 @@ nothing else in the card moves. See [Card](../components/card.md) for the card's
 
 ### Space sections evenly
 
-- **Do:** Space every section of a page 20px apart (a page header, a toolbar, and a card), so pages share one rhythm.
-- **Don't:** Let sections touch (a title against a search box) or space them by a margin each page picks. Use the 20px
+- **Do:** Space every section of a page `gap-5` apart (a page header, a toolbar, and a card), so pages share one rhythm.
+- **Don't:** Let sections touch (a title against a search box) or space them by a margin each page picks. Use the `gap-5`
   gap, so every page has the same spacing.
 
 ### Keep one scroll
@@ -78,7 +78,7 @@ nothing else in the card moves. See [Card](../components/card.md) for the card's
 
 ## When you can do it differently
 
-A board, or a list table wider than the column, fills the full width beside the sidebar instead of the 1440px column.
+A board, or a list table wider than the column, fills the full width beside the sidebar instead of the `max-w-360` column.
 Items that always show together, such as buttons in a row or a title and its count, can have a gap between them.
 
 ## Works with
@@ -96,7 +96,7 @@ Items that always show together, such as buttons in a row or a title and its cou
   up to `max-w-360` (1440px) with `gap-5` between its children. Make each section a direct child: no margins, and no
   second `gap` wrapper. A page that fills the pane renders `<FullWidth />` anywhere in its markup. Never build this
   wrapper by hand (`max-w-…`, `mx-auto`, `p-5` in the layout).
-- The column is a container: lay a page out by its width with container queries (`@min-[48rem]:grid-cols-4`), not
+- The column is a container: lay a page out by its width with container queries (`@min-page-md:grid-cols-4`), not
   the window's.
 - Lining up in a card (`CardContent` is `px-4`): `<Item className="-mx-3">` cancels `Item`'s own `px-3`; a section whose
   divider runs to the card's edges is `-mx-4 px-4`; rows divided to the edges straight in a titled card

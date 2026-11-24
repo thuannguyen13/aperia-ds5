@@ -21,13 +21,13 @@ Each kind of record has its own shape and content:
 
 Pictures come in five sizes:
 
-| Size | Pixels | Use |
+| Size | Token | Use |
 |---|---|---|
-| Extra small | 20px | A picker row |
-| Small | 24px | Beside a name |
-| Default | 32px | The account entry in the sidebar |
-| Large | 40px | A logo preview in an image picker |
-| Extra large | 48px | A page header |
+| Extra small | `size-5` | A picker row |
+| Small | `size-6` | Beside a name |
+| Default | `size-8` | The account entry in the sidebar |
+| Large | `size-10` | A logo preview in an image picker |
+| Extra large | `size-12` | A page header |
 
 A page header that shows people shows up to three avatars, then "+N" for the people it leaves out. Hovering, focusing, or tapping them
 opens a card. The card lists everyone, each with their avatar, name, and role.
@@ -78,7 +78,7 @@ everyone. See
 
 ## When you can do it differently
 
-A picture smaller than 20px, such as one in a 16px chip, is sized by the app.
+A picture smaller than `size-5`, such as one in a `size-4` chip, is sized by the app.
 
 ## Works with
 

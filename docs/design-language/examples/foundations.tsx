@@ -334,26 +334,37 @@ export const typographyExamples = {
 // The steps as Tailwind writes them, so each bar is exactly a step wide.
 const SPACE_STEPS = [
   {
+    name: "Step 1",
     className: "w-1",
     code: "gap-1",
     use: "Between an icon and its label, or between chips",
   },
   {
+    name: "Step 1.5",
+    className: "w-1.5",
+    code: "gap-1.5",
+    use: "The half step, for a compact row: a button's icon and text, a menu item's parts, a dot and its word",
+  },
+  {
+    name: "Step 2",
     className: "w-2",
     code: "gap-2",
     use: "Between buttons or controls in a row",
   },
   {
+    name: "Step 3",
     className: "w-3",
     code: "gap-3 · p-3",
     use: "Inside a component; a small card's and a popover's inset",
   },
   {
+    name: "Step 4",
     className: "w-4",
     code: "gap-4 · p-4",
     use: "A card's, a sheet's, and a dialog's inset; between cards",
   },
   {
+    name: "Step 5",
     className: "w-5",
     code: "gap-5 · p-5",
     use: "Between page sections; the page column's inset",
@@ -393,8 +404,8 @@ export const spacingExamples = {
     <DoDont
       good={<SpacedRow good />}
       bad={<SpacedRow good={false} />}
-      goodNote="8px from field to field, and from field to the ×'s button"
-      badNote="the ×'s button pulled 6px toward the field"
+      goodNote="Step 2 from field to field, and from field to the ×'s button"
+      badNote="the ×'s button pulled toward the field by a margin off the scale"
     />
   ),
   "What is available": (
@@ -406,10 +417,10 @@ export const spacingExamples = {
         note="Every step is a multiple of it"
         sample={<span className="text-muted-foreground">—</span>}
       />
-      {SPACE_STEPS.map((step, at) => (
+      {SPACE_STEPS.map((step) => (
         <SpecRow
           key={step.className}
-          name={`Step ${at + 1}`}
+          name={step.name}
           code={step.code}
           read={(style) => px(style.width)}
           note={step.use}

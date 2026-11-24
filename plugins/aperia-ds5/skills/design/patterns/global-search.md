@@ -25,7 +25,7 @@ Global search has four parts, listed from top to bottom:
 
 Global search opens as a dialog, updates as the user types, and closes when a result opens:
 
-1. Global search opens as the search dialog over the dimmed page, up to 576px wide. See
+1. Global search opens as the search dialog over the dimmed page, up to `max-w-xl` wide. See
    [Dialog](../components/dialog.md) for the four kinds of dialog.
 2. The field is flush with the panel. It has no fill, edge, or ring of its own.
 3. A divider separates the key hint from the results.

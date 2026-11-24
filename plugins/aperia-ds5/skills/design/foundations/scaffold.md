@@ -34,12 +34,12 @@ the top right of the screen.
 
 Every screen places the regions the same way, on a desktop and on a phone.
 
-On a desktop, the sidebar runs down the left edge. It is 256px wide, or 48px when people collapse it to its icons. The
-top bar runs across the rest of the screen. It is 56px tall, with a divider under it. The page column fills the space
-under the top bar and scrolls as one. It is centered and up to 1440px wide, with 20px of space around it. A board or a
+On a desktop, the sidebar runs down the left edge. It is `--sidebar-width` wide, or `--sidebar-width-icon` when people collapse it to its icons. The
+top bar runs across the rest of the screen. It is `h-14` tall, with a divider under it. The page column fills the space
+under the top bar and scrolls as one. It is centered and up to `max-w-360` wide, with `p-5` around it. A board or a
 wide list table fills the full width beside the sidebar instead.
 
-A sheet slides in from the right as the second pane. It sits 16px in from the window's edges, over a dimmed page. A
+A sheet slides in from the right as the second pane. It sits in from the window's edges by `right-4`, over a dimmed page. A
 dialog opens over the page or over the sheet that opened it. See [Dialog](../components/dialog.md) for where each kind
 of dialog sits.
 
@@ -48,7 +48,7 @@ On a phone, the regions change in six ways:
 - The sidebar is hidden below the width [Screen Sizes](screen-sizes.md) gives. The button at the start of the top bar opens it as a
   288px panel from the left.
 - The top bar keeps the breadcrumb, cut to its last two crumbs.
-- The page column fills the screen under the top bar, with 20px of space around it.
+- The page column fills the screen under the top bar, with `p-5` around it.
 - A sheet fills the screen.
 - A confirmation or a reason dialog stays in the middle, and its buttons stack with the action on top. A search or
   review dialog fills the screen.

@@ -21,10 +21,10 @@ A dialog comes in four kinds. Each kind has its own width, its own layout on a p
 
 | Kind | Use for | Width | On a phone | Component |
 |---|---|---|---|---|
-| Confirmation | Asking before a delete, a removal, or a step whose consequence people must know first, such as "Delete Project?" | Up to 384px | 320px wide, in the middle of the screen, with its buttons stacked | `ConfirmDialog`. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
-| Reason | Picking a new status and writing the reason for it, such as "Change to Lost?" | Up to 384px | 320px wide, in the middle of the screen, with its buttons stacked | The reason dialog that the app builds. See [Status Change With a Reason](../examples/status-change.md). |
-| Search | Finding any record in the app from the sidebar or ⌘K | Up to 576px, a third of the way down the screen | Fills the screen | The app's search dialog. See [Global Search](../patterns/global-search.md). |
-| Review | Checking many rows in a wide table before they save, such as the rows of an imported file | Up to 72rem | Fills the screen | One dialog for every step. See [Import Wizard](../examples/import.md). |
+| Confirmation | Asking before a delete, a removal, or a step whose consequence people must know first, such as "Delete Project?" | Up to `max-w-sm` | `max-w-xs` wide, in the middle of the screen, with its buttons stacked | `ConfirmDialog`. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
+| Reason | Picking a new status and writing the reason for it, such as "Change to Lost?" | Up to `max-w-sm` | `max-w-xs` wide, in the middle of the screen, with its buttons stacked | The reason dialog that the app builds. See [Status Change With a Reason](../examples/status-change.md). |
+| Search | Finding any record in the app from the sidebar or ⌘K | Up to `max-w-xl`, a third of the way down the screen | Fills the screen | The app's search dialog. See [Global Search](../patterns/global-search.md). |
+| Review | Checking many rows in a wide table before they save, such as the rows of an imported file | Up to `max-w-6xl` | Fills the screen | One dialog for every step. See [Import Wizard](../examples/import.md). |
 
 A dialog has five parts, listed from top to bottom:
 
@@ -42,9 +42,9 @@ A dialog has five parts, listed from top to bottom:
 |---|---|
 | Width | Set by the dialog's kind, in the table above |
 | Corners | Extra large corner |
-| Padding | 16px |
+| Padding | `p-4` |
 | Fill | Page background, a border in the Border color, and the Large shadow |
-| Title | 16px, medium weight |
+| Title | `text-base`, medium weight |
 | Footer | Muted at 50%, under a divider. Buttons at the right, stacked on phones. |
 | Overlay | The overlay, with no blur |
 | Motion | The panel opening and closing timings, growing from slightly under full size |
