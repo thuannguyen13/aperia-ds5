@@ -6,17 +6,33 @@ import { DoDont } from "../blocks"
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-/** One email field that checks on Save, or on every keystroke for the Don't. */
-function EmailForm({ id, eager = false }: { id: string; eager?: boolean }) {
-  const [value, setValue] = useState("")
-  const [error, setError] = useState<string | null>(null)
-  const [shown, setShown] = useState(false)
-  const check = (next: string) =>
-    !next.trim()
-      ? "Enter an email address."
-      : EMAIL.test(next.trim())
-        ? null
-        : "Enter a valid email address."
+const check = (next: string) =>
+  !next.trim()
+    ? "Enter an email address."
+    : EMAIL.test(next.trim())
+      ? null
+      : "Enter a valid email address."
+
+/**
+ * One email field that checks on Save, or on every keystroke for the Don't. `initial` is what is typed when the page
+ * opens, and `saved` opens it as if Save had just been pressed, so each preview shows its state before anyone types.
+ */
+function EmailForm({
+  id,
+  eager = false,
+  initial = "",
+  saved = false,
+}: {
+  id: string
+  eager?: boolean
+  initial?: string
+  saved?: boolean
+}) {
+  const [value, setValue] = useState(initial)
+  const [error, setError] = useState<string | null>(
+    eager || saved ? check(initial) : null
+  )
+  const [shown, setShown] = useState(saved)
   return (
     <form
       className="flex w-full max-w-60 flex-col gap-4"
@@ -88,16 +104,16 @@ function Refused({ blameFields = false }: { blameFields?: boolean }) {
 export const errorsExamples = {
   "Check on save, not while people type": (
     <DoDont
-      good={<EmailForm id="errors-do-email" />}
-      goodNote="type, then press Save Changes"
-      bad={<EmailForm id="errors-dont-email" eager />}
-      badNote="type one letter: it is already wrong"
+      good={<EmailForm id="errors-do-email" initial="dana@north" />}
+      goodNote="still typing, so nothing is red yet"
+      bad={<EmailForm id="errors-dont-email" initial="d" eager />}
+      badNote="one letter typed, and it is already wrong"
     />
   ),
   "Keep the save button enabled": (
     <DoDont
-      good={<EmailForm id="errors-enabled-email" />}
-      goodNote="press Save Changes with nothing typed"
+      good={<EmailForm id="errors-enabled-email" saved />}
+      goodNote="Save Changes pressed: the field says what is missing"
       bad={
         <div className="flex w-full max-w-60 flex-col gap-4">
           <Field>
