@@ -20,9 +20,11 @@ a reason, or a decision first. Find the change in this table:
 | A pick in a grid, such as a role's level | At once, as it is picked | The grid has no Save button. See [Roles and Permissions](../examples/roles-and-permissions.md). |
 | A ticked task | At once, as the box is ticked | Ticking a task is one click and easy to take back. See [Task Checklist](../examples/task-checklist.md). |
 | A new order of options | At once, as the row is dropped | What people see is the saved order. See [Reordering](../patterns/reordering.md). |
+| A card dropped on another column of a board | At once, as the card is dropped, with Undo. A new status that needs a reason asks for it first. | A move is one drag and easy to take back. See [Board of Cards](../examples/board.md). |
 | A status change with a reason | When its button is pressed, in a small panel or a dialog | It waits for the reason. See [Status Change With a Reason](../examples/status-change.md). |
 | A delete, or another step whose consequence people must know first | When the confirmation's action is pressed | It cannot be taken back. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
 | Adding or editing a record | When the save button is pressed, in a form in a sheet | No record is saved half-filled. See [Forms in Sheets](../patterns/forms-in-sheets.md). |
+| A setting that is not a list, such as the app's default currency | When Save Changes is pressed, in the sheet that Edit opens from the setting's card | Its values change together, so they save together. See [Settings Page](../examples/settings-page.md). |
 | A file on a form | It uploads as soon as it is picked, and it is saved with the form. | See [Files and Images](../patterns/files-and-images.md). |
 
 ## What is available
@@ -32,11 +34,12 @@ Feedback comes in four forms, one for each moment of a change:
 | Form | Moment | What people see |
 |---|---|---|
 | Working state | While a save that waits for a button runs | The button keeps its label beside a spinner. The sheet, panel, or dialog stays open. |
-| Toast | After a save goes through | A message in a corner of the screen that states the result and closes on its own. It offers Undo when the change can be taken back. |
+| Toast | After a save goes through | A message at the top right of the screen that states the result and closes on its own. It offers Undo when the change can be taken back. |
 | Message in place | After a save is refused | A message beside the field, above the buttons, or above the grid that holds the control |
 | Discard Changes? | When a sheet closes after typing in it | A dialog over the sheet that asks before what was typed is lost |
 
-A change that the screen already shows, such as a filter or a switch, needs no message when it goes through.
+A change that the screen already shows, such as a filter, a switch, or a new order, needs no message when it goes
+through. A change that offers Undo is the one exception, because its toast holds Undo.
 
 ## How it looks and behaves
 
@@ -61,23 +64,29 @@ What confirms a save depends on whether the screen already shows the change:
 
 | Change | What confirms it |
 |---|---|
-| A filter, a sort, a search, or a switch in a settings sheet | Nothing more, because the list or the switch shows the change |
+| A filter, a sort, a search, a switch in a settings sheet, or a new order of options | Nothing more, because the list or the switch shows the change |
 | A form in a sheet | The sheet closes, and a toast states the result, such as "Note added." |
-| A ticked task, a status change, or a pick in a roles grid | A toast with the result and Undo, such as "Changed to Demo." |
-| A new order of options | A toast with the result, "Order saved." |
+| A ticked task, a status change, a card dropped on a board, or a pick in a roles grid | A toast with the result and Undo, such as "Changed to Demo." |
+
+### Where toasts show
+
+Toasts sit at the top right of the screen on a desktop and across the top of the screen on a phone. Save
+confirmations, errors, and new notifications share one stack. Three toasts show at most. Past three, one toast says how
+many more arrived, such as "4 more new notifications." A toast that stays until it is closed has a close button (×).
 
 ### Undo
 
-Undo sits in the toast of a change that saved without a form, such as a ticked task, a status change, or a pick in a
-roles grid. Pressing Undo puts back everything that the change did, such as every permission that one pick changed. A
-status change offers Undo only when the change can be reversed.
+Undo sits in the toast of a change that saved without a form. A ticked task, a status change, a card dropped on a board,
+and a pick in a roles grid each offer Undo. Pressing Undo puts back everything that the change did, such as every permission
+that one pick changed. A status change offers Undo only when the change can be reversed.
 
 A change that cannot be taken back, such as a delete, asks first instead and offers no Undo.
 
 ### When it is refused
 
 A refused save shows where the change was made, and nothing that people typed or chose is lost. A form keeps what was
-typed. A control that saved at once returns to its saved value. See
+typed. A control that saved at once returns to its saved value. An error that nothing on screen holds is a toast that
+stays until it is closed, with a close button (×). See
 [Message Templates](copy-templates.md#a-toast-an-alert-or-a-message-on-the-field) for where each kind of failure
 shows.
 
@@ -106,7 +115,7 @@ that wording.
 
 ### Offer Undo instead of asking first
 
-- **Do:** Save a ticked task at once and offer Undo in its toast ("Done: Send Proposal"), so taking it back is one
+- **Do:** Save a ticked task at once and offer Undo in its toast ("Task completed."), so taking it back is one
   click.
 - **Don't:** Ask "Mark Task as Done?" before a change that can be taken back. Keep questions for what cannot be undone,
   so a confirmation still means the change is permanent.
@@ -120,10 +129,10 @@ that wording.
 
 ### Confirm only what the screen does not show
 
-- **Do:** Show "Note added." after a sheet saves and closes, and nothing after a switch flips, so every message tells
-  people something new.
-- **Don't:** Show "Setting saved." or "Filters applied." when the switch or the list already shows it. Leave it out, so
-  toasts stay worth reading.
+- **Do:** Show "Note added." after a sheet saves and closes, and nothing after a switch flips or a row moves, so every
+  message tells people something new.
+- **Don't:** Show "Setting saved.", "Filters applied.", or "Order saved." when the screen already shows the change.
+  Leave it out, so toasts stay worth reading.
 
 ### Discard a closed form's input
 
@@ -154,10 +163,14 @@ A new order inside a form saves with the form, not at once. See [Reordering](../
 - A refusal: `form.refused({ error, field? })`. It shows under the field, or above the buttons, and the sheet stays
   open.
 - A change that saves at once: `toast("Changed to Demo.", { action: { label: "Undo", onClick } })` from `sonner`. Mount
-  `Toaster` from `aperia-ds5` once, at the app's root.
-- A dialog that saves: `ConfirmDialog` closes as its action is pressed. A dialog that stays open while it saves is an
-  `AlertDialog` built in the app, with `Spinner` (`data-icon="inline-start"`) in the action, Cancel `disabled`, and the
-  close ignored while pending, as on [Status Change With a Reason](../examples/status-change.md).
+  `Toaster` from `aperia-ds5` once, at the app's root. It places the stack (top right, across the top on a phone) and
+  shows three toasts at most. An error toast that stays is `toast.error(message, { duration: Infinity, closeButton:
+  true })`.
+- A confirmation that saves: `ConfirmDialog`'s `onConfirm` may return a Promise. While it runs, the action shows a
+  spinner and Cancel is disabled. When it fails, the dialog stays open with the error above its buttons.
+- The reason dialog of a status change is an `AlertDialog` built in the app, with `Spinner`
+  (`data-icon="inline-start"`) in the action, Cancel `disabled`, and the close ignored while pending, as on
+  [Status Change With a Reason](../examples/status-change.md).
 - A switch in a grid: the flag switch on [Switches in a Grid](../patterns/switches-in-a-grid.md), `disabled` while it
   saves. A refusal sets it back and shows an `Alert` (`variant="destructive"`) above the table.
 - Files: hold the save while `isUploading(files)`, and delete `stagedIds(files)` when the form closes unsaved.

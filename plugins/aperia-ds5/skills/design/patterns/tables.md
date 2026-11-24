@@ -19,6 +19,22 @@ this table:
 | A few items with no columns to compare, such as a record's tasks or notes | A simple list of rows in a card | A table is for comparing records by columns, and these items have none to compare. |
 | One record's own values, such as its details | Labeled values in a card, never a table | A table compares many records, and here there is one. See [Details](details.md). |
 
+### A page or a sheet for the record
+
+A row opens its record. The record opens on its own page or in a sheet, depending on how much it holds. Find the record
+in this table:
+
+| Record | Opens in | Why |
+|---|---|---|
+| A record with its own related content, such as a prospect with contacts, activity, and line items | Its own page. The row opens the page. | The record's cards need a whole page. See [Record Page](../examples/record-page.md). |
+| A small record, such as an option, a note, a line item, or a task | A sheet. The row opens the sheet. | The record is a few fields, so people read and edit it in one panel without leaving the page. See [Forms in Sheets](forms-in-sheets.md). |
+
+A small record is also read in its sheet. A person who may not change it gets the sheet read-only. See
+[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the read-only sheet.
+
+Edit and Delete sit where the record opens. A record with its own page has them in the page header. A small record has
+them in its sheet, with Delete at the start of the footer.
+
 ## What is available
 
 Tables come in five forms:
@@ -50,6 +66,19 @@ A missing value is a muted em dash (—). See [Empty States](../foundations/empt
 On a phone, a table keeps every column and scrolls sideways inside its box, so the page never scrolls sideways.
 See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
+### Buttons on a row
+
+A row's click opens its record, so a row holds no button to open, view, or edit it. A row shows a button only when the
+row's click is already taken by something else. Such a button appears on hover and keyboard focus, and it stays
+visible on a touch screen. These rows are the cases of that rule:
+
+| Row | What takes the row's click | The row's button |
+|---|---|---|
+| A task in a Tasks card | Its checkbox ticks the task, and on a To Do page the row opens the task's record | Edit, which opens the task's sheet |
+| A note in a Notes card | Nothing, because the whole note is shown and its text is there to read and copy | Delete, for the note's author |
+| A line item in the Edit Line Items sheet | Its fields | Remove |
+| A status in a list's row | The row opens its record | A chevron beside the status badge, which opens the status change |
+
 ## Rules
 
 ### Put the column headings right under the card header
@@ -71,9 +100,16 @@ See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 - **Don't:** Write every name out, stretching the row or cut off at the cell's edge. Show the count, so the row stays
   readable.
 
+### Add a row button only when the row's click is taken
+
+- **Do:** Add a row's button only when the row's click is taken, such as a task's Edit beside its checkbox, so a click
+  on any other row opens its record.
+- **Don't:** Put an Open, View, Edit, or Delete button on a row whose click is free. Keep that click for opening the
+  record, so a row's button always means its click was taken.
+
 ## When you can do it differently
 
-This pattern has no exceptions.
+This pattern has no exceptions. A row's button is one of the cases under Buttons on a row.
 
 ## Works with
 
@@ -83,6 +119,7 @@ This pattern has no exceptions.
 - See [Table](../components/table.md) for plain rows without stripes.
 - See [Selecting Rows](selecting-rows.md) for ticking rows and acting on them together.
 - See [Status](status.md) for a status column.
+- See [Forms in Sheets](forms-in-sheets.md) for the sheet that a small record opens in.
 
 ## In code
 

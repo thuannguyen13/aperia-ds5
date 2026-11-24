@@ -24,7 +24,8 @@ in this table:
 | The person's role can never take the action, such as a role that never deletes prospects | Leave the action out everywhere it would show, such as a header button, a menu item, an Add row in a picker, or Add in an empty state | Nothing on screen offers what the person can never do. |
 | The action is blocked on this record or at this moment, such as a record in use, a field that waits on another, or a closed record | Show the control disabled, with its reason | People learn what stands in the way, and the control works again once it clears. |
 | A rule stops this one person, such as an admin taking Roles away from their own role | Show the control locked, with its reason, such as "You cannot remove your own role's access to Roles." | The same control works on other rows, so it stays and says why it does not work here. |
-| The person may read a record but not change it | Show the record with no Edit. A sheet that opens anyway, such as to reach Delete, opens read-only. | People still read the record, and nothing invites a change that cannot be saved. |
+| The person's role may read a record but never change or delete it | Show the record with no Edit, no Delete, and no banner | People read the record like anyone else, and nothing offers a change the role can never make. |
+| The person may delete a small record but not change it, such as an option | Its sheet opens read-only, with Delete | People reach Delete, and the fields show that nothing in them changes. |
 | The person may neither change nor delete an option, and its row shows everything about it | The row does not open | The sheet would hold nothing the person can use. |
 | The person reaches an action anyway, such as through a link or after their role changed | The save is refused in place with "You do not have access to \<action\>." | The message is the same for everyone. See [Message Templates](copy-templates.md). |
 
@@ -79,7 +80,8 @@ An action that is left out leaves no gap. The actions around it close up and kee
 ### Prefer an enabled button that refuses in place
 
 - **Do:** Keep Save enabled and, when it is pressed with a field missing, show the message beside that field, so
-  people see what to fix.
+  people see what to fix. An import button with no row set to import also stays enabled and refuses above the
+  buttons.
 - **Don't:** Show a disabled primary button waiting for input. Keep it enabled, so people learn what is
   missing by pressing it.
 
@@ -101,12 +103,13 @@ An action that is left out leaves no gap. The actions around it close up and kee
 
 - **Do:** Leave Delete out of the record's actions for a role that never deletes, so the screen offers only what the
   person can do.
-- **Don't:** Show a disabled Delete that says "You do not have access to delete prospects." on every record. Leave it
-  out, so no one keeps meeting an action that never works for them.
+- **Don't:** Show a disabled Delete that says "You do not have access to delete prospects." on every record, or a
+  banner that says the record is read-only. Leave both out, so no one keeps meeting an action that never works for
+  them.
 
 ### Show a record read-only to someone who cannot change it
 
-- **Do:** Open the sheet with its fields disabled and Close in place of Save, so people read the record and see that it
+- **Do:** Open a small record's sheet with its fields disabled and Close in place of Save, so people read the record and see that it
   does not change here.
 - **Don't:** Open an editable form that refuses the save ("You do not have access to edit contacts."). Open it
   read-only, so no one types a change that cannot be saved.

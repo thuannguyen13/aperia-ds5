@@ -4,22 +4,22 @@ Loading states hold a page's shape in placeholder blocks while its data arrives.
 
 ## When to use
 
-Use a loading state whenever a page or a card is waiting for its data. The library ships the loading state for list
-pages. A record page and a card build theirs from the library's skeleton blocks, in the same way.
+Use a loading state whenever a page or a card is waiting for its data. The app builds every loading state from the
+library's skeleton blocks, in the page's own shape.
 
 ## What is available
 
-A loading state comes in two layouts:
+A loading state comes in four layouts:
 
 | Layout | Blocks |
 |---|---|
-| Table page | Title and its buttons, any stat tiles, the toolbar's search, filters, count, and Sort, then the table's headings and rows |
+| Table page | Title and its buttons, any stat tiles, the toolbar's search, filters, and Sort, then the table's headings and rows, then the count in the footer |
 | Board page | The same header and toolbar, with the Board / Table switch first, then one column per stage instead of the table |
 | Record page | The page header's title and actions, the row of tiles, then each card in its own place, with its title and a block for each row or field |
 | Card | The card's title, then a block for each row or field it will show |
 
-The table and board layouts come ready-made. An app builds the record page and card layouts from skeleton blocks,
-following the same rules.
+The list skeleton is a recipe for the table and board layouts, under In code. An app builds the record page and card
+layouts from skeleton blocks in the same way.
 
 ## How it looks and behaves
 

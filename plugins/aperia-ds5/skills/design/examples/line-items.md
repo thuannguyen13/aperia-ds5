@@ -34,7 +34,7 @@ Subtotals update as the user types. The sheet works them out with the same rules
 shown is the one that saves. A subtotal that cannot be worked out yet reads "—".
 
 Remove is an icon button at the end of a row. It shows when the row is pointed at or focused, and always on a touch
-screen.
+screen. A row's fields take its clicks, so Remove is one of the row buttons that Tables allows.
 
 A refused field is marked in the destructive color. Its message shows on a line under the row, across the whole table.
 Nothing saves until Save. A save is refused if someone else changed the rows since the sheet opened, so one save does

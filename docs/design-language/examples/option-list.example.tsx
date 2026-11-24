@@ -1,5 +1,4 @@
 import { useState, useTransition } from "react"
-import { toast } from "sonner"
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -195,7 +194,6 @@ export function OptionListExample() {
         each === group ? moved : was.filter((stage) => stage.group === each)
       )
     })
-    toast("Order saved.")
   }
 
   const editing = open !== null && open !== "new" ? open : null

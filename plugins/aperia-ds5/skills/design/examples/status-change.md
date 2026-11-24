@@ -14,7 +14,7 @@ A status change opens in one of two places, depending on where it starts:
 | Starts from | Opens as |
 |---|---|
 | A status in a table row | A small panel under the status badge. A chevron button beside the badge opens it. The button's tooltip names the change and the record, such as "Change Disposition for Harbor Lane Bistro LLC". |
-| A record's page, or a card dropped on another column of a board | A dialog in the middle of the screen. |
+| A record's page, or a card dropped on a board column whose state needs a reason | The reason dialog, an alert dialog in the middle of the screen. See [Dialog](../components/dialog.md) for its width. |
 
 The panel or dialog shows the change as the old status badge, an arrow, and the new status badge.
 
@@ -35,7 +35,7 @@ The change then moves through these moments, in order:
 | Saving | The button shows a spinner, Cancel is grayed out, and the panel stays open. |
 | Refused | The refusal shows inside the panel. What was typed stays, and focus goes back to the reason. |
 | Closing | Focus goes back to what opened the change. After a board drop, that is the card. |
-| Changed | A message at the corner of the screen states the result, such as "Changed to Demo.", with Undo when the change can be reversed. |
+| Changed | A toast at the top right of the screen states the result, such as "Changed to Demo.", with Undo when the change can be reversed. |
 
 ## Before and after
 
@@ -75,6 +75,8 @@ A status change has no exceptions.
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for why the button stays enabled.
 - See [Tables](../patterns/tables.md) for the status in a row.
 - See [Record Page](record-page.md) for where the dialog starts on a record.
+- See [Dialog](../components/dialog.md) for the reason dialog beside the other kinds of dialog.
+- See [Board of Cards](board.md) for a drop that saves at once unless the state needs a reason.
 - See [Copy](../foundations/copy.md) for naming the action on a button and asking with the action's name.
 - See [Saving and Feedback](../foundations/saving-and-feedback.md) for the working state and Undo.
 
@@ -84,7 +86,8 @@ The app builds it from aperia-ds5 parts and the recipes on the pattern and compo
 
 - From a row: a `Popover` anchored to the status `Badge` (`PopoverAnchor`), opened by an icon button (the recipe from
   [Button](../components/button.md)) with a chevron and the label "Change Disposition for …". From a record page or a
-  board drop: an `AlertDialog`.
+  board drop on a state that needs a reason: an `AlertDialog`, the reason dialog. A confirmation with no reason to write
+  is `ConfirmDialog` instead.
 - The change: two `Badge`s and an arrow icon. The choices: `RadioGroup` in a `FieldSet`. The reason: `Textarea` with
   `maxLength` and the length count from [Forms in Sheets](../patterns/forms-in-sheets.md), `autoFocus`ed, and
   `FieldError` for the refusal.

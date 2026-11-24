@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { ArrowRightIcon } from "lucide-react"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,10 +9,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  Badge,
   Button,
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -124,6 +125,20 @@ export const ConfirmationError: Story = {
   ),
 }
 
+/** The failure as a toast after the confirmation closed, the page behind it as if nothing happened. */
+export const ClosedWithToast: Story = {
+  render: () => (
+    <div className="relative h-svh bg-background">
+      <div
+        role="status"
+        className="absolute top-4 right-4 w-72 rounded-lg bg-popover px-4 py-3 text-sm text-popover-foreground shadow-lg ring-[0.5px] ring-border"
+      >
+        Project failed to delete.
+      </div>
+    </div>
+  ),
+}
+
 export const AreYouSure: Story = {
   render: () => (
     <>
@@ -168,28 +183,38 @@ export const BlueDelete: Story = {
   ),
 }
 
-export const ShortTask: Story = {
+/** The reason dialog: the change as badges, then the reason, as Status Change With a Reason builds it. */
+export const ReasonDialog: Story = {
   render: () => (
     <>
       <Page />
-      <Dialog open>
-        <DialogContent onOpenAutoFocus={keepFocus}>
-          <DialogHeader>
-            <DialogTitle>Mark as Lost</DialogTitle>
-            <DialogDescription>
-              Northwind Payments moves to Lost.
-            </DialogDescription>
-          </DialogHeader>
+      <AlertDialog open>
+        <AlertDialogContent onOpenAutoFocus={keepFocus}>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Change to Lost?</AlertDialogTitle>
+            <AlertDialogDescription className="sr-only">
+              Northwind Payments moves from Demo to Lost.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="flex items-center gap-2" aria-hidden>
+            <Badge variant="secondary">Demo</Badge>
+            <ArrowRightIcon className="size-4 text-muted-foreground" />
+            <Badge variant="outline">Lost</Badge>
+          </div>
           <Field>
             <FieldLabel htmlFor="reason">Reason for Change</FieldLabel>
-            <Input id="reason" placeholder="Chose another processor" />
+            <Textarea
+              id="reason"
+              rows={3}
+              placeholder="e.g. Chose another processor."
+            />
           </Field>
-          <DialogFooter>
-            <Button variant="outline">Cancel</Button>
-            <Button>Mark as Lost</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Change to Lost</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   ),
 }

@@ -1,26 +1,30 @@
 # Dialog
 
-A dialog is a small window over the page for a short task or a question that needs an answer first.
+A dialog is a window over the page for one question, a search, or a review, which closes before people go on.
 
 ## When to use
 
-Use a dialog in three cases:
-
-| Case | Example |
-|---|---|
-| Confirmation | "Delete Project?" with Cancel and the action |
-| Short task | One or two choices, such as picking a reason |
-| Global search | The search panel opened from the sidebar or ⌘K |
+Use a dialog for a question that must be answered before people go on, for global search, or for reviewing many rows
+before they save. Every dialog is one of the four kinds under What is available.
 
 See [Forms in Sheets](../patterns/forms-in-sheets.md) for choosing a sheet, a dialog, or a page of its own, such as for
 a form that adds or edits a record.
 
 ### Dialog or alert dialog?
 
-An alert dialog is a dialog that must be answered. It has no close (×), and clicking outside it does not close it. Use
-an alert dialog for a confirmation, above all a destructive one. Use a plain dialog for everything else.
+An alert dialog is a dialog that must be answered. It has no close (×), and clicking outside it does not close it. A
+confirmation and a reason dialog are alert dialogs. Global search and a review are plain dialogs.
 
 ## What is available
+
+A dialog comes in four kinds. Each kind has its own width, its own layout on a phone, and its own component.
+
+| Kind | Use for | Width | On a phone | Component |
+|---|---|---|---|---|
+| Confirmation | Asking before a delete, a removal, or a step whose consequence people must know first, such as "Delete Project?" | Up to 384px | 320px wide, in the middle of the screen, with its buttons stacked | `ConfirmDialog`. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
+| Reason | Picking a new status and writing the reason for it, such as "Change to Lost?" | Up to 384px | 320px wide, in the middle of the screen, with its buttons stacked | The reason dialog that the app builds. See [Status Change With a Reason](../examples/status-change.md). |
+| Search | Finding any record in the app from the sidebar or ⌘K | Up to 576px, a third of the way down the screen | Fills the screen | The app's search dialog. See [Global Search](../patterns/global-search.md). |
+| Review | Checking many rows in a wide table before they save, such as the rows of an imported file | Up to 72rem | Fills the screen | One dialog for every step. See [Import Wizard](../examples/import.md). |
 
 A dialog has five parts, listed from top to bottom:
 
@@ -36,7 +40,7 @@ A dialog has five parts, listed from top to bottom:
 
 | Part | Value |
 |---|---|
-| Width | Up to 384px on desktop. On phones, the screen width less 16px a side. |
+| Width | Set by the dialog's kind, in the table above |
 | Corners | Extra large corner |
 | Padding | 16px |
 | Fill | Page background, a border in the Border color, and the Large shadow |
@@ -89,6 +93,7 @@ A dialog has three states. Its buttons have their own states. See [Button](butto
 ## When you can do it differently
 
 - An alert dialog has no close (×) and stays open when someone clicks outside it, because it must be answered.
+- A search dialog and a review dialog fill the screen on a phone, because their lists need the whole height.
 
 ## Works with
 
@@ -111,5 +116,9 @@ name. See [Border and Radius](../styles/border-and-radius.md), [Elevation](../st
 
 - `Dialog`, `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogTitle`, `DialogDescription`, `DialogFooter`,
   `DialogClose` from `aperia-ds5`. `showCloseButton={false}` drops the ×.
-- Confirmations use `AlertDialog` with `AlertDialogAction variant="destructive"` for a destructive action.
-- Forms use `Sheet` (side `right`, the default).
+- A confirmation is `ConfirmDialog` from `aperia-ds5`, never an `AlertDialog` built in the app. Its `variant` is
+  `"destructive"` by default.
+- A reason dialog is an `AlertDialog` built as on [Status Change With a Reason](../examples/status-change.md).
+- A search dialog is `CommandDialog` with `className="sm:max-w-xl"`, as on [Global Search](../patterns/global-search.md).
+- A review dialog is one `DialogContent`, full screen below `sm`, as on [Import Wizard](../examples/import.md).
+- A form is `FormSheet` with `SheetForm` from `aperia-ds5`, never a raw `Sheet` or a dialog.

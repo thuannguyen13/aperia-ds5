@@ -25,11 +25,11 @@ import { AppStatusColors } from "./app-status"
 const WARNING =
   "bg-status-amber text-status-amber-foreground *:data-[slot=alert-description]:text-status-amber-foreground"
 
-function ReadOnly({ closable = false }: { closable?: boolean }) {
+function Closed({ closable = false }: { closable?: boolean }) {
   return (
     <Alert role="status">
       <InfoIcon />
-      <AlertTitle>Read Only</AlertTitle>
+      <AlertTitle>Closed Opportunity</AlertTitle>
       <AlertDescription>
         Closed opportunities cannot be changed.
       </AlertDescription>
@@ -116,7 +116,7 @@ export const bannerAlertExamples = {
   "@intro": (
     <Screen caption="A closed opportunity: the banner under the page header says why the record cannot be changed, and stays while the record is closed.">
       <Header />
-      <ReadOnly />
+      <Closed />
       <Details />
     </Screen>
   ),
@@ -126,7 +126,7 @@ export const bannerAlertExamples = {
       className="flex-col items-stretch"
     >
       <AppStatusColors />
-      <ReadOnly />
+      <Closed />
       <Stale />
       <Outage />
     </Example>
@@ -144,7 +144,7 @@ export const bannerAlertExamples = {
       bad={
         <Page>
           <Outage />
-          <ReadOnly />
+          <Closed />
           <Header />
           <Details />
         </Page>
@@ -154,7 +154,7 @@ export const bannerAlertExamples = {
   ),
   "Keep a banner alert for the whole page": (
     <DoDont
-      good={<ReadOnly />}
+      good={<Closed />}
       bad={
         <Alert>
           <InfoIcon />
@@ -166,23 +166,23 @@ export const bannerAlertExamples = {
   ),
   "Match the type to how much it stops": (
     <DoDont
-      good={<ReadOnly />}
+      good={<Closed />}
       bad={
         <Alert variant="destructive">
           <CircleAlertIcon />
-          <AlertTitle>Read Only</AlertTitle>
+          <AlertTitle>Closed Opportunity</AlertTitle>
           <AlertDescription>
             Closed opportunities cannot be changed.
           </AlertDescription>
         </Alert>
       }
-      badNote="a read-only notice in the error type"
+      badNote="a closed-record notice in the error type"
     />
   ),
   "Keep a lasting state's banner alert open": (
     <DoDont
-      good={<ReadOnly />}
-      bad={<ReadOnly closable />}
+      good={<Closed />}
+      bad={<Closed closable />}
       badNote="a close button on a record that stays closed"
     />
   ),

@@ -20,8 +20,9 @@ panel under it. The panel contains three parts, from top to bottom:
 | Refusal | Why the file was refused, shown under the drop zone when a file is refused. |
 | Templates | "Need a template?" with CSV and XLSX download buttons, under a line. |
 
-The dialog is titled after the import, such as "Import Prospects". On a phone, the dialog fills the screen. On larger
-screens, it is up to 72rem wide. Its header and footer stay in place while its body scrolls.
+The dialog is the review dialog, titled after the import, such as "Import Prospects". See
+[Dialog](../components/dialog.md) for its width and its layout on a phone. Its header and footer stay in place while
+its body scrolls.
 
 Review saves nothing. Counts sit above the table as badges with words, such as "12 New" and "3 Duplicate". Selecting a
 count shows only those rows. The table lists each row of the file with its row number, its fields, a Match badge, and an
@@ -29,8 +30,8 @@ Action. The Action says what happens to the row. Its choices depend on the row's
 Add as New, or Skip. A wide table scrolls sideways.
 
 The Review footer has Choose Another File and an import button that names the count, such as "Import 12 Prospects". The
-import button is grayed out when no row is set to import, and pointing at it says why ("Set at least one row to
-import.").
+import button stays enabled when no row is set to import, and then reads "Import Prospects". Pressing it then shows
+"Set at least one row to import." above the buttons.
 
 Importing shows a progress bar and a count, such as "Importing 120 of 400". The dialog cannot be closed while the import
 runs.
@@ -68,7 +69,9 @@ An import wizard has no exceptions.
 - See [Page Header](../patterns/page-header.md) for the import button's place among the page's buttons.
 - See [Tables](../patterns/tables.md) for the wide Review table that scrolls sideways.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the Result counts.
-- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the import button at zero.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for why the import button stays enabled at
+  zero.
+- See [Dialog](../components/dialog.md) for the review dialog.
 - See [Copy](../foundations/copy.md) for naming the action on a button.
 
 ## In code
@@ -80,7 +83,7 @@ The app builds it from aperia-ds5 parts and the recipes on the pattern and compo
 - The dialog: one `DialogContent` for Review, Importing and Result, full screen below `sm` and
   `sm:max-w-[min(72rem,calc(100%-4rem))]` above, with the header and footer fixed and the body scrolling.
 - Review: the counts as `Badge`s inside buttons (`aria-pressed`), the rows in the scroll table from
-  [Tables](../patterns/tables.md) with a `Badge` per Match and a `Select` per Action; the footer's import `Button` is
-  disabled at zero.
+  [Tables](../patterns/tables.md) with a `Badge` per Match and a `Select` per Action. The footer's import `Button` stays
+  enabled at zero, and pressing it shows the refusal in a `FieldError` above the buttons.
 - Importing: `Progress`, and `onOpenChange` ignores closing while it runs. Result: a stat tile per count, the recipe
   from [Cards and Tiles](../patterns/cards-and-tiles.md).

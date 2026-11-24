@@ -19,13 +19,18 @@ each set of options has the page's full width.
 |---|---|
 | Page header | The title, "Settings", and a one-line subtitle that says what the page sets |
 | A card for each set | The set's name as the card's title, such as Stages or Roles. A list of options shows its count beside the title and its Add button in the header. |
+| A card for a setting that is not a list | The setting's name as the card's title, such as Defaults, its values as labeled values, and Edit in the card header |
 
 Each card works as its own example page describes. A list of options, such as Stages, is an editable option list. A
 row opens the option's sheet, and a grip reorders the options when their order matters. A grid of what each role may
 do is the roles grid, and each pick saves at once with Undo.
 
-The page has no Save button. Each change saves where it is made. A new order, a pick, and a switch save at once, and an
-option's sheet saves its own form.
+A setting that is not a list, such as the app's default currency and time zone, shows its values in a details card.
+Edit in the card's header opens a sheet with the setting's form. The sheet saves with Save Changes and closes, and a
+toast states the result.
+
+The page has no Save button. Each change saves where it is made. A new order, a pick, and a switch save at once. An
+option's sheet and a setting's sheet each save their own form.
 
 On a phone, the cards keep one column. A grid too wide for the screen, such as Roles, shows one role at a time, picked
 above the table.
@@ -58,6 +63,9 @@ This page has no exceptions of its own. Each set's exceptions are on its example
 - See [Page Header](../patterns/page-header.md) for the title and the subtitle.
 - See [Editable Option List](option-list.md) for a list of options, its sheet, and its grip.
 - See [Roles and Permissions](roles-and-permissions.md) for the roles grid and Notification Settings.
+- See [Details](../patterns/details.md) for the labeled values of a setting that is not a list.
+- See [Forms in Sheets](../patterns/forms-in-sheets.md) for the sheet that Edit opens.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for when each kind of change saves.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the titled card, its count, its Add button, and one page of
   cards instead of page tabs.
 - See [Page Layout](../foundations/page-layout.md) for the 20px between sections.
@@ -71,5 +79,8 @@ The app builds the page from aperia-ds5 parts and the recipes on the pattern and
 - Each set is the titled card from [Card](../components/card.md), a direct child of `AppContent`. A list of options
   holds a flush `Table`, built as on [Editable Option List](option-list.md). The roles grid is built as on
   [Roles and Permissions](roles-and-permissions.md).
+- A setting that is not a list is the titled card with an outline Edit `Button` as its action, holding the detail rows
+  from [Details](../patterns/details.md). Edit opens `FormSheet` with `SheetForm` (`submit="Save Changes"`), and the
+  save ends with `toast`, such as "Defaults updated."
 - Changes save on their own: `toast` from sonner confirms a new order or a pick, with Undo where the page offers it.
   No `SheetForm` or Save button wraps the page.

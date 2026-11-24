@@ -20,9 +20,10 @@ A button comes in six types and four sizes. An icon button is a button with an i
 
 ### Primary
 
-A Primary button has a solid Primary fill. It is the main action of a page, a sheet, or a dialog, the one the user came
-to do. A page, a sheet, or a dialog has one Primary button at most. A page's Primary button sits at the end of the page
-header, after its Outline buttons. A sheet or a dialog puts it at the end of the footer, after Cancel.
+A Primary button has a solid Primary fill. It is the one action that its area exists for, such as Save in a sheet. An
+area has one Primary button at most. A page header's Primary button sits at its end, after its Outline buttons. A sheet
+or a dialog puts it at the end of the footer, after Cancel. See [Buttons and
+Actions](../patterns/buttons-and-actions.md) for what an area is and for the questions that choose a button's type.
 
 ### Outline
 
@@ -47,8 +48,8 @@ destination, such as View All.
 
 ### Secondary
 
-A Secondary button has the Secondary fill. Use it for a filter chip on a phone. A filter chip is a small, round button
-that shows an active filter and clears it when tapped.
+A Secondary button has the Secondary fill. Use it only for a filter chip. A filter chip is a small, round button that
+shows an active filter and clears it when tapped. The button beside the main action is Outline, never Secondary.
 
 ### Sizes
 
@@ -64,8 +65,8 @@ A button has four sizes:
 ### Icon button
 
 An icon button shows an icon with no text. Use it for an action that repeats on many rows or has a well-known icon, such
-as edit, delete, close, or more. An icon button is square and 28px. It always has a tooltip that names the
-action.
+as edit, delete, close, or more. An icon button is square and takes the height of the controls beside it. It is 32px in
+a toolbar beside a field, and 28px on a row or in a card header. It always has a tooltip that names the action.
 
 ### Specs
 
@@ -104,7 +105,7 @@ A screen reader reads an icon button's tooltip label as its name.
 A button disabled for a reason stays reachable. Its tooltip says why it is disabled, so keyboard and screen reader
 users get the reason too.
 
-A button is 32px tall, and an icon button is 28px, on every screen.
+A button is 32px tall on every screen. An icon button keeps the height of the controls beside it on every screen.
 
 On a phone, a dialog's buttons stack, with the action on top.
 
@@ -145,16 +146,16 @@ A button has five states. Each type shows them in its own colors.
 | Component | How it works with a button |
 |---|---|
 | Dialog | Cancel, then the action, sit at the bottom right. The action repeats the dialog's verb, such as "Delete Project", not OK. |
-| Sheet | A fixed footer holds Cancel and Save. A record's Delete sits at the start of the footer, away from Save. |
-| Page header | The page's actions sit on the title's line. A record's actions are Edit, then the record's other actions, then Delete in the Destructive type. |
+| Sheet | A fixed footer holds Cancel and Save. A small record's Delete sits at the start of the footer, away from Save. |
+| Page header | The page's actions sit on the title's line. A record's actions are Edit, then the record's other actions, then Delete in the Destructive type, with three buttons at most. |
 | Card | Add sits in the card header. |
 | Table | A row has no Open, View, or Edit button. The whole row opens its record, and editing happens there. |
 | Tooltip | Every icon button has a tooltip. |
 | Badge | A badge shows a state. A button never does. |
 | Alert Dialog | An alert dialog asks before an action that cannot be undone. Its action button is Destructive when the action removes something or cannot be taken back, and Primary otherwise. |
 
-See [Buttons and Actions](../patterns/buttons-and-actions.md) for where buttons go on a page, a sheet, and a dialog, and
-for using one primary button per area. See [Copy](../foundations/copy.md) for naming the action on a button. See
+See [Buttons and Actions](../patterns/buttons-and-actions.md) for where buttons go on a page, a sheet, and a dialog, for
+using one primary button per area, and for choosing a button's type. See [Copy](../foundations/copy.md) for naming the action on a button. See
 [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for saying why a button is disabled. See [Border and
 Radius](../styles/border-and-radius.md) and [Elevation](../styles/elevation.md) for the corners, edges, and
 shadows the Specs name.
@@ -162,7 +163,8 @@ shadows the Specs name.
 ## In code
 
 - `Button` from `aperia-ds5`: `variant` is `default` (Primary), `outline`, `ghost`, `destructive`, `link` or
-  `secondary`; `size` is `default`, `sm`, `xs`, `lg`, or `icon`, `icon-sm`, `icon-xs`, `icon-lg` for icon buttons.
+  `secondary`; `size` is `default`, `sm`, `xs`, `lg`, or `icon`, `icon-sm`, `icon-xs`, `icon-lg` for icon buttons. An
+  icon button is `icon` (32px) in a toolbar beside a field and `icon-sm` (28px) on a row or in a card header.
 - Build an icon button in the app from `Button`, `Tooltip`, `TooltipTrigger`, and `TooltipContent` from
   `aperia-ds5`. Its label is both the tooltip and the accessible name. While it is disabled with a reason, the tooltip
   shows the reason instead.
