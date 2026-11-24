@@ -223,61 +223,133 @@ export const colorExamples = {
 
 // ─── Typography ────────────────────────────────────────────────────────────
 
-const typeSpec: Read = (s) =>
-  `${px(s.fontSize)} / ${px(s.lineHeight)} · ${s.fontWeight}`
-
-const STEPS: { step: string; className: string; text: string }[] = [
-  {
-    step: "Page title",
-    className: "text-2xl leading-9 font-semibold tracking-tight",
-    text: "Acme Renewal",
-  },
-  {
-    step: "Card title",
-    className: "text-base font-semibold",
-    text: "Recent Activity",
-  },
-  {
-    step: "Panel title",
-    className: "text-base font-medium",
-    text: "Add Contact",
-  },
-  {
-    step: "Body",
-    className: "text-sm",
-    text: "Send the pricing proposal before the review.",
-  },
-  {
-    step: "Control text",
-    className: "text-sm font-medium",
-    text: "Start Date",
-  },
-  {
-    step: "Muted",
-    className: "text-sm text-muted-foreground",
-    text: "No tasks assigned to you.",
-  },
-  { step: "Small", className: "text-xs font-medium", text: "In Progress" },
-  {
-    step: "Figures",
-    className: "text-sm tabular-nums",
-    text: "$1,840,000 · 11/23/2026",
-  },
+/** Every step of the type scale, and whether an Aperia app uses it. Size and line height are read live. */
+const SCALE: { step: string; className: string; used: boolean }[] = [
+  { step: "XS", className: "text-xs", used: true },
+  { step: "SM", className: "text-sm", used: true },
+  { step: "Base", className: "text-base", used: true },
+  { step: "LG", className: "text-lg", used: false },
+  { step: "XL", className: "text-xl", used: false },
+  { step: "2XL", className: "text-2xl", used: true },
+  { step: "3XL", className: "text-3xl", used: false },
+  { step: "4XL", className: "text-4xl", used: false },
+  { step: "5XL", className: "text-5xl", used: false },
+  { step: "6XL", className: "text-6xl", used: false },
+  { step: "7XL", className: "text-7xl", used: false },
+  { step: "8XL", className: "text-8xl", used: false },
+  { step: "9XL", className: "text-9xl", used: false },
 ]
 
-export const typographyExamples = {
-  "What is available": (
+const WEIGHTS = [
+  { weight: "Regular", className: "font-normal" },
+  { weight: "Medium", className: "font-medium" },
+  { weight: "Semibold", className: "font-semibold" },
+  { weight: "Bold", className: "font-bold" },
+]
+
+/** A table row that prints what the browser gives its sample: `read` turns the computed style into the value. */
+function SpecRow({
+  name,
+  className,
+  sample,
+  read,
+  note,
+  code = className,
+}: {
+  name: string
+  className: string
+  /** The class to print, when the sample needs more classes than the one it shows. */
+  code?: string
+  sample: string
+  read: (style: CSSStyleDeclaration) => string
+  note: string
+}) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [value, setValue] = useState("")
+  useLayoutEffect(() => {
+    if (ref.current) setValue(read(getComputedStyle(ref.current)))
+  }, [read])
+  return (
+    <tr className="border-b last:border-b-0">
+      <td className="py-3 pr-4 align-middle font-medium whitespace-nowrap">
+        {name}
+        <code className="mt-1 block font-mono text-[11px] font-normal text-muted-foreground">
+          {code}
+        </code>
+      </td>
+      <td className="py-3 pr-4 align-middle font-mono text-[11px] whitespace-nowrap text-muted-foreground tabular-nums">
+        {value}
+      </td>
+      <td className="py-3 pr-4 align-middle text-muted-foreground">{note}</td>
+      <td className="py-3 align-middle">
+        <span ref={ref} className={cn(className, "block whitespace-nowrap")}>
+          {sample}
+        </span>
+      </td>
+    </tr>
+  )
+}
+
+const sizeAndLine = (s: CSSStyleDeclaration) =>
+  `${px(s.fontSize)} / ${px(s.lineHeight)}`
+const weightValue = (s: CSSStyleDeclaration) => s.fontWeight
+
+function SpecTable({
+  head,
+  children,
+}: {
+  head: [string, string, string]
+  children: ReactNode
+}) {
+  return (
     <Frame>
-      <div className="grid gap-4">
-        {STEPS.map((s) => (
-          <Measured key={s.step} read={typeSpec} label={s.step}>
-            <span data-measure className={s.className}>
-              {s.text}
-            </span>
-          </Measured>
-        ))}
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-sm">
+          <thead>
+            <tr className="border-b text-xs text-muted-foreground">
+              {[...head, "Sample"].map((cell) => (
+                <th key={cell} className="pr-4 pb-2 font-medium">
+                  {cell}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>{children}</tbody>
+        </table>
       </div>
     </Frame>
+  )
+}
+
+export const typographyExamples = {
+  "Type scale": (
+    <SpecTable head={["Step", "Size / line height", "In an Aperia app"]}>
+      {SCALE.map((step) => (
+        <SpecRow
+          key={step.step}
+          name={step.step}
+          className={step.className}
+          sample="Aa"
+          read={sizeAndLine}
+          note={step.used ? "Used" : "Not used"}
+        />
+      ))}
+    </SpecTable>
+  ),
+  Weights: (
+    <SpecTable head={["Weight", "Value", "In an Aperia app"]}>
+      {WEIGHTS.map((weight) => (
+        <SpecRow
+          key={weight.weight}
+          name={weight.weight}
+          className={cn("text-base", weight.className)}
+          code={weight.className}
+          sample="Recent Activity"
+          read={weightValue}
+          note={weight.weight === "Bold" ? "Sidebar logo only" : "Used"}
+        />
+      ))}
+    </SpecTable>
   ),
   "Line up figures": (
     <DoDont
