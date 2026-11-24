@@ -39,6 +39,8 @@ Where an action goes depends on its container:
 | Dialog | Cancel, then the action, sit at the bottom right. The action is named after the change, such as "Delete Project", not OK. A destructive action uses the destructive color. On a phone, the buttons stack with the action on top. |
 | Table | No buttons open, view, or edit a row. The row opens its record. Edit and Delete are on the record's page. |
 
+See [Screen Sizes](../foundations/screen-sizes.md) for where each container's buttons go on a phone.
+
 ## Rules
 
 ### Use one primary button per area

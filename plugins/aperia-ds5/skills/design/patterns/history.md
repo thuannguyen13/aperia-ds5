@@ -27,6 +27,9 @@ Each entry says when it happened in the short relative form, such as "3d ago", w
 An entry that the app made, such as an import, has no person. A card with no entries keeps its place, with an empty state
 inside, such as "No Activity".
 
+On a phone, View All opens the sheet over the whole screen, and every entry keeps the layout it has on a desktop.
+See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
 ## Rules
 
 ### Show the latest ten entries, with View All

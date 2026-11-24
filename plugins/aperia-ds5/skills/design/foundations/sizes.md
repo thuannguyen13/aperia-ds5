@@ -24,8 +24,8 @@ Controls come in four sizes, the same on every screen, a phone included.
 An icon button shows an icon with no text and is square. It is 28px by default. Its other sizes, 24px, 32px, and 36px,
 match the button heights, so an icon button can sit beside a button of the same height.
 
-A phone is any screen narrower than 640px. Every "phone" on these pages means this width. A phone changes how a page is
-laid out, such as a sheet that fills the screen, but not the size of a control.
+A phone changes how a page is laid out, such as a sheet that fills the screen, but not the size of a control. See
+[Screen Sizes](screen-sizes.md) for the widths and what changes at each.
 
 The top bar, a card's header, and a sheet's title-only header share one fixed height, so they line up across the
 screen. A page header can show a 48px picture beside its title, such as a record's avatar.
@@ -56,6 +56,7 @@ A page may fill the whole width in place of the centered column when it shows a 
 - See [Spacing](spacing.md) for the space around these sizes.
 - See [Typography](../styles/typography.md) for the text inside them.
 - See [Icons](../styles/icons.md) for icon buttons.
+- See [Screen Sizes](screen-sizes.md) for what changes on a phone and a tablet.
 
 ## In code
 
@@ -63,7 +64,6 @@ A page may fill the whole width in place of the centered column when it shows a 
   `input/input.tsx`, `select/select.tsx`. Icon buttons: `components/ui/icon-button/icon-button.tsx`. The fixed height:
   `app-shell/app-header.tsx`, `titled-card/titled-card.tsx`, `sheet/sheet.tsx`; the page's picture is in
   `app-shell/app-header.tsx`. The page column: `components/ui/app-shell/app-content.tsx`.
-- A phone is narrower than Tailwind's `sm` breakpoint (640px).
 - `Button` sizes: `xs` (`h-6`), `sm` (`h-7`), `default` (`h-8`), `lg` (`h-9`); icon sizes `icon-xs`, `icon-sm`, `icon`
   and `icon-lg`. `Input` and `SelectTrigger` are `h-8`. No control changes height on a phone; never add a `max-sm:`
   height.

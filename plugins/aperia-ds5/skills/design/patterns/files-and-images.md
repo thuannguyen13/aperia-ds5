@@ -45,6 +45,9 @@ the picker takes.
 In a read-only form, files show as downloads only, and an empty list reads "No attachments". A read-only image shows
 its preview only.
 
+On a phone, a tap on the drop zone opens the phone's own file chooser, so people pick a file without dragging it.
+See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
 ## Rules
 
 ### Say what the drop zone accepts

@@ -45,7 +45,7 @@ Delete when the person may delete.
 A form in a sheet goes through these steps, from opening to closing:
 
 1. The sheet slides in from the right, set 16px in from the window, with a 56px header. On a phone it fills the
-   screen.
+   screen. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 2. The fields scroll between the header and the footer. The footer never scrolls away.
 3. While the save runs, every field is disabled, and the save button keeps its label beside a spinner. Closing waits
    until the save is done.

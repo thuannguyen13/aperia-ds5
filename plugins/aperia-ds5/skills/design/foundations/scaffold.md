@@ -101,6 +101,7 @@ the second pane. See [Forms in Sheets](../patterns/forms-in-sheets.md) for that 
 
 - See [App Shell](../patterns/app-shell.md) for the sidebar, the top bar, and the page column.
 - See [Page Layout](page-layout.md) for the sections inside the page column.
+- See [Screen Sizes](screen-sizes.md) for what each region and part does on a phone and a tablet.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the sheet.
 - See [Dialog](../components/dialog.md) for what a dialog holds and what opens in a sheet instead.
 - See [Buttons and Actions](../patterns/buttons-and-actions.md) for where buttons go inside each region.

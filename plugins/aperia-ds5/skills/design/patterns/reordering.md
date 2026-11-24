@@ -31,6 +31,9 @@ A row moves by pointer or by keyboard, and it stays inside its own list:
 5. A held row stops at the edge of its list. It never slides sideways or over another list.
 6. Escape while a row is held only puts the row back. The sheet or dialog around the list stays open with its edits.
 
+On a phone, a finger on the grip drags the row, and the page holds still while the row moves. A swipe anywhere else
+on the row still scrolls the page. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
 ## Rules
 
 ### Drag by the grip, or move from the keyboard

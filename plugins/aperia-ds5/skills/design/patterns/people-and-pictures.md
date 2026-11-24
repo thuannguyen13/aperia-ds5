@@ -43,6 +43,10 @@ reads as a circle. A picture has an inner hairline and no other edge.
 
 A screen reader skips a picture that sits beside its name. A picture that stands alone is named.
 
+On a phone, pictures keep the sizes they have on a desktop. A tap on a stack of pictures opens the card that lists
+everyone. See
+[Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
 ## Rules
 
 ### Show people as circles and companies, products, and teams as squares

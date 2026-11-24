@@ -59,7 +59,8 @@ On the rail, each entry shows its name in a tooltip. The unread count moves to t
 The sidebar keeps its open or collapsed state the next time the app loads.
 
 On phones and tablets, narrower than 768px, the sidebar is hidden. The button at the start of the top bar opens it as
-a 288px panel from the left. Opening a search result closes the panel.
+a 288px panel from the left. Opening a search result closes the panel. See
+[Screen Sizes](../foundations/screen-sizes.md) for every region at each screen size.
 
 ### Top bar
 

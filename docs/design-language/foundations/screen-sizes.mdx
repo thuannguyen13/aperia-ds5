@@ -1,0 +1,34 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/foundations/screen-sizes.md?raw"
+import * as ScrollTable from "../recipes/scroll-table.stories"
+import { SkillDoc } from "../skill-doc"
+import { Devices } from "../examples/before-after"
+
+<Meta title="Foundations/Layout/Screen Sizes" />
+
+<SkillDoc
+  source={source}
+  after={{
+    "Parts on a phone": (
+      <Devices
+        id="design-language-examples-screens--list-page"
+        caption="A list page on a desktop and on a phone. On the phone, the toolbar takes its rows and the pager shows its arrows."
+      />
+    ),
+    "Move a part on a phone, never drop it": (
+      <Devices
+        id="design-language-examples-screens--record-page"
+        caption="A record's page. On the phone, the record actions fold into More actions on the title's line."
+      />
+    ),
+    "Keep the page from scrolling sideways": (
+      <Canvas of={ScrollTable.InTitledCard} sourceState="none" />
+    ),
+    "Lay out a page by its column's width": (
+      <Devices
+        id="design-language-examples-screens--dashboard"
+        caption="A dashboard. Beside the sidebar, the column fits four tiles. On the phone, the tiles sit two to a row and the charts stack."
+      />
+    ),
+  }}
+/>

@@ -33,6 +33,10 @@ The panel opens from the sidebar, and each notification leads to its record:
 6. Notification Settings opens from the settings button in the panel and from the account menu. See
    [Switches in a Grid](switches-in-a-grid.md) for the settings grid.
 
+On a phone, Notifications sits in the sidebar's panel, which the button at the start of the top bar opens. A new
+notification's toast spans the screen, 16px from each side. See [Screen Sizes](../foundations/screen-sizes.md)
+for every part on a phone.
+
 ## Rules
 
 ### Open the record from the whole notification

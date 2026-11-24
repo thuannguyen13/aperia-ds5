@@ -32,6 +32,9 @@ A switch and its word act as one control:
 5. A settings sheet of switches saves each switch as it is flipped and has no Save button.
 6. A refused save flips the switch back. The reason shows in place, above the table, with no toast.
 
+On a phone, every switch keeps its size. A grid wider than its card scrolls sideways inside the card. See
+[Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
 ## Rules
 
 ### Show the word, not only the color
