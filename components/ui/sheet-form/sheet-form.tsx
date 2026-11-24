@@ -129,7 +129,10 @@ export function SheetForm({
   pending: boolean
   /** The save button's label, a verb and its object: "Save Changes", "Add Contact". */
   submit: string
-  /** False while the form cannot be saved yet, such as before a required name is typed. */
+  /**
+   * @deprecated Leave the save button enabled and check on save, so pressing it shows what is missing (Errors and
+   * Validation). False still disables the button, for apps that set it.
+   */
   ready?: boolean
   readOnly?: boolean
   /** Set apart at the footer's start, such as the record's `SheetDelete`, as a record's sheet keeps it off its row. */

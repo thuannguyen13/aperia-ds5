@@ -60,6 +60,7 @@ export const FOUNDATIONS: Section<SkillPage> = {
       pages: [
         { file: "foundations/loading.md" },
         { file: "foundations/saving-and-feedback.md" },
+        { file: "foundations/errors-and-validation.md" },
         { file: "foundations/empty-states.md" },
         { file: "foundations/disabled-with-a-reason.md" },
       ],

@@ -64,6 +64,7 @@ const preview: Preview = {
             [
               "Loading",
               "Saving and Feedback",
+              "Errors and Validation",
               "Empty States",
               "Disabled With a Reason"
             ]

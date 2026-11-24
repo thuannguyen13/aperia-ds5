@@ -52,12 +52,10 @@ A form in a sheet goes through these steps, from opening to closing:
 3. While the save runs, the fields and the save button show the working state on
    [Saving and Feedback](../foundations/saving-and-feedback.md).
 4. A save that goes through closes the sheet.
-5. A save that is refused leaves the sheet open with everything that was typed. The message sits under the field it
-   names, such as "A contact with this email already exists." When no field shows it, the message sits above the
-   buttons. Focus moves to the first field in error.
-6. A message under a field goes away as soon as the value changes. It comes back when the field loses focus, if the
-   value is still wrong.
-7. Closing after typing asks "Discard Changes?" first, and closing forgets what was typed. See
+5. A save that is refused leaves the sheet open with everything that was typed. See
+   [Errors and Validation](../foundations/errors-and-validation.md) for when the form is checked and where each
+   message shows.
+6. Closing after typing asks "Discard Changes?" first, and closing forgets what was typed. See
    [Saving and Feedback](../foundations/saving-and-feedback.md) for every way a sheet closes.
 
 ## Rules
@@ -70,12 +68,10 @@ See [Saving and Feedback](../foundations/saving-and-feedback.md) for discarding 
   one form for each record.
 - **Don't:** Add a smaller "quick add" form beside the full one. Reuse the full form, so no record is saved half-filled.
 
-### Show errors in place, and keep the sheet open
+### Keep the sheet open when a save is refused
 
-- **Do:** Show the error under its field ("Enter a valid email address.") and keep the sheet open with what was typed,
-  so people fix it in place.
-- **Don't:** Show a toast saying the save failed, or close the sheet and lose the user's work. Keep the sheet open, so
-  nothing typed is lost.
+- **Do:** Keep the sheet open with what was typed when a save is refused, so people fix the problem in place.
+- **Don't:** Close the sheet and show a toast saying the save failed. Keep the sheet open, so nothing typed is lost.
 
 ### Mark optional fields, not required ones
 

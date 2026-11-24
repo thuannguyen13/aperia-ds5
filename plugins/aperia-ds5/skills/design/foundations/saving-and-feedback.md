@@ -87,8 +87,7 @@ A change that cannot be taken back, such as a delete, asks first instead and off
 A refused save shows where the change was made, and nothing that people typed or chose is lost. A form keeps what was
 typed. A control that saved at once returns to its saved value. An error that nothing on screen holds is a toast that
 stays until it is closed, with a close button (×). See
-[Message Templates](copy-templates.md#a-toast-an-alert-or-a-message-on-the-field) for where each kind of failure
-shows.
+[Errors and Validation](errors-and-validation.md) for where each kind of failure shows.
 
 ### When a sheet closes before it saves
 

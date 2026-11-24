@@ -39,6 +39,8 @@ Migrate a table:
 
 ### Changed
 
+- **SheetForm** `ready` is deprecated. A save button stays enabled and the form is checked on save, so pressing it
+  shows what is missing (Errors and Validation). `ready={false}` still disables the button.
 - **Tokens** (`base.css`): Sales Portal's values. Page `oklch(0.975 0.002 286)`, cards white, darker muted and muted
   text (`#66666e`), destructive `#c10007` / `#ff8a8c`, accent equals muted, Dark surfaces on hue 286.
 - **Primary** is `#0058cc` in both modes, white text. The Light sidebar is the navy `#002f67`, set on `--sidebar` itself.
@@ -88,6 +90,8 @@ Migrate a table:
 
 ### Added
 
+- **Errors and Validation** (docs, Foundations › States): where each error shows, when a form is checked, the words
+  of every field and form error, preventing errors in the control, and trimming spaces.
 - Tokens `--control`, `--overlay`, `--ghost-hover`, `--shadow-color`, `--shadow-depth`, `--shadow-base`,
   `--panel-in`, `--panel-out`, `--rail-duration`, `--rail-ease`; utilities `bg-control`, `bg-overlay`.
 - Utilities `surface` and `control` for app markup.

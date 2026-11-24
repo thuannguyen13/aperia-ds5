@@ -56,7 +56,7 @@ rest, on hover, on focus, when pressed, and when disabled.
   [Scaffold](foundations/scaffold.md), [Page Layout](foundations/page-layout.md), [Screen Sizes](foundations/screen-sizes.md), [Spacing](foundations/spacing.md), [Sizes](foundations/sizes.md); Content Design:
   [Copy](foundations/copy.md), [Message Templates](foundations/copy-templates.md), [Money and
   Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Saving and
-  Feedback](foundations/saving-and-feedback.md), [Empty States](foundations/empty-states.md), [Disabled With a
+  Feedback](foundations/saving-and-feedback.md), [Errors and Validation](foundations/errors-and-validation.md), [Empty States](foundations/empty-states.md), [Disabled With a
   Reason](foundations/disabled-with-a-reason.md).
 - **Styles** (the visual values): [Surfaces and Layers](styles/surfaces-and-layers.md), [Color](styles/color.md),
   [Typography](styles/typography.md), [Border and Radius](styles/border-and-radius.md), [Elevation](styles/elevation.md),

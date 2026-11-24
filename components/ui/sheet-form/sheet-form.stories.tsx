@@ -87,7 +87,6 @@ function ContactForm({
       onSubmit={submit}
       pending={pending}
       submit={contact ? "Save Changes" : "Add Contact"}
-      ready={Boolean(draft.name.trim())}
       readOnly={readOnly}
       start={
         contact && (

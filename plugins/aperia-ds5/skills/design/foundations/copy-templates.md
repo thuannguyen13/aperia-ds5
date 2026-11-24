@@ -52,34 +52,14 @@ how people left it.
 | Several records are open, and the changed one may be hidden | Discard Changes? | You have unsaved changes in a \<Name\>. This will close all \<Names\> without saving. Do you want to discard your changes? | Continue Editing · Discard Changes |
 | Several records are open, and which ones changed is unknown | Discard Changes? | This will close all \<Names\> without saving. Do you want to discard any changes you may have in a \<Name\>? | Continue Editing · Discard Changes |
 
-### Errors and validation
+### Errors
 
-An error is a problem that stops people or the app. The message says what happened and how to recover. It adds why,
-or how to avoid the problem, only when people need it.
-
-| Situation | Template | Example |
-|---|---|---|
-| A required value is missing | The fix | Pick a stage. · Write a message before you send. |
-| A value is outside a limit | \<Field\> must be \<limit\>. | Logo must be 2 MB or smaller. |
-| A value breaks a rule | The rule, stated neutrally | Merchant IDs only include letters and numbers. · Alert Message only supports these special characters: |
-| A format is wrong | What to enter | Enter a valid email address. |
-| Something people cannot do | You cannot \<action\>. Then who can act, only when the user can reach that person in the app, such as another admin who can change their role. | You cannot deactivate yourself. · You cannot move yourself to a role without Settings. Ask another admin. |
-| No access | You do not have access to \<action\>. The same message for everyone. | You do not have access to change rates. |
-| The app or a device is the cause | The problem, then the fix | The file service is not responding. Try again in a few minutes. |
-
-An error message follows three rules.
-
-- Write one message for each known cause, never one vague message for several causes.
-- State the problem in the third person and the passive voice. State the fix in the active imperative. Use the present
-  tense for both.
-- A dialog that stops an operation has **Cancel**. A dialog that only informs has **Close**.
-
-See "A toast, an alert, or a message on the field" under How it looks and behaves for where an error shows.
+The words of every error, where each one shows, and when the app checks a form are on
+[Errors and Validation](errors-and-validation.md).
 
 ### Failures
 
-A failure message says that an action, the person's or the app's, did not complete. An error message, above, is for a
-problem that stops people or the app.
+A failure message says that an action, the person's or the app's, did not complete.
 
 | Template | Example |
 |---|---|
@@ -141,25 +121,8 @@ Values and working states use the fixed wording in this table.
 
 ## How it looks and behaves
 
-### A toast, an alert, or a message on the field
-
-An error or a failure shows where the action happened, so people see what went wrong at the place they were working. A
-result that needs nothing more from people shows as a toast. Find the situation in this table:
-
-| Situation | Choice | Why |
-|---|---|---|
-| A field in a form or a dialog holds a wrong or missing value | A message beside the field it names | People fix the value where they typed it. |
-| A form or a dialog is refused, with no one field at fault | A message above the buttons. The form or dialog stays open with what was typed. | Nothing typed is lost, and people try again in place. |
-| A control that saves on change is refused, such as a switch in a grid | The control returns to its saved value, and an alert above the grid names the row, such as "Pipeline: Email could not be saved. Try again." | The control shows what is saved, and the message stays beside the work. |
-| A file is refused in a drop zone | A message under the drop zone, beside the refused file | It stays where the file was dropped until it is read. |
-| An action fails and nothing on screen holds it, such as a background job, a closed menu, or a page the person has left | A toast that stays until it is closed with its close button (×), names what failed, and offers the fix, such as "Report export failed. Try again." | No place is left on screen to show it. |
-| An action succeeds | A toast that closes on its own, with the result, such as "Note added." | People see what happened at a glance and carry on. |
-| A change saves at once and can be taken back, such as a ticked task or a status change | A toast with the result and Undo, such as "Changed to Demo." | People see the change take effect and can take it back. |
-| A new notification arrives | A toast with the notification's sentence that links to its record, three at most. See [Notifications](../patterns/notifications.md). | People see it on any page, and the page stays usable. |
-| Something holds for the whole page, such as a closed record or an outage | A banner alert under the page header. See [Banner Alerts](../patterns/banner-alerts.md). | People read it before they start working on the page. |
-
-A toast that closes on its own is only for a success. An error is never a toast while its place is still on screen.
-Every toast shows in one stack at the top right of the screen. See
+A toast that closes on its own is only for a success. Every toast shows in one stack at the top right of the screen.
+See [Errors and Validation](errors-and-validation.md) for where an error or a failure shows, and
 [Saving and Feedback](saving-and-feedback.md) for where toasts show on a phone and how many show at once.
 
 ## Rules
@@ -171,19 +134,13 @@ Every toast shows in one stack at the top right of the screen. See
 - **Don't:** Write "Your note has been successfully added!" Fill in the template and stop, so the message stays quick to
   read.
 
-### Show an error where the action happened
-
-- **Do:** Show an error beside its field, above a form's buttons, or above the grid that holds the control, so people
-  see what went wrong where they were working.
-- **Don't:** Show a toast that disappears while the form, grid, or file is still on screen. Show the error in place, so
-  no one misses it or thinks the change was saved.
-
 ## When you can do it differently
 
 A screen may depart from a template only for a business reason the app has recorded.
 
 ## Works with
 
+- See [Errors and Validation](errors-and-validation.md) for the words of every error and where each one shows.
 - See [Copy](copy.md) for voice, case, punctuation, and formats. Copy also holds the rules for naming the action on a
   button and for asking with the action's name.
 - See [Saving and Feedback](saving-and-feedback.md) for when a change saves, its working state, and when it offers
@@ -198,5 +155,5 @@ A screen may depart from a template only for a business reason the app has recor
 - `SheetForm` asks Discard Changes? itself, with the one-form wording above.
 - `EmptyState` (`title`, `description`) and `NoResults` (`onClear` adds the line and Clear Filters).
 - `ReasonTooltip`, and the icon button recipe's reason on [Button](../components/button.md), for why something is
-  disabled; `FieldError` beside a field; `Spinner`
+  disabled; `Spinner`
   in a working button that keeps its label; `HIDDEN_MONEY` from `aperia-ds5/format`.

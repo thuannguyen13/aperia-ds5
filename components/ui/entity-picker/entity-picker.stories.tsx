@@ -436,7 +436,6 @@ function ProspectForm({
       onSubmit={submit}
       pending={pending}
       submit="Add Prospect"
-      ready={Boolean(draft.name.trim())}
     >
       <FormSection title="Details">
         <Field data-invalid={Boolean(errors.name)}>
