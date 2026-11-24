@@ -36,7 +36,9 @@ People show as three avatars at most, then "+N". Pointing at the stack, focusing
 card lists everyone with their picture, name, and role. When no one is assigned, the stack shows an empty avatar and
 "No [role]", such as "No assignee".
 
-On screens 1024px and wider, record actions are buttons. Edit comes first, then the record's other actions. Actions
+On screens 1024px and wider, up to three record actions are buttons. Edit comes first, then the record's other
+actions. With four or more, the rest go into More actions (…), as
+[Buttons and Actions](buttons-and-actions.md) says. Actions
 that close the record's work, such as Close as Lost, come next, set apart in the destructive color. Delete comes last.
 On narrower screens, the record actions fold into one More actions (…) button. Its menu keeps the same order, with a
 line above the destructive actions.

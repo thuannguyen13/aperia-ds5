@@ -62,7 +62,7 @@ Opening a notification marks it read at once, closes the panel, and goes to the 
 
 An empty tab shows an empty state with a bell, such as "No Unread Notifications" or "No Notifications".
 
-New notifications also pop up at the corner of the screen, with the same sentence and picture. Selecting one opens the
+New notifications also pop up at the top right of the screen, with the same sentence and picture. Selecting one opens the
 record. At most three show. Past three, one more pop-up says how many others came, such as "4 more new notifications."
 
 ## Before and after

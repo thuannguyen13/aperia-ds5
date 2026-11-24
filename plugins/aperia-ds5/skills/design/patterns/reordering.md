@@ -60,8 +60,8 @@ Two cases change how reordering works.
 Rows that cannot move come first. Each one has a lock icon and no grip. An example is a column that cannot be hidden
 in a view.
 
-A list of options in settings saves its new order at once and confirms with "Order saved." On a form, the order saves
-with the form.
+A list of options in settings saves its new order at once, and the list itself shows the change, so no toast follows.
+On a form, the order saves with the form.
 
 ## Works with
 

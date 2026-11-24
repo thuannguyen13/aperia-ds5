@@ -21,7 +21,8 @@ The header contains five parts:
 | Record actions | Edit, the record's other actions, then Delete, at the end of the title's line. |
 | Actions | Further actions, such as Send Email, as outlined buttons beside the record actions. |
 
-On a narrow screen, the record actions fold into More Actions.
+On a narrow screen, the record actions fold into More actions (…). After a delete, the page goes back to its list,
+as [Confirmations and Delete](../patterns/confirmations-and-delete.md) says.
 
 The body is one column of cards, or a main column with a side column. The content decides, not the number of cards. A
 record gets a side column when it has related records or people to show beside its main work. Without them, the body is
