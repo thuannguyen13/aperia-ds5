@@ -55,6 +55,18 @@ Filters sit in the toolbar. On a phone, they go behind one Filter button that co
 button opens the filters in a sheet. Active filters show as chips, and tapping a chip clears its filter. A search or
 filter with no match shows the empty state "No Results".
 
+### States
+
+A row that opens its record has four states. A table has no disabled row. A record that cannot be opened has no
+pointer and no focus.
+
+| State | Look |
+|---|---|
+| Default | Body text on the page or card fill, with a hairline under the row. |
+| Hover | The row takes the muted color at 50%. |
+| Focus, from the keyboard | The row takes the muted color at 50%, with a focus-color line just inside its edge. |
+| Selected | The row takes the muted color. |
+
 ## Rules
 
 ### Open the record from the whole row

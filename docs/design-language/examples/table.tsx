@@ -12,6 +12,7 @@ import {
   opensOnClick,
 } from "aperia-ds5"
 import { DoDont, Example } from "../blocks"
+import { forceState, useForcedStates } from "../states"
 import { IconButton, TaskTable, TitledCard, Wide } from "./shared"
 
 const CONTACTS = [
@@ -143,7 +144,49 @@ function inCard(table: React.ReactNode) {
   )
 }
 
+/** A row in each state, named in its first cell. Hover and focus are the row's own state styles, marked with `data-force`. */
+function RowStates() {
+  useForcedStates()
+  const rows = [
+    { state: "Default", props: {} },
+    { state: "Hover", props: forceState("hover") },
+    { state: "Focus", props: forceState("focus") },
+    { state: "Selected", props: { "data-state": "selected" } },
+  ]
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="pl-4">State</TableHead>
+          <TableHead>Task</TableHead>
+          <TableHead className="pr-4">Owner</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow
+            key={row.state}
+            {...opensOnClick(`${row.state} row`, () => {})}
+            {...row.props}
+          >
+            <TableCell className="pl-4 text-muted-foreground">
+              {row.state}
+            </TableCell>
+            <TableCell>Send the pricing proposal</TableCell>
+            <TableCell className="pr-4">Dana Whitfield</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
+
 export const tableExamples = {
+  States: (
+    <Example caption="Each row shows the state named in its first cell.">
+      {inCard(<RowStates />)}
+    </Example>
+  ),
   "@intro": (
     <Example caption="Click a row, or Tab to it and press Enter: the whole row opens its record.">
       <div className="w-full max-w-xl">

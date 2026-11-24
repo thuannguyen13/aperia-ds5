@@ -63,6 +63,17 @@ A card's title is a heading at level 2, so screen reader users can jump between 
 A collapsible card's title is a button. It tells a screen reader whether the card is open and which content it
 controls.
 
+### States
+
+A card has no hover, pressed, or disabled state of its own. Only the controls inside it react. A collapsible card has
+three states.
+
+| State | Look |
+|---|---|
+| Open | The content shows, and the chevron points down. |
+| Closed | The card is its header alone, and the chevron points right. |
+| Focus, from the keyboard | A halo in the focus color surrounds the title and the chevron. |
+
 ## Rules
 
 ### Head every card the same way

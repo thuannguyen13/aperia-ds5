@@ -10,6 +10,7 @@ import {
   TabsTrigger,
 } from "aperia-ds5"
 import { DoDont, Example } from "../blocks"
+import { StateCards, forceState } from "../states"
 import { TaskTable, TitledCard, Wide } from "./shared"
 
 const add = (
@@ -43,7 +44,57 @@ function Details() {
   )
 }
 
+const note = (
+  <CardContent className="pb-4 text-muted-foreground">
+    Send the pricing proposal by Friday.
+  </CardContent>
+)
+
 export const cardExamples = {
+  // A collapsible card's states, each the real card: Focus marks the title's button with the focus state's own styles.
+  States: (
+    <StateCards
+      items={[
+        {
+          label: "Open",
+          node: (
+            <TitledCard
+              title="Tasks"
+              figure={count}
+              collapsible
+              className="w-full"
+            >
+              {note}
+            </TitledCard>
+          ),
+        },
+        {
+          label: "Closed",
+          node: (
+            <TitledCard
+              title="Tasks"
+              figure={count}
+              collapsible
+              defaultOpen={false}
+              className="w-full"
+            >
+              {note}
+            </TitledCard>
+          ),
+        },
+        {
+          label: "Focus",
+          node: (
+            <div {...forceState("focus")} className="w-full">
+              <TitledCard title="Tasks" figure={count} collapsible>
+                {note}
+              </TitledCard>
+            </div>
+          ),
+        },
+      ]}
+    />
+  ),
   "@intro": (
     <Example>
       <Wide>

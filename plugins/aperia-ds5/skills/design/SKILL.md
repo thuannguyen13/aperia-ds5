@@ -43,7 +43,10 @@ drift.
 ## The pages
 
 Every rule lives on one page; read the page before placing what it covers. Values live only in `aperia-ds5/base.css`.
-The pages are in six sections, the same as the Storybook sidebar.
+The pages are in six sections, the same as the Storybook sidebar. Every page has the same sections in one order
+([Overview](overview.md), How a page is laid out). A component's or pattern's Anatomy lists its parts by number, each
+optional part marked "(optional)", and a component's States, under How it looks and behaves, names how it looks at
+rest, on hover, on focus, when pressed, and when disabled.
 
 - **Get Started**: [Overview](overview.md), [For Designers](get-started/for-designers.md) and
   [For Developers](get-started/for-developers.md).

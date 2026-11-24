@@ -5,6 +5,7 @@ import { cn } from "aperia-ds5/utils"
 import { Unstyled } from "@storybook/addon-docs/blocks"
 import { Badge, Tabs, TabsList, TabsTrigger, TooltipProvider } from "aperia-ds5"
 import { DoDont } from "./blocks"
+import { Anatomy } from "./anatomy"
 import { COMPONENTS, componentTitle, skillTitle, storyId } from "./site"
 import { LiveColor } from "./live-color"
 import { componentsOf, pagesUsing, type Home } from "./uses"
@@ -627,7 +628,49 @@ const TAB_LABEL: Record<Tab, string> = {
 const TAB_OF: Record<string, Tab> = {
   "When to use": "overview",
   "What is available": "overview",
+  Anatomy: "overview",
   "In code": "code",
+}
+
+/**
+ * An Anatomy section's numbered list ("1. Container", "3. Icon (optional)"), taken out of its Markdown so the drawing
+ * shows it as its legend, numbered like its markers. Continuation lines (indented) belong to the item above.
+ */
+function splitParts(section: string) {
+  const rest: string[] = []
+  const parts: string[] = []
+  let inList = false
+  for (const line of section.split("\n")) {
+    const item = line.match(/^\d+\.\s+(.*)$/)
+    if (item) {
+      parts.push(item[1])
+      inList = true
+    } else if (inList && /^\s+\S/.test(line)) {
+      parts[parts.length - 1] += " " + line.trim()
+    } else {
+      inList = false
+      rest.push(line)
+    }
+  }
+  return { rest: rest.join("\n"), parts }
+}
+
+/** An Anatomy drawing with its legend filled from the section's list. */
+function withLegend(example: ReactNode, parts: string[]) {
+  if (
+    !React.isValidElement<React.ComponentProps<typeof Anatomy>>(example) ||
+    example.type !== Anatomy
+  )
+    return example
+  return React.cloneElement(example, {
+    legend: parts.map((part, at) => (
+      <Markdown key={at} options={{ ...OPTIONS, forceInline: true }}>
+        {part}
+      </Markdown>
+    )),
+    // Names alone fit two columns; a part with a sentence takes the whole line.
+    legendColumns: parts.every((part) => part.length <= 32) ? 2 : 1,
+  })
 }
 
 /** Sections of a page (split at each `##` and `###`), each with the live example `after` names for its heading. */
@@ -652,6 +695,12 @@ function Sections({
     const verdicts = split && split.do && split.dont ? split : undefined
     const paired =
       verdicts && React.isValidElement(example) && example.type === DoDont
+    // An Anatomy drawing shows the section's numbered list as its legend, so the list is not shown twice.
+    const anatomy =
+      React.isValidElement(example) && example.type === Anatomy
+        ? splitParts(section)
+        : undefined
+    const shown = anatomy ? withLegend(example, anatomy.parts) : example
     return (
       // The text under the title is the page's lead: larger and quieter, as a docs page opens.
       <div
@@ -663,7 +712,7 @@ function Sections({
         )}
       >
         <Markdown options={OPTIONS}>
-          {verdicts ? verdicts.rest : section}
+          {verdicts ? verdicts.rest : anatomy ? anatomy.rest : section}
         </Markdown>
         {verdicts && (
           <div className="skip-toc">
@@ -676,7 +725,7 @@ function Sections({
         )}
         {example && !paired && (
           // skip-toc: a heading inside an example (a mock card's title) isn't a section of the page.
-          <div className="skip-toc my-6">{example}</div>
+          <div className="skip-toc my-6">{shown}</div>
         )}
       </div>
     )
@@ -749,8 +798,9 @@ function OnThisPage({ panel }: { panel: React.RefObject<HTMLElement | null> }) {
 }
 
 /**
- * Renders a skill file as a page: its title and lead, then its sections in three tabs. Overview holds When to use and What is available, Guidelines holds how it looks and behaves and its
- * rules, and Code holds In code plus `code` (a component's live stories and props). A page without the standard
+ * Renders a skill file as a page: its title and lead, then its sections in three tabs. Overview holds When to use, What
+ * is available and Anatomy (a live drawing whose legend is the section's numbered list), Guidelines holds how it looks
+ * and behaves and its rules, and Code holds In code plus `code` (a component's live stories and props). A page without the standard
  * sections (the Overview, a getting-started page) shows as one page. A live example follows any `##` or `###` section
  * named in `after`, by its heading text, or "@intro" for the text under the title. The Overview ends with the
  * generated links: the components the page uses, or, for a component's home (`component`, its folder under
