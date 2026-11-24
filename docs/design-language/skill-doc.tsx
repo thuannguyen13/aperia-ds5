@@ -1,6 +1,7 @@
 import * as React from "react"
 import type { ReactNode } from "react"
 import { Markdown } from "@storybook/addon-docs/blocks"
+import { TokenPill } from "./token-pill"
 import { cn } from "aperia-ds5/utils"
 import { Unstyled } from "@storybook/addon-docs/blocks"
 import { Badge, Tabs, TabsList, TabsTrigger, TooltipProvider } from "aperia-ds5"
@@ -227,7 +228,7 @@ function LI({ className, children, ...props }: El<"li">) {
   )
 }
 
-const Code = ({ className, ...props }: El<"code">) => (
+const PlainCode = ({ className, ...props }: El<"code">) => (
   <code
     className={cx(
       "rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm tracking-normal text-foreground [pre_&]:bg-transparent [pre_&]:p-0 [td_&]:whitespace-nowrap",
@@ -236,6 +237,13 @@ const Code = ({ className, ...props }: El<"code">) => (
     {...props}
   />
 )
+/** Inline code: a token (`--border`, `rounded-lg`, `shadow-md`, `text-sm`, `p-4`) is a live pill; anything else stays code. */
+const Code = (props: El<"code">) => {
+  const plain = <PlainCode {...props} />
+  // A fenced block carries a language class; only inline code can be a token.
+  if (props.className || typeof props.children !== "string") return plain
+  return <TokenPill name={props.children} fallback={plain} />
+}
 const Pre = ({ className, ...props }: El<"pre">) => (
   <pre
     className={cx(
