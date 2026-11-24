@@ -207,7 +207,8 @@ function SpecRow({
       {note !== undefined && (
         <td className="py-3 pr-4 align-middle text-muted-foreground">{note}</td>
       )}
-      <td className="py-3 align-middle">
+      {/* Room on the right, so a sample's border and its focus or error halo are not clipped by the table's scroll box. */}
+      <td className="py-3 pr-1 align-middle">
         <div ref={ref} className="flex items-center">
           {sample}
         </div>
@@ -229,7 +230,7 @@ function SpecTable({
 }) {
   return (
     <Frame>
-      <div className="overflow-x-auto">
+      <div className="-mx-1 overflow-x-auto px-1 py-1">
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b text-xs text-muted-foreground">
