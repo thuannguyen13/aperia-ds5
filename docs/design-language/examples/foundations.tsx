@@ -171,12 +171,15 @@ function SpecRow({
   name,
   code,
   read,
+  value: given,
   note,
   sample,
 }: {
   name: string
   code: string
   read?: Read
+  /** A value to show instead of measuring one, such as the color token a border takes. */
+  value?: ReactNode
   note?: ReactNode
   sample: ReactNode
 }) {
@@ -199,9 +202,9 @@ function SpecRow({
           {code}
         </code>
       </td>
-      {read && (
+      {(read || given) && (
         <td className="max-w-48 py-3 pr-4 align-middle font-mono text-[11px] break-words text-muted-foreground tabular-nums">
-          {value}
+          {given ?? value}
         </td>
       )}
       {note !== undefined && (
@@ -214,6 +217,22 @@ function SpecRow({
         </div>
       </td>
     </tr>
+  )
+}
+
+/** A color token's role, linked to the Color page, which holds every color's value. */
+function ColorToken({ role, token }: { role: string; token: string }) {
+  return (
+    <a
+      href="./?path=/docs/styles-color--docs"
+      target="_top"
+      className="font-sans text-xs text-primary hover:underline"
+    >
+      {role}
+      <code className="block font-mono text-[11px] text-muted-foreground">
+        {token}
+      </code>
+    </a>
   )
 }
 
@@ -471,21 +490,21 @@ export const borderExamples = {
       <SpecRow
         name="Border"
         code="ring-border · border"
-        read={cssVar("--border")}
+        value={<ColorToken role="Border" token="--border" />}
         note="Cards, tables, dialogs, sheets, and dividers"
         sample={<div className="h-8 w-28 surface" />}
       />
       <SpecRow
         name="Input"
         code="ring-input"
-        read={cssVar("--input")}
+        value={<ColorToken role="Input" token="--input" />}
         note="Fields, outline buttons, checkboxes, and radios"
         sample={<Input placeholder="Input" className="w-28" />}
       />
       <SpecRow
         name="Focus"
         code="inset-ring-ring · ring-ring/50"
-        read={cssVar("--ring")}
+        value={<ColorToken role="Ring" token="--ring" />}
         note="Any control with keyboard focus"
         sample={
           <Input
@@ -497,7 +516,7 @@ export const borderExamples = {
       <SpecRow
         name="Invalid"
         code="aria-invalid"
-        read={cssVar("--destructive")}
+        value={<ColorToken role="Destructive" token="--destructive" />}
         note="A field with an error"
         sample={<Input placeholder="Invalid" aria-invalid className="w-28" />}
       />
