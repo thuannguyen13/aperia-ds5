@@ -5,6 +5,11 @@
 
 @source "../components";
 
+/* The docs' token pills (docs/design-language/token-pill.tsx) read each value from its theme variable, and Tailwind
+   writes a theme variable only when a class uses it. A breakpoint or a container query never does, so these classes
+   bring the breakpoints and the named widths in. */
+@source inline("w-(--breakpoint-{sm,md,lg}) w-{page-md,page-lg,popover-sm,popover-lg,3xs,2xs,xs,sm,md,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl}");
+
 /* ds5 defaults `--font-sans` to Inter but loads no font file; an app loads Inter itself. Storybook loads it above and
    sets the same stack, so stories render as they do in an app instead of in Storybook's own font. */
 :root {
