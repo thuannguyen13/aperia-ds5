@@ -10,7 +10,6 @@ import { IconButton } from "../icon-button/icon-button"
 import { Label } from "../label/label"
 import { Popover, PopoverContent, PopoverTrigger } from "../popover/popover"
 import { RadioGroup, RadioGroupItem } from "../radio-group/radio-group"
-import { Separator } from "../separator/separator"
 import { ToggleGroup, ToggleGroupItem } from "../toggle-group/toggle-group"
 import { cn } from "@/lib/utils"
 import type { SortDirection, SortOption, SortState } from "./sort"
@@ -86,37 +85,39 @@ export function SortControl({
           </Button>
         )}
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-60">
-        <p className="text-sm font-medium">Sort By</p>
-        <RadioGroup
-          value={value.by || UNSORTED_VALUE}
-          onValueChange={(next) => {
-            const field = fields.find((each) => each.value === next)
-            onChange(
-              field
-                ? { by: next, direction: field.starts ?? "asc" }
-                : { by: "", direction: value.direction }
-            )
-          }}
-          aria-label="Sort by"
-          className="gap-0"
-        >
-          {[{ value: UNSORTED_VALUE, label: "Default order" }, ...fields].map(
-            (field) => (
-              <Label
-                key={field.value}
-                className="flex min-h-8 items-center gap-3 font-normal"
-              >
-                <RadioGroupItem value={field.value} />
-                {field.label}
-              </Label>
-            )
-          )}
-        </RadioGroup>
+      {/* Two groups, Sort By and the direction, each with its own inset; the line between them runs edge to edge. */}
+      <PopoverContent align="end" className="w-60 gap-0 p-0">
+        <div className="flex flex-col gap-3 p-3">
+          <p className="text-sm font-medium">Sort By</p>
+          <RadioGroup
+            value={value.by || UNSORTED_VALUE}
+            onValueChange={(next) => {
+              const field = fields.find((each) => each.value === next)
+              onChange(
+                field
+                  ? { by: next, direction: field.starts ?? "asc" }
+                  : { by: "", direction: value.direction }
+              )
+            }}
+            aria-label="Sort by"
+            className="gap-0"
+          >
+            {[{ value: UNSORTED_VALUE, label: "Default order" }, ...fields].map(
+              (field) => (
+                <Label
+                  key={field.value}
+                  className="flex min-h-8 items-center gap-3 font-normal"
+                >
+                  <RadioGroupItem value={field.value} />
+                  {field.label}
+                </Label>
+              )
+            )}
+          </RadioGroup>
+        </div>
         {/* Which way only means something once a field is picked; in the list's own order it stays out of the way. */}
         {by && (
-          <>
-            <Separator />
+          <div className="border-t p-3">
             <ToggleGroup
               type="single"
               variant="outline"
@@ -138,7 +139,7 @@ export function SortControl({
                 Descending
               </ToggleGroupItem>
             </ToggleGroup>
-          </>
+          </div>
         )}
       </PopoverContent>
     </Popover>

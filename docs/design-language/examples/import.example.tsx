@@ -17,7 +17,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Separator,
   Table,
   TableBody,
   TableCell,
@@ -350,14 +349,15 @@ export function ImportExample() {
                 Import Prospects
               </Button>
             </PopoverTrigger>
+            {/* Two groups, the file and the templates, each with its own inset; the line between them runs edge to edge. */}
             <PopoverContent
               align="end"
-              className="w-96 max-w-[calc(100vw-2rem)]"
+              className="w-96 max-w-[calc(100vw-2rem)] gap-0 p-0"
             >
-              <PopoverHeader>
-                <PopoverTitle>Import Prospects</PopoverTitle>
-              </PopoverHeader>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 p-3">
+                <PopoverHeader>
+                  <PopoverTitle>Import Prospects</PopoverTitle>
+                </PopoverHeader>
                 <FileDrop
                   id="import-file"
                   label="Prospects file"
@@ -368,19 +368,18 @@ export function ImportExample() {
                 {refusal && (
                   <p className="text-sm text-destructive">{refusal}</p>
                 )}
-                <Separator />
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <PopoverDescription>Need a template?</PopoverDescription>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
-                      <DownloadIcon data-icon="inline-start" />
-                      CSV
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <DownloadIcon data-icon="inline-start" />
-                      XLSX
-                    </Button>
-                  </div>
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-2 border-t p-3">
+                <PopoverDescription>Need a template?</PopoverDescription>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm">
+                    <DownloadIcon data-icon="inline-start" />
+                    CSV
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    <DownloadIcon data-icon="inline-start" />
+                    XLSX
+                  </Button>
                 </div>
               </div>
             </PopoverContent>
