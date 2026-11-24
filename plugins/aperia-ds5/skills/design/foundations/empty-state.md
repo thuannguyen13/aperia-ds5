@@ -39,9 +39,8 @@ This case applies when the content could not load.
 
 | Part | Content |
 |---|---|
-| Title | What failed, as Failed to Load [Items], such as Failed to Load Tasks |
-| Line | What to do, such as "Try again." |
-| Action | A way out, such as Try Again or a way home |
+| Title | Failed to Load, with no item name, since the card or list around it names the item, as No Results does |
+| Action | Try Again, or a way home when trying again cannot help |
 
 ### Specs
 

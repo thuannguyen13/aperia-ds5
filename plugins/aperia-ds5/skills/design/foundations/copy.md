@@ -164,7 +164,8 @@ Screen text speaks in one plain voice. The voice follows these rules:
 - Write instructions to the person, in the active voice, in the imperative or present tense. Write "Search by name or
   phone number.", not "Search can be by name or phone number." Labels have no person, voice, or tense.
 - Write a finished action in the past tense, without "has been", as in "Credit line increased."
-- Write out every contraction in screen text, as in "cannot", "is not", and "You are".
+- Write out every contraction in screen text, titles and buttons included, as in "cannot", "is not", and "You are".
+  Write "Failed to Load", never "Didn't Load" or "Couldn't Load".
 - Leave out "please" and "thank you", because they make the action sound optional.
 - Use no exclamation marks and no capitals for emphasis.
 - Never call the app "I", "me", or "we". Write "The application will be available soon."

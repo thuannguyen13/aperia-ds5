@@ -54,8 +54,7 @@ export const emptyStateExamples = {
       <InCard>
         <EmptyState
           icon={CircleAlertIcon}
-          title="Tasks Didn't Load"
-          description="Try again."
+          title="Failed to Load"
           action={<Button variant="outline">Try Again</Button>}
         />
       </InCard>

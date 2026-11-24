@@ -86,7 +86,7 @@ problem that stops people or the app.
 | Failed to \<action\>. | Failed to download document. |
 | With an instruction, when people must act | Request failed. Resubmit the request. · Failed to save changes. Try again. |
 | With a known cause, passive, between them | Failed to save notification settings. The server could not be reached. Try again. |
-| As a title, Failed to \<Action\> \<Item\> | Failed to Load Page |
+| As the title of an empty state, Failed to \<Action\>, with no item, since the card or list around it names the item | Failed to Load |
 
 Add a time stamp, as in "Request failed on 10/13/2020 02:40:32 PM.", only when asked for.
 
