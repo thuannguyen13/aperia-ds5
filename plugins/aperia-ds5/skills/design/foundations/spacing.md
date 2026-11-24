@@ -36,6 +36,12 @@ Cards sit at step 4, closer than sections at step 5, because each card has its o
 
 When a section is not shown, its space is removed with it. No empty gap is left.
 
+Controls side by side, such as the fields of a filter row and the × after them, are spaced by their boxes. A gap runs
+from one control's edge to the next one's. A ghost button or an icon button counts its whole button as its box,
+including the padding around its icon. So the gap before an icon button equals the gap between two fields. At the end
+of a row, that same padding reaches past the row's edge, so the icon itself lines up with the edge. See
+[Page Layout](page-layout.md) for that edge.
+
 ## Rules
 
 ### Leave space between sections
@@ -44,6 +50,13 @@ When a section is not shown, its space is removed with it. No empty gap is left.
   begins.
 - **Don't:** Let two sections touch (a title against a search box, a toolbar against a table's card). Leave step 5
   between them, so each section reads as its own group.
+
+### Space controls by their boxes
+
+- **Do:** Keep one gap between the controls of a row, measured box to box. A field and the icon button after it then
+  sit as far apart as two fields.
+- **Don't:** Pull an icon button toward the field before it to line its icon up with the edge. Let its padding reach
+  past the edge instead, so the gaps stay equal and the icon still lines up.
 
 ### Stay on the grid
 

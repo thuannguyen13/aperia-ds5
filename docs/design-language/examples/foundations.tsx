@@ -6,6 +6,7 @@ import {
   PlusIcon,
   SearchIcon,
   TrashIcon,
+  XIcon,
 } from "lucide-react"
 import {
   Button,
@@ -390,7 +391,31 @@ function Sections({ gap }: { gap: string }) {
   )
 }
 
+/** A filter row: two fields and the × after them, spaced box to box (good) or with the × pulled in to its icon (bad). */
+function SpacedRow({ good }: { good: boolean }) {
+  return (
+    <div className="grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1fr)_1.375rem] items-center gap-2 rounded-lg bg-background p-3 ring-[0.5px] ring-border">
+      <Input aria-label="Column" defaultValue="MC Band" />
+      <Input aria-label="Value" defaultValue="High" />
+      <IconButton
+        label="Remove Filter"
+        className={good ? undefined : "-ml-1.5"}
+      >
+        <XIcon />
+      </IconButton>
+    </div>
+  )
+}
+
 export const spacingExamples = {
+  "Space controls by their boxes": (
+    <DoDont
+      good={<SpacedRow good />}
+      bad={<SpacedRow good={false} />}
+      goodNote="8px from field to field, and from field to the ×'s button"
+      badNote="the ×'s button pulled 6px toward the field"
+    />
+  ),
   "What is available": (
     <Frame>
       <div className="grid gap-4">

@@ -39,7 +39,9 @@ Content and box edges line up across containers, to the pixel. Three cases apply
 - Everything in a card starts on the card title's line, 16px in from the card's edge. This includes a table's first
   column, a list's pictures, and a form's labels.
 - A part with its own padding, such as a row that highlights under the pointer or a ghost button, is pulled back onto
-  that line. Its text sits on the line, and its highlight reaches past it.
+  that line. Its text sits on the line, and its highlight reaches past it. The same holds at a row's right end, where
+  an icon button's padding reaches past the line and the icon ends on it. See [Spacing](spacing.md) for the gap before
+  it.
 - Rows divided to a card's edges, such as a table's rows, keep the 16px inside each row. Their text lines up with the
   title, and the lines between rows run edge to edge.
 

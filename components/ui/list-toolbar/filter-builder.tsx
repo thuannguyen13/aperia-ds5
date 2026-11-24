@@ -27,11 +27,12 @@ import {
   type FilterRule,
 } from "./filters"
 
-// The columns every row shares, so Column, Operator and Value line up under their headings, then the ×. The last
-// column is the × icon's own 16px: its button reaches 6px past it on each side (`-mx-1.5`), so the × itself ends on
-// the popover's right content line, as the fields start on its left one.
+// The columns every row shares, so Column, Operator and Value line up under their headings, then the ×. The ×
+// column is the button's left padding plus the icon (22px): the button box keeps the same 8px gap from the Value field
+// as the fields keep from each other, and its right padding reaches into the popover's, so the × itself ends on the
+// popover's right content line, as the fields start on its left one.
 const ROW =
-  "grid grid-cols-[minmax(0,1fr)_10rem_minmax(0,1fr)_1rem] items-center gap-2"
+  "grid grid-cols-[minmax(0,1fr)_10rem_minmax(0,1fr)_1.375rem] items-center gap-2"
 
 /**
  * The filter builder: one Filter button that counts the filters on, and a popover where each filter is a row of
@@ -130,8 +131,8 @@ export function FilterBuilder({
               <div className="h-8 rounded-lg bg-foreground/4" aria-hidden />
               <IconButton
                 label="Remove Filter"
-                // Wider than its column by its padding, so the × sits on the popover's right content line.
-                className="-mx-1.5"
+                // Its right padding reaches past the column, so the × sits on the popover's right content line.
+                className="-mr-1.5"
                 onClick={() =>
                   setDrafts((list) => list.filter((each) => each !== id))
                 }
@@ -267,8 +268,8 @@ function BuilderRow({
       <IconButton
         label="Remove Filter"
         aria-label={`Remove ${field.label} filter`}
-        // Wider than its column by its padding, so the × sits on the popover's right content line.
-        className="-mx-1.5"
+        // Its right padding reaches past the column, so the × sits on the popover's right content line.
+        className="-mr-1.5"
         onClick={onRemove}
       >
         <XIcon />
