@@ -99,11 +99,17 @@ export function dayRangeLabel(from: string | null, to: string | null) {
  * How long ago, as "3d ago". A moment under a day old reads "Just now", "5m ago" or "3h ago"; from a day on, and for a
  * YYYY-MM-DD day, it counts days in `zone`, today reading "Today". Show it with the full date on hover (`RelativeTime`).
  */
-export function ago(value: string | Date, zone = ZONE) {
+export function ago(
+  value: string | Date,
+  zone = ZONE,
+  /** The time to count from; now by default. A component passes the time it read, so it never reads the clock while
+   * it renders (see RelativeTime). */
+  now: number = Date.now()
+) {
   const moment =
     value instanceof Date ? value : value.includes("T") ? new Date(value) : null
   if (moment) {
-    const minutes = Math.floor((Date.now() - moment.getTime()) / 60_000)
+    const minutes = Math.floor((now - moment.getTime()) / 60_000)
     // A clock a little behind the server's puts the moment slightly ahead: still just now.
     if (minutes > -60 && minutes < 1) return "Just now"
     if (minutes >= 1 && minutes < 60) return `${minutes}m ago`
@@ -112,7 +118,7 @@ export function ago(value: string | Date, zone = ZONE) {
   }
   const days = daysBetween(
     typeof value === "string" ? value.slice(0, 10) : dayOf(value, zone),
-    today(zone)
+    dayOf(new Date(now), zone)
   )
   if (days <= 0) return "Today"
   if (days < 7) return `${days}d ago`

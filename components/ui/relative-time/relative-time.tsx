@@ -1,7 +1,19 @@
 "use client"
 
+import { useSyncExternalStore } from "react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
 import { ago, formatDate, formatMoment, ZONE } from "@/lib/format"
+import { cn } from "@/lib/utils"
+
+// The clock, read only in the browser and once a minute. A server render or a prerender (Next.js 16 refuses a clock
+// read there) gets null, so "3d ago" is worked out in the browser and stays current while the page is open.
+const MINUTE = 60_000
+function subscribe(tick: () => void) {
+  const timer = setInterval(tick, MINUTE)
+  return () => clearInterval(timer)
+}
+const minuteNow = () => Math.floor(Date.now() / MINUTE) * MINUTE
+const noClock = () => null
 
 /**
  * How long ago, as "3d ago", with the exact date on hover, and the time and zone for a moment: "3d ago" alone cannot be
@@ -24,16 +36,21 @@ export function RelativeTime({
   // A string with a time in it is a moment, as a Date is; a bare YYYY-MM-DD is a day, which has no time to show.
   const moment =
     value instanceof Date ? value : value.includes("T") ? new Date(value) : null
-  const said = ago(value, zone)
+  const now = useSyncExternalStore(subscribe, minuteNow, noClock)
+  const dateTime = moment ? moment.toISOString() : (value as string)
+  if (now === null) {
+    // Before the browser has the clock: a stand-in of about the same width, unseen, so nothing moves when it lands.
+    return (
+      <time dateTime={dateTime} className={cn("invisible", className)}>
+        {label ? `${label} 3d ago` : "3d ago"}
+      </time>
+    )
+  }
+  const said = ago(value, zone, now)
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        {/* A minute label can differ between the server's render and the browser's first one. */}
-        <time
-          suppressHydrationWarning
-          dateTime={moment ? moment.toISOString() : (value as string)}
-          className={className}
-        >
+        <time dateTime={dateTime} className={className}>
           {label ? `${label} ${said.toLowerCase()}` : said}
         </time>
       </TooltipTrigger>

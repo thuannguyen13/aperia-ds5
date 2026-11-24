@@ -61,6 +61,7 @@ export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./tool
 
 // Aperia patterns: shared compositions every app uses instead of building its own.
 export { EmptyState } from "./empty-state/empty-state"
+export type { IconProp } from "../../lib/icon"
 export { ReasonTooltip } from "./reason-tooltip/reason-tooltip"
 export { useFieldNote, describedBy } from "./field-note/field-note"
 // Sheets and dialogs

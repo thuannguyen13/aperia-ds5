@@ -11,7 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu/dropdown-menu"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip/tooltip"
+import { renderIcon, type IconProp } from "@/lib/icon"
 
 /** The one reason a Delete is refused, on every disabled Delete. */
 export const IN_USE_DELETE = "This item is in use and cannot be deleted."
@@ -19,7 +24,8 @@ export const IN_USE_DELETE = "This item is in use and cannot be deleted."
 /** One of a record page's actions, besides Edit and Delete. */
 export type RecordAction = {
   label: string
-  icon: React.ComponentType<{ className?: string; "data-icon"?: string }>
+  /** `icon={ArchiveIcon}` or, from a server component, `icon={<ArchiveIcon />}`. */
+  icon: IconProp
   onSelect: () => void
   /** Ends or removes the record's work: set apart in red, beside Delete. */
   destructive?: boolean
@@ -46,7 +52,9 @@ export function RecordActions({
   /** A false entry is left out. */
   actions?: (RecordAction | false | undefined | null)[]
 }) {
-  const shown = actions.filter((action): action is RecordAction => Boolean(action))
+  const shown = actions.filter((action): action is RecordAction =>
+    Boolean(action)
+  )
   const all: RecordAction[] = [
     ...(onEdit ? [{ label: "Edit", icon: PencilIcon, onSelect: onEdit }] : []),
     ...shown.filter((action) => !action.destructive),
@@ -58,7 +66,12 @@ export function RecordActions({
             icon: Trash2Icon,
             onSelect: onDelete,
             destructive: true,
-            blocked: typeof deleteBlocked === "string" ? deleteBlocked : deleteBlocked ? IN_USE_DELETE : undefined,
+            blocked:
+              typeof deleteBlocked === "string"
+                ? deleteBlocked
+                : deleteBlocked
+                  ? IN_USE_DELETE
+                  : undefined,
           },
         ]
       : []),
@@ -78,7 +91,13 @@ export function RecordActions({
           <Tooltip>
             <TooltipTrigger asChild>
               <DropdownMenuTrigger asChild>
-                <Button type="button" variant="outline" size="icon" aria-label="More actions" className="max-sm:size-10">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  aria-label="More actions"
+                  className="max-sm:size-10"
+                >
                   <EllipsisIcon />
                 </Button>
               </DropdownMenuTrigger>
@@ -88,13 +107,12 @@ export function RecordActions({
           {/* The menu is sized to its trigger, 128px at least, which wrapped a longer item. */}
           <DropdownMenuContent align="end" className="w-auto">
             {all.map((action, at) => {
-              const Icon = action.icon
               return (
                 <React.Fragment key={action.label}>
                   {at > 0 && at === apart && <DropdownMenuSeparator />}
                   {action.blocked ? (
                     <BlockedMenuItem reason={action.blocked}>
-                      <Icon />
+                      {renderIcon(action.icon)}
                       {action.label}
                     </BlockedMenuItem>
                   ) : (
@@ -104,7 +122,7 @@ export function RecordActions({
                       className="whitespace-nowrap"
                       onSelect={action.onSelect}
                     >
-                      <Icon />
+                      {renderIcon(action.icon)}
                       {action.label}
                     </DropdownMenuItem>
                   )}
@@ -120,7 +138,6 @@ export function RecordActions({
 
 /** An action as a header button. Blocked, it stays focusable through aria-disabled, so the tooltip saying why opens. */
 function ActionButton({ action }: { action: RecordAction }) {
-  const Icon = action.icon
   const button = (
     <Button
       type="button"
@@ -128,9 +145,11 @@ function ActionButton({ action }: { action: RecordAction }) {
       disabled={action.disabled}
       aria-disabled={action.blocked ? true : undefined}
       className="whitespace-nowrap aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
-      onClick={action.blocked ? (event) => event.preventDefault() : action.onSelect}
+      onClick={
+        action.blocked ? (event) => event.preventDefault() : action.onSelect
+      }
     >
-      <Icon data-icon="inline-start" />
+      {renderIcon(action.icon, { "data-icon": "inline-start" })}
       {action.label}
     </Button>
   )
@@ -147,7 +166,13 @@ function ActionButton({ action }: { action: RecordAction }) {
  * A menu item the viewer cannot take, with why in a tooltip that opens on hover and as the keyboard lands on it. It
  * stays focusable, marked aria-disabled, and refuses its own select.
  */
-export function BlockedMenuItem({ reason, children }: { reason: string; children: React.ReactNode }) {
+export function BlockedMenuItem({
+  reason,
+  children,
+}: {
+  reason: string
+  children: React.ReactNode
+}) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>

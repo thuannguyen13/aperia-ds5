@@ -107,6 +107,9 @@ Every other part of the shell is the same in every app.
 
 ## In code
 
+- Every `icon` here (a sidebar item's, `AppSidebarNotifications`', a `RecordActions` action's) takes the icon
+  (`icon={UsersIcon}`) or an element (`icon={<UsersIcon />}`). A server component, such as a layout that lists the
+  pages, passes the element.
 - Wire it once in the app's layout, from `aperia-ds5`:
 
   ```tsx <TooltipProvider> <SidebarProvider> <AppSidebar brand={{ name: "Sales Portal", logo }} groups={groups}

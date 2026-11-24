@@ -1,7 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { ChevronsUpDownIcon, LogOutIcon, MoonIcon, PanelLeftIcon, SearchIcon, SunIcon } from "lucide-react"
+import {
+  ChevronsUpDownIcon,
+  LogOutIcon,
+  MoonIcon,
+  PanelLeftIcon,
+  SearchIcon,
+  SunIcon,
+} from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar/avatar"
@@ -33,13 +40,19 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar/sidebar"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip/tooltip"
+import { renderIcon, type IconProp } from "@/lib/icon"
 
 /** One page in the sidebar. `active` overrides the match on `currentPath`. */
 export type AppNavItem = {
   href: string
   label: string
-  icon: React.ComponentType<{ className?: string }>
+  /** The page's icon, `icon={UsersIcon}` or, from a server component, `icon={<UsersIcon />}`. */
+  icon: IconProp
   active?: boolean
 }
 
@@ -60,7 +73,8 @@ export type AppLinkComponent = React.ElementType
 
 const isActive = (item: AppNavItem, currentPath?: string) =>
   item.active ??
-  (currentPath !== undefined && (currentPath === item.href || currentPath.startsWith(`${item.href}/`)))
+  (currentPath !== undefined &&
+    (currentPath === item.href || currentPath.startsWith(`${item.href}/`)))
 
 const initials = (name: string) =>
   name
@@ -74,14 +88,26 @@ const initials = (name: string) =>
  * The sidebar's toggle, named for what a click does next. On the rail (`rail`) it is a menu button like its
  * neighbours; `AppHeader` uses the plain trigger below md, where the rail is a sheet.
  */
-export function SidebarToggle({ className, rail = false }: { className?: string; rail?: boolean }) {
+export function SidebarToggle({
+  className,
+  rail = false,
+}: {
+  className?: string
+  rail?: boolean
+}) {
   const { open, openMobile, isMobile, toggleSidebar } = useSidebar()
-  const label = (isMobile ? openMobile : open) ? "Close sidebar" : "Open sidebar"
+  const label = (isMobile ? openMobile : open)
+    ? "Close sidebar"
+    : "Open sidebar"
   return (
     <Tooltip>
       <TooltipTrigger asChild>
         {rail ? (
-          <SidebarMenuButton aria-label={label} onClick={toggleSidebar} className={cn("w-auto", className)}>
+          <SidebarMenuButton
+            aria-label={label}
+            onClick={toggleSidebar}
+            className={cn("w-auto", className)}
+          >
             <PanelLeftIcon />
           </SidebarMenuButton>
         ) : (
@@ -97,7 +123,13 @@ export function SidebarToggle({ className, rail = false }: { className?: string;
  * The sidebar's Search entry, first in the menu: opens the app's search dialog on a click and on ⌘K (Ctrl K off a
  * Mac). The dialog is the app's own, as it searches the app's records.
  */
-export function AppSidebarSearch({ onOpen, label = "Search" }: { onOpen: () => void; label?: string }) {
+export function AppSidebarSearch({
+  onOpen,
+  label = "Search",
+}: {
+  onOpen: () => void
+  label?: string
+}) {
   const [mac, setMac] = React.useState(true)
   const open = React.useRef(onOpen)
   open.current = onOpen
@@ -116,7 +148,9 @@ export function AppSidebarSearch({ onOpen, label = "Search" }: { onOpen: () => v
     <SidebarMenuButton tooltip={label} aria-label={label} onClick={onOpen}>
       <SearchIcon />
       <span>{label}</span>
-      <Kbd className="ml-auto bg-transparent text-sidebar-foreground/60 max-md:hidden">{mac ? "⌘K" : "Ctrl K"}</Kbd>
+      <Kbd className="ml-auto bg-transparent text-sidebar-foreground/60 max-md:hidden">
+        {mac ? "⌘K" : "Ctrl K"}
+      </Kbd>
     </SidebarMenuButton>
   )
 }
@@ -128,13 +162,13 @@ export function AppSidebarSearch({ onOpen, label = "Search" }: { onOpen: () => v
 export function AppSidebarNotifications({
   unread = 0,
   label = "Notifications",
-  icon: Icon,
+  icon,
   className,
   ...props
 }: React.ComponentProps<typeof SidebarMenuButton> & {
   unread?: number
   label?: string
-  icon: React.ComponentType<{ className?: string }>
+  icon: IconProp
 }) {
   const count = unread > 99 ? "99+" : unread
   return (
@@ -142,14 +176,20 @@ export function AppSidebarNotifications({
       <SidebarMenuButton
         tooltip={label}
         aria-label={unread > 0 ? `${label}, ${unread} unread` : label}
-        className={cn("data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground", className)}
+        className={cn(
+          "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground",
+          className
+        )}
         {...props}
       >
-        <Icon />
+        {renderIcon(icon)}
         <span>{label}</span>
       </SidebarMenuButton>
       {unread > 0 && (
-        <SidebarMenuBadge aria-hidden className="rounded-full bg-destructive text-white peer-hover/menu-button:text-white">
+        <SidebarMenuBadge
+          aria-hidden
+          className="rounded-full bg-destructive text-white peer-hover/menu-button:text-white"
+        >
           {count}
         </SidebarMenuBadge>
       )}
@@ -214,7 +254,11 @@ export function AppSidebar({
   children?: React.ReactNode
   className?: string
 }) {
-  const placed = notificationsAfter !== undefined && groups.some((group) => group.items.some((item) => item.href === notificationsAfter))
+  const placed =
+    notificationsAfter !== undefined &&
+    groups.some((group) =>
+      group.items.some((item) => item.href === notificationsAfter)
+    )
   const BrandLink = Link
 
   return (
@@ -250,11 +294,17 @@ export function AppSidebar({
         <SidebarContent>
           {groups.map((group, at) => (
             <SidebarGroup key={group.label ?? at}>
-              {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
+              {group.label && (
+                <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+              )}
               <SidebarGroupContent>
                 <SidebarMenu>
-                  {at === 0 && search && <SidebarMenuItem>{search}</SidebarMenuItem>}
-                  {at === 0 && notifications && !placed && <SidebarMenuItem>{notifications}</SidebarMenuItem>}
+                  {at === 0 && search && (
+                    <SidebarMenuItem>{search}</SidebarMenuItem>
+                  )}
+                  {at === 0 && notifications && !placed && (
+                    <SidebarMenuItem>{notifications}</SidebarMenuItem>
+                  )}
                   {group.items.map((item) => (
                     <React.Fragment key={item.href}>
                       <SidebarMenuItem>
@@ -267,14 +317,16 @@ export function AppSidebar({
                           className="data-active:bg-sidebar-primary data-active:text-sidebar-primary-foreground data-active:hover:bg-sidebar-primary data-active:hover:text-sidebar-primary-foreground"
                         >
                           <Link href={item.href}>
-                            <item.icon />
+                            {renderIcon(item.icon)}
                             <span>{item.label}</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
-                      {notifications && placed && item.href === notificationsAfter && (
-                        <SidebarMenuItem>{notifications}</SidebarMenuItem>
-                      )}
+                      {notifications &&
+                        placed &&
+                        item.href === notificationsAfter && (
+                          <SidebarMenuItem>{notifications}</SidebarMenuItem>
+                        )}
                     </React.Fragment>
                   ))}
                 </SidebarMenu>
@@ -290,23 +342,40 @@ export function AppSidebar({
             <SidebarMenuItem>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton size="lg" className="h-auto" tooltip={user.name}>
+                  <SidebarMenuButton
+                    size="lg"
+                    className="h-auto"
+                    tooltip={user.name}
+                  >
                     {user.avatar ?? (
                       <Avatar className="size-8">
                         <AvatarFallback>{initials(user.name)}</AvatarFallback>
                       </Avatar>
                     )}
                     <span className="flex min-w-0 flex-col items-start gap-1">
-                      <span className="max-w-36 truncate font-medium">{user.name}</span>
-                      {user.role && <Badge variant="secondary">{user.role}</Badge>}
+                      <span className="max-w-36 truncate font-medium">
+                        {user.name}
+                      </span>
+                      {user.role && (
+                        <Badge variant="secondary">{user.role}</Badge>
+                      )}
                     </span>
                     <ChevronsUpDownIcon className="ml-auto" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent side="right" align="end" sideOffset={8} className="w-56">
+                <DropdownMenuContent
+                  side="right"
+                  align="end"
+                  sideOffset={8}
+                  className="w-56"
+                >
                   <DropdownMenuLabel className="flex flex-col gap-1">
                     <span>{user.name}</span>
-                    {user.role && <span className="text-xs font-normal text-muted-foreground">{user.role}</span>}
+                    {user.role && (
+                      <span className="text-xs font-normal text-muted-foreground">
+                        {user.role}
+                      </span>
+                    )}
                   </DropdownMenuLabel>
                   {(accountItems || themeToggle) && (
                     <>
@@ -318,9 +387,15 @@ export function AppSidebar({
                           <DropdownMenuItem
                             onSelect={(event) => {
                               event.preventDefault()
-                              const dark = document.documentElement.classList.toggle("dark")
+                              const dark =
+                                document.documentElement.classList.toggle(
+                                  "dark"
+                                )
                               try {
-                                localStorage.setItem("theme", dark ? "dark" : "light")
+                                localStorage.setItem(
+                                  "theme",
+                                  dark ? "dark" : "light"
+                                )
                               } catch {
                                 // Storage blocked: the theme still changes for this visit.
                               }
@@ -329,7 +404,9 @@ export function AppSidebar({
                             <MoonIcon className="dark:hidden" />
                             <SunIcon className="hidden dark:block" />
                             <span className="dark:hidden">Dark Theme</span>
-                            <span className="hidden dark:inline">Light Theme</span>
+                            <span className="hidden dark:inline">
+                              Light Theme
+                            </span>
                           </DropdownMenuItem>
                         )}
                       </DropdownMenuGroup>

@@ -377,8 +377,9 @@ Send questions these rules do not answer to the VP of Product Innovation and Des
 - Formatters in `aperia-ds5/format`: `formatDate` (09/22/2026), `formatMoment` (with time and zone), `dayRangeLabel`,
   `ago` ("3d ago"), `money`, `HIDDEN_MONEY` ($XX,XXX), `percent`, `plural`, `listed`. Never format a date or amount by
   hand.
-- Values: `RelativeTime` ("3d ago" with the date on hover). Build the empty value (—) and "No [field]" text in the app
-  from [Empty and Missing](empty-and-missing.md), and the hidden value ($XX,XXX) from
-  [Money and Numbers](money-and-numbers.md).
+- Values: `RelativeTime` ("3d ago" with the date on hover). It reads the clock only in the browser, so it works in a
+  server component and in a prerendered page with no `Suspense` around it. Use it, not `ago()`, on a page: `ago()` reads
+  the clock when it is called. Build the empty value (—) and "No [field]" text in the app from [Empty and
+  Missing](empty-and-missing.md), and the hidden value ($XX,XXX) from [Money and Numbers](money-and-numbers.md).
 - The project's own glossary and copy decisions, when it has them: `docs/glossary.md`, `docs/screens.md`, or a
   project-level `ui-copy` skill.

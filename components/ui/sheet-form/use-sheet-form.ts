@@ -96,9 +96,18 @@ function rebuilt(
  * Messages the schema cannot give. A function reads the draft as it is when asked, so a message the draft has since
  * fixed is not shown again and one it has broken again comes back on blur.
  */
-type Also<D> = Record<string, string> | ((draft: D) => Record<string, string>)
-const extra = <D>(also: Also<D> | undefined, draft: D) =>
-  typeof also === "function" ? also(draft) : (also ?? {})
+// A field with no message may be left out or undefined, so `draft.email ? { email: "…" } : {}` type-checks.
+type Messages = Partial<Record<string, string>>
+type Also<D> = Messages | ((draft: D) => Messages)
+const extra = <D>(
+  also: Also<D> | undefined,
+  draft: D
+): Record<string, string> =>
+  Object.fromEntries(
+    Object.entries(
+      typeof also === "function" ? also(draft) : (also ?? {})
+    ).filter((entry): entry is [string, string] => typeof entry[1] === "string")
+  )
 
 /**
  * One sheet over several forms, each a record saved in turn: the first refusal no field shows, every form's failures,
@@ -199,7 +208,7 @@ export function useSheetForm<D>(initial: D | (() => D)) {
         ? {}
         : fieldErrors(parsed.error.issues, checked.grouped)),
       // Only a function reads the draft as it is now; a fixed record is what it was when checked.
-      ...(typeof checked.also === "function" ? checked.also(draft) : {}),
+      ...(typeof checked.also === "function" ? extra(checked.also, draft) : {}),
     }
     const back = [...shown.current].filter(
       (path) => found[path] && !errors[path]

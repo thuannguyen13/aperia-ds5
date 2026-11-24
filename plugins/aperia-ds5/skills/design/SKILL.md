@@ -161,6 +161,12 @@ The pages are in six sections, the same as the Storybook sidebar.
 Take a screenshot of the screen, in Light and in Dark, and look at it as a user would. Each line must hold before the
 screen is done; fix what fails and look again.
 
+Run the app (`npm run dev`) and take the screenshots with any browser you can drive: Chrome or Chromium headless
+(`--headless=new --screenshot=out.png --window-size=1440,1000 <url>`, adding
+`--blink-settings=preferredColorScheme=0` for Dark, since `ThemeProvider` follows the system), or Playwright if the project has it. Take one at phone width (390px) too. If no browser can run
+where you work, do not call the screen done: end your reply by saying the screenshot review did not run, and list the
+lines below for the user to check in their browser.
+
 - [ ] **The top bar holds the breadcrumb only** (and the sidebar toggle on a phone): no title, status chips, dates,
       filters or buttons.
 - [ ] **One title.** The page names itself once, in `PageHeader`; it isn't repeated in the top bar or a card.

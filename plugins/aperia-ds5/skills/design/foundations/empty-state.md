@@ -105,3 +105,5 @@ See [Shape and Edges](../styles/shape-and-edges.md) for the corner the Specs nam
 
 - `EmptyState` from aperia-ds5: `icon`, `title`, `description`, `action`. It's built from
   `Empty`, `EmptyHeader`, `EmptyMedia`, `EmptyTitle`, `EmptyDescription` and `EmptyContent` in `aperia-ds5`.
+- `icon` takes the icon (`icon={InboxIcon}`) or an element (`icon={<InboxIcon />}`). A server component passes the
+  element, because aperia-ds5's components are client components and only an element can reach them from the server.

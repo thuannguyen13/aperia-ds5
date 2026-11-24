@@ -140,6 +140,16 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   - Every page: what it is, when to use it, what's available, how it looks and behaves, rules as Do / Don't, when you
     can do it differently, works with, then In code. The old references, Brand Slots, Drifts and Best Practices pages
     are gone; their rules moved to these pages, and each mistake is a Don't on its page.
+- From the 0.3.0 blind test (five fresh agents, one brief each, on Next.js 16):
+  - `RelativeTime` reads the clock only in the browser, so it works in a server component and a prerendered page with no
+    `Suspense` (Next.js 16 refused a clock read during prerender and failed the build). An unseen stand-in holds its
+    place until then, and it now stays current while the page is open. `ago()` takes an optional time to count from.
+  - `icon` on `EmptyState`, the sidebar's items, `AppSidebarNotifications` and `RecordActions` also takes an element
+    (`icon={<InboxIcon />}`), which a server component can pass; a component (`icon={InboxIcon}`) still works. New type
+    `IconProp`.
+  - `SheetForm`'s `also` messages may leave a field out (`draft.email ? { email: "…" } : {}` now type-checks).
+  - The skill's screenshot review says how to take the screenshots (headless Chrome, Dark through the system setting)
+    and, when no browser can run, to say the review did not run and hand its checks to the user.
 - **Docs organized like Material 3** (0.3.0): six sections, Get Started, Foundations, Styles, Components, Patterns and
   Examples, each opening on an index of cards built from the pages' leads. Foundations now holds the rules across every
   screen (Accessibility, new; Layout; Content Design; States, with Loading, Empty and Missing, and Disabled With a
