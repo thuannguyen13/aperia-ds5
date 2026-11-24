@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
   Field,
+  FieldError,
   FieldGroup,
   FieldLabel,
   Input,
@@ -24,6 +25,7 @@ import {
   SheetFooter,
   SheetHeader,
   SheetTitle,
+  Spinner,
   Textarea,
 } from "aperia-ds5"
 
@@ -58,6 +60,58 @@ export const Confirmation: Story = {
               This permanently deletes the project and its files.
             </AlertDialogDescription>
           </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction variant="destructive">
+              Delete Project
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  ),
+}
+
+/** The confirmation while its action runs: a spinner beside the label, and both buttons disabled. */
+export const ConfirmationWorking: Story = {
+  render: () => (
+    <>
+      <Page />
+      <AlertDialog open>
+        <AlertDialogContent onOpenAutoFocus={keepFocus}>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Project?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This permanently deletes the project and its files.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled>Cancel</AlertDialogCancel>
+            <AlertDialogAction variant="destructive" disabled>
+              <Spinner data-icon="inline-start" />
+              Delete Project
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
+  ),
+}
+
+/** The confirmation after its action failed: the error above the buttons, and the dialog still open. */
+export const ConfirmationError: Story = {
+  render: () => (
+    <>
+      <Page />
+      <AlertDialog open>
+        <AlertDialogContent onOpenAutoFocus={keepFocus}>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Project?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This permanently deletes the project and its files.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <FieldError>Project failed to delete. Try again.</FieldError>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction variant="destructive">

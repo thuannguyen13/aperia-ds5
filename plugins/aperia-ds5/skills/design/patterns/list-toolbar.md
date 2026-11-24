@@ -11,20 +11,25 @@ board of opportunities. A short list inside a card has no toolbar. Its Sort and 
 
 ## What is available
 
-A list toolbar holds four kinds of control. The search and the filters sit at the left end. Sort and the list's
-actions sit at the right end.
-
-| Control | Where | Content |
-|---|---|---|
-| Search | Left end | A search box that names what it searches, such as "Search prospects" |
-| Filters | After the search | Advanced filters (the Filter button and its popover) or simple filters (fixed controls). See [Filters](filters.md). |
-| Sort | Right end | The Sort control. See [Sort](sort.md). |
-| Actions | After Sort | The list's own actions, such as Import and Add Prospect, with the primary action last |
-
-A list shows only the controls it needs. The ones it shows keep this order.
+A list toolbar comes in one layout. Its controls are listed under Anatomy. Its filters come in two forms. Advanced
+filters are one Filter button that opens the filters in a popover. Simple filters are fixed controls on the row, for a
+list with four filters or fewer. See [Filters](filters.md) for choosing between them.
 
 The toolbar holds nothing else. The list's count sits in the footer under the list. See [Paging](paging.md) for the
 footer.
+
+## Anatomy
+
+A list toolbar needs at least one control. Every control is optional, and the controls a list shows keep this order.
+The search and the filters sit at the left end. The layout switch, Sort, and the list's actions sit at the right end.
+
+1. **Search** (optional). It is a search box that names what it searches, such as "Search prospects".
+2. **Filters** (optional). They follow the search, as the Filter button or as fixed controls. See
+   [Filters](filters.md).
+3. **Layout switch** (optional). It switches a list between Board and Table, before Sort.
+4. **Sort** (optional). It is the Sort control. See [Sort](sort.md).
+5. **Actions** (optional). They are the list's own actions, such as Import and Add Prospect, with the primary action
+   last.
 
 ## How it looks and behaves
 

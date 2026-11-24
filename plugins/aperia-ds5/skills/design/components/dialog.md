@@ -71,6 +71,16 @@ A screen reader names the close (×) "Close".
 
 On a phone, the footer buttons stack, with the action on top.
 
+### States
+
+A dialog has three states. Its buttons have their own states. See [Button](button.md) for those.
+
+| State | Look |
+|---|---|
+| Open | The title, the description, and Cancel and the action, ready to answer. |
+| Working | The action shows a spinner beside its label, and both buttons are disabled until the action ends. |
+| Error | The error shows above the buttons in the destructive color, and both buttons work again. |
+
 ## Rules
 
 ### Open forms in a sheet

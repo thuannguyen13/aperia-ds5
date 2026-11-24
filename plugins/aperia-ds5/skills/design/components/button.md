@@ -67,17 +67,6 @@ An icon button shows an icon with no text. Use it for an action that repeats on 
 as edit, delete, close, or more. An icon button is square and 28px. It always has a tooltip that names the
 action.
 
-### States
-
-A button has four states beyond its resting look:
-
-| State | Look |
-|---|---|
-| Hover | Outline fills with the muted color. Ghost fills with the ghost hover tint. Destructive fill rises to 20% (30% in dark mode). |
-| Pressed | The button moves down by one pixel. |
-| Focus, from the keyboard | The focus edge, a line inside the button and a halo around it. |
-| Disabled | The button shows at 50% opacity. |
-
 ### Specs
 
 | | Default | Small |
@@ -96,6 +85,15 @@ A button has four states beyond its resting look:
 | Destructive | Destructive at 10% (20% in dark mode) | Destructive | None |
 | Disabled | Any type at 50% opacity | | |
 
+## Anatomy
+
+A button needs its container and its label. Its icon is optional. An icon button has the icon alone, with a tooltip
+that names the action.
+
+1. Container
+2. Label
+3. Icon (optional)
+
 ## How it looks and behaves
 
 A person reaches a button, presses it, and the action runs. A keyboard user reaches a button with **Tab** and presses
@@ -109,6 +107,18 @@ users get the reason too.
 A button is 32px tall, and an icon button is 28px, on every screen.
 
 On a phone, a dialog's buttons stack, with the action on top.
+
+### States
+
+A button has five states. Each type shows them in its own colors.
+
+| State | Look |
+|---|---|
+| Default | The type's own fill, text, and edge. |
+| Hover | Outline fills with the muted color. Ghost fills with the ghost hover tint. Destructive fill rises to 20% (30% in dark mode). Secondary fill fades to 80%. Link text is underlined. Primary keeps its fill. |
+| Focus, from the keyboard | The focus edge, a line inside the button and a halo around it. |
+| Pressed | The button moves down by one pixel. |
+| Disabled | The button shows at 50% opacity. |
 
 ## Rules
 

@@ -2,6 +2,7 @@ import { Meta, Story } from "@storybook/addon-docs/blocks"
 import * as Stories from "../../../components/ui/dialog/dialog.stories"
 import { ComponentHome } from "../component-page"
 import { DoDont, Example } from "../blocks"
+import { StateCards } from "../states"
 import * as Panels from "../examples/dialog.stories"
 
 {/* The component's home: replaces its generated docs page (see component-page.tsx). */}
@@ -25,6 +26,16 @@ export const Panel = ({ of, height = "300px" }) => (
       <Example className={frame}>
         <Panel of={Panels.ShortTask} height="340px" />
       </Example>
+    ),
+    "States": (
+      <StateCards
+        flush
+        items={[
+          { label: "Open", node: <Panel of={Panels.Confirmation} height="260px" /> },
+          { label: "Working", node: <Panel of={Panels.ConfirmationWorking} height="260px" /> },
+          { label: "Error", node: <Panel of={Panels.ConfirmationError} height="260px" /> },
+        ]}
+      />
     ),
     "Open forms in a sheet": (
       <DoDont

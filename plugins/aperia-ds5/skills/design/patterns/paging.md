@@ -10,16 +10,23 @@ and View All.
 
 ## What is available
 
-The footer has two parts:
-
-| Part | Where | Content |
-|---|---|---|
-| Count | Left end | The records on this page and the records in all, such as "26–50 of 312 merchants". A list that fits one page shows the total alone, such as "6 merchants". |
-| Pages | Right end | Previous, the page numbers, and Next. The page shown has an outline. They appear only when the list has more than one page. |
+The footer comes in two forms. A list that fits one page shows its count alone, such as "6 merchants". A longer list
+shows its count at the left end and its pages at the right end. Its parts are listed under Anatomy.
 
 A page holds 25 records. The numbers show the first page, the last page, and the page shown with one page either side.
 An ellipsis (…) stands for each run of pages left out, such as "1 … 6 7 8 … 13". A list of seven pages or fewer shows
 every number.
+
+## Anatomy
+
+A footer needs its count. The pages, parts 2 to 6, appear only when the list has more than one page.
+
+1. **Count**. It shows the records on this page and the records in all, such as "26–50 of 312 merchants".
+2. **Previous** (optional). It opens the page before the one shown.
+3. **Page number** (optional). It opens its page.
+4. **Page shown** (optional). Its number has an outline.
+5. **Ellipsis** (optional). It stands for a run of pages left out.
+6. **Next** (optional). It opens the page after the one shown.
 
 ## How it looks and behaves
 

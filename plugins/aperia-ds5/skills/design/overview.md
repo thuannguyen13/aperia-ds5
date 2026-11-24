@@ -30,8 +30,9 @@ A one-sentence lead under the title defines the subject. The sections below it a
 | Section | What it answers |
 |---|---|
 | When to use | The conditions in which the subject applies |
-| What is available | The parts or options to choose from, with the names used in Figma |
-| How it looks and behaves | What people see and do, on a desktop first and then on a phone |
+| What is available | The types and options to choose from, with the names used in Figma |
+| Anatomy | On a component's or a pattern's page, a numbered list of its parts, each optional part marked "(optional)", after a sentence that says which parts are required |
+| How it looks and behaves | What people see and do, on a desktop first and then on a phone. A component's page shows its states, such as hover, focus, and disabled, under States. |
 | Rules | The constraints, each with a Do and a Don't and the reason for both |
 | When you can do it differently | The allowed exceptions and the condition for each, or a note that there are none |
 | Works with | The related pages |
@@ -48,8 +49,9 @@ Examples pages use a different order:
 | Which patterns it uses | The pattern pages the screen is built from |
 | In code | Notes for developers and coding agents |
 
-In Storybook, a page shows its sections in three tabs. Overview holds When to use and What is available, and on an
-Examples page the screen itself. Guidelines holds every other section up to In code. Code holds In code, and on a
+In Storybook, a page shows its sections in three tabs. Overview holds When to use, What is available, and Anatomy, and
+on an Examples page the screen itself. Anatomy shows a live drawing with a numbered marker on each part, above the
+numbered list. Guidelines holds every other section up to In code. Code holds In code, and on a
 component's or a pattern's page also the live examples and props of its components.
 
 ## One source of truth

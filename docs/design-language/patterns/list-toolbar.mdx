@@ -3,6 +3,7 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/list-tool
 import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.stories"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { listToolbarAnatomy } from "../examples/pattern-anatomy"
 
 <Meta title="Patterns/Lists/List Toolbar" />
 
@@ -13,6 +14,7 @@ import { PatternCode } from "../component-page"
     "What is available": (
       <Canvas of={ListToolbar.WithActions} sourceState="none" />
     ),
+    "Anatomy": listToolbarAnatomy,
     "When you can do it differently": (
       <Canvas of={ListToolbar.WithLayoutSwitch} sourceState="none" />
     ),

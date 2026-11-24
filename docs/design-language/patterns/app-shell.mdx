@@ -2,6 +2,7 @@ import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/app-shell.md?raw"
 import * as AppShell from "../../../components/ui/app-shell/app-shell.stories"
 import { SkillDoc } from "../skill-doc"
+import { appShellAnatomy } from "../examples/pattern-anatomy"
 
 <Meta title="Patterns/Navigation/App Shell" />
 
@@ -15,6 +16,7 @@ import { SkillDoc } from "../skill-doc"
         sourceState="none"
       />
     ),
+    "Anatomy": appShellAnatomy,
     "Sidebar": (
       <div style={{ maxWidth: 400 }}>
         <Canvas

@@ -4,6 +4,7 @@ import * as ListPager from "../../../components/ui/list-pager/list-pager.stories
 import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.stories"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { pagingAnatomy } from "../examples/pattern-anatomy"
 
 <Meta title="Patterns/Lists/Paging" />
 
@@ -17,6 +18,7 @@ import { PatternCode } from "../component-page"
         <Canvas of={ListPager.OnePage} sourceState="none" />
       </>
     ),
+    "Anatomy": pagingAnatomy,
     "How it looks and behaves": (
       <Canvas of={ListToolbar.Paged} sourceState="none" />
     ),

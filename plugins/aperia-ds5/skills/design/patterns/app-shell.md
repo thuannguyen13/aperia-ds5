@@ -9,27 +9,33 @@ inside it. A page never builds its own sidebar, top bar, or page column.
 
 ## What is available
 
-An app shell has three parts. A sidebar runs down the left edge. A top bar runs across the top of the page area. A
-page column fills the space under the top bar.
+An app shell comes in one layout, with a sidebar, a top bar, and a page column. Its parts are listed under Anatomy.
 
-The sidebar contains five parts, listed from top to bottom:
-
-| Part | Content | Action |
-|---|---|---|
-| Header | App logo, product name, and collapse button | Selecting the logo opens the home page. |
-| Search | Search entry and its shortcut, ⌘K or Ctrl K | Opens search. See [Search](search.md). |
-| Notifications | Notifications entry and unread count | Opens the notifications panel. See [Notifications](notifications.md). |
-| Pages | Each page's icon and name, in optional groups with headings | Opens the page and highlights it. |
-| Account | User's picture, name, and role | Opens the account menu. |
-
-Notifications follows Search. The unread count shows in a badge in the destructive color.
+The sidebar shows in three ways. On a desktop it is open at full width or collapsed to a rail of icons. On phones and
+tablets it is hidden and opens as a panel.
 
 The account menu shows the user's name and role, the app's own items (such as Notification Settings), Dark Theme or
 Light Theme, and Log Out.
 
-The top bar contains the breadcrumb. On phones and tablets, it also contains the button that opens the sidebar.
+## Anatomy
 
-The page column holds the page. See [Page Layout](../foundations/page-layout.md) for how a page is laid out inside it.
+An app shell needs every part except Search and Notifications, which an app adds when it has them. The sidebar's
+parts are listed from top to bottom.
+
+1. **Sidebar**. It runs down the left edge in the sidebar color.
+2. **Header**. It holds the app logo, the product name, and the collapse button. Selecting the logo opens the home page.
+3. **Search** (optional). It shows the search entry and its shortcut, ⌘K or Ctrl K, and opens search. See
+   [Search](search.md).
+4. **Notifications** (optional). It follows Search and shows the unread count in a badge in the destructive color. It
+   opens the notifications panel. See [Notifications](notifications.md).
+5. **Pages**. Each page shows its icon and name, in optional groups with headings. Selecting one opens the page and
+   highlights it.
+6. **Account**. It shows the user's picture, name, and role, and opens the account menu.
+7. **Top bar**. It runs across the top of the page area.
+8. **Breadcrumb**. It shows where the page sits. On phones and tablets, the button that opens the sidebar sits before
+   it.
+9. **Page column**. It fills the space under the top bar and holds the page. See
+   [Page Layout](../foundations/page-layout.md) for how a page is laid out inside it.
 
 ## How it looks and behaves
 

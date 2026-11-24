@@ -7,7 +7,19 @@ import {
 } from "lucide-react"
 import { Badge, Button } from "aperia-ds5"
 import { DoDont, Example } from "../blocks"
+import { Anatomy } from "../anatomy"
+import { StateTable, forceState } from "../states"
 import { IconButton } from "./shared"
+
+// Every type, as the States table shows it: its variant, its name on the page, and a label it is used with.
+const TYPES = [
+  ["default", "Primary", "Save"],
+  ["outline", "Outline", "Cancel"],
+  ["ghost", "Ghost", "Clear"],
+  ["destructive", "Destructive", "Delete"],
+  ["link", "Link", "View All"],
+  ["secondary", "Secondary", "Proposal"],
+] as const
 
 export const buttonExamples = {
   "@intro": (
@@ -93,20 +105,37 @@ export const buttonExamples = {
       </IconButton>
     </Example>
   ),
-  States: (
-    <Example caption="The last button is disabled for a reason: hover or focus it.">
-      <Button variant="outline">Default</Button>
-      <Button variant="outline" disabled>
-        Disabled
+  Anatomy: (
+    <Anatomy zoom={2}>
+      <Button data-anatomy="1" data-anatomy-side="bottom">
+        <PlusIcon data-anatomy="3" data-icon="inline-start" />
+        <span data-anatomy="2">Add Task</span>
       </Button>
-      <IconButton
-        label="Delete Task"
-        disabled
-        reason="This item is in use and cannot be deleted."
-      >
-        <Trash2Icon />
-      </IconButton>
-    </Example>
+    </Anatomy>
+  ),
+  States: (
+    <StateTable
+      states={["Default", "Hover", "Focus", "Pressed", "Disabled"]}
+      rows={TYPES.map(([variant, label, text]) => ({
+        label,
+        cells: [
+          <Button variant={variant}>{text}</Button>,
+          <Button variant={variant} {...forceState("hover")}>
+            {text}
+          </Button>,
+          <Button variant={variant} {...forceState("focus")}>
+            {text}
+          </Button>,
+          <Button variant={variant} {...forceState("hover", "active")}>
+            {text}
+          </Button>,
+          <Button variant={variant} disabled>
+            {text}
+          </Button>,
+        ],
+      }))}
+      caption="Hover, Focus, and Pressed are drawn by each button's own state styles."
+    />
   ),
   "Use one primary button per area": (
     <DoDont
