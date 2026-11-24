@@ -12,9 +12,8 @@ import {
 import { Badge } from "../badge/badge"
 
 const meta: Meta<typeof Table> = {
-  title: "UI/Table",
+  title: "Components/Lists and Tables/Table",
   component: Table,
-  tags: ["autodocs"],
 }
 
 export default meta

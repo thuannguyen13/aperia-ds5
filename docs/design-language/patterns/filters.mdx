@@ -3,20 +3,20 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/filters.m
 import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.stories"
 import { SkillDoc } from "../skill-doc"
 
-<Meta title="Design Language/Patterns/Filters" />
+<Meta title="Patterns/Lists/Filters" />
 
 <SkillDoc
   source={source}
   after={{
-    Chips: (
+    "Advanced filters": (
       <>
         <Canvas of={ListToolbar.Default} sourceState="none" />
-        <Canvas of={ListToolbar.ChipsOn} sourceState="none" />
+        <Canvas of={ListToolbar.FiltersOn} sourceState="none" />
       </>
     ),
-    Dropdowns: (
+    "Simple filters": (
       <>
-        <Canvas of={ListToolbar.DropdownsOn} sourceState="none" />
+        <Canvas of={ListToolbar.SimpleOn} sourceState="none" />
         <Canvas of={ListToolbar.SwitchAndDates} sourceState="none" />
       </>
     ),

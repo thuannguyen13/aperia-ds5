@@ -94,7 +94,8 @@ Pickers work with three other patterns:
 
 - See [Forms in Sheets](forms-in-sheets.md) for the form that every Add row opens.
 - See [People and Pictures](people-and-pictures.md) for the picture on every row.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for rows, chips, and fields that cannot be used.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for rows, chips, and fields that cannot be
+  used.
 
 ## In code
 

@@ -1,8 +1,10 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import source from "../../../plugins/aperia-ds5/skills/design/components/card.md?raw"
-import { SkillDoc } from "../skill-doc"
+import * as Stories from "../../../components/ui/card/card.stories"
+import { ComponentHome } from "../component-page"
 import { cardExamples } from "../examples/card"
 
-<Meta title="Design Language/Components/Card" />
+{/* The component's home: replaces its generated docs page (see component-page.tsx). */}
 
-<SkillDoc source={source} after={cardExamples} />
+<Meta of={Stories} />
+
+<ComponentHome guide="components/card.md" after={cardExamples} />

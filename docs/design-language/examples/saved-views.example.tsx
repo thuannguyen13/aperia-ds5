@@ -22,7 +22,6 @@ import {
   InputGroupInput,
   Label,
   ListToolbar,
-  MoneyValue,
   Select,
   SelectContent,
   SelectItem,
@@ -43,6 +42,7 @@ import {
   useSheetForm,
   type FormSchema,
 } from "aperia-ds5"
+import { MoneyValue } from "../recipes"
 import { cn } from "@/lib/utils"
 import { BeforeAfter, Screen } from "./before-after"
 

@@ -74,14 +74,15 @@ A funnel chart has no exceptions.
 
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the titled card, its legend as the header's action, and the
   empty state inside it.
-- See [Page Layout](../patterns/page-layout.md) for where the card sits on a dashboard.
+- See [Page Layout](../foundations/page-layout.md) for where the card sits on a dashboard.
 - See [Date Range and Report Date](date-range.md) for the span the funnel counts.
 
 ## In code
 
 The app builds it; aperia-ds5 has no funnel component.
 
-- A `TitledCard` with the legend as its `action`; the bars in `<CardContent className="pb-4">`.
+- The titled card from [Card](../components/card.md) with the legend as its action; the bars in `<CardContent
+  className="pb-4">`.
 - Fills are the app's chart variables: `var(--chart-1)` for moved on, `var(--chart-3)` for lost, and a striped
   `repeating-linear-gradient` of `--chart-1` for still there. The wedge is an SVG polygon in `--chart-1` at low opacity.
 - Each stage is a focusable element (`tabIndex={0}`) with an `aria-label` sentence, wrapped in `HoverCard`

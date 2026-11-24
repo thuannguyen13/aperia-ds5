@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { BubbleGroup, Bubble, BubbleContent, BubbleReactions } from "./bubble"
 
 const meta: Meta<typeof Bubble> = {
-  title: "UI/Bubble",
+  title: "Components/Chat/Bubble",
   component: Bubble,
   tags: ["autodocs"],
   args: {

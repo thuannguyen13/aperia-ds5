@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Badge } from "../badge/badge"
 import { Button } from "../button/button"
 import { Field, FieldError, FieldGroup, FieldLabel } from "../field/field"
-import { FormSection } from "../form-section/form-section"
+import { FormSection } from "@/docs/design-language/recipes/form-section"
 import { Input } from "../input/input"
 import { FormSheet, SheetForm } from "../sheet-form/sheet-form"
 import { useSheet } from "../sheet-form/use-sheet"
@@ -176,9 +176,10 @@ function Labeled({
 }
 
 const meta: Meta<typeof EntityPicker> = {
-  title: "Patterns/EntityPicker",
+  title: "Pattern Components/EntityPicker",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: EntityPicker,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

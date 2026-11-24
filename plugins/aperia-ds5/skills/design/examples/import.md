@@ -65,21 +65,22 @@ An import wizard has no exceptions.
 
 ## Which patterns it uses
 
-- See [List Page](../patterns/list-page.md) for the import button's place among the list's buttons and the refresh after
-  an import.
+- See [Page Header](../patterns/page-header.md) for the import button's place among the page's buttons.
 - See [Tables](../patterns/tables.md) for the wide Review table that scrolls sideways.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the Result counts.
-- See [Disabled With a Reason](../patterns/disabled-with-a-reason.md) for the import button at zero.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the import button at zero.
 - See [Copy](../foundations/copy.md) for naming the action on a button.
 
 ## In code
 
-The app builds it from aperia-ds5 parts:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
 - Upload: an outline `Button` with `UploadIcon` as a `PopoverTrigger`; the `PopoverContent` holds `FileDrop` (its `hint`
   the accepted types and size, `accept=".csv,.xlsx"`), the refusal under it, a `Separator`, then the template buttons.
 - The dialog: one `DialogContent` for Review, Importing and Result, full screen below `sm` and
   `sm:max-w-[min(72rem,calc(100%-4rem))]` above, with the header and footer fixed and the body scrolling.
-- Review: the counts as `Badge`s inside buttons (`aria-pressed`), the rows in a `ScrollTable` with a `Badge` per Match
-  and a `Select` per Action; the footer's import `Button` is disabled at zero.
-- Importing: `Progress`, and `onOpenChange` ignores closing while it runs. Result: a `StatTile` per count.
+- Review: the counts as `Badge`s inside buttons (`aria-pressed`), the rows in the scroll table from
+  [Tables](../patterns/tables.md) with a `Badge` per Match and a `Select` per Action; the footer's import `Button` is
+  disabled at zero.
+- Importing: `Progress`, and `onOpenChange` ignores closing while it runs. Result: a stat tile per count, the recipe
+  from [Cards and Tiles](../patterns/cards-and-tiles.md).

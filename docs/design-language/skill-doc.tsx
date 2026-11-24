@@ -3,8 +3,9 @@ import type { ReactNode } from "react"
 import { Markdown } from "@storybook/addon-docs/blocks"
 import { cn } from "aperia-ds5/utils"
 import { Unstyled } from "@storybook/addon-docs/blocks"
-import { TooltipProvider } from "aperia-ds5"
+import { Tabs, TabsList, TabsTrigger, TooltipProvider } from "aperia-ds5"
 import { DoDont } from "./blocks"
+import { COMPONENTS, componentTitle, skillTitle, storyId } from "./site"
 import { LiveColor } from "./live-color"
 
 // The skill's markdown is the source: these pages render it as it is and never copy its text.
@@ -13,10 +14,10 @@ import { LiveColor } from "./live-color"
 const REPO =
   "https://github.com/thuannguyen13/aperia-ds5/blob/main/plugins/aperia-ds5/skills/design/"
 
-// Every skill page, so a link can open its Storybook page without a hand-kept list. A page's Storybook id is its folder
-// and its "# Title" (each page's Meta title is "Design Language/<Folder>/<Title>").
+// Every skill page, so a link can open its Storybook page without a hand-kept list. A page's Storybook title comes from
+// the site map (site.ts) and its "# Title".
 const ROOT = "../../plugins/aperia-ds5/skills/design/"
-const FILES = import.meta.glob(
+export const FILES = import.meta.glob(
   "../../plugins/aperia-ds5/skills/design/**/*.md",
   {
     query: "?raw",
@@ -24,27 +25,33 @@ const FILES = import.meta.glob(
     eager: true,
   }
 ) as Record<string, string>
-const GROUPS: Record<string, string> = {
-  foundations: "foundations",
-  patterns: "patterns",
-  components: "components",
-  examples: "examples",
-}
-const slug = (text: string) =>
-  text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
+
+/** A skill file's text, by its path from the skill's root. */
+export const fileText = (path: string) => FILES[ROOT + path]
+/** A skill file's "# Title". */
+export const titleOf = (path: string) =>
+  fileText(path)
+    ?.match(/^# (.+)$/m)?.[1]
+    ?.trim()
+/** A skill file's lead: the first paragraph under its title, as one line. */
+export const leadOf = (path: string) =>
+  fileText(path)
+    ?.replace(/^---\n[\s\S]*?\n---\n/, "")
+    .split(/\n\s*\n/)
+    .find((block) => block.trim() && !block.startsWith("#"))
+    ?.replace(/\s*\n\s*/g, " ")
+    .trim()
 
 /** The Storybook docs id of a skill file (a path from the skill's root), or undefined when it has no page. */
-function pageOf(path: string) {
-  if (path === "SKILL.md" || path === "overview.md")
-    return "design-language-overview"
-  const [folder, file] = path.split("/")
-  const title = file && FILES[ROOT + path]?.match(/^# (.+)$/m)?.[1]
-  return GROUPS[folder] && title
-    ? `design-language-${GROUPS[folder]}-${slug(title)}`
-    : undefined
+export function pageOf(path: string) {
+  if (path === "SKILL.md") path = "overview.md"
+  for (const group of COMPONENTS.groups ?? [])
+    for (const page of group.pages)
+      if (page.guide === path)
+        return storyId(componentTitle(group.title, page.name))
+  const title = titleOf(path)
+  const full = title && skillTitle(path, title)
+  return full ? storyId(full) : undefined
 }
 
 /** The skill path a link points at, resolved from the page it sits on (`from`, a path from the skill's root). */
@@ -105,7 +112,7 @@ type El<T extends keyof React.JSX.IntrinsicElements> = React.ComponentProps<T>
 const H1 = ({ className, ...props }: El<"h1">) => (
   <h1
     className={cx(
-      "mt-2 mb-3 text-[2.25rem] leading-[1.15] font-semibold tracking-tight text-foreground",
+      "mt-2 mb-3 text-4xl leading-[1.15] font-semibold tracking-tight text-foreground",
       className
     )}
     {...props}
@@ -114,7 +121,7 @@ const H1 = ({ className, ...props }: El<"h1">) => (
 const H2 = ({ className, ...props }: El<"h2">) => (
   <h2
     className={cx(
-      "mt-14 mb-3 scroll-mt-6 text-[1.5rem] leading-tight font-semibold tracking-tight text-foreground",
+      "mt-14 mb-3 scroll-mt-6 text-2xl leading-tight font-semibold tracking-tight text-foreground",
       className
     )}
     {...props}
@@ -123,7 +130,7 @@ const H2 = ({ className, ...props }: El<"h2">) => (
 const H3 = ({ className, ...props }: El<"h3">) => (
   <h3
     className={cx(
-      "mt-8 mb-2 scroll-mt-6 text-[1.0625rem] font-semibold text-foreground",
+      "mt-8 mb-2 scroll-mt-6 text-lg font-semibold tracking-[-0.014em] text-foreground",
       className
     )}
     {...props}
@@ -132,7 +139,7 @@ const H3 = ({ className, ...props }: El<"h3">) => (
 const P = ({ className, ...props }: El<"p">) => (
   <p
     className={cx(
-      "my-3 text-[0.9375rem] leading-7 text-foreground/80",
+      "my-4 text-base leading-6.5 tracking-[-0.011em] text-foreground/80",
       className
     )}
     {...props}
@@ -141,7 +148,7 @@ const P = ({ className, ...props }: El<"p">) => (
 const UL = ({ className, ...props }: El<"ul">) => (
   <ul
     className={cx(
-      "my-3 list-disc space-y-1.5 pl-6 marker:text-muted-foreground/60",
+      "my-4 list-disc space-y-2 pl-6 marker:text-muted-foreground/60 [&_li>p]:my-0 [p+&]:-mt-2",
       className
     )}
     {...props}
@@ -150,7 +157,7 @@ const UL = ({ className, ...props }: El<"ul">) => (
 const OL = ({ className, ...props }: El<"ol">) => (
   <ol
     className={cx(
-      "my-3 list-decimal space-y-1.5 pl-6 marker:text-muted-foreground",
+      "my-4 list-decimal space-y-2 pl-6 marker:text-muted-foreground [&_li>p]:my-0 [p+&]:-mt-2",
       className
     )}
     {...props}
@@ -179,7 +186,7 @@ function LI({ className, children, ...props }: El<"li">) {
     return (
       <li
         className={cx(
-          "-ml-6 flex list-none gap-3 rounded-lg px-3.5 py-2.5 text-[0.9375rem] leading-6",
+          "-ml-6 flex list-none gap-3 rounded-lg px-3.5 py-2.5 text-base leading-6.5 tracking-[-0.011em]",
           verdict === "do"
             ? "bg-[color-mix(in_oklab,#16a34a_7%,transparent)]"
             : "bg-[color-mix(in_oklab,var(--destructive)_7%,transparent)]",
@@ -190,7 +197,7 @@ function LI({ className, children, ...props }: El<"li">) {
         <span
           aria-hidden
           className={cx(
-            "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white",
+            "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white",
             verdict === "do" ? "bg-[#16a34a]" : "bg-destructive"
           )}
         >
@@ -208,7 +215,7 @@ function LI({ className, children, ...props }: El<"li">) {
   return (
     <li
       className={cx(
-        "pl-1 text-[0.9375rem] leading-7 text-foreground/80",
+        "pl-1.5 text-base leading-6.5 tracking-[-0.011em] text-foreground/80",
         className
       )}
       {...props}
@@ -221,7 +228,7 @@ function LI({ className, children, ...props }: El<"li">) {
 const Code = ({ className, ...props }: El<"code">) => (
   <code
     className={cx(
-      "rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.8125rem] text-foreground [pre_&]:bg-transparent [pre_&]:p-0 [td_&]:whitespace-nowrap",
+      "rounded-md bg-muted px-1.5 py-0.5 font-mono text-sm tracking-normal text-foreground [pre_&]:bg-transparent [pre_&]:p-0 [td_&]:whitespace-nowrap",
       className
     )}
     {...props}
@@ -230,7 +237,7 @@ const Code = ({ className, ...props }: El<"code">) => (
 const Pre = ({ className, ...props }: El<"pre">) => (
   <pre
     className={cx(
-      "my-4 overflow-x-auto rounded-xl bg-muted/50 p-4 text-[0.8125rem] leading-6 ring-[0.5px] ring-border",
+      "my-4 overflow-x-auto rounded-xl bg-muted/50 p-4 text-sm leading-6 ring-[0.5px] ring-border",
       className
     )}
     {...props}
@@ -240,7 +247,10 @@ function TableFrame({ className, ...props }: El<"table">) {
   return (
     <div className="my-5 overflow-x-auto rounded-xl ring-[0.5px] ring-border">
       <table
-        className={cx("w-full border-collapse text-left text-sm", className)}
+        className={cx(
+          "w-full border-collapse text-left text-sm tracking-[-0.006em]",
+          className
+        )}
         {...props}
       />
     </div>
@@ -491,7 +501,7 @@ function VerdictCard({
           <span
             aria-hidden
             className={cx(
-              "flex size-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white",
+              "flex size-5 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white",
               good ? "bg-[#16a34a]" : "bg-destructive"
             )}
           >
@@ -499,7 +509,7 @@ function VerdictCard({
           </span>
           {good ? "Do" : "Don't"}
         </span>
-        <span className="text-[0.9375rem] leading-6 text-foreground/85">
+        <span className="text-base leading-6.5 tracking-[-0.011em] text-foreground/85">
           <Markdown options={{ ...OPTIONS, forceInline: true }}>
             {sentence(text)}
           </Markdown>
@@ -548,65 +558,218 @@ function Verdicts({
   )
 }
 
+type Tab = "overview" | "guidelines" | "code"
+const TAB_LABEL: Record<Tab, string> = {
+  overview: "Overview",
+  guidelines: "Guidelines",
+  code: "Code",
+}
+// Which tab each section of a page goes in, by its heading. Every other section is a guideline.
+const TAB_OF: Record<string, Tab> = {
+  "When to use": "overview",
+  "What is available": "overview",
+  "In code": "code",
+}
+
+/** Sections of a page (split at each `##` and `###`), each with the live example `after` names for its heading. */
+function Sections({
+  text,
+  after,
+  intro = false,
+}: {
+  text: string
+  after: Record<string, ReactNode>
+  intro?: boolean
+}) {
+  const sections = text.split(/\n(?=###? )/)
+  return sections.map((section, i) => {
+    const heading =
+      intro && i === 0 ? "@intro" : section.match(/^###? (.+)/)?.[1]?.trim()
+    const example = heading ? after[heading] : undefined
+    // A rule (###) with both a Do and a Don't renders them as one card each, with the live pair inside.
+    const split = section.startsWith("### ")
+      ? splitVerdicts(section)
+      : undefined
+    const verdicts = split && split.do && split.dont ? split : undefined
+    const paired =
+      verdicts && React.isValidElement(example) && example.type === DoDont
+    return (
+      // The text under the title is the page's lead: larger and quieter, as a docs page opens.
+      <div
+        key={i}
+        className={cx(
+          intro &&
+            i === 0 &&
+            "[&_p]:text-lg [&_p]:leading-7 [&_p]:tracking-[-0.014em] [&_p]:text-muted-foreground"
+        )}
+      >
+        <Markdown options={OPTIONS}>
+          {verdicts ? verdicts.rest : section}
+        </Markdown>
+        {verdicts && (
+          <div className="skip-toc">
+            <Verdicts
+              doText={verdicts.do}
+              dontText={verdicts.dont}
+              example={paired ? example : undefined}
+            />
+          </div>
+        )}
+        {example && !paired && (
+          // skip-toc: a heading inside an example (a mock card's title) isn't a section of the page.
+          <div className="skip-toc my-6">{example}</div>
+        )}
+      </div>
+    )
+  })
+}
+
 /**
- * Renders a skill file, with a live example after any `##` or `###` section named in `after` (by its heading text, or
- * "@intro" for the text under the page title).
+ * "On this page": the headings of the tab in view, read from the page once it renders, so it follows the tab and
+ * includes the stories a component's Code tab shows. The heading under the top of the window is highlighted.
+ */
+function OnThisPage({ panel }: { panel: React.RefObject<HTMLElement | null> }) {
+  const [headings, setHeadings] = React.useState<HTMLElement[]>([])
+  const [active, setActive] = React.useState(0)
+  React.useEffect(() => {
+    const root = panel.current
+    if (!root) return
+    const read = () =>
+      setHeadings(
+        [...root.querySelectorAll<HTMLElement>("h2, h3")].filter(
+          (h) => !h.closest(".skip-toc, .docs-story") && h.textContent?.trim()
+        )
+      )
+    read()
+    const observer = new MutationObserver(read)
+    observer.observe(root, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [panel])
+  React.useEffect(() => {
+    const onScroll = () => {
+      let current = 0
+      headings.forEach((h, i) => {
+        if (h.getBoundingClientRect().top < 120) current = i
+      })
+      setActive(current)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [headings])
+  if (headings.length < 2) return null
+  return (
+    <nav aria-label="On this page" className="text-sm">
+      <p className="mb-3 text-xs font-medium text-muted-foreground">
+        On this page
+      </p>
+      <ul className="flex flex-col gap-0.5 border-l border-border">
+        {headings.map((h, i) => (
+          <li key={i}>
+            <a
+              href={h.id ? `#${h.id}` : undefined}
+              onClick={(event) => {
+                event.preventDefault()
+                h.scrollIntoView({ behavior: "smooth", block: "start" })
+              }}
+              className={cx(
+                "-ml-px block border-l py-1 leading-5 transition-colors",
+                h.tagName === "H3" ? "pl-6" : "pl-3",
+                i === active
+                  ? "border-foreground font-medium text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {h.textContent?.trim()}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+/**
+ * Renders a skill file as a page: its title and lead, then its sections in three tabs, as Material 3 lays out a
+ * component page. Overview holds When to use and What is available, Guidelines holds how it looks and behaves and its
+ * rules, and Code holds In code plus `code` (a component's live stories and props). A page without the standard
+ * sections (the Overview, a getting-started page) shows as one page. A live example follows any `##` or `###` section
+ * named in `after`, by its heading text, or "@intro" for the text under the title.
  */
 export function SkillDoc({
   source,
   after = {},
+  code,
 }: {
   source: string
   after?: Record<string, ReactNode>
+  code?: ReactNode
 }) {
   const here =
     Object.keys(FILES)
       .find((key) => FILES[key] === source)
       ?.slice(ROOT.length) ?? "SKILL.md"
   const body = source.replace(/^---\n[\s\S]*?\n---\n/, "")
-  const sections = body.split(/\n(?=###? )/)
+  const [intro, ...parts] = body.split(/\n(?=## )/)
+  const tabbed = parts.some((part) => part.startsWith("## When to use"))
+  const panels: Record<Tab, string[]> = {
+    overview: [],
+    guidelines: [],
+    code: [],
+  }
+  // A screen (an Examples page) has no What is available: its Overview shows the screen itself, How it looks and
+  // behaves, so the tab is not one sentence long.
+  const screen = !parts.some((part) => part.startsWith("## What is available"))
+  for (const part of parts) {
+    const heading = part.match(/^## (.+)/)?.[1]?.trim() ?? ""
+    const overview = screen && heading === "How it looks and behaves"
+    panels[
+      tabbed
+        ? overview
+          ? "overview"
+          : (TAB_OF[heading] ?? "guidelines")
+        : "guidelines"
+    ].push(part)
+  }
+  const tabs = (Object.keys(TAB_LABEL) as Tab[]).filter(
+    (tab) => panels[tab].length > 0 || (tab === "code" && code)
+  )
+  const [tab, setTab] = React.useState<Tab>(tabs[0] ?? "guidelines")
+  const panel = React.useRef<HTMLDivElement>(null)
   return (
     <Here.Provider value={here}>
-      <div className="sb-unstyled mx-auto max-w-[50rem] pb-24 font-sans text-foreground antialiased">
-        {sections.map((section, i) => {
-          const heading =
-            i === 0 ? "@intro" : section.match(/^###? (.+)/)?.[1]?.trim()
-          const example = heading ? after[heading] : undefined
-          // A rule (###) with both a Do and a Don't renders them as one card each, with the live pair inside.
-          const split = section.startsWith("### ")
-            ? splitVerdicts(section)
-            : undefined
-          const verdicts = split && split.do && split.dont ? split : undefined
-          const paired =
-            verdicts && React.isValidElement(example) && example.type === DoDont
-          return (
-            // The text under the title is the page's lead: larger and quieter, as a docs page opens.
-            <div
-              key={i}
-              className={cx(
-                i === 0 &&
-                  "[&_p]:text-[1.0625rem] [&_p]:leading-8 [&_p]:text-muted-foreground"
-              )}
+      <div className="dl-page sb-unstyled mx-auto grid max-w-[66rem] gap-12 pb-24 font-sans text-foreground antialiased lg:grid-cols-[minmax(0,1fr)_12rem]">
+        <article className="min-w-0">
+          <Sections text={intro} after={after} intro />
+          {tabbed && tabs.length > 1 && (
+            <Tabs
+              value={tab}
+              onValueChange={(value) => setTab(value as Tab)}
+              className="skip-toc mt-6 border-b border-border"
             >
-              <Markdown options={OPTIONS}>
-                {verdicts ? verdicts.rest : section}
-              </Markdown>
-              {verdicts && (
-                <div className="skip-toc">
-                  <Verdicts
-                    doText={verdicts.do}
-                    dontText={verdicts.dont}
-                    example={paired ? example : undefined}
-                  />
-                </div>
-              )}
-              {example && !paired && (
-                // skip-toc: a heading inside an example (a mock card's title) isn't a section of the page.
-                <div className="skip-toc my-6">{example}</div>
-              )}
-            </div>
-          )
-        })}
+              <TabsList variant="line" className="-mb-px h-10">
+                {tabs.map((each) => (
+                  <TabsTrigger key={each} value={each} className="px-3">
+                    {TAB_LABEL[each]}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          )}
+          <div ref={panel} role={tabbed ? "tabpanel" : undefined}>
+            <Sections
+              key={tab}
+              text={(tabbed ? panels[tab] : parts).join("\n")}
+              after={after}
+            />
+            {(tab === "code" || !tabbed) && code}
+          </div>
+        </article>
+        <aside className="hidden lg:block">
+          <div className="sticky top-8">
+            <OnThisPage panel={panel} />
+          </div>
+        </aside>
       </div>
     </Here.Provider>
   )

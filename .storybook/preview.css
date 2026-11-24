@@ -23,3 +23,12 @@ body {
 .sbdocs.sbdocs-toc--custom .toc-wrapper {
   width: 15rem;
 }
+
+/* A design-language page draws its own "On this page" beside the tab in view (skill-doc.tsx), so Storybook's own one,
+   which reads the headings once and would list the hidden tabs too, steps aside, and the page gets its width. */
+.sbdocs-wrapper:has(.dl-page) .sbdocs-toc--custom {
+  display: none;
+}
+.sbdocs-wrapper:has(.dl-page) .sbdocs-content {
+  max-width: 72rem;
+}

@@ -90,7 +90,7 @@ after the change, such as "Change to Lost".
 
 - See [Forms in Sheets](forms-in-sheets.md) for Delete in the sheet's footer and for Discard Changes?, which guards what
   was typed.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for the in-use phrases.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the in-use phrases.
 - See [Buttons and Actions](buttons-and-actions.md) for button types and labels.
 - See [Dialog](../components/dialog.md) for the dialog itself.
 

@@ -3,12 +3,11 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, 
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Card> = {
-  title: "UI/Card",
+  title: "Components/Containment/Card",
   component: Card,
   args: {
     size: "default",
   },
-  tags: ["autodocs"],
   argTypes: {
     size: {
       control: "select",

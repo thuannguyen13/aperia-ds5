@@ -171,7 +171,7 @@ An app sets only its own **status and chart colors**, in one file imported after
 ```
 
 What an app may set (its status and chart colors; the sidebar color only with a reason agreed here) and why is on the
-design skill's [Color](plugins/aperia-ds5/skills/design/foundations/color.md) page, "What an app can change". The
+design skill's [Color](plugins/aperia-ds5/skills/design/styles/color.md) page, "What an app can change". The
 model file is [brand.example.css](plugins/aperia-ds5/skills/design/assets/brand.example.css). Don't override shared
 tokens or restyle components with `[data-slot=…]` CSS; raise it here instead.
 

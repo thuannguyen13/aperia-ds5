@@ -48,7 +48,7 @@ const SidebarFrame = ({ children }: { children: React.ReactNode }) => (
 )
 
 const meta: Meta<typeof Sidebar> = {
-  title: "UI/Sidebar",
+  title: "Components/Navigation/Sidebar",
   component: Sidebar,
   tags: ["autodocs"],
   parameters: {

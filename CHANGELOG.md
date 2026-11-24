@@ -34,7 +34,7 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   border: focus and invalid are a 1px inner ring plus the 3px halo, so text no longer shifts. 40px tall below 640px.
 - **Attachment** (rc.2): the control recipe instead of a 0.5px border on `card`. Idle draws a dashed outline with no
   shadow; error turns the edge destructive; focus is the control's inner ring plus halo.
-- **`TitledCard`** (skill composition, rc.2): each part owns its space. The card has no gap or vertical padding; the
+- **Titled card recipe** (skill, rc.2): each part owns its space. The card has no gap or vertical padding; the
   header is 56px (12px around its 2rem row), a table follows it directly, and padded content brings its own
   (`<CardContent className="pb-4">`). A collapsed card is just its header, with no padding added back. An app with a
   copy re-copies it, drops `className="pb-0"` / `"pb-3"` from its cards, and moves padding onto the content.
@@ -81,35 +81,35 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   `link` and the user come in as props; nothing imports Next.js. Stories: UI/App Shell.
 - **One structure for every app** (rc.2): every Aperia app has the same sidebar and primary; an app sets only its
   status and chart colors. `brand.example.css` holds just those.
-- **Aperia patterns in the library** (rc.2): the patterns every app built for itself now ship in aperia-ds5, so apps
-  import them instead of building or copying their own. Ported from Sales Portal:
-  - `TitledCard`, `StatTile`, `EmptyState`, `IconButton`, `FormSection`, which the skill used to have apps copy in
-    from `assets/components` (gone). An app with a copy deletes it and imports from `aperia-ds5`.
-  - `EmptyValue` (a muted —), `NoneText` ("No priority"), `HiddenValue` ("$XX,XXX" for a hidden amount),
-    `ReasonTooltip` (why something can't be used), `useFieldNote` and `describedBy`, `LengthCount`, `Fact`,
-    `DetailRow`, `DetailSection`, `ScrollTable`, `TableGroupRow`.
+- **Patterns every app has ship in aperia-ds5; the rest are recipes.** The library ships building components and
+  only the patterns every app needs, ported from Sales Portal. Anything an app can put together from plain components
+  is a recipe on its design page instead (the card header, stat tile, people stack, history timeline, detail rows,
+  empty value, money value, scroll table, group row, flag switch, icon button, form section, length count, a list
+  page's loading shape, and the ⌘K search dialog). Apps build those themselves from the page's recipe.
+  - Lists: `ListToolbar`, a list's one toolbar (scope slot, search, filters, count, Sort). Filters use one model
+    (`FilterField`, `FilterRule`, `filterRows`) in two forms. Advanced filters are a Filter button that counts the filters on and opens
+    them in a popover as rows of Column, Operator and Value (the default; a row's column changes in place, one column
+    can hold several filters, and Add Filter adds empty rows at any time), with Add Filter and Remove All always
+    shown. Simple filters (`form: "simple"`) are fixed controls, one click to pick, for a list with four filters or
+    fewer, each a pick-list, yes or no, or a date. On a phone they become a Filters button with a sheet and clearable chips.
+    `NoResults` ships beside it. `SortControl` with `sortRows` and `UNSORTED` (one Sort per list; empty values sort
+    lowest; `size="sm"` in a card's header, before Add). `DayRangeFields`. The pure sort and filter helpers are also in
+    `aperia-ds5/list` for server pages.
+  - `EmptyState`, which the skill used to have apps copy in from `assets/components` (gone).
+  - `ReasonTooltip` (why something cannot be used), `useFieldNote` and `describedBy`.
+  - Drag and drop: `SortableList` and `SortableRow` (adds `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities`),
+    `FileDrop`, `FilePicker` (built on `Attachment`) with `fileSize` and `fileRefusal`, `ImagePicker` and
+    `ImagePreview`.
   - `aperia-ds5/format`: `formatDate` (09/22/2026), `formatMoment` (with the zone), `ago` ("3d ago"),
     `dayRangeLabel`, `money`, `percent`, `plural`, `listed`, `initials` and day helpers, in Dallas time by default.
+    `RelativeTime` ("3d ago", the full date on hover).
   - Sheets and confirms: `FormSheet` and `SheetForm` (errors beside their fields, a save spinner, Discard Changes?
     before closing a typed form), `useSheetForm`, `useSheet`, `combineForms`, `SheetDelete` (its own confirm, a reason
-    when it can't delete), `ConfirmDialog` (named by its action, returns focus), and the focus helpers
+    when it cannot delete), `ConfirmDialog` (named by its action, returns focus), and the focus helpers
     `returnFocus`, `useReturnFocus`, `OpenerReturnsFocus`, `keepScroll`, `useEscapeClosesList`.
-  - Records: `RelativeTime` ("3d ago", the full date on hover), `Timeline` with `TimelineEntry`, `TimelineSaid` and
-    `TimelineWhen`, `RecordActivity` (the latest ten, View All in a sheet), `PeopleStack` (three avatars, then +N).
-  - Inputs and files: `MoneyInput` and `MoneyField`, `FileDrop`, `FilePicker` (built on `Attachment`) with
-    `fileSize` and `fileRefusal`, `ImagePicker` and `ImagePreview`, `FlagSwitch`, `SortableList` and `SortableRow`
-    (adds `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities`), `draftKey`.
-  - Lists: `ListToolbar`, a list's one toolbar (scope slot, search, filters, count, Sort). Filters use one model
-    (`FilterField`, `FilterRule`, `filterRows`) in two forms: chips the user builds by column, operator and value
-    (the default, "MC Band is High, Critical"), or fixed dropdowns for a list with few filters. On a phone they become
-    a Filters button with a sheet and clearable chips. `NoResults` ships beside it. `SortControl` with `sortRows` and
-    `UNSORTED` (one Sort per list; empty values sort lowest; `size="sm"` in a card's header, before Add, and
-    `TitledCard`'s `action` now spaces several actions), `DayRangeFields`, and `ListSkeleton` (the page's
-    loading state in its own shape). The pure sort and filter helpers are also in `aperia-ds5/list` for server pages.
-  - `MoneyValue`: an amount as V4.3 shows it: tabular, a negative in red parentheses, an em dash for none.
-  - Pickers: `EntityPicker` (records with their `Avatar`, search, reasons, Add from inside the picker),
-    `PickField`, `DraftField`, `AddOption`, and `useAdded`, `useAdding`, `useRefusedDraft` so one record form works
-    on its page and from a picker.
+  - Inputs and pickers: `MoneyInput` and `MoneyField`, `EntityPicker` (records with their `Avatar`, search, reasons,
+    Add from inside the picker), `PickField`, `DraftField`, `AddOption`, `draftKey`, and `useAdded`, `useAdding`,
+    `useRefusedDraft` so one record form works on its page and from a picker.
 - **UI copy follows the UI Style Guide V4.3** (rc.2): no contractions in UI text (`IN_USE_DELETE` reads "This item is
   in use and cannot be deleted."), `money()` writes a negative in parentheses ("($125.50)") and shows cents only when the amount has
   them ("$1,250", "$12.50"; `cents: true` or `false` forces one form, and `MoneyValue` follows it), and `listed()` uses
@@ -122,7 +122,7 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   an equal negative margin to stay on it (`<Item className="-mx-3">`), and indents only show hierarchy.
 - `opensOnClick` and `openable` (rc.2): props that make a `TableRow` open its record; `[data-opens]` gets the pointer.
 - Skill (rc.2): the shell components replace the shell prose; rules against internal labels (MVP, Demo Data), color
-  as the only signal, Show / Hide buttons (`TitledCard` gets `collapsible`) and a line between a card's header and its
+  as the only signal, Show / Hide buttons (the titled card collapses by its title) and a line between a card's header and its
   table; a screenshot review in `SKILL.md`.
 - **Design language docs** (rc.2), written for designers, POs and PMs first and agents second, and the one source of
   truth: the skill's pages are what Storybook's Design Language section shows and what agents read.
@@ -140,6 +140,20 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   - Every page: what it is, when to use it, what's available, how it looks and behaves, rules as Do / Don't, when you
     can do it differently, works with, then In code. The old references, Brand Slots, Drifts and Best Practices pages
     are gone; their rules moved to these pages, and each mistake is a Don't on its page.
+- **Docs organized like Material 3** (0.3.0): six sections, Get Started, Foundations, Styles, Components, Patterns and
+  Examples, each opening on an index of cards built from the pages' leads. Foundations now holds the rules across every
+  screen (Accessibility, new; Layout; Content Design; States, with Loading, Empty and Missing, and Disabled With a
+  Reason moved from Patterns), and Styles holds the visual values (Color, Typography, Shape and Edges, Elevation,
+  Motion, Icons). Every component has one home under Components, grouped by purpose: its guidance, live examples and
+  props on one page. Pages show their sections in Overview, Guidelines and Code tabs, with an "On this page" for the tab
+  in view. Get Started adds For Designers, For Developers and What's New. The skill's folders follow the same sections
+  (`styles/` is new, and five pages moved), so links to a moved page's old path need updating. Story titles moved from
+  "UI/" to `Components/<Group>/`, which changes their Storybook links. The Components index lists building blocks only:
+  each pattern's components (ListToolbar, SortControl, SortableList, SheetForm, SheetDelete, ConfirmDialog, the pickers,
+  the file pickers, MoneyInput, RelativeTime, ReasonTooltip, FieldNote, EmptyState) are on that pattern's page, in its
+  Code tab, and Empty State's guidance sits in Foundations beside Empty and Missing. Patterns are UI patterns only: the
+  List Page and Record Page patterns are gone (whole pages stay as Examples), and their content moved to List Toolbar,
+  Details and History (new) and Cards and Tiles (the page of cards).
 - Skill (rc.2), from Sales Portal's blind test: a missing value is an em dash (—), not `-` (UI Style Guide V4.3,
   p.11); phone numbers, emails and websites read as plain text in the body color, links only where tapping does
   something (`tel:`, `mailto:`, the website), underlined on hover.

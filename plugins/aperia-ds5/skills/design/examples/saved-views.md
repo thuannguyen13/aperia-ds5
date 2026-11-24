@@ -70,10 +70,10 @@ Saved views have no exceptions.
 
 ## Which patterns it uses
 
-- See [List Page](../patterns/list-page.md) for the toolbar the picker starts.
+- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar the picker starts.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the Edit View sheet, its footer, and its refusals.
 - See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for Delete View, which asks first.
-- See [Disabled With a Reason](../patterns/disabled-with-a-reason.md) for the last view's Delete.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the last view's Delete.
 
 ## In code
 

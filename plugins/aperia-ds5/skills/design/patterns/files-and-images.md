@@ -83,8 +83,8 @@ Files and images work with three other patterns:
 
 - See [Forms in Sheets](forms-in-sheets.md) for the form that files and images are saved with.
 - See [People and Pictures](people-and-pictures.md) for the record's square picture that shows a logo.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for the line under a drop zone or picker that cannot take a
-  file.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the line under a drop zone or picker that
+  cannot take a file.
 
 ## In code
 

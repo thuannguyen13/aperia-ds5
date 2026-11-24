@@ -2,7 +2,7 @@ import { useState, useTransition } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Badge } from "../badge/badge"
 import { Field, FieldError, FieldLabel } from "../field/field"
-import { FormSection } from "../form-section/form-section"
+import { FormSection } from "@/docs/design-language/recipes/form-section"
 import { Input } from "../input/input"
 import { SheetForm } from "../sheet-form/sheet-form"
 import { useSheetForm } from "../sheet-form/use-sheet-form"
@@ -22,9 +22,10 @@ const stageBadge = (name: string, className: string) => (
 )
 
 const meta: Meta<typeof PickField> = {
-  title: "Patterns/PickField",
+  title: "Pattern Components/PickField",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: PickField,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   decorators: [
     (Story) => (
       <div className="w-[28rem] max-w-full">

@@ -1,6 +1,7 @@
 # Filters
 
-Filters narrow a list to matching rows and appear in the list's toolbar as chips or dropdowns.
+Filters narrow a list to matching rows, set from fixed controls on the list's toolbar (simple filters) or from a Filter
+button that opens a popover of rows (advanced filters).
 
 ## When to use
 
@@ -8,12 +9,15 @@ Use filters on a list page, in its toolbar, when people need to narrow the list 
 
 ## What is available
 
-Filters come in two forms:
+Filters come in two forms. Each list uses one of them, picked by what the list filters on:
 
-| Form | Use when | Content |
+| Form | Use when | What people do |
 |---|---|---|
-| Chips | By default | Each filter that is on is a chip that reads as a sentence, such as "MC Band is High, Critical". |
-| Dropdowns | The list has four filters or fewer, and each one picks from a list of choices, is yes or no, or is a date | Each filter is a fixed control on the toolbar, such as an "All products" select, a switch, or a From and To date. |
+| Simple filters | The list has four filters or fewer, and each one picks one choice from a short list, is yes or no, or is a span of dates | Change a value straight on the toolbar, in one click, such as picking a product from an "All products" select. |
+| Advanced filters | Any other list: a fifth filter, a filter on text, a number, or an amount, or a choice where people pick several values | Open the Filter button, then set each filter as a row of Column, Operator, and Value, such as MC Band, is, High, Critical. |
+
+Simple filters keep a short list of filters one click away. Advanced filters keep a list with many ways to filter in
+one short toolbar.
 
 Each kind of column offers its own ways to compare:
 
@@ -27,29 +31,59 @@ Each kind of column offers its own ways to compare:
 
 ## How it looks and behaves
 
-### Chips
+### Advanced filters
 
-People add, change, and remove a chip in this order:
+The toolbar shows one outline **Filter** button with a filter icon. When filters are on, the button adds their number in
+a primary badge, so the toolbar stays one short row however many filters are on.
 
-1. The "Add Filter" button opens a list of the columns that are not filtered yet. It is an outline button with a
-   filter icon. The list has a search at its top, and each column has a small mark for the kind of value it holds.
-2. Picking a column adds its chip with its values already open, so people choose the values next.
-3. The chip reads as a sentence, with the column, then how it compares, then its values. The comparison and the values
-   each open where they are changed. Every change applies at once.
-4. Past two values, the chip shows a count, such as "High, Critical +1".
-5. A filter with no value yet shows a muted "—" and narrows nothing.
-6. The **×** on a chip removes that filter. **"Clear All"** removes every filter.
+The button opens a popover titled "Filters". Each filter that is on is a row of three controls under the headings
+Column, Operator, and Value, with a **×** at its end. **Add Filter** sits at the bottom left and **Remove All** at the
+bottom right. Both always show. Remove All is disabled while no filter is on, and pointing at it says "No filters to
+remove."
+
+People add, change, and remove a filter in this order:
+
+1. With no filter on, the popover opens with one empty row. Its Column reads "Pick a column", and its Operator and
+   Value wait until a column is picked.
+2. Picking a column fills in the row, starting with that column's first way to compare and no value.
+3. The Operator lists the ways that kind of column compares. The Value is a field to type in for text, numbers,
+   amounts, and dates, or a list to pick from for choices. Every change applies at once.
+4. Changing a row's Column starts that filter over on the new column, in the same place. The Column lists every column,
+   so one column can hold several filters, such as MC Score ≥ 700 and MC Score ≤ 900.
+5. A filter with no value yet narrows nothing, and the button does not count it.
+6. Add Filter adds an empty row at any time, so people can add several rows first and fill them in after. The **×** on
+   a row removes that row, and **Remove All** removes every filter and leaves one empty row.
 
 Choices are a list, with a search when there are many. Picking several choices matches any of them. "Is between" takes
 a From and a To. Either one can stay empty to leave that end open.
 
-Filters add up, so a row must pass every one. Each column has one filter at most. Text matches without regard to
+Filters add up, so a row must pass every one, including several filters on one column. Text matches without regard to
 capitals, so "acme" finds "Acme Payments".
 
-### Dropdowns
+### Simple filters
 
-Every dropdown filter is always on the toolbar. A select's first choice narrows nothing, such as "All products". A
-switch is on or off. From and To narrow the list by a span of days.
+Every simple filter is always on the toolbar, so picking a value takes one click. A select's first choice narrows
+nothing, such as "All products". A switch is on or off. From and To narrow the list by a span of days.
+
+### Choosing between the two forms
+
+Most lists fit one form at once. These cases decide the rest:
+
+- A list uses one form, never both. Simple filters never sit beside a Filter button.
+- A list that outgrows simple filters moves to advanced filters as a whole. That happens with a fifth filter, or with
+  a filter on text, a number, or an amount.
+- A choice where people need several values at once, such as Stage is Demo or Proposal, needs advanced filters. A simple
+  filter picks one value.
+- A long list of choices that people need to search, such as every owner in a large team, needs advanced filters. Its
+  value list has a search, and a simple filter does not.
+- A yes or no filter is a switch with its label on the toolbar, such as "Assigned to me".
+- A span of dates is a From and a To. Either one can stay empty, so "before" and "after" need no other control.
+- A report date, the one day that the page's figures count, is not a filter. It goes first in the toolbar, with the
+  controls that set the list's scope. See [Date Range](../examples/date-range.md).
+
+Both forms clear the same ways. A simple filter goes back to its first choice, such as "All products". Advanced
+filters have Remove All. When nothing matches, Clear Filters clears every filter in either form. Both forms show the
+count, such as "4 of 6".
 
 ### On a phone
 
@@ -64,20 +98,21 @@ The filters that are on show as chips under the search. A tap on a chip clears i
 ### When nothing matches
 
 When nothing matches, the list shows "No Results", with "No matching results." and Clear Filters. See
-[Empty and Missing](empty-and-missing.md) for the empty state.
+[Empty and Missing](../foundations/empty-and-missing.md) for the empty state.
 
 ## Rules
 
-### Read a filter as a sentence
+### Build each filter as a row
 
-- **Do:** Show each filter as a chip that reads as a sentence ("MC Band is High, Critical"), changed in place and
-  removed with ×, so people see what is on.
-- **Don't:** Build the app its own filter panel or row. Use the chips, so filters read and clear the same on every list.
+- **Do:** Show each advanced filter as a row of Column, Operator, and Value (MC Band, is, High, Critical),
+  each changed in place and removed with ×, so people can change any part without starting over.
+- **Don't:** Build the app its own filter panel or row. Use advanced filters, so filters read and clear the same on
+  every list.
 
 ### Keep filters in the toolbar
 
-- **Do:** Put the filters between the search and the count in the list's one toolbar, so people find them in the same
-  place.
+- **Do:** Put the Filter button or the simple filters between the search and the count in the list's one toolbar, so
+  people find them in the same place.
 - **Don't:** Put a filter in the page header (a report date as a label over a field). Move it into the toolbar, so the
   header stays the page's name.
 
@@ -88,29 +123,34 @@ When nothing matches, the list shows "No Results", with "No matching results." a
 - **Don't:** Narrow a list by filters hidden in a sheet, with nothing on screen. Show them as chips, so no one thinks
   records are missing.
 
+### Use one filter form per list
+
+- **Do:** Use simple filters for a list with four filters or fewer, and advanced filters for any other list, so a
+  simple list changes in one click and a large one keeps a short toolbar.
+- **Don't:** Mix simple filters and a Filter button on one toolbar. Move the whole list to advanced filters when it
+  outgrows simple filters, so people find every filter in one place.
+
 ## When you can do it differently
 
-Use dropdowns instead of chips when a list has four filters or fewer and every filter picks from a list of choices, is
-yes or no, or is a date. Examples are an "All products" select, a switch, or a From and To date. The limit is four
-because four dropdowns, the search, and Sort fit in one toolbar row on a desktop. A fifth filter, or any filter on text,
-a number, or an amount, means chips. Dropdowns count, clear, and go behind the Filters button on a phone the same way
-chips do.
+Filters have no other exceptions. Every list uses simple or advanced filters, as decided under "Choosing between
+the two forms".
 
 ## Works with
 
-- See [List Page](list-page.md) for the toolbar the filters sit in.
+- See [List Toolbar](list-toolbar.md) for the toolbar the filters sit in.
 - See [Sort](sort.md) for the control at the toolbar's right end.
-- See [Empty and Missing](empty-and-missing.md) for "No Results" when nothing matches.
+- See [Empty and Missing](../foundations/empty-and-missing.md) for "No Results" when nothing matches.
 
 ## In code
 
-- `ListToolbar`'s `filters`: `{ fields, value, onChange, form }`. `form` is `"chips"` (the default) or
-  `"dropdowns"`.
+- `ListToolbar`'s `filters`: `{ fields, value, onChange, form }`. `form` is `"advanced"` (the default) or
+  `"simple"`.
 - A `FilterField` is `{ id, label, type, options?, all?, read? }`, `type` one of `text`, `number`, `money`, `enum`,
-  `day`, `boolean`. `label` is Title Case, as a column heading. `all` names a dropdown's choice that narrows nothing
-  ("All products"). `read` gives a row's value; a list filtered on the server leaves it out.
-- A `FilterRule` is `{ field, operator, values }`, all strings, so the filters fit in the page's address. Apply them
-  with `filterRows(rows, fields, rules)` from `aperia-ds5/list`, or send them to the server.
+  `day`, `boolean`. `label` is Title Case, as a column heading. `all` names a simple filter's choice that narrows
+  nothing ("All products"). `read` gives a row's value; a list filtered on the server leaves it out.
+- A `FilterRule` is `{ field, operator, values, id? }`, all strings, so the filters fit in the page's address. Advanced
+  filters give each rule an `id`, so one column can hold several rules. Simple filters hold one rule per column. Apply
+  them with `filterRows(rows, fields, rules)` from `aperia-ds5/list`, or send them to the server.
 - When nothing matches, render `NoResults` with `onClear` (Clear Filters). Pass `shown`, `total` and `noun` so the count
   and the phone's sheet read right.
 - A day span for a list is a `day` filter; a report date (one day) goes in `start` instead.

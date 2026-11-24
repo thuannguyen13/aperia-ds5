@@ -145,14 +145,43 @@ On a phone, a dialog's buttons stack, with the action on top.
 
 See [Buttons and Actions](../patterns/buttons-and-actions.md) for where buttons go on a page, a sheet, and a dialog, and
 for using one primary button per area. See [Copy](../foundations/copy.md) for naming the action on a button. See
-[Disabled With a Reason](../patterns/disabled-with-a-reason.md) for saying why a button is disabled. See [Shape and
-Edges](../foundations/shape-and-edges.md) and [Elevation](../foundations/elevation.md) for the corners, edges, and
+[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for saying why a button is disabled. See [Shape and
+Edges](../styles/shape-and-edges.md) and [Elevation](../styles/elevation.md) for the corners, edges, and
 shadows the Specs name.
 
 ## In code
 
 - `Button` from `aperia-ds5`: `variant` is `default` (Primary), `outline`, `ghost`, `destructive`, `link` or
   `secondary`; `size` is `default`, `sm`, `xs`, `lg`, or `icon`, `icon-sm`, `icon-xs`, `icon-lg` for icon buttons.
-- Icon buttons use `IconButton` from aperia-ds5: `label` is the tooltip and the accessible name,
-  and `reason` is the tooltip while it's disabled.
+- Build an icon button in the app from `Button`, `Tooltip`, `TooltipTrigger`, and `TooltipContent` from
+  `aperia-ds5`. Its label is both the tooltip and the accessible name. While it is disabled with a reason, the tooltip
+  shows the reason instead.
+
+```tsx
+const why = disabled ? reason : null
+
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button
+      variant="ghost"
+      size="icon-sm"
+      type="button"
+      aria-label="Edit Contact"
+      disabled={disabled && !why}
+      aria-disabled={why ? true : undefined}
+      onClick={why ? (event) => event.preventDefault() : onEdit}
+      className="max-sm:size-10 aria-disabled:opacity-50 aria-disabled:hover:bg-transparent aria-disabled:active:translate-y-0 dark:aria-disabled:hover:bg-transparent"
+    >
+      <PencilIcon />
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>{why || "Edit Contact"}</TooltipContent>
+</Tooltip>
+```
+
+- A button disabled with a reason uses `aria-disabled`, not `disabled`, so keyboard and pointer users still reach the
+  tooltip. Its click does nothing. A button disabled without a reason uses `disabled`.
+- The button stays the same element when it becomes disabled, so focus stays on it.
+- It is `type="button"`, so a button inside a form never submits the form.
+- On a phone the button is 40px square (`max-sm:size-10`), which is a thumb's target.
 - A record's header actions use `RecordActions` from `aperia-ds5`.

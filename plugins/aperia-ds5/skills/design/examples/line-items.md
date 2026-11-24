@@ -81,17 +81,19 @@ Line items have no exceptions.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the Line Items card and its empty state.
 - See [Tables](../patterns/tables.md) for group bands, figures on the right, and a table that runs to the card's edges.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the wide Edit sheet, refused fields, and the save.
-- See [Record Page](../patterns/record-page.md) for where the card sits on the record.
+- See [Cards and Tiles](../patterns/cards-and-tiles.md) for where the card sits on the record.
 
 ## In code
 
-The app builds it from aperia-ds5 parts:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- The page: `TitledCard` ("Line Items") with the `Table` flush, a `TableGroupRow` per group (`leading` the picture,
-  `trailing` the subtotal), then the rows, then a Total row whose last cell is `pr-4 text-right tabular-nums`. Edit is
-  the card's `action`; with no rows it goes in `EmptyState`'s `action`.
-- The sheet: `FormSheet` with `className="data-[side=right]:sm:max-w-6xl"`, a `TitledCard` per group (its `figure`
-  the group total, its `action` Apply Template and Add Line), rows of `Input`, `MoneyInput` and `Select`,
-  and Remove as an `IconButton`. Work subtotals out with the same function the server uses; show `EmptyValue` when one
-  can't be.
-- A hidden amount: leave the column out, or `HiddenValue` ($XX,XXX). `MoneyInput` takes `amountHidden`.
+- The page: the titled card from [Card](../components/card.md) ("Line Items") with the `Table` flush, the table group
+  row from [Tables](../patterns/tables.md) per group (the picture before the name, the subtotal at the end), then the
+  rows, then a Total row whose last cell is `pr-4 text-right tabular-nums`. Edit is the card's action; with no rows it
+  goes in `EmptyState`'s `action`.
+- The sheet: `FormSheet` with `className="data-[side=right]:sm:max-w-6xl"`, a titled card per group (its figure the
+  group total, its action Apply Template and Add Line), rows of `Input`, `MoneyInput` and `Select`, and Remove as an
+  icon button (the recipe from [Button](../components/button.md)). Work subtotals out with the same function the server
+  uses; show the empty value from [Empty and Missing](../foundations/empty-and-missing.md) when one cannot be.
+- A hidden amount: leave the column out, or the hidden value ($XX,XXX) from [Money and
+  Numbers](../foundations/money-and-numbers.md). `MoneyInput` takes `amountHidden`.

@@ -7,7 +7,7 @@ import {
 import { Avatar, AvatarFallback } from "../avatar/avatar"
 
 const meta: Meta<typeof HoverCard> = {
-  title: "UI/Hover Card",
+  title: "Components/Communication/Hover Card",
   component: HoverCard,
   tags: ["autodocs"],
 }

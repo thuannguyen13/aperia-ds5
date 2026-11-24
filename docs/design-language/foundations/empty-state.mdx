@@ -1,0 +1,14 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/foundations/empty-state.md?raw"
+import * as EmptyStateStories from "../../../components/ui/empty-state/empty-state.stories"
+import { SkillDoc } from "../skill-doc"
+import { PatternCode } from "../component-page"
+import { emptyStateExamples } from "../examples/empty-state"
+
+<Meta title="Foundations/States/Empty State" />
+
+<SkillDoc
+  source={source}
+  after={emptyStateExamples}
+  code={<PatternCode components={[{ name: "EmptyState", stories: EmptyStateStories }]} />}
+/>

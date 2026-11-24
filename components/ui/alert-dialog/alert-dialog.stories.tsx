@@ -15,7 +15,7 @@ import { Button } from "../button/button"
 import { TrashIcon } from "lucide-react"
 
 const meta: Meta<typeof AlertDialog> = {
-  title: "UI/Alert Dialog",
+  title: "Components/Containment/Alert Dialog",
   component: AlertDialog,
   tags: ["autodocs"],
 }

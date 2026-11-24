@@ -3,10 +3,6 @@ import { InboxIcon, PencilIcon, PlusIcon, Trash2Icon } from "lucide-react"
 import {
   Button,
   EmptyState,
-  FormSection,
-  IconButton,
-  StatTile,
-  TitledCard,
   Field,
   FieldLabel,
   Input,
@@ -18,11 +14,14 @@ import {
   TableRow,
   opensOnClick,
 } from "aperia-ds5"
+import { FormSection, IconButton, StatTile, TitledCard } from "./recipes"
 
 // The Aperia patterns aperia-ds5 ships, which every app uses instead of building its own.
 
 const meta: Meta = {
   title: "Design Language/Compositions",
+  // The recipes these show live on their owner pages; this file only keeps them rendering.
+  tags: ["!dev", "!autodocs"],
   parameters: { layout: "padded" },
   decorators: [
     (Story) => (

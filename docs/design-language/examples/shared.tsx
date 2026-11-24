@@ -9,7 +9,8 @@ import {
   opensOnClick,
 } from "aperia-ds5"
 
-export { EmptyState, IconButton, TitledCard } from "aperia-ds5"
+export { EmptyState } from "aperia-ds5"
+export { IconButton, TitledCard } from "../recipes"
 
 export const TASKS = [
   {

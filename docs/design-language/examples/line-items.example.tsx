@@ -12,10 +12,7 @@ import {
   AvatarFallback,
   Button,
   EmptyState,
-  EmptyValue,
   FormSheet,
-  HiddenValue,
-  IconButton,
   Input,
   Label,
   MoneyInput,
@@ -32,10 +29,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  TableGroupRow,
-  TitledCard,
   useSheetForm,
 } from "aperia-ds5"
+import {
+  EmptyValue,
+  HiddenValue,
+  IconButton,
+  TableGroupRow,
+  TitledCard,
+} from "../recipes"
 import { BeforeAfter, Screen } from "./before-after"
 
 type Line = {

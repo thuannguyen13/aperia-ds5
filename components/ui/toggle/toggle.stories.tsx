@@ -3,7 +3,7 @@ import { Toggle } from "./toggle"
 import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react"
 
 const meta: Meta<typeof Toggle> = {
-  title: "UI/Toggle",
+  title: "Components/Actions/Toggle",
   component: Toggle,
   args: {
     variant: "default",

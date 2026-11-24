@@ -87,20 +87,23 @@ A task checklist has no exceptions.
 
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the Tasks card, its figure, its empty state, and the task
   page's tiles.
-- See [Record Page](../patterns/record-page.md) for where the Tasks card sits, beside Notes.
+- See [Cards and Tiles](../patterns/cards-and-tiles.md) for where the Tasks card sits, beside Notes.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the Edit sheet and its Delete.
-- See [List Page](../patterns/list-page.md) for the task page's toolbar.
+- See [List Toolbar](../patterns/list-toolbar.md) for the task page's toolbar.
 
 ## In code
 
-The app builds it from aperia-ds5 parts:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- `TitledCard` titled "Tasks", with the progress as `figure` and Apply Template and Add Task as `action`. With no tasks,
-  `EmptyState` ("No Tasks", `actionClassName="flex-row flex-wrap justify-center"`) holds both buttons instead.
+- The titled card from [Card](../components/card.md), titled "Tasks", with the progress as its figure and Apply Template
+  and Add Task as its action. With no tasks, `EmptyState` ("No Tasks", `actionClassName="flex-row flex-wrap
+  justify-center"`) holds both buttons instead.
 - Rows are `Item`s in an `ItemGroup` (`gap-0`, a `@container`), each `rounded-none border-0 px-4 not-first:border-t`:
   `ItemMedia` holds the `Checkbox` (`aria-labelledby` the title's id), `ItemContent` the title and type, `ItemActions`
-  who and when and an `IconButton` "Edit" (`opacity-0 group-hover/item:opacity-100 focus-visible:opacity-100
-  pointer-coarse:opacity-100`). Under `@min-[40rem]`, who and when move into `ItemDescription`.
+  who and when and an icon button "Edit" (the recipe from [Button](../components/button.md)) (`opacity-0
+  group-hover/item:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-100`). Under `@min-[40rem]`, who and
+  when move into `ItemDescription`.
 - The tick saves at once and calls `toast("Done: Send Proposal", { action: { label: "Undo", … } })` from sonner.
 - Edit opens a `FormSheet` with `SheetForm` and `SheetDelete` in its `start`.
-- To Do: `StatTile`s, `ListToolbar` (filters kept in the URL) and a `TitledCard` per group.
+- To Do: stat tiles from [Cards and Tiles](../patterns/cards-and-tiles.md), `ListToolbar` (filters kept in the URL), and
+  a titled card per group.

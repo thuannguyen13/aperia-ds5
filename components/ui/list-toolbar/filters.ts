@@ -1,5 +1,5 @@
-// A list's filters, one model for both of ListToolbar's forms: the filter chips a user builds (column, operator, value)
-// and the fixed dropdowns a list with few filters shows. Pure, no React and no "use client", so a page on the server can
+// A list's filters, one model for both of ListToolbar's forms: the rows a user builds in advanced filters (column,
+// operator, value) and the fixed controls of simple filters. Pure, no React and no "use client", so a page on the server can
 // read and apply filters too. Field types and operators follow Titan's lib/filters.ts.
 
 import type { ReactNode } from "react"
@@ -75,6 +75,11 @@ export type FilterRule = {
   field: string
   operator: FilterOperator
   values: string[]
+  /**
+   * Which row of advanced filters it is, so one column can hold several filters (MC Score ≥ 700 and ≤ 900). The
+   * popover gives each rule one; rules read from a page's address may leave it out.
+   */
+  id?: string
 }
 
 /** Each type's operators, as a chip reads them ("MC Band is High, Critical"); the first is where a new filter starts. */
@@ -126,6 +131,19 @@ export const newRule = (
   operator: OPERATORS[field.type][0].value,
   values: [],
 })
+
+let lastId = 0
+/** A new id for a filter row. */
+export const ruleId = () => `rule-${++lastId}`
+
+/**
+ * `rules`, each with an id: its own, or one from its place in the list, the same on every render. The first change
+ * sends them all back with their ids, so every row keeps its place from then on.
+ */
+export const withIds = (rules: readonly FilterRule[]): FilterRule[] =>
+  rules.map((rule, index) =>
+    rule.id ? rule : { ...rule, id: `rule-at-${index}` }
+  )
 
 /** Whether a filter narrows the list: it has a value to compare with. */
 export function isComplete(rule: FilterRule): boolean {

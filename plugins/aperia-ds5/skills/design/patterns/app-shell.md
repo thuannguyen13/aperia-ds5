@@ -29,7 +29,7 @@ Light Theme, and Log Out.
 
 The top bar contains the breadcrumb. On phones and tablets, it also contains the button that opens the sidebar.
 
-The page column holds the page. See [Page Layout](page-layout.md) for how a page is laid out inside it.
+The page column holds the page. See [Page Layout](../foundations/page-layout.md) for how a page is laid out inside it.
 
 ## How it looks and behaves
 
@@ -71,7 +71,7 @@ phone, which is the target size for a phone.
 ### Page column
 
 The page column scrolls as one, under the top bar, with 20px of space around it. The column is centered and up to
-1440px wide. See [Page Layout](page-layout.md) for the sections inside it.
+1440px wide. See [Page Layout](../foundations/page-layout.md) for the sections inside it.
 
 ## Rules
 
@@ -95,13 +95,13 @@ An app whose main page is a personal work list may place Notifications after tha
 items sit beside the work they affect.
 
 An app changes the sidebar's color only after the design system team agrees to the change, never to look different.
-See [Color](../foundations/color.md) for what an app can change.
+See [Color](../styles/color.md) for what an app can change.
 
 Every other part of the shell is the same in every app.
 
 ## Works with
 
-- See [Page Layout](page-layout.md) for what goes in the page column.
+- See [Page Layout](../foundations/page-layout.md) for what goes in the page column.
 - See [Page Header](page-header.md) for the page title that fills the breadcrumb.
 - See [Search](search.md) and [Notifications](notifications.md) for what opens from the sidebar.
 
@@ -109,21 +109,12 @@ Every other part of the shell is the same in every app.
 
 - Wire it once in the app's layout, from `aperia-ds5`:
 
-  ```tsx
-  <TooltipProvider>
-    <SidebarProvider>
-      <AppSidebar brand={{ name: "Sales Portal", logo }} groups={groups} currentPath={pathname} link={Link}
-        search={<AppSidebarSearch onOpen={openSearch} />}
-        notifications={<Popover><PopoverTrigger asChild><AppSidebarNotifications icon={BellIcon} unread={3} /></PopoverTrigger>…</Popover>}
-        notificationsAfter="/todo" user={{ name, role }} accountItems={…} onSignOut={signOut} />
-      <SidebarInset>
-        <AppHeader crumbs={crumbs} link={Link}>
-          <AppContent>{children}</AppContent>
-        </AppHeader>
-      </SidebarInset>
-    </SidebarProvider>
-  </TooltipProvider>
-  ```
+  ```tsx <TooltipProvider> <SidebarProvider> <AppSidebar brand={{ name: "Sales Portal", logo }} groups={groups}
+  currentPath={pathname} link={Link} search={<AppSidebarSearch onOpen={openSearch} />}
+  notifications={<Popover><PopoverTrigger asChild><AppSidebarNotifications icon={BellIcon} unread={3}
+  /></PopoverTrigger>…</Popover>} notificationsAfter="/todo" user={{ name, role }} accountItems={…} onSignOut={signOut}
+  /> <SidebarInset> <AppHeader crumbs={crumbs} link={Link}> <AppContent>{children}</AppContent> </AppHeader>
+  </SidebarInset> </SidebarProvider> </TooltipProvider> ```
 
 - `AppSidebar`: `brand` (`name`, a 24px `logo`, `href`), `groups` (`{ label?, items: { href, label, icon }[] }`),
   `currentPath`, the router's `link`, `search`, `notifications`, `notificationsAfter`, `user` (`name`, `role`,

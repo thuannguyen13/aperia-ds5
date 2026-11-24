@@ -19,7 +19,7 @@ import {
 } from "lucide-react"
 
 const meta: Meta<typeof Command> = {
-  title: "UI/Command",
+  title: "Components/Navigation/Command",
   component: Command,
   tags: ["autodocs"],
 }

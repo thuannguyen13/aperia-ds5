@@ -43,19 +43,16 @@ import {
 import { SortControl } from "../sort-control/sort-control"
 import { Switch } from "../switch/switch"
 import { plural } from "@/lib/format"
-import {
-  AddFilter,
-  FILTER_ICONS,
-  FilterChip,
-  FilterValueEditor,
-  withOperator,
-} from "./filter-chip"
+import { FilterBuilder } from "./filter-builder"
+import { FILTER_ICONS, FilterValueEditor, withOperator } from "./filter-value"
 import {
   OPERATORS,
   describeValues,
   isComplete,
   newRule,
+  ruleId,
   ruleOn,
+  withIds,
   withRule,
   type FilterChoice,
   type FilterField,
@@ -72,11 +69,12 @@ export type ListFilters = {
   value: FilterRule[]
   onChange: (rules: FilterRule[]) => void
   /**
-   * `chips` (the default): the user adds a filter by column, operator and value, each a chip in the toolbar. `dropdowns`:
-   * every field is a fixed control on the row, for a list with only a few filters: an enum is a select of one choice, a
-   * boolean a switch, a day a From and To. Text, number and amount fields need chips.
+   * `advanced` (the default): one Filter button that counts the filters on and opens them in a popover as rows of
+   * Column, Operator and Value, where a row's column can change in place. `simple`: every field is a fixed control on
+   * the row, one click to pick, for a list with four filters or fewer. An enum is a select of one choice, a boolean a
+   * switch, and a day a From and To. Text, number and amount fields need advanced filters.
    */
-  form?: "chips" | "dropdowns"
+  form?: "advanced" | "simple"
 }
 
 // "prospects" as a button says it: "Prospects".
@@ -88,9 +86,9 @@ const titled = (noun: string) =>
  * Sort at the right end. Every list page has this one, above its table or board, as a section of the page.
  *
  * Filters come in two forms on one model (`FilterField`, `FilterRule`), so either form, the count, the phone's sheet
- * and Clear All work the same. By default each filter on is a chip that reads as a sentence ("MC Band is High,
- * Critical"), added from Add Filter; a list with only a few filters shows them as fixed dropdowns instead (`form:
- * "dropdowns"`). Apply them with `filterRows`, or send them to the server.
+ * and Clear All work the same. Advanced filters, the default, are one Filter button that opens a popover where each
+ * filter on is a row of Column, Operator and Value, added from Add Filter. Simple filters (`form: "simple"`), for a
+ * list with four filters or fewer, are fixed controls on the toolbar. Apply them with `filterRows`, or send them to the server.
  *
  * On a phone the row is the search and a Filters button that counts those on; the filters are set in a sheet from the
  * bottom, and those on show as chips that clear on a tap.
@@ -127,21 +125,29 @@ export function ListToolbar({
   children?: React.ReactNode
 }) {
   const [open, setOpen] = useState(false)
-  // The field just added from Add Filter, whose chip opens its values as it appears.
-  const [added, setAdded] = useState<string | null>(null)
   const fields = filters?.fields ?? []
   const rules = filters?.value ?? []
-  const form = filters?.form ?? "chips"
+  const form = filters?.form ?? "advanced"
   const fieldOf = (rule: FilterRule) =>
     fields.find((field) => field.id === rule.field)
   // A rule on a field the list no longer offers is left alone, not shown.
   const shownRules = rules.filter((rule) => fieldOf(rule))
   const on = shownRules.filter(isComplete)
-  const unused = fields.filter((field) => !ruleOn(rules, field.id))
   const counted = shown !== undefined && total !== undefined
 
+  // Simple filters hold one filter per column, so they change by column.
   const change = (field: string, rule: FilterRule | null) =>
     filters?.onChange(withRule(rules, field, rule))
+  // The popover's filters, and the phone's for it, may hold several per column, so they change by id.
+  const rows = withIds(rules)
+  const changeRow = (id: string | undefined, rule: FilterRule | null) =>
+    filters?.onChange(
+      rule
+        ? rows.map((each) => (each.id === id ? rule : each))
+        : rows.filter((each) => each.id !== id)
+    )
+  const shownRows = rows.filter((rule) => fieldOf(rule))
+  const onRows = shownRows.filter(isComplete)
   const clearAll = () => filters?.onChange([])
 
   const searchField = search && (
@@ -168,7 +174,7 @@ export function ListToolbar({
   // What a filter that is on says on a phone's chip: the value alone for a dropdown, as its control shows it, and the
   // whole sentence for a chip, which names its own column.
   const chipText = (field: FilterField, rule: FilterRule) => {
-    if (form === "dropdowns")
+    if (form === "simple")
       return field.type === "boolean"
         ? field.label
         : describeValues(field, rule)
@@ -183,7 +189,7 @@ export function ListToolbar({
       <div className="flex shrink-0 flex-wrap items-center gap-3 max-sm:hidden">
         {start}
         {searchField}
-        {form === "dropdowns"
+        {form === "simple"
           ? fields.map((field) => (
               <FilterDropdown
                 key={field.id}
@@ -193,33 +199,11 @@ export function ListToolbar({
               />
             ))
           : filters && (
-              <>
-                {shownRules.map((rule) => (
-                  <FilterChip
-                    key={rule.field}
-                    field={fieldOf(rule)!}
-                    rule={rule}
-                    defaultOpen={rule.field === added}
-                    onChange={(next) => change(rule.field, next)}
-                    onRemove={() => change(rule.field, null)}
-                  />
-                ))}
-                {unused.length > 0 && (
-                  <AddFilter
-                    fields={unused}
-                    onAdd={(field) => {
-                      setAdded(field.id)
-                      change(field.id, newRule(field))
-                    }}
-                  />
-                )}
-                {shownRules.length > 0 && (
-                  <Button variant="outline" onClick={clearAll}>
-                    <XIcon data-icon="inline-start" />
-                    Clear All
-                  </Button>
-                )}
-              </>
+              <FilterBuilder
+                fields={fields}
+                rules={rules}
+                onRulesChange={filters.onChange}
+              />
             )}
         {children}
         {count}
@@ -255,16 +239,20 @@ export function ListToolbar({
         </div>
         {on.length > 0 && (
           <div className="flex flex-wrap items-center gap-1.5">
-            {on.map((rule) => {
+            {(form === "simple" ? on : onRows).map((rule) => {
               const field = fieldOf(rule)!
               return (
                 <Button
-                  key={rule.field}
+                  key={rule.id ?? rule.field}
                   variant="secondary"
                   size="sm"
                   className="max-w-full rounded-full"
                   aria-label={`Clear ${field.label}: ${describeValues(field, rule)}`}
-                  onClick={() => change(rule.field, null)}
+                  onClick={() =>
+                    form === "simple"
+                      ? change(rule.field, null)
+                      : changeRow(rule.id, null)
+                  }
                 >
                   <span className="truncate">{chipText(field, rule)}</span>
                   <XIcon data-icon="inline-end" />
@@ -315,7 +303,7 @@ export function ListToolbar({
             )}
           </SheetHeader>
           <div className="flex min-h-0 flex-col gap-5 overflow-y-auto p-4">
-            {form === "dropdowns" ? (
+            {form === "simple" ? (
               fields.map((field) => (
                 <SheetDropdown
                   key={field.id}
@@ -326,16 +314,16 @@ export function ListToolbar({
               ))
             ) : (
               <>
-                {shownRules.map((rule) => (
+                {shownRows.map((rule) => (
                   <SheetRule
-                    key={rule.field}
+                    key={rule.id}
                     field={fieldOf(rule)!}
                     rule={rule}
-                    onChange={(next) => change(rule.field, next)}
-                    onRemove={() => change(rule.field, null)}
+                    onChange={(next) => changeRow(rule.id, next)}
+                    onRemove={() => changeRow(rule.id, null)}
                   />
                 ))}
-                {unused.length > 0 && (
+                {fields.length > 0 && (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline" className="self-start">
@@ -344,12 +332,17 @@ export function ListToolbar({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start" className="max-h-72">
-                      {unused.map((field) => {
+                      {fields.map((field) => {
                         const Icon = FILTER_ICONS[field.type]
                         return (
                           <DropdownMenuItem
                             key={field.id}
-                            onSelect={() => change(field.id, newRule(field))}
+                            onSelect={() =>
+                              filters?.onChange([
+                                ...rows,
+                                { ...newRule(field), id: ruleId() },
+                              ])
+                            }
                           >
                             <Icon className="text-muted-foreground" />
                             {field.label}

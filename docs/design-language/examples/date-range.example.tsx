@@ -15,8 +15,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  StatTile,
 } from "aperia-ds5"
+import { StatTile } from "../recipes"
 import { dayRangeLabel, isDay, money } from "@/lib/format"
 import { BeforeAfter, Screen } from "./before-after"
 

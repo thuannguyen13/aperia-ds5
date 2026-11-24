@@ -47,7 +47,7 @@ A row does not open when the record it is about no longer exists.
 
 ## Which patterns it uses
 
-- See [List Page](../patterns/list-page.md) for the toolbar, the count, and the empty and no-match states.
+- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar and the count.
 - See [Filters](../patterns/filters.md) for the Record, Who, Action, and Day filters.
 - See [Table](../components/table.md) for the whole row that opens its record.
 
@@ -55,7 +55,7 @@ A row does not open when the record it is about no longer exists.
 
 The app builds it from aperia-ds5 parts:
 
-- `ListToolbar` with `search`, `filters` (`form: "dropdowns"`: Record, Who and Action as `enum` fields, Day as a `day`
+- `ListToolbar` with `search`, `filters` (`form: "simple"`: Record, Who and Action as `enum` fields, Day as a `day`
   field, which shows From and To), `shown`, `total` and `noun={["entry", "entries"]}`.
 - The `Table` in a `surface` box. When: `RelativeTime` in `text-muted-foreground`. What: the sentence in `font-medium`,
   then a list in `text-xs text-muted-foreground`.

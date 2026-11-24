@@ -6,13 +6,15 @@ import * as SheetDeleteStories from "../../../components/ui/sheet-delete/sheet-d
 import { DoDont } from "../blocks"
 import * as Panels from "../examples/dialog.stories"
 import { SkillDoc } from "../skill-doc"
+import { PatternCode } from "../component-page"
 
-<Meta title="Design Language/Patterns/Confirmations and Delete" />
+<Meta title="Patterns/Editing/Confirmations and Delete" />
 
 export const frame = "block min-h-0 overflow-hidden p-0"
 
 <SkillDoc
   source={source}
+  code={<PatternCode components={[{ name: "ConfirmDialog", stories: ConfirmStories }, { name: "SheetDelete", stories: SheetDeleteStories }]} />}
   after={{
     "@intro": <Canvas of={ConfirmStories.Destructive} sourceState="none" />,
     "What is available": (

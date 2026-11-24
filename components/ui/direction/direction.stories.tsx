@@ -3,7 +3,7 @@ import { DirectionProvider } from "./direction"
 import { Slider } from "../slider/slider"
 
 const meta: Meta<typeof DirectionProvider> = {
-  title: "UI/Direction",
+  title: "Components/Layout/Direction",
   component: DirectionProvider,
   tags: ["autodocs"],
   args: {

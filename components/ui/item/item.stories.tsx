@@ -15,7 +15,7 @@ import {
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Item> = {
-  title: "UI/Item",
+  title: "Components/Containment/Item",
   component: Item,
   tags: ["autodocs"],
   parameters: {

@@ -4,7 +4,7 @@ import { Input } from "../input/input"
 import { Checkbox } from "../checkbox/checkbox"
 
 const meta: Meta<typeof Field> = {
-  title: "UI/Field",
+  title: "Components/Text Inputs/Field",
   component: Field,
   args: {
     orientation: "vertical",

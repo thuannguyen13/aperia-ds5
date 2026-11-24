@@ -69,9 +69,9 @@ A date control has no exceptions.
 
 ## Which patterns it uses
 
-- See [List Page](../patterns/list-page.md) for the toolbar and the place of a report date in it.
+- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar and the place of a report date in it.
 - See [Filters](../patterns/filters.md) for a list's days, From and To.
-- See [Page Layout](../patterns/page-layout.md) for the subtitle under the title.
+- See [Page Layout](../foundations/page-layout.md) for the subtitle under the title.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the figures the span counts.
 
 ## In code

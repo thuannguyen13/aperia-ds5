@@ -1,0 +1,20 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/list-toolbar.md?raw"
+import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.stories"
+import { SkillDoc } from "../skill-doc"
+import { PatternCode } from "../component-page"
+
+<Meta title="Patterns/Lists/List Toolbar" />
+
+<SkillDoc
+  source={source}
+  code={<PatternCode components={[{ name: "ListToolbar", stories: ListToolbar }]} />}
+  after={{
+    "What is available": (
+      <Canvas of={ListToolbar.AppControls} sourceState="none" />
+    ),
+    "When you can do it differently": (
+      <Canvas of={ListToolbar.WithLayoutSwitch} sourceState="none" />
+    ),
+  }}
+/>

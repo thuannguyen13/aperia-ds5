@@ -12,9 +12,8 @@ import {
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Dialog> = {
-  title: "UI/Dialog",
+  title: "Components/Containment/Dialog",
   component: Dialog,
-  tags: ["autodocs"],
 }
 
 export default meta

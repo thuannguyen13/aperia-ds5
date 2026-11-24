@@ -10,7 +10,6 @@ import {
   CommandItem,
   CommandList,
   EmptyState,
-  IconButton,
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
@@ -34,6 +33,7 @@ import {
   TabsTrigger,
   matchRange,
 } from "aperia-ds5"
+import { IconButton } from "../recipes"
 import { initials } from "@/lib/format"
 import { cn } from "@/lib/utils"
 import { BeforeAfter, Screen } from "./before-after"

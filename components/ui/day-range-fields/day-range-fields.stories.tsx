@@ -4,7 +4,7 @@ import { DayRangeFields } from "./day-range-fields"
 import { dayRangeLabel } from "@/lib/format"
 
 const meta: Meta<typeof DayRangeFields> = {
-  title: "Patterns/DayRangeFields",
+  title: "Components/Selection/Day Range Fields",
   component: DayRangeFields,
   tags: ["autodocs"],
   parameters: {

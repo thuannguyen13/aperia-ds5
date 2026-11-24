@@ -4,9 +4,10 @@ import { Button } from "../button/button"
 import { ConfirmDialog } from "./confirm-dialog"
 
 const meta: Meta<typeof ConfirmDialog> = {
-  title: "Patterns/ConfirmDialog",
+  title: "Pattern Components/ConfirmDialog",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: ConfirmDialog,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       story: { inline: false, height: "320px" },

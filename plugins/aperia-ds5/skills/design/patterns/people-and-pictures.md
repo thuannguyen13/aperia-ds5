@@ -88,5 +88,46 @@ Pictures work with two other patterns:
   (`initials(name)` from `aperia-ds5/format`). Never a `rounded-*` class, ring, border or shadow on it.
 - The app keeps one small adapter that maps a record to its picture (URL, letters, colors) and renders `Avatar`; every
   page calls that.
-- People in a header are `PeopleStack` (`people`, `title`, `empty`, `size`), each person passed as data from that
-  adapter; companies and products are `shape: "square"`.
+
+### People stack
+
+Build the people stack in the app from `HoverCard`, `HoverCardTrigger`, `HoverCardContent`, `AvatarGroup`,
+`AvatarGroupCount`, `ItemGroup`, `Item`, `ItemMedia`, `ItemContent`, and `ItemTitle` from `aperia-ds5`. Each avatar
+comes from the app's picture adapter. Companies and products are square.
+
+```tsx
+<HoverCard open={open} onOpenChange={setOpen} openDelay={150} closeDelay={100}>
+  <HoverCardTrigger asChild>
+    <button type="button" aria-label="Sales Reps: Maria Chen (Lead), Sam Ortiz" className="flex cursor-pointer rounded-full outline-none focus-visible:ring-3 focus-visible:ring-ring/50">
+      <AvatarGroup>
+        {people.slice(0, 3).map((person) => <RecordAvatar key={person.id} record={person} size="sm" />)}
+        {people.length > 3 && <AvatarGroupCount className="text-xs">+{people.length - 3}</AvatarGroupCount>}
+      </AvatarGroup>
+    </button>
+  </HoverCardTrigger>
+  <HoverCardContent align="start" className="w-auto min-w-56 p-1">
+    <p className="px-2 py-1.5 text-xs font-medium text-muted-foreground">Sales Reps</p>
+    <ItemGroup role="list" className="gap-0 has-data-[size=xs]:gap-0">
+      {people.map((person) => (
+        <Item key={person.id} role="listitem" size="xs" className="gap-2.5 border-0 px-2 py-1.5">
+          <ItemMedia><RecordAvatar record={person} size="sm" /></ItemMedia>
+          <ItemContent className="min-w-0 gap-0">
+            <ItemTitle className="truncate">{person.name}</ItemTitle>
+            <span className="text-xs text-muted-foreground">{[person.role, person.detail].filter(Boolean).join(" · ")}</span>
+          </ItemContent>
+        </Item>
+      ))}
+    </ItemGroup>
+  </HoverCardContent>
+</HoverCard>
+```
+
+- `RecordAvatar` in the snippet stands for the app's own picture adapter.
+- The stack shows the first three avatars, then a count such as +2 for the rest.
+- The button's accessible name lists every person and their role, so nothing hides behind the hover.
+- The card opens on hover and on keyboard focus. A hover card ignores touch, so on a pointer down with
+  `pointerType === "touch"`, remember whether it was open, and on click set it to the opposite. While a touch is in
+  progress, ignore `onOpenChange`.
+- With no one, the button holds `<Avatar size="sm" empty />`, its name reads "Sales Reps: No assignee", and the card
+  shows the muted "No assignee" line in place of the list.
+- The avatars are 24px (`sm`) in the header line, or 20px (`xs`) for a denser line. The card's rows stay 24px.

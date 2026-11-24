@@ -60,8 +60,8 @@ A page may fill the whole width in place of the centered column when it shows a 
 ## Works with
 
 - See [Spacing](spacing.md) for the space around these sizes.
-- See [Typography](typography.md) for the text inside them.
-- See [Icons](icons.md) for icon buttons.
+- See [Typography](../styles/typography.md) for the text inside them.
+- See [Icons](../styles/icons.md) for icon buttons.
 
 ## In code
 
@@ -72,7 +72,8 @@ A page may fill the whole width in place of the centered column when it shows a 
 - A phone is narrower than Tailwind's `sm` breakpoint (640px).
 - `Button` sizes: `xs` (`h-6`), `sm` (`h-7`), `default` (`h-8`, `max-sm:h-10`), `lg` (`h-9`); icon sizes `icon-xs`,
   `icon-sm`, `icon` and `icon-lg`. `Input` and `SelectTrigger` are `h-8 max-sm:h-10`.
-- `IconButton` defaults to `size="icon-sm"` and is `max-sm:size-10` on a phone.
+- An icon button (the recipe on [Button](../components/button.md)) is `size="icon-sm"` and `max-sm:size-10` on a
+  phone.
 - `AppContent` is the page column (`max-w-360`, with `p-5`); render `<FullWidth />` in a page that needs the whole pane.
   `AppHeader`'s bar is `h-14`.
 - `base.css` gives every clickable element the pointer, including a row marked with `opensOnClick` (`data-opens`); it

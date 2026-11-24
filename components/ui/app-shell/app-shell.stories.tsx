@@ -261,7 +261,7 @@ function Dark({ children }: { children: React.ReactNode }) {
 }
 
 const meta: Meta = {
-  title: "UI/App Shell",
+  title: "Components/Navigation/App Shell",
   parameters: {
     layout: "fullscreen",
     docs: {

@@ -11,9 +11,10 @@ import {
 } from "../command/command"
 
 const meta: Meta<typeof ReasonTooltip> = {
-  title: "Patterns/ReasonTooltip",
+  title: "Pattern Components/ReasonTooltip",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: ReasonTooltip,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

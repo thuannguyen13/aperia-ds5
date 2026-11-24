@@ -43,6 +43,17 @@ Examples are the content of a collapsed card and an error that clears.
 Tiles sit in rows, and tiles in a row line up. The line that says what each number means is pinned to the foot of the
 tile, whether or not the tile has a bar. Tile numbers use tabular figures.
 
+A page of cards, such as a record's page, stacks the page header, a row of tiles, and the cards, 20px apart. The cards
+sit in one column, or in a main column with a side column. The content decides, not the number of cards. A page gets a
+side column when it has related records or people to show beside its main work. The side column appears once the page
+is 960px wide. The main column takes three quarters and the side column one quarter, lined up under the tiles. A phone
+gets one column. Cards in a grid are 16px apart.
+
+Cards are ordered by what the user does. The main column holds the record's own content first, such as what is sold
+and its details. The work on the record follows, with two short cards side by side once both fit, such as Tasks and
+Notes. The side column holds related records and people, with the history card last. An empty card keeps its place,
+with an empty state inside.
+
 ## Rules
 
 ### Put Add in the header, beside the records
@@ -57,6 +68,13 @@ tile, whether or not the tile has a bar. Tile numbers use tabular figures.
 - **Do:** Label a tile's number ("Overdue Tasks" above a red 3, "3 overdue" under it), so people know what it counts.
 - **Don't:** Show a bare red number, or a number with no label. Add the label, so the number means something.
 
+### Use one page of cards, not page tabs
+
+- **Do:** Build one scrolling page of cards, with tabs that switch a card's content inside that card, so the whole
+  record is in view.
+- **Don't:** Split the record into views with tabs across the top of the page. Use one page of cards, so nothing hides
+  behind a tab.
+
 ### Let each part own its space
 
 - **Do:** Let the header's height and the content's padding make the space, so nothing moves when a part hides.
@@ -70,19 +88,38 @@ hover or focus, and always on touch screens. Edit opens the same editor as the r
 
 ## Works with
 
-Cards and tiles work with four other pages:
+Cards and tiles work with these pages:
 
 - See [Card](../components/card.md) for the card's types and specs, for heading every card the same way, for tabs
   inside the card, and for collapsing a card with its title.
-- See [Money and Numbers](money-and-numbers.md) for how a tile's number is written.
+- See [Money and Numbers](../foundations/money-and-numbers.md) for how a tile's number is written.
 - See [Buttons and Actions](buttons-and-actions.md) for Add in the header.
-- See [Empty State](../components/empty-state.md) for an empty card.
+- See [Empty State](../foundations/empty-state.md) for an empty card.
+- See [Details](details.md) and [History](history.md) for the cards a record's page holds.
 
 ## In code
 
-- `TitledCard` from `aperia-ds5` for every card: `title`, `figure`, `action`, `description`, `collapsible`,
-  `defaultOpen`. A table goes straight inside; other content in `<CardContent className="pb-4">`. Never a `gap` or
-  `space-y` on the card.
-- `StatTile` for a number: `label`, `value`, `hint`, `tone="red"` (with the app's status color), `plain` inside a
-  card, a bar as `children`.
+- Sections are direct children of `AppContent`: the row of tiles first, then the body. Don't wrap them in a
+  `gap-4` column or space them with margins.
+- A side column: a grid from a 60rem container, three quarters and one quarter, `grid-cols-[minmax(0,1fr)]` on a
+  phone, `gap-4`. Build every card, the details card too, as the titled card recipe on [Card](../components/card.md).
+Build every card's header as the titled card recipe on [Card](../components/card.md).
+
+Build the stat tile in the app from plain elements with the `surface` utility from `aperia-ds5`. A bar under the
+number is a `Progress` from `aperia-ds5`.
+
+```tsx
+<div className="surface flex flex-col gap-0.5 px-4 py-3">
+  <span className="text-xs text-muted-foreground">Overdue Tasks</span>
+  <span className="text-2xl font-semibold tabular-nums text-destructive">3</span>
+  {/* An optional bar goes here, under the number. */}
+  <span className="mt-auto text-xs text-muted-foreground">3 overdue</span>
+</div>
+```
+
+- The red number (`text-destructive`) shows only with a label that says what it counts. An app can use its own status
+  color in its place.
+- Inside a card, drop `surface px-4 py-3` and keep `flex flex-col gap-0.5`, because the card is the surface.
+- The line under the number has `mt-auto`, so the lines of a row of tiles stay level whether or not a tile has a bar.
+- A row of tiles is a grid with `gap-4`, two columns on a phone.
 - A chart's tooltip is `ChartTip` from `aperia-ds5/chart`.

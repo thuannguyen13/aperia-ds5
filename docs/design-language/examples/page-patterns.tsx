@@ -5,9 +5,6 @@ import {
   AvatarFallback,
   Button,
   CardContent,
-  DetailRow,
-  DetailSection,
-  EmptyValue,
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
@@ -17,10 +14,15 @@ import {
   ItemGroup,
   ItemMedia,
   ItemTitle,
-  ListSkeleton,
-  NoneText,
   Spinner,
 } from "aperia-ds5"
+import {
+  DetailRow,
+  DetailSection,
+  EmptyValue,
+  ListSkeleton,
+  NoneText,
+} from "../recipes"
 import { cn } from "@/lib/utils"
 import { DoDont } from "../blocks"
 import { TaskTable, TitledCard, Wide } from "./shared"

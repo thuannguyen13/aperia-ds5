@@ -94,15 +94,16 @@ The app builds both, once, from aperia-ds5 parts:
 
 - **Search:** `AppSidebarSearch` in `AppSidebar`'s `search` opens it on a click and on ⌘K. Build the panel from
   `CommandDialog` and `Command` with `shouldFilter={false}`, since the server already matched. One `CommandGroup` per
-  kind, in a fixed order, only for kinds with matches; each `CommandItem` holds the app's `Avatar` adapter, the name with
-  the match (`matchRange`) in `font-semibold`, and a muted detail line. Search after a short pause, keep the last
+  kind, in a fixed order, only for kinds with matches; each `CommandItem` holds the app's `Avatar` adapter, the name
+  with the match (`matchRange`) in `font-semibold`, and a muted detail line. Search after a short pause, keep the last
   results faded while new ones load, and show `NoResults` only once typing has paused. The footer's hints are `Kbd`s,
   hidden on a phone. Opening a result closes the dialog (and the sidebar on a phone, `setOpenMobile(false)`); closing
   clears the query.
 - **Notifications:** `AppSidebarNotifications` (with `unread`) is the trigger of a `Popover`
   (`side="right"`, `align="start"`, `w-[min(24rem,calc(100vw-1rem))]`). The content takes focus itself
   (`tabIndex={-1}`, focused in `onOpenAutoFocus`). The header is a 48px row: `Tabs` with `TabsList variant="line"`, a
-  ghost Mark All as Read, and an `IconButton` "Notification Settings". Each notification is an `Item size="sm"` as a link,
+  ghost Mark All as Read, and an icon button "Notification Settings" (the recipe from
+  [Button](../components/button.md)). Each notification is an `Item size="sm"` as a link,
   with an `Avatar` (a `BellIcon` for the system), the sentence, `RelativeTime`, and an unread dot with
   `aria-label="Unread"`. Empty tabs use `EmptyState` with `BellIcon`. New ones are also toasts with the same sentence
   and avatar: three at most, then one "N more new notifications." toast.

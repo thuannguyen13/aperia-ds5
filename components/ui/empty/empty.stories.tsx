@@ -5,7 +5,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "../avatar/avatar"
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Empty> = {
-  title: "UI/Empty",
+  title: "Components/Communication/Empty",
   component: Empty,
   tags: ["autodocs"],
   parameters: {

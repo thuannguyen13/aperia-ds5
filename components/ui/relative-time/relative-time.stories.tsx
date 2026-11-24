@@ -5,9 +5,10 @@ import { RelativeTime } from "./relative-time"
 const minutesAgo = (minutes: number) => new Date(Date.now() - minutes * 60_000)
 
 const meta: Meta<typeof RelativeTime> = {
-  title: "Patterns/RelativeTime",
+  title: "Pattern Components/RelativeTime",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: RelativeTime,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   args: { value: minutesAgo(3 * 24 * 60), label: undefined },
   parameters: {
     docs: {

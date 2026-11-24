@@ -4,8 +4,8 @@ import { Button } from "../button/button"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { SortControl } from "./sort-control"
 import { sortRows, UNSORTED, type SortField, type SortState } from "./sort"
-import { TitledCard } from "../titled-card/titled-card"
-import { EmptyValue } from "../empty-value/empty-value"
+import { TitledCard } from "@/docs/design-language/recipes/titled-card"
+import { EmptyValue } from "@/docs/design-language/recipes/empty-value"
 import {
   Table,
   TableBody,
@@ -17,9 +17,10 @@ import {
 import { formatDate } from "@/lib/format"
 
 const meta: Meta<typeof SortControl> = {
-  title: "Patterns/SortControl",
+  title: "Pattern Components/SortControl",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: SortControl,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
     docs: {

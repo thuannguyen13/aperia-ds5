@@ -96,14 +96,40 @@ controls.
 | Page header | The page title is larger. A card's title is one step below it. |
 
 See [Tables](../patterns/tables.md) for running a table to the card's edges, with the column headings right under the
-card header. See [Empty State](empty-state.md) for keeping an empty card in its place. See [Shape and
-Edges](../foundations/shape-and-edges.md) and [Elevation](../foundations/elevation.md) for the corner, edge, and shadow
+card header. See [Empty State](../foundations/empty-state.md) for keeping an empty card in its place. See [Shape and
+Edges](../styles/shape-and-edges.md) and [Elevation](../styles/elevation.md) for the corner, edge, and shadow
 the Specs name.
 
 ## In code
 
-- `TitledCard` from aperia-ds5 for every card: `title`, `figure`, `action`, `collapsible` and
-  `defaultOpen`. A table goes straight inside; other content goes in `<CardContent className="pb-4">`, which brings
-  its own padding. Don't add `gap`, `space-y` or vertical padding to the card: each part owns its space.
-- It's built on `Card` from `aperia-ds5` (`size="sm"` for the small card). Use the `surface` utility for your own box
-  that should look like a card.
+Build the titled card in the app from `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, and
+`CardContent` from `aperia-ds5`. Write it once as the app's own component and use it for every card.
+
+```tsx
+<Card className="gap-0 py-0">
+  <CardHeader className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-3">
+    <div className="flex min-h-8 flex-wrap content-center items-baseline gap-x-3">
+      <CardTitle role="heading" aria-level={2}>Tasks</CardTitle>
+      <p className="text-sm text-muted-foreground tabular-nums">12</p>
+    </div>
+    <CardDescription className="order-last basis-full">Optional line under the title</CardDescription>
+    <CardAction className="ml-auto flex items-center gap-2 self-center">
+      <Button variant="outline">Add Task</Button>
+    </CardAction>
+  </CardHeader>
+  <CardContent className="pb-4">…</CardContent>
+</Card>
+```
+
+- The card has `gap-0 py-0`, and each part brings its own space. Do not add `gap`, `space-y`, or vertical padding to
+  the card. A table goes straight inside the card with no `CardContent`. Other content goes in
+  `<CardContent className="pb-4">`.
+- The header is a wrapping row, not the grid that `CardHeader` has by default. On a phone the action drops under the
+  title, and `ml-auto` keeps it at the right.
+- For a collapsible card, put a `<button type="button">` inside `CardTitle` that holds the title and a
+  `ChevronDownIcon` (`size-4 text-muted-foreground transition-transform`, plus `-rotate-90` while closed). Give it
+  `aria-expanded` and `aria-controls` that names the content's `id`. Wrap the content in a `<div>` that is `hidden`
+  while closed and `className="contents"` while open. Start it open unless the page says otherwise.
+- Give the card an `id` when a link elsewhere opens the page at it.
+- Pass `size="sm"` to `Card` for the small card. Use the `surface` utility for an app's own box that should look like
+  a card.

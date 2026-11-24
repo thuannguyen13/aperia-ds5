@@ -3,7 +3,7 @@ import { Smile } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
 
 const meta: Meta<typeof Tabs> = {
-  title: "UI/Tabs",
+  title: "Components/Containment/Tabs",
   component: Tabs,
   tags: ["autodocs"],
   parameters: {

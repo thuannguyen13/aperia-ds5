@@ -3,7 +3,7 @@ import { Checkbox } from "./checkbox"
 import { Label } from "../label/label"
 
 const meta: Meta<typeof Checkbox> = {
-  title: "UI/Checkbox",
+  title: "Components/Selection/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
   argTypes: {

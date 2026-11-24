@@ -18,7 +18,6 @@ import {
   FieldGroup,
   FieldLabel,
   FormSheet,
-  IconButton,
   Input,
   Item,
   ItemActions,
@@ -35,11 +34,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  TitledCard,
   Toaster,
   useSheetForm,
   type FormSchema,
 } from "aperia-ds5"
+import { IconButton, TitledCard } from "../recipes"
 import { BeforeAfter, Screen } from "./before-after"
 
 type Task = {

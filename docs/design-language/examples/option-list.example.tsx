@@ -24,11 +24,9 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableGroupRow,
   TableHead,
   TableHeader,
   TableRow,
-  TitledCard,
   Toaster,
   ToggleGroup,
   ToggleGroupItem,
@@ -38,6 +36,7 @@ import {
   type FormSchema,
   type SortableRowProps,
 } from "aperia-ds5"
+import { TableGroupRow, TitledCard } from "../recipes"
 import { cn } from "@/lib/utils"
 import { BeforeAfter, Screen } from "./before-after"
 

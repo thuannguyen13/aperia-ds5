@@ -11,7 +11,7 @@ import { Button } from "../button/button"
 import { ChevronDownIcon } from "lucide-react"
 
 const meta: Meta<typeof Collapsible> = {
-  title: "UI/Collapsible",
+  title: "Components/Containment/Collapsible",
   component: Collapsible,
   tags: ["autodocs"],
 }

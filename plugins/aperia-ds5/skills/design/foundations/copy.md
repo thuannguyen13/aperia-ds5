@@ -369,14 +369,16 @@ Send questions these rules do not answer to the VP of Product Innovation and Des
 ## Works with
 
 - See [Message Templates](copy-templates.md) for the wording of every message.
-- See [Typography](typography.md) for Title Case and sentence case on screen.
-- See [Color](color.md) for gray in the missing-value dash and hints, and red in negative amounts.
+- See [Typography](../styles/typography.md) for Title Case and sentence case on screen.
+- See [Color](../styles/color.md) for gray in the missing-value dash and hints, and red in negative amounts.
 
 ## In code
 
 - Formatters in `aperia-ds5/format`: `formatDate` (09/22/2026), `formatMoment` (with time and zone), `dayRangeLabel`,
   `ago` ("3d ago"), `money`, `HIDDEN_MONEY` ($XX,XXX), `percent`, `plural`, `listed`. Never format a date or amount by
   hand.
-- Values: `EmptyValue` (—), `NoneText` ("No [field]"), `HiddenValue`, `RelativeTime` ("3d ago" with the date on hover).
+- Values: `RelativeTime` ("3d ago" with the date on hover). Build the empty value (—) and "No [field]" text in the app
+  from [Empty and Missing](empty-and-missing.md), and the hidden value ($XX,XXX) from
+  [Money and Numbers](money-and-numbers.md).
 - The project's own glossary and copy decisions, when it has them: `docs/glossary.md`, `docs/screens.md`, or a
   project-level `ui-copy` skill.

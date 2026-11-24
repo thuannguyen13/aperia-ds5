@@ -3,12 +3,15 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/pickers.m
 import * as PickerStories from "../../../components/ui/entity-picker/entity-picker.stories"
 import * as PickFieldStories from "../../../components/ui/pick-field/pick-field.stories"
 import { pickerExamples } from "../examples/forms-and-values"
+import * as AddOptionStories from "../../../components/ui/add-option/add-option.stories"
 import { SkillDoc } from "../skill-doc"
+import { PatternCode } from "../component-page"
 
-<Meta title="Design Language/Patterns/Pickers" />
+<Meta title="Patterns/Editing/Pickers" />
 
 <SkillDoc
   source={source}
+  code={<PatternCode components={[{ name: "EntityPicker", stories: PickerStories }, { name: "PickField", stories: PickFieldStories }, { name: "AddOption", stories: AddOptionStories }]} />}
   after={{
     "@intro": <Canvas of={PickerStories.Default} sourceState="none" />,
     "What is available": (

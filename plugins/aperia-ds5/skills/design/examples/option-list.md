@@ -66,15 +66,17 @@ Leave out the grip column when the order does not matter.
 - See [Tables](../patterns/tables.md) for the grouped rows and In Use aligned right.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the option's sheet, read-only for someone who may only
   delete.
-- See [Disabled With a Reason](../patterns/disabled-with-a-reason.md) for Delete while the option is in use.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for Delete while the option is in use.
 
 ## In code
 
-The app builds it from aperia-ds5 parts:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- `TitledCard` per list, the count as `figure` and Add Stage as `action`, holding a flush `Table`.
-- Each group is its own `TableBody`, headed by `TableGroupRow`, holding a `SortableList` of `SortableRow`s (the handle
-  in the first cell). Save the new order at once and `toast("Order saved.")`.
+- The titled card from [Card](../components/card.md) per list, the count as its figure and Add Stage as its action,
+  holding a flush `Table`.
+- Each group is its own `TableBody`, headed by the table group row from [Tables](../patterns/tables.md), holding a
+  `SortableList` of `SortableRow`s (the handle in the first cell). Save the new order at once and `toast("Order
+  saved.")`.
 - Each row spreads `opensOnClick(`Open ${name}`, edit)`, or nothing for someone who may neither edit nor delete.
 - The sheet is `FormSheet` with `SheetForm` (`readOnly` for someone who may only delete) and `SheetDelete` in `start`,
   with `reason={IN_USE_DELETE}` while the option is in use.

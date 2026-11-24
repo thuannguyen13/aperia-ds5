@@ -5,7 +5,7 @@ import { Message, MessageContent } from "../message/message"
 import { Bubble, BubbleContent } from "../bubble/bubble"
 
 const meta: Meta<typeof Marker> = {
-  title: "UI/Marker",
+  title: "Components/Chat/Marker",
   component: Marker,
   tags: ["autodocs"],
   args: {

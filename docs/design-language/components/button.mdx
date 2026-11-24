@@ -1,8 +1,10 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import source from "../../../plugins/aperia-ds5/skills/design/components/button.md?raw"
-import { SkillDoc } from "../skill-doc"
+import * as Stories from "../../../components/ui/button/button.stories"
+import { ComponentHome } from "../component-page"
 import { buttonExamples } from "../examples/button"
 
-<Meta title="Design Language/Components/Button" />
+{/* The component's home: replaces its generated docs page (see component-page.tsx). */}
 
-<SkillDoc source={source} after={buttonExamples} />
+<Meta of={Stories} />
+
+<ComponentHome guide="components/button.md" after={buttonExamples} />

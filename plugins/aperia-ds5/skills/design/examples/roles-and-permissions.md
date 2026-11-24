@@ -95,19 +95,21 @@ Show one role at a time, picked above the table, when the space is too narrow fo
 - See [Notifications](../patterns/notifications.md) for where Notification Settings opens from.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for Add Role and Edit Role.
 - See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for Delete Role.
-- See [Disabled With a Reason](../patterns/disabled-with-a-reason.md) for a level that cannot change and a role in use.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for a level that cannot change and a role in
+  use.
 - See [Message Templates](../foundations/copy-templates.md) for where a refused save shows.
 
 ## In code
 
-The app builds both from aperia-ds5 parts:
+The app builds both from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- Roles: `TitledCard` (`title="Roles"`, Add Role as `action`) holding a flush `Table`. Each area is a
-  `TableGroupRow`. A level cell is a `Select` of None, Owned and All; an on/off cell is `FlagSwitch` with a full
-  `label`. A cell that can't change gets `reason` (`FlagSwitch`) or sits in `ReasonTooltip`. Each pick calls
-  `toast(…, { action: { label: "Undo", … } })`.
+- Roles: the titled card from [Card](../components/card.md) (titled Roles, Add Role as its action) holding a flush
+  `Table`. Each area is headed by the table group row from [Tables](../patterns/tables.md). A level cell is a `Select`
+  of None, Owned, and All; an on/off cell is the flag switch from [Switches in a
+  Grid](../patterns/switches-in-a-grid.md) with a full label. A cell that cannot change shows its reason (the flag
+  switch's lock) or sits in `ReasonTooltip`. Each pick calls `toast(…, { action: { label: "Undo", … } })`.
 - Add Role and Edit Role: `FormSheet` with `SheetForm`. Delete Role: `ConfirmDialog`, or `BlockedMenuItem` with
   `IN_USE_DELETE` for a role with users.
-- Notification Settings: a `Sheet` (no form, nothing to save) holding a flush `Table` with `TableGroupRow`s and a
-  `FlagSwitch` per channel. A refused save sets the switch back and shows an `Alert` (`variant="destructive"`) above
+- Notification Settings: a `Sheet` (no form, nothing to save) holding a flush `Table` with table group rows and a
+  flag switch per channel. A refused save sets the switch back and shows an `Alert` (`variant="destructive"`) above
   the table.

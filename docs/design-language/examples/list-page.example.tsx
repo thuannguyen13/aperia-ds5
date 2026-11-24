@@ -15,9 +15,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-  ListSkeleton,
   ListToolbar,
-  MoneyValue,
   NoResults,
   PageHeader,
   Table,
@@ -36,6 +34,7 @@ import {
   type FilterRule,
   type SortField,
 } from "aperia-ds5"
+import { ListSkeleton, MoneyValue } from "../recipes"
 import { BeforeAfter, Screen } from "./before-after"
 
 type Prospect = {

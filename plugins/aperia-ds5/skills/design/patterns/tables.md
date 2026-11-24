@@ -5,7 +5,7 @@ parts and specs.
 
 ## When to use
 
-Use a table on a list page for the list's records, under its toolbar. See [List Page](list-page.md) for the toolbar.
+Use a table on a list page for the list's records, under its toolbar. See [List Toolbar](list-toolbar.md) for the toolbar.
 
 Use a table in a card for records that belong to the page's record, such as its tasks or line items.
 
@@ -35,7 +35,7 @@ Numbers, including amounts, line up in their column and are right-aligned.
 
 A cell with several names shows a count. Selecting the count lists the names.
 
-A missing value is a muted em dash (—). See [Empty and Missing](empty-and-missing.md) for missing values.
+A missing value is a muted em dash (—). See [Empty and Missing](../foundations/empty-and-missing.md) for missing values.
 
 ## Rules
 
@@ -64,17 +64,57 @@ This pattern has no exceptions.
 
 ## Works with
 
-- See [List Page](list-page.md) for the toolbar above a list's table and for rows that open their record.
-- See [Page Layout](page-layout.md) for lining the first column up with the title.
+- See [List Toolbar](list-toolbar.md) for the toolbar above a list's table.
+- See [Page Layout](../foundations/page-layout.md) for lining the first column up with the title.
 - See [Card](../components/card.md) for the titled card a table sits in.
 - See [Table](../components/table.md) for plain rows without stripes.
 
 ## In code
 
-- In a `TitledCard`, put the `Table` straight inside (no wrapper, no padding, no `border-t` or `Separator`) and pad
-  the first and last cells `pl-4` and `pr-4`. On the page, give the table the `surface` utility.
-- Grouped rows: `TableGroupRow` (`colSpan`, the table's column count; `leading`, such as a logo; `trailing`, such as
-  the group's total or buttons), each group in its own `TableBody` when they reorder.
-- A wide table: `ScrollTable` around the `Table`, which scrolls it sideways and takes keyboard focus and a name. A
-  wide list table on the page also renders `<FullWidth />`.
-- Figures are `tabular-nums` and right-aligned. A missing value is `EmptyValue`.
+- In a card, put the `Table` straight inside (no wrapper, no padding, no `border-t` or `Separator`) and pad the first
+  and last cells `pl-4` and `pr-4`. Build the card as the titled card recipe on [Card](../components/card.md). On the
+  page, give the table the `surface` utility.
+- Figures are `tabular-nums` and right-aligned. A missing value is the empty value from
+  [Empty and Missing](../foundations/empty-and-missing.md).
+
+### Scroll table
+
+Build the scroll table in the app as a `div` around the `Table` from `aperia-ds5`. The `div` scrolls the table sideways
+when it is wider than its box.
+
+```tsx
+<div
+  role="region"
+  aria-label="Commissions"
+  tabIndex={0}
+  className="overflow-x-auto outline-none focus-visible:ring-2 focus-visible:ring-ring *:data-[slot=table-container]:overflow-visible"
+>
+  <Table>…</Table>
+</div>
+```
+
+- The region takes keyboard focus and a name, because the table holds nothing to Tab to and its own scroll is out of
+  the keyboard's reach.
+- The table's own container gives up its scroll (`overflow-visible`), so only the region scrolls.
+- On the page, add the `surface` utility to the region. A wide list table on the page also renders `<FullWidth />`.
+
+### Group row
+
+Build the group row in the app from `TableRow` and `TableCell` from `aperia-ds5`. It heads each group of rows in one
+table with a quiet band that holds the group's name.
+
+```tsx
+<TableRow className="bg-foreground/4 hover:bg-foreground/4">
+  <TableCell colSpan={columnCount} className="pl-4 pr-4 text-xs font-medium text-muted-foreground">
+    <div className="flex items-center justify-between gap-3">
+      <span className="flex items-center gap-1.5">{logo}Acme Bank</span>
+      <span className="flex items-center gap-1 tabular-nums">$48,500</span>
+    </div>
+  </TableCell>
+</TableRow>
+```
+
+- `colSpan` is the table's column count, so the band crosses the whole table.
+- The name starts on the first column's `pl-4` line. A total or buttons at the end stop on the last column's `pr-4`
+  line. With nothing before or after the name, drop the inner `div` and `pr-4`.
+- Put each group in its own `TableBody` when the groups can be reordered.

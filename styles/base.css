@@ -110,7 +110,7 @@
    Values follow Sales Portal, the source of the 0.3.0 audit, and match the
    Figma library "Aperia Shadcn Library (Enhanced)". Every token is shadcn's,
    with Aperia's value; an app sets only its chart palette and status colors
-   (plugins/aperia-ds5/skills/design/foundations/color.md, What an app can
+   (plugins/aperia-ds5/skills/design/styles/color.md, What an app can
    change).
    Tokens derived with var() are declared again under .dark, so a .dark
    subtree inside a light page resolves them too. */

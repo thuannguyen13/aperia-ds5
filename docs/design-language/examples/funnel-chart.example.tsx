@@ -5,8 +5,8 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-  TitledCard,
 } from "aperia-ds5"
+import { TitledCard } from "../recipes"
 import { cn } from "@/lib/utils"
 import { BeforeAfter, Screen } from "./before-after"
 

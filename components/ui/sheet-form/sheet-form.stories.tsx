@@ -2,7 +2,7 @@ import { useEffect, useTransition } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Button } from "../button/button"
 import { Field, FieldError, FieldGroup, FieldLabel } from "../field/field"
-import { FormSection } from "../form-section/form-section"
+import { FormSection } from "@/docs/design-language/recipes/form-section"
 import { Input } from "../input/input"
 import { Textarea } from "../textarea/textarea"
 import { IN_USE_DELETE, SheetDelete } from "../sheet-delete/sheet-delete"
@@ -202,10 +202,11 @@ function ContactSheet({
 }
 
 const meta: Meta<typeof SheetForm> = {
-  title: "Patterns/SheetForm",
+  title: "Pattern Components/SheetForm",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: SheetForm,
   subcomponents: { FormSheet },
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
     docs: {

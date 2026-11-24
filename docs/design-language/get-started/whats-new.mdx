@@ -1,0 +1,7 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import source from "../../../CHANGELOG.md?raw"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Get Started/What's New" />
+
+<SkillDoc source={source.replace(/^# .+/, "# What's New")} />

@@ -8,12 +8,13 @@ import {
 } from "lucide-react"
 import { EmptyState } from "./empty-state"
 import { Button } from "../button/button"
-import { TitledCard } from "../titled-card/titled-card"
+import { TitledCard } from "@/docs/design-language/recipes/titled-card"
 
 const meta: Meta<typeof EmptyState> = {
-  title: "Patterns/EmptyState",
+  title: "Pattern Components/EmptyState",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
+  tags: ["!dev"],
   component: EmptyState,
-  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {

@@ -16,9 +16,7 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-  IconButton,
   Label,
-  LengthCount,
   Popover,
   PopoverAnchor,
   PopoverContent,
@@ -34,6 +32,7 @@ import {
   Textarea,
   Toaster,
 } from "aperia-ds5"
+import { IconButton, LengthCount } from "../recipes"
 import { BeforeAfter, Screen } from "./before-after"
 
 const REASON_MAX = 2000

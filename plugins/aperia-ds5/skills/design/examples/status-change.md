@@ -72,19 +72,21 @@ A status change has no exceptions.
 ## Which patterns it uses
 
 - See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for the dialog's title and button.
-- See [Disabled With a Reason](../patterns/disabled-with-a-reason.md) for why the button stays enabled.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for why the button stays enabled.
 - See [Tables](../patterns/tables.md) for the status in a row.
-- See [Record Page](../patterns/record-page.md) for where the dialog starts on a record.
+- See [Record Page](record-page.md) for where the dialog starts on a record.
 - See [Copy](../foundations/copy.md) for naming the action on a button and asking with the action's name.
 
 ## In code
 
-The app builds it from aperia-ds5 parts:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- From a row: a `Popover` anchored to the status `Badge` (`PopoverAnchor`), opened by an `IconButton` with a chevron
-  and the label "Change Disposition for …". From a record page or a board drop: an `AlertDialog`.
+- From a row: a `Popover` anchored to the status `Badge` (`PopoverAnchor`), opened by an icon button (the recipe from
+  [Button](../components/button.md)) with a chevron and the label "Change Disposition for …". From a record page or a
+  board drop: an `AlertDialog`.
 - The change: two `Badge`s and an arrow icon. The choices: `RadioGroup` in a `FieldSet`. The reason: `Textarea` with
-  `maxLength` and `LengthCount`, `autoFocus`ed, and `FieldError` for the refusal.
+  `maxLength` and the length count from [Forms in Sheets](../patterns/forms-in-sheets.md), `autoFocus`ed, and
+  `FieldError` for the refusal.
 - While saving: `Spinner` in the action (`data-icon="inline-start"`) and Cancel `disabled`; ignore the close while
   pending. After: `toast("Changed to Demo.", { action: { label: "Undo", onClick } })`.
 - After a board drop, return focus to the card in `onCloseAutoFocus`.

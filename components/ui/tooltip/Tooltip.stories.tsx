@@ -3,7 +3,7 @@ import { Button } from "../button/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip"
 
 const meta: Meta<typeof TooltipContent> = {
-  title: "UI/Tooltip",
+  title: "Components/Communication/Tooltip",
   component: TooltipContent,
   tags: ["autodocs"],
   args: {

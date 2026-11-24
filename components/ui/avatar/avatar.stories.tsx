@@ -9,7 +9,7 @@ import {
 } from "./avatar"
 
 const meta: Meta<typeof Avatar> = {
-  title: "UI/Avatar",
+  title: "Components/Files and Media/Avatar",
   component: Avatar,
   args: {
     size: "default",

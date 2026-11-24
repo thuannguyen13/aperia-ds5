@@ -62,15 +62,15 @@ Notifications work with three other patterns:
 
 - See [App Shell](app-shell.md) for the sidebar entry that opens the panel.
 - See [Switches in a Grid](switches-in-a-grid.md) for Notification Settings.
-- See [Empty and Missing](empty-and-missing.md) for the empty tabs.
+- See [Empty and Missing](../foundations/empty-and-missing.md) for the empty tabs.
 
 ## In code
 
 - `AppSidebarNotifications` (`icon`, `unread`, `label`) in `AppSidebar`'s `notifications`, wrapped by the app's
   `PopoverTrigger asChild`; `notificationsAfter` places it after a page.
 - The panel is a `Popover` (`side="right"`, `align="start"`), up to `w-96` (24rem) and never wider than the screen,
-  that focuses itself on open. Header: `Tabs` `variant="line"`, a ghost Mark All as Read, an `IconButton`
-  "Notification Settings".
+  that focuses itself on open. Header: `Tabs` `variant="line"`, a ghost Mark All as Read, and an icon button
+  "Notification Settings" (the icon button recipe on [Button](../components/button.md)).
 - Each notification is an `Item` (`size="sm"`) linking to its record: `Avatar`, the sentence in `text-muted-foreground`
   with names `text-foreground font-medium`, `RelativeTime` under it, and the unread dot with an sr-only "Unread".
 - Empty tabs are `EmptyState` with a bell icon. New ones also toast, three at most.

@@ -3,7 +3,7 @@ import { Spinner } from "./spinner"
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Spinner> = {
-  title: "UI/Spinner",
+  title: "Components/Communication/Spinner",
   component: Spinner,
   tags: ["autodocs"],
   parameters: {

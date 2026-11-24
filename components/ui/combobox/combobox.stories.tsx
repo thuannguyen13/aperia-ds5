@@ -21,7 +21,7 @@ import {
 } from "./combobox"
 
 const meta: Meta<typeof Combobox> = {
-  title: "UI/Combobox",
+  title: "Components/Selection/Combobox",
   component: Combobox,
   tags: ["autodocs"],
   parameters: {

@@ -2,11 +2,13 @@ import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/sort.md?raw"
 import * as SortControl from "../../../components/ui/sort-control/sort-control.stories"
 import { SkillDoc } from "../skill-doc"
+import { PatternCode } from "../component-page"
 
-<Meta title="Design Language/Patterns/Sort" />
+<Meta title="Patterns/Lists/Sort" />
 
 <SkillDoc
   source={source}
+  code={<PatternCode components={[{ name: "SortControl", stories: SortControl }]} />}
   after={{
     "What is available": (
       <>

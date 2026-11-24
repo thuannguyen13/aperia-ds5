@@ -79,7 +79,23 @@ function Measured({
   )
 }
 
-/** The same content in a Light frame and a Dark frame, side by side (stacked on a narrow window). */
+/** One frame for an example whose values are the same in Light and Dark, such as sizes, type, spacing or motion. */
+function Frame({ children }: { children: ReactNode }) {
+  return (
+    <Unstyled>
+      <TooltipProvider>
+        <div className="my-4 rounded-xl bg-background p-5 text-sm text-foreground ring-[0.5px] ring-border">
+          {children}
+        </div>
+      </TooltipProvider>
+    </Unstyled>
+  )
+}
+
+/**
+ * The same content in a Light frame and a Dark frame, side by side (stacked on a narrow window). Only for an example
+ * whose values change with the mode, such as shadows; everything else uses `Frame`.
+ */
 function LightDark({ children }: { children: ReactNode }) {
   const frame =
     "rounded-xl bg-background p-5 text-sm text-foreground ring-[0.5px] ring-border"
@@ -251,7 +267,7 @@ const STEPS: { step: string; className: string; text: string }[] = [
 
 export const typographyExamples = {
   "What is available": (
-    <LightDark>
+    <Frame>
       <div className="grid gap-4">
         {STEPS.map((s) => (
           <Measured key={s.step} read={typeSpec} label={s.step}>
@@ -261,7 +277,7 @@ export const typographyExamples = {
           </Measured>
         ))}
       </div>
-    </LightDark>
+    </Frame>
   ),
   "Line up figures": (
     <DoDont
@@ -304,7 +320,7 @@ function Sections({ gap }: { gap: string }) {
 
 export const spacingExamples = {
   "What is available": (
-    <LightDark>
+    <Frame>
       <div className="grid gap-4">
         <Measured read={cssVar("--spacing")} label="The spacing unit">
           {null}
@@ -315,7 +331,7 @@ export const spacingExamples = {
           </Measured>
         ))}
       </div>
-    </LightDark>
+    </Frame>
   ),
   "Leave space between sections": (
     <DoDont
@@ -343,7 +359,7 @@ const radius: Read = (s) =>
 
 export const shapeExamples = {
   "What is available": (
-    <LightDark>
+    <Frame>
       <div className="grid gap-6">
         <div className="grid grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-3">
           {CORNERS.map((c) => (
@@ -373,7 +389,7 @@ export const shapeExamples = {
           </Measured>
         </div>
       </div>
-    </LightDark>
+    </Frame>
   ),
   "Use the hairline, not a border": (
     <DoDont
@@ -499,7 +515,7 @@ function Play() {
 export const motionExamples = {
   "What is available": (
     <>
-      <LightDark>
+      <Frame>
         <div className="grid gap-4">
           <div className="grid grid-cols-2 gap-3">
             <Measured read={cssVar("--panel-in")} label="Panel opening">
@@ -517,7 +533,7 @@ export const motionExamples = {
           </div>
           <Play />
         </div>
-      </LightDark>
+      </Frame>
       <Example caption="A real dialog and sheet, on the same timing.">
         <Dialog>
           <DialogTrigger asChild>
@@ -556,7 +572,7 @@ const height: Read = (s) => px(s.height)
 
 export const sizesExamples = {
   "What is available": (
-    <LightDark>
+    <Frame>
       <div className="grid gap-5">
         <div className="flex flex-wrap items-start gap-4">
           {(["xs", "sm", "default", "lg"] as const).map((size) => (
@@ -582,7 +598,7 @@ export const sizesExamples = {
           </Measured>
         </div>
       </div>
-    </LightDark>
+    </Frame>
   ),
 }
 
@@ -593,7 +609,7 @@ const iconSize: Read = (_, el) =>
 
 export const iconsExamples = {
   "What is available": (
-    <LightDark>
+    <Frame>
       <div className="flex flex-wrap items-start gap-4">
         {(["default", "sm", "xs"] as const).map((size) => (
           <Measured key={size} read={iconSize} label={size}>
@@ -609,7 +625,7 @@ export const iconsExamples = {
           </div>
         </Measured>
       </div>
-    </LightDark>
+    </Frame>
   ),
   "Name every icon-only button": (
     <DoDont

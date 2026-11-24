@@ -6,7 +6,7 @@ import { Calendar } from "./calendar"
 import type { DateRange } from "react-day-picker"
 
 const meta: Meta<typeof Calendar> = {
-  title: "UI/Calendar",
+  title: "Components/Selection/Calendar",
   component: Calendar,
   tags: ["autodocs"],
 }

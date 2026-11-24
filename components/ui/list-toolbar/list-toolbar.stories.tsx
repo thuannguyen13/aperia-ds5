@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback } from "../avatar/avatar"
 import { Badge } from "../badge/badge"
 import { Button } from "../button/button"
 import { EmptyState } from "../empty-state/empty-state"
-import { EmptyValue } from "../empty-value/empty-value"
+import { EmptyValue } from "@/docs/design-language/recipes/empty-value"
 import {
   Table,
   TableBody,
@@ -21,15 +21,16 @@ import { ToggleGroup, ToggleGroupItem } from "../toggle-group/toggle-group"
 import { formatDate, initials, money } from "@/lib/format"
 
 const meta: Meta<typeof ListToolbar> = {
-  title: "Patterns/ListToolbar",
+  title: "Pattern Components/ListToolbar",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: ListToolbar,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     layout: "padded",
     docs: {
       description: {
         component:
-          'Every list page\'s one toolbar, a section of the page above its table or board: `start` (what picks the list\'s scope: a Board and Table switch, a report date, a saved view), the search, the filters, any `children`, how many rows are left ("12 of 40"), and one Sort at the right end (`SortControl`, sorted with `sortRows`).\n\nFilters are one model in two forms. A list describes what it can filter by (`FilterField`: an id, a label and a type, `text`, `number`, `money`, `enum`, `day` or `boolean`), and holds the filters on as `FilterRule`s (a field, an operator, its values). **Chips** (the default): Add Filter lists the columns, and each filter on is a chip that reads as a sentence, "MC Band is High, Critical", its operator and values changed in place and removed with ×. **Dropdowns** (`form: "dropdowns"`), for a list with only a few filters: each field is a fixed select, switch or From and To on the row. Apply the rules with `filterRows`, or send them to the server.\n\nOn a phone, in either form, the filters go behind one Filters button that counts those on; they\'re set in a sheet from the bottom and show as chips that clear on a tap. When nothing matches, the list shows `NoResults` with Clear Filters.',
+          'Every list page\'s one toolbar, a section of the page above its table or board: `start` (what picks the list\'s scope: a Board and Table switch, a report date, a saved view), the search, the filters, any `children`, how many rows are left ("12 of 40"), and one Sort at the right end (`SortControl`, sorted with `sortRows`).\n\nFilters are one model in two forms. A list describes what it can filter by (`FilterField`: an id, a label and a type, `text`, `number`, `money`, `enum`, `day` or `boolean`), and holds the filters on as `FilterRule`s (a field, an operator, its values). **Advanced** (the default): one Filter button counts the filters on and opens them in a popover as rows of Column, Operator and Value, each changed in place (a new column starts that filter over) and removed with ×, with Add Filter and Remove All under them. **Simple** (`form: \"simple\"`), for a list with four filters or fewer: each field is a fixed select, switch or From and To on the row, one click to pick. Apply the rules with `filterRows`, or send them to the server.\n\nOn a phone, in either form, the filters go behind one Filters button that counts those on; they\'re set in a sheet from the bottom and show as chips that clear on a tap. When nothing matches, the list shows `NoResults` with Clear Filters.',
       },
     },
   },
@@ -282,13 +283,16 @@ function MerchantList({
   )
 }
 
-/** Chips, the default: Add Filter, then each filter on reads as a sentence, its operator and values changed in place. */
+/** Advanced filters, the default: the Filter button opens a row of Column, Operator and Value to start from. */
 export const Default: Story = {
   render: () => <MerchantList />,
 }
 
-/** Filters on: an enum of two choices, a number and a text. */
-export const ChipsOn: Story = {
+/**
+ * Filters on: an enum of two choices, a number and a text. The button counts them; its popover shows each as a row
+ * of Column, Operator and Value, each changed in place, with Add Filter and Remove All.
+ */
+export const FiltersOn: Story = {
   render: () => (
     <MerchantList
       initial={[
@@ -299,6 +303,18 @@ export const ChipsOn: Story = {
           operator: "is_not",
           values: ["New and Ramping Merchants"],
         },
+      ]}
+    />
+  ),
+}
+
+/** Two filters on one column: MC Score from 700 to 900. Every filter must pass. */
+export const SameColumnTwice: Story = {
+  render: () => (
+    <MerchantList
+      initial={[
+        { field: "score", operator: "gte", values: ["700"] },
+        { field: "score", operator: "lte", values: ["900"] },
       ]}
     />
   ),
@@ -332,7 +348,7 @@ export const Phone: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
 }
 
-// Sales Portal's Prospects: two filters, so they are dropdowns.
+// Sales Portal's Prospects: two filters, so they are simple filters.
 
 type Prospect = {
   id: number
@@ -500,7 +516,7 @@ function ProspectsList({
           fields: PROSPECT_FIELDS,
           value: rules,
           onChange: setRules,
-          form: "dropdowns",
+          form: "simple",
         }}
         shown={rows.length}
         total={PROSPECTS.length}
@@ -558,13 +574,13 @@ function ProspectsList({
   )
 }
 
-/** Dropdowns, for a list with only a few filters: each is a select on the row, its choices counted. */
-export const Dropdowns: Story = {
+/** Simple filters, for a list with four filters or fewer: each is a select on the row, one click to pick, its choices counted. */
+export const Simple: Story = {
   render: () => <ProspectsList />,
 }
 
-/** Dropdowns on. At phone width they're chips under the search that clear on a tap, and the button counts them. */
-export const DropdownsOn: Story = {
+/** Simple filters on. At phone width they're chips under the search that clear on a tap, and the button counts them. */
+export const SimpleOn: Story = {
   render: () => (
     <ProspectsList
       initial={[
@@ -624,7 +640,7 @@ const REQUEST_FIELDS: FilterField<Request>[] = [
   },
 ]
 
-/** A switch and a span of days as dropdowns: the Requests list. */
+/** A switch and a span of days as simple filters: the Requests list. */
 export const SwitchAndDates: Story = {
   render: function Render() {
     const [query, setQuery] = useState("")
@@ -649,7 +665,7 @@ export const SwitchAndDates: Story = {
           fields: REQUEST_FIELDS,
           value: rules,
           onChange: setRules,
-          form: "dropdowns",
+          form: "simple",
         }}
         shown={rows.length}
         total={REQUESTS.length}

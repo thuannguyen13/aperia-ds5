@@ -60,20 +60,24 @@ breadcrumb's last crumb. See [Page Header](../patterns/page-header.md) for the b
 
 ## Which patterns it uses
 
-- See [Record Page](../patterns/record-page.md) for the header, actions, and history.
-- See [Page Layout](../patterns/page-layout.md) for sections 20px apart.
+- See [Page Header](../patterns/page-header.md) for the header and actions, and [History](../patterns/history.md) for
+  the history.
+- See [Page Layout](../foundations/page-layout.md) for sections 20px apart.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for titled cards, tiles, and empty cards.
 - See [Notes on a Record](notes.md), [Line Items With Totals](line-items.md), and [Task Checklist](task-checklist.md)
   for examples of cards on a record.
 
 ## In code
 
-The app builds it from aperia-ds5 parts, inside `AppContent`:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages, inside `AppContent`:
 
 - `PageHeader`: `title`, `media` (`<Avatar size="xl">`, `shape="square"` for a company), `subtitle` ("Opportunity #659 ·
-  Northwind Payments"), `properties` (label and value pairs, people as `PeopleStack`), `menu={<RecordActions … />}` and
+  Northwind Payments"), `properties` (label and value pairs, people as the people stack from
+  [People and Pictures](../patterns/people-and-pictures.md)), `menu={<RecordActions … />}` and
   outline buttons in `actions`.
-- Tiles and the body are direct children of `AppContent`. Tiles: `StatTile`s in a grid. A side column: a grid that is
-  `grid-cols-[minmax(0,1fr)]` and, from `@min-[60rem]`, four columns (main `col-span-3`, side one), `gap-4`.
-- Every card is `TitledCard`, including the details (`DetailSection`, `DetailRow`, or `Fact`); empty cards hold
-  `EmptyState`. History is `RecordActivity`.
+- Tiles and the body are direct children of `AppContent`. Tiles: stat tiles from [Cards and
+  Tiles](../patterns/cards-and-tiles.md) in a grid. A side column: a grid that is `grid-cols-[minmax(0,1fr)]` and, from
+  `@min-[60rem]`, four columns (main `col-span-3`, side one), `gap-4`.
+- Every card is the titled card from [Card](../components/card.md), including the details, built as the detail section,
+  detail rows, or facts from [Details](../patterns/details.md); empty cards hold `EmptyState`. History is the history
+  card from [History](../patterns/history.md).

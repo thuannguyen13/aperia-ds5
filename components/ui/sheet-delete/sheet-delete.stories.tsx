@@ -2,9 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { IN_USE_DELETE, SheetDelete } from "./sheet-delete"
 
 const meta: Meta<typeof SheetDelete> = {
-  title: "Patterns/SheetDelete",
+  title: "Pattern Components/SheetDelete",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: SheetDelete,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       story: { inline: false, height: "320px" },

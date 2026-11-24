@@ -8,7 +8,7 @@ import {
 import { REGEXP_ONLY_DIGITS } from "input-otp"
 
 const meta: Meta<typeof InputOTP> = {
-  title: "UI/Input OTP",
+  title: "Components/Text Inputs/Input OTP",
   component: InputOTP,
   tags: ["autodocs"],
 }

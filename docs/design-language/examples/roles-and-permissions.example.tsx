@@ -12,7 +12,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  FlagSwitch,
   IN_USE_DELETE,
   ReasonTooltip,
   Select,
@@ -27,13 +26,12 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableGroupRow,
   TableHead,
   TableHeader,
   TableRow,
-  TitledCard,
   Toaster,
 } from "aperia-ds5"
+import { FlagSwitch, TableGroupRow, TitledCard } from "../recipes"
 import { cn } from "@/lib/utils"
 import { BeforeAfter, Screen } from "./before-after"
 

@@ -3,7 +3,7 @@ import { Search, Mail } from "lucide-react"
 import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, InputGroupButton, InputGroupTextarea } from "./input-group"
 
 const meta: Meta<typeof InputGroup> = {
-  title: "UI/InputGroup",
+  title: "Components/Text Inputs/Input Group",
   component: InputGroup,
   tags: ["autodocs"],
 }

@@ -16,32 +16,34 @@ import {
   CardHeader,
   CardTitle,
   Checkbox,
-  DetailRow,
-  DetailSection,
   Item,
   ItemContent,
   ItemDescription,
   ItemGroup,
   ItemMedia,
   ItemTitle,
-  MoneyValue,
   PageHeader,
-  PeopleStack,
   RecordActions,
-  RecordActivity,
-  StatTile,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
+} from "aperia-ds5"
+import {
+  DetailRow,
+  DetailSection,
+  MoneyValue,
+  PeopleStack,
+  RecordActivity,
+  StatTile,
   Timeline,
   TimelineEntry,
   TimelineSaid,
   TimelineWhen,
   TitledCard,
-} from "aperia-ds5"
+} from "../recipes"
 import { money } from "@/lib/format"
 import { BeforeAfter, Screen } from "./before-after"
 

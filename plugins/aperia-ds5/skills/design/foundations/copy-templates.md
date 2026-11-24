@@ -182,5 +182,6 @@ A screen may depart from a template only for a business reason the app has recor
   children, and `variant="default"` for an action that adds.
 - `SheetForm` asks Discard Changes? itself, with the one-form wording above.
 - `EmptyState` (`title`, `description`) and `NoResults` (`onClear` adds the line and Clear Filters).
-- `ReasonTooltip` and `IconButton`'s `reason` for why something is disabled; `FieldError` beside a field; `Spinner`
+- `ReasonTooltip`, and the icon button recipe's reason on [Button](../components/button.md), for why something is
+  disabled; `FieldError` beside a field; `Spinner`
   in a working button that keeps its label; `HIDDEN_MONEY` from `aperia-ds5/format`.

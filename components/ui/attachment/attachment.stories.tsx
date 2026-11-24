@@ -14,7 +14,7 @@ import {
 import { Spinner } from "../spinner/spinner"
 
 const meta: Meta<typeof Attachment> = {
-  title: "UI/Attachment",
+  title: "Components/Files and Media/Attachment",
   component: Attachment,
   tags: ["autodocs"],
   args: {

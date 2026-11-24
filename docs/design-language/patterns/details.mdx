@@ -1,0 +1,15 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/details.md?raw"
+import * as DetailSection from "../recipes/detail-section.stories"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Patterns/Content/Details" />
+
+<SkillDoc
+  source={source}
+  after={{
+    "What is available": (
+      <Canvas of={DetailSection.InCard} sourceState="none" />
+    ),
+  }}
+/>

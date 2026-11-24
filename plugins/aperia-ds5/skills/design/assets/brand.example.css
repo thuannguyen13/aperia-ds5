@@ -1,5 +1,5 @@
 /*
-  An app's own colors, the only ones an Aperia app sets (foundations/color.md, What an app can change).
+  An app's own colors, the only ones an Aperia app sets (styles/color.md, What an app can change).
   These are the Sales Portal's values; copy the file and change the values, not the names.
   The primary, the sidebar navy and every other token are shared and stay in aperia-ds5/base.css.
 */

@@ -11,9 +11,10 @@ import {
 } from "../command/command"
 
 const meta: Meta<typeof AddOption> = {
-  title: "Patterns/AddOption",
+  title: "Pattern Components/AddOption",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: AddOption,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

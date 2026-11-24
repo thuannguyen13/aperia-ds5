@@ -10,14 +10,18 @@ QA, and developers. Coding agents read the same pages before they build a screen
 
 ## What is here
 
-The pages are grouped in four sections:
+The pages are grouped in six sections:
 
 | Section | What it covers | Pages |
 |---|---|---|
-| Foundations | The building blocks of every screen, and the rules for the words on it | [Color](foundations/color.md), [Typography](foundations/typography.md), [Spacing](foundations/spacing.md), [Shape and Edges](foundations/shape-and-edges.md), [Elevation](foundations/elevation.md), [Motion](foundations/motion.md), [Sizes](foundations/sizes.md), [Icons](foundations/icons.md), [Copy](foundations/copy.md), [Message Templates](foundations/copy-templates.md) |
-| Patterns | How parts fit together and behave, one page per pattern | From [App Shell](patterns/app-shell.md) and [Page Layout](patterns/page-layout.md) to [Filters](patterns/filters.md), [Forms in Sheets](patterns/forms-in-sheets.md), and [Pickers](patterns/pickers.md) |
-| Components | One component in depth | [Button](components/button.md), [Card](components/card.md), [Dialog](components/dialog.md), [Empty State](components/empty-state.md), [Table](components/table.md) |
-| Examples | Complete screens built from the patterns, each with a before and after | Such as [List Page](examples/list-page.md), [Record Page](examples/record-page.md), and [Saved Views](examples/saved-views.md) |
+| Get Started | How designers and developers start | [For Designers](get-started/for-designers.md) and [For Developers](get-started/for-developers.md) |
+| Foundations | The rules across every screen, grouped as Layout, Content Design, and States | Such as [Accessibility](foundations/accessibility.md), [Page Layout](foundations/page-layout.md), [Copy](foundations/copy.md), and [Loading](foundations/loading.md) |
+| Styles | The visual values that every component uses | [Color](styles/color.md), [Typography](styles/typography.md), [Shape and Edges](styles/shape-and-edges.md), [Elevation](styles/elevation.md), [Motion](styles/motion.md), and [Icons](styles/icons.md) |
+| Components | Each building block's home, grouped by what people do with it, with its guidance, live examples, and props. A pattern's components are on that pattern's page. | Such as [Button](components/button.md), [Card](components/card.md), and [Dialog](components/dialog.md) |
+| Patterns | How components combine into the parts of a screen, grouped as Navigation, Content, Lists, and Editing | Such as [App Shell](patterns/app-shell.md), [Filters](patterns/filters.md), and [Forms in Sheets](patterns/forms-in-sheets.md) |
+| Examples | Whole screens built from the patterns, each with a before and after | Such as [List Page](examples/list-page.md), [Record Page](examples/record-page.md), and [Saved Views](examples/saved-views.md) |
+
+Each section opens on an index of its pages, each with its one-sentence lead.
 
 ## How a page is laid out
 
@@ -44,6 +48,10 @@ Examples pages use a different order:
 | Which patterns it uses | The pattern pages the screen is built from |
 | In code | Notes for developers and coding agents |
 
+In Storybook, a page shows its sections in three tabs. Overview holds When to use and What is available, and on an
+Examples page the screen itself. Guidelines holds every other section up to In code. Code holds In code, and on a
+component's or a pattern's page also the live examples and props of its components.
+
 ## One source of truth
 
 Each value and each rule is defined in one place:
@@ -56,7 +64,7 @@ Each value and each rule is defined in one place:
 ## What an app can change
 
 An app sets its own logo and product name, status colors, and chart colors. Everything else is the same in every app.
-That includes the sidebar color, unless the design system team agrees to a change. See [Color](foundations/color.md)
+That includes the sidebar color, unless the design system team agrees to a change. See [Color](styles/color.md)
 for the details.
 
 ## Proposing a change

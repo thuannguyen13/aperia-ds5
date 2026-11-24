@@ -100,7 +100,7 @@ Three cases use another form:
 
 - See [Confirmations and Delete](confirmations-and-delete.md) for Delete at the footer's start and for Discard Changes?.
 - See [Pickers](pickers.md) for fields that pick a record, and for adding a missing one from the picker.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for a field that waits on another.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for a field that waits on another.
 - See [Buttons and Actions](buttons-and-actions.md) for the footer's buttons.
 
 ## In code
@@ -112,7 +112,41 @@ Three cases use another form:
 - Check with `form.check(schema, draft)` before saving; pass a refusal (`{ error, field? }`) to `form.refused(result)`.
   Close with `onOpenChange(false)` only when the save went through. Never build the sheet, footer or error handling
   yourself, and never show an error in a toast.
-- Sections are `FormSection` (`title`). A long text field shows `LengthCount` under it once 90% of its limit is used.
 - An optional field's label ends with "(Optional)".
 - The wider sheet for line items is `FormSheet` with `className="data-[side=right]:sm:max-w-6xl"` (a bare
-  `max-w-6xl` loses to the sheet's own width) and a `TitledCard` per group.
+  `max-w-6xl` loses to the sheet's own width) and one card per group. Build each card's header as the titled card
+  recipe on [Card](../components/card.md).
+
+### Form section
+
+Build a form section in the app from `FieldSet`, `FieldLegend`, `FieldDescription`, and `FieldGroup` from
+`aperia-ds5`.
+
+```tsx
+<div className="-mx-4 border-t px-4 pt-5 first:border-t-0 first:pt-0">
+  <FieldSet>
+    <FieldLegend variant="legend" className="mb-4 font-semibold">Portfolio</FieldLegend>
+    <FieldDescription className="-mt-3">Optional line under the title</FieldDescription>
+    <FieldGroup>{/* the section's fields */}</FieldGroup>
+  </FieldSet>
+</div>
+```
+
+- The line above each section reaches the sheet's edges, because `-mx-4 px-4` steps out of the form's 16px padding.
+- The first section has no line, because the sheet's header already draws one.
+- A legend sits outside the fieldset's gap, so it keeps its own `mb-4` to the fields.
+
+### Length count
+
+Build the length count in the app from `FieldDescription` from `aperia-ds5`, under the field it counts.
+
+```tsx
+{max !== undefined && value.length >= max * 0.9 && (
+  <FieldDescription className="text-right tabular-nums">
+    {value.length.toLocaleString("en-US")} / {max.toLocaleString("en-US")}
+  </FieldDescription>
+)}
+```
+
+- The count shows only once 90% of the limit is used, so a short note carries no number.
+- Give the input or textarea the same `maxLength`, so the limit stops typing instead of refusing the save.

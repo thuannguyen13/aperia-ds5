@@ -39,7 +39,7 @@ import {
 } from "../card/card"
 
 const meta: Meta<typeof ChartContainer> = {
-  title: "UI/Chart",
+  title: "Components/Charts/Chart",
   component: ChartContainer,
   tags: ["autodocs"],
 }

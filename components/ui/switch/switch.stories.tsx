@@ -4,7 +4,7 @@ import { Label } from "../label/label"
 import { Field, FieldContent, FieldDescription, FieldTitle } from "../field/field"
 
 const meta: Meta<typeof Switch> = {
-  title: "UI/Switch",
+  title: "Components/Selection/Switch",
   component: Switch,
   args: {
     size: "default",

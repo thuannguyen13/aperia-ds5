@@ -103,8 +103,8 @@ filter with no match shows the empty state "No Results".
 
 See [Tables](../patterns/tables.md) for the column headings right under a card header, with no line above them, and for
 a table too wide for the page column. See [Sort](../patterns/sort.md) for sorting from the toolbar. See
-[Copy](../foundations/copy.md) for how contact details link on a record's page. See [Color](../foundations/color.md) for
-pairing every color with a word or an icon. See [Shape and Edges](../foundations/shape-and-edges.md) for the hairline
+[Copy](../foundations/copy.md) for how contact details link on a record's page. See [Color](../styles/color.md) for
+pairing every color with a word or an icon. See [Shape and Edges](../styles/shape-and-edges.md) for the hairline
 the Specs name.
 
 ## In code
@@ -113,5 +113,5 @@ the Specs name.
   `DataTableContent` and the rest) for a different layout.
 - `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableCell` from `aperia-ds5` for a simple table.
 - A row opens its record with `<TableRow {...opensOnClick(name, open)}>`.
-- In a `TitledCard`, put the table straight inside (no wrapper, no padding) and pad the first and last cells (`pl-4`,
-  `pr-4`) so the columns line up with the card title.
+- In a titled card ([Card](card.md)), put the table straight inside (no wrapper, no padding) and pad the first and last
+  cells (`pl-4`, `pr-4`) so the columns line up with the card title.

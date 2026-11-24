@@ -4,7 +4,7 @@ import { Input } from "../input/input"
 import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from "./button-group"
 
 const meta: Meta<typeof ButtonGroup> = {
-  title: "UI/ButtonGroup",
+  title: "Components/Actions/Button Group",
   component: ButtonGroup,
   args: {
     orientation: "horizontal",

@@ -59,16 +59,17 @@ Buttons work with seven other pages:
 - See [Button](../components/button.md) for the button types, sizes, and states, for icon-button tooltips, and for
   showing a state as a badge.
 - See [Copy](../foundations/copy.md) for naming the action on a button.
-- See [Color](../foundations/color.md) for pairing every color with a word or an icon.
+- See [Color](../styles/color.md) for pairing every color with a word or an icon.
 - See [Confirmations and Delete](confirmations-and-delete.md) for destructive actions and their confirmation.
 - See [Forms in Sheets](forms-in-sheets.md) for the footer of a sheet.
 - See [Cards and Tiles](cards-and-tiles.md) for Add in a card header.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for saying why a button is disabled.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for saying why a button is disabled.
 
 ## In code
 
 - `Button` from `aperia-ds5` (`variant`: `default` for Primary, `outline`, `ghost`, `destructive`).
-- Icon-only buttons are `IconButton`: `label` is the tooltip and the accessible name, `reason` the tooltip while
-  disabled (it stays focusable with `aria-disabled`).
+- Build icon-only buttons in the app as the icon button recipe on [Button](../components/button.md): the label is the
+  tooltip and the accessible name, and the reason is the tooltip while disabled (it stays focusable with
+  `aria-disabled`).
 - A record's page actions are `RecordActions` in `PageHeader`'s `menu`; a sheet's footer is `SheetForm`; a dialog's
   buttons come with `ConfirmDialog`.

@@ -1,8 +1,14 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/foundations/copy.md?raw"
+import * as RelativeTimeStories from "../../../components/ui/relative-time/relative-time.stories"
 import { SkillDoc } from "../skill-doc"
+import { PatternCode } from "../component-page"
 import { copyExamples } from "../examples/foundations"
 
-<Meta title="Design Language/Foundations/Copy" />
+<Meta title="Foundations/Content Design/Copy" />
 
-<SkillDoc source={source} after={copyExamples} />
+<SkillDoc
+  source={source}
+  after={copyExamples}
+  code={<PatternCode components={[{ name: "RelativeTime", stories: RelativeTimeStories }]} />}
+/>

@@ -1,18 +1,20 @@
 import { Meta, Story } from "@storybook/addon-docs/blocks"
-import source from "../../../plugins/aperia-ds5/skills/design/components/dialog.md?raw"
-import { SkillDoc } from "../skill-doc"
+import * as Stories from "../../../components/ui/dialog/dialog.stories"
+import { ComponentHome } from "../component-page"
 import { DoDont, Example } from "../blocks"
 import * as Panels from "../examples/dialog.stories"
 
-<Meta title="Design Language/Components/Dialog" />
+{/* The component's home: replaces its generated docs page (see component-page.tsx). */}
+
+<Meta of={Stories} />
 
 export const frame = "block min-h-0 overflow-hidden p-0"
 export const Panel = ({ of, height = "300px" }) => (
   <Story of={of} inline={false} height={height} />
 )
 
-<SkillDoc
-  source={source}
+<ComponentHome
+  guide="components/dialog.md"
   after={{
     "@intro": (
       <Example className={frame}>

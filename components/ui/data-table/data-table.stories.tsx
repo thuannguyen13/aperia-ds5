@@ -245,7 +245,7 @@ function CustomLayoutExample() {
 }
 
 const meta: Meta<typeof DataTable<Merchant>> = {
-  title: "UI/DataTable",
+  title: "Components/Lists and Tables/Data Table",
   component: DataTable,
   tags: ["autodocs"],
   parameters: {

@@ -4,7 +4,7 @@ import { Alert, AlertTitle, AlertDescription, AlertAction } from "./alert"
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Alert> = {
-  title: "UI/Alert",
+  title: "Components/Communication/Alert",
   component: Alert,
   tags: ["autodocs"],
   parameters: {

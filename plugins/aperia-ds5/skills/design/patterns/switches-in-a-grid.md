@@ -53,12 +53,46 @@ A cell whose choice has more than two levels, such as None, Owned, and All, uses
 
 Switches in a grid work with three other patterns:
 
-- See [Disabled With a Reason](disabled-with-a-reason.md) for the lock and its tooltip.
+- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the lock and its tooltip.
 - See [Pickers](pickers.md) for a cell with more than on and off.
 - See [Forms in Sheets](forms-in-sheets.md) for the sheet that a settings grid opens in.
 
 ## In code
 
-- `FlagSwitch` from `aperia-ds5`: `on`, `onChange`, `label` (the full name a screen reader reads, such as "Sales Rep:
-  Prospects, Delete"), `reason` to lock it, `disabled` while loading. `className` goes on the switch, for an app's
-  own "on" color.
+Build the flag switch in the app from `Switch`, `Tooltip`, `TooltipTrigger`, and `TooltipContent` from `aperia-ds5`,
+with `LockIcon` from `lucide-react`. The switch and its Yes or No form one `label`, which is one target.
+
+```tsx
+const locked = disabled || Boolean(reason)
+
+<label
+  htmlFor={id}
+  className={cn(
+    "flex h-7 w-fit items-center gap-1.5 rounded-md px-1.5 text-sm",
+    locked ? "opacity-50" : "cursor-pointer hover:bg-muted/50 in-[tr]:hover:bg-foreground/6"
+  )}
+>
+  <Switch
+    id={id}
+    size="sm"
+    checked={on}
+    aria-label={reason ? `${label}. ${reason}` : label}
+    disabled={locked}
+    onCheckedChange={onChange}
+    className="data-disabled:opacity-100"
+  />
+  <span className={cn(!on && "text-muted-foreground")}>{on ? "Yes" : "No"}</span>
+  {reason && <LockIcon className="size-3.5 text-muted-foreground" aria-hidden />}
+</label>
+```
+
+- Wrap the label in `<span className="-mx-1.5 flex h-8 items-center">`, so the switch lines up with its column's name
+  and only the hover reaches past it.
+- With a reason, wrap it in a `Tooltip` instead. The trigger is `<span tabIndex={0} className="-mx-1.5 flex h-8 w-fit
+  items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50">`, and the tooltip shows the
+  reason. A disabled switch takes no pointer or focus, so the span takes them.
+- The switch's `aria-label` is the full name a screen reader reads, such as "Sales Rep: Prospects, Delete", plus the
+  reason while it is locked.
+- Lock it with `disabled` while it saves or loads. The label fades the whole target, so the switch keeps
+  `data-disabled:opacity-100` and does not fade twice.
+- An app's own "on" color goes in the switch's `className`.

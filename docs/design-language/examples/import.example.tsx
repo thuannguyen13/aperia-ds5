@@ -12,14 +12,12 @@ import {
   PopoverTrigger,
   Progress,
   ReasonTooltip,
-  ScrollTable,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
   Separator,
-  StatTile,
   Table,
   TableBody,
   TableCell,
@@ -29,6 +27,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "aperia-ds5"
+import { ScrollTable, StatTile } from "../recipes"
 import { BeforeAfter, Screen } from "./before-after"
 
 type Status = "new" | "existing" | "repeat"

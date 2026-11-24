@@ -124,8 +124,8 @@ export function ago(value: string | Date, zone = ZONE) {
 /**
  * An amount in full, never shortened ($1.8M): whole dollars when it has no cents, "$1,250", and two decimals when it
  * does, "$12.50", "$1,840,000.25". `cents: true` always shows two decimals; `cents: false` always rounds to whole
- * dollars. A negative amount is in parentheses, "($125.50)", as the UI Style Guide V4.3 writes it; show it in red with
- * `MoneyValue`.
+ * dollars. A negative amount is in parentheses, "($125.50)", as the UI Style Guide V4.3 writes it; show it in the
+ * destructive color (the money value recipe on the design skill's Money and Numbers page).
  */
 export const money = (
   value: number,
@@ -145,7 +145,7 @@ export const money = (
 /** What an amount the viewer may not see reads as: the shape of a figure, so a column keeps its width. */
 export const HIDDEN_MONEY = "$XX,XXX"
 
-/** "42%", rounded, or null when there is nothing to divide by (show it as `EmptyValue`). */
+/** "42%", rounded, or null when there is nothing to divide by (show it as a missing value, a muted em dash). */
 export function percent(part: number, whole: number): string | null {
   return whole === 0 ? null : `${Math.round((part / whole) * 100)}%`
 }

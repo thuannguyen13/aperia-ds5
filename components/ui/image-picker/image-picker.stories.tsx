@@ -6,9 +6,10 @@ import { Field, FieldDescription, FieldLabel } from "../field/field"
 import { initials } from "@/lib/format"
 
 const meta: Meta<typeof ImagePicker> = {
-  title: "Patterns/ImagePicker",
+  title: "Pattern Components/ImagePicker",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: ImagePicker,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

@@ -4,9 +4,10 @@ import { FileDrop } from "./file-drop"
 import { Field, FieldError, FieldLabel } from "../field/field"
 
 const meta: Meta<typeof FileDrop> = {
-  title: "Patterns/FileDrop",
+  title: "Pattern Components/FileDrop",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: FileDrop,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

@@ -77,21 +77,21 @@ A board has no exceptions.
 
 ## Which patterns it uses
 
-- See [List Page](../patterns/list-page.md) for the toolbar, the Board / Table switch, and loading.
-- See [Page Layout](../patterns/page-layout.md) for a board that fills the page's width.
+- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar and the Board / Table switch.
+- See [Page Layout](../foundations/page-layout.md) for a board that fills the page's width.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the small card.
 
 ## In code
 
-The app builds it from aperia-ds5 parts:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
 - `ListToolbar` above, with a `ToggleGroup` (Board / Table) in `start`; render `<FullWidth />` on the page; load with
-  `ListSkeleton` (`board`, `fullWidth`).
+  the list skeleton from [Loading](../foundations/loading.md) in its board shape, full width.
 - Columns: a grid of `auto-cols-[minmax(16rem,1fr)] grid-flow-col`, each column tinted with
   `color-mix(in oklab, var(--shadow-color) 3%, transparent)` (18% in Dark), its header `sticky` with the stage
   `Badge`, the count and the total (`text-xs text-muted-foreground tabular-nums`). An empty column holds
   `EmptyState` ("No Opportunities").
 - A card is `Card size="sm"` with `{...openable(label, open)}`; detail lines are `text-xs text-muted-foreground` with a
   `size-3` icon.
-- Dragging uses dnd-kit with a `MouseSensor` (`distance: 4`), a `TouchSensor` (`delay: 200`) and no keyboard sensor, plus `announcements`.
-  A drop opens the app's stage change (`AlertDialog`).
+- Dragging uses dnd-kit with a `MouseSensor` (`distance: 4`), a `TouchSensor` (`delay: 200`) and no keyboard sensor,
+  plus `announcements`. A drop opens the app's stage change (`AlertDialog`).

@@ -97,7 +97,7 @@ ends its breadcrumb with the record's name.
 ## Works with
 
 - See [App Shell](app-shell.md) for the breadcrumb the title fills.
-- See [Record Page](record-page.md) for what follows a record's header.
+- See [Cards and Tiles](cards-and-tiles.md) for the tiles and cards under a record's header.
 - See [Buttons and Actions](buttons-and-actions.md) for which type each action is.
 
 ## In code
@@ -110,7 +110,8 @@ ends its breadcrumb with the record's name.
 - `RecordActions`: `onEdit`, `onDelete`, `deleteBlocked` (`true` for `IN_USE_DELETE`, or the reason as a string) and
   `actions` (`{ label, icon, onSelect, destructive?, disabled?, blocked? }`; `blocked` is the reason it shows).
   `BlockedMenuItem` is a menu item the viewer can't take, with its reason.
-- People are a `PeopleStack`, in the `subtitle` or as a `properties` value: `title` (their role here, such as "Sales Reps"), `people` from the app's
-  picture adapter (`shape: "square"` for companies and products), `empty` ("No assignee"), `size="xs"` for a denser
-  line.
+- People go in the `subtitle` or a `properties` value as the people stack recipe on
+  [People and Pictures](people-and-pictures.md), built in the app: named by their role here (such as "Sales Reps"),
+  pictures from the app's picture adapter (`shape="square"` for companies and products), "No assignee" when empty, and
+  `size="xs"` for a denser line.
 - A report date or a date range is a control in `ListToolbar`'s `start`, never in `PageHeader`'s `actions`.

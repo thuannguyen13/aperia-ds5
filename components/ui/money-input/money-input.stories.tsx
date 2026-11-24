@@ -4,9 +4,10 @@ import { MoneyField, MoneyInput } from "./money-input"
 import { Field, FieldLabel } from "../field/field"
 
 const meta: Meta<typeof MoneyInput> = {
-  title: "Patterns/MoneyInput",
+  title: "Pattern Components/MoneyInput",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: MoneyInput,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

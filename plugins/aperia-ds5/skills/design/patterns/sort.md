@@ -60,17 +60,17 @@ This pattern has no exceptions.
 
 ## Works with
 
-- See [List Page](list-page.md) for the toolbar that Sort ends.
+- See [List Toolbar](list-toolbar.md) for the toolbar that Sort ends.
 - See [Filters](filters.md) for what narrows the list before it is sorted.
 - See [Tables](tables.md) for the rows Sort orders.
 
 ## In code
 
-- `SortControl` from `aperia-ds5`: `fields` (`{ value, label, starts? }`, where `starts: "desc"` makes amounts and
-  dates start highest first; A to Z when left out), `value` (`{ by, direction }`, `by` empty for the default order) and
-  `onChange`. On a list page pass the same props to `ListToolbar`'s `sort`; in a card, put it in `TitledCard`'s
-  `action` with `size="sm"`, before the card's Add button when it has one (`action={<><SortControl size="sm" … />
-  <Button variant="outline" size="sm">…</Button></>}`).
+- `SortControl` from `aperia-ds5`: `fields` (`{ value, label, starts? }`, where `starts: "desc"` makes amounts and dates
+  start highest first; A to Z when left out), `value` (`{ by, direction }`, `by` empty for the default order) and
+  `onChange`. On a list page pass the same props to `ListToolbar`'s `sort`; in a card, put it in the titled card's
+  action ([Card](../components/card.md)) with `size="sm"`, before the card's Add button when it has one (`<SortControl
+  size="sm" … />` then `<Button variant="outline" size="sm">…</Button>` in `CardAction`).
 - Sort with `sortRows(rows, fields, value)` from `aperia-ds5/list`, the same fields on the server. A `SortField` adds
   `read`, a row's value; null, undefined or "" sorts lowest. `UNSORTED` is the default order.
 - Don't make `TableHead`s sortable.

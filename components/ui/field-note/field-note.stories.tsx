@@ -18,8 +18,9 @@ type Args = {
 }
 
 const meta: Meta<Args> = {
-  title: "Patterns/FieldNote",
-  tags: ["autodocs"],
+  title: "Pattern Components/FieldNote",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

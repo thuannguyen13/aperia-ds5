@@ -84,22 +84,25 @@ Offer Edit Note only when the app lets an author change a saved note.
 
 ## Which patterns it uses
 
-- See [Record Page](../patterns/record-page.md) for where the card sits and how history is listed.
+- See [Cards and Tiles](../patterns/cards-and-tiles.md) for where the card sits, and [History](../patterns/history.md)
+  for how history is listed.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the Add Note sheet.
 - See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for asking before Delete Note removes a note.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for Add in the header or in the empty state.
 
 ## In code
 
-The app builds it from aperia-ds5 parts:
+The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- The card is `RecordActivity` with `title="Notes"`, `add` (an outline Add Note `Button`) and `empty` (`EmptyState`
-  "No Notes" with the same button as its `action`). Its `list` is a `Timeline` of `TimelineEntry`s with `boxed`, each
-  the note's box then `TimelineWhen` (`date`, `user`, and the other record as children).
+- The card is the history card from [History](../patterns/history.md), titled Notes, with an outline Add Note
+  `Button` as its action and `EmptyState` "No Notes" (with the same button as its `action`) when there are none. Its
+  list is the timeline from the same page, each entry boxed, holding the note's box and then the when line (the date,
+  the user, and the other record).
 - Add Note is a `FormSheet` "Add Note" with `SheetForm` (`submit="Add Note"`), one `Textarea` with `maxLength` and
-  `LengthCount`; ⌘↵ submits.
-- Delete is an `IconButton` "Delete Note" (`opacity-0` until `group-hover`, `group-focus-within`, and always under
-  `pointer-coarse`), asking with `ConfirmDialog` (title "Delete Note?", action "Delete Note").
+  the length count from [Forms in Sheets](../patterns/forms-in-sheets.md); ⌘↵ submits.
+- Delete is an icon button "Delete Note" (the recipe from [Button](../components/button.md)) (`opacity-0` until
+  `group-hover`, `group-focus-within`, and always under `pointer-coarse`), asking with `ConfirmDialog` (title "Delete
+  Note?", action "Delete Note").
 - The preview is the box with `line-clamp-3` (12px, `bg-muted/60`, `rounded-lg`). Measure `scrollHeight >
   clientHeight` in a `ResizeObserver`; when it's cut, View Note opens a `Sheet` titled "Note" whose
   `SheetDescription` says what, when and who.

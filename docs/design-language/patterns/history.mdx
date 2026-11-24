@@ -1,0 +1,15 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/history.md?raw"
+import * as RecordActivity from "../recipes/record-activity.stories"
+import { SkillDoc } from "../skill-doc"
+
+<Meta title="Patterns/Content/History" />
+
+<SkillDoc
+  source={source}
+  after={{
+    "What is available": (
+      <Canvas of={RecordActivity.Default} sourceState="none" />
+    ),
+  }}
+/>

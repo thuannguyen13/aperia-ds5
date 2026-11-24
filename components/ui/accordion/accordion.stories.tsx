@@ -7,7 +7,7 @@ import {
 } from "./accordion"
 
 const meta: Meta<typeof Accordion> = {
-  title: "UI/Accordion",
+  title: "Components/Containment/Accordion",
   component: Accordion,
   tags: ["autodocs"],
 }

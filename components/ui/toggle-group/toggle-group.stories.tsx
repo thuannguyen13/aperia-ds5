@@ -3,7 +3,7 @@ import { ToggleGroup, ToggleGroupItem } from "./toggle-group"
 import { AlignLeftIcon, AlignCenterIcon, AlignRightIcon, AlignJustifyIcon, BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react"
 
 const meta: Meta<typeof ToggleGroup> = {
-  title: "UI/Toggle Group",
+  title: "Components/Actions/Toggle Group",
   component: ToggleGroup,
   args: {
     type: "single",

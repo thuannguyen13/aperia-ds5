@@ -20,7 +20,7 @@ The toolbar is one row. It contains five parts, from left to right:
 |---|---|
 | Scope | Anything that picks what the list covers, such as a saved view or a report date. |
 | Search | A search box that names what it searches, such as "Search prospects". |
-| Filters | Add Filter, and a chip for each filter that is on. Each chip reads as a sentence, such as "Stage is Demo, Proposal". |
+| Filters | A Filter button that counts the filters that are on. Its popover holds a row of Column, Operator, and Value for each filter, such as Stage, is, Demo, Proposal. |
 | Count | How many rows are left, such as "3 of 6". |
 | Sort | The Sort control, at the right end. |
 
@@ -43,8 +43,8 @@ sheet from the bottom. Filters that are on show as chips, and a tap on a chip cl
 - **Before:** The app builds its own toolbar. A "Report Date:" label comes first, then "View:", an Edit View link, a
   Filter button, and the search at the far right. Names are links with a details button beside each, and the column
   headings sort.
-- **After:** One toolbar from the library holds the report date and view first, then search, filter chips, the count,
-  and Sort. Names are plain text. The whole row opens the record.
+- **After:** One toolbar from the library holds the report date and view first, then search, the Filter button, the
+  count, and Sort. Names are plain text. The whole row opens the record.
 
 ## Rules
 
@@ -52,16 +52,19 @@ Each part's rules live on its pattern page, listed under Which patterns it uses.
 
 ## When you can do it differently
 
-- A list may show fixed dropdowns on the toolbar instead of Add Filter and chips. It does so when it has four filters
-  or fewer, and every one picks from a list, is yes or no, or is a date. A fifth filter, or any filter on text, a
-  number, or an amount, means chips. See [Filters](../patterns/filters.md) for why the limit is four.
+- A list may use simple filters, fixed controls on the toolbar, instead of the Filter button. It does so when it has
+  four filters or fewer, and every one picks from a list, is yes or no, or is a date. A fifth filter, or any filter on
+  text, a number, or an amount, means the Filter button. See [Filters](../patterns/filters.md) for why the limit is
+  four.
 - A board or a wide table fills the whole width of the page instead of the centered column.
 
 ## Which patterns it uses
 
-- See [Page Layout](../patterns/page-layout.md) for the header and the 20px between sections.
-- See [List Page](../patterns/list-page.md) for the toolbar and the empty and loading states.
-- See [Filters](../patterns/filters.md) and [Sort](../patterns/sort.md) for the filter chips and the Sort control.
+- See [Page Layout](../foundations/page-layout.md) for the header and the 20px between sections.
+- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar.
+- See [Loading](../foundations/loading.md) and [Empty and Missing](../foundations/empty-and-missing.md) for the empty
+  and loading states.
+- See [Filters](../patterns/filters.md) and [Sort](../patterns/sort.md) for the Filter button and the Sort control.
 - See [Tables](../patterns/tables.md) for rows that open their record.
 
 ## In code
@@ -70,8 +73,8 @@ The app builds the page from aperia-ds5 parts, inside `AppContent`:
 
 - `PageHeader` with `title`, `subtitle` and `actions`.
 - `ListToolbar` with `start`, `search`, `filters` (`FilterField`s and `FilterRule`s, applied with `filterRows`; `form:
-  "dropdowns"` for four filters or fewer, each a pick-list, yes or no, or a date), `shown`, `total`, `noun` and `sort`
+  "simple"` for four filters or fewer, each a pick-list, yes or no, or a date), `shown`, `total`, `noun` and `sort`
   (`SortControl`'s props, sorted with `sortRows`).
 - The table in `<div className="surface overflow-clip">`, each `TableRow` spread with `opensOnClick(label, open)`.
 - `NoResults` with `onClear` when filters match nothing; `EmptyState` (`className="surface"`) when the list is empty;
-  `ListSkeleton` while it loads. `<FullWidth />` for a board or wide table.
+  the list skeleton from [Loading](../foundations/loading.md) while it loads. `<FullWidth />` for a board or wide table.

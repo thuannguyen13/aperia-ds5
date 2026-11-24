@@ -58,7 +58,7 @@ Spacing has no exceptions. Every app uses these steps.
 ## Works with
 
 - See [Sizes](sizes.md) for control heights and the page width.
-- See [Shape and Edges](shape-and-edges.md) for the edges that sit around the space.
+- See [Shape and Edges](../styles/shape-and-edges.md) for the edges that sit around the space.
 
 ## In code
 
@@ -67,4 +67,4 @@ Spacing has no exceptions. Every app uses these steps.
   margins.
 - Cards or tiles in a grid: `gap-4`.
 - Fields: `FieldGroup` and `FieldSet` spacing; do not add margins.
-- A card: `TitledCard`'s header and `CardContent`'s own padding.
+- A card: the titled card's header ([Card](../components/card.md)) and `CardContent`'s own padding.

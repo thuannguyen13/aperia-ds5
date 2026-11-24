@@ -12,9 +12,10 @@ import { Field, FieldDescription, FieldLabel } from "../field/field"
 const MB = 1024 * 1024
 
 const meta: Meta<typeof FilePicker> = {
-  title: "Patterns/FilePicker",
+  title: "Pattern Components/FilePicker",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: FilePicker,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

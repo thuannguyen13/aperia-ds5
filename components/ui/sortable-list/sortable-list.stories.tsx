@@ -16,9 +16,10 @@ import { draftKey } from "@/lib/draft-key"
 import { cn } from "@/lib/utils"
 
 const meta: Meta<typeof SortableList> = {
-  title: "Patterns/SortableList",
+  title: "Pattern Components/SortableList",
+  // Shown on its pattern page's Code tab (site.ts), not in the sidebar or the Components index.
   component: SortableList,
-  tags: ["autodocs"],
+  tags: ["!dev"],
   parameters: {
     docs: {
       description: {

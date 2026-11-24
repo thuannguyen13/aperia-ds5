@@ -10,7 +10,7 @@ import {
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Popover> = {
-  title: "UI/Popover",
+  title: "Components/Containment/Popover",
   component: Popover,
   tags: ["autodocs"],
 }

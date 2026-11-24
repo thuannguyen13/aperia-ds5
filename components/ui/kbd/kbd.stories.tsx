@@ -4,7 +4,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
 import { Kbd, KbdGroup } from "./kbd"
 
 const meta: Meta<typeof Kbd> = {
-  title: "UI/Kbd",
+  title: "Components/Communication/Kbd",
   component: Kbd,
   tags: ["autodocs"],
   args: {

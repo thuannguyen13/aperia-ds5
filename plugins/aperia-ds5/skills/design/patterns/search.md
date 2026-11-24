@@ -7,7 +7,7 @@ Search finds any record in the app from one field that opens from the sidebar or
 Use search to find any record in the app, across every kind of record. Every app offers it behind the Search entry in
 the sidebar.
 
-To narrow one list, use that list's own toolbar search instead. See [List Page](list-page.md) for the toolbar search.
+To narrow one list, use that list's own toolbar search instead. See [List Toolbar](list-toolbar.md) for the toolbar search.
 
 ## What is available
 
@@ -66,8 +66,8 @@ This pattern has no exceptions.
 Search works with three other pages:
 
 - See [App Shell](app-shell.md) for the Search entry in the sidebar that opens it.
-- See [Empty and Missing](empty-and-missing.md) for "No Results".
-- See [Motion](../foundations/motion.md) for how the panel opens and closes.
+- See [Empty and Missing](../foundations/empty-and-missing.md) for "No Results".
+- See [Motion](../styles/motion.md) for how the panel opens and closes.
 
 ## In code
 

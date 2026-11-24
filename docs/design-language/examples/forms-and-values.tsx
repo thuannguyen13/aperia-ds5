@@ -12,15 +12,13 @@ import {
   Field,
   FieldLabel,
   FileDrop,
-  FlagSwitch,
-  HiddenValue,
   Input,
   MoneyInput,
   NativeSelect,
   NativeSelectOption,
-  StatTile,
   Switch,
 } from "aperia-ds5"
+import { FlagSwitch, HiddenValue, StatTile } from "../recipes"
 import { DoDont } from "../blocks"
 
 // Live Do / Don't pairs for the Patterns pages on forms, actions and values, keyed by the rule's heading.

@@ -19,7 +19,7 @@ import {
 } from "../attachment/attachment"
 
 const meta: Meta<typeof Message> = {
-  title: "UI/Message",
+  title: "Components/Chat/Message",
   component: Message,
   tags: ["autodocs"],
   args: {
