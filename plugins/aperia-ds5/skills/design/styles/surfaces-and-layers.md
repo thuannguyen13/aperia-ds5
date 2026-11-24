@@ -63,6 +63,11 @@ sits in one box, and the box sets how its parts are separated.
 | One record's values, such as its details | Space, with the values lined up in one column | No box of their own. The rows sit in the card's content. |
 | Sections of one form, or of one details card | A hairline above each section, or space and a heading | No box of their own |
 
+Inside one container, such as a sheet, a popover, a dialog, or a card, groups are sections. Each section keeps the
+container's inset, and a hairline between two sections runs from the container's left edge to its right edge. Examples
+are a sheet's header and body, a popover's column list and its Ascending and Descending, and a card's footer. A hairline
+that stops at the inset appears only between the rows of a list, such as a list people reorder by dragging.
+
 Groups with their own title and their own actions are separate cards, 16px apart. Two products' line items are two
 cards, each with its own Add. See [Spacing](../foundations/spacing.md) for the gaps between cards and between sections.
 
@@ -131,6 +136,13 @@ The filter sheet on a phone shows the five steps at work:
   Muted fill, so each group has one frame.
 - **Don't:** Put a card, a surface, or an outlined box inside a card. Remove the inner box, so the content does not sit
   in two frames.
+
+### Run a line between groups edge to edge
+
+- **Do:** Make each group of a sheet or popover a section with its own inset, and run the line between sections from
+  edge to edge. The groups then read as parts of the container.
+- **Don't:** Stop the line between two groups at the container's inset. Keep a stopped line for the rows of a list, so
+  a group never reads as one more row.
 
 ### Show a status on a badge, not a filled area
 

@@ -12,6 +12,11 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  Label,
+  RadioGroup,
+  RadioGroupItem,
+  ToggleGroup,
+  ToggleGroupItem,
   TooltipProvider,
   openable,
 } from "aperia-ds5"
@@ -293,6 +298,63 @@ function Rows({ state }: { state: "hover" | "selected" | "focus" }) {
   )
 }
 
+/**
+ * A sort panel drawn with the popover's own classes: its column list, then Ascending and Descending as a second group.
+ * Good: two sections, each with the popover's 12px inset, and a line from edge to edge. Bad: one padded box with a
+ * line stopped at the inset, which reads as one more row.
+ */
+function SortPanel({ sections }: { sections: boolean }) {
+  const list = (
+    <div className="flex flex-col gap-3">
+      <p className="text-sm font-medium">Sort By</p>
+      <RadioGroup defaultValue="Name" aria-label="Sort by" className="gap-0">
+        {["Default order", "Name", "Annual Volume"].map((label) => (
+          <Label
+            key={label}
+            className="flex min-h-8 items-center gap-3 font-normal"
+          >
+            <RadioGroupItem value={label} />
+            {label}
+          </Label>
+        ))}
+      </RadioGroup>
+    </div>
+  )
+  const direction = (
+    <ToggleGroup
+      type="single"
+      variant="outline"
+      spacing={0}
+      value="asc"
+      aria-label="Direction"
+      className="w-full"
+    >
+      <ToggleGroupItem value="asc" className="flex-1">
+        Ascending
+      </ToggleGroupItem>
+      <ToggleGroupItem value="desc" className="flex-1">
+        Descending
+      </ToggleGroupItem>
+    </ToggleGroup>
+  )
+  return (
+    <div className="w-60 rounded-lg bg-popover text-sm text-popover-foreground shadow-md ring-[0.5px] ring-border">
+      {sections ? (
+        <>
+          <div className="p-3">{list}</div>
+          <div className="border-t p-3">{direction}</div>
+        </>
+      ) : (
+        <div className="flex flex-col gap-3 p-3">
+          {list}
+          <div className="border-t" />
+          {direction}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export const surfacesExamples = {
   "What is available": (
     <LightDark>
@@ -324,6 +386,14 @@ export const surfacesExamples = {
       bad={<Billing boxed />}
       goodNote="The card is the one frame."
       badNote="A surface inside the card."
+    />
+  ),
+  "Run a line between groups edge to edge": (
+    <DoDont
+      good={<SortPanel sections />}
+      bad={<SortPanel sections={false} />}
+      goodNote="Two sections, the line from edge to edge."
+      badNote="The line stops at the inset and reads as one more row."
     />
   ),
   "Show a status on a badge, not a filled area": (
