@@ -28,8 +28,9 @@ A value that is missing shows the empty value, a muted em dash (—), never a bl
 [Empty States](../foundations/empty-states.md) for missing values.
 
 A phone number, email, or website in details is a link. Selecting it calls, writes, or opens the website in a new tab.
-The link uses the body color and is underlined only under the pointer. In a table, the same values are plain text. See
-[Table](../components/table.md) for values in a table.
+The link is in the Link color, so it reads as a link at rest, and it is underlined only under the pointer. In a table,
+the same values are plain text. See [Table](../components/table.md) for values in a table, and
+[Accessibility](../foundations/accessibility.md) for contact links on a touch screen.
 
 On a phone, each label stays beside its value. A long value wraps inside its own column, so the values still line up
 down the block. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
@@ -79,5 +80,5 @@ A fact is a small label over its value, for a row of facts in a `dl`, such as a 
 ```
 
 - The label column is at most 9rem, so the values line up in one column and read down.
-- A contact value is a `tel:` / `mailto:` / website link (`target="_blank"` for the website), body color,
-  `hover:underline`.
+- A contact value is a `tel:` / `mailto:` / website link (`target="_blank"` for the website), with
+  `text-link hover:underline`.

@@ -37,7 +37,7 @@ Each element on screen has its own wording, listed below. Examples such as "Pros
 | Toast | The result, such as "Changes saved." or "Note added." | "Great! Your changes have been saved successfully!" |
 | Confirmation | "Delete Project?" / "This permanently deletes the project and its files." / Cancel · **Delete Project** | "Are you sure?" / OK |
 | Status | The state, such as "Draft", "Active", "In Progress", or "Done" | "Currently Active", "Successfully Completed" |
-| Tooltip | Only when the screen needs explaining, such as an icon button's action or why something is disabled | "Click here to edit", a repeat of the label |
+| Tooltip | Only when the screen needs explaining. An action's name is in Title Case, such as "Edit Task" or "More Actions". A reason is a sentence, such as "This item is in use and cannot be deleted." | "Click here to edit", "Edit task", a repeat of the label |
 
 ### Action words
 
@@ -180,10 +180,11 @@ Screen text speaks in one plain voice. The voice follows these rules:
 
 Titles and names use Title Case, and sentences use sentence case.
 
-- Use Title Case for titles, headings, tabs, table headings, labels, and buttons. Title Case capitalizes every word
+- Use Title Case for titles, headings, tabs, table headings, labels, buttons, and a tooltip that names an action, such
+  as "More Actions". Title Case capitalizes every word
   except articles, conjunctions, and prepositions. These elements end with no punctuation. They use "and", never "&",
   except in a table heading when space is short.
-- Use sentence case for sentences, descriptions, values, toasts, and tooltips.
+- Use sentence case for sentences, descriptions, values, toasts, and a tooltip that is a sentence, such as a reason.
 - Give every page and window a title that says what it is for. A task title is a present-tense verb and its object,
   such as "Add User", "Generate Report", or "Associate Transactions to Case". It is never an "-ing" or noun form, such
   as "Selecting an Option" or "Report Generation". A page for many tasks is named for its content, such as "Account
@@ -235,10 +236,10 @@ Never refer to a part of the screen as "below", "page", "window", "modal", "pane
 
 ### Links
 
-A link in running text uses the primary color with an underline, and no other text uses that pair. A Link button
-uses the primary color and shows its underline only under the pointer. See [Button](../components/button.md) for the
-Link button. Contact details on a record's page are the other exception, described under "When you can do it
-differently".
+A link in running text uses the Link color with an underline, and no other text uses that pair. A Link button uses
+the Link color and shows its underline only under the pointer. See [Button](../components/button.md) for the
+Link button. Contact details on a record's page link the way a Link button does, as "When you can do it differently"
+says.
 
 ## How it looks and behaves
 
@@ -361,9 +362,9 @@ These rules allow four exceptions.
   rules, and bring a screen that disagrees back in line.
 - An app built as a conversational assistant, a persona that answers in chat, keeps its own voice in the chat. The
   screen text around the chat follows these rules.
-- Phone numbers, emails, and websites read as plain text in the body color. On a record's page, they link to call,
-  email, or open, and they underline only on hover. See [Table](../components/table.md) for contact details in a
-  table.
+- Phone numbers, emails, and websites read as plain text in the body color in a table. On a record's page, they link
+  to call, email, or open, in the Link color, and they underline only on hover. See [Table](../components/table.md) for
+  contact details in a table.
 
 Send questions these rules do not answer to the VP of Product Innovation and Design.
 

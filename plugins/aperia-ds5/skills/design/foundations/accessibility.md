@@ -19,6 +19,7 @@ The library and the app share the work:
 | Less motion when a person turns on reduced motion in their device settings | The components | See [Motion](../styles/motion.md). |
 | A name for every icon-only button | The app, from the icon button recipe | See [Button](../components/button.md). |
 | A reason for every control that cannot be used | The app, with `ReasonTooltip` or a field note | See [Disabled With a Reason](disabled-with-a-reason.md). |
+| What a hover shows, also on a tap | The app, for each tooltip and card it adds | This page |
 | Words, icons, or a legend beside every color | The app | This page |
 | Labels on every field | The app, with `Field` and `FieldLabel` | See [Forms in Sheets](../patterns/forms-in-sheets.md). |
 
@@ -37,12 +38,21 @@ A screen reader hears a name for every control. A button's name is its text, an 
 and a field's name is its label. A control that cannot be used stays focusable, so a screen reader still reaches it
 and hears why.
 
+On a touch screen, a tap shows what a hover shows on a desktop, because a finger cannot hover:
+
+- A tap on a disabled control shows its reason.
+- A tap on a relative time, such as "3d ago", shows its exact date.
+- A tap on a stack of pictures opens the card that lists everyone.
+
+A contact link is in the Link color at rest, so it reads as a link without the underline that a hover adds. See
+[Surfaces and Layers](../styles/surfaces-and-layers.md) for showing what responds before the pointer reaches it.
+
 ## Rules
 
 ### Never use color as the only signal
 
-- **Do:** Pair every colored count, dot, cell, or chart series with a word, an icon, a badge, or a legend, such as a red
-  "3 overdue" with its label, so people who cannot tell the colors apart read the same thing.
+- **Do:** Pair every colored badge, dot, or chart series with a word, an icon, or a legend, such as the word on the
+  Overdue badge, so people who cannot tell the colors apart read the same thing.
 - **Don't:** Mark a state with color alone, such as a red row with no word. Add the word, so the state does not depend
   on seeing color.
 
@@ -73,10 +83,15 @@ of them.
 - See [Color](../styles/color.md) for the status and chart colors that need a word beside them.
 - See [Disabled With a Reason](disabled-with-a-reason.md) for controls that cannot be used.
 - See [Sizes](sizes.md) for the size of every control.
+- See [History](../patterns/history.md) and [Details](../patterns/details.md) for the dates and contact links that a
+  tap shows.
 
 ## In code
 
 - The components come from Radix, which handles keyboard use, focus, and ARIA roles. Use them as they are.
 - `opensOnClick(label, open)` makes a table row focusable and opens it with Enter or Space.
 - A disabled control that says why uses `aria-disabled` instead of `disabled`, so it stays focusable.
+- Radix's `Tooltip` and `HoverCard` open on hover and focus only. A part whose hover shows something also opens it on a
+  tap. On a pointer down with `pointerType === "touch"`, toggle it open, as the people stack on
+  [People and Pictures](../patterns/people-and-pictures.md) does.
 - `prefers-reduced-motion` turns off the scale and slide of panels in `base.css`. Panels still fade.
