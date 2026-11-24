@@ -855,12 +855,16 @@ export function SkillDoc({
     (tab) => panels[tab].length > 0 || (tab === "code" && code)
   )
   const [tab, setTab] = React.useState<Tab>(tabs[0] ?? "guidelines")
+  const withoutIntro = Object.fromEntries(
+    Object.entries(after).filter(([key]) => key !== "@intro")
+  )
   const panel = React.useRef<HTMLDivElement>(null)
   return (
     <Here.Provider value={here}>
       <div className="dl-page sb-unstyled mx-auto grid max-w-[66rem] gap-12 pb-24 font-sans text-foreground antialiased lg:grid-cols-[minmax(0,1fr)_12rem]">
         <article className="min-w-0">
-          <Sections text={intro} after={after} intro />
+          {/* The page's example opens its Overview tab, not the space above the tabs, so the lead and tabs sit together. */}
+          <Sections text={intro} after={withoutIntro} intro />
           {tabbed && tabs.length > 1 && (
             <Tabs
               value={tab}
@@ -877,6 +881,9 @@ export function SkillDoc({
             </Tabs>
           )}
           <div ref={panel} role={tabbed ? "tabpanel" : undefined}>
+            {(tab === "overview" || !tabbed) && after["@intro"] && (
+              <div className="skip-toc mt-8">{after["@intro"]}</div>
+            )}
             <Sections
               key={tab}
               text={(tabbed ? panels[tab] : parts).join("\n")}
