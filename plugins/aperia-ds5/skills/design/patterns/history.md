@@ -24,12 +24,12 @@ opens every entry in a sheet that scrolls on its own. The card and the sheet dra
 Each entry says when it happened in the short relative form, such as "3d ago", with the exact date on hover. See
 [Copy](../foundations/copy.md) for how times are written.
 
-An entry the system made, such as an import, has no person. A card with no entries keeps its place, with an empty state
+An entry that the app made, such as an import, has no person. A card with no entries keeps its place, with an empty state
 inside, such as "No Activity".
 
 ## Rules
 
-### Show the latest entries, with View All for the rest
+### Show the latest ten entries, with View All
 
 - **Do:** Show the latest ten in the history card, with View All opening every entry in a scrolling sheet, so the page
   stays short.
@@ -77,7 +77,7 @@ joins it to the next entry. The line stops at the last entry.
 ```
 
 - The kind of entry is the icon's `title` on hover and an `sr-only` text that a screen reader reads first.
-- Leave out the user and its dot when the system made the change.
+- Leave out the user and its dot when the app made the change, such as an import.
 - A badge, such as a check on a finished task, sits over the icon's corner, out of the flow.
 - When each entry opens with a box, as notes do, add `mt-2` to the icon and `-mb-1.5` to the line, so the icon centers
   on the first line of text inside the box.

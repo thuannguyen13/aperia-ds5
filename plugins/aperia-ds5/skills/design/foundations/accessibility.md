@@ -16,7 +16,7 @@ The library and the app share the work:
 |---|---|---|
 | Keyboard reach, focus order, and Escape to close panels | The components | Every menu, dialog, sheet, popover, and picker |
 | A visible focus line and halo on every control | The components | See [Border and Radius](../styles/border-and-radius.md). |
-| Less motion when the system asks for it | The components | See [Motion](../styles/motion.md). |
+| Less motion when a person turns on reduced motion in their device settings | The components | See [Motion](../styles/motion.md). |
 | A name for every icon-only button | The app, from the icon button recipe | See [Button](../components/button.md). |
 | A reason for every control that cannot be used | The app, with `ReasonTooltip` or a field note | See [Disabled With a Reason](disabled-with-a-reason.md). |
 | Words, icons, or a legend beside every color | The app | This page |

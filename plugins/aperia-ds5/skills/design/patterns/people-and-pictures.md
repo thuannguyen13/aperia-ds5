@@ -29,7 +29,7 @@ Pictures come in five sizes:
 | Large | 40px | A logo preview in an image picker |
 | Extra large | 48px | A page header |
 
-A page header that shows people shows up to three avatars, then "+N" for the rest. Hovering, focusing, or tapping them
+A page header that shows people shows up to three avatars, then "+N" for the people it leaves out. Hovering, focusing, or tapping them
 opens a card. The card lists everyone, each with their avatar, name, and role.
 
 ## How it looks and behaves
@@ -123,7 +123,7 @@ comes from the app's picture adapter. Companies and products are square.
 ```
 
 - `RecordAvatar` in the snippet stands for the app's own picture adapter.
-- The stack shows the first three avatars, then a count such as +2 for the rest.
+- The stack shows the first three avatars, then a count such as +2 for the people it leaves out.
 - The button's accessible name lists every person and their role, so nothing hides behind the hover.
 - The card opens on hover and on keyboard focus. A hover card ignores touch, so on a pointer down with
   `pointerType === "touch"`, remember whether it was open, and on click set it to the opposite. While a touch is in

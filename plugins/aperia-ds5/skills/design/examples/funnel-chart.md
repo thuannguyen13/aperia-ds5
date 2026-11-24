@@ -4,8 +4,8 @@ A funnel chart shows how many records reach each stage and where the others drop
 
 ## When to use
 
-Use a funnel chart on a dashboard that shows how many records reach each stage of a process, and where the rest were
-lost or still are.
+Use a funnel chart on a dashboard that shows how many records reach each stage of a process. It also shows at which
+stage the other records dropped out or still wait.
 
 ## How it looks and behaves
 
@@ -31,7 +31,7 @@ records reached the stage and what became of them. Pointing at a stage, moving t
 small card below the bar with the same numbers. That card looks like a chart's tooltip, with the popover fill and a gap
 between each name and its value.
 
-The funnel counts the same span as the rest of the page. The page's date control sets that span, and the page's subtitle
+The funnel counts the same span as the page's other figures. The page's date control sets that span, and the page's subtitle
 states it.
 
 When nobody reached the first stage, the card shows an empty state instead of bars, such as "No Opportunities".

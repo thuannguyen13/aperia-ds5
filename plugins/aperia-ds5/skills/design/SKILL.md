@@ -130,8 +130,8 @@ The pages are in six sections, the same as the Storybook sidebar.
 4. **Motion eases out:** panels open and close on the shared timing ([Motion](styles/motion.md)), a dialog growing
    slightly as it opens. Reduced motion only fades. Nothing pops in or snaps shut.
 5. **Card headers come from one recipe**, the titled card on [Card](components/card.md): title, optional figure and
-   action on one 2rem row, so every card's first line aligns. Each part owns its space (the header its 56px, the content
-   its padding), never a gap on the card. Card titles are semibold and smaller than the page title.
+   action on one 2rem row, so every card's first line aligns. The header, content and footer each hold their own
+   space (the header its height, the content its padding), never a gap on the card. Card titles are semibold and smaller than the page title.
 6. **Empty means `EmptyState`:** an icon and "No [Items]". A second line only when it says what the title can't (whose,
    which range, what to do). Never bare text, and never a line that repeats the title.
 7. **Every record's picture is the ds5 `Avatar`.** People are circles; companies, products and teams are

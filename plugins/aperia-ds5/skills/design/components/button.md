@@ -136,7 +136,7 @@ On a phone, a dialog's buttons stack, with the action on top.
 |---|---|
 | Dialog | Cancel, then the action, sit at the bottom right. The action repeats the dialog's verb, such as "Delete Project", not OK. |
 | Sheet | A fixed footer holds Cancel and Save. A record's Delete sits at the start of the footer, away from Save. |
-| Page header | The page's actions sit on the title's line. A record's actions are Edit, then the rest, then Delete in the Destructive type. |
+| Page header | The page's actions sit on the title's line. A record's actions are Edit, then the record's other actions, then Delete in the Destructive type. |
 | Card | Add sits in the card header. |
 | Table | A row has no Open, View, or Edit button. The whole row opens its record, and editing happens there. |
 | Tooltip | Every icon button has a tooltip. |

@@ -37,8 +37,8 @@ Add sits at the right of the header. When the card's list also has Sort, Sort si
 [Sort](sort.md) for the Sort control. While the card is empty, Add moves to the middle of the empty state, and the
 header has none.
 
-Each part of a card brings its own space. When a part hides, its space goes with it, and the rest stays where it was.
-Examples are the content of a collapsed card and an error that clears.
+A card's header, content, and footer each hold their own space, so a part that hides takes its space with it. See
+[Card](../components/card.md) for the card's parts.
 
 Tiles sit in rows, and tiles in a row line up. The line that says what each number means is pinned to the foot of the
 tile, whether or not the tile has a bar. Tile numbers use tabular figures.

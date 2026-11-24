@@ -74,8 +74,8 @@ View Note shows only while the note is cut short at the column's current width.
 ### Open a cut-short preview in a sheet
 
 - **Do:** Put View Note under a note that is cut short (the reason under a stage change), opening the whole note in a
-  sheet, so people read the rest without losing their place.
-- **Don't:** Cut the note short with the rest in a tooltip, or expand it in place. Open the whole note in a sheet, so it
+  sheet, so people read the whole note without losing their place.
+- **Don't:** Cut the note short with the full text in a tooltip, or expand it in place. Open the whole note in a sheet, so it
   is easy to read and nothing under it shifts.
 
 ## When you can do it differently

@@ -39,7 +39,7 @@ A file on a form goes through these steps:
 Sizes read with their unit, such as "812 KB" and "3.2 MB".
 
 An image picker resizes a picked image for its use, such as a logo, a cover, or an email header. The image is saved
-with the rest of the form. An image that cannot be read shows a message under the buttons. The message names the types
+with the form's other fields. An image that cannot be read shows a message under the buttons. The message names the types
 the picker takes.
 
 In a read-only form, files show as downloads only, and an empty list reads "No attachments". A read-only image shows

@@ -22,14 +22,14 @@ A page has one of two widths:
 
 ## How it looks and behaves
 
-A page follows five layout rules for spacing, scrolling, width, alignment, and the space each part owns.
+A page follows five layout rules for spacing, scrolling, width, alignment, and the space inside a card.
 
 The page column has 20px of space around it and 20px between its sections. Cards or tiles side by side are 16px apart.
 This gap is smaller than the gap between sections, because a card already has space inside it.
 
 The whole page scrolls as one. No part of the page has a scroll of its own, because a part that scrolls catches the
-mouse wheel. A long list inside a page, such as a history, shows its latest ten entries, and View All opens the rest in
-a sheet. See [History](../patterns/history.md) for the history card.
+mouse wheel. A long list on a page, such as a record's history, shows its latest ten entries. View All opens a sheet
+with every entry. See [History](../patterns/history.md) for the history card.
 
 The column narrows with the window. A page lays itself out by the width it gets, such as tiles in one row on a wide
 screen and stacked tiles on a phone.
@@ -43,9 +43,8 @@ Content and box edges line up across containers, to the pixel. Three cases apply
 - Rows divided to a card's edges, such as a table's rows, keep the 16px inside each row. Their text lines up with the
   title, and the lines between rows run edge to edge.
 
-Each part of a card owns its space. The header has its own height, and the content has its own padding. The card adds
-no space between them. When a part hides, such as a collapsed card's content or an error that clears, its space goes
-with it. The rest of the card stays where it was.
+A card's header, content, and footer each hold their own space, so a part that hides takes its space with it and
+nothing else in the card moves. See [Card](../components/card.md) for the card's parts.
 
 ## Rules
 
@@ -57,10 +56,10 @@ with it. The rest of the card stays where it was.
 
 ### Keep one scroll
 
-- **Do:** Let the page scroll as one, showing a long list's latest entries and the rest in a sheet, so the mouse wheel
-  always moves the page.
-- **Don't:** Put a box on the page that scrolls on its own. Show the latest entries and open the rest in a sheet, so the
-  wheel never gets trapped.
+- **Do:** Let the page scroll as one. Show a long list's latest entries, with View All opening every entry in a sheet,
+  so the mouse wheel always moves the page.
+- **Don't:** Put a box on the page that scrolls on its own. Show the latest entries and open the full list in a sheet,
+  so the wheel never gets trapped.
 
 ### Put content on its title's line
 

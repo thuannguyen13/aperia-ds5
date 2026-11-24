@@ -53,7 +53,7 @@ deleted."
 ### Say the consequence in one line
 
 - **Do:** Say the consequence in one line ("This permanently deletes the note."), so people decide at a glance.
-- **Don't:** Write a paragraph about what the system does next, or skip the line when the delete also removes related
+- **Don't:** Write a paragraph about what the app does next, or skip the line when the delete also removes related
   items (such as files). Keep one plain line, so people read it.
 
 ### Use the destructive color for removal

@@ -20,7 +20,7 @@ The table sits in a box with the card fill on the page. The newest entry comes f
 |---|---|
 | When | How long ago the change happened, in muted text ("3h ago"). Pointing at it shows the exact date and time. |
 | Who | The person who made the change. |
-| What | The action as a sentence in medium weight. Each change follows on its own line in small muted text ("Stage: Demo → Proposal"). When the entry holds more changes than it lists, the list ends with a count of the rest, such as "and 3 more". |
+| What | The action as a sentence in medium weight. Each change follows on its own line in small muted text ("Stage: Demo → Proposal"). When the entry holds more changes than it lists, the list ends with a count of the changes it leaves out, such as "and 3 more". |
 
 Selecting anywhere on a row opens the record the entry is about, while that record still exists.
 

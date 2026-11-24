@@ -159,7 +159,7 @@ Screen text speaks in one plain voice. The voice follows these rules:
 
 - Use plain, concrete words. Pick familiar words for the actual object, action, or state, and choose clarity over
   cleverness.
-- Say only what people need to act. Never say where data is saved, what it counts toward, what the system does next,
+- Say only what people need to act. Never say where data is saved, what it counts toward, what the app does next,
   or why a rule exists, unless people must act on it. Cut any sentence people would not miss.
 - Write instructions to the person, in the active voice, in the imperative or present tense. Write "Search by name or
   phone number.", not "Search can be by name or phone number." Labels have no person, voice, or tense.
@@ -297,7 +297,7 @@ Make a copy change only when the new words follow a rule on this page that the o
 - **Don't:** Repeat the title ("No tasks yet." under "No Tasks"), or show a bare "No data". Name the items, so people
   know what is missing.
 
-### Use the same words as the rest of the app
+### Use the same words as the app's other screens
 
 - **Do:** Reuse the wording a similar screen already uses for the same action, state, or message, so people recognize
   it.

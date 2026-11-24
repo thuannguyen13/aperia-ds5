@@ -15,7 +15,7 @@ Notifications have five parts:
 |---|---|
 | Sidebar entry | Notifications, with the unread count in a destructive badge. Past 99, the count reads "99+". On the collapsed rail, the count sits on the corner of the bell. |
 | Panel header | One row with two tabs, Mark All as Read, and a settings button named "Notification Settings". The Unread tab comes first with its count, then All. |
-| Notification | The picture of who did it, or a bell for the system. The sentence in muted text, with the person and the record's name in the foreground color at medium weight. The time under the sentence, such as "3d ago". A dot while it is unread. |
+| Notification | The picture of who did it, or a bell for a notice from the app. The sentence in muted text, with the person and the record's name in the foreground color at medium weight. The time under the sentence, such as "3d ago". A dot while it is unread. |
 | Empty tab | A bell and "No Unread Notifications" or "No Notifications". |
 | Toast | The same sentence and picture as the notification, for each new notification. |
 

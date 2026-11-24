@@ -67,7 +67,7 @@ nothing, such as "All products". A switch is on or off. From and To narrow the l
 
 ### Choosing between the two forms
 
-Most lists fit one form at once. These cases decide the rest:
+Most lists fit one form at once. These cases decide the others:
 
 - A list uses one form, never both. Simple filters never sit beside a Filter button.
 - A list that outgrows simple filters moves to advanced filters as a whole. That happens with a fifth filter, or with

@@ -25,8 +25,9 @@ A card has three parts, listed from top to bottom:
 | Content | A table, a list, fields, or a chart |
 | Footer, when there is one | A band at the bottom of the card, under the hairline |
 
-Each part carries its own space. The header carries its height, and the content carries its padding. The card adds no
-space between them, so the header stays the same when the content is hidden.
+Each part holds its own space. The header has a fixed height, and the content and the footer have their own padding.
+The card adds no space between the parts. When a part hides, such as the content of a collapsed card or an error that
+clears, its space goes with it. The other parts stay where they were.
 
 ### Titled card
 
