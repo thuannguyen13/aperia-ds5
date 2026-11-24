@@ -24,8 +24,8 @@ Selecting a row opens the option's sheet, so every action on an option is in one
 buttons. The same form adds and edits an option. Delete sits at the start of the sheet's footer. While anything uses the
 option, Delete is grayed out and says "This item is in use and cannot be deleted."
 
-People reorder options by dragging the grip, or from the keyboard through the grip. The new order saves at once, with
-the message "Order saved."
+People reorder options by dragging the grip, or from the keyboard through the grip. The new order saves at once. The
+list already shows it, so no message follows.
 
 Options may fall into groups, such as Open and Closed stages. Each group sits under a muted band. Options reorder only
 within their group.
@@ -43,8 +43,8 @@ neither edit nor delete gets rows that do not open.
 
 ### Reorder with the grip
 
-- **Do:** Drag the grip, or pick it up from the keyboard, and save the new order at once ("Order saved."), so moving an
-  option takes one step.
+- **Do:** Drag the grip, or pick it up from the keyboard, and save the new order at once, so moving an option takes one
+  step.
 - **Don't:** Put up and down arrows on every row. Use a grip that drags, so moving an option far does not take many
   clicks.
 
@@ -63,6 +63,7 @@ Leave out the grip column when the order does not matter.
 
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for one card per list, its count, and its add button.
 - See [Table](../components/table.md) for the whole row that opens its record.
+- See [Tables](../patterns/tables.md) for why an option opens a sheet and not a page.
 - See [Tables](../patterns/tables.md) for the grouped rows and In Use aligned right.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the option's sheet, read-only for someone who may only
   delete.
@@ -75,8 +76,7 @@ The app builds it from aperia-ds5 parts and the recipes on the pattern and compo
 - The titled card from [Card](../components/card.md) per list, the count as its figure and Add Stage as its action,
   holding a flush `Table`.
 - Each group is its own `TableBody`, headed by the table group row from [Tables](../patterns/tables.md), holding a
-  `SortableList` of `SortableRow`s (the handle in the first cell). Save the new order at once and `toast("Order
-  saved.")`.
+  `SortableList` of `SortableRow`s (the handle in the first cell). Save the new order at once, with no toast.
 - Each row spreads `opensOnClick(`Open ${name}`, edit)`, or nothing for someone who may neither edit nor delete.
 - The sheet is `FormSheet` with `SheetForm` (`readOnly` for someone who may only delete) and `SheetDelete` in `start`,
   with `reason={IN_USE_DELETE}` while the option is in use.

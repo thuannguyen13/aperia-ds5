@@ -153,6 +153,58 @@ export const buttonExamples = {
       }
     />
   ),
+  "Choose the type by asking the questions in order": (
+    <DoDont
+      good={
+        <>
+          <Button variant="outline">Cancel</Button>
+          <Button>Save</Button>
+        </>
+      }
+      goodNote="Cancel is Outline, Save is the area's Primary"
+      bad={
+        <>
+          <Button variant="secondary">Cancel</Button>
+          <Button>Save</Button>
+        </>
+      }
+      badNote="Secondary beside the main action"
+    />
+  ),
+  "Show at most three record actions as buttons": (
+    <DoDont
+      stack
+      good={
+        <>
+          <Button variant="outline">
+            <PencilIcon />
+            Edit
+          </Button>
+          <Button variant="outline">Send Email</Button>
+          <IconButton label="More actions" variant="outline" size="icon">
+            <MoreHorizontalIcon />
+          </IconButton>
+        </>
+      }
+      goodNote="Edit and one more, then More actions"
+      bad={
+        <>
+          <Button variant="outline">
+            <PencilIcon />
+            Edit
+          </Button>
+          <Button variant="outline">Send Email</Button>
+          <Button variant="outline">Convert</Button>
+          <Button variant="destructive">Close as Lost</Button>
+          <Button variant="destructive">
+            <Trash2Icon />
+            Delete
+          </Button>
+        </>
+      }
+      badNote="five record actions across the header"
+    />
+  ),
   "Say why a button is disabled": (
     <DoDont
       good={

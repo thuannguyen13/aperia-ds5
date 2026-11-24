@@ -25,7 +25,8 @@ Global search has four parts, listed from top to bottom:
 
 Global search opens as a dialog, updates as the user types, and closes when a result opens:
 
-1. Global search opens as a dialog over the dimmed page.
+1. Global search opens as the search dialog over the dimmed page, up to 576px wide. See
+   [Dialog](../components/dialog.md) for the four kinds of dialog.
 2. The field is flush with the panel. It has no fill, edge, or ring of its own.
 3. A divider separates the key hint from the results.
 4. A result highlights like a menu item when the pointer or the arrow keys reach it.
@@ -65,17 +66,18 @@ This pattern has no exceptions.
 
 ## Works with
 
-Global search works with three other pages:
+Global search works with four other pages:
 
 - See [App Shell](app-shell.md) for the Search entry in the sidebar that opens it.
 - See [Empty States](../foundations/empty-states.md) for "No Results".
 - See [Motion](../styles/motion.md) for how the panel opens and closes.
+- See [Dialog](../components/dialog.md) for the search dialog's width beside the other kinds of dialog.
 
 ## In code
 
 - `AppSidebarSearch` (`onOpen`, `label`) in `AppSidebar`'s `search` opens the app's dialog on a click and on ⌘K
   (Ctrl K off a Mac).
-- Build the dialog from `CommandDialog` and `Command` with `shouldFilter={false}`, since the server already matched:
+- Build the dialog from `CommandDialog` (`className="sm:max-w-xl"`) and `Command` with `shouldFilter={false}`, since the server already matched:
   one `CommandGroup` per kind, each `CommandItem` with the app's `Avatar` adapter, the name with the match
   `font-semibold`, and a muted detail line. Use `NoResults` for nothing found. Do not filter the server's results again
   in the browser.

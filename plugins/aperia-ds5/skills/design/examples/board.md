@@ -33,9 +33,10 @@ A drag starts differently for each kind of input:
 
 Screen readers announce each pickup and drop.
 
-Dropping a card on another column opens a status change before anything saves. The status change asks for a reason when
-the app records why a record changes state. See [Status Change With a Reason](status-change.md) for that dialog. While
-the dialog is open, the card shows in its new column. Cancel, or a refused change, puts the card back.
+Dropping a card on another column saves the new state at once. A toast states the result, such as "Changed to Demo.",
+with Undo. A new state that needs a reason asks for it first, in the reason dialog. See
+[Status Change With a Reason](status-change.md) for that dialog. While the dialog is open, the card shows in its new
+column. Cancel, or a refused change, puts the card back.
 
 Dragging works with a pointer only. Keyboard and screen reader users open the card and change the state from the
 record's page.
@@ -57,12 +58,12 @@ While the board loads, the page shows placeholder shapes in the board's shape in
 - **Don't:** Put a "View" link or button inside the card, or links on its text. Let the whole card open the record, so
   no one guesses which part opens what.
 
-### Confirm a move before it saves
+### Save a move at once, with Undo
 
-- **Do:** Open the status change when a card is dropped on another column (Cancel puts it back), so nothing changes by
-  accident.
-- **Don't:** Save the new state on a drop without asking. Open the status change on every drop, so a slip never changes
-  a record and a required reason is always recorded.
+- **Do:** Save a card's new state as it is dropped, with Undo in its toast ("Changed to Demo."), so a move takes one
+  drag. Ask first only when the new state needs a reason.
+- **Don't:** Ask "Move to Demo?" on every drop. Keep questions for a reason the state needs, so a confirmation still
+  means something must be filled in.
 
 ### Load in the board's shape
 
@@ -80,6 +81,7 @@ A board has no exceptions.
 - See [List Toolbar](../patterns/list-toolbar.md) for the toolbar and the Board / Table switch.
 - See [Page Layout](../foundations/page-layout.md) for a board that fills the page's width.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the small card.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for a change that offers Undo instead of asking.
 
 ## In code
 
@@ -94,4 +96,6 @@ The app builds it from aperia-ds5 parts and the recipes on the pattern and compo
 - A card is `Card size="sm"` with `{...openable(label, open)}`; detail lines are `text-xs text-muted-foreground` with a
   `size-3` icon.
 - Dragging uses dnd-kit with a `MouseSensor` (`distance: 4`), a `TouchSensor` (`delay: 200`) and no keyboard sensor,
-  plus `announcements`. A drop opens the app's stage change (`AlertDialog`).
+  plus `announcements`. A drop saves at once and calls `toast("Changed to Demo.", { action: { label: "Undo", onClick
+  } })`. A drop on a state that needs a reason opens the reason dialog (`AlertDialog`) from
+  [Status Change With a Reason](status-change.md) first.

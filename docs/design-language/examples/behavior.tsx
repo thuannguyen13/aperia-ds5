@@ -85,7 +85,7 @@ function TickWithUndo() {
         onCheckedChange={(on) => {
           setDone(on === true)
           if (on === true)
-            toast("Done: Send Proposal", {
+            toast("Task completed.", {
               action: { label: "Undo", onClick: () => setDone(false) },
             })
         }}

@@ -88,6 +88,7 @@ Offer Edit Note only when the app lets an author change a saved note.
   for how history is listed.
 - See [Forms in Sheets](../patterns/forms-in-sheets.md) for the Add Note sheet.
 - See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for asking before Delete Note removes a note.
+- See [Tables](../patterns/tables.md) for a note as a small record, read in a sheet, and for its bin as a row's button.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for Add in the header or in the empty state.
 
 ## In code

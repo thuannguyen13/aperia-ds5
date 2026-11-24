@@ -35,9 +35,11 @@ A confirmation follows four rules.
 
 - The message names the record, so a wrong pick shows.
 - A deletion says "This permanently deletes \<the record\>[ and \<what goes with it\>]."
-- When the count is known, the title and message match it, as in "Delete the 12 selected merchants?"
-- The action uses the destructive color when it removes something or cannot be taken back. An action that adds, such as
-  Apply Template, uses the primary color.
+- When the count is known, the title and message match it. The title is in Title Case, as in "Delete 3 Merchants?",
+  and the message is "This permanently deletes 3 merchants."
+- The action uses the destructive color when it removes something or cannot be taken back. An action that changes
+  content without deleting a record uses the primary color, such as Apply Template, which replaces the lines already
+  there.
 
 ### Unsaved changes
 
@@ -149,13 +151,15 @@ result that needs nothing more from people shows as a toast. Find the situation 
 | A form or a dialog is refused, with no one field at fault | A message above the buttons. The form or dialog stays open with what was typed. | Nothing typed is lost, and people try again in place. |
 | A control that saves on change is refused, such as a switch in a grid | The control returns to its saved value, and an alert above the grid names the row, such as "Pipeline: Email could not be saved. Try again." | The control shows what is saved, and the message stays beside the work. |
 | A file is refused in a drop zone | A message under the drop zone, beside the refused file | It stays where the file was dropped until it is read. |
-| An action fails and nothing on screen holds it, such as a background job, a closed menu, or a page the person has left | A toast that stays until it is closed, names what failed, and offers the fix, such as "Report export failed. Try again." | No place is left on screen to show it. |
+| An action fails and nothing on screen holds it, such as a background job, a closed menu, or a page the person has left | A toast that stays until it is closed with its close button (×), names what failed, and offers the fix, such as "Report export failed. Try again." | No place is left on screen to show it. |
 | An action succeeds | A toast that closes on its own, with the result, such as "Note added." | People see what happened at a glance and carry on. |
 | A change saves at once and can be taken back, such as a ticked task or a status change | A toast with the result and Undo, such as "Changed to Demo." | People see the change take effect and can take it back. |
 | A new notification arrives | A toast with the notification's sentence that links to its record, three at most. See [Notifications](../patterns/notifications.md). | People see it on any page, and the page stays usable. |
-| Something holds for the whole page, such as a read-only record or an outage | A banner alert under the page header. See [Banner Alerts](../patterns/banner-alerts.md). | People read it before they start working on the page. |
+| Something holds for the whole page, such as a closed record or an outage | A banner alert under the page header. See [Banner Alerts](../patterns/banner-alerts.md). | People read it before they start working on the page. |
 
 A toast that closes on its own is only for a success. An error is never a toast while its place is still on screen.
+Every toast shows in one stack at the top right of the screen. See
+[Saving and Feedback](saving-and-feedback.md) for where toasts show on a phone and how many show at once.
 
 ## Rules
 
@@ -189,7 +193,7 @@ A screen may depart from a template only for a business reason the app has recor
 ## In code
 
 - `ConfirmDialog` from aperia-ds5: `title` ("Delete Contact?"), `action` ("Delete Contact"), `cancel`, the message as
-  children, and `variant="default"` for an action that adds.
+  children, and `variant="default"` for a step that deletes no record, such as Apply Template.
 - `SheetForm` asks Discard Changes? itself, with the one-form wording above.
 - `EmptyState` (`title`, `description`) and `NoResults` (`onClear` adds the line and Clear Filters).
 - `ReasonTooltip`, and the icon button recipe's reason on [Button](../components/button.md), for why something is

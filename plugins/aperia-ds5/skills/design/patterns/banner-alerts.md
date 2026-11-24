@@ -1,7 +1,7 @@
 # Banner Alerts
 
-A banner alert is an alert under the page header about something that affects the whole page, such as a read-only
-record or an outage.
+A banner alert is an alert under the page header about something that affects the whole page, such as a closed record
+or an outage.
 
 ## When to use
 
@@ -9,10 +9,12 @@ Use a banner alert when something holds for the whole page while people are on i
 
 | Situation | Example |
 |---|---|
-| The record is read-only for this user | "You do not have access to change opportunities." |
 | The record is closed or locked, so it cannot be changed | "Closed opportunities cannot be changed." |
 | A warning affects every figure or record on the page | "Volume figures are from 11/22/2026. Today's figures arrive after 6:00 AM." |
 | A service the page needs is down | "The file service is not responding. Try again in a few minutes." |
+
+A role that may read a record but never change it gets no banner. The record shows without Edit or Delete. See
+[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for that case.
 
 Use something other than a banner when the message belongs to one action or one place. A result that needs nothing
 more is a toast. A wrong value is a message beside its field. See [Message Templates](../foundations/copy-templates.md)
@@ -24,7 +26,7 @@ A banner alert comes in three types, one for each weight of message:
 
 | Type | Look | Use for |
 |---|---|---|
-| Information | The card fill, the body text, and an info icon | A read-only or closed record, and other states that limit what people can do |
+| Information | The card fill, the body text, and an info icon | A closed or locked record, and other states of the record that limit what people can do |
 | Warning | The app's amber status pair, and a warning icon | A risk to what the page shows, such as figures that are out of date |
 | Error | The destructive text, and an error icon | An outage or a failure that stops work on the page |
 
@@ -33,7 +35,7 @@ A banner alert comes in three types, one for each weight of message:
 A banner alert has four parts, listed from start to end.
 
 1. **Icon**. It shows the type at a glance, beside the title.
-2. **Title**. It names the situation in a few words, in Title Case, such as "Read Only" or "Service Outage".
+2. **Title**. It names the situation in a few words, in Title Case, such as "Closed Opportunity" or "Service Outage".
 3. **Description** (optional). One or two sentences say what happened and what people can do.
 4. **Action** (optional). One button at the end, such as Try Again or a close button (×).
 
@@ -63,16 +65,16 @@ work, such as an outage, is announced at once.
 
 ### Keep a banner alert for the whole page
 
-- **Do:** Use a banner alert for a state that holds for the whole page, such as a read-only record, so people know why
+- **Do:** Use a banner alert for a state that holds for the whole page, such as a closed record, so people know why
   the page behaves as it does.
 - **Don't:** Use a banner alert for a saved change ("Note added.") or for one field's error. Use a toast or a message
   on the field, so a banner always means the whole page.
 
 ### Match the type to how much it stops
 
-- **Do:** Use information for a read-only record, a warning for figures at risk, and an error for an outage, so the
+- **Do:** Use information for a closed record, a warning for figures at risk, and an error for an outage, so the
   color says how much the message stops.
-- **Don't:** Show a read-only notice in the destructive color, or an outage in the card fill. Match the type, so red
+- **Don't:** Show a closed-record notice in the destructive color, or an outage in the card fill. Match the type, so red
   always means that something is broken.
 
 ### Keep a lasting state's banner alert open
@@ -80,7 +82,7 @@ work, such as an outage, is announced at once.
 - **Do:** Leave out the close button while the state lasts, such as on a closed record, so people always see why they
   cannot change it.
 - **Don't:** Let people close the banner on a record they still cannot change. Keep it on screen, so no one forgets the
-  record is read-only.
+  record cannot be changed.
 
 ## When you can do it differently
 
@@ -104,7 +106,7 @@ saved is one such case. That alert is not a banner. See
 ```tsx
 <Alert role="status">
   <InfoIcon />
-  <AlertTitle>Read Only</AlertTitle>
+  <AlertTitle>Closed Opportunity</AlertTitle>
   <AlertDescription>Closed opportunities cannot be changed.</AlertDescription>
 </Alert>
 ```

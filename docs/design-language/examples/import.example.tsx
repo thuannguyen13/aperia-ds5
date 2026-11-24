@@ -3,6 +3,7 @@ import { DownloadIcon, UploadIcon } from "lucide-react"
 import {
   Badge,
   Button,
+  FieldError,
   FileDrop,
   Popover,
   PopoverContent,
@@ -11,7 +12,6 @@ import {
   PopoverTitle,
   PopoverTrigger,
   Progress,
-  ReasonTooltip,
   Select,
   SelectContent,
   SelectItem,
@@ -132,9 +132,12 @@ function Match({ row, choice }: { row: Row; choice?: Choice }) {
 /** The dialog's frame, drawn in place so the docs show it without opening it. */
 function DialogFrame({
   footer,
+  message,
   children,
 }: {
   footer: ReactNode
+  /** A refusal, shown above the buttons. */
+  message?: ReactNode
   children: ReactNode
 }) {
   return (
@@ -147,8 +150,11 @@ function DialogFrame({
         <h2 className="text-base font-semibold">Import Prospects</h2>
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto p-4">{children}</div>
-      <div className="flex flex-col-reverse gap-2 border-t px-4 py-3 sm:flex-row sm:justify-end">
-        {footer}
+      <div className="flex flex-col gap-2 border-t px-4 py-3">
+        {message}
+        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          {footer}
+        </div>
       </div>
     </div>
   )
@@ -269,6 +275,7 @@ export function ImportExample() {
   const [file, setFile] = useState<string | null>(null)
   const [refusal, setRefusal] = useState<string | null>(null)
   const [choices, setChoices] = useState(START)
+  const [refused, setRefused] = useState<string | null>(null)
   const importable = Object.values(choices).filter(
     (choice) => choice !== "skip"
   ).length
@@ -289,18 +296,17 @@ export function ImportExample() {
     step === "review" ? (
       <>
         <Button variant="outline">Choose Another File</Button>
-        <ReasonTooltip
-          reason={
-            importable === 0 ? "Set at least one row to import." : undefined
+        <Button
+          onClick={() =>
+            importable === 0
+              ? setRefused("Set at least one row to import.")
+              : setStep("importing")
           }
         >
-          <Button
-            disabled={importable === 0}
-            onClick={() => setStep("importing")}
-          >
-            Import {importable} {importable === 1 ? "Prospect" : "Prospects"}
-          </Button>
-        </ReasonTooltip>
+          {importable === 0
+            ? "Import Prospects"
+            : `Import ${importable} ${importable === 1 ? "Prospect" : "Prospects"}`}
+        </Button>
       </>
     ) : step === "importing" ? (
       <Button disabled>Importing</Button>
@@ -387,13 +393,21 @@ export function ImportExample() {
           <Button>Add Prospect</Button>
         </div>
       </div>
-      <DialogFrame footer={footer}>
+      <DialogFrame
+        footer={footer}
+        message={
+          step === "review" && refused ? (
+            <FieldError className="sm:text-right">{refused}</FieldError>
+          ) : undefined
+        }
+      >
         {step === "review" && (
           <Review
             choices={choices}
-            onChoose={(line, choice) =>
+            onChoose={(line, choice) => {
+              setRefused(null)
               setChoices((was) => ({ ...was, [line]: choice }))
-            }
+            }}
           />
         )}
         {step === "importing" && (

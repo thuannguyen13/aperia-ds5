@@ -49,6 +49,10 @@ A row takes the muted color at 50% when the pointer is over it. Selecting anywhe
 keyboard user reaches a row with **Tab**. The row has the record's name as its label and opens with **Enter** or
 **Space**.
 
+A row opens its record on the record's page, or in a sheet for a small record such as an option or a note. See
+[Tables](../patterns/tables.md) for which records open where, for where their Edit and Delete sit, and for the few rows
+that show a button.
+
 Column headings are real table headings, so a screen reader reads each cell with its column.
 
 Filters sit in the toolbar. On a phone, they go behind one Filter button that counts the filters that are on. The
@@ -76,12 +80,6 @@ pointer and no focus.
 - **Don't:** Put an Open or View button on each row, or a link on the name only. Make the whole row open the record, so
   the table holds no extra buttons.
 
-### Edit and delete on the record's page
-
-- **Do:** Put Edit and Delete in the record page's header, so people act on a record after seeing it.
-- **Don't:** Put Edit and Delete buttons on every row. Keep them on the record's page, so no slip changes the wrong
-  record.
-
 ### Keep table rows plain
 
 - **Do:** Separate rows with dividers and tint a row in the muted color on hover, so people can follow a row across.
@@ -107,7 +105,7 @@ pointer and no focus.
 | Empty State | An empty state shows in place of the rows when there are none. |
 | Badge | A state in a cell is a badge. See [Status](../patterns/status.md). |
 | Avatar | A person or company in a cell shows its picture beside the name. |
-| Button | A row has no button to open or edit it. |
+| Button | A row has no button to open or edit it. A row shows a button only when its click is already taken. |
 | Page | A list table fills the page column. |
 
 See [Tables](../patterns/tables.md) for the column headings right under a card header, with no line above them, and for

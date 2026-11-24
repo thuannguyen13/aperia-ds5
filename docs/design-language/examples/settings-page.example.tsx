@@ -73,7 +73,6 @@ function StagesCard() {
         each === group ? moved : was.filter((stage) => stage.group === each)
       )
     })
-    toast("Order saved.")
   }
   return (
     <TitledCard
