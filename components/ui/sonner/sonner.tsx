@@ -16,15 +16,16 @@ import {
 } from "lucide-react"
 import { plural } from "@/lib/format"
 
-// Three new notifications show as toasts, and one more toast counts the rest, so the stack holds four.
+// Three toasts show at once. Past three new notifications, one more toast counts the rest; it is the newest, so it
+// shows in front and the oldest notification waits behind the three until one closes.
+const VISIBLE_TOASTS = 3
 const NOTIFICATIONS_SHOWN = 3
-const VISIBLE_TOASTS = NOTIFICATIONS_SHOWN + 1
 
 /**
  * The app's one stack of toasts: save confirmations, errors and new notifications alike. Mount it once, at the app's
  * root. It sits at the top right of the window; on a phone (below sonner's own 600px breakpoint) it spans the top of
- * the screen, 16px from each side. It shows four toasts at most: three new notifications plus the one that counts the
- * rest (`toastNotification`).
+ * the screen, 16px from each side. It shows three toasts at most, the newest in front. Past three new notifications,
+ * one toast counts the rest (`toastNotification`).
  */
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()

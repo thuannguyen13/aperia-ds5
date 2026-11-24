@@ -22,6 +22,10 @@ import { renderIcon, type IconProp } from "@/lib/icon"
 /** The one reason a Delete is refused, on every disabled Delete. */
 export const IN_USE_DELETE = "This item is in use and cannot be deleted."
 
+// A record page shows three actions as buttons at most; with more, the first two stay and the rest fold into a menu.
+const MAX_BUTTONS = 3
+const KEPT_BUTTONS = 2
+
 /** One of a record page's actions, besides Edit and Delete. */
 export type RecordAction = {
   label: string
@@ -37,8 +41,9 @@ export type RecordAction = {
 
 /**
  * A record page's actions, the same on every record page, for `PageHeader`'s `menu`: Edit first, then the record's
- * other actions, then, set apart in red, what ends its work and Delete. At lg and wider they are header buttons;
- * narrower, they fold into a More actions menu. Without `onDelete` there is no Delete. With `deleteBlocked`, Delete
+ * other actions, then, set apart in red, what ends its work and Delete. Three actions or fewer are header buttons. With
+ * four or more, the first two stay buttons and the rest, Delete included, go into a More actions menu (…). It is the
+ * same at every width. Without `onDelete` there is no Delete. With `deleteBlocked`, Delete
  * shows disabled and says why on hover (`IN_USE_DELETE`, or the reason given), so a refused delete is never offered.
  */
 export function RecordActions({
@@ -78,16 +83,17 @@ export function RecordActions({
       : []),
   ]
   if (all.length === 0) return null
+  // Three fit as buttons; past three, two stay and the rest share one menu.
+  const buttons = all.length <= MAX_BUTTONS ? all : all.slice(0, KEPT_BUTTONS)
+  const folded = all.slice(buttons.length)
   // The red ones are set apart in the menu from those before them.
-  const apart = all.findIndex((action) => action.destructive)
+  const apart = folded.findIndex((action) => action.destructive)
   return (
-    <>
-      <div className="hidden gap-2 lg:flex">
-        {all.map((action) => (
-          <ActionButton key={action.label} action={action} />
-        ))}
-      </div>
-      <div className="flex lg:hidden">
+    <div className="flex gap-2">
+      {buttons.map((action) => (
+        <ActionButton key={action.label} action={action} />
+      ))}
+      {folded.length > 0 && (
         <DropdownMenu>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -106,7 +112,7 @@ export function RecordActions({
           </Tooltip>
           {/* The menu is sized to its trigger, 128px at least, which wrapped a longer item. */}
           <DropdownMenuContent align="end" className="w-auto">
-            {all.map((action, at) => {
+            {folded.map((action, at) => {
               return (
                 <React.Fragment key={action.label}>
                   {at > 0 && at === apart && <DropdownMenuSeparator />}
@@ -131,8 +137,8 @@ export function RecordActions({
             })}
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
-    </>
+      )}
+    </div>
   )
 }
 
