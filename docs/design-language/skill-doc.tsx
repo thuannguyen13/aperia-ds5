@@ -3,10 +3,11 @@ import type { ReactNode } from "react"
 import { Markdown } from "@storybook/addon-docs/blocks"
 import { cn } from "aperia-ds5/utils"
 import { Unstyled } from "@storybook/addon-docs/blocks"
-import { Tabs, TabsList, TabsTrigger, TooltipProvider } from "aperia-ds5"
+import { Badge, Tabs, TabsList, TabsTrigger, TooltipProvider } from "aperia-ds5"
 import { DoDont } from "./blocks"
 import { COMPONENTS, componentTitle, skillTitle, storyId } from "./site"
 import { LiveColor } from "./live-color"
+import { componentsOf, pagesUsing, type Home } from "./uses"
 
 // The skill's markdown is the source: these pages render it as it is and never copy its text.
 // Its links point at sibling files; here they open the matching page, or the file on GitHub.
@@ -558,6 +559,64 @@ function Verdicts({
   )
 }
 
+/** A row of links to pages, as outline badges. The page in view is named without a link. */
+function PageLinks({ pages, here }: { pages: Home[]; here?: string }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {pages.map((page) =>
+        page.id === here ? (
+          <Badge key={page.id} variant="outline">
+            {page.name}
+          </Badge>
+        ) : (
+          <Badge key={page.id} variant="outline" asChild>
+            {/* Docs render in the preview iframe; the page opens in the manager around it. */}
+            <a href={`./?path=/docs/${page.id}--docs`} target="_top">
+              {page.name}
+            </a>
+          </Badge>
+        )
+      )}
+    </div>
+  )
+}
+
+/**
+ * The links between components and the pages that use them, generated from the source (uses.ts) so they never go
+ * stale: a component's home lists the pages that use it, by section, and a skill page lists the components it uses.
+ */
+function Related({ component, file }: { component?: string; file: string }) {
+  const here = component ? undefined : pageOf(file)
+  const groups = component
+    ? pagesUsing(component)
+    : [{ section: "", pages: componentsOf(file) }].filter(
+        (group) => group.pages.length > 0
+      )
+  if (!groups.length) return null
+  return (
+    <section>
+      <H2>{component ? "Used in" : "Components"}</H2>
+      <P>
+        {component
+          ? "Each page below uses this component."
+          : "This page uses each component below."}
+      </P>
+      <div className="flex flex-col gap-4">
+        {groups.map((group) => (
+          <div key={group.section} className="flex flex-col gap-2">
+            {group.section && (
+              <span className="text-sm font-medium text-muted-foreground">
+                {group.section}
+              </span>
+            )}
+            <PageLinks pages={group.pages} here={here} />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 type Tab = "overview" | "guidelines" | "code"
 const TAB_LABEL: Record<Tab, string> = {
   overview: "Overview",
@@ -693,16 +752,20 @@ function OnThisPage({ panel }: { panel: React.RefObject<HTMLElement | null> }) {
  * Renders a skill file as a page: its title and lead, then its sections in three tabs. Overview holds When to use and What is available, Guidelines holds how it looks and behaves and its
  * rules, and Code holds In code plus `code` (a component's live stories and props). A page without the standard
  * sections (the Overview, a getting-started page) shows as one page. A live example follows any `##` or `###` section
- * named in `after`, by its heading text, or "@intro" for the text under the title.
+ * named in `after`, by its heading text, or "@intro" for the text under the title. The Overview ends with the
+ * generated links: the components the page uses, or, for a component's home (`component`, its folder under
+ * components/ui), the pages that use it.
  */
 export function SkillDoc({
   source,
   after = {},
   code,
+  component,
 }: {
   source: string
   after?: Record<string, ReactNode>
   code?: ReactNode
+  component?: string
 }) {
   const here =
     Object.keys(FILES)
@@ -761,6 +824,9 @@ export function SkillDoc({
               text={(tabbed ? panels[tab] : parts).join("\n")}
               after={after}
             />
+            {(tab === "overview" || !tabbed) && (
+              <Related component={component} file={here} />
+            )}
             {(tab === "code" || !tabbed) && code}
           </div>
         </article>

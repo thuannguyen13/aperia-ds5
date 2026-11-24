@@ -32,13 +32,18 @@ export function ComponentCode() {
   )
 }
 
-/** The site map's entry for a sidebar title, with its group. */
+/** The site map's entry for a sidebar title. */
 function entryOf(title: string) {
   for (const group of COMPONENTS.groups ?? [])
     for (const page of group.pages)
       if (componentTitle(group.title, page.name) === title) return page
   return undefined
 }
+/** The site map's entry whose guidance is a skill page. */
+const entryOfGuide = (guide: string) =>
+  COMPONENTS.groups
+    ?.flatMap((group) => group.pages)
+    .find((page) => page.guide === guide)
 
 /** A guided component's home, for its attached .mdx: the skill page in tabs, with the stories in Code. */
 export function ComponentHome({
@@ -49,7 +54,12 @@ export function ComponentHome({
   after?: Record<string, ReactNode>
 }) {
   return (
-    <SkillDoc source={fileText(guide)} after={after} code={<ComponentCode />} />
+    <SkillDoc
+      source={fileText(guide)}
+      after={after}
+      code={<ComponentCode />}
+      component={entryOfGuide(guide)?.dir}
+    />
   )
 }
 
@@ -61,7 +71,9 @@ export function ComponentPage() {
   if (entry?.guide) return <ComponentHome guide={entry.guide} />
   const name = entry?.name ?? title.split("/").pop()
   const source = `# ${name}\n\n${entry?.lead ?? ""}\n`
-  return <SkillDoc source={source} code={<ComponentCode />} />
+  return (
+    <SkillDoc source={source} code={<ComponentCode />} component={entry?.dir} />
+  )
 }
 
 /** A CSF file as an .mdx imports it (`import * as Stories from "…stories"`). */

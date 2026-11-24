@@ -52,6 +52,7 @@
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
+    "check:docs": "node scripts/check-docs.mjs",
     "generate:icons": "node --env-file=.env.local scripts/generate-icon-code-connect.mjs",
     "publish:icons": "npx figma connect publish -r components/ui/icon --skip-validation --batch-size 100",
     "cc:publish": "npx figma connect publish --skip-validation --batch-size 100"
