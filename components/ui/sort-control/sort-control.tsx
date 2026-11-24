@@ -86,7 +86,7 @@ export function SortControl({
         )}
       </PopoverTrigger>
       {/* Two groups, Sort By and the direction, each with its own inset; the line between them runs edge to edge. */}
-      <PopoverContent align="end" className="w-60 gap-0 p-0">
+      <PopoverContent align="end" className="w-popover-sm gap-0 p-0">
         <div className="flex flex-col gap-3 p-3">
           <p className="text-sm font-medium">Sort By</p>
           <RadioGroup
