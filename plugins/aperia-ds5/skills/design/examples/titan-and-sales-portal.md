@@ -12,8 +12,9 @@ data.
 
 ## How it looks and behaves
 
-Each grid shows one kind of screen. The rows are Before and After, and the columns are the two apps. Desktop and Phone
-switch every frame to that width. Selecting a frame opens it at full size.
+Each comparison shows one kind of screen in one app at a time, its Before above its After. Titan and Sales Portal switch
+the app, and Desktop and Phone switch the width. On a phone, Before and After sit side by side. Selecting a frame opens
+it at full size.
 
 ### The home screen
 

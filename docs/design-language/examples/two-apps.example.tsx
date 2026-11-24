@@ -55,8 +55,8 @@ function Window({
     return () => observer.disconnect()
   }, [])
   const size = SIZE[device]
-  // A phone shows at most 240px wide, so it reads as a phone beside the other app's.
-  const shown = device === "phone" ? Math.min(width, 240) : width
+  // A phone shows at most 320px wide, its Before and After side by side.
+  const shown = device === "phone" ? Math.min(width, 320) : width
   const scale = shown / size.width
   const src = story ? `iframe.html?id=${story}&viewMode=story` : image
   return (
@@ -92,7 +92,10 @@ function Window({
   )
 }
 
-/** A screen of both apps: Before and After rows, Titan and Sales Portal columns, at desktop or phone width. */
+/**
+ * A screen of both apps, one app at a time: its Before and its After, each at the page's full width on a desktop and
+ * side by side on a phone, so the screen reads at a usable size.
+ */
 function Compare({
   titan,
   portal,
@@ -102,58 +105,64 @@ function Compare({
   portal: AppScreen
   name: string
 }) {
+  const [app, setApp] = useState<"Titan" | "Sales Portal">("Titan")
   const [device, setDevice] = useState<Device>("desktop")
-  const apps = [
-    { app: "Titan", screen: titan },
-    { app: "Sales Portal", screen: portal },
-  ]
+  const screen = app === "Titan" ? titan : portal
   return (
     <Unstyled>
       <figure className="my-4 flex flex-col gap-3 text-sm text-foreground">
-        <ToggleGroup
-          type="single"
-          variant="outline"
-          size="sm"
-          aria-label="Screen width"
-          value={device}
-          onValueChange={(next) => next && setDevice(next as Device)}
-          className="self-start"
+        <div className="flex flex-wrap items-center gap-2">
+          <ToggleGroup
+            type="single"
+            variant="outline"
+            size="sm"
+            aria-label="App"
+            value={app}
+            onValueChange={(next) => next && setApp(next as typeof app)}
+          >
+            <ToggleGroupItem value="Titan">Titan</ToggleGroupItem>
+            <ToggleGroupItem value="Sales Portal">Sales Portal</ToggleGroupItem>
+          </ToggleGroup>
+          <ToggleGroup
+            type="single"
+            variant="outline"
+            size="sm"
+            aria-label="Screen width"
+            value={device}
+            onValueChange={(next) => next && setDevice(next as Device)}
+          >
+            <ToggleGroupItem value="desktop">Desktop</ToggleGroupItem>
+            <ToggleGroupItem value="phone">Phone</ToggleGroupItem>
+          </ToggleGroup>
+        </div>
+        <div
+          className={cn(
+            "grid gap-4 rounded-xl bg-muted/50 p-4 ring-[0.5px] ring-border",
+            device === "phone" && "grid-cols-2 justify-items-center"
+          )}
         >
-          <ToggleGroupItem value="desktop">Desktop</ToggleGroupItem>
-          <ToggleGroupItem value="phone">Phone</ToggleGroupItem>
-        </ToggleGroup>
-        <div className="grid grid-cols-[auto_1fr_1fr] gap-x-4 gap-y-3 rounded-xl bg-muted/50 p-4 ring-[0.5px] ring-border">
-          <span />
-          {apps.map(({ app }) => (
-            <span key={app} className="font-medium">
-              {app}
-            </span>
-          ))}
           {(["Before", "After"] as const).map((when) => (
-            <div key={when} className="contents">
+            <div key={when} className="flex min-w-0 flex-col gap-2">
               <span
                 className={cn(
-                  "rotate-180 pt-1 text-xs font-semibold tracking-wide uppercase [writing-mode:vertical-rl]",
+                  "text-xs font-semibold tracking-wide uppercase",
                   when === "Before" ? "text-destructive" : "text-primary"
                 )}
               >
                 {when}
               </span>
-              {apps.map(({ app, screen }) => (
-                <Window
-                  key={`${when}-${app}`}
-                  device={device}
-                  label={`${app} ${name}, ${when.toLowerCase()}`}
-                  {...(when === "Before"
-                    ? { image: screen.before[device] }
-                    : { story: screen.after })}
-                />
-              ))}
+              <Window
+                device={device}
+                label={`${app} ${name}, ${when.toLowerCase()}`}
+                {...(when === "Before"
+                  ? { image: screen.before[device] }
+                  : { story: screen.after })}
+              />
             </div>
           ))}
         </div>
         <figcaption className="text-muted-foreground">
-          Before is each app as it ships on its own styles. After is the same
+          Before is the app as it ships on its own styles. After is the same
           screen built from aperia-ds5. Select a screen to open it at full size.
         </figcaption>
       </figure>
