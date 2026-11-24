@@ -113,7 +113,7 @@ An app never changes it only to look different. No other shared color changes pe
 ## Works with
 
 - See [Elevation](elevation.md) for shadows and the overlay.
-- See [Shape and Edges](shape-and-edges.md) for where Border and Input draw.
+- See [Border and Radius](border-and-radius.md) for where Border and Input draw.
 - See [Typography](typography.md) for which text is foreground and which is muted.
 
 ## In code

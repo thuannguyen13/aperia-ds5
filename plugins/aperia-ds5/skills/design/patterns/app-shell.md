@@ -65,8 +65,7 @@ every section shows the product name.
 
 A record that belongs to another record shows the parent record's page in its trail, wherever it was opened from.
 
-On a phone, a long trail keeps only the last two crumbs, so neither crumb is cut short. The sidebar button is 40px on a
-phone, which is the target size for a phone.
+On a phone, a long trail keeps only the last two crumbs, so neither crumb is cut short.
 
 ### Page column
 

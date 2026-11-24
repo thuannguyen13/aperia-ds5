@@ -11,7 +11,8 @@ function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
       role="list"
       data-slot="item-group"
       className={cn(
-        "group/item-group flex w-full flex-col gap-4 has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2",
+        // Plain items sit flush, their own padding spacing them as a list; boxed items (outline, muted) keep a gap between.
+        "group/item-group flex w-full flex-col has-data-[variant=muted]:gap-2.5 has-data-[variant=outline]:gap-2.5",
         className
       )}
       {...props}

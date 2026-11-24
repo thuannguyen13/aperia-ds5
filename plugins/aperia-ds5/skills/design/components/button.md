@@ -56,7 +56,7 @@ A button has four sizes:
 
 | Size | Height | Use |
 |---|---|---|
-| Default | 32px, 40px on phones | Every action on a page, sheet, dialog, or card |
+| Default | 32px | Every action on a page, sheet, dialog, or card |
 | Small | 28px | Inside a compact component, such as a filter chip |
 | Extra small | 24px | Inside a compact component, when the component sets it |
 | Large | 36px | No Aperia use yet. Use Default. |
@@ -64,8 +64,8 @@ A button has four sizes:
 ### Icon button
 
 An icon button shows an icon with no text. Use it for an action that repeats on many rows or has a well-known icon, such
-as edit, delete, close, or more. An icon button is square and 28px, or 40px on phones. It always has a tooltip that
-names the action.
+as edit, delete, close, or more. An icon button is square and 28px. It always has a tooltip that names the
+action.
 
 ### States
 
@@ -82,7 +82,7 @@ A button has four states beyond its resting look:
 
 | | Default | Small |
 |---|---|---|
-| Height | 32px (40px below 640px wide) | 28px |
+| Height | 32px | 28px |
 | Corners | Large corner | Medium corner |
 | Text | 14px, medium weight | 13px, medium weight |
 | Side padding | 10px | 10px |
@@ -106,7 +106,7 @@ A screen reader reads an icon button's tooltip label as its name.
 A button disabled for a reason stays reachable. Its tooltip says why it is disabled, so keyboard and screen reader
 users get the reason too.
 
-A button is 32px tall on desktop, and an icon button is 28px. Both are 40px on a phone.
+A button is 32px tall, and an icon button is 28px, on every screen.
 
 On a phone, a dialog's buttons stack, with the action on top.
 
@@ -145,8 +145,8 @@ On a phone, a dialog's buttons stack, with the action on top.
 
 See [Buttons and Actions](../patterns/buttons-and-actions.md) for where buttons go on a page, a sheet, and a dialog, and
 for using one primary button per area. See [Copy](../foundations/copy.md) for naming the action on a button. See
-[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for saying why a button is disabled. See [Shape and
-Edges](../styles/shape-and-edges.md) and [Elevation](../styles/elevation.md) for the corners, edges, and
+[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for saying why a button is disabled. See [Border and
+Radius](../styles/border-and-radius.md) and [Elevation](../styles/elevation.md) for the corners, edges, and
 shadows the Specs name.
 
 ## In code
@@ -170,7 +170,7 @@ const why = disabled ? reason : null
       disabled={disabled && !why}
       aria-disabled={why ? true : undefined}
       onClick={why ? (event) => event.preventDefault() : onEdit}
-      className="max-sm:size-10 aria-disabled:opacity-50 aria-disabled:hover:bg-transparent aria-disabled:active:translate-y-0 dark:aria-disabled:hover:bg-transparent"
+      className="aria-disabled:opacity-50 aria-disabled:hover:bg-transparent aria-disabled:active:translate-y-0 dark:aria-disabled:hover:bg-transparent"
     >
       <PencilIcon />
     </Button>
@@ -183,5 +183,4 @@ const why = disabled ? reason : null
   tooltip. Its click does nothing. A button disabled without a reason uses `disabled`.
 - The button stays the same element when it becomes disabled, so focus stays on it.
 - It is `type="button"`, so a button inside a form never submits the form.
-- On a phone the button is 40px square (`max-sm:size-10`), which is a thumb's target.
 - A record's header actions use `RecordActions` from `aperia-ds5`.

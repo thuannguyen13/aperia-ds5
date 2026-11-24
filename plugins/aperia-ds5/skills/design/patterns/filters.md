@@ -78,22 +78,29 @@ Most lists fit one form at once. These cases decide the rest:
   value list has a search, and a simple filter does not.
 - A yes or no filter is a switch with its label on the toolbar, such as "Assigned to me".
 - A span of dates is a From and a To. Either one can stay empty, so "before" and "after" need no other control.
-- A report date, the one day that the page's figures count, is not a filter. It goes first in the toolbar, with the
-  controls that set the list's scope. See [Date Range](../examples/date-range.md).
 
 Both forms clear the same ways. A simple filter goes back to its first choice, such as "All products". Advanced
-filters have Remove All. When nothing matches, Clear Filters clears every filter in either form. Both forms show the
-count, such as "4 of 6".
+filters have Remove All. When nothing matches, Clear Filters clears every filter in either form. The count under the
+list follows both forms, such as "4 merchants". See [Paging](paging.md) for the count.
 
 ### On a phone
 
-On a phone, both forms move behind one button. The toolbar shows the search, then a **Filters** button with the number
-of filters that are on.
+On a phone, both forms move behind one Filter button, an icon button beside the search that shows the number of
+filters that are on. Under the search, the filters that are on show on one line, as chips. The line scrolls
+sideways however many are on, so the list never moves down, and a tap on a chip's × clears it.
 
-The Filters button opens a sheet from the bottom. The sheet holds every filter's controls, the count (such as "12 of 40
-prospects"), Clear All, and a button that closes it (such as "Show 12 Prospects").
+The Filter button opens a sheet from the bottom in two steps:
 
-The filters that are on show as chips under the search. A tap on a chip clears it.
+1. The sheet opens on a list of the filters in a card, one line each with a line between them, and what the filter is
+   set to under its name, such as MC Band, then "is High, Critical". Advanced filters list the filters that are on, each
+   with × at its end to remove it, and Add Filter under them. Simple filters list every filter, and a yes or no filter
+   is a switch on its line.
+2. A tap on a line opens that filter alone, with a back arrow to the list. Its ways to compare are a row of toggles,
+   such as "is" and "is not", and its value follows, with a search when there are many choices. Add Filter opens the
+   list of columns first, and the column picked opens its filter.
+
+Every change applies at once, so the sheet has no button to apply or show results. Its header holds the count, Clear
+All, and the close button. Clear All is disabled while no filter is on, and says "No filters to clear."
 
 ### When nothing matches
 
@@ -111,14 +118,14 @@ When nothing matches, the list shows "No Results", with "No matching results." a
 
 ### Keep filters in the toolbar
 
-- **Do:** Put the Filter button or the simple filters between the search and the count in the list's one toolbar, so
-  people find them in the same place.
-- **Don't:** Put a filter in the page header (a report date as a label over a field). Move it into the toolbar, so the
-  header stays the page's name.
+- **Do:** Put the Filter button or the simple filters right after the search in the list's one toolbar, so people find
+  them in the same place.
+- **Don't:** Put a filter in the page header, such as a label over a field. Move it into the toolbar, so the header
+  stays the page's name.
 
 ### Show active filters on a phone too
 
-- **Do:** Show a Filters button that counts the filters that are on, with those filters as chips that clear on a tap,
+- **Do:** Show a Filter button that counts the filters that are on, with those filters as chips that clear on a tap,
   so a phone user knows the list is narrowed.
 - **Don't:** Narrow a list by filters hidden in a sheet, with nothing on screen. Show them as chips, so no one thinks
   records are missing.
@@ -151,6 +158,6 @@ the two forms".
 - A `FilterRule` is `{ field, operator, values, id? }`, all strings, so the filters fit in the page's address. Advanced
   filters give each rule an `id`, so one column can hold several rules. Simple filters hold one rule per column. Apply
   them with `filterRows(rows, fields, rules)` from `aperia-ds5/list`, or send them to the server.
-- When nothing matches, render `NoResults` with `onClear` (Clear Filters). Pass `shown`, `total` and `noun` so the count
-  and the phone's sheet read right.
-- A day span for a list is a `day` filter; a report date (one day) goes in `start` instead.
+- When nothing matches, render `NoResults` with `onClear` (Clear Filters). Pass `shown`, `total` and `noun` so the phone's
+  sheet reads right.
+- A day span for a list is a `day` filter.

@@ -32,7 +32,7 @@ Items with no value count as lowest. They come first when ascending and last whe
 Names sort as people read them. Capitals and accents do not split them, and "Queue 10" follows "Queue 9". Rows that tie
 keep their order.
 
-On a phone, Sort sits at the end of the line with the count.
+On a phone, Sort is an icon button at the end of the search's line.
 
 ## Rules
 

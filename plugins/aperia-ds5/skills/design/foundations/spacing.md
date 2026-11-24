@@ -58,7 +58,7 @@ Spacing has no exceptions. Every app uses these steps.
 ## Works with
 
 - See [Sizes](sizes.md) for control heights and the page width.
-- See [Shape and Edges](../styles/shape-and-edges.md) for the edges that sit around the space.
+- See [Border and Radius](../styles/border-and-radius.md) for the edges that sit around the space.
 
 ## In code
 

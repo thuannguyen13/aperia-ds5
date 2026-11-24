@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { Building2Icon, CalendarIcon, ChevronDownIcon } from "lucide-react"
+import { Building2Icon, PlusIcon, UploadIcon } from "lucide-react"
 import { ListToolbar, NoResults } from "./list-toolbar"
+import { ListPager } from "../list-pager/list-pager"
+import { pageRows } from "../list-pager/paging"
 import { filterRows, type FilterField, type FilterRule } from "./filters"
 import { sortRows, UNSORTED, type SortField } from "../sort-control/sort"
 import { Avatar, AvatarFallback } from "../avatar/avatar"
@@ -30,7 +32,7 @@ const meta: Meta<typeof ListToolbar> = {
     docs: {
       description: {
         component:
-          'Every list page\'s one toolbar, a section of the page above its table or board: `start` (what picks the list\'s scope: a Board and Table switch, a report date, a saved view), the search, the filters, any `children`, how many rows are left ("12 of 40"), and one Sort at the right end (`SortControl`, sorted with `sortRows`).\n\nFilters are one model in two forms. A list describes what it can filter by (`FilterField`: an id, a label and a type, `text`, `number`, `money`, `enum`, `day` or `boolean`), and holds the filters on as `FilterRule`s (a field, an operator, its values). **Advanced** (the default): one Filter button counts the filters on and opens them in a popover as rows of Column, Operator and Value, each changed in place (a new column starts that filter over) and removed with ×, with Add Filter and Remove All under them. **Simple** (`form: \"simple\"`), for a list with four filters or fewer: each field is a fixed select, switch or From and To on the row, one click to pick. Apply the rules with `filterRows`, or send them to the server.\n\nOn a phone, in either form, the filters go behind one Filters button that counts those on; they\'re set in a sheet from the bottom and show as chips that clear on a tap. When nothing matches, the list shows `NoResults` with Clear Filters.',
+          'Every list page\'s one toolbar, a section of the page above its table or board: the search and the filters on the left; then, at the right end, `layout` (a Board and Table switch), one Sort (`SortControl`, sorted with `sortRows`), and `actions`, the list\'s own buttons such as Import and Add Merchant, the primary last. It holds nothing else: the count is under the list (`ListPager`), and a control that picks the list\'s scope, such as a report date, is the app\'s own.\n\nFilters are one model in two forms. A list describes what it can filter by (`FilterField`: an id, a label and a type, `text`, `number`, `money`, `enum`, `day` or `boolean`), and holds the filters on as `FilterRule`s (a field, an operator, its values). **Advanced** (the default): one Filter button counts the filters on and opens them in a popover as rows of Column, Operator and Value, each changed in place (a new column starts that filter over) and removed with ×, with Add Filter and Remove All under them. **Simple** (`form: \"simple\"`), for a list with four filters or fewer: each field is a fixed select, switch or From and To on the row, one click to pick. Apply the rules with `filterRows`, or send them to the server.\n\nOn a phone, in either form, the filters go behind one Filter icon button that counts those on, beside a Sort icon button. They are set in a sheet from the bottom that opens on one line per filter, a tap opening that filter alone, and those on show as chips that clear on a tap. When nothing matches, the list shows `NoResults` with Clear Filters.',
       },
     },
   },
@@ -38,8 +40,8 @@ const meta: Meta<typeof ListToolbar> = {
     search: { control: false },
     filters: { control: false },
     sort: { control: false },
-    start: { control: false },
-    children: { control: false },
+    layout: { control: false },
+    actions: { control: false },
   },
 }
 
@@ -175,15 +177,25 @@ const MERCHANT_SORTS: SortField<Merchant>[] = [
 
 function MerchantList({
   initial = [],
-  appControls = false,
+  withActions = false,
+  pageSize,
 }: {
   initial?: FilterRule[]
-  appControls?: boolean
+  withActions?: boolean
+  pageSize?: number
 }) {
   const [query, setQuery] = useState("")
   const [rules, setRules] = useState(initial)
   const [sort, setSort] = useState(UNSORTED)
-  const rows = sortRows(
+  const [page, setPage] = useState(1)
+  // A new search, filter or sort starts again at page 1.
+  const changed =
+    <T,>(set: (value: T) => void) =>
+    (value: T) => {
+      set(value)
+      setPage(1)
+    }
+  const matched = sortRows(
     filterRows(
       MERCHANTS.filter((row) =>
         `${row.mid} ${row.name}`.toLowerCase().includes(query.toLowerCase())
@@ -194,26 +206,20 @@ function MerchantList({
     MERCHANT_SORTS,
     sort
   )
+  const rows = pageRows(matched, page, pageSize)
   return (
     <div className="flex flex-col gap-5">
       <ListToolbar
-        start={
-          appControls && (
+        actions={
+          withActions && (
             <>
-              <Button variant="outline" className="font-normal">
-                <CalendarIcon data-icon="inline-start" />
-                <span className="text-muted-foreground max-sm:sr-only">
-                  Report Date
-                </span>
-                <span className="tabular-nums">11/22/2026</span>
+              <Button variant="outline">
+                <UploadIcon data-icon="inline-start" />
+                Import
               </Button>
-              <Button variant="outline" className="font-normal">
-                <span className="text-muted-foreground">View</span>
-                My View
-                <ChevronDownIcon
-                  data-icon="inline-end"
-                  className="text-muted-foreground"
-                />
+              <Button>
+                <PlusIcon data-icon="inline-start" />
+                Add Merchant
               </Button>
             </>
           )
@@ -221,15 +227,23 @@ function MerchantList({
         search={{
           placeholder: "Search MID or merchant name",
           value: query,
-          onChange: setQuery,
+          onChange: changed(setQuery),
         }}
-        filters={{ fields: MERCHANT_FIELDS, value: rules, onChange: setRules }}
-        shown={rows.length}
+        filters={{
+          fields: MERCHANT_FIELDS,
+          value: rules,
+          onChange: changed(setRules),
+        }}
+        shown={matched.length}
         total={MERCHANTS.length}
         noun={["merchant", "merchants"]}
-        sort={{ fields: MERCHANT_SORTS, value: sort, onChange: setSort }}
+        sort={{
+          fields: MERCHANT_SORTS,
+          value: sort,
+          onChange: changed(setSort),
+        }}
       />
-      {rows.length === 0 ? (
+      {matched.length === 0 ? (
         <NoResults
           className="surface"
           onClear={() => {
@@ -238,46 +252,57 @@ function MerchantList({
           }}
         />
       ) : (
-        <div className="overflow-clip surface">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="pl-4">MID</TableHead>
-                <TableHead>Merchant Name</TableHead>
-                <TableHead>Detection Queue</TableHead>
-                <TableHead className="text-right">MCC</TableHead>
-                <TableHead>MC Band</TableHead>
-                <TableHead className="text-right">MC Score</TableHead>
-                <TableHead className="text-right">Net Amount</TableHead>
-                <TableHead className="pr-4">Last Alert</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.mid} className="cursor-pointer">
-                  <TableCell className="pl-4 tabular-nums">{row.mid}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.queue}</TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {row.mcc}
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="secondary">{row.band}</Badge>
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {row.score}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {row.net === null ? <EmptyValue /> : money(row.net)}
-                  </TableCell>
-                  <TableCell className="pr-4 tabular-nums">
-                    {formatDate(row.alerted)}
-                  </TableCell>
+        <>
+          <div className="overflow-clip surface">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="pl-4">MID</TableHead>
+                  <TableHead>Merchant Name</TableHead>
+                  <TableHead>Detection Queue</TableHead>
+                  <TableHead className="text-right">MCC</TableHead>
+                  <TableHead>MC Band</TableHead>
+                  <TableHead className="text-right">MC Score</TableHead>
+                  <TableHead className="text-right">Net Amount</TableHead>
+                  <TableHead className="pr-4">Last Alert</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+              </TableHeader>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.mid} className="cursor-pointer">
+                    <TableCell className="pl-4 tabular-nums">
+                      {row.mid}
+                    </TableCell>
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.queue}</TableCell>
+                    <TableCell className="text-right tabular-nums">
+                      {row.mcc}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary">{row.band}</Badge>
+                    </TableCell>
+                    <TableCell className="text-right tabular-nums">
+                      {row.score}
+                    </TableCell>
+                    <TableCell className="text-right tabular-nums">
+                      {row.net === null ? <EmptyValue /> : money(row.net)}
+                    </TableCell>
+                    <TableCell className="pr-4 tabular-nums">
+                      {formatDate(row.alerted)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <ListPager
+            page={page}
+            pageSize={pageSize}
+            total={matched.length}
+            noun={["merchant", "merchants"]}
+            onPageChange={setPage}
+          />
+        </>
       )}
     </div>
   )
@@ -320,14 +345,19 @@ export const SameColumnTwice: Story = {
   ),
 }
 
+/** Pages: four rows a page, so the six merchants run to two. The count and Previous and Next sit under the list. */
+export const Paged: Story = {
+  render: () => <MerchantList pageSize={4} />,
+}
+
 /**
- * An app's own controls in `start`: Titan's report date and saved view. The toolbar lays them out and knows nothing
- * about them.
+ * The list's own actions in `actions`, at the right end after Sort with the primary last. On a phone they take the first
+ * row. The toolbar lays them out and knows nothing about them.
  */
-export const AppControls: Story = {
+export const WithActions: Story = {
   render: () => (
     <MerchantList
-      appControls
+      withActions
       initial={[
         { field: "band", operator: "is", values: ["High", "Critical"] },
       ]}
@@ -335,7 +365,7 @@ export const AppControls: Story = {
   ),
 }
 
-/** A phone: the Filters button counts those on and opens them in a sheet; those on are chips that clear on a tap. */
+/** A phone: Filter and Sort are icon buttons beside the search; those on are chips on one line that scrolls sideways. */
 export const Phone: Story = {
   render: () => (
     <MerchantList
@@ -675,14 +705,14 @@ export const SwitchAndDates: Story = {
   },
 }
 
-/** A board's toolbar: the Board and Table switch first, in `start`. */
+/** A board's toolbar: the Board and Table switch in `layout`, before Sort. */
 export const WithLayoutSwitch: Story = {
   render: function Render() {
     const [layout, setLayout] = useState("board")
     const [query, setQuery] = useState("")
     return (
       <ListToolbar
-        start={
+        layout={
           <ToggleGroup
             type="single"
             variant="outline"
@@ -699,8 +729,6 @@ export const WithLayoutSwitch: Story = {
           value: query,
           onChange: setQuery,
         }}
-        shown={24}
-        total={24}
       />
     )
   },

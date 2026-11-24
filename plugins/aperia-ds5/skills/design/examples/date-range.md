@@ -1,29 +1,23 @@
-# Date Range and Report Date
+# Date Range
 
-A date control sets the day or the period that a page's figures cover.
+A date range sets the period that a page's figures cover, or the days that a list's records fall in.
 
 ## When to use
 
-Use a date control on a page whose figures count over one day or over a period. Use a report date when the figures are a
-snapshot of a single day, such as a work queue on a given day. Use a date range when the figures add up over a period,
-such as a dashboard for this quarter. Use a days filter when a list filters its records by a date, such as when they
-were created.
+Use a date range when a page's figures add up over a period, such as a dashboard for this quarter. Use a days filter
+when a list filters its records by a date, such as when they were created.
 
 ## How it looks and behaves
 
-A date control is one control in the page's toolbar. It never sits with the page title's buttons. It is never a label
-stacked over a field.
+A date range is one control on its own row under the page header. It never sits with the page title's buttons. It is
+never a label stacked over fields.
 
-A date control takes one of three forms:
+A date control takes one of two forms:
 
 | Form | Use when | How it looks |
 |---|---|---|
 | Days filter | A list filters its records by date. | One of the list's filters, set as From and To. |
-| Report date | The figures count one day. | The first control in the list's toolbar, before a saved view's picker. It is an outlined button with a calendar icon, "Report Date" in muted text, and the date written MM/DD/YYYY. |
 | Range | A dashboard counts a period. | A dropdown of named spans. |
-
-On a phone, the report date hides the words "Report Date" and keeps them for screen readers only. Selecting the report
-date opens a calendar. Picking a day closes the calendar.
 
 A range offers named spans that match how the app reports, such as This quarter, Last quarter, Year to date, Last 12
 months, and All time. Custom always comes last. The default is the span people check most often, such as This quarter.
@@ -37,19 +31,18 @@ address.
 
 ## Before and after
 
-- **Before:** A "Report Date:" label sits beside a date field, hand-built in the toolbar. Nothing under the title says
-  which day the figures count.
-- **After:** One outlined button reads "Report Date 11/22/2026" and opens a calendar. The dashboard's subtitle states
-  the span as text.
+- **Before:** A "Date Range:" label sits beside two hand-built date fields. Nothing under the title says which span the
+  figures count.
+- **After:** One dropdown offers named spans, such as This quarter. The dashboard's subtitle states the span as text.
 
 ## Rules
 
-### Put the day in the toolbar
+### Offer named spans
 
-- **Do:** Put the report date, or the range, as a control in the page's toolbar ("Report Date 11/22/2026"), so people
-  find it beside the other controls that change the figures.
-- **Don't:** Put a date picker among the page title's buttons, or stack a "Report Date:" label with its field. Make it
-  one control in the toolbar, so people find it where they look.
+- **Do:** Offer the spans people report on, such as This quarter, with Custom last, so most people pick a span in one
+  click.
+- **Don't:** Start with two empty date fields under a "Date Range:" label. Offer the named spans, so no one types a
+  date that a span already covers.
 
 ### Say the span once, as text
 
@@ -65,11 +58,10 @@ address.
 
 ## When you can do it differently
 
-A date control has no exceptions.
+A list never takes a date range. Its days are one of its filters, so they show as a chip and clear with the others.
 
 ## Which patterns it uses
 
-- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar and the place of a report date in it.
 - See [Filters](../patterns/filters.md) for a list's days, From and To.
 - See [Page Layout](../foundations/page-layout.md) for the subtitle under the title.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the figures the span counts.
@@ -79,9 +71,6 @@ A date control has no exceptions.
 The app builds it from aperia-ds5 parts:
 
 - A list's days: a `day` field in `ListToolbar`'s `filters`, set as a `between` rule.
-- A report date: in `ListToolbar`'s `start`, an outline `Button` with `CalendarIcon`,
-  `<span className="text-muted-foreground max-sm:sr-only">Report Date</span>` and the date (`formatDate`,
-  `tabular-nums`), as the trigger of a `Popover` with `Calendar mode="single"`; `onSelect` closes it.
 - A dashboard's range: a `Select` of the named spans; Custom adds `DayRangeFields`, applied once both days pass
   `isDay`. The subtitle is `PageHeader`'s `subtitle`, from `dayRangeLabel` (`aperia-ds5/format`).
 - Keep the choice in the URL's search params, and leave them out for the default.

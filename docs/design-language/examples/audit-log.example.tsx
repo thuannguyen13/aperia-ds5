@@ -3,6 +3,7 @@ import { HistoryIcon, PencilIcon, Trash2Icon } from "lucide-react"
 import {
   Button,
   EmptyState,
+  ListPager,
   ListToolbar,
   NoResults,
   RelativeTime,
@@ -245,6 +246,12 @@ export function AuditLogExample() {
               </Table>
             </div>
           )}
+          <ListPager
+            page={1}
+            total={rows.length}
+            noun={["entry", "entries"]}
+            onPageChange={() => {}}
+          />
         </>
       )}
     </Screen>

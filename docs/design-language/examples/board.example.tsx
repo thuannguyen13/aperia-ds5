@@ -179,7 +179,7 @@ export function BoardExample() {
       }
     >
       <ListToolbar
-        start={
+        layout={
           <ToggleGroup
             type="single"
             variant="outline"

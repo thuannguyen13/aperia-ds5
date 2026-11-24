@@ -55,7 +55,7 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
 - **Card**: 0.5px edge plus `shadow-sm`; title semibold.
 - **Panels**: dialogs, alert dialogs, sheets and drawers use `background`, a 0.5px edge and `shadow-lg`. One overlay,
   black 10% / 50%, no blur. They open over 220ms and close over 150ms; dialogs scale from 97%; reduced motion only fades.
-- **Sheet** (right side): floats 16px from the window, `rounded-xl`, 56px header, full screen below 640px.
+- **Sheet** (right side): floats 16px from the window, `rounded-xl`, 56px header, full screen below 640px. Its header and footer keep their height when the content scrolls.
 - **Menus and popovers**: 0.5px `border` edge instead of `ring-foreground/10`.
 - **Switch** thumb is white in both modes with the control edge.
 - **Outline badge** has the control fill. **Ghost button** hovers with a 5% (Dark 10%) tint of the text color.
@@ -126,7 +126,7 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   table; a screenshot review in `SKILL.md`.
 - **Design language docs** (rc.2), written for designers, POs and PMs first and agents second, and the one source of
   truth: the skill's pages are what Storybook's Design Language section shows and what agents read.
-  - **Foundations:** Color (with what an app can change, replacing Brand Slots), Typography, Spacing, Shape and Edges,
+  - **Foundations:** Color (with what an app can change, replacing Brand Slots), Typography, Spacing, Border and Radius,
     Elevation, Motion, Sizes, Icons, Copy and Message Templates (the one source for UI copy, built on the UI Style
     Guide V4.3). Values are shown live from `base.css`, never copied into the text.
   - **Patterns:** one page each for how things fit and behave: App Shell, Page Layout, Page Header, List Page, Filters,
@@ -134,12 +134,34 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
     With a Reason, Money and Numbers, Files and Images, Reordering, Switches in a Grid, Buttons and Actions (replacing
     Button Best Practices), Cards and Tiles, People and Pictures, Search, Notifications.
   - **Components:** Button, Card, Dialog, Empty State, Table.
-  - **Examples:** screens apps build from the patterns, each with a before / after: List Page, Record Page, Saved Views,
+  - **Examples:** screens apps build from the patterns, each with a before / after: List Page, Record Page,
     Status Change With a Reason, Notes, Board, Line Items, Import, Date Range, Task Checklist, Roles and Permissions,
     Option List, Audit Log, Funnel Chart, Search and Notifications.
   - Every page: what it is, when to use it, what's available, how it looks and behaves, rules as Do / Don't, when you
     can do it differently, works with, then In code. The old references, Brand Slots, Drifts and Best Practices pages
     are gone; their rules moved to these pages, and each mistake is a Don't on its page.
+- Controls keep one size on every screen: the default is 32px and an icon button 28px, on a phone too. The phone-only
+  40px heights are gone from `Button`, `Input`, `InputGroup`, `SelectTrigger`, the icon button recipe, `RecordActions`
+  and the top bar's sidebar button. A phone changes a page's layout, not a control's size.
+- `ListToolbar` holds only the list's own controls: the search and filters on the left; then `layout` (a Board / Table
+  switch), Sort, and `actions` (the list's buttons, such as Import and Add Prospect, primary last) on the right.
+  **Breaking:** `start` and `children` are gone. A control that picks the list's scope, such as a report date or a saved
+  view, is the app's own, outside the toolbar; a list's Add moves from `PageHeader`'s `actions` to the toolbar's
+  `actions`. The toolbar shows no count; `shown`, `total` and `noun` now feed the phone's Filter sheet only.
+- `ItemGroup`: plain items (the default variant) sit flush, spaced by their own padding, so a list of people or records
+  reads as one list; outline and muted items keep a 10px gap. An app that set `gap-0` on a plain group can drop it.
+- Docs: Shape and Edges is now Border and Radius (`styles/border-and-radius.md`).
+- New `ListPager`: the footer under a list, with its count ("6 merchants", or "26–50 of 312 merchants") and, once the
+  rows run past one page (25 rows, `PAGE_SIZE`), Previous, the page numbers ("1 … 6 7 8 … 13") and Next, built from
+  `Pagination`. `pageRows` and `pageCount` in `aperia-ds5/list` cut
+  the rows on the server or the client. `DataTable`'s footer is now `ListPager` (pass its `noun`), replacing shadcn's
+  "0 of 6 row(s) selected." text. New pattern page: Paging.
+- Docs: the Saved Views example and the report date are removed, as one app's needs rather than shared guidance; Date
+  Range covers a dashboard's range and a list's days filter. Toolbar buttons no longer carry a muted label inside them.
+- `ListToolbar` on a phone: the list's actions first, then one row of the search with Filter and Sort as icon buttons
+  (Sort opens a menu), and under it the filters that are on as chips on one line that scrolls sideways. The Filter sheet opens on one line
+  per filter, a tap opens that filter alone (its ways to compare as toggles, then its value), Add Filter picks a column
+  first, and the header holds the count, Clear All, and the close button. A filter's row ends with × to remove it.
 - From the 0.3.0 blind test (five fresh agents, one brief each, on Next.js 16):
   - `RelativeTime` reads the clock only in the browser, so it works in a server component and a prerendered page with no
     `Suspense` (Next.js 16 refused a clock read during prerender and failed the build). An unseen stand-in holds its
@@ -153,7 +175,7 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
 - **Docs organized like Material 3** (0.3.0): six sections, Get Started, Foundations, Styles, Components, Patterns and
   Examples, each opening on an index of cards built from the pages' leads. Foundations now holds the rules across every
   screen (Accessibility, new; Layout; Content Design; States, with Loading, Empty and Missing, and Disabled With a
-  Reason moved from Patterns), and Styles holds the visual values (Color, Typography, Shape and Edges, Elevation,
+  Reason moved from Patterns), and Styles holds the visual values (Color, Typography, Border and Radius, Elevation,
   Motion, Icons). Every component has one home under Components, grouped by purpose: its guidance, live examples and
   props on one page. Pages show their sections in Overview, Guidelines and Code tabs, with an "On this page" for the tab
   in view. Get Started adds For Designers, For Developers and What's New. The skill's folders follow the same sections

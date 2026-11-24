@@ -19,6 +19,7 @@ import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnVisibilityState,
+  type PaginationState,
   type ReactTable,
   type RowData,
   type SortingState,
@@ -26,6 +27,8 @@ import {
 import { ArrowDown, ArrowUp, ArrowUpDown, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { ListPager } from "@/components/ui/list-pager/list-pager"
+import { PAGE_SIZE } from "@/components/ui/list-pager/paging"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -77,6 +80,10 @@ function useDataTable<TData extends RowData>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<ColumnVisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: PAGE_SIZE,
+  })
 
   return useTable({
     features,
@@ -86,7 +93,9 @@ function useDataTable<TData extends RowData>({
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
+      pagination,
       sorting,
       columnFilters,
       columnVisibility,
@@ -100,12 +109,15 @@ function DataTable<TData extends RowData>({
   data,
   filterColumn,
   filterPlaceholder,
+  noun,
 }: {
   columns: ColumnDef<DataTableFeatures, TData>[]
   data: TData[]
   /** Column id the search input filters on. Omit to hide the input. */
   filterColumn?: string
   filterPlaceholder?: string
+  /** What a row is, one and many, for the count under the table: ["merchant", "merchants"]. */
+  noun?: readonly [string, string]
 }) {
   const table = useDataTable({ columns, data })
 
@@ -122,7 +134,7 @@ function DataTable<TData extends RowData>({
         <DataTableViewOptions table={table} className="ml-auto" />
       </div>
       <DataTableContent table={table} />
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} noun={noun} />
     </div>
   )
 }
@@ -234,36 +246,27 @@ function DataTableColumnHeader<TData extends RowData, TValue>({
   )
 }
 
+/** The table's footer: its count and pages, drawn by `ListPager` as under every list. */
 function DataTablePagination<TData extends RowData>({
   table,
+  noun = ["row", "rows"],
   className,
 }: {
   table: DataTableInstance<TData>
+  /** What a row is, one and many, for the count: ["merchant", "merchants"]. */
+  noun?: readonly [string, string]
   className?: string
 }) {
+  const { pageIndex, pageSize } = table.store.state.pagination
   return (
-    <div className={cn("flex items-center gap-2 py-4", className)}>
-      <div className="flex-1 text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => table.previousPage()}
-        disabled={!table.getCanPreviousPage()}
-      >
-        Previous
-      </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => table.nextPage()}
-        disabled={!table.getCanNextPage()}
-      >
-        Next
-      </Button>
-    </div>
+    <ListPager
+      page={pageIndex + 1}
+      pageSize={pageSize}
+      total={table.getRowCount()}
+      noun={noun}
+      onPageChange={(page) => table.setPageIndex(page - 1)}
+      className={cn("py-4", className)}
+    />
   )
 }
 

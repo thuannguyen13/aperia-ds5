@@ -1,70 +1,86 @@
 # List Toolbar
 
-A list toolbar holds the controls that change one list, such as its search, filters, and Sort, in one row above it.
+A list toolbar holds the controls that change or add to one list, such as its search, filters, Sort, and Add, in one
+row above it.
 
 ## When to use
 
-Use a list toolbar above every list that people search, filter, or sort, such as a table of prospects or a board of
-opportunities. A short list inside a card has no toolbar. Its Sort sits in the card's header. See [Sort](sort.md) for
-Sort in a card.
+Use a list toolbar above every list that people search, filter, sort, or add to, such as a table of prospects or a
+board of opportunities. A short list inside a card has no toolbar. Its Sort and Add sit in the card's header. See
+[Sort](sort.md) for Sort in a card.
 
 ## What is available
 
-A list toolbar holds five controls, listed from left to right:
+A list toolbar holds four kinds of control. The search and the filters sit at the left end. Sort and the list's
+actions sit at the right end.
 
-| Control | Content |
-|---|---|
-| Scope | What sets the list's scope, such as a Board / Table switch, a report date, or a saved view |
-| Search | A search box that names what it searches, such as "Search prospects" |
-| Filters | Advanced filters (the Filter button and its popover) or simple filters (fixed controls). See [Filters](filters.md). |
-| Count | How many rows are left, such as "12 of 40" |
-| Sort | The Sort control, at the right end. See [Sort](sort.md). |
+| Control | Where | Content |
+|---|---|---|
+| Search | Left end | A search box that names what it searches, such as "Search prospects" |
+| Filters | After the search | Advanced filters (the Filter button and its popover) or simple filters (fixed controls). See [Filters](filters.md). |
+| Sort | Right end | The Sort control. See [Sort](sort.md). |
+| Actions | After Sort | The list's own actions, such as Import and Add Prospect, with the primary action last |
 
 A list shows only the controls it needs. The ones it shows keep this order.
+
+The toolbar holds nothing else. The list's count sits in the footer under the list. See [Paging](paging.md) for the
+footer.
 
 ## How it looks and behaves
 
 The toolbar is a section of its own between the page header and the list, 20px from each. It is one row on a desktop.
 
-The count changes as people search and filter, so they see how much of the list is left. When nothing matches, the
-list shows "No Results" with Clear Filters. See [Empty and Missing](../foundations/empty-and-missing.md) for that
-state.
+When nothing matches, the list shows "No Results" with Clear Filters. See
+[Empty and Missing](../foundations/empty-and-missing.md) for that state. While the list is empty, the toolbar is gone,
+and the empty state holds Add instead.
 
-On a phone, the toolbar stacks in four rows:
+On a phone, the toolbar is at most three short rows:
 
-1. The scope controls come first.
-2. The search and a Filters button come next.
-3. The filters that are on show as chips.
-4. The count comes last, with Sort at its end.
+1. The list's actions come first, when the list has any.
+2. The search comes next, with Filter and Sort as icon buttons at its end. Sort opens a menu of what to sort by and
+   which way.
+3. The filters that are on come last, as chips on one line that scrolls sideways.
+
+See [Filters](filters.md) for the sheet that the Filter button opens.
 
 ## Rules
 
 ### Use one toolbar in one order
 
-- **Do:** Lay out scope, search, filters, the count, and then Sort at the right end, on every list, so people know
-  where everything is.
+- **Do:** Lay out the search and the filters on the left, then Sort and the list's actions on the right, on every list,
+  so people know where everything is.
 - **Don't:** Give the app its own toolbar order, or set a search box against the page title. Use the shared toolbar, so
   every list works the same.
+
+### Keep the list's actions with the list
+
+- **Do:** Put the actions that add to the list or work on it, such as Add Prospect, Import, or Export, at the
+  toolbar's right end, so they sit beside the list they change.
+- **Don't:** Put the list's actions in the page header, or put a control that does not change the list, such as a
+  date or a picker of saved views, in the toolbar. Keep the toolbar to the list's own controls, so it reads the same
+  in every app.
 
 ## When you can do it differently
 
 A list that people work by moving records between states, such as opportunities by stage, can be a board. A Board /
-Table switch then comes first in the toolbar, and the board fills the full width of the page.
+Table switch then sits before Sort, and the board fills the full width of the page.
 
 ## Works with
 
 - See [Filters](filters.md), [Sort](sort.md), and [Search](search.md) for the toolbar's controls.
+- See [Paging](paging.md) for the count and the pages under the list.
 - See [Tables](tables.md) for the table under the toolbar.
 - See [Page Header](page-header.md) for the header above it.
 - See [Loading](../foundations/loading.md) for the list's shape while it loads.
 
 ## In code
 
-- `ListToolbar` from `aperia-ds5`, as a direct child of `AppContent`: `start` (scope controls), `search`
-  (`{ placeholder, value, onChange }`), `filters`, `shown` and `total` (the count), `noun` (`["prospect",
-  "prospects"]`, for the phone's sheet), `sort` (`SortControl`'s props) and `children` (after the filters). Never build
-  a toolbar row by hand.
-- Controls in `start` and `children` render twice (the wide row and the phone's rows), so keep their state with the
+- `ListToolbar` from `aperia-ds5`, as a direct child of `AppContent`: `search` (`{ placeholder, value, onChange }`),
+  `filters`, `sort` (`SortControl`'s props), `layout` (a Board / Table switch), and `actions` (the list's buttons,
+  primary last). `shown`, `total`, and `noun` (`["prospect", "prospects"]`) give the phone's Filter sheet its count.
+  Never build a toolbar row by hand.
+- Controls in `layout` and `actions` render twice (the wide row and the phone's rows), so keep their state with the
   list, not in themselves.
 - Filter and sort with `filterRows` and `sortRows` from `aperia-ds5/list`, the same fields on the server.
+- Put `ListPager` under the list for its count and pages.
 - A board or a wide table renders `<FullWidth />`.

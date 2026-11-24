@@ -2,9 +2,9 @@ import { FullWidth } from "@/components/ui/app-shell/app-content"
 import { Skeleton } from "@/components/ui/skeleton/skeleton"
 
 /**
- * A list page while it loads, in the page's own shape so nothing moves when it lands: the title and its buttons, any
- * stat tiles, the toolbar's search, filters, count and Sort, then the table's header and rows at their real heights.
- * A board shows its scope switch and a column per stage instead of the table. Put it where the page would be, inside
+ * A list page while it loads, in the page's own shape so nothing moves when it lands: the title, any stat tiles, the
+ * toolbar's search, filters, Sort and the list's actions, then the table's header and rows at their real heights and
+ * the count under them. A board shows its Board and Table switch and a column per stage instead of the table. Put it where the page would be, inside
  * `AppContent`, which puts 20px between its parts as it does the page's sections.
  *
  * Every size is the page's, so pass what the page has: its title's width, how many filters, its columns' shares. A
@@ -24,7 +24,7 @@ export function ListSkeleton({
 }: {
   /** The title's width in px, about as long as the page's name. */
   title: number
-  /** How many buttons the page header has, such as Add Prospect. */
+  /** How many of the list's own buttons the toolbar has, such as Add Prospect. */
   actions?: number
   /** How many filters the toolbar has. */
   filters?: number
@@ -38,7 +38,7 @@ export function ListSkeleton({
   rowHeight?: number
   /** How many stat tiles sit above the toolbar, all on one row from 768px. */
   tiles?: number
-  /** A board of stage columns instead of a table, with the board's Board and Table switch first on the toolbar. */
+  /** A board of stage columns instead of a table, with the board's Board and Table switch before Sort. */
   board?: boolean
   fullWidth?: boolean
 }) {
@@ -49,16 +49,8 @@ export function ListSkeleton({
       <p role="status" className="sr-only">
         Loading
       </p>
-      {/* As PageHeader lays it out: on a phone its buttons drop to a row of their own, sharing the width. */}
-      <div className="flex min-h-9 flex-wrap items-center justify-between gap-x-2 gap-y-4">
+      <div className="flex min-h-9 items-center">
         <Skeleton className="h-8" style={{ width: title }} />
-        {actions > 0 && (
-          <div className="flex gap-2 max-sm:basis-full max-sm:*:flex-1">
-            {Array.from({ length: actions }, (_, at) => (
-              <Skeleton key={at} className="h-8 w-36 max-sm:h-10" />
-            ))}
-          </div>
-        )}
       </div>
       {tiles > 0 && (
         <div
@@ -70,21 +62,39 @@ export function ListSkeleton({
           ))}
         </div>
       )}
-      <div className="flex flex-wrap items-center gap-3">
-        {board && <Skeleton className="h-8 w-27 max-sm:hidden" />}
-        {/* Controls are 40px on a phone, where the filters are one Filters button. */}
-        <Skeleton className="h-8 flex-1 max-sm:h-10 sm:w-64 sm:flex-none" />
-        {filters > 0 && <Skeleton className="h-10 w-24 sm:hidden" />}
+      {/* On a phone the list's actions and the board's switch take a row of their own, first. */}
+      {(actions > 0 || board) && (
+        <div className="flex items-center gap-2 sm:hidden">
+          {board && <Skeleton className="h-8 w-27" />}
+          <div className="ml-auto flex gap-2">
+            {Array.from({ length: actions }, (_, at) => (
+              <Skeleton key={at} className="h-8 w-32" />
+            ))}
+          </div>
+        </div>
+      )}
+      <div className="flex items-center gap-3">
+        {/* On a phone, Filter and Sort are two icon buttons at the search's end. */}
+        <Skeleton className="h-8 flex-1 sm:w-64 sm:flex-none" />
+        {filters > 0 && <Skeleton className="size-8 sm:hidden" />}
+        {sort && <Skeleton className="size-8 sm:hidden" />}
         {Array.from({ length: filters }, (_, at) => (
           <Skeleton key={at} className="h-8 w-40 max-sm:hidden" />
         ))}
-        {/* The count, then Sort at the right end: on a phone, a row of their own under the search, as the toolbar has. */}
-        <div className="flex flex-1 items-center gap-3 max-sm:basis-full">
-          <Skeleton className="h-4 w-12" />
+        {/* The right end: the board's switch, Sort, then the list's actions. */}
+        <div className="ml-auto flex gap-3 max-sm:hidden">
+          {board && <Skeleton className="h-8 w-27" />}
           {sort && (
-            <div className="ml-auto flex gap-1.5">
-              <Skeleton className="h-8 w-44 max-sm:h-10" />
-              <Skeleton className="size-8 max-sm:size-10" />
+            <div className="flex gap-1.5">
+              <Skeleton className="h-8 w-44" />
+              <Skeleton className="size-8" />
+            </div>
+          )}
+          {actions > 0 && (
+            <div className="flex gap-2">
+              {Array.from({ length: actions }, (_, at) => (
+                <Skeleton key={at} className="h-8 w-32" />
+              ))}
             </div>
           )}
         </div>
@@ -130,6 +140,12 @@ export function ListSkeleton({
               ))}
             </div>
           ))}
+        </div>
+      )}
+      {/* The count under the list, as ListPager draws it. */}
+      {!board && (
+        <div className="flex h-8 items-center">
+          <Skeleton className="h-4 w-28" />
         </div>
       )}
     </>

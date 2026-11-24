@@ -8,10 +8,11 @@ Use an audit log when admins need to check who changed a record, what changed, a
 
 ## How it looks and behaves
 
-An audit log has a toolbar and a table under it.
+An audit log has a toolbar, a table under it, and a count under the table.
 
-The toolbar contains a search, filters, and a count. The filters usually cover the record, the person, the action, and
-the day, such as Record, Who, Action, and Day. The count shows how many entries match, such as "12 of 500 entries".
+The toolbar contains a search and filters. The filters usually cover the record, the person, the action, and the day,
+such as Record, Who, Action, and Day. The count under the table shows how many entries match, such as "1–25 of 500
+entries".
 
 The table sits in a box with the card fill on the page. The newest entry comes first. The table has three columns:
 
@@ -47,7 +48,8 @@ A row does not open when the record it is about no longer exists.
 
 ## Which patterns it uses
 
-- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar and the count.
+- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar.
+- See [Paging](../patterns/paging.md) for the count and the pages under the table.
 - See [Filters](../patterns/filters.md) for the Record, Who, Action, and Day filters.
 - See [Table](../components/table.md) for the whole row that opens its record.
 
@@ -57,6 +59,7 @@ The app builds it from aperia-ds5 parts:
 
 - `ListToolbar` with `search`, `filters` (`form: "simple"`: Record, Who and Action as `enum` fields, Day as a `day`
   field, which shows From and To), `shown`, `total` and `noun={["entry", "entries"]}`.
+- `ListPager` under the table, with `noun={["entry", "entries"]}`.
 - The `Table` in a `surface` box. When: `RelativeTime` in `text-muted-foreground`. What: the sentence in `font-medium`,
   then a list in `text-xs text-muted-foreground`.
 - Rows whose record exists spread `opensOnClick(label, open)`.

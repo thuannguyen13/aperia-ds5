@@ -1,15 +1,8 @@
 import { useState } from "react"
-import { CalendarIcon } from "lucide-react"
 import {
-  Button,
-  Calendar,
   DayRangeFields,
   Input,
-  ListToolbar,
   PageHeader,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
   Select,
   SelectContent,
   SelectItem,
@@ -19,49 +12,6 @@ import {
 import { StatTile } from "../recipes"
 import { dayRangeLabel, isDay, money } from "@/lib/format"
 import { BeforeAfter, Screen } from "./before-after"
-
-const mmddyyyy = (date: Date) =>
-  date.toLocaleDateString("en-US", {
-    month: "2-digit",
-    day: "2-digit",
-    year: "numeric",
-  })
-
-/** Titan's report date: one outlined button in the toolbar's start, opening a calendar that closes on a pick. */
-function ReportDate({
-  date,
-  onChange,
-}: {
-  date: Date
-  onChange: (date: Date) => void
-}) {
-  const [open, setOpen] = useState(false)
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="outline" className="font-normal">
-          <CalendarIcon data-icon="inline-start" />
-          <span className="text-muted-foreground max-sm:sr-only">
-            Report Date
-          </span>
-          <span className="tabular-nums">{mmddyyyy(date)}</span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent align="start" className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={date}
-          defaultMonth={date}
-          required
-          onSelect={(day) => {
-            if (day) onChange(day)
-            setOpen(false)
-          }}
-        />
-      </PopoverContent>
-    </Popover>
-  )
-}
 
 const RANGES = {
   quarter: "This quarter",
@@ -148,69 +98,34 @@ function Dashboard() {
   )
 }
 
-/** Merchant View with its report date first in the toolbar. */
-function MerchantList() {
-  const [date, setDate] = useState(new Date(2026, 10, 22))
-  const [query, setQuery] = useState("")
-  return (
-    <Screen caption="Open Report Date and pick a day: the calendar closes on the pick.">
-      <ListToolbar
-        start={<ReportDate date={date} onChange={setDate} />}
-        search={{
-          placeholder: "Search MID or merchant name",
-          value: query,
-          onChange: setQuery,
-        }}
-        shown={11}
-        total={11}
-        noun={["merchant", "merchants"]}
-      />
-    </Screen>
-  )
-}
-
-export function DateRangeExample() {
-  return (
-    <>
-      <MerchantList />
-      <Dashboard />
-    </>
-  )
-}
-
-/** Titan's stacked label and field, against the report date button. */
+/** A hand-built "Date Range:" label over two fields, with no span under the title, against the named spans. */
 export function DateRangeBeforeAfter() {
   return (
     <BeforeAfter
-      beforeNote="a “Report Date:” label and its own date field"
-      afterNote="one control in the toolbar: icon, muted label, the date"
+      beforeNote="a “Date Range:” label and two date fields; the span shows nowhere else"
+      afterNote="a dropdown of named spans; the subtitle states the span"
       before={
         <div className="flex flex-wrap items-center gap-2">
-          <label htmlFor="before-report-date" className="font-medium">
-            Report Date:
-          </label>
-          <div className="relative w-44">
-            <Input
-              id="before-report-date"
-              defaultValue="11/22/2026"
-              className="pr-9"
-            />
-            <CalendarIcon
-              className="absolute top-1/2 right-2.5 size-4 -translate-y-1/2"
-              aria-hidden
-            />
-          </div>
+          <span className="font-medium">Date Range:</span>
+          <Input aria-label="From" defaultValue="10/01/2026" className="w-32" />
+          <Input aria-label="To" defaultValue="12/31/2026" className="w-32" />
         </div>
       }
       after={
-        <div className="flex flex-wrap items-center gap-2">
-          <Button variant="outline" className="font-normal">
-            <CalendarIcon data-icon="inline-start" />
-            <span className="text-muted-foreground max-sm:sr-only">
-              Report Date
-            </span>
-            <span className="tabular-nums">11/22/2026</span>
-          </Button>
+        <div className="flex flex-col gap-3">
+          <PageHeader title="Dashboard" subtitle="10/01/2026–12/31/2026" />
+          <Select defaultValue="quarter">
+            <SelectTrigger aria-label="Date range" className="w-40">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent position="popper">
+              {Object.entries(RANGES).map(([key, label]) => (
+                <SelectItem key={key} value={key}>
+                  {label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       }
     />
@@ -218,6 +133,6 @@ export function DateRangeBeforeAfter() {
 }
 
 export const dateRangeExamples = {
-  "How it looks and behaves": <DateRangeExample />,
+  "How it looks and behaves": <Dashboard />,
   "Before and after": <DateRangeBeforeAfter />,
 }

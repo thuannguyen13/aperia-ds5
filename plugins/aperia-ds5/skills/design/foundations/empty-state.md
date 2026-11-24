@@ -99,7 +99,7 @@ Missing](empty-and-missing.md) for a page the user cannot reach.
 | Table | An empty state shows in place of the rows. |
 | Search and filters | A search or filter with no match shows "No Results" with Clear Filters. |
 
-See [Shape and Edges](../styles/shape-and-edges.md) for the corner the Specs name.
+See [Border and Radius](../styles/border-and-radius.md) for the corner the Specs name.
 
 ## In code
 

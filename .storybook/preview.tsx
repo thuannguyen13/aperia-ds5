@@ -63,7 +63,7 @@ const preview: Preview = {
             "Overview",
             "Color",
             "Typography",
-            "Shape and Edges",
+            "Border and Radius",
             "Elevation",
             "Motion",
             "Icons",
@@ -155,7 +155,14 @@ const preview: Preview = {
               "People and Pictures",
             ],
             "Lists",
-            ["List Toolbar", "Filters", "Sort", "Tables", "Reordering"],
+            [
+              "List Toolbar",
+              "Filters",
+              "Sort",
+              "Paging",
+              "Tables",
+              "Reordering",
+            ],
             "Editing",
             [
               "Buttons and Actions",
@@ -172,7 +179,6 @@ const preview: Preview = {
             "Lists",
             [
               "List Page",
-              "Saved Views",
               "Board of Cards",
               "Audit Log",
               "Search and Notifications",
@@ -188,7 +194,7 @@ const preview: Preview = {
             "Settings",
             ["Roles and Permissions", "Editable Option List"],
             "Data and Charts",
-            ["Import Wizard", "Date Range and Report Date", "Funnel Chart"],
+            ["Import Wizard", "Date Range", "Funnel Chart"],
           ],
         ],
         // sidebar-order:end

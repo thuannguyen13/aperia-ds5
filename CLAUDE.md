@@ -47,14 +47,14 @@ The chrome (`CHART_AXIS`, `CHART_MARGIN`, `ChartGrid`, `ChartTip`, `chartAxisPro
 
 `DataTable` is imported from the `aperia-ds5/data-table` subpath, which re-exports all of `@tanstack/react-table` beside `DataTable` and the parts it is built from: `useDataTable`, `DataTableContent`, `DataTableFilter`, `DataTableViewOptions`, `DataTablePagination`, `DataTableColumnHeader` and `dataTableFeatures`. TanStack exports a `Table` type, so it stays out of the root barrel for the same reason recharts does.
 
-Use `DataTable` by default. Build from the parts only for a different layout, actions on selected rows, or state the app owns (server paging): the "Build your own" docs page beside the DataTable stories shows both. `DataTable` must stay built only from those exported parts, so a hand-built table looks the same. The layout follows the Figma Data Table node (`18719:212930`): toolbar and footer `py-4`, no border around the table, count plus Previous and Next in the footer.
+Use `DataTable` by default. Build from the parts only for a different layout, actions on selected rows, or state the app owns (server paging): the "Build your own" docs page beside the DataTable stories shows both. `DataTable` must stay built only from those exported parts, so a hand-built table looks the same. The layout follows the Figma Data Table node (`18719:212930`): toolbar and footer `py-4`, no border around the table, count plus the page numbers in the footer (`ListPager`).
 
 shadcn ships Data Table as a guide, not a registry component, so `components/ui/data-table/data-table.tsx` is DS-owned code built from that guide (TanStack Table v9, `useTable` with `tableFeatures`). There is nothing to refresh with `shadcn add`. `@tanstack/react-table` is a **peer** dependency like `recharts`: consumer column definitions are typed against the app's copy, so both must resolve one.
 
 ### Aperia patterns
 
 aperia-ds5 ships building components and only the patterns every Aperia app has: `ListToolbar` (filters and list
-search), `SortControl`, `EmptyState`, `SortableList` and `FileDrop` (drag and drop), `ReasonTooltip` (why something
+search), `SortControl`, `ListPager` (a list's count and pages), `EmptyState`, `SortableList` and `FileDrop` (drag and drop), `ReasonTooltip` (why something
 cannot be used), `RelativeTime` and `aperia-ds5/format` (dates, times, money), and the app shell. It also ships a few
 pieces with behavior that is easy to get wrong: `SheetForm`, `SheetDelete`, `ConfirmDialog`, `EntityPicker`,
 `PickField`, `AddOption`, `MoneyInput`, `DayRangeFields`, `FilePicker` and `ImagePicker`. Each lives under
@@ -140,7 +140,7 @@ The library targets React 19: `react` and `react-dom` are peer dependencies (`^1
   The pages sit in six sections laid out after Material 3's site (decided 2026-11-24), the same in the skill's folders and the Storybook sidebar:
   - Get Started: `overview.md` (who it's for, what's available, how to read a page, how to propose a change) and `get-started/` (For Designers, For Developers). Storybook adds What's New (CHANGELOG.md) and Code Connect Status.
   - `foundations/`: the rules across every screen. Accessibility; Layout (Page Layout, Spacing, Sizes); Content Design (Copy and Message Templates, the one source for UI copy, built on Aperia's UI Style Guide V4.3, which the personal `ui-copy` skill points to; Money and Numbers); States (Loading, Empty and Missing, Empty State, Disabled With a Reason).
-  - `styles/`: the visual values (Color, including what an app can change; Typography, Shape and Edges, Elevation, Motion, Icons).
+  - `styles/`: the visual values (Color, including what an app can change; Typography, Border and Radius, Elevation, Motion, Icons).
   - `components/`: guidance for one building block in depth (Button, Card, Dialog, Table). Every building block has one home in Storybook under Components/<Group> (Actions, Communication, Containment, Navigation, Selection, Text Inputs, Files and Media, Lists and Tables, Charts, Chat, Layout): its guidance in tabs when it has a page here, and its stories and props in the Code tab.
   - `patterns/`: UI patterns, how components combine into the parts of a screen (a list's toolbar, a record's details or history), grouped as Navigation, Content, Lists and Editing, one page each. A whole page (a list page, a record page) is an Example, not a pattern (decided 2026-11-24).
   - `examples/`: screens an app builds from the patterns (Lists, Records, Settings, Data and Charts), each with a before/after; feature-level patterns are guidance here, not library components.

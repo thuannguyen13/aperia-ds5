@@ -1,7 +1,7 @@
 # Accessibility
 
-Accessibility rules make every screen usable with a keyboard, a screen reader, a phone, and settings such as reduced
-motion. See each linked page for the rule it owns.
+Accessibility rules make every screen usable with a keyboard, a screen reader, and settings such as reduced motion. See
+each linked page for the rule it owns.
 
 ## When to use
 
@@ -15,8 +15,7 @@ The library and the app share the work:
 | What | Who does it | Where it is set |
 |---|---|---|
 | Keyboard reach, focus order, and Escape to close panels | The components | Every menu, dialog, sheet, popover, and picker |
-| A visible focus line and halo on every control | The components | See [Shape and Edges](../styles/shape-and-edges.md). |
-| Larger targets on a phone | The components | See [Sizes](sizes.md). |
+| A visible focus line and halo on every control | The components | See [Border and Radius](../styles/border-and-radius.md). |
 | Less motion when the system asks for it | The components | See [Motion](../styles/motion.md). |
 | A name for every icon-only button | The app, from the icon button recipe | See [Button](../components/button.md). |
 | A reason for every control that cannot be used | The app, with `ReasonTooltip` or a field note | See [Disabled With a Reason](disabled-with-a-reason.md). |
@@ -73,7 +72,7 @@ of them.
 
 - See [Color](../styles/color.md) for the status and chart colors that need a word beside them.
 - See [Disabled With a Reason](disabled-with-a-reason.md) for controls that cannot be used.
-- See [Sizes](sizes.md) for touch targets on a phone.
+- See [Sizes](sizes.md) for the size of every control.
 
 ## In code
 

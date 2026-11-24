@@ -32,7 +32,8 @@ Where an action goes depends on its container:
 
 | Container | Where actions go |
 |---|---|
-| Page | The page's actions sit on the title's line, in the page header, never in the top bar. A record's actions are Edit first, then the record's other actions. Actions that close the record's work, such as Close as Lost, come next in the destructive color. Delete comes last. On screens narrower than 1024px, they fold into one More actions (…) button. |
+| Page | The page's actions sit on the title's line, in the page header, never in the top bar. A list's actions sit in its toolbar instead. A record's actions are Edit first, then the record's other actions. Actions that close the record's work, such as Close as Lost, come next in the destructive color. Delete comes last. On screens narrower than 1024px, they fold into one More actions (…) button. |
+| List | The list's actions, such as Import and Add Prospect, sit at the right end of its toolbar, after Sort, with the primary action last. While the list is empty, Add moves to the middle of the empty state. See [List Toolbar](list-toolbar.md). |
 | Card | Add sits at the right of the card header. While the card is empty, Add moves to the middle of the empty state, and the header has none. A list that people edit inside a card, such as tasks, shows an Edit button on a row when the pointer or focus is on it. On touch screens, the Edit button always shows. |
 | Sheet | The footer stays at the bottom while the form scrolls. Cancel, then Save, sit at the right. A record's Delete sits at the start of the footer, on the left, away from Save. |
 | Dialog | Cancel, then the action, sit at the bottom right. The action is named after the change, such as "Delete Project", not OK. A destructive action uses the destructive color. On a phone, the buttons stack with the action on top. |

@@ -96,7 +96,6 @@ export function RecordActions({
                   variant="outline"
                   size="icon"
                   aria-label="More actions"
-                  className="max-sm:size-10"
                 >
                   <EllipsisIcon />
                 </Button>

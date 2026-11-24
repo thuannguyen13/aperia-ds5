@@ -2,10 +2,9 @@ import { useState } from "react"
 import {
   ArrowUpDownIcon,
   Building2Icon,
-  CalendarIcon,
-  ChevronDownIcon,
   FilterIcon,
   InfoIcon,
+  PlusIcon,
   SearchIcon,
 } from "lucide-react"
 import {
@@ -15,6 +14,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
+  ListPager,
   ListToolbar,
   NoResults,
   PageHeader,
@@ -182,7 +182,6 @@ export function ListPageExample() {
     <PageHeader
       title="Prospects"
       subtitle="Companies you are working to sign."
-      actions={<Button>Add Prospect</Button>}
     />
   )
 
@@ -225,6 +224,7 @@ export function ListPageExample() {
             icon={Building2Icon}
             title="No Prospects"
             className="surface"
+            action={<Button>Add Prospect</Button>}
           />
         </>
       ) : (
@@ -241,6 +241,12 @@ export function ListPageExample() {
             total={PROSPECTS.length}
             noun={["prospect", "prospects"]}
             sort={{ fields: SORTS, value: sort, onChange: setSort }}
+            actions={
+              <Button>
+                <PlusIcon data-icon="inline-start" />
+                Add Prospect
+              </Button>
+            }
           />
           {rows.length === 0 ? (
             <NoResults
@@ -252,7 +258,15 @@ export function ListPageExample() {
               }}
             />
           ) : (
-            <ProspectsTable rows={rows} />
+            <>
+              <ProspectsTable rows={rows} />
+              <ListPager
+                page={1}
+                total={rows.length}
+                noun={["prospect", "prospects"]}
+                onPageChange={() => {}}
+              />
+            </>
           )}
         </>
       )}
@@ -270,18 +284,10 @@ export function ListPageBeforeAfter() {
   return (
     <BeforeAfter
       beforeNote="a toolbar built by hand; blue names, a Details button on each row, headings that sort"
-      afterNote="the library’s toolbar, Sort at its end; plain names, and the row opens the merchant"
+      afterNote="the library’s toolbar, Sort at its end; plain names, the row opens the merchant, and the count under the list"
       before={
         <>
           <div className="flex flex-wrap items-center gap-2">
-            <span>Report Date:</span>
-            <Button variant="outline" className="font-normal">
-              10/28/2026
-              <CalendarIcon data-icon="inline-end" />
-            </Button>
-            <Button variant="link" className="px-1">
-              Edit View
-            </Button>
             <Button variant="outline" className="ml-auto">
               <FilterIcon data-icon="inline-start" />
               Filter
@@ -333,25 +339,6 @@ export function ListPageBeforeAfter() {
       after={
         <>
           <ListToolbar
-            start={
-              <>
-                <Button variant="outline" className="font-normal">
-                  <CalendarIcon data-icon="inline-start" />
-                  <span className="text-muted-foreground max-sm:sr-only">
-                    Report Date
-                  </span>
-                  <span className="tabular-nums">10/28/2026</span>
-                </Button>
-                <Button variant="outline" className="font-normal">
-                  <span className="text-muted-foreground">View</span>
-                  My Queue
-                  <ChevronDownIcon
-                    data-icon="inline-end"
-                    className="text-muted-foreground"
-                  />
-                </Button>
-              </>
-            }
             search={{
               placeholder: "Search MID or merchant name",
               value: "",
@@ -384,6 +371,12 @@ export function ListPageBeforeAfter() {
               </TableBody>
             </Table>
           </div>
+          <ListPager
+            page={1}
+            total={2}
+            noun={["merchant", "merchants"]}
+            onPageChange={() => {}}
+          />
         </>
       }
     />

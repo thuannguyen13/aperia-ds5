@@ -42,8 +42,7 @@ export function IconButton({
           disabled={props.disabled && !why}
           aria-disabled={why ? true : undefined}
           className={cn(
-            // 40px square on a phone, a thumb's target, where 28 to 32px suits a pointer.
-            "aria-disabled:opacity-50 aria-disabled:hover:bg-transparent aria-disabled:active:translate-y-0 max-sm:size-10 dark:aria-disabled:hover:bg-transparent",
+            "aria-disabled:opacity-50 aria-disabled:hover:bg-transparent aria-disabled:active:translate-y-0 dark:aria-disabled:hover:bg-transparent",
             className
           )}
           onClick={why ? (event) => event.preventDefault() : onClick}

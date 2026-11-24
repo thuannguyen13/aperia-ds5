@@ -15,7 +15,7 @@ A page header has seven parts, listed from start to end and top to bottom:
 |---|---|---|
 | Picture | Before the title, on a record's page | A 48px picture. A person is a circle, and a company or product is a square. |
 | Title | Start of the title's line | The page's name in 24px semibold. It also fills the last crumb of the breadcrumb in the top bar. |
-| Actions | End of the title's line | Other actions as outline buttons, then the page's primary action, such as Add Prospect. |
+| Actions | End of the title's line | Other actions as outline buttons, then the page's primary action, such as Export Report. A list's actions, such as Add Prospect, sit in its toolbar instead. |
 | Record actions | End of the title's line, on a record's page | Edit, the record's other actions, then the destructive ones and Delete. |
 | Subtitle | Under the title | One line of muted text. |
 | Properties | Row under the title | A small muted label over each value, such as Owner or Stage. |
@@ -60,8 +60,8 @@ primary action first. Properties sit in two columns.
 
 - **Do:** Keep the header to the title, subtitle, actions, and properties, with tiles, toolbars, filters, and tabs
   after it, so the header stays about the page.
-- **Don't:** Put a filter in the header (a report date as a label over a field). Move it to the page's toolbar, so
-  controls stay where people look for them.
+- **Don't:** Put a filter in the header, such as a label over a field. Move it to the list's toolbar, so controls stay
+  where people look for them.
 
 ### Lead a record with its kind and number
 
@@ -114,4 +114,5 @@ ends its breadcrumb with the record's name.
   [People and Pictures](people-and-pictures.md), built in the app: named by their role here (such as "Sales Reps"),
   pictures from the app's picture adapter (`shape="square"` for companies and products), "No assignee" when empty, and
   `size="xs"` for a denser line.
-- A report date or a date range is a control in `ListToolbar`'s `start`, never in `PageHeader`'s `actions`.
+- A list's actions go in `ListToolbar`'s `actions`, never in `PageHeader`'s `actions`. A dashboard's date range is a
+  control on its own row under the header.

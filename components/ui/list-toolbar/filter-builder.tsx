@@ -299,7 +299,7 @@ function BuilderValue({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
-        className="flex h-8 w-full items-center justify-between gap-1.5 rounded-lg control py-2 pr-2 pl-2.5 text-left text-sm outline-none focus-visible:ring-3 focus-visible:inset-ring-1 focus-visible:ring-ring/50 focus-visible:inset-ring-ring max-sm:h-10"
+        className="flex h-8 w-full items-center justify-between gap-1.5 rounded-lg control py-2 pr-2 pl-2.5 text-left text-sm outline-none focus-visible:ring-3 focus-visible:inset-ring-1 focus-visible:ring-ring/50 focus-visible:inset-ring-ring"
         aria-label={`${field.label}: ${values || "no value"}`}
       >
         <span className={cn("truncate", !values && "text-muted-foreground")}>

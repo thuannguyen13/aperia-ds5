@@ -71,7 +71,7 @@ export const STYLES: Section<SkillPage> = {
   pages: [
     { file: "styles/color.md" },
     { file: "styles/typography.md" },
-    { file: "styles/shape-and-edges.md" },
+    { file: "styles/border-and-radius.md" },
     { file: "styles/elevation.md" },
     { file: "styles/motion.md" },
     { file: "styles/icons.md" },
@@ -482,6 +482,7 @@ export const PATTERNS: Section<SkillPage> = {
         { file: "patterns/list-toolbar.md" },
         { file: "patterns/filters.md" },
         { file: "patterns/sort.md" },
+        { file: "patterns/paging.md" },
         { file: "patterns/tables.md" },
         { file: "patterns/reordering.md" },
       ],
@@ -508,7 +509,6 @@ export const EXAMPLES: Section<SkillPage> = {
       title: "Lists",
       pages: [
         { file: "examples/list-page.md" },
-        { file: "examples/saved-views.md" },
         { file: "examples/board.md" },
         { file: "examples/audit-log.md" },
         { file: "examples/search-and-notifications.md" },

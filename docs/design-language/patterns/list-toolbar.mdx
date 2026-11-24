@@ -11,7 +11,7 @@ import { PatternCode } from "../component-page"
   code={<PatternCode components={[{ name: "ListToolbar", stories: ListToolbar }]} />}
   after={{
     "What is available": (
-      <Canvas of={ListToolbar.AppControls} sourceState="none" />
+      <Canvas of={ListToolbar.WithActions} sourceState="none" />
     ),
     "When you can do it differently": (
       <Canvas of={ListToolbar.WithLayoutSwitch} sourceState="none" />

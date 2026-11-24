@@ -2,9 +2,13 @@
 
 import { useState } from "react"
 import {
+  ArrowDownWideNarrowIcon,
+  ArrowUpNarrowWideIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  FilterIcon,
   PlusIcon,
   SearchIcon,
-  SlidersHorizontalIcon,
   XIcon,
 } from "lucide-react"
 import { Button } from "../button/button"
@@ -12,7 +16,10 @@ import { DayRangeFields } from "../day-range-fields/day-range-fields"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../dropdown-menu/dropdown-menu"
 import { EmptyState } from "../empty-state/empty-state"
@@ -25,6 +32,7 @@ import {
 } from "../input-group/input-group"
 import { Label } from "../label/label"
 import { RadioGroup, RadioGroupItem } from "../radio-group/radio-group"
+import { ReasonTooltip } from "../reason-tooltip/reason-tooltip"
 import {
   Select,
   SelectContent,
@@ -42,7 +50,9 @@ import {
 } from "../sheet/sheet"
 import { SortControl } from "../sort-control/sort-control"
 import { Switch } from "../switch/switch"
+import { ToggleGroup, ToggleGroupItem } from "../toggle-group/toggle-group"
 import { plural } from "@/lib/format"
+import { cn } from "@/lib/utils"
 import { FilterBuilder } from "./filter-builder"
 import { FILTER_ICONS, FilterValueEditor, withOperator } from "./filter-value"
 import {
@@ -77,26 +87,24 @@ export type ListFilters = {
   form?: "advanced" | "simple"
 }
 
-// "prospects" as a button says it: "Prospects".
-const titled = (noun: string) =>
-  noun.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase())
-
 /**
- * A list's one toolbar: the controls that pick its scope, its search and filters, how many rows they leave, and its
- * Sort at the right end. Every list page has this one, above its table or board, as a section of the page.
+ * A list's one toolbar: its search and filters on the left; its layout switch, Sort, and the list's own actions (such as
+ * Import or Add Prospect) on the right. Every list page has this one, above its table or board, as a section of the
+ * page. It holds only what changes or adds to the list: what picks a list's scope, such as a report date, is the app's
+ * own, outside it. The list's count is under the list, with its pages (`ListPager`).
  *
- * Filters come in two forms on one model (`FilterField`, `FilterRule`), so either form, the count, the phone's sheet
- * and Clear All work the same. Advanced filters, the default, are one Filter button that opens a popover where each
- * filter on is a row of Column, Operator and Value, added from Add Filter. Simple filters (`form: "simple"`), for a
- * list with four filters or fewer, are fixed controls on the toolbar. Apply them with `filterRows`, or send them to the server.
+ * Filters come in two forms on one model (`FilterField`, `FilterRule`), so either form, the phone's sheet and Clear All
+ * work the same. Advanced filters, the default, are one Filter button that opens a popover where each filter on is a
+ * row of Column, Operator and Value, added from Add Filter. Simple filters (`form: "simple"`), for a list with four
+ * filters or fewer, are fixed controls on the toolbar. Apply them with `filterRows`, or send them to the server.
  *
- * On a phone the row is the search and a Filters button that counts those on; the filters are set in a sheet from the
- * bottom, and those on show as chips that clear on a tap.
+ * On a phone the actions and the layout switch take the first row, when the list has any. The next row is the search,
+ * then Filter (counting those on) and Sort as icon buttons; under it the filters that are on show as chips on one line
+ * that scrolls sideways. The filters are set in a sheet from the bottom that opens on one line per filter, and a tap
+ * opens that filter alone.
  *
- * The toolbar knows nothing of an app's own controls. `start` comes first: what picks the list's scope, such as a Board
- * and Table switch, a report date or a saved view. `children` follow the filters. Both stay on screen on a phone. The
- * wide row and the phone's rows are both in the markup, one hidden by CSS, so the server renders the right one with no
- * flash: a control passed in renders twice, so it keeps its state with the list (controlled), not in itself.
+ * The wide row and the phone's rows are both in the markup, one hidden by CSS, so the server renders the right one with
+ * no flash: a control passed in renders twice, so it keeps its state with the list (controlled), not in itself.
  */
 export function ListToolbar({
   search,
@@ -105,8 +113,8 @@ export function ListToolbar({
   total,
   noun,
   sort,
-  start,
-  children,
+  layout,
+  actions,
 }: {
   search?: {
     placeholder: string
@@ -114,17 +122,22 @@ export function ListToolbar({
     onChange: (value: string) => void
   }
   filters?: ListFilters
-  /** Rows the search and filters leave, and rows in all, shown as "12 of 40". Left out, no count shows. */
+  /** Rows the search and filters leave, and rows in all, for the phone's sheet ("12 prospects of 40"). */
   shown?: number
   total?: number
-  /** What a row is, one and many, for the sheet's count and its button: ["prospect", "prospects"]. */
+  /** What a row is, one and many, for the sheet's count: ["prospect", "prospects"]. */
   noun?: readonly [string, string]
   /** The list's Sort: what it sorts by, from the list's own order, and which way (`SortControl`). */
   sort?: React.ComponentProps<typeof SortControl>
-  start?: React.ReactNode
-  children?: React.ReactNode
+  /** How the list shows, such as a Board and Table switch, before Sort. */
+  layout?: React.ReactNode
+  /** The list's own actions, such as Import or Add Prospect, at the right end with the primary last. */
+  actions?: React.ReactNode
 }) {
   const [open, setOpen] = useState(false)
+  // The sheet shows its list of filters, or one step: "add" (pick a column), a rule's id (advanced filters), or a
+  // field's id (simple filters).
+  const [step, setStep] = useState<string | null>(null)
   const fields = filters?.fields ?? []
   const rules = filters?.value ?? []
   const form = filters?.form ?? "advanced"
@@ -149,6 +162,10 @@ export function ListToolbar({
   const shownRows = rows.filter((rule) => fieldOf(rule))
   const onRows = shownRows.filter(isComplete)
   const clearAll = () => filters?.onChange([])
+  const stepRule =
+    form === "advanced" ? shownRows.find((rule) => rule.id === step) : undefined
+  const stepField =
+    form === "simple" ? fields.find((field) => field.id === step) : undefined
 
   const searchField = search && (
     // On the row it gives up width before a filter wraps to a second line.
@@ -163,11 +180,6 @@ export function ListToolbar({
         onChange={(event) => search.onChange(event.target.value)}
       />
     </InputGroup>
-  )
-  const count = counted && (
-    <p className="text-sm whitespace-nowrap text-muted-foreground tabular-nums">
-      {shown} of {total}
-    </p>
   )
   const sorting = sort && <SortControl {...sort} />
 
@@ -187,7 +199,6 @@ export function ListToolbar({
   return (
     <>
       <div className="flex shrink-0 flex-wrap items-center gap-3 max-sm:hidden">
-        {start}
         {searchField}
         {form === "simple"
           ? fields.map((field) => (
@@ -205,74 +216,78 @@ export function ListToolbar({
                 onRulesChange={filters.onChange}
               />
             )}
-        {children}
-        {count}
-        {sorting && <div className="ml-auto">{sorting}</div>}
+        {(layout || sorting || actions) && (
+          <div className="ml-auto flex items-center gap-3">
+            {layout}
+            {sorting}
+            {actions && (
+              <div className="flex items-center gap-2">{actions}</div>
+            )}
+          </div>
+        )}
       </div>
 
-      <div className="flex shrink-0 flex-col gap-3 sm:hidden">
-        {/* First, as on the wide row: what picks the list's scope is read before what narrows it. */}
-        {start && (
-          <div className="flex flex-wrap items-center gap-2">{start}</div>
+      {/* A phone: the actions and the layout switch, when the list has any; then the search with Filter and Sort as icon
+          buttons; then the filters that are on as chips that scroll sideways. The sheet sets the filters. */}
+      <div className="flex shrink-0 flex-col gap-2 sm:hidden">
+        {(layout || actions) && (
+          <div className="flex flex-wrap items-center gap-2">
+            {layout}
+            {actions && (
+              <div className="ml-auto flex items-center gap-2">{actions}</div>
+            )}
+          </div>
         )}
         <div className="flex items-center gap-2">
           {searchField}
           {fields.length > 0 && (
-            <Button
+            <IconButton
+              label={on.length > 0 ? `Filter, ${on.length} on` : "Filter"}
               variant="outline"
-              className="shrink-0"
-              aria-label={
-                on.length > 0 ? `Filters, ${on.length} on` : undefined
-              }
-              onClick={() => setOpen(true)}
+              size="icon"
+              className="relative shrink-0"
+              onClick={() => {
+                setStep(null)
+                setOpen(true)
+              }}
             >
-              <SlidersHorizontalIcon data-icon="inline-start" />
-              Filters
+              <FilterIcon />
               {on.length > 0 && (
-                <span className="ml-0.5 flex size-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground tabular-nums">
+                <span className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground tabular-nums">
                   {on.length}
                 </span>
               )}
-            </Button>
+            </IconButton>
           )}
-          {children}
+          {sort && <SortMenu {...sort} />}
         </div>
         {on.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5">
-            {(form === "simple" ? on : onRows).map((rule) => {
-              const field = fieldOf(rule)!
-              return (
-                <Button
-                  key={rule.id ?? rule.field}
-                  variant="secondary"
-                  size="sm"
-                  className="max-w-full rounded-full"
-                  aria-label={`Clear ${field.label}: ${describeValues(field, rule)}`}
-                  onClick={() =>
-                    form === "simple"
-                      ? change(rule.field, null)
-                      : changeRow(rule.id, null)
-                  }
-                >
-                  <span className="truncate">{chipText(field, rule)}</span>
-                  <XIcon data-icon="inline-end" />
-                </Button>
-              )
-            })}
-            <Button
-              variant="link"
-              size="sm"
-              className="text-muted-foreground"
-              onClick={clearAll}
-            >
-              Clear All
-            </Button>
-          </div>
-        )}
-        {(count || sorting) && (
-          <div className="flex items-center justify-between gap-3">
-            {count}
-            {sorting && <div className="ml-auto">{sorting}</div>}
+          <div className="flex min-w-0 items-center gap-2">
+            {on.length > 0 && (
+              // One line that scrolls sideways, however many are on, so the list never moves down.
+              <div className="flex min-w-0 flex-1 gap-1.5 overflow-x-auto [scrollbar-width:none]">
+                {(form === "simple" ? on : onRows).map((rule) => {
+                  const field = fieldOf(rule)!
+                  return (
+                    <Button
+                      key={rule.id ?? rule.field}
+                      variant="secondary"
+                      size="sm"
+                      className="shrink-0 rounded-full"
+                      aria-label={`Clear ${field.label}: ${describeValues(field, rule)}`}
+                      onClick={() =>
+                        form === "simple"
+                          ? change(rule.field, null)
+                          : changeRow(rule.id, null)
+                      }
+                    >
+                      {chipText(field, rule)}
+                      <XIcon data-icon="inline-end" />
+                    </Button>
+                  )
+                })}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -282,8 +297,9 @@ export function ListToolbar({
           side="bottom"
           className="max-h-[85dvh] gap-0 rounded-t-2xl"
         >
-          <SheetHeader className="flex-row items-center justify-between border-b">
-            <div className="flex flex-col gap-0.5">
+          {/* Every change applies at once, so the header holds all the sheet needs: the count, Clear All, and close. */}
+          <SheetHeader className="flex-row items-start gap-2 border-b pr-12">
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
               <SheetTitle>Filters</SheetTitle>
               {counted && (
                 <SheetDescription>
@@ -291,76 +307,155 @@ export function ListToolbar({
                 </SheetDescription>
               )}
             </div>
-            {shownRules.length > 0 && (
-              <Button
-                variant="link"
-                size="sm"
-                className="mr-8 text-muted-foreground"
-                onClick={clearAll}
+            {/* ReasonTooltip grows to fill a row; this box keeps Clear All at its own width. */}
+            <div className="shrink-0">
+              <ReasonTooltip
+                reason={
+                  shownRules.length === 0 ? "No filters to clear." : undefined
+                }
               >
-                Clear All
-              </Button>
-            )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  // Centered on the close button beside it.
+                  className="-mt-0.5"
+                  disabled={shownRules.length === 0}
+                  onClick={() => {
+                    clearAll()
+                    setStep(null)
+                  }}
+                >
+                  Clear All
+                </Button>
+              </ReasonTooltip>
+            </div>
           </SheetHeader>
-          <div className="flex min-h-0 flex-col gap-5 overflow-y-auto p-4">
-            {form === "simple" ? (
-              fields.map((field) => (
-                <SheetDropdown
-                  key={field.id}
-                  field={field}
-                  rule={ruleOn(rules, field.id)}
-                  onChange={(rule) => change(field.id, rule)}
+          <div className="flex min-h-0 flex-col overflow-y-auto p-4">
+            {step === "add" ? (
+              <FilterStep title="Add Filter" onBack={() => setStep(null)} list>
+                <RowList>
+                  {fields.map((field) => {
+                    const Icon = FILTER_ICONS[field.type]
+                    return (
+                      <StepRow
+                        key={field.id}
+                        onClick={() => {
+                          const rule = { ...newRule(field), id: ruleId() }
+                          filters?.onChange([...rows, rule])
+                          setStep(rule.id)
+                        }}
+                      >
+                        <Icon className="size-4 text-muted-foreground" />
+                        <span className="flex-1">{field.label}</span>
+                      </StepRow>
+                    )
+                  })}
+                </RowList>
+              </FilterStep>
+            ) : stepRule && fieldOf(stepRule) ? (
+              <FilterStep
+                title={fieldOf(stepRule)!.label}
+                onBack={() => setStep(null)}
+              >
+                <RuleEditor
+                  field={fieldOf(stepRule)!}
+                  rule={stepRule}
+                  onChange={(next) => changeRow(stepRule.id, next)}
                 />
-              ))
+              </FilterStep>
+            ) : stepField ? (
+              <FilterStep title={stepField.label} onBack={() => setStep(null)}>
+                <SheetDropdown
+                  field={stepField}
+                  rule={ruleOn(rules, stepField.id)}
+                  onChange={(rule) => change(stepField.id, rule)}
+                  bare
+                />
+              </FilterStep>
+            ) : form === "simple" ? (
+              <RowList>
+                {fields.map((field) =>
+                  // A yes or no filter is set in place, one tap; the others open their own step.
+                  field.type === "boolean" ? (
+                    <div key={field.id} className="px-3 py-2">
+                      <SheetDropdown
+                        field={field}
+                        rule={ruleOn(rules, field.id)}
+                        onChange={(rule) => change(field.id, rule)}
+                      />
+                    </div>
+                  ) : (
+                    <StepRow key={field.id} onClick={() => setStep(field.id)}>
+                      <Summary
+                        label={field.label}
+                        value={
+                          ruleOn(rules, field.id)
+                            ? describeValues(field, ruleOn(rules, field.id)!)
+                            : (field.all ?? "Any")
+                        }
+                      />
+                      <ChevronRightIcon className="size-4 text-muted-foreground" />
+                    </StepRow>
+                  )
+                )}
+              </RowList>
             ) : (
               <>
-                {shownRows.map((rule) => (
-                  <SheetRule
-                    key={rule.id}
-                    field={fieldOf(rule)!}
-                    rule={rule}
-                    onChange={(next) => changeRow(rule.id, next)}
-                    onRemove={() => changeRow(rule.id, null)}
-                  />
-                ))}
-                {fields.length > 0 && (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="outline" className="self-start">
-                        <PlusIcon data-icon="inline-start" />
-                        Add Filter
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" className="max-h-72">
-                      {fields.map((field) => {
-                        const Icon = FILTER_ICONS[field.type]
-                        return (
-                          <DropdownMenuItem
-                            key={field.id}
-                            onSelect={() =>
-                              filters?.onChange([
-                                ...rows,
-                                { ...newRule(field), id: ruleId() },
-                              ])
-                            }
-                          >
-                            <Icon className="text-muted-foreground" />
-                            {field.label}
-                          </DropdownMenuItem>
-                        )
-                      })}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                {shownRows.length === 0 && (
+                  <p className="py-3 text-sm text-muted-foreground">
+                    No filters applied.
+                  </p>
                 )}
+                {shownRows.length > 0 && (
+                  <RowList>
+                    {shownRows.map((rule) => {
+                      const field = fieldOf(rule)!
+                      const values = describeValues(field, rule)
+                      const operator = OPERATORS[field.type].find(
+                        (each) => each.value === rule.operator
+                      )
+                      return (
+                        // The row opens the filter; its own × removes it, as on a desktop filter row.
+                        <div
+                          key={rule.id}
+                          // The row's hover and focus cover its × too, so the line reads as one row.
+                          className="flex items-center pr-2 hover:bg-muted/50 has-[>button:first-child:focus-visible]:bg-muted/50 has-[>button:first-child:focus-visible]:outline-2 has-[>button:first-child:focus-visible]:-outline-offset-2 has-[>button:first-child:focus-visible]:outline-ring"
+                        >
+                          <StepRow
+                            className="min-w-0 flex-1 hover:bg-transparent focus-visible:bg-transparent focus-visible:outline-none"
+                            onClick={() => setStep(rule.id!)}
+                          >
+                            <Summary
+                              label={field.label}
+                              value={
+                                values
+                                  ? `${operator?.label ?? ""} ${values}`
+                                  : ""
+                              }
+                            />
+                          </StepRow>
+                          <IconButton
+                            label="Remove Filter"
+                            aria-label={`Remove ${field.label} filter`}
+                            onClick={() => changeRow(rule.id, null)}
+                          >
+                            <XIcon />
+                          </IconButton>
+                        </div>
+                      )
+                    })}
+                  </RowList>
+                )}
+                <Button
+                  variant="ghost"
+                  className="mt-2 -ml-2.5 self-start"
+                  onClick={() => setStep("add")}
+                >
+                  <PlusIcon data-icon="inline-start" />
+                  Add Filter
+                </Button>
               </>
             )}
-          </div>
-          <div className="border-t p-4">
-            <Button className="w-full" onClick={() => setOpen(false)}>
-              {counted && noun
-                ? `Show ${plural(shown, titled(noun[0]), titled(noun[1]))}`
-                : "Show Results"}
-            </Button>
           </div>
         </SheetContent>
       </Sheet>
@@ -455,10 +550,13 @@ function SheetDropdown({
   field,
   rule,
   onChange,
+  bare = false,
 }: {
   field: FilterField
   rule: FilterRule | undefined
   onChange: (rule: FilterRule | null) => void
+  /** In its own step, which names it: no name over the choices. */
+  bare?: boolean
 }) {
   const id = `filter-${field.id}-sheet`
   if (field.type === "boolean")
@@ -475,12 +573,14 @@ function SheetDropdown({
   if (field.type === "day")
     return (
       <div className="flex flex-col gap-2">
-        <p id={id} className="text-sm font-medium">
-          {field.label}
-        </p>
+        {!bare && (
+          <p id={id} className="text-sm font-medium">
+            {field.label}
+          </p>
+        )}
         <DayRangeFields
           label={field.label}
-          labelledBy={id}
+          labelledBy={bare ? undefined : id}
           // One width for From and To, so the two fields line up one under the other.
           className="[&_label]:w-8"
           from={rule?.values[0] ?? ""}
@@ -492,7 +592,7 @@ function SheetDropdown({
   if (field.type !== "enum") return null
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-sm font-medium">{field.label}</p>
+      {!bare && <p className="text-sm font-medium">{field.label}</p>}
       <RadioGroup
         value={rule?.values[0] ?? ALL}
         onValueChange={(value) => onChange(pickRule(field, value))}
@@ -504,7 +604,7 @@ function SheetDropdown({
         ].map((choice) => (
           <Label
             key={choice.value}
-            className="flex min-h-9 items-center gap-3 font-normal pointer-coarse:min-h-11"
+            className="flex min-h-9 items-center gap-3 font-normal"
           >
             <RadioGroupItem value={choice.value} />
             {choice.media}
@@ -523,60 +623,184 @@ function SheetDropdown({
   )
 }
 
-/** A chip's filter in the phone's sheet: its column, then its operator and value, set in place. */
-function SheetRule({
+/** One step of the phone's sheet: a way back to the list, the step's name, and what it sets. */
+function FilterStep({
+  title,
+  onBack,
+  list = false,
+  children,
+}: {
+  title: string
+  onBack: () => void
+  /** A list of lines to pick from, which sit together, rather than the controls of one filter. */
+  list?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <section aria-label={title} className="flex flex-col">
+      <div className="-ml-2.5 flex items-center gap-1 py-1">
+        <IconButton label="Back to Filters" size="icon" onClick={onBack}>
+          <ChevronLeftIcon />
+        </IconButton>
+        <h3 className="text-sm font-medium">{title}</h3>
+      </div>
+      <div className={cn("flex flex-col pt-2", !list && "gap-3")}>
+        {children}
+      </div>
+    </section>
+  )
+}
+
+/** The lines of the phone's sheet, in one card with a line between each. */
+function RowList({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col divide-y divide-border overflow-hidden surface">
+      {children}
+    </div>
+  )
+}
+
+/** A line of the phone's sheet that opens a step: the whole line is the target, at a thumb's height. */
+function StepRow({
+  onClick,
+  className,
+  children,
+}: {
+  onClick: () => void
+  className?: string
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      // Focus as a table row shows it, inside the line, since the card clips anything outside.
+      className={cn(
+        "flex min-h-11 items-center gap-3 px-3 py-1.5 text-left text-sm outline-none hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
+        className
+      )}
+    >
+      {children}
+    </button>
+  )
+}
+
+/** A filter on one line: its column, then what it is set to, or "Pick a value" while it has none. */
+function Summary({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="flex min-w-0 flex-1 flex-col">
+      <span className="font-medium">{label}</span>
+      <span className="truncate text-muted-foreground">
+        {value || "Pick a value"}
+      </span>
+    </span>
+  )
+}
+
+/** One filter's step on a phone: its ways to compare as a row of toggles, when it has more than one, then its value. */
+function RuleEditor({
   field,
   rule,
   onChange,
-  onRemove,
 }: {
   field: FilterField
   rule: FilterRule
   onChange: (rule: FilterRule) => void
-  onRemove: () => void
 }) {
   const operators = OPERATORS[field.type]
   return (
-    <section
-      aria-label={`${field.label} filter`}
-      className="flex flex-col gap-2"
-    >
-      <div className="flex items-center justify-between gap-2">
-        <p className="text-sm font-medium">{field.label}</p>
-        <IconButton
-          label="Remove Filter"
-          aria-label={`Remove ${field.label} filter`}
-          // Its 40px target overhangs the row, so the × lines up with the fields' right edge and the name sets the height.
-          className="-my-2 -mr-3"
-          onClick={onRemove}
-        >
-          <XIcon />
-        </IconButton>
-      </div>
+    <>
       {operators.length > 1 && (
-        <Select
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          size="sm"
+          spacing={1}
+          className="flex-wrap"
+          aria-label={`${field.label} operator`}
           value={rule.operator}
+          // A toggle group lets its last toggle go; a filter always compares one way, so that tap is ignored.
           onValueChange={(value) =>
-            onChange(withOperator(rule, value as FilterOperator))
+            value && onChange(withOperator(rule, value as FilterOperator))
           }
         >
-          <SelectTrigger
-            className="w-full"
-            aria-label={`${field.label} operator`}
-          >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent position="popper">
-            {operators.map((each) => (
-              <SelectItem key={each.value} value={each.value}>
-                {each.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          {operators.map((each) => (
+            <ToggleGroupItem key={each.value} value={each.value}>
+              {each.label}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
       )}
       <FilterValueEditor field={field} rule={rule} onChange={onChange} sheet />
-    </section>
+    </>
+  )
+}
+
+/**
+ * Sort on a phone: one icon button whose arrow shows the direction, opening a menu of what to sort by and which way.
+ * It takes `SortControl`'s props, so a list passes the same `sort` to both.
+ */
+function SortMenu({
+  fields,
+  value,
+  onChange,
+}: React.ComponentProps<typeof SortControl>) {
+  const ascending = value.direction === "asc"
+  const by = fields.find((field) => field.value === value.by)
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <IconButton
+          label={by ? `Sort by ${by.label}` : "Sort"}
+          variant="outline"
+          size="icon"
+          className="shrink-0"
+        >
+          {ascending ? <ArrowUpNarrowWideIcon /> : <ArrowDownWideNarrowIcon />}
+        </IconButton>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel>Sort By</DropdownMenuLabel>
+        <DropdownMenuRadioGroup
+          value={value.by || "default"}
+          onValueChange={(next) => {
+            const field = fields.find((each) => each.value === next)
+            onChange(
+              field
+                ? { by: next, direction: field.starts ?? "asc" }
+                : { by: "", direction: value.direction }
+            )
+          }}
+        >
+          <DropdownMenuRadioItem value="default">
+            Default order
+          </DropdownMenuRadioItem>
+          {fields.map((field) => (
+            <DropdownMenuRadioItem key={field.value} value={field.value}>
+              {field.label}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+        {by && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuRadioGroup
+              value={value.direction}
+              onValueChange={(direction) =>
+                onChange({ ...value, direction: direction as "asc" | "desc" })
+              }
+            >
+              <DropdownMenuRadioItem value="asc">
+                Ascending
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="desc">
+                Descending
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

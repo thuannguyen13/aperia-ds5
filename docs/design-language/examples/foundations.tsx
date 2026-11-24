@@ -344,7 +344,7 @@ export const spacingExamples = {
   ),
 }
 
-// ─── Shape and Edges ───────────────────────────────────────────────────────
+// ─── Border and Radius ─────────────────────────────────────────────────────
 
 const CORNERS = [
   { name: "Small", className: "rounded-sm" },
@@ -357,7 +357,7 @@ const CORNERS = [
 const radius: Read = (s) =>
   parseFloat(s.borderTopLeftRadius) > 999 ? "full" : px(s.borderTopLeftRadius)
 
-export const shapeExamples = {
+export const borderExamples = {
   "What is available": (
     <Frame>
       <div className="grid gap-6">
@@ -570,31 +570,44 @@ export const motionExamples = {
 
 const height: Read = (s) => px(s.height)
 
+/** Sets a control on a 36px stage, bottom-aligned, so every label below it sits on one line. */
+const Stage = ({ children }: { children: ReactNode }) => (
+  <div className="flex h-9 items-end">{children}</div>
+)
+
 export const sizesExamples = {
   "What is available": (
     <Frame>
-      <div className="grid gap-5">
-        <div className="flex flex-wrap items-start gap-4">
+      <div className="flex flex-wrap items-start gap-x-12 gap-y-6">
+        <div className="flex items-start gap-6">
           {(["xs", "sm", "default", "lg"] as const).map((size) => (
             <Measured key={size} read={height} label={size}>
-              <Button data-measure size={size} variant="outline">
-                <PlusIcon />
-                Add
-              </Button>
+              <Stage>
+                <Button data-measure size={size} variant="outline">
+                  <PlusIcon />
+                  Add
+                </Button>
+              </Stage>
             </Measured>
           ))}
         </div>
-        <div className="flex flex-wrap items-start gap-4">
+        <div className="flex items-start gap-6">
           <Measured read={height} label="Field">
-            <Input data-measure placeholder="Search" className="w-40" />
+            <Stage>
+              <Input data-measure placeholder="Search" className="w-40" />
+            </Stage>
           </Measured>
           <Measured read={height} label="Button">
-            <Button data-measure>Add Task</Button>
+            <Stage>
+              <Button data-measure>Add Task</Button>
+            </Stage>
           </Measured>
           <Measured read={height} label="Icon button">
-            <IconButton data-measure label="Edit Task" variant="outline">
-              <PencilIcon />
-            </IconButton>
+            <Stage>
+              <IconButton data-measure label="Edit Task" variant="outline">
+                <PencilIcon />
+              </IconButton>
+            </Stage>
           </Measured>
         </div>
       </div>

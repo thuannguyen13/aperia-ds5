@@ -61,7 +61,7 @@ Elevation has no exceptions. Every app uses these shadows and the one overlay.
 ## Works with
 
 - See [Motion](motion.md) for how panels open and close.
-- See [Shape and Edges](shape-and-edges.md) for the edge that goes with each shadow.
+- See [Border and Radius](border-and-radius.md) for the edge that goes with each shadow.
 - See [Color](color.md) for the Overlay role.
 
 ## In code

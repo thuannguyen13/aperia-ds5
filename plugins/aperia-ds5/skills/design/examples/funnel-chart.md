@@ -75,7 +75,7 @@ A funnel chart has no exceptions.
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for the titled card, its legend as the header's action, and the
   empty state inside it.
 - See [Page Layout](../foundations/page-layout.md) for where the card sits on a dashboard.
-- See [Date Range and Report Date](date-range.md) for the span the funnel counts.
+- See [Date Range](date-range.md) for the span the funnel counts.
 
 ## In code
 
@@ -88,5 +88,5 @@ The app builds it; aperia-ds5 has no funnel component.
 - Each stage is a focusable element (`tabIndex={0}`) with an `aria-label` sentence, wrapped in `HoverCard`
   (`side="bottom"`); open it on click too, as Radix's hover card ignores touch. Style the card's content like
   `ChartTooltipContent`, with a gap between each label and value.
-- Count the page's span (Date Range and Report Date). With no records at the first stage, render
+- Count the page's span (Date Range). With no records at the first stage, render
   `<EmptyState title="No Opportunities" />` in the card instead.

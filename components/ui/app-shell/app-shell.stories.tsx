@@ -24,6 +24,7 @@ import { Avatar, AvatarFallback } from "../avatar/avatar"
 import { Badge } from "../badge/badge"
 import { Button } from "../button/button"
 import { Card, CardHeader, CardTitle } from "../card/card"
+import { ListToolbar } from "../list-toolbar/list-toolbar"
 import {
   CommandDialog,
   CommandEmpty,
@@ -204,8 +205,8 @@ function ListPage() {
         subtitle={
           opened ? `Opened ${opened}` : "Companies you are working to sign."
         }
-        actions={<Button>Add Prospect</Button>}
       />
+      <ListToolbar actions={<Button>Add Prospect</Button>} />
       <ProspectsTable onOpen={setOpened} />
     </Shell>
   )

@@ -51,7 +51,7 @@ export function AppHeader({
       <SetTrail value={setTrail}>
         <header className={cn("flex h-14 shrink-0 items-center gap-2 border-b bg-background px-5", className)}>
           {/* Wider than md the toggle lives in the rail's header. */}
-          <SidebarToggle className="-ml-1.5 max-sm:size-10 md:hidden" />
+          <SidebarToggle className="-ml-1.5 md:hidden" />
           {shown ? (
             <Breadcrumb className="min-w-0">
               <BreadcrumbList className="flex-nowrap text-base font-medium tracking-tight">

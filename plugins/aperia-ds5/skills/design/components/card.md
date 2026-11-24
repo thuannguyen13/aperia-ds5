@@ -96,8 +96,8 @@ controls.
 | Page header | The page title is larger. A card's title is one step below it. |
 
 See [Tables](../patterns/tables.md) for running a table to the card's edges, with the column headings right under the
-card header. See [Empty State](../foundations/empty-state.md) for keeping an empty card in its place. See [Shape and
-Edges](../styles/shape-and-edges.md) and [Elevation](../styles/elevation.md) for the corner, edge, and shadow
+card header. See [Empty State](../foundations/empty-state.md) for keeping an empty card in its place. See [Border and
+Radius](../styles/border-and-radius.md) and [Elevation](../styles/elevation.md) for the corner, edge, and shadow
 the Specs name.
 
 ## In code

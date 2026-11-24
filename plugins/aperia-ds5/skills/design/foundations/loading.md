@@ -57,29 +57,28 @@ A list that changes while the user types keeps its last results, shown at reduce
 
 ```tsx
 <p role="status" className="sr-only">Loading</p>
-{/* The page header: the title at its own width, then its buttons. */}
-<div className="flex min-h-9 flex-wrap items-center justify-between gap-x-2 gap-y-4">
-  <Skeleton className="h-8 w-40" />
-  <div className="flex gap-2 max-sm:basis-full max-sm:*:flex-1"><Skeleton className="h-8 w-36 max-sm:h-10" /></div>
-</div>
-{/* The toolbar: search, one block per filter, the count, then Sort. */}
-<div className="flex flex-wrap items-center gap-3">
-  <Skeleton className="h-8 flex-1 max-sm:h-10 sm:w-64 sm:flex-none" />
+{/* The page header: the title at its own width. */}
+<div className="flex min-h-9 items-center"><Skeleton className="h-8 w-40" /></div>
+{/* The toolbar: search, one block per filter, then Add at the right end. */}
+<div className="flex items-center gap-3">
+  <Skeleton className="h-8 flex-1 sm:w-64 sm:flex-none" />
   <Skeleton className="h-8 w-40 max-sm:hidden" />
-  <Skeleton className="h-4 w-12" />
+  <Skeleton className="ml-auto h-8 w-32 max-sm:hidden" />
 </div>
 {/* The table: a 40px header row, then rows at the real height (53px with a second line, 37px with one). */}
 <div className="surface overflow-clip">
   <div className="flex h-10 items-center gap-4 border-b px-4">{/* one Skeleton h-3.5 per column */}</div>
   <div className="flex h-[53px] items-center gap-4 border-b px-4 last:border-b-0">{/* one Skeleton h-4 per column */}</div>
 </div>
+{/* The count under the list. */}
+<div className="flex h-8 items-center"><Skeleton className="h-4 w-28" /></div>
 ```
 
-- Use the page's own sizes: the title's width, how many header buttons and filters, each column's share of the width
+- Use the page's own sizes: the title's width, how many filters and toolbar buttons, each column's share of the width
   (`style={{ flex: share }}`), the row count, and the row height. Nothing moves when the page lands.
 - Vary the widths of the cell blocks by row and column with a fixed formula, not at random, so the server and the
   browser draw the same thing.
-- On a phone the filters are one Filters button (`h-10 w-24 sm:hidden`), and controls are 40px high.
+- On a phone the filters and Sort are two icon buttons (`size-8 sm:hidden`) at the search's end.
 - Stat tiles above the toolbar are `h-27 rounded-xl` blocks in the tiles' grid. A board shows its columns of card
   blocks in place of the table.
 - A page that renders `<FullWidth />` renders it in its skeleton too, or the column widens when the page lands.

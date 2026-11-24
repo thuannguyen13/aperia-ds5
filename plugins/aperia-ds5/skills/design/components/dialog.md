@@ -101,7 +101,7 @@ edited.
 
 See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for naming the change and its consequence in a
 confirmation, and for the destructive color on removal. See [Copy](../foundations/copy.md) for asking with the action's
-name. See [Shape and Edges](../styles/shape-and-edges.md), [Elevation](../styles/elevation.md), and
+name. See [Border and Radius](../styles/border-and-radius.md), [Elevation](../styles/elevation.md), and
 [Motion](../styles/motion.md) for the corner, edge, shadow, overlay, and timings the Specs name.
 
 ## In code

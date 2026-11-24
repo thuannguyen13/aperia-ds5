@@ -10,7 +10,7 @@ stage.
 ## How it looks and behaves
 
 A board page has a toolbar and a board under it. The list's toolbar sits above the board. When the list also has a table
-view, a Board / Table switch comes first in the toolbar. The board fills the whole width of the page.
+view, a Board / Table switch sits before Sort in the toolbar. The board fills the whole width of the page.
 
 The board has one column per state. The columns share the width equally, and each column is at least 16rem wide. When
 there are more columns than fit, the board scrolls sideways. Arrows show at its edges while more columns are off screen.
@@ -85,7 +85,7 @@ A board has no exceptions.
 
 The app builds it from aperia-ds5 parts and the recipes on the pattern and component pages:
 
-- `ListToolbar` above, with a `ToggleGroup` (Board / Table) in `start`; render `<FullWidth />` on the page; load with
+- `ListToolbar` above, with a `ToggleGroup` (Board / Table) in `layout`; render `<FullWidth />` on the page; load with
   the list skeleton from [Loading](../foundations/loading.md) in its board shape, full width.
 - Columns: a grid of `auto-cols-[minmax(16rem,1fr)] grid-flow-col`, each column tinted with
   `color-mix(in oklab, var(--shadow-color) 3%, transparent)` (18% in Dark), its header `sticky` with the stage

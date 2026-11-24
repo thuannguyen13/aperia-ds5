@@ -1,0 +1,24 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/paging.md?raw"
+import * as ListPager from "../../../components/ui/list-pager/list-pager.stories"
+import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.stories"
+import { SkillDoc } from "../skill-doc"
+import { PatternCode } from "../component-page"
+
+<Meta title="Patterns/Lists/Paging" />
+
+<SkillDoc
+  source={source}
+  code={<PatternCode components={[{ name: "ListPager", stories: ListPager }]} />}
+  after={{
+    "What is available": (
+      <>
+        <Canvas of={ListPager.Pages} sourceState="none" />
+        <Canvas of={ListPager.OnePage} sourceState="none" />
+      </>
+    ),
+    "How it looks and behaves": (
+      <Canvas of={ListToolbar.Paged} sourceState="none" />
+    ),
+  }}
+/>

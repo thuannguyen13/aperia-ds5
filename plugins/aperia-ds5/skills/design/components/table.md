@@ -23,7 +23,7 @@ A table has four parts, listed from top to bottom:
 | Toolbar | Search, filters, and Sort, above the table |
 | Column headings | Headings in Title Case, with one hairline under them |
 | Rows | Records separated by hairlines |
-| Footer, when the rows run past one page | The count, with Previous and Next |
+| Footer | The count, with the page numbers once the rows run past one page. See [Paging](../patterns/paging.md). |
 
 ### Specs
 
@@ -55,7 +55,7 @@ keyboard user reaches a row with **Tab**. The row has the record's name as its l
 
 Column headings are real table headings, so a screen reader reads each cell with its column.
 
-Filters sit in the toolbar. On a phone, they go behind one Filters button that counts the filters that are on. The
+Filters sit in the toolbar. On a phone, they go behind one Filter button that counts the filters that are on. The
 button opens the filters in a sheet. Active filters show as chips, and tapping a chip clears its filter. A search or
 filter with no match shows the empty state "No Results".
 
@@ -104,7 +104,7 @@ filter with no match shows the empty state "No Results".
 See [Tables](../patterns/tables.md) for the column headings right under a card header, with no line above them, and for
 a table too wide for the page column. See [Sort](../patterns/sort.md) for sorting from the toolbar. See
 [Copy](../foundations/copy.md) for how contact details link on a record's page. See [Color](../styles/color.md) for
-pairing every color with a word or an icon. See [Shape and Edges](../styles/shape-and-edges.md) for the hairline
+pairing every color with a word or an icon. See [Border and Radius](../styles/border-and-radius.md) for the hairline
 the Specs name.
 
 ## In code

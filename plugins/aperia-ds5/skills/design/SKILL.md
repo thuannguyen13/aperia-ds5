@@ -54,7 +54,7 @@ The pages are in six sections, the same as the Storybook sidebar.
   Missing](foundations/empty-and-missing.md), [Empty State](foundations/empty-state.md),
   [Disabled With a Reason](foundations/disabled-with-a-reason.md).
 - **Styles** (the visual values): [Color](styles/color.md), [Typography](styles/typography.md),
-  [Shape and Edges](styles/shape-and-edges.md), [Elevation](styles/elevation.md), [Motion](styles/motion.md),
+  [Border and Radius](styles/border-and-radius.md), [Elevation](styles/elevation.md), [Motion](styles/motion.md),
   [Icons](styles/icons.md).
 - **Components** (one building block in depth; every other building block's props and live examples are in
   Storybook): [Button](components/button.md), [Card](components/card.md), [Dialog](components/dialog.md),
@@ -64,18 +64,18 @@ The pages are in six sections, the same as the Storybook sidebar.
   [App Shell](patterns/app-shell.md), [Search](patterns/search.md), [Notifications](patterns/notifications.md); Content:
   [Page Header](patterns/page-header.md), [Cards and Tiles](patterns/cards-and-tiles.md), [Details](patterns/details.md),
   [History](patterns/history.md), [People and Pictures](patterns/people-and-pictures.md); Lists:
-  [List Toolbar](patterns/list-toolbar.md), [Filters](patterns/filters.md), [Sort](patterns/sort.md),
+  [List Toolbar](patterns/list-toolbar.md), [Filters](patterns/filters.md), [Sort](patterns/sort.md), [Paging](patterns/paging.md),
   [Tables](patterns/tables.md), [Reordering](patterns/reordering.md); Editing:
   [Buttons and Actions](patterns/buttons-and-actions.md), [Forms in Sheets](patterns/forms-in-sheets.md),
   [Pickers](patterns/pickers.md), [Confirmations and Delete](patterns/confirmations-and-delete.md),
   [Files and Images](patterns/files-and-images.md), [Switches in a Grid](patterns/switches-in-a-grid.md).
 - **Examples** (screens an app builds from the patterns, with before and after): Lists: [List
-  Page](examples/list-page.md), [Saved Views](examples/saved-views.md), [Board of Cards](examples/board.md), [Audit
+  Page](examples/list-page.md), [Board of Cards](examples/board.md), [Audit
   Log](examples/audit-log.md), [Search and Notifications](examples/search-and-notifications.md); Records: [Record
   Page](examples/record-page.md), [Notes on a Record](examples/notes.md), [Task Checklist](examples/task-checklist.md),
   [Status Change With a Reason](examples/status-change.md), [Line Items With Totals](examples/line-items.md); Settings:
   [Roles and Permissions](examples/roles-and-permissions.md), [Editable Option List](examples/option-list.md); Data and
-  Charts: [Import Wizard](examples/import.md), [Date Range and Report Date](examples/date-range.md), [Funnel
+  Charts: [Import Wizard](examples/import.md), [Date Range](examples/date-range.md), [Funnel
   Chart](examples/funnel-chart.md).
 
 ## Order of work
@@ -90,10 +90,10 @@ The pages are in six sections, the same as the Storybook sidebar.
    `opensOnClick` for rows (wiring in [App Shell](patterns/app-shell.md)). Never rebuild the sidebar, top bar or page
    header. The system-wide patterns ship in aperia-ds5 too, each named in its pattern page's In code:
    - cards and values: `EmptyState`, `NoResults`, `RelativeTime`;
-   - lists: `ListToolbar` (search, filters, Sort), `SortControl`, `DayRangeFields`;
+   - lists: `ListToolbar` (search, filters, Sort, the list's actions), `SortControl`, `ListPager` (the count and pages), `DayRangeFields`;
    - forms and confirms: `FormSheet`, `SheetForm`, `SheetDelete`, `ConfirmDialog`, `EntityPicker`, `PickField`,
      `DraftField`, `AddOption`, `MoneyInput`, `FileDrop`, `FilePicker`, `ImagePicker`, `SortableList`, `ReasonTooltip`;
-   - formatters in `aperia-ds5/format` (dates, times, money, "3d ago"), and sorting and filtering in
+   - formatters in `aperia-ds5/format` (dates, times, money, "3d ago"), and sorting, filtering and paging in
      `aperia-ds5/list`.
    Use them; never rebuild or copy one in the app. When the app needs a system-wide pattern the library lacks, raise
    it on aperia-ds5.
@@ -109,7 +109,7 @@ The pages are in six sections, the same as the Storybook sidebar.
      [People and Pictures](patterns/people-and-pictures.md), the list skeleton on [Loading](foundations/loading.md), and
      the flag switch on [Switches in a Grid](patterns/switches-in-a-grid.md).
    Build a recipe once in the app and reuse it on every screen; never import it from aperia-ds5, which does not ship
-   it. Feature patterns (saved views, status changes, notes, boards, import wizards, settings lists) are
+   it. Feature patterns (status changes, notes, boards, import wizards, settings lists) are
    built in the app from these parts, the way the Examples pages show.
 4. **Apply the invariants** below, and the page for what you're placing: its pattern page, and its component page when
    there is one. [Buttons and Actions](patterns/buttons-and-actions.md) says where buttons go.
@@ -149,7 +149,7 @@ The pages are in six sections, the same as the Storybook sidebar.
 12. **Title Case** for titles, headings, tabs, table headers, labels and buttons. Sentence case for sentences,
     descriptions and values.
 13. **Everything clickable shows the pointer,** rows and menu items included.
-14. **Phones get 40px targets** (32px on desktop), and sheets fill the screen.
+14. **Controls keep their size on a phone** (32px, icon buttons 28px), and sheets fill the screen.
 15. **Vertical alignment holds across containers:** icons, pictures, headings, text and footers in one column share an
     x. A card's content starts on its title's line; a part with its own padding (a hover row, a ghost button) takes an
     equal negative margin to stay on it. Indents only show hierarchy ([Page Layout](foundations/page-layout.md)).
