@@ -84,12 +84,7 @@ export function ListSkeleton({
         {/* The right end: the board's switch, Sort, then the list's actions. */}
         <div className="ml-auto flex gap-3 max-sm:hidden">
           {board && <Skeleton className="h-8 w-27" />}
-          {sort && (
-            <div className="flex gap-1.5">
-              <Skeleton className="h-8 w-44" />
-              <Skeleton className="size-8" />
-            </div>
-          )}
+          {sort && <Skeleton className="h-8 w-20" />}
           {actions > 0 && (
             <div className="flex gap-2">
               {Array.from({ length: actions }, (_, at) => (

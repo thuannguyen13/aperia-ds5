@@ -170,6 +170,10 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   repeated rules and broken links.
 - Docs: Typography shows the whole type scale and the four weights, measured live, then the step and weight each role
   in an Aperia app uses.
+- `SortControl` is one button that opens a panel: "Default order" and the fields as a list of choices, then Ascending
+  and Descending once a field is picked. The button reads "Sort", or "Sort: <field>" with an arrow for the direction.
+  The separate direction arrow is gone, and `iconOnly` draws it as an icon with a dot while sorted, which
+  `ListToolbar` uses on a phone in place of its own sort menu.
 - New `ListPager`: the footer under a list, with its count ("6 merchants", or "26–50 of 312 merchants") and, once the
   rows run past one page (25 rows, `PAGE_SIZE`), Previous, the page numbers ("1 … 6 7 8 … 13") and Next, built from
   `Pagination`. `pageRows` and `pageCount` in `aperia-ds5/list` cut

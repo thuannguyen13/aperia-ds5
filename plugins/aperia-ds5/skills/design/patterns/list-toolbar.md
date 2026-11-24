@@ -42,8 +42,7 @@ and the empty state holds Add instead.
 On a phone, the toolbar is at most three short rows:
 
 1. The list's actions come first, when the list has any.
-2. The search comes next, with Filter and Sort as icon buttons at its end. Sort opens a menu of what to sort by and
-   which way.
+2. The search comes next, with Filter and Sort as icon buttons at its end. Sort opens the same panel as on a desktop.
 3. The filters that are on come last, as chips on one line that scrolls sideways.
 
 See [Filters](filters.md) for the sheet that the Filter button opens.

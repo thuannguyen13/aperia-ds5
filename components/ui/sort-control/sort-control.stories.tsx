@@ -26,7 +26,7 @@ const meta: Meta<typeof SortControl> = {
     docs: {
       description: {
         component:
-          "A list's one Sort: a field, then which way. It sits at the right end of `ListToolbar` (its `sort`), before the list's actions, or alone in a card's header for a list inside a card. Column headings don't sort. Picking a field starts in that field's `starts` direction (highest or newest first for amounts and dates, A to Z otherwise), and the arrow flips it; in the list's own order the arrow stays, disabled with a reason, so nothing shifts. `sortRows(rows, fields, value)` sorts with the same fields: ties keep their order and an empty value sorts lowest.",
+          "A list's one Sort: one button that opens a panel with what to sort by, then Ascending and Descending once a field is picked. The button reads \"Sort\" in the list's own order and \"Sort: <field>\" with an arrow once sorted; `iconOnly` draws an icon with a dot while sorted, for a phone. It sits at the right end of `ListToolbar` (its `sort`), before the list's actions, or alone in a card's header for a list inside a card. Column headings do not sort. Picking a field starts in that field's `starts` direction (highest or newest first for amounts and dates, A to Z otherwise), and every choice applies at once. `sortRows(rows, fields, value)` sorts with the same fields: ties keep their order and an empty value sorts lowest.",
       },
     },
   },

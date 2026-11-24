@@ -2,8 +2,6 @@
 
 import { useState } from "react"
 import {
-  ArrowDownWideNarrowIcon,
-  ArrowUpNarrowWideIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   FilterIcon,
@@ -13,15 +11,6 @@ import {
 } from "lucide-react"
 import { Button } from "../button/button"
 import { DayRangeFields } from "../day-range-fields/day-range-fields"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../dropdown-menu/dropdown-menu"
 import { EmptyState } from "../empty-state/empty-state"
 import { Field, FieldLabel } from "../field/field"
 import { IconButton } from "../icon-button/icon-button"
@@ -259,7 +248,7 @@ export function ListToolbar({
               )}
             </IconButton>
           )}
-          {sort && <SortMenu {...sort} />}
+          {sort && <SortControl {...sort} iconOnly />}
         </div>
         {on.length > 0 && (
           <div className="flex min-w-0 items-center gap-2">
@@ -733,74 +722,6 @@ function RuleEditor({
       )}
       <FilterValueEditor field={field} rule={rule} onChange={onChange} sheet />
     </>
-  )
-}
-
-/**
- * Sort on a phone: one icon button whose arrow shows the direction, opening a menu of what to sort by and which way.
- * It takes `SortControl`'s props, so a list passes the same `sort` to both.
- */
-function SortMenu({
-  fields,
-  value,
-  onChange,
-}: React.ComponentProps<typeof SortControl>) {
-  const ascending = value.direction === "asc"
-  const by = fields.find((field) => field.value === value.by)
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <IconButton
-          label={by ? `Sort by ${by.label}` : "Sort"}
-          variant="outline"
-          size="icon"
-          className="shrink-0"
-        >
-          {ascending ? <ArrowUpNarrowWideIcon /> : <ArrowDownWideNarrowIcon />}
-        </IconButton>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>Sort By</DropdownMenuLabel>
-        <DropdownMenuRadioGroup
-          value={value.by || "default"}
-          onValueChange={(next) => {
-            const field = fields.find((each) => each.value === next)
-            onChange(
-              field
-                ? { by: next, direction: field.starts ?? "asc" }
-                : { by: "", direction: value.direction }
-            )
-          }}
-        >
-          <DropdownMenuRadioItem value="default">
-            Default order
-          </DropdownMenuRadioItem>
-          {fields.map((field) => (
-            <DropdownMenuRadioItem key={field.value} value={field.value}>
-              {field.label}
-            </DropdownMenuRadioItem>
-          ))}
-        </DropdownMenuRadioGroup>
-        {by && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuRadioGroup
-              value={value.direction}
-              onValueChange={(direction) =>
-                onChange({ ...value, direction: direction as "asc" | "desc" })
-              }
-            >
-              <DropdownMenuRadioItem value="asc">
-                Ascending
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="desc">
-                Descending
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </>
-        )}
-      </DropdownMenuContent>
-    </DropdownMenu>
   )
 }
 
