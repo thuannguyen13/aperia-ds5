@@ -90,3 +90,23 @@ export const Disabled: Story = {
   },
   render: (args) => <Demo {...args} />,
 }
+
+const wait = (ms: number) => new Promise((done) => setTimeout(done, ms))
+
+/**
+ * `onConfirm` returns a Promise: the action keeps its label beside a spinner, Cancel is disabled, and the dialog stays
+ * open until the Promise settles, then closes.
+ */
+export const Working: Story = {
+  args: { onConfirm: () => wait(1500) },
+  render: (args) => <Demo {...args} />,
+}
+
+/** The Promise rejects: the dialog stays open with one line in red, and the action can be pressed again. */
+export const Failed: Story = {
+  args: {
+    onConfirm: () =>
+      wait(1000).then(() => Promise.reject(new Error("Server error"))),
+  },
+  render: (args) => <Demo {...args} />,
+}
