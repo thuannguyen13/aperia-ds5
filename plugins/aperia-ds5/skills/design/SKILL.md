@@ -1,6 +1,6 @@
 ---
 name: design
-description: The shared design language of Aperia's internal apps built on aperia-ds5 (shadcn/ui on Tailwind v4): its look, motion, layout patterns and UI copy, one structure for every app (the same sidebar, primary, shell and patterns), each app keeping only its logo, name, charts and status colors. Use whenever building, changing or reviewing any screen, component, page or style in an Aperia app, before writing the UI, and again before calling a UI change done.
+description: The shared design language of Aperia's internal apps built on aperia-ds5 (shadcn/ui on Tailwind v4): its look, motion, layout patterns and UI copy, one structure for every app (the same sidebar, primary, shell and patterns), each app keeping only its logo, name, font loading, and its chart, status and avatar colors. Use whenever building, changing or reviewing any screen, component, page or style in an Aperia app, before writing the UI, and again before calling a UI change done.
 ---
 
 # Aperia App Design
@@ -34,6 +34,9 @@ An app sets **only** these ([styles/color.md](styles/color.md), What an app can 
 - Its **logo and product name**, in the sidebar's top row. The sidebar itself is the shared Aperia navy.
 - Its **chart palette**, if it draws charts.
 - Its **status colors**, if it shows states: tinted pairs applied to `Badge` and `Alert` through `className`.
+- Its **avatar colors**: the fill and text pairs its picture adapter picks for initials, by the record.
+- **Loading the font.** The library sets Inter with a system fallback but does not download it, so the app loads Inter
+  ([For Developers](get-started/for-developers.md), Load the font).
 
 Everything else is shared and comes from `aperia-ds5`: the primary, neutrals, surfaces, edges, shadows, overlay, motion,
 density, alignment, patterns and copy. Do not restyle these per app. If the app's CSS overrides one, that override is
@@ -84,9 +87,9 @@ rest, on hover, on focus, when pressed, and when disabled.
 
 ## Order of work
 
-1. **Check the app's CSS:** `aperia-ds5/base.css` imported after Tailwind, then the app's brand file
+1. **Check the app's CSS and font:** `aperia-ds5/base.css` imported after Tailwind, then the app's brand file
    ([assets/brand.example.css](assets/brand.example.css) is the model) and nothing else that restyles shared tokens or
-   `data-slot`s. Fix that first.
+   `data-slot`s. Check that the app loads Inter, such as with `next/font` or a Google Fonts link. Fix these first.
 2. **Find the sibling.** Before adding any control, find where the app already shows the same concept (an empty list, a
    delete, a picker, a person, a status). Use that pattern. If two differ, propose one and convert both.
 3. **Use the shell and the compositions**, not raw primitives. The shell ships in aperia-ds5: `AppSidebar`,
@@ -128,7 +131,7 @@ rest, on hover, on focus, when pressed, and when disabled.
 
 ## Invariants
 
-1. **No 1px borders on surfaces.** Cards, fields, outline buttons and the selected tab have a 0.5px edge plus two soft
+1. **No 1px borders on surfaces.** Cards, fields, outline buttons and the selected tab have a 0.5px edge plus a soft
    shadow. The aperia-ds5 components already have it; for your own markup use the `surface` (cards, a table or empty
    state on the page) and `control` utilities. Never put a bordered box inside a bordered card: a table sits flush in
    its card.
@@ -149,17 +152,21 @@ rest, on hover, on focus, when pressed, and when disabled.
    [Button](components/button.md)). A disabled button with a reason stays
    focusable and its tooltip says why.
 9. **Status color means state,** from the app's tinted pairs (a pale fill with deep text), one word and one color per
-   state across screens ([Status](patterns/status.md)). Never use it to decorate, and never use solid primary buttons
-   as status pills.
-10. **Tables show, sheets edit.** A row opens its record. Edit and Delete live on the record page, not the row.
+   state across screens ([Status](patterns/status.md)). It sits only on a badge, a dot beside its word, or an alert, never
+   on a tile's number, a row, or a switch. Never use solid primary buttons as status pills.
+10. **Tables show, sheets edit.** A row opens its record. Edit and Delete live on the record page, or in the sheet for a
+    small record, not on the row ([Tables](patterns/tables.md), A page or a sheet for the record).
 11. **Errors in place:** an error shows where its action happened, such as beside its field, above a form's or dialog's
     buttons, or above the grid for a control that saves on change. The form stays open with what was typed. A toast
-    shows an error only when nothing on screen holds it, and then it stays until closed. See Message Templates.
-12. **Title Case** for titles, headings, tabs, table headers, labels and buttons. Sentence case for sentences,
-    descriptions and values.
-13. **Everything clickable shows the pointer,** rows and menu items included.
-14. **Controls keep their size on a phone** (32px, icon buttons 28px), and sheets fill the screen
-    ([Screen Sizes](foundations/screen-sizes.md)).
+    shows an error only when nothing on screen holds it, and then it stays until closed. See Message Templates. Toasts
+    sit at the top right, in one stack ([Saving and Feedback](foundations/saving-and-feedback.md), Where toasts show).
+12. **Title Case** for titles, headings, tabs, table headers, labels, buttons, and a tooltip that names an action.
+    Sentence case for sentences, descriptions, values, and a tooltip that says why.
+13. **What responds looks different at rest,** and everything clickable shows the pointer, rows and menu items included
+    ([Surfaces and Layers](styles/surfaces-and-layers.md), Showing what responds).
+14. **Controls keep their size on a phone** (32px), and sheets fill the screen
+    ([Screen Sizes](foundations/screen-sizes.md)). An icon button takes the height of the controls beside it, 32px
+    beside a field and 28px on a row or in a card header ([Button](components/button.md)).
 15. **Vertical alignment holds across containers:** icons, pictures, headings, text and footers in one column share an
     x. A card's content starts on its title's line; a part with its own padding (a hover row, a ghost button) takes an
     equal negative margin to stay on it. Indents only show hierarchy ([Page Layout](foundations/page-layout.md)).
@@ -190,7 +197,8 @@ lines below for the user to check in their browser.
 
 ## Checklist before calling UI done
 
-- [ ] The only colors the app sets are its status and chart colors, and no app CSS restyles an aperia-ds5 component.
+- [ ] The only colors the app sets are its status, chart and avatar colors, the app loads Inter, and no app CSS
+      restyles an aperia-ds5 component.
 - [ ] No 1px border on a surface, and no bordered box inside a card.
 - [ ] Every empty or no-match state is `EmptyState`, and its second line adds something.
 - [ ] Every icon-only button has a tooltip.

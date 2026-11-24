@@ -33,8 +33,17 @@ import { ThemeProvider } from "aperia-ds5/theme-provider"
 <ThemeProvider>{children}</ThemeProvider>
 ```
 
-The app adds only its own status and chart colors after these lines. See [Color](../styles/color.md) for what an app
-can change.
+The app adds only its own status and chart colors after these lines. Its avatar colors live in its picture adapter. See
+[Color](../styles/color.md) for what an app can change.
+
+## Load the font
+
+The library sets Inter as the font, with the system font as the fallback, but it does not download Inter. The app
+loads Inter once, at its root, with the font loader it already uses. A Next.js app can use `next/font`, and any app can
+add a Google Fonts link to the page's head. Until Inter loads, or where it cannot load, text shows in the system font.
+
+Load the regular, medium, semibold, and bold weights, because the components use all four. See
+[Typography](../styles/typography.md) for where each weight goes.
 
 ## Import components
 
