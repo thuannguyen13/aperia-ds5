@@ -227,7 +227,7 @@ function ColorToken({ role, token }: { role: string; token: string }) {
     <a
       href="./?path=/docs/styles-color--docs"
       target="_top"
-      className="font-sans text-xs text-primary hover:underline"
+      className="font-sans text-xs text-link hover:underline"
     >
       {role}
       <code className="block font-mono text-[11px] text-muted-foreground">

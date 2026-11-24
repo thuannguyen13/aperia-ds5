@@ -117,11 +117,12 @@ Empty states never hint at permissions or who to ask.
 
 ### Locked and disabled
 
-A locked or disabled item explains itself in one of four ways.
+A locked or disabled item explains itself in one of these ways.
 
 | Situation | Template |
 |---|---|
 | An item that cannot be deleted, changed, or removed | This item is in use and cannot be \<deleted / changed / removed\>. Use these words exactly, with no "so" clause, and without naming what uses the item. On a disabled button, this line is the tooltip. |
+| Several selected items, some of which cannot be deleted | \<N\> of the selected \<items\> are in use and cannot be deleted. With one, "1 of the selected \<items\> is in use and cannot be deleted." The count tells people how many to clear from the selection. |
 | A disabled option, row, or chip | Its reason in a tooltip on hover. The reason is the locked-item line, or else an instruction. |
 | The cause is not on screen | The field's hint says what to do, as in "To remove a product, first remove its line items." |
 | The cause is in view | Nothing more. |

@@ -284,17 +284,17 @@ export function RecordPageContent() {
           ],
         ]}
       />
-      <div className="grid grid-cols-2 gap-4 @min-[48rem]:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 @min-page-md:grid-cols-4">
         <StatTile label="Monthly Volume" value={money(4_200_000)} />
         <StatTile label="Annual Revenue" value={money(186_400)} />
         <StatTile label="Days in Stage" value="12" />
         <StatTile label="Tasks Done" value="1 of 2" />
       </div>
-      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 @min-[60rem]:grid-cols-4">
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-4 @min-[60rem]:col-span-3">
+      <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 @min-page-lg:grid-cols-4">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-4 @min-page-lg:col-span-3">
           <LinesCard />
           <DetailsCard />
-          <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 @min-[60rem]:grid-cols-2">
+          <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-4 @min-page-lg:grid-cols-2">
             <TasksCard />
             <NotesCard />
           </div>
@@ -328,7 +328,7 @@ export function RecordPageBeforeAfter() {
           <Card className="gap-3 py-3">
             <CardHeader className="flex flex-row items-center justify-between px-3">
               <CardTitle className="text-sm">Alert Status</CardTitle>
-              <a href="#" className="text-sm text-primary">
+              <a href="#" className="text-sm text-link">
                 View Alert History
               </a>
             </CardHeader>
@@ -337,7 +337,7 @@ export function RecordPageBeforeAfter() {
                 Unworked
               </Button>
               <span className="tabular-nums">10/28/2026</span>
-              <a href="#" className="text-primary">
+              <a href="#" className="text-link">
                 View Alerted Merchants
               </a>
             </CardContent>

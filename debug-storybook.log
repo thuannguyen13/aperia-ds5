@@ -1,0 +1,32 @@
+[14:32:43.630] [INFO] storybook v10.3.6
+[14:32:44.187] [DEBUG] Getting package.json info for /Users/thuannguyen/Documents/code/aperia-ds5/package.json...
+[14:32:44.653] [INFO] Starting...
+[14:32:44.680] [WARN] unable to find package.json for radix-ui
+[14:32:45.262] [DEBUG] Starting preview..
+[14:32:45.280] [DEBUG] Using tsconfig paths for react-docgen
+[14:32:45.309] [WARN] 🚨 Unable to index ./components/ui/data-table/data-table-guide.mdx,./components/ui/data-table/data-table.stories.tsx:
+  Error: You have a story for Components/Lists and Tables/Data Table with the same name as your component docs page (Build your own), so the docs page is being dropped. Use `<Meta of={} name="Other Name">` to distinguish them.
+    at _StoryIndexGenerator.chooseDuplicate (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/storybook/dist/core-server/index.js:6237:11)
+    at file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/storybook/dist/core-server/index.js:6287:52
+    at Array.forEach (<anonymous>)
+    at _StoryIndexGenerator.getIndexAndStats (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/storybook/dist/core-server/index.js:6284:23)
+    at async _StoryIndexGenerator.getIndex (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/storybook/dist/core-server/index.js:6271:13)
+    at async config (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/@storybook/builder-vite/dist/_node-chunks/chunk-BNXOZ5T4.js:184:19)
+    at async runConfigHook (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:49513:17)
+    at async resolveConfig (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:48819:12)
+    at async _createServer (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:38373:66)
+    at async Module.start (file:///Users/thuannguyen/Documents/code/aperia-ds5/node_modules/@storybook/builder-vite/dist/index.js:1557:17)
+[14:32:45.312] [ERROR] Failed to build the preview
+[14:32:45.312] [ERROR] Error: Unable to index ./components/ui/data-table/data-table-guide.mdx,./components/ui/data-table/data-table.stories.tsx
+    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/storybook/dist/core-server/index.js:6292:15)
+    at async _StoryIndexGenerator.getIndex (file://./node_modules/storybook/dist/core-server/index.js:6271:13)
+    at async config (file://./node_modules/@storybook/builder-vite/dist/_node-chunks/chunk-BNXOZ5T4.js:184:19)
+    at async runConfigHook (file://./node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:49513:17)
+    at async resolveConfig (file://./node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:48819:12)
+    at async _createServer (file://./node_modules/vite/dist/node/chunks/dep-Dq2t6Dq0.js:38373:66)
+    at async Module.start (file://./node_modules/@storybook/builder-vite/dist/index.js:1557:17)
+    at async storybookDevServer (file://./node_modules/storybook/dist/core-server/index.js:7503:83)
+    at async buildOrThrow (file://./node_modules/storybook/dist/core-server/index.js:4508:12)
+    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:8033:41)
+[14:32:45.313] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.

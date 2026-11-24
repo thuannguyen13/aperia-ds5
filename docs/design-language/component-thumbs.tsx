@@ -234,7 +234,7 @@ export const THUMBS: Record<string, ReactNode> = {
   ),
   "hover-card": (
     <div className="flex flex-col items-center gap-1.5">
-      <span className="text-sm font-medium text-primary underline underline-offset-4">
+      <span className="text-sm font-medium text-link underline underline-offset-4">
         Acme Payments
       </span>
       <Panel className="w-40 flex-row items-center">

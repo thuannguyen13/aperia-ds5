@@ -1,5 +1,5 @@
 import { useId, useState } from "react"
-import { toast } from "sonner"
+import { toast } from "aperia-ds5"
 import { EllipsisIcon, PencilIcon, Trash2Icon } from "lucide-react"
 import {
   BlockedMenuItem,

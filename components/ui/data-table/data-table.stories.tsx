@@ -359,7 +359,7 @@ export const PlainColumns: Story = {
 
 export const Empty: Story = { args: { data: [] } }
 
-export const BuildYourOwn: Story = {
+export const HandBuilt: Story = {
   parameters: {
     controls: { disable: true },
     docs: {

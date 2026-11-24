@@ -175,7 +175,7 @@ export function DashboardPage() {
           />
         )}
       </div>
-      <div className="grid grid-cols-2 gap-4 @min-[48rem]:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 @min-page-md:grid-cols-4">
         <StatTile label="New Opportunities" value={created} />
         <StatTile label="Closed Won" value={won} />
         <StatTile label="Win Rate" value={percent(won, created) ?? "—"} />
@@ -184,7 +184,7 @@ export function DashboardPage() {
           value={money(sum(months, (month) => month.value))}
         />
       </div>
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-4 @min-[60rem]:grid-cols-2">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-4 @min-page-lg:grid-cols-2">
         <ChartCard title="Opportunities by Month" months={months}>
           <ChartContainer config={opportunities} className="h-64 w-full">
             <BarChart data={months} margin={CHART_MARGIN}>

@@ -83,62 +83,70 @@ export function RecordActions({
       : []),
   ]
   if (all.length === 0) return null
-  // Three fit as buttons; past three, two stay and the rest share one menu.
+  // Three fit as buttons; past three, two stay and the rest share one menu. Below 1024px every action folds into the
+  // menu, so the record's title keeps the width of its line.
   const buttons = all.length <= MAX_BUTTONS ? all : all.slice(0, KEPT_BUTTONS)
   const folded = all.slice(buttons.length)
-  // The red ones are set apart in the menu from those before them.
-  const apart = folded.findIndex((action) => action.destructive)
   return (
-    <div className="flex gap-2">
-      {buttons.map((action) => (
-        <ActionButton key={action.label} action={action} />
-      ))}
-      {folded.length > 0 && (
-        <DropdownMenu>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="icon"
-                  aria-label="More actions"
-                >
-                  <EllipsisIcon />
-                </Button>
-              </DropdownMenuTrigger>
-            </TooltipTrigger>
-            <TooltipContent>More actions</TooltipContent>
-          </Tooltip>
-          {/* The menu is sized to its trigger, 128px at least, which wrapped a longer item. */}
-          <DropdownMenuContent align="end" className="w-auto">
-            {folded.map((action, at) => {
-              return (
-                <React.Fragment key={action.label}>
-                  {at > 0 && at === apart && <DropdownMenuSeparator />}
-                  {action.blocked ? (
-                    <BlockedMenuItem reason={action.blocked}>
-                      {renderIcon(action.icon)}
-                      {action.label}
-                    </BlockedMenuItem>
-                  ) : (
-                    <DropdownMenuItem
-                      variant={action.destructive ? "destructive" : undefined}
-                      disabled={action.disabled}
-                      className="whitespace-nowrap"
-                      onSelect={action.onSelect}
-                    >
-                      {renderIcon(action.icon)}
-                      {action.label}
-                    </DropdownMenuItem>
-                  )}
-                </React.Fragment>
-              )
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
-    </div>
+    <>
+      <div className="hidden gap-2 lg:flex">
+        {buttons.map((action) => (
+          <ActionButton key={action.label} action={action} />
+        ))}
+        {folded.length > 0 && <MoreActions actions={folded} />}
+      </div>
+      <div className="flex lg:hidden">
+        <MoreActions actions={all} />
+      </div>
+    </>
+  )
+}
+
+/** One More actions (…) button whose menu holds `actions`, the red ones set apart from those before them. */
+function MoreActions({ actions }: { actions: RecordAction[] }) {
+  const apart = actions.findIndex((action) => action.destructive)
+  return (
+    <DropdownMenu>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DropdownMenuTrigger asChild>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              aria-label="More actions"
+            >
+              <EllipsisIcon />
+            </Button>
+          </DropdownMenuTrigger>
+        </TooltipTrigger>
+        <TooltipContent>More actions</TooltipContent>
+      </Tooltip>
+      {/* The menu is sized to its trigger, 128px at least, which wrapped a longer item. */}
+      <DropdownMenuContent align="end" className="w-auto">
+        {actions.map((action, at) => (
+          <React.Fragment key={action.label}>
+            {at > 0 && at === apart && <DropdownMenuSeparator />}
+            {action.blocked ? (
+              <BlockedMenuItem reason={action.blocked}>
+                {renderIcon(action.icon)}
+                {action.label}
+              </BlockedMenuItem>
+            ) : (
+              <DropdownMenuItem
+                variant={action.destructive ? "destructive" : undefined}
+                disabled={action.disabled}
+                className="whitespace-nowrap"
+                onSelect={action.onSelect}
+              >
+                {renderIcon(action.icon)}
+                {action.label}
+              </DropdownMenuItem>
+            )}
+          </React.Fragment>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

@@ -33,7 +33,7 @@ The table's place shows a different state when there are no rows to show:
 | State | What shows |
 |---|---|
 | Nothing matches | "No Results" with a search icon, "No matching results.", and Clear Filters. |
-| Nothing yet | An empty state, such as "No Prospects", with Add Prospect in it and no toolbar, since there is nothing to search. |
+| Nothing yet | An empty state, such as "No Prospects", with Import and Add Prospect in it and no toolbar, since there is nothing to search. |
 | Loading | Placeholder shapes in the page's own layout (title, toolbar, columns, and rows), so nothing moves when the list loads. A spinner never shows. |
 
 On a phone, the list's actions take the first row. The next row holds the search with Filter and Sort as icon buttons, and the Filter button counts the filters

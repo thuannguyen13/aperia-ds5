@@ -238,7 +238,7 @@ export function BoardBeforeAfter() {
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-xs text-primary underline"
+                className="text-xs text-link underline"
               >
                 {DEAL.prospect}
               </a>

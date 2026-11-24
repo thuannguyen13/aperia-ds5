@@ -192,7 +192,7 @@ Migrate a table:
 - Docs: Typography shows the whole type scale and the four weights, measured live, then the step and weight each role
   in an Aperia app uses.
 - `SortControl` is one button that opens a panel: "Default order" and the fields as a list of choices, then Ascending
-  and Descending once a field is picked. The button reads "Sort", or "Sort: <field>" with an arrow for the direction.
+  and Descending once a field is picked. The button reads "Sort", or "Sort: \<field\>" with an arrow for the direction.
   The separate direction arrow is gone, and `iconOnly` draws it as an icon with a dot while sorted, which
   `ListToolbar` uses on a phone in place of its own sort menu.
 - `PopoverContent` and `HoverCardContent` pad and space their content at 12px, on the 4px grid (shadcn's default was
@@ -282,7 +282,7 @@ Migrate a table:
   with a red line above the buttons (`error`, "Delete Contact failed. Try again." by default). `pending` shows the same
   state for an action the app tracks. `SheetDelete`'s `onDelete` may return a Promise too.
 - **RecordActions** (after rc.2): three actions or fewer are buttons; with four or more, the first two stay buttons and
-  the rest, Delete included, go into More actions. The same at every width.
+  the rest, Delete included, go into More actions. Below 1024px every action folds into More actions, as before.
 - **CommandDialog** (after rc.2): 576px wide from `sm`; on a phone it fills the screen.
 
 ### Not in the library

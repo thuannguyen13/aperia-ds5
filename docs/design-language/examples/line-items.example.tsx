@@ -388,7 +388,7 @@ function LineItemsForm({
                           </TableCell>
                           <TableCell className="pr-4">
                             <IconButton
-                              label={`Remove line ${n}`}
+                              label={`Remove Line ${n}`}
                               className="pointer-fine:opacity-0 pointer-fine:group-hover/row:opacity-100 pointer-fine:focus-visible:opacity-100"
                               onClick={() =>
                                 change(

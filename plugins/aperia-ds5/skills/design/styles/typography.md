@@ -79,8 +79,8 @@ cover yet, and such a need is a proposal for this page.
 
 ## In code
 
-- The library sets no font. It uses `--font-sans`, which the app sets on `<html>`. Sales Portal, for example, loads
-  Inter with `next/font/google` (`variable: "--font-sans"`). Without it, text falls back to whatever the page inherits.
+- `--font-sans` defaults to Inter, then the system font. The library loads no font file, so the app loads Inter, as
+  [For Developers](../get-started/for-developers.md) shows. An app's own `--font-sans` wins.
 - The scale and weights are Tailwind's defaults; `base.css` changes none of them. Roles as the components use them: page title `text-2xl leading-9 font-semibold tracking-tight` (`PageHeader`), stat
   figure `text-2xl font-semibold tabular-nums` (the stat tile on [Cards and Tiles](../patterns/cards-and-tiles.md)),
   card title `text-base font-semibold` (`CardTitle`, `text-sm` at `size="sm"`), dialog and sheet titles `text-base

@@ -19,7 +19,7 @@ The library and the app share the work:
 | Less motion when a person turns on reduced motion in their device settings | The components | See [Motion](../styles/motion.md). |
 | A name for every icon-only button | The app, from the icon button recipe | See [Button](../components/button.md). |
 | A reason for every control that cannot be used | The app, with `ReasonTooltip` or a field note | See [Disabled With a Reason](disabled-with-a-reason.md). |
-| What a hover shows, also on a tap | The app, for each tooltip and card it adds | This page |
+| What a hover shows, also on a tap | The components for a reason and a relative time, and the app for each tooltip and card it adds | This page |
 | Words, icons, or a legend beside every color | The app | This page |
 | Labels on every field | The app, with `Field` and `FieldLabel` | See [Forms in Sheets](../patterns/forms-in-sheets.md). |
 
@@ -91,7 +91,8 @@ of them.
 - The components come from Radix, which handles keyboard use, focus, and ARIA roles. Use them as they are.
 - `opensOnClick(label, open)` makes a table row focusable and opens it with Enter or Space.
 - A disabled control that says why uses `aria-disabled` instead of `disabled`, so it stays focusable.
-- Radix's `Tooltip` and `HoverCard` open on hover and focus only. A part whose hover shows something also opens it on a
-  tap. On a pointer down with `pointerType === "touch"`, toggle it open, as the people stack on
+- `ReasonTooltip`, `BlockedMenuItem`, a blocked `RecordActions` button, `SheetDelete` and `RelativeTime` already open
+  on a tap. Radix's own `Tooltip` and `HoverCard` open on hover and focus only, so a tooltip or card the app adds also
+  opens on a tap. On a pointer down with `pointerType === "touch"`, toggle it open, as the people stack on
   [People and Pictures](../patterns/people-and-pictures.md) does.
 - `prefers-reduced-motion` turns off the scale and slide of panels in `base.css`. Panels still fade.

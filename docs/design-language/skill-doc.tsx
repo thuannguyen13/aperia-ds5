@@ -411,7 +411,7 @@ function Link(props: El<"a">) {
   return (
     <SkillLink
       {...props}
-      className="font-medium text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+      className="font-medium text-link underline decoration-link/30 underline-offset-4 transition-colors hover:decoration-primary"
     />
   )
 }

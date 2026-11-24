@@ -130,17 +130,24 @@ import { cn } from "aperia-ds5/utils"
 Install the peer dependency once: `npm install @tanstack/react-table`. Then define columns and pass your rows:
 
 ```tsx
-import { DataTable, DataTableColumnHeader, type ColumnDef, type DataTableFeatures } from "aperia-ds5/data-table"
+import { DataTable, type ColumnDef, type DataTableFeatures } from "aperia-ds5/data-table"
 
 const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
-  { accessorKey: "merchant", header: ({ column }) => <DataTableColumnHeader column={column} title="Merchant" /> },
+  { accessorKey: "merchant", header: "Merchant" },
   { accessorKey: "email", header: "Email" },
 ]
 
-<DataTable columns={columns} data={merchants} filterColumn="merchant" filterPlaceholder="Filter merchants..." />
+<DataTable
+  columns={columns}
+  data={merchants}
+  noun={["merchant", "merchants"]}
+  search={{ placeholder: "Search merchants" }}
+  sort={[{ value: "merchant", label: "Merchant" }]}
+/>
 ```
 
-Sorting, filtering, pagination, row selection and column visibility are built in. For a different layout or server-side paging, build from the same parts: see the DataTable "Build your own" page in Storybook.
+The table draws the list toolbar (search, filters, Sort, and a Columns menu), the table, and the count and pages
+under it. Headings do not sort when clicked; Sort does. For a different layout or server-side paging, build from the same parts: see the DataTable "Build your own" page in Storybook.
 
 ### Package exports
 

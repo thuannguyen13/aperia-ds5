@@ -29,7 +29,7 @@ const CONTACTS = [
 ]
 
 function Contacts({ links }: { links: boolean }) {
-  const link = "text-primary underline underline-offset-2"
+  const link = "text-link underline underline-offset-2"
   return (
     <Table>
       <TableHeader>

@@ -30,7 +30,7 @@ Each cell holds the role's level for that row. A cell is one of two controls:
 
 Use a picker when a permission has levels, and a switch when it is only on or off.
 
-Each pick saves at once. A message shows at the bottom of the screen with Undo. A pick can change several permissions at
+Each pick saves at once. A toast shows at the top right with Undo. A pick can change several permissions at
 once, so Undo puts back everything the pick changed. The grid has no Save button.
 
 A level that cannot change shows a lock that says why when pointed at or reached by keyboard. For example, an admin
@@ -52,7 +52,7 @@ Each channel is a column, such as In App or Email. Each cell is a switch, named 
 
 Each switch saves at once. The sheet has no Save button. The choices are read again each time the sheet opens.
 
-A refused save flips the switch back and shows the reason above the table. No message shows at the bottom of the screen.
+A refused save flips the switch back and shows the reason above the table. No toast shows.
 
 ## Before and after
 

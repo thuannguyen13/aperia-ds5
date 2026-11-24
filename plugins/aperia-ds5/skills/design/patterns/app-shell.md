@@ -32,7 +32,7 @@ parts are listed from top to bottom.
    highlights it.
 6. **Account**. It shows the user's picture, name, and role, and opens the account menu.
 7. **Top bar**. It runs across the top of the page area.
-8. **Breadcrumb**. It shows where the page sits. On phones and tablets, the button that opens the sidebar sits before
+8. **Breadcrumb**. It shows where the page sits. While the sidebar is hidden, the button that opens the sidebar sits before
    it.
 9. **Page column**. It fills the space under the top bar and holds the page. See
    [Page Layout](../foundations/page-layout.md) for how a page is laid out inside it.
@@ -58,7 +58,7 @@ On the rail, each entry shows its name in a tooltip. The unread count moves to t
 
 The sidebar keeps its open or collapsed state the next time the app loads.
 
-On phones and tablets, narrower than 768px, the sidebar is hidden. The button at the start of the top bar opens it as
+Below the width [Screen Sizes](../foundations/screen-sizes.md) gives, the sidebar is hidden. The button at the start of the top bar opens it as
 a 288px panel from the left. Opening a search result closes the panel. See
 [Screen Sizes](../foundations/screen-sizes.md) for every region at each screen size.
 

@@ -81,6 +81,6 @@ Notifications work with these pages:
 - Each notification is an `Item` (`size="sm"`) linking to its record: `Avatar`, the sentence in `text-muted-foreground`
   with names `text-foreground font-medium`, `RelativeTime` under it, and the unread dot with an sr-only "Unread".
 - Empty tabs are `EmptyState` with a bell icon.
-- A new notification calls `toast()` from sonner, through the app's one `Toaster` (`position="top-right"`), which
-  shows three at most (`visibleToasts`, 3 by default). Past three, the app replaces the waiting ones with one toast,
+- A new notification calls `toastNotification({ media, message, label, onOpen, onMore })` from `aperia-ds5`, which
+  shows it in the app's one `Toaster` (top right, three at most). Past three, it shows one toast instead, such as
   "4 more new notifications.".

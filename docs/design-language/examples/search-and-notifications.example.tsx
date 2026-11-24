@@ -339,7 +339,7 @@ function NotificationsPanel() {
     )
   return (
     // The panel as it opens beside the sidebar: up to 24rem, never wider than the screen.
-    <div className="w-full max-w-96 overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-md ring-[0.5px] ring-border">
+    <div className="w-full max-w-popover-lg overflow-hidden rounded-xl bg-popover text-popover-foreground shadow-md ring-[0.5px] ring-border">
       <Tabs defaultValue="unread" className="gap-0">
         <div className="flex h-12 items-center justify-between gap-2 border-b pr-2 pl-3">
           <TabsList

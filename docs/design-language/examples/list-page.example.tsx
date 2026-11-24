@@ -364,7 +364,7 @@ export function ListPageBeforeAfter() {
                     </TableCell>
                     <TableCell className="pr-4">
                       <span className="flex flex-wrap items-center gap-2">
-                        <a href="#" className="text-primary">
+                        <a href="#" className="text-link">
                           {row.name}
                         </a>
                         <Badge variant="outline">

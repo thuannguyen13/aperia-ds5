@@ -5,8 +5,8 @@
 
 @source "../components";
 
-/* ds5 leaves the font to the app (`--font-sans`); Sales Portal sets Inter. Storybook does the same, so stories render
-   as they do there instead of in Storybook's own font. */
+/* ds5 defaults `--font-sans` to Inter but loads no font file; an app loads Inter itself. Storybook loads it above and
+   sets the same stack, so stories render as they do in an app instead of in Storybook's own font. */
 :root {
   --font-sans:
     "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",

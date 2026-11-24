@@ -54,7 +54,7 @@ export function ListSkeleton({
       </div>
       {tiles > 0 && (
         <div
-          className="grid grid-cols-2 gap-4 @min-[48rem]:grid-cols-[repeat(var(--tiles),minmax(0,1fr))]"
+          className="grid grid-cols-2 gap-4 @min-page-md:grid-cols-[repeat(var(--tiles),minmax(0,1fr))]"
           style={{ "--tiles": tiles } as React.CSSProperties}
         >
           {Array.from({ length: tiles }, (_, at) => (

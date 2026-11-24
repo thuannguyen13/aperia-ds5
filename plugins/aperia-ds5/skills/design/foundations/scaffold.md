@@ -15,7 +15,7 @@ A scaffold has three kinds of region. Each kind does one job, and each sits in t
 
 | Region | What it does | On every screen |
 |---|---|---|
-| Bar | Frames the screen and shows people where they are | The top bar, with the breadcrumb. On phones and tablets, it also holds the button that opens the sidebar. |
+| Bar | Frames the screen and shows people where they are | The top bar, with the breadcrumb. While the sidebar is hidden, it also holds the button that opens the sidebar. |
 | Rail | Fills an edge around the content and holds navigation and tools | The sidebar, with the logo, Search, Notifications, the app's pages, and the account |
 | Pane | Holds content | The page column, and a sheet while one is open |
 
@@ -45,7 +45,7 @@ of dialog sits.
 
 On a phone, the regions change in six ways:
 
-- The sidebar is hidden on phones and tablets, below 768px. The button at the start of the top bar opens it as a
+- The sidebar is hidden below the width [Screen Sizes](screen-sizes.md) gives. The button at the start of the top bar opens it as a
   288px panel from the left.
 - The top bar keeps the breadcrumb, cut to its last two crumbs.
 - The page column fills the screen under the top bar, with 20px of space around it.

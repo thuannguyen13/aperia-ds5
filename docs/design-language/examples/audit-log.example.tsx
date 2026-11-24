@@ -280,7 +280,7 @@ export function AuditLogBeforeAfter() {
                   2026-11-23 09:14:07 UTC
                 </TableCell>
                 <TableCell className="align-top whitespace-normal">
-                  <a href="#audit" className="text-primary underline">
+                  <a href="#audit" className="text-link underline">
                     {entry.sentence}
                   </a>{" "}
                   by {entry.who}

@@ -358,7 +358,7 @@ export function ImportExample() {
             {/* Two groups, the file and the templates, each with its own inset; the line between them runs edge to edge. */}
             <PopoverContent
               align="end"
-              className="w-96 max-w-[calc(100vw-2rem)] gap-0 p-0"
+              className="w-popover-lg max-w-[calc(100vw-2rem)] gap-0 p-0"
             >
               <div className="flex flex-col gap-3 p-3">
                 <PopoverHeader>
