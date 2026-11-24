@@ -5,6 +5,7 @@ import { Trash2Icon } from "lucide-react"
 import { Button } from "../button/button"
 import { ConfirmDialog } from "../confirm-dialog/confirm-dialog"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
+import { useTapOpen } from "../tooltip/use-tap-open"
 
 // The reason a record in use can't be deleted, word for word as the copy rules fix it: one constant, shared with
 // RecordActions.
@@ -32,7 +33,8 @@ export function SheetDelete({
   title: React.ReactNode
   /** The confirm's button, a verb and its object: "Delete Contact". */
   action: string
-  onDelete: () => void
+  /** Runs on the confirm's action. Return a Promise to keep the confirm open, with a spinner, until it settles. */
+  onDelete: () => void | Promise<unknown>
   /** While the sheet's save or the delete runs. */
   pending?: boolean
   /** Why it can't be deleted; blocks it while set. */
@@ -41,6 +43,7 @@ export function SheetDelete({
   children: React.ReactNode
 }) {
   const [asking, setAsking] = useState(false)
+  const tap = useTapOpen()
   const blocked = Boolean(reason)
   const button = (
     <Button
@@ -61,8 +64,10 @@ export function SheetDelete({
   return (
     <>
       {blocked ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
+        <Tooltip {...tap.root}>
+          <TooltipTrigger asChild {...tap.trigger}>
+            {button}
+          </TooltipTrigger>
           <TooltipContent>{reason}</TooltipContent>
         </Tooltip>
       ) : (

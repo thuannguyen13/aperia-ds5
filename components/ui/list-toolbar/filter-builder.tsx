@@ -315,7 +315,7 @@ function BuilderValue({
         </span>
         <ChevronDownIcon className="size-4 shrink-0 text-muted-foreground" />
       </PopoverTrigger>
-      <PopoverContent align="start" className="w-60 p-0">
+      <PopoverContent align="start" className="w-popover-sm p-0">
         <FilterValueEditor
           field={field}
           rule={rule}

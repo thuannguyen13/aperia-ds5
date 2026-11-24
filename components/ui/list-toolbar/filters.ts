@@ -191,8 +191,8 @@ const asDay = (raw: FilterValue) =>
       ? raw.slice(0, 10)
       : null
 
-/** Whether one row's value passes a complete rule. */
-function matches(
+/** Whether one row's value passes a complete rule. DataTable filters its columns with it. */
+export function matches(
   type: FilterType,
   rule: FilterRule,
   raw: FilterValue

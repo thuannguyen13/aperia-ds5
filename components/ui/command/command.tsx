@@ -11,10 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import {
-  InputGroup,
-  InputGroupAddon,
-} from "@/components/ui/input-group"
+import { InputGroup, InputGroupAddon } from "@/components/ui/input-group"
 import { SearchIcon, CheckIcon } from "lucide-react"
 
 function Command({
@@ -52,9 +49,10 @@ function CommandDialog({
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
+      {/* 576px wide from sm; on a phone it fills the screen and its list takes the height left. */}
       <DialogContent
         className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0",
+          "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0 max-sm:inset-0 max-sm:flex max-sm:h-dvh max-sm:max-w-none max-sm:translate-x-0 max-sm:flex-col max-sm:rounded-none! max-sm:ring-0 max-sm:**:data-[slot=command-list]:max-h-none max-sm:**:data-[slot=command-list]:min-h-0 max-sm:**:data-[slot=command-list]:flex-1 sm:max-w-xl",
           className
         )}
         showCloseButton={showCloseButton}

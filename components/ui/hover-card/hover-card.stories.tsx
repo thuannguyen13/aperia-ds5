@@ -50,7 +50,7 @@ export const WithDetails: Story = {
   render: () => (
     <HoverCard openDelay={200}>
       <HoverCardTrigger asChild>
-        <button className="text-sm font-medium text-primary underline underline-offset-4">
+        <button className="text-sm font-medium text-link underline underline-offset-4">
           Issue #1042
         </button>
       </HoverCardTrigger>

@@ -71,6 +71,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-link: var(--link);
   --color-control: var(--control);
   --color-overlay: var(--overlay);
   --color-chart-1: var(--chart-1);
@@ -87,9 +88,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
-  --font-mono: var(--font-mono);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -135,6 +134,8 @@
   --border: color-mix(in oklab, var(--foreground) 12%, transparent);
   --input: color-mix(in oklab, var(--foreground) 16%, transparent);
   --ring: var(--primary);
+  /* Primary as text: a link, the Link button. Primary itself in Light. */
+  --link: var(--primary);
   --ghost-hover: color-mix(in oklab, currentColor 5%, transparent);
   --overlay: oklch(0 0 0 / 10%);
 
@@ -198,7 +199,11 @@
   --destructive: #ff8a8c;
   --border: color-mix(in oklab, var(--foreground) 12%, transparent);
   --input: color-mix(in oklab, var(--foreground) 16%, transparent);
-  --ring: var(--primary);
+  /* Primary #0058cc is too dark to read as a line or as text on Dark's fills (1.9:1 on a popover), so the focus line
+     and links take lighter blues of the same hue. The ring reaches 3:1 on background, card, control, popover and
+     muted; the link reaches 4.5:1 on them. Primary stays the fill of a primary button. */
+  --ring: oklch(0.65 0.16 259.33); /* #508DEF */
+  --link: oklch(0.74 0.13 259.33); /* #78ABFC */
   --ghost-hover: color-mix(in oklab, currentColor 10%, transparent);
   --overlay: oklch(0 0 0 / 50%);
 
@@ -229,6 +234,34 @@
   --default-border-width: 0.5px;
 }
 
+/* ─── Named widths ──────────────────────────────────────────────────────────
+   Container sizes, so each works as a container query (`@min-page-md:`) and
+   as a width (`w-popover-sm`, `max-w-popover-lg`).
+   - page-md, 768px: a page's sections change here, by the page column's
+     width; stat tiles go from two to a row to one row.
+   - page-lg, 960px: a side column, or cards side by side, start here.
+   - popover-sm, 240px: a list's Sort panel and a filter's value picker.
+   - popover-lg, 384px: a wide panel, such as Notifications. */
+@theme {
+  --container-page-md: 48rem;
+  --container-page-lg: 60rem;
+  --container-popover-sm: 15rem;
+  --container-popover-lg: 24rem;
+}
+
+/* ─── Font ──────────────────────────────────────────────────────────────────
+   Inter when the app has it, else the system's sans serif. The library loads
+   no font file: an app that wants Inter loads it itself (next/font with
+   `variable: "--font-sans"`, or @fontsource-variable/inter, whose family is
+   "Inter Variable"). An app's own --font-sans on html or body wins over this
+   one, which sits in Tailwind's theme layer. Mono is Tailwind's own stack. */
+@theme {
+  --font-sans:
+    "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 /* ─── Base element styles ────────────────────────────────────────────────── */
 @layer base {
   * {
@@ -245,7 +278,7 @@
     overscroll-behavior: none;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-foreground;
   }
   /* Everything clickable shows the pointer, including a row that opens its record (data-opens, opensOnClick). */
   :is(

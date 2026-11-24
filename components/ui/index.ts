@@ -50,7 +50,7 @@ export { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupActio
 export { Skeleton } from "./skeleton/skeleton"
 export { Slider } from "./slider/slider"
 export { Spinner } from "./spinner/spinner"
-export { Toaster } from "./sonner/sonner"
+export { Toaster, toast, toastNotification } from "./sonner/sonner"
 export { Switch } from "./switch/switch"
 export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from "./table/table"
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs/tabs"

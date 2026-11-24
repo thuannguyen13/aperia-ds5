@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { toast } from "sonner"
-import { Toaster } from "./sonner"
+import { Toaster, toast, toastNotification } from "./sonner"
+import { Avatar, AvatarFallback } from "../avatar/avatar"
 import { Button } from "../button/button"
 
 const meta: Meta<typeof Toaster> = {
@@ -44,22 +44,66 @@ export const Success: Story = {
   ),
 }
 
+/** An error stays until it is closed, so it has a close button. */
 export const Error: Story = {
   render: () => (
     <>
       <Toaster />
       <Button
         variant="outline"
-        onClick={() =>
-          toast.error("Something went wrong.", {
-            description: "Failed to save changes. Please try again.",
-          })
-        }
+        onClick={() => toast.error("Report export failed. Try again.")}
       >
         Error toast
       </Button>
     </>
   ),
+}
+
+const people = [
+  ["Dana Whitfield", "DW", "Harbor Coffee"],
+  ["Luis Ortega", "LO", "Parkway Auto"],
+  ["Mia Chen", "MC", "Lumen Pharmacy"],
+  ["Sam Patel", "SP", "Orbit Electronics"],
+] as const
+
+/**
+ * New notifications share the one stack. Three show at most; past three, one toast counts the rest. Press the button
+ * several times.
+ */
+export const Notifications: Story = {
+  render: () => {
+    let at = 0
+    return (
+      <>
+        <Toaster />
+        <Button
+          variant="outline"
+          onClick={() => {
+            const [name, initials, record] = people[at++ % people.length]
+            toastNotification({
+              media: (
+                <Avatar size="sm">
+                  <AvatarFallback>{initials}</AvatarFallback>
+                </Avatar>
+              ),
+              message: (
+                <>
+                  <span className="font-medium text-foreground">{name}</span>{" "}
+                  assigned you{" "}
+                  <span className="font-medium text-foreground">{record}</span>.
+                </>
+              ),
+              label: `${name} assigned you ${record}.`,
+              onOpen: () => {},
+              onMore: () => {},
+            })
+          }}
+        >
+          New notification
+        </Button>
+      </>
+    )
+  },
 }
 
 export const Warning: Story = {
@@ -102,9 +146,7 @@ export const AllVariants: Story = {
         </Button>
         <Button
           variant="outline"
-          onClick={() =>
-            toast.loading("Processing...", { duration: 3000 })
-          }
+          onClick={() => toast.loading("Processing...", { duration: 3000 })}
         >
           Loading
         </Button>

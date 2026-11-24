@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
  * puts 20px between the page's sections (its `PageHeader`, tiles, toolbar, cards): sections stack with this gap, and
  * each owns the space inside it. A section that isn't rendered takes its gap with it. A page that needs the whole pane
  * (a board, a wide table) renders `<FullWidth />` anywhere in its markup. The column is a container, so a page lays out
- * by the width it gets (`@min-[48rem]:grid-cols-4`), and it's the target of a "Skip to content" link (`#content`).
+ * by the width it gets (`@min-page-md:grid-cols-4`), and it's the target of a "Skip to content" link (`#content`).
  */
 function AppContent({
   className,

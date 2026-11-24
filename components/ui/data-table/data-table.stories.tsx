@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { Download, MoreHorizontal } from "lucide-react"
+import { Download, MoreHorizontal, Plus } from "lucide-react"
 import { Badge } from "../badge/badge"
 import { Button } from "../button/button"
 import { Checkbox } from "../checkbox/checkbox"
@@ -9,13 +9,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../dropdown-menu/dropdown-menu"
+import type { FilterField } from "../list-toolbar/filters"
+import type { SortOption } from "../sort-control/sort"
 import {
   DataTable,
-  DataTableColumnHeader,
   DataTableContent,
-  DataTableFilter,
   DataTablePagination,
-  DataTableViewOptions,
+  DataTableToolbar,
   useDataTable,
   type ColumnDef,
   type DataTableFeatures,
@@ -153,15 +153,9 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
         aria-label="Select row"
       />
     ),
-    enableSorting: false,
     enableHiding: false,
   },
-  {
-    accessorKey: "merchant",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Merchant" />
-    ),
-  },
+  { accessorKey: "merchant", header: "Merchant" },
   {
     accessorKey: "status",
     header: "Status",
@@ -174,17 +168,10 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
       )
     },
   },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
+  { accessorKey: "email", header: "Email" },
   {
     accessorKey: "volume",
-    header: ({ column }) => (
-      <div className="text-right">
-        <DataTableColumnHeader column={column} title="Volume" />
-      </div>
-    ),
+    header: () => <div className="text-right">Volume</div>,
     cell: ({ row }) => (
       <div className="text-right tabular-nums">
         {new Intl.NumberFormat("en-US", {
@@ -198,11 +185,11 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
   {
     id: "actions",
     enableHiding: false,
+    enableGlobalFilter: false,
     cell: ({ row }) => (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon-xs">
-            <span className="sr-only">Open menu</span>
+          <Button variant="ghost" size="icon-sm" aria-label="More actions">
             <MoreHorizontal />
           </Button>
         </DropdownMenuTrigger>
@@ -210,36 +197,60 @@ const columns: ColumnDef<DataTableFeatures, Merchant>[] = [
           <DropdownMenuItem
             onClick={() => navigator.clipboard.writeText(row.original.email)}
           >
-            Copy email
+            Copy Email
           </DropdownMenuItem>
-          <DropdownMenuItem>View merchant</DropdownMenuItem>
+          <DropdownMenuItem>View Merchant</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     ),
   },
 ]
 
-function CustomLayoutExample() {
+// What the list filters by: each field's id is a column's id.
+const filterFields: FilterField[] = [
+  {
+    id: "status",
+    label: "Status",
+    type: "enum",
+    all: "All statuses",
+    options: [
+      { value: "active", text: "Active" },
+      { value: "review", text: "Review" },
+      { value: "closed", text: "Closed" },
+    ],
+  },
+  { id: "volume", label: "Volume", type: "money" },
+]
+
+// What the list sorts by: each value is a column's id.
+const sortFields: SortOption[] = [
+  { value: "merchant", label: "Merchant" },
+  { value: "volume", label: "Volume", starts: "desc" },
+]
+
+const NOUN = ["merchant", "merchants"] as const
+
+function BuildYourOwnExample() {
   const table = useDataTable({ columns, data: merchants })
   const selected = table.getFilteredSelectedRowModel().rows.length
 
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 py-4">
-        <DataTableViewOptions table={table} />
-        <Button variant="outline" disabled={!selected}>
-          <Download data-icon="inline-start" />
-          Export {selected || ""}
-        </Button>
-        <DataTableFilter
-          table={table}
-          column="email"
-          placeholder="Filter emails..."
-          className="ml-auto"
-        />
-      </div>
+      <DataTableToolbar
+        table={table}
+        search={{ placeholder: "Search merchants" }}
+        filters={{ fields: filterFields }}
+        sort={sortFields}
+        noun={NOUN}
+        actions={
+          <Button variant="outline" disabled={!selected}>
+            <Download data-icon="inline-start" />
+            Export {selected || ""}
+          </Button>
+        }
+      />
       <DataTableContent table={table} />
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} noun={NOUN} />
     </div>
   )
 }
@@ -253,34 +264,48 @@ const meta: Meta<typeof DataTable<Merchant>> = {
     docs: {
       description: {
         component:
-          "Import from `aperia-ds5/data-table`. Pass `columns` and `data`; sorting, filtering, pagination, row selection and column visibility are built in. For a different layout, see Build your own. [View in Figma](https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=18719-212930)",
+          "Import from `aperia-ds5/data-table`. A data table is a list: the same toolbar (`ListToolbar`, with the search, the filters, the Columns menu in its slot, Sort, and the list's actions), the table, and the count and pages under it (`ListPager`). Pass `columns` and `data`, then `search`, `filters` (each field's `id` a column's id), `sort` (each `value` a column's id) and `actions`. Column headings are plain text: the list sorts from Sort, not from its headings. For a different layout, see Build your own. [View in Figma](https://www.figma.com/design/uXivJU4N3R0LWu0mbimHWt/Aperia-Shadcn-Library--Enhanced-?node-id=18719-212930)",
       },
     },
   },
   args: {
     columns,
     data: merchants,
-    filterColumn: "merchant",
-    filterPlaceholder: "Filter merchants...",
+    noun: NOUN,
+    search: { placeholder: "Search merchants" },
+    filters: { fields: filterFields },
+    sort: sortFields,
+    columnsMenu: true,
   },
   argTypes: {
     columns: {
       control: false,
       description:
-        "TanStack column definitions: which fields show, how cells render, and which columns sort or hide.",
+        "TanStack column definitions: which fields show, how cells render, and which columns hide.",
     },
     data: {
       control: "object",
       description: "The rows. Edit the JSON to change what the table shows.",
     },
-    filterColumn: {
-      control: "select",
-      options: ["none", "merchant", "status", "email"],
-      mapping: { none: undefined },
+    search: {
+      control: "object",
       description:
-        "Column id the search input filters on. Omit to hide the input.",
+        "The list's search: `placeholder`, and `column` to look in one column only. Left out, no search.",
     },
-    filterPlaceholder: { control: "text" },
+    filters: {
+      control: false,
+      description:
+        "What the list filters by (`FilterField`, each `id` a column's id) and `form`: `advanced` or `simple`.",
+    },
+    sort: {
+      control: false,
+      description:
+        "What the list sorts by (`SortOption`, each `value` a column's id), in one Sort button.",
+    },
+    actions: { control: false },
+    columnsMenu: { control: "boolean" },
+    filterColumn: { table: { disable: true } },
+    filterPlaceholder: { table: { disable: true } },
   },
 }
 
@@ -291,8 +316,32 @@ export const Default: Story = {}
 
 export const ManyRows: Story = { args: { data: manyMerchants } }
 
-export const FilterByEmail: Story = {
-  args: { filterColumn: "email", filterPlaceholder: "Filter emails..." },
+/** Simple filters: each field is a fixed control on the toolbar, for a list with four filters or fewer. */
+export const SimpleFilters: Story = {
+  args: { filters: { fields: filterFields, form: "simple" } },
+}
+
+/** The list's own buttons sit at the right end of the toolbar, the primary last. */
+export const WithActions: Story = {
+  args: {
+    actions: (
+      <>
+        <Button variant="outline">
+          <Download data-icon="inline-start" />
+          Export
+        </Button>
+        <Button>
+          <Plus data-icon="inline-start" />
+          Add Merchant
+        </Button>
+      </>
+    ),
+  },
+}
+
+/** A search that looks in one column only. */
+export const SearchOneColumn: Story = {
+  args: { search: { placeholder: "Search emails", column: "email" } },
 }
 
 export const PlainColumns: Story = {
@@ -302,22 +351,23 @@ export const PlainColumns: Story = {
       { accessorKey: "email", header: "Email" },
       { accessorKey: "volume", header: "Volume" },
     ],
+    filters: undefined,
+    sort: undefined,
+    columnsMenu: false,
   },
 }
 
-export const WithoutFilter: Story = { args: { filterColumn: "none" } }
-
 export const Empty: Story = { args: { data: [] } }
 
-export const CustomLayout: Story = {
+export const BuildYourOwn: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story:
-          "Built from the parts with useDataTable: the Columns menu and an Export button that reads the selection sit on the left, the filter on the right.",
+          "Built from the parts with `useDataTable`: `DataTableToolbar` with an Export button that reads the selection, `DataTableContent`, and `DataTablePagination`.",
       },
     },
   },
-  render: () => <CustomLayoutExample />,
+  render: () => <BuildYourOwnExample />,
 }

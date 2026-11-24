@@ -2,12 +2,13 @@
 
 import { Button } from "../button/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
+import { useTapOpen } from "../tooltip/use-tap-open"
 import { cn } from "@/lib/utils"
 
 /**
  * A button that is only an icon. The label is its tooltip, so a sighted user can read
  * the action, and its accessible name unless an aria-label names the record too. Disabled
- * with a reason, the tooltip says why instead.
+ * with a reason, the tooltip says why instead, and a tap on a touch screen shows it too.
  */
 export function IconButton({
   label,
@@ -23,9 +24,10 @@ export function IconButton({
   reason?: string | null
 }) {
   const why = props.disabled ? reason : null
+  const tap = useTapOpen()
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
+    <Tooltip {...tap.root}>
+      <TooltipTrigger asChild {...(why ? tap.trigger : {})}>
         {/*
           Disabled with a reason, the button stays focusable and hoverable through aria-disabled, so
           keyboard and pointer users both reach the tooltip, which Radix sets as its description. The
