@@ -65,7 +65,8 @@ function linesOf(text) {
     let kind = "prose"
     if (front) {
       kind = "front"
-      if (i > 0 && /^---\s*$/.test(line)) front = false
+      // Front matter ends at a line that ends with ---, even when the closing --- shares a line with text.
+      if (i > 0 && /---\s*$/.test(line)) front = false
       else if (i === 0 && /---\s*$/.test(line.slice(3))) front = false
     } else if (/^\s*(```|~~~)/.test(line)) {
       kind = "code"
@@ -453,6 +454,8 @@ function checkPage(file, text, ctx) {
 
   // Writing. Contractions and "&" are checked everywhere outside code and quoted UI text. The guidance checks (colons,
   // vague references, long sentences, rules repeated across pages) skip In code, which is written for developers.
+  // SKILL.md is the agents' checklist, terse by design: it gets only the contraction, "&", and repeated-rule checks.
+  const guidance = file !== "SKILL.md"
   let previous = ""
   for (const block of blocks) {
     const raw = joined(block)
@@ -481,7 +484,7 @@ function checkPage(file, text, ctx) {
       .replace(/\d:\d/g, "   ")
     const tail = colons.trimEnd().length - 1
     for (const m of colons.matchAll(/:/g)) {
-      if (m.index === tail) continue
+      if (!guidance || m.index === tail) continue
       const label =
         /^\s*(?:[-*+]|\d+\.)\s+\*\*[^*]+:\*\*/.test(raw) &&
         m.index < raw.indexOf(":**") + 2
@@ -494,7 +497,7 @@ function checkPage(file, text, ctx) {
     }
 
     // Vague references: name the thing instead.
-    for (const [pattern, say] of VAGUE)
+    for (const [pattern, say] of guidance ? VAGUE : [])
       for (const m of masked.matchAll(pattern))
         add(lineAt(block, m.index), "warning", "vague", `"${m[0]}": ${say}`)
 
@@ -511,7 +514,7 @@ function checkPage(file, text, ctx) {
         .replace(/\]\([^)]*\)/g, "]")
         .split(/\s+/)
         .filter((w) => /\w/.test(w)).length
-      if (words >= LONG)
+      if (guidance && words >= LONG)
         add(
           lineAt(block, offset),
           "warning",
@@ -522,6 +525,7 @@ function checkPage(file, text, ctx) {
             .trim()}…"`
         )
       if (
+        guidance &&
         /^(It|This|These)\b/.test(sentence) &&
         THIS_VERB.test(sentence) &&
         namesSeveral(previous)
