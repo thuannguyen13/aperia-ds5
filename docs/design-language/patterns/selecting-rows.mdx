@@ -1,0 +1,17 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/selecting-rows.md?raw"
+import * as SelectionBarStories from "../recipes/selection-bar.stories"
+import { SkillDoc } from "../skill-doc"
+import { selectingRowsExamples } from "../examples/selecting-rows.example"
+
+<Meta title="Patterns/Lists/Selecting Rows" />
+
+<SkillDoc
+  source={source}
+  after={{
+    ...selectingRowsExamples,
+    "Selection bar": (
+      <Canvas of={SelectionBarStories.Default} sourceState="none" />
+    ),
+  }}
+/>

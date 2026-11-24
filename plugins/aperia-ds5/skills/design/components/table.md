@@ -97,6 +97,7 @@ pointer and no focus.
 ## When you can do it differently
 
 - A control inside a row, such as a checkbox or a menu, keeps its own keys and clicks. Using it does not open the row.
+  See [Selecting Rows](../patterns/selecting-rows.md) for a checkbox column.
 
 ## Works with
 
@@ -104,7 +105,7 @@ pointer and no focus.
 |---|---|
 | Card | A table in a card runs to the card's edges, with no top border. |
 | Empty State | An empty state shows in place of the rows when there are none. |
-| Badge | A state in a cell is a badge in its state color. |
+| Badge | A state in a cell is a badge. See [Status](../patterns/status.md). |
 | Avatar | A person or company in a cell shows its picture beside the name. |
 | Button | A row has no button to open or edit it. |
 | Page | A list table fills the page column. |

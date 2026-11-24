@@ -65,13 +65,6 @@ A ghost button's hover is a tint of the text color. The tint is a little stronge
 - **Don't:** Color a heading or an icon with the primary color, or show a status as a small primary button. Keep them
   neutral, so the real action stands out.
 
-### Use status color only for state
-
-- **Do:** Show a state as a badge in the app's status colors that names it ("In Progress"), so a status color always
-  means a state.
-- **Don't:** Tint a card, a heading, or an icon with a status color to decorate it. Keep decoration neutral, so no one
-  reads a state that is not there.
-
 ### Pair every color with a word or an icon
 
 - **Do:** Pair every colored count, dot, or cell with a word, an icon, or a legend ("3 Overdue"), so it reads without
@@ -90,8 +83,8 @@ An app sets only two kinds of color. Every other value on this page is shared by
 
 | What | Who decides | How it is used |
 |---|---|---|
-| Status colors | The app, one pair per state | A pale fill with deep text, each with its own Dark pair, on badges and alerts. The library ships none. |
-| Chart colors | The app | Its series, Chart 1 to 6. Check them against the status colors, so a series never reads as a state. |
+| Status colors | The app, one pair per state | A pale fill with deep text, each with its own Dark pair, on badges and alerts. The library ships none. See [Status](../patterns/status.md). |
+| Chart colors | The app | Its series, Chart 1 to 6. Check them against the status colors, so a series never reads as a state. See [Charts](../patterns/charts.md). |
 
 An app also sets its own logo and product name. See [App Shell](../patterns/app-shell.md) for where they sit.
 
@@ -115,6 +108,8 @@ An app never changes it only to look different. No other shared color changes pe
 - See [Elevation](elevation.md) for shadows and the overlay.
 - See [Border and Radius](border-and-radius.md) for where Border and Input draw.
 - See [Typography](typography.md) for which text is foreground and which is muted.
+- See [Status](../patterns/status.md) for status color, which only ever means a state.
+- See [Charts](../patterns/charts.md) for the chart colors in order.
 
 ## In code
 
@@ -133,5 +128,5 @@ An app never changes it only to look different. No other shared color changes pe
   ```
 
 - [assets/brand.example.css](../assets/brand.example.css) holds Sales Portal's values as the model: copy it, change the
-  values, keep the names, and delete any line whose value equals the library's. Status pairs go on `Badge` and `Alert`
-  through `className` (`bg-status-green text-status-green-foreground`).
+  values, keep the names, and delete any line whose value equals the library's. See [Status](../patterns/status.md)
+  for the status pairs on `Badge`, and [Banner Alerts](../patterns/banner-alerts.md) for a warning `Alert`.

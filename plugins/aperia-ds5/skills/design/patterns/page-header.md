@@ -99,6 +99,8 @@ ends its breadcrumb with the record's name.
 - See [App Shell](app-shell.md) for the breadcrumb the title fills.
 - See [Cards and Tiles](cards-and-tiles.md) for the tiles and cards under a record's header.
 - See [Buttons and Actions](buttons-and-actions.md) for which type each action is.
+- See [Status](status.md) for a record's status as a property.
+- See [Banner Alerts](banner-alerts.md) for an alert under the header about the whole page.
 
 ## In code
 

@@ -1,0 +1,15 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks"
+import source from "../../../plugins/aperia-ds5/skills/design/patterns/status.md?raw"
+import * as StatusDotStories from "../recipes/status-dot.stories"
+import { SkillDoc } from "../skill-doc"
+import { statusExamples } from "../examples/status.example"
+
+<Meta title="Patterns/Content/Status" />
+
+<SkillDoc
+  source={source}
+  after={{
+    ...statusExamples,
+    "Status dot": <Canvas of={StatusDotStories.Default} sourceState="none" />,
+  }}
+/>

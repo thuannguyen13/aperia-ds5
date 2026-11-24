@@ -125,9 +125,6 @@ const px = (value: string) => `${Math.round(parseFloat(value) * 100) / 100}px`
 
 const chip = "rounded-4xl px-2 py-0.5 text-xs font-medium"
 
-// An app's own status pair (the amber from brand.example.css): the library ships no status colors.
-const STATUS_AMBER = { backgroundColor: "#fbeed3", color: "#7a4c07" }
-
 /** A menu's rows with the second highlighted, in a Light and a Dark panel side by side. */
 function HoverRows({ highlight }: { highlight: string }) {
   return (
@@ -175,30 +172,6 @@ export const colorExamples = {
       }
       goodNote="The primary color on the main action."
       badNote="A heading and icon in the primary color, a primary button as a status."
-    />
-  ),
-  "Use status color only for state": (
-    <DoDont
-      good={
-        <div className="grid w-full max-w-64 gap-2">
-          <span className="text-sm font-semibold">Northwind Payments</span>
-          <span className={`${chip} justify-self-start`} style={STATUS_AMBER}>
-            In Progress
-          </span>
-        </div>
-      }
-      bad={
-        <div className="grid w-full max-w-64 gap-2">
-          <span
-            className="flex items-center gap-1.5 text-sm font-semibold"
-            style={{ color: STATUS_AMBER.color }}
-          >
-            <InboxIcon className="size-4" />
-            Northwind Payments
-          </span>
-          <span className="text-sm text-muted-foreground">In Progress</span>
-        </div>
-      }
     />
   ),
   "Pick the role, not a fixed value": (
