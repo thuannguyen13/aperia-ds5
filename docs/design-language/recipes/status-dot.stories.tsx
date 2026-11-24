@@ -14,7 +14,7 @@ const meta: Meta<typeof StatusDot> = {
       },
     },
   },
-  args: { dot: "bg-status-red-foreground", children: "3 overdue" },
+  args: { dot: "bg-status-red-foreground", children: "2 failed" },
   argTypes: { dot: { control: "text" }, children: { control: "text" } },
   decorators: [
     (Story) => (

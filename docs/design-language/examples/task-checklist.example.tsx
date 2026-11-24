@@ -10,6 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import {
+  Badge,
   Button,
   Checkbox,
   EmptyState,
@@ -39,6 +40,7 @@ import {
   type FormSchema,
 } from "aperia-ds5"
 import { IconButton, TitledCard } from "../recipes"
+import { AppStatusColors, STATES } from "./app-status"
 import { BeforeAfter, Screen } from "./before-after"
 
 type Task = {
@@ -70,10 +72,11 @@ const TASKS: Task[] = [
   { id: 4, title: "Pricing Review", type: "Meeting", due: "12/02/2026" },
 ]
 
+// MM/DD/YYYY compares by its year, then month and day.
+const dayKey = (day: string) => day.slice(6) + day.slice(0, 5)
+const isLate = (task: Task) => !task.done && dayKey(task.due) < dayKey(TODAY)
+
 function dueLabel(due: string) {
-  // MM/DD/YYYY compares by its year, then month and day.
-  const key = (day: string) => day.slice(6) + day.slice(0, 5)
-  if (key(due) < key(TODAY)) return `Overdue, was due ${due}`
   return due === TODAY ? "Due today" : `Due ${due}`
 }
 
@@ -92,19 +95,18 @@ function TaskRow({
 }) {
   const titleId = useId()
   const Icon = TYPE_ICON[task.type]
-  const late = !task.done && dueLabel(task.due).startsWith("Overdue")
   const status = task.done ? (
     <span className="text-xs text-muted-foreground tabular-nums">
       {task.done.by} · {task.done.on}
     </span>
   ) : (
-    <span
-      className={
-        late
-          ? "text-xs text-destructive tabular-nums"
-          : "text-xs text-muted-foreground tabular-nums"
-      }
-    >
+    <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground tabular-nums">
+      {/* Overdue is the app's one Overdue badge, the same as on every other screen. */}
+      {isLate(task) && (
+        <Badge className={STATES.overdue.className}>
+          {STATES.overdue.label}
+        </Badge>
+      )}
       {dueLabel(task.due)}
     </span>
   )
@@ -134,7 +136,7 @@ function TaskRow({
         <span className="hidden @min-[40rem]/tasks:inline">{status}</span>
         {!task.done && (
           <IconButton
-            label="Edit"
+            label="Edit Task"
             aria-label={`Edit ${task.title}`}
             className={QUIET}
             onClick={onEdit}
@@ -237,13 +239,14 @@ export function TaskChecklistExample() {
       )
     )
     if (on)
-      toast(`Done: ${task.title}`, {
+      toast("Task completed.", {
         action: { label: "Undo", onClick: () => setTasks(before) },
       })
   }
 
   return (
-    <Screen caption="Tick a task to see the message with Undo. Point at a row that isn’t done to reveal Edit.">
+    <Screen caption="Tick a task to see the toast with Undo, at the top right. Point at a row that is not done to reveal Edit Task.">
+      <AppStatusColors />
       <TitledCard
         title="Tasks"
         figure={`${done} of ${tasks.length}`}
@@ -292,7 +295,7 @@ export function TaskChecklistExample() {
           />
         )}
       </FormSheet>
-      <Toaster />
+      <Toaster position="top-right" />
     </Screen>
   )
 }
@@ -303,7 +306,7 @@ export function TaskChecklistBeforeAfter() {
   return (
     <BeforeAfter
       beforeNote="a solid Done button on every row; late shown only by a red date"
-      afterNote="a checkbox; late said in words; Edit appears on pointing"
+      afterNote="a checkbox; late shown by the Overdue badge; Edit Task appears on pointing"
       before={
         <div className="overflow-hidden rounded-lg border">
           <Table>
@@ -343,6 +346,7 @@ export function TaskChecklistBeforeAfter() {
       }
       after={
         <TitledCard title="Tasks" figure={`0 of ${shown.length}`}>
+          <AppStatusColors />
           <ItemGroup role="list" className="@container/tasks gap-0">
             {shown.map((task) => (
               <TaskRow

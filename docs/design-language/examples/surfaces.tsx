@@ -11,6 +11,8 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
   TableRow,
   Label,
   RadioGroup,
@@ -355,6 +357,42 @@ function SortPanel({ sections }: { sections: boolean }) {
   )
 }
 
+/** Merchants in a table whose rows open. `marked`: each row's name is medium weight, its title, so the rows read as
+ * things that open before the pointer reaches them. Unmarked: every cell is plain, and only a hover says a row opens. */
+function OpeningRows({ marked }: { marked: boolean }) {
+  const rows = [
+    ["Harbor Coffee", "Active", "$482,150"],
+    ["Lumen Pharmacy", "Onboarding", "$903,220"],
+    ["Parkway Auto", "Closed", "$58,710"],
+  ]
+  return (
+    <div className="w-full max-w-md overflow-hidden surface">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="pl-4">Merchant</TableHead>
+            <TableHead>Stage</TableHead>
+            <TableHead className="pr-4 text-right">Monthly Volume</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map(([name, stage, volume]) => (
+            <TableRow key={name} {...openable(`Open ${name}`, () => {})}>
+              <TableCell className={cn("pl-4", marked && "font-medium")}>
+                {name}
+              </TableCell>
+              <TableCell>{stage}</TableCell>
+              <TableCell className="pr-4 text-right tabular-nums">
+                {volume}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  )
+}
+
 export const surfacesExamples = {
   "What is available": (
     <LightDark>
@@ -402,6 +440,14 @@ export const surfacesExamples = {
       bad={<Account filled />}
       goodNote="A neutral surface with a badge."
       badNote="The whole card in the status color."
+    />
+  ),
+  "Show what responds before the pointer reaches it": (
+    <DoDont
+      good={<OpeningRows marked />}
+      bad={<OpeningRows marked={false} />}
+      goodNote="Each row's name is medium weight, so the rows read as records that open."
+      badNote="Nothing marks the rows that open until the pointer reaches one."
     />
   ),
   "Let one element lead each area": (

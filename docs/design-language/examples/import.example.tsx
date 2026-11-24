@@ -423,7 +423,7 @@ export function ImportExample() {
             <StatTile label="New Added" value={4} />
             <StatTile label="Existing Updated" value={1} />
             <StatTile label="Skipped" value={1} />
-            <StatTile label="Failed" value={2} tone="red" />
+            <StatTile label="Failed" value={2} />
           </div>
         )}
       </DialogFrame>

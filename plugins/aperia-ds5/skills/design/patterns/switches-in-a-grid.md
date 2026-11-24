@@ -16,7 +16,7 @@ A switch in a grid has three states:
 | State | Look | Reason |
 |---|---|---|
 | On or off | A small switch with "Yes" or "No" beside it. "No" shows in muted text. | None |
-| Locked | Disabled, with a lock icon | Shown on hover and focus, such as "You cannot remove your own role's access to Roles." |
+| Locked | Disabled, with a lock icon | Shown on hover, focus, and a tap, such as "You cannot remove your own role's access to Roles." |
 | Waiting | Disabled, while the saved values load | None |
 
 ## How it looks and behaves
@@ -31,6 +31,10 @@ A switch and its word act as one control:
 4. A locked switch can still be reached by the keyboard, so its reason is heard too.
 5. A settings sheet of switches saves each switch as it is flipped and has no Save button.
 6. A refused save flips the switch back. The reason shows in place, above the table, with no toast.
+
+A switch that is on fills with the primary color, the one "on" color in every grid and every app. A switch never takes
+a status color, because on and off are not states of a record. See [Color](../styles/color.md) for what the primary
+color marks.
 
 On a phone, every switch keeps its size. A grid wider than its card scrolls sideways inside the card. See
 [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
@@ -54,12 +58,13 @@ A cell whose choice has more than two levels, such as None, Owned, and All, uses
 
 ## Works with
 
-Switches in a grid work with three other patterns:
+Switches in a grid work with these pages:
 
 - See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the lock and its tooltip.
 - See [Pickers](pickers.md) for a cell with more than on and off.
 - See [Forms in Sheets](forms-in-sheets.md) for the sheet that a settings grid opens in.
 - See [Saving and Feedback](../foundations/saving-and-feedback.md) for a switch that saves as it is flipped.
+- See [Accessibility](../foundations/accessibility.md) for showing a lock's reason on a touch screen.
 
 ## In code
 
@@ -99,4 +104,4 @@ const locked = disabled || Boolean(reason)
   reason while it is locked.
 - Lock it with `disabled` while it saves or loads. The label fades the whole target, so the switch keeps
   `data-disabled:opacity-100` and does not fade twice.
-- An app's own "on" color goes in the switch's `className`.
+- The switch keeps its own colors. Never pass a status color or an app's own color in its `className`.

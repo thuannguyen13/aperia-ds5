@@ -18,7 +18,7 @@ A screen has three sizes, set by the width of the browser window.
 | Screen size | Window width | What changes |
 |---|---|---|
 | Phone | Narrower than 640px | The layout changes the most. Sheets fill the screen, and toolbars and buttons move onto rows of their own. |
-| Tablet | 640px to 1023px | The desktop layout, with a record's actions folded into one More actions button. Below 768px, the sidebar stays hidden, as on a phone. |
+| Tablet | 640px to 1023px | The desktop layout, with a record's actions folded into one More actions button. The sidebar shows only on a wide tablet. |
 | Desktop | 1024px and wider | Every part shows its desktop layout, with a record's actions as buttons. |
 
 Every "phone" on these pages means a window narrower than 640px.
@@ -39,10 +39,13 @@ Each region of the scaffold changes as the window narrows. See [Scaffold](scaffo
 |---|---|---|---|
 | Sidebar | Hidden. The button at the start of the top bar opens it as a 288px panel from the left. | Hidden below 768px, as on a phone. From 768px, it shows at 256px or as a 48px rail. | 256px wide, or a 48px rail of icons |
 | Top bar | 56px tall. The breadcrumb keeps its last two crumbs. | 56px tall, with the whole breadcrumb | 56px tall, with the whole breadcrumb |
-| Page column | Fills the window under the top bar, with 20px around it | Fills the space beside the sidebar, or the whole window below 768px, with 20px around it | Centered and up to 1440px wide, with 20px around it |
+| Page column | Fills the window under the top bar, with 20px around it | Fills the space beside the sidebar, or the whole window while the sidebar is hidden, with 20px around it | Centered and up to 1440px wide, with 20px around it |
 | Sheet | Fills the screen, with square corners | 16px in from the window's edges, three quarters of the window wide, up to 576px for a form | 16px in from the window's edges, 576px wide for a form |
-| Dialog | In the middle, 16px from each side. A confirmation is 320px wide. | In the middle, up to 384px wide | In the middle, up to 384px wide |
-| Toast | Spans the screen, 16px from each side | In a corner of the window | In a corner of the window |
+| Dialog | A confirmation or a dialog that asks for a reason sits in the middle, 320px wide and at least 16px from each side. A search or a review dialog fills the screen. | In the middle, up to 384px wide | In the middle, up to 384px wide |
+| Toast | Across the top of the screen, 16px from each side | At the top right of the window | At the top right of the window |
+
+See [Dialog](../components/dialog.md) for the kinds of dialog. See
+[Saving and Feedback](saving-and-feedback.md) for the one stack of toasts.
 
 ### Parts on a phone
 
@@ -141,7 +144,8 @@ of scrolling sideways. A select above the table picks the column. See
 - `Table` scrolls inside its container (`overflow-x-auto`); a table on the page or in a card uses the scroll table
   recipe on [Tables](../patterns/tables.md). `PaginationPrevious` and `PaginationNext` hide their words below `sm`,
   and `ListPager` wraps the pages under the count.
-- `Toaster` (`sonner`) spans the screen below its own 600px breakpoint, 16px from each side.
+- `Toaster` (`sonner`) takes `position="top-right"` once, at the app's root. It spans the screen below its own 600px
+  breakpoint, 16px from each side.
 - Page sections use container queries on `AppContent`'s column, never `md:` or `lg:`. Tiles are
   `grid grid-cols-2 gap-4 @min-[48rem]:grid-cols-4`; a side column or two cards side by side start at `@min-[60rem]`.
 - Check a screen at 390px wide. `Devices` in `docs/design-language/examples/before-after.tsx` shows a story at 1280px

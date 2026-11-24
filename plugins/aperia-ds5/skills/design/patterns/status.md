@@ -16,7 +16,7 @@ A status comes in three forms:
 |---|---|---|
 | Plain badge | The state's word in a pill with the outline look, in the body color | A state with no color of its own, such as one stage among many |
 | Colored badge | The state's word in a pill with the state's pale fill and deep text | A state people must notice, such as Overdue, Active, or Closed |
-| Dot and word | A small dot in the state's deep color, then the word in body text | A condition inside a line of text or a dense cell, such as "3 overdue" |
+| Dot and word | A small dot in the state's deep color, then the word in body text | A condition inside a line of text or a dense cell, such as "2 failed" in an import's summary |
 
 A status sits in one of four places, and each place has one form of it:
 
@@ -32,8 +32,9 @@ A status sits in one of four places, and each place has one form of it:
 A status always names the state in a word. The color helps people find a state at a glance, and the word says what it
 is. See [Accessibility](../foundations/accessibility.md) for why color is never the only signal.
 
-Each state has one word and one color in the whole app. A table, the record's page header, and a board column show the
-same badge for the same state.
+Each state has one word, one color, and one form in the whole app. A table, the record's page header, a card, and a
+board column show the same badge for the same state. Overdue, for example, is always its badge, never red text or a red
+date.
 
 An app colors only the states that need attention and shows the others as plain badges. It picks one status pair for
 each colored state by what the state means, as in these examples:
@@ -84,6 +85,7 @@ list.
 ## Works with
 
 - See [Color](../styles/color.md) for the status colors an app sets.
+- See [Surfaces and Layers](../styles/surfaces-and-layers.md) for where a status color can sit.
 - See [Accessibility](../foundations/accessibility.md) for pairing every color with a word.
 - See [Tables](tables.md) for the status column.
 - See [Page Header](page-header.md) for the status as a property.
@@ -120,7 +122,7 @@ Build the status dot in the app from a `span`, for a condition inside a line of 
 ```tsx
 <span className="inline-flex items-center gap-1.5">
   <span aria-hidden className="size-1.5 rounded-full bg-status-red-foreground" />
-  3 overdue
+  2 failed
 </span>
 ```
 

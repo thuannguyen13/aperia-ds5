@@ -9,6 +9,7 @@ import {
   XIcon,
 } from "lucide-react"
 import {
+  Badge,
   Button,
   CardContent,
   ConfirmDialog,
@@ -35,6 +36,7 @@ import { cn } from "@/lib/utils"
 import { DoDont, Example } from "../blocks"
 import { DocTable, DocTD, DocTH } from "../skill-doc"
 import { EmptyState, IconButton, TaskTable, TitledCard, Wide } from "./shared"
+import { AppStatusColors, STATES } from "./app-status"
 
 // Live examples for the Foundations pages, keyed by the skill files' headings. base.css is the only place a value
 // lives: every sample here is drawn from its CSS variables (or the components' own classes), and the value printed
@@ -66,8 +68,6 @@ function Frame({ children }: { children: ReactNode }) {
 const px = (value: string) => `${Math.round(parseFloat(value) * 100) / 100}px`
 
 // ─── Color ────────────────────────────────────────────────────────────────
-
-const chip = "rounded-4xl px-2 py-0.5 text-xs font-medium"
 
 /** A menu's rows with the second highlighted, in a Light and a Dark panel side by side. */
 function HoverRows({ highlight }: { highlight: string }) {
@@ -127,12 +127,15 @@ export const colorExamples = {
   "Pair every color with a word or an icon": (
     <DoDont
       good={
-        <span className={`${chip} bg-destructive/10 text-destructive`}>
-          3 Overdue
-        </span>
+        <>
+          <AppStatusColors />
+          <Badge className={STATES.overdue.className}>
+            {STATES.overdue.label}
+          </Badge>
+        </>
       }
       bad={<span className="font-medium text-destructive tabular-nums">3</span>}
-      goodNote="The color and the word."
+      goodNote="The app's Overdue badge: the color and the word."
       badNote="A red number alone."
     />
   ),
@@ -837,6 +840,32 @@ export const sizesExamples = {
         />
       ))}
     </SpecTable>
+  ),
+  "Give controls side by side one height": (
+    <DoDont
+      good={
+        <div className="flex items-center gap-2">
+          <Input
+            aria-label="Search merchants"
+            placeholder="Search merchants"
+            className="w-44"
+          />
+          <Button>Search</Button>
+        </div>
+      }
+      bad={
+        <div className="flex items-center gap-2">
+          <Input
+            aria-label="Search merchants"
+            placeholder="Search merchants"
+            className="w-44"
+          />
+          <Button size="lg">Search</Button>
+        </div>
+      }
+      goodNote="The field and the button share one height."
+      badNote="A large button beside a default field."
+    />
   ),
 }
 

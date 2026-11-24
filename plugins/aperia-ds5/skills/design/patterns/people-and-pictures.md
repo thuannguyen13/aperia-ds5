@@ -37,9 +37,12 @@ opens a card. The card lists everyone, each with their avatar, name, and role.
 A picture loads in two steps. The initials show at once. The photo or logo then fades in over them once it loads.
 Wherever the photo or logo fails to load, the initials stay.
 
-Every picture looks the same across the app. Initials and monograms take the app's colors. The colors are picked by
-the record, so they never change between pages. A square's corners get smaller with its size, so a small square never
-reads as a circle. A picture has a thin inner border and no other edge.
+Every picture looks the same across the app. Initials and monograms take the app's avatar colors, a short set of fill and
+text pairs that the app sets. The pair is picked by the record, so it never changes between pages. See
+[Color](../styles/color.md) for the colors an app sets.
+
+A square's corners get smaller with its size, so a small square never reads as a circle. A picture has a thin inner
+border and no other edge.
 
 A screen reader skips a picture that sits beside its name. A picture that stands alone is named.
 
@@ -79,10 +82,12 @@ A picture smaller than 20px, such as one in a 16px chip, is sized by the app.
 
 ## Works with
 
-Pictures work with two other patterns:
+Pictures work with these pages:
 
 - See [Pickers](pickers.md) for the record's picture on every picker row.
 - See [Files and Images](files-and-images.md) for picking a logo, which previews as the record's square.
+- See [Color](../styles/color.md) for the avatar colors, which the app sets.
+- See [Accessibility](../foundations/accessibility.md) for opening the card behind a stack of pictures with a tap.
 
 ## In code
 

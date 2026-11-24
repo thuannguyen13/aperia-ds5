@@ -21,8 +21,9 @@ History is built from two parts:
 The history card shows the latest ten entries. When there are more than ten, View All sits in the card's header and
 opens every entry in a sheet that scrolls on its own. The card and the sheet draw the entries in the same way.
 
-Each entry says when it happened in the short relative form, such as "3d ago", with the exact date on hover. See
-[Copy](../foundations/copy.md) for how times are written.
+Each entry says when it happened in the short relative form, such as "3d ago", with the exact date on hover and on a
+tap. See [Copy](../foundations/copy.md) for how times are written, and [Accessibility](../foundations/accessibility.md)
+for what a tap shows on a touch screen.
 
 An entry that the app made, such as an import, has no person. A card with no entries keeps its place, with an empty state
 inside, such as "No Activity".
