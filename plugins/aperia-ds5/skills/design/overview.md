@@ -15,11 +15,11 @@ The pages are grouped in six sections:
 | Section | What it covers | Pages |
 |---|---|---|
 | Get Started | How designers and developers start | [For Designers](get-started/for-designers.md) and [For Developers](get-started/for-developers.md) |
-| Foundations | The rules across every screen, grouped as Layout, Content Design, and States | Such as [Accessibility](foundations/accessibility.md), [Page Layout](foundations/page-layout.md), [Copy](foundations/copy.md), and [Loading](foundations/loading.md) |
+| Foundations | The rules across every screen, grouped as Layout, Content Design, and States | Such as [Scaffold](foundations/scaffold.md), [Accessibility](foundations/accessibility.md), [Page Layout](foundations/page-layout.md), [Copy](foundations/copy.md), and [Loading](foundations/loading.md) |
 | Styles | The visual values that every component uses | [Color](styles/color.md), [Typography](styles/typography.md), [Border and Radius](styles/border-and-radius.md), [Elevation](styles/elevation.md), [Motion](styles/motion.md), and [Icons](styles/icons.md) |
 | Components | Each building block's home, grouped by what people do with it, with its guidance, live examples, and props. A pattern's components are on that pattern's page. | Such as [Button](components/button.md), [Card](components/card.md), and [Dialog](components/dialog.md) |
 | Patterns | How components combine into the parts of a screen, grouped as Navigation, Content, Lists, and Editing | Such as [App Shell](patterns/app-shell.md), [Filters](patterns/filters.md), and [Forms in Sheets](patterns/forms-in-sheets.md) |
-| Examples | Whole screens built from the patterns, each with a before and after | Such as [List Page](examples/list-page.md), [Record Page](examples/record-page.md), and [Board of Cards](examples/board.md) |
+| Examples | Whole screens built from the patterns, each with a before and after | Such as [List Page](examples/list-page.md), [Record Page](examples/record-page.md), [Dashboard](examples/dashboard.md), and [Settings Page](examples/settings-page.md) |
 
 Each section opens on an index of its pages, each with its one-sentence lead.
 

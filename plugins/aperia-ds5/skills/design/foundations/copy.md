@@ -3,13 +3,13 @@
 Copy rules define the voice, case, punctuation, and formats of all text on screen. See [Message
 Templates](copy-templates.md) for the wording of each message.
 
-These rules are built on Aperia's User Interface Style Guide V4.3.
-
 ## When to use
 
 Use these rules for any text a person sees. That includes titles, headings, labels, buttons, links, placeholders,
 hints, empty states, errors, confirmations, toasts, statuses, and tooltips. It also includes the way dates, times,
 amounts, and other values are written.
+
+These rules are built on Aperia's User Interface Style Guide V4.3.
 
 ## What is available
 

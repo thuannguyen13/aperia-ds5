@@ -1,13 +1,13 @@
 # Message Templates
 
 Message templates give fixed wording for confirmations, errors, successes, empty states, and other messages.
-
-These templates are built on Aperia's User Interface Style Guide V4.3. See [Copy](copy.md) for the rules behind the
-wording.
+See [Copy](copy.md) for the rules behind the wording.
 
 ## When to use
 
 Use a template whenever the app asks, warns, refuses, fails, succeeds, or has nothing to show.
+
+These templates are built on Aperia's User Interface Style Guide V4.3.
 
 ## What is available
 

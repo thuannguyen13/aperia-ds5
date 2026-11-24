@@ -81,6 +81,7 @@ Items that always show together, such as buttons in a row or a title and its cou
 
 ## Works with
 
+- See [Scaffold](scaffold.md) for the regions around the page column and where each kind of thing goes.
 - See [App Shell](../patterns/app-shell.md) for the frame the page column sits in.
 - See [Page Header](../patterns/page-header.md) for the first section of every page.
 - See [List Page](../examples/list-page.md) and [Record Page](../examples/record-page.md) for the two kinds of page.

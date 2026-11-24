@@ -106,6 +106,8 @@ Every other part of the shell is the same in every app.
 
 ## Works with
 
+- See [Scaffold](../foundations/scaffold.md) for the bars, rails, and panes the shell is made of, and where each kind
+  of thing goes.
 - See [Page Layout](../foundations/page-layout.md) for what goes in the page column.
 - See [Page Header](page-header.md) for the page title that fills the breadcrumb.
 - See [Search](search.md) and [Notifications](notifications.md) for what opens from the sidebar.
@@ -117,12 +119,21 @@ Every other part of the shell is the same in every app.
   pages, passes the element.
 - Wire it once in the app's layout, from `aperia-ds5`:
 
-  ```tsx <TooltipProvider> <SidebarProvider> <AppSidebar brand={{ name: "Sales Portal", logo }} groups={groups}
-  currentPath={pathname} link={Link} search={<AppSidebarSearch onOpen={openSearch} />}
-  notifications={<Popover><PopoverTrigger asChild><AppSidebarNotifications icon={BellIcon} unread={3}
-  /></PopoverTrigger>…</Popover>} notificationsAfter="/todo" user={{ name, role }} accountItems={…} onSignOut={signOut}
-  /> <SidebarInset> <AppHeader crumbs={crumbs} link={Link}> <AppContent>{children}</AppContent> </AppHeader>
-  </SidebarInset> </SidebarProvider> </TooltipProvider> ```
+  ```tsx
+  <TooltipProvider>
+    <SidebarProvider>
+      <AppSidebar brand={{ name: "Sales Portal", logo }} groups={groups} currentPath={pathname} link={Link}
+        search={<AppSidebarSearch onOpen={openSearch} />}
+        notifications={<Popover><PopoverTrigger asChild><AppSidebarNotifications icon={BellIcon} unread={3} /></PopoverTrigger>…</Popover>}
+        notificationsAfter="/todo" user={{ name, role }} accountItems={…} onSignOut={signOut} />
+      <SidebarInset>
+        <AppHeader crumbs={crumbs} link={Link}>
+          <AppContent>{children}</AppContent>
+        </AppHeader>
+      </SidebarInset>
+    </SidebarProvider>
+  </TooltipProvider>
+  ```
 
 - `AppSidebar`: `brand` (`name`, a 24px `logo`, `href`), `groups` (`{ label?, items: { href, label, icon }[] }`),
   `currentPath`, the router's `link`, `search`, `notifications`, `notificationsAfter`, `user` (`name`, `role`,

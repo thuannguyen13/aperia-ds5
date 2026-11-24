@@ -158,6 +158,16 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
 - Docs: decision tables for the choices people get wrong: a sheet, a dialog, or a page of its own (Forms in Sheets);
   simple or advanced filters (Filters); a toast, an alert, or a message on the field (Message Templates); a table on the
   page, a table in a card, or a list (Tables).
+- Docs: Scaffold (Foundations › Layout) names the screen's three kinds of region (bars, rails, and panes) and holds the
+  "Where does it go?" table, one place and one owner page for each kind of thing on a screen.
+- Docs: Dashboard and Settings Page join List Page and Record Page as the four standard screens in Examples, each shown
+  in the app shell at desktop and phone width side by side.
+- Docs: a standard Anatomy section (a live drawing with numbered markers and the parts list) on Button, App Shell, List
+  Toolbar and Paging, and live States (default, hover, focus, pressed, disabled) on Button, Card, Dialog and Table.
+- Docs: every component's home lists the pages that use it (Used in), and every other page lists the components it uses
+  (Components), generated from the pages' In code sections and live examples.
+- `npm run check:docs` checks the design skill's pages for structure, rules, live examples, writing-standard slips,
+  repeated rules and broken links.
 - Docs: Typography shows the whole type scale and the four weights, measured live, then the step and weight each role
   in an Aperia app uses.
 - New `ListPager`: the footer under a list, with its count ("6 merchants", or "26–50 of 312 merchants") and, once the
