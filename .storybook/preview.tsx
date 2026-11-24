@@ -171,6 +171,8 @@ const preview: Preview = {
           "Examples",
           [
             "Overview",
+            "Apps",
+            ["Titan and Sales Portal"],
             "Lists",
             [
               "List Page",

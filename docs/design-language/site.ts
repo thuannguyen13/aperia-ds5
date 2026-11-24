@@ -506,6 +506,10 @@ export const EXAMPLES: Section<SkillPage> = {
   lead: "Examples are whole screens that an app builds from the patterns, each with a before and an after.",
   groups: [
     {
+      title: "Apps",
+      pages: [{ file: "examples/titan-and-sales-portal.md" }],
+    },
+    {
       title: "Lists",
       pages: [
         { file: "examples/list-page.md" },
