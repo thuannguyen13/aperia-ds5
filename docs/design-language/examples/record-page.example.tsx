@@ -233,6 +233,15 @@ export function RecordPageExample() {
       className="sm:p-4"
       caption="Make the window narrower: under 960px of content the side column drops under the main one, and on a phone every card stacks."
     >
+      <RecordPageContent />
+    </Screen>
+  )
+}
+
+/** The opportunity's page alone, for a frame that is the whole window (the desktop and phone frames). */
+export function RecordPageContent() {
+  return (
+    <>
       <PageHeader
         title="Northwind Card Processing"
         subtitle="Opportunity #659 · Northwind Payments"
@@ -295,7 +304,7 @@ export function RecordPageExample() {
           <ActivityCard />
         </div>
       </div>
-    </Screen>
+    </>
   )
 }
 

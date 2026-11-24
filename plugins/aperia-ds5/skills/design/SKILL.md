@@ -47,8 +47,8 @@ The pages are in six sections, the same as the Storybook sidebar.
 
 - **Get Started**: [Overview](overview.md), [For Designers](get-started/for-designers.md) and
   [For Developers](get-started/for-developers.md).
-- **Foundations** (rules across every screen): [Accessibility](foundations/accessibility.md); Layout: [Page
-  Layout](foundations/page-layout.md), [Spacing](foundations/spacing.md), [Sizes](foundations/sizes.md); Content Design:
+- **Foundations** (rules across every screen): [Accessibility](foundations/accessibility.md); Layout:
+  [Scaffold](foundations/scaffold.md), [Page Layout](foundations/page-layout.md), [Spacing](foundations/spacing.md), [Sizes](foundations/sizes.md); Content Design:
   [Copy](foundations/copy.md), [Message Templates](foundations/copy-templates.md), [Money and
   Numbers](foundations/money-and-numbers.md); States: [Loading](foundations/loading.md), [Empty and
   Missing](foundations/empty-and-missing.md), [Empty State](foundations/empty-state.md),
@@ -74,8 +74,9 @@ The pages are in six sections, the same as the Storybook sidebar.
   Log](examples/audit-log.md), [Search and Notifications](examples/search-and-notifications.md); Records: [Record
   Page](examples/record-page.md), [Notes on a Record](examples/notes.md), [Task Checklist](examples/task-checklist.md),
   [Status Change With a Reason](examples/status-change.md), [Line Items With Totals](examples/line-items.md); Settings:
-  [Roles and Permissions](examples/roles-and-permissions.md), [Editable Option List](examples/option-list.md); Data and
-  Charts: [Import Wizard](examples/import.md), [Date Range](examples/date-range.md), [Funnel
+  [Settings Page](examples/settings-page.md), [Roles and Permissions](examples/roles-and-permissions.md),
+  [Editable Option List](examples/option-list.md); Data and Charts: [Dashboard](examples/dashboard.md),
+  [Import Wizard](examples/import.md), [Date Range](examples/date-range.md), [Funnel
   Chart](examples/funnel-chart.md).
 
 ## Order of work
@@ -112,7 +113,8 @@ The pages are in six sections, the same as the Storybook sidebar.
    it. Feature patterns (status changes, notes, boards, import wizards, settings lists) are
    built in the app from these parts, the way the Examples pages show.
 4. **Apply the invariants** below, and the page for what you're placing: its pattern page, and its component page when
-   there is one. [Buttons and Actions](patterns/buttons-and-actions.md) says where buttons go.
+   there is one. [Scaffold](foundations/scaffold.md) says which region and which place each kind of thing goes in,
+   and [Buttons and Actions](patterns/buttons-and-actions.md) says where buttons go.
 5. **Write the copy** by [Copy](foundations/copy.md), with the fixed wording in
    [Message Templates](foundations/copy-templates.md).
 6. **Measure alignment** in the browser (`getBoundingClientRect`). Check both themes and phone width.

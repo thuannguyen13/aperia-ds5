@@ -274,6 +274,50 @@ export function ListPageExample() {
   )
 }
 
+/** The Prospects page alone, for a frame that is the whole window (the desktop and phone frames). */
+export function ProspectsPage() {
+  const [query, setQuery] = useState("")
+  const [rules, setRules] = useState<FilterRule[]>([])
+  const [sort, setSort] = useState(UNSORTED)
+  const searched = PROSPECTS.filter((row) =>
+    row.name.toLowerCase().includes(query.toLowerCase())
+  )
+  const rows = sortRows(filterRows(searched, FIELDS, rules), SORTS, sort)
+  return (
+    <>
+      <PageHeader
+        title="Prospects"
+        subtitle="Companies you are working to sign."
+      />
+      <ListToolbar
+        search={{
+          placeholder: "Search prospects",
+          value: query,
+          onChange: setQuery,
+        }}
+        filters={{ fields: FIELDS, value: rules, onChange: setRules }}
+        shown={rows.length}
+        total={PROSPECTS.length}
+        noun={["prospect", "prospects"]}
+        sort={{ fields: SORTS, value: sort, onChange: setSort }}
+        actions={
+          <Button>
+            <PlusIcon data-icon="inline-start" />
+            Add Prospect
+          </Button>
+        }
+      />
+      <ProspectsTable rows={rows} />
+      <ListPager
+        page={1}
+        total={rows.length}
+        noun={["prospect", "prospects"]}
+        onPageChange={() => {}}
+      />
+    </>
+  )
+}
+
 const MERCHANTS = [
   { mid: "492001837716", name: "Harbor Lane Bistro LLC", score: 748 },
   { mid: "492001902245", name: "Apex Digital Goods Inc", score: 911 },

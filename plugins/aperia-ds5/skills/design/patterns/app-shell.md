@@ -100,6 +100,8 @@ Every other part of the shell is the same in every app.
 
 ## Works with
 
+- See [Scaffold](../foundations/scaffold.md) for the bars, rails, and panes the shell is made of, and where each kind
+  of thing goes.
 - See [Page Layout](../foundations/page-layout.md) for what goes in the page column.
 - See [Page Header](page-header.md) for the page title that fills the breadcrumb.
 - See [Search](search.md) and [Notifications](notifications.md) for what opens from the sidebar.

@@ -40,6 +40,7 @@ export const FOUNDATIONS: Section<SkillPage> = {
     {
       title: "Layout",
       pages: [
+        { file: "foundations/scaffold.md" },
         { file: "foundations/page-layout.md" },
         { file: "foundations/spacing.md" },
         { file: "foundations/sizes.md" },
@@ -527,6 +528,7 @@ export const EXAMPLES: Section<SkillPage> = {
     {
       title: "Settings",
       pages: [
+        { file: "examples/settings-page.md" },
         { file: "examples/roles-and-permissions.md" },
         { file: "examples/option-list.md" },
       ],
@@ -534,6 +536,7 @@ export const EXAMPLES: Section<SkillPage> = {
     {
       title: "Data and Charts",
       pages: [
+        { file: "examples/dashboard.md" },
         { file: "examples/import.md" },
         { file: "examples/date-range.md" },
         { file: "examples/funnel-chart.md" },
