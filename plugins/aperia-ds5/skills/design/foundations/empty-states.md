@@ -34,7 +34,7 @@ missing, a title, an optional line, and an optional action. Each case fills the 
 
 | Case | Title | Line | Action |
 |---|---|---|---|
-| No records yet | "No [Items]", such as No Tasks or No Contacts | Only when it says what the title cannot. It can say whose, such as "No tasks assigned to you." It can say which, such as "No lost opportunities in this range." | The button that fills it, such as Add Task, when the user can add one |
+| No records yet | "No [Items]", such as No Tasks or No Contacts | Only when it says what the title cannot. It can say whose, such as "No tasks assigned to you." It can say which, such as "No lost opportunities in this range." | Every button that adds records, such as Add Task, or Import and Add Prospect on a list, when the user can add one |
 | Could not load | "Failed to Load", with no item name, because the card or list around it already names the item | None, because the Try Again button says it | Try Again, or a way home when trying again cannot help |
 | Dead end | Why the page cannot show, such as a record that is not found, a page the user cannot reach, or an error | Only when it says what the title cannot | A way home |
 
@@ -53,6 +53,14 @@ An empty state sits in the place of the content it replaces and fills the space 
 card or the table stays where it was, so nothing shifts when records arrive.
 
 While a card is empty, its Add button moves from the card's header to the middle of the empty state.
+
+A list with no records at all, such as a new app's Prospects, shows the empty state in the list's place:
+
+- The list toolbar is gone, because there is nothing to search, filter, or sort.
+- The empty state holds every action that adds records, such as Import and Add Prospect, in the toolbar's order.
+- The app's own controls in the toolbar's slot, such as a Board / Table switch, do not show.
+
+A list that has records but none that match keeps its toolbar, so people can change the search or the filters.
 
 The second line, when there is one, says what the title cannot. It says whose records are missing ("No tasks assigned
 to you.") or which records are missing ("No lost opportunities in this range.").
@@ -119,6 +127,7 @@ An amount that the user may not see can be left out of a sentence or a summary. 
 
 - See [Cards and Tiles](../patterns/cards-and-tiles.md) for an empty card and where its Add button sits.
 - See [Tables](../patterns/tables.md) for a missing value in a table, and for a table with no rows.
+- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar that an empty list hides.
 - See [Filters](../patterns/filters.md) for Clear Filters, and [Global Search](../patterns/global-search.md) for a search
   across the app that finds nothing.
 - See [Copy](copy.md) and [Message Templates](copy-templates.md) for the fixed phrases for missing, empty, and hidden
@@ -133,6 +142,8 @@ An amount that the user may not see can be left out of a sentence or a summary. 
   `EmptyDescription`, and `EmptyContent` in `aperia-ds5`.
 - `icon` takes the icon (`icon={InboxIcon}`) or an element (`icon={<InboxIcon />}`). A server component passes the
   element, because aperia-ds5's components are client components and only an element can reach them from the server.
+- An empty list renders `EmptyState` in place of both `ListToolbar` and the table, with the list's adding actions as
+  its `action` and `actionClassName="flex-row flex-wrap justify-center"`.
 - `NoResults` from `aperia-ds5` when nothing matches. `onClear` adds "No matching results." and Clear Filters.
 - Build the empty value and the "No [field]" text in the app as muted spans. Use them in tables, detail rows, and
   headers alike.

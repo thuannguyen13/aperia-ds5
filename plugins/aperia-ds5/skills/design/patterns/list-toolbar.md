@@ -16,8 +16,8 @@ filters are one Filter button that opens the filters in a popover. Simple filter
 list with four filters or fewer. See [Filters](filters.md) for choosing between them.
 
 The toolbar holds nothing else. The list's count sits in the footer under the list. See [Paging](paging.md) for the
-footer. While rows are selected, a selection bar takes the toolbar's place. See [Selecting Rows](selecting-rows.md) for
-that bar.
+footer. While rows are selected, a selection bar takes the place of the list's actions, and the search, the filters,
+and Sort stay. See [Selecting Rows](selecting-rows.md) for that bar.
 
 ## Anatomy
 
@@ -36,9 +36,9 @@ The search and the filters sit at the left end. Sort and the list's actions sit 
 
 The toolbar is a section of its own between the page header and the list, 20px from each. It is one row on a desktop.
 
-When nothing matches, the list shows "No Results" with Clear Filters. See
-[Empty States](../foundations/empty-states.md) for that state. While the list is empty, the toolbar is gone,
-and the empty state holds Add instead.
+A search or a filter that matches nothing keeps the toolbar, and "No Results" takes the list's place. When the list
+has no records at all, the toolbar is gone, its slot's controls included. See
+[Empty States](../foundations/empty-states.md) for both states and for the actions that an empty list holds.
 
 On a phone, the toolbar is at most three short rows:
 
