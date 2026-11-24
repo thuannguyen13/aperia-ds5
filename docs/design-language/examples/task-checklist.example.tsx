@@ -239,7 +239,7 @@ export function TaskChecklistExample() {
       )
     )
     if (on)
-      toast(`Done: ${task.title}`, {
+      toast("Task completed.", {
         action: { label: "Undo", onClick: () => setTasks(before) },
       })
   }

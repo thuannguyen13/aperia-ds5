@@ -41,11 +41,11 @@ Each region of the scaffold changes as the window narrows. See [Scaffold](scaffo
 | Top bar | 56px tall. The breadcrumb keeps its last two crumbs. | 56px tall, with the whole breadcrumb | 56px tall, with the whole breadcrumb |
 | Page column | Fills the window under the top bar, with 20px around it | Fills the space beside the sidebar, or the whole window while the sidebar is hidden, with 20px around it | Centered and up to 1440px wide, with 20px around it |
 | Sheet | Fills the screen, with square corners | 16px in from the window's edges, three quarters of the window wide, up to 576px for a form | 16px in from the window's edges, 576px wide for a form |
-| Dialog | A confirmation or a dialog that asks for a reason sits in the middle, 16px from each side. A confirmation is 320px wide. A search or a review dialog fills the screen. | In the middle, up to 384px wide | In the middle, up to 384px wide |
+| Dialog | A confirmation or a dialog that asks for a reason sits in the middle, 320px wide and at least 16px from each side. A search or a review dialog fills the screen. | In the middle, up to 384px wide | In the middle, up to 384px wide |
 | Toast | Across the top of the screen, 16px from each side | At the top right of the window | At the top right of the window |
 
-See [Dialog](../components/dialog.md) for the kinds of dialog. Save confirmations, errors, and new notifications share
-one stack of toasts, three at most. See [Notifications](../patterns/notifications.md) for the stack.
+See [Dialog](../components/dialog.md) for the kinds of dialog. See
+[Saving and Feedback](saving-and-feedback.md) for the one stack of toasts.
 
 ### Parts on a phone
 

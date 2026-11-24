@@ -84,8 +84,8 @@ with an empty state inside.
 
 ## When you can do it differently
 
-A list that people edit inside a card, such as tasks, is the one case where a row has a button. Each row shows Edit on
-hover or focus, and always on touch screens. Edit opens the same editor as the record's own page.
+A row in a card can show a button only when the row's click is already taken, such as a task whose checkbox ticks it.
+See [Tables](tables.md), Buttons on a row, for every such row.
 
 ## Works with
 

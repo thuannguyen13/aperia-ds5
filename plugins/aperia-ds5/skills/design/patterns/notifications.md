@@ -28,15 +28,15 @@ The panel opens from the sidebar, and each notification leads to its record:
 2. The panel takes focus as it opens, so the first tab shows no focus ring after a click.
 3. Mark All as Read is disabled while nothing is unread.
 4. Opening a notification marks it read at once. It also closes the panel and opens its record.
-5. A new notification also shows as a toast that links to its record. It joins the one stack of toasts at the top
-   right, with save confirmations and errors. Three toasts show at most. Past three, one toast says how many more
-   arrived, such as "4 more new notifications."
+5. A new notification also shows as a toast that links to its record. It joins the one stack of toasts that save
+   confirmations and errors use. See [Saving and Feedback](../foundations/saving-and-feedback.md) for where the stack
+   sits and how many toasts it shows.
 6. Notification Settings opens from the settings button in the panel and from the account menu. See
    [Switches in a Grid](switches-in-a-grid.md) for the settings grid.
 
-On a phone, Notifications sits in the sidebar's panel, which the button at the start of the top bar opens. The
-stack of toasts runs across the top of the screen, 16px from each side. See [Screen Sizes](../foundations/screen-sizes.md)
-for every part on a phone.
+On a phone, Notifications sits in the sidebar's panel, which the button at the start of the top bar opens. A new
+notification's toast runs across the top of the screen. See [Screen Sizes](../foundations/screen-sizes.md) for every
+part on a phone.
 
 ## Rules
 
@@ -52,11 +52,10 @@ for every part on a phone.
   what is new.
 - **Don't:** Show unread only by a tinted background. Add the dot, so it reads without color.
 
-### Keep toasts to three
+### Show new notifications in the shared stack
 
-- **Do:** Show three toasts at most in the one stack, then one "4 more new notifications.", so the page stays usable.
-- **Don't:** Give notifications a stack of their own, or let toasts cover the page when many arrive. Keep one stack of
-  three, so people can keep working.
+- **Do:** Show a new notification as a toast in the one stack that every toast uses, so the page stays usable.
+- **Don't:** Give notifications a stack or a corner of their own. Keep one stack, so toasts never pile up in two places.
 
 ## When you can do it differently
 
@@ -64,12 +63,13 @@ This pattern has no exceptions.
 
 ## Works with
 
-Notifications work with four other pages:
+Notifications work with these pages:
 
 - See [App Shell](app-shell.md) for the sidebar entry that opens the panel.
 - See [Switches in a Grid](switches-in-a-grid.md) for Notification Settings.
 - See [Empty States](../foundations/empty-states.md) for the empty tabs.
 - See [Message Templates](../foundations/copy-templates.md) for when a message is a toast.
+- See [Saving and Feedback](../foundations/saving-and-feedback.md) for the stack of toasts.
 
 ## In code
 

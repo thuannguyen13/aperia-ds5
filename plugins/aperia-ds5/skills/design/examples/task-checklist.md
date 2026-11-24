@@ -23,11 +23,12 @@ row's content lines up with the card's title. A row contains three parts, from l
 | End | Who did it and the day, or when it is due, then an icon button with a pencil, named "Edit Task". |
 
 Edit Task shows when the row is pointed at or reached by keyboard, and always on a touch screen. Only tasks not yet done
-have Edit Task. It opens the same sheet as the task's own page, with Delete at the start of its footer.
+have Edit Task. A task is a small record, so Edit Task opens the task's sheet, with Delete at the start of its footer.
+See [Tables](../patterns/tables.md) for a small record that opens in a sheet.
 
-Ticking a box saves at once, and the box shows ticked straight away. A toast at the top right names the task, such as
-"Done: Send Proposal", with Undo. In a row that opens a record, ticking does not open the record. A closed record's
-boxes are grayed out and say why on hover, focus, or a tap, so no one changes work on a closed record.
+Ticking a box saves at once, and the box shows ticked straight away. A toast at the top right says "Task completed.",
+with Undo. In a row that opens a record, ticking does not open the record. A closed record's boxes are grayed out and
+say why on hover, focus, or a tap, so no one changes work on a closed record.
 
 A late task shows the Overdue badge before its due date, such as "Due 11/18/2026". The badge names the state in a
 word, so color is never the only signal. See [Status](../patterns/status.md) for the badge.
@@ -54,8 +55,8 @@ A page of one person's tasks across their records, such as To Do, contains four 
 
 ### Tick in place
 
-- **Do:** Put a checkbox at the start of the row that saves at once, with a "Done: Send Proposal" message and Undo, so
-  ticking a task is one click and easy to take back.
+- **Do:** Put a checkbox that saves at once at the start of the row, so ticking a task is one click. Offer Undo in the
+  "Task completed." toast, so a tick is easy to take back.
 - **Don't:** Put a solid Done button on every row. Use a checkbox at the start of the row, so the rows carry no primary
   buttons and the tasks are what people read first.
 
@@ -106,7 +107,7 @@ The app builds it from aperia-ds5 parts and the recipes on the pattern and compo
   who and when and an icon button "Edit Task" (the recipe from [Button](../components/button.md)) (`opacity-0
   group-hover/item:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-100`). Under `@min-[40rem]`, who and
   when move into `ItemDescription`.
-- The tick saves at once and calls `toast("Done: Send Proposal", { action: { label: "Undo", … } })` from sonner.
+- The tick saves at once and calls `toast("Task completed.", { action: { label: "Undo", … } })` from sonner.
 - A late task shows the app's Overdue `Badge` from its one map of states, the same badge as in a table. See
   [Status](../patterns/status.md) for the map.
 - Edit Task opens a `FormSheet` with `SheetForm` and `SheetDelete` in its `start`.

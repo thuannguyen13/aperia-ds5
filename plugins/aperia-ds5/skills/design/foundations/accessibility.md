@@ -42,7 +42,7 @@ On a touch screen, a tap shows what a hover shows on a desktop, because a finger
 
 - A tap on a disabled control shows its reason.
 - A tap on a relative time, such as "3d ago", shows its exact date.
-- A tap on a stack of pictures opens the card that lists everyone.
+- A tap on a stack of people's pictures opens the card with each person's name.
 
 A contact link is in the Link color at rest, so it reads as a link without the underline that a hover adds. See
 [Surfaces and Layers](../styles/surfaces-and-layers.md) for showing what responds before the pointer reaches it.
@@ -51,8 +51,8 @@ A contact link is in the Link color at rest, so it reads as a link without the u
 
 ### Never use color as the only signal
 
-- **Do:** Pair every colored badge, dot, or chart series with a word, an icon, or a legend, such as the word on the
-  Overdue badge, so people who cannot tell the colors apart read the same thing.
+- **Do:** Pair every colored badge, dot, or chart series with a word, an icon, or a legend, so people who cannot tell
+  the colors apart read the same thing.
 - **Don't:** Mark a state with color alone, such as a red row with no word. Add the word, so the state does not depend
   on seeing color.
 
