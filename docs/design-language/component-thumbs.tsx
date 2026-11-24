@@ -45,7 +45,7 @@ import {
 } from "aperia-ds5"
 import { cn } from "aperia-ds5/utils"
 
-// The picture on each card of the Components index, as Material 3 shows one for every component. A control that
+// The picture on each card of the Components index, one for every component. A control that
 // renders on its own is the real component; a panel that opens over the page (a dialog, a sheet, a menu, a toast) is
 // drawn from the same tokens, since the real one would open over the index. The pictures are inert: nothing in them
 // takes focus or clicks.

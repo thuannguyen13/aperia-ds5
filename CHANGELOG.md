@@ -172,7 +172,7 @@ The shared Aperia look moves into the library, from Sales Portal's `globals.css`
   - `SheetForm`'s `also` messages may leave a field out (`draft.email ? { email: "…" } : {}` now type-checks).
   - The skill's screenshot review says how to take the screenshots (headless Chrome, Dark through the system setting)
     and, when no browser can run, to say the review did not run and hand its checks to the user.
-- **Docs organized like Material 3** (0.3.0): six sections, Get Started, Foundations, Styles, Components, Patterns and
+- **Docs in six sections** (0.3.0): Get Started, Foundations, Styles, Components, Patterns and
   Examples, each opening on an index of cards built from the pages' leads. Foundations now holds the rules across every
   screen (Accessibility, new; Layout; Content Design; States, with Loading, Empty and Missing, and Disabled With a
   Reason moved from Patterns), and Styles holds the visual values (Color, Typography, Border and Radius, Elevation,

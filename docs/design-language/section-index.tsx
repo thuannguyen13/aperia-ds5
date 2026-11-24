@@ -11,7 +11,7 @@ import {
 import { leadOf, titleOf } from "./skill-doc"
 import { THUMBS } from "./component-thumbs"
 
-// A section's index, as Material 3 opens each section: its one-sentence lead, then a card for every page under the
+// A section's index: its one-sentence lead, then a card for every page under the
 // group it sits in, each with the page's name and the first sentence of its lead. The cards come from the site map
 // and the pages' own leads, so the index never holds a copy of their text.
 

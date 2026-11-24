@@ -11,7 +11,7 @@ import {
 import { COMPONENTS, componentTitle } from "./site"
 import { SkillDoc, fileText } from "./skill-doc"
 
-// A component's one home, as Material 3 gives each component one page: its guidance (when it has a skill page) in the
+// A component's one home, one page per component: its guidance (when it has a skill page) in the
 // Overview and Guidelines tabs, and its live stories and props in the Code tab. A component with a skill page gets an
 // .mdx attached to its stories (`<Meta of>`), which replaces the generated page; every other component gets
 // `ComponentPage`, set as the docs page in .storybook/preview.tsx.

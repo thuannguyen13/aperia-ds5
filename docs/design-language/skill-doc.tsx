@@ -690,8 +690,7 @@ function OnThisPage({ panel }: { panel: React.RefObject<HTMLElement | null> }) {
 }
 
 /**
- * Renders a skill file as a page: its title and lead, then its sections in three tabs, as Material 3 lays out a
- * component page. Overview holds When to use and What is available, Guidelines holds how it looks and behaves and its
+ * Renders a skill file as a page: its title and lead, then its sections in three tabs. Overview holds When to use and What is available, Guidelines holds how it looks and behaves and its
  * rules, and Code holds In code plus `code` (a component's live stories and props). A page without the standard
  * sections (the Overview, a getting-started page) shows as one page. A live example follows any `##` or `###` section
  * named in `after`, by its heading text, or "@intro" for the text under the title.

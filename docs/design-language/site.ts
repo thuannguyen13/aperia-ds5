@@ -1,5 +1,5 @@
-// The docs' site map: every section, group and page in the order the sidebar shows them, laid out the way Material 3
-// organizes its site (Get Started, Foundations, Styles, Components, Patterns, Examples). Index pages, links between
+// The docs' site map: every section, group and page in the order the sidebar shows them (Get Started, Foundations,
+// Styles, Components, Patterns, Examples). Index pages, links between
 // pages and each component's home read this list, so a page moves by changing it here, its .mdx Meta title, and the
 // sidebar order in .storybook/preview.tsx (`node scripts/sidebar-order.mjs --check` checks that the three agree).
 
