@@ -240,12 +240,13 @@
    - page-md, 768px: a page's sections change here, by the page column's
      width; stat tiles go from two to a row to one row.
    - page-lg, 960px: a side column, or cards side by side, start here.
-   - popover-sm, 240px: a list's Sort panel and a filter's value picker.
+   - popover-sm, 256px: a list's Sort panel and a filter's value picker. Sort's
+     Ascending and Descending halves fit their labels at this width.
    - popover-lg, 384px: a wide panel, such as Notifications. */
 @theme {
   --container-page-md: 48rem;
   --container-page-lg: 60rem;
-  --container-popover-sm: 15rem;
+  --container-popover-sm: 16rem;
   --container-popover-lg: 24rem;
 }
 

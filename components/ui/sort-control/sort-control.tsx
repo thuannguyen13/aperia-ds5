@@ -131,11 +131,11 @@ export function SortControl({
               className="w-full"
             >
               <ToggleGroupItem value="asc" className="flex-1">
-                <ArrowUpNarrowWideIcon />
+                <ArrowUpNarrowWideIcon data-icon="inline-start" />
                 Ascending
               </ToggleGroupItem>
               <ToggleGroupItem value="desc" className="flex-1">
-                <ArrowDownWideNarrowIcon />
+                <ArrowDownWideNarrowIcon data-icon="inline-start" />
                 Descending
               </ToggleGroupItem>
             </ToggleGroup>

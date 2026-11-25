@@ -183,16 +183,28 @@ Migrate a table:
 - Docs: decision tables for the choices people get wrong: a sheet, a dialog, or a page of its own (Forms in Sheets);
   simple or advanced filters (Filters); a toast, an alert, or a message on the field (Message Templates); a table on the
   page, a table in a card, or a list (Tables).
-- Docs: Scaffold (Foundations › Layout) names the screen's three kinds of region (bars, rails, and panes) and holds the
-  "Where does it go?" table, one place and one owner page for each kind of thing on a screen.
+- Docs: Scaffold (Foundations › Layout) names the screen's regions (the sidebar, the top bar, the page column, and a
+  sheet) and holds the "Where each thing goes" table, one place and one owner page for each kind of thing on a screen.
 - Docs: Dashboard and Settings Page join List Page and Record Page as the four standard screens in Examples, each shown
   in the app shell at desktop and phone width side by side.
-- Docs: a standard Anatomy section (a live drawing with numbered markers and the parts list) on Button, App Shell, List
-  Toolbar and Paging, and live States (default, hover, focus, pressed, disabled) on Button, Card, Dialog and Table.
-- Docs: every component's home lists the pages that use it (Used in), and every other page lists the components it uses
-  (Components), generated from the pages' In code sections and live examples.
+- Docs: every page has one structure (after rc.2). Anatomy comes first, under the lead, on every component and pattern
+  page and on a Foundations or Styles page whose subject has parts (35 pages): a live drawing of the real component in
+  its place on a screen, a panel or a menu drawn open, with a numbered marker on each part and a list that says what
+  kind of thing each part is. When to use and What is available show only where a page has something to say there.
+  "When you can do it differently" and "Works with" are gone: an exception sits with the behavior or the rule it
+  changes, and a link in the sentence that needs it.
+- Docs: rules are numbered and cited by page and number, such as "Sort 2" (after rc.2). Each rule is a statement with
+  its reason, with a Do and a Don't only where they add a concrete case. A rule that repeated another page's rule is
+  removed, and that page links to the owner.
+- Docs: every live example has a caption that says what it shows, and every page shows the Overview, Guidelines and
+  Code tabs (after rc.2).
+- Docs: a token named in a sentence is a small chip with the token's name and a mark of its kind; its value shows on
+  hover (after rc.2). A color keeps a live swatch.
+- Docs: live States (default, hover, focus, pressed, disabled) on Button, Card, Dialog and Table.
+- Docs: every component's home lists the pages that use it (Used in), generated from the pages' In code sections and
+  live examples.
 - `npm run check:docs` checks the design skill's pages for structure, rules, live examples, writing-standard slips,
-  repeated rules and broken links.
+  repeated rules and broken links. It fails on a rule with no number or no statement, and on a retired section.
 - Docs: Typography shows the whole type scale and the four weights, measured live, then the step and weight each role
   in an Aperia app uses.
 - `SortControl` is one button that opens a panel: "Default order" and the fields as a list of choices, then Ascending
@@ -271,7 +283,7 @@ Migrate a table:
   The Link button and badge variants and the hover color of links in Field, Item and Empty use it. Dark `--ring` is
   `oklch(0.65 0.16 259.33)` (#508DEF), at least 3:1 on the same fills. Primary stays `#0058cc` as a fill.
 - **Named widths** (after rc.2): `--container-page-md` (48rem) and `--container-page-lg` (60rem) for a page's sections
-  (`@min-page-md:grid-cols-4`), `--container-popover-sm` (15rem) for Sort and a filter's value picker, and
+  (`@min-page-md:grid-cols-4`), `--container-popover-sm` (16rem, so Sort's Ascending and Descending fit their labels) for Sort and a filter's value picker, and
   `--container-popover-lg` (24rem) for a wide panel such as Notifications (`w-popover-lg`).
 - Button and Toggle `sm` text is `text-xs` (was `text-[0.8rem]`).
 - **Toasts** (after rc.2): `Toaster` sits at the top right, and on a phone spans the top, 16px from each side. It shows
