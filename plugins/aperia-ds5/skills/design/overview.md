@@ -23,6 +23,9 @@ The pages are grouped in six sections:
 
 Each section opens on an index of its pages, each with its one-sentence lead.
 
+The code behind these pages is aperia-ds5, a React library styled with Tailwind CSS, with components from shadcn/ui.
+See [For Developers](get-started/for-developers.md) for the full tech stack.
+
 ## How a page is laid out
 
 A one-sentence lead under the title says what the subject is for. The sections below it always come in the same order.

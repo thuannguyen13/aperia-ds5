@@ -301,6 +301,8 @@ Migrate a table:
 - **RecordActions** (after rc.2): three actions or fewer are buttons; with four or more, the first two stay buttons and
   the rest, Delete included, go into More actions. Below 1024px every action folds into More actions, as before.
 - **CommandDialog** (after rc.2): 576px wide from `sm`; on a phone it fills the screen.
+- **Sidebar dividers** (after rc.3): the two dividers in the sidebar stop at the sidebar's padding on both sides, in
+  line with the menu items. They ran from the left inset across the right padding to the sidebar's edge.
 
 ### Not in the library
 

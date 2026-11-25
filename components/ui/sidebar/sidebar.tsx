@@ -358,7 +358,9 @@ function SidebarSeparator({
     <Separator
       data-slot="sidebar-separator"
       data-sidebar="separator"
-      className={cn("mx-2 w-auto bg-sidebar-border", className)}
+      // Separator sets its width under `data-horizontal:`, which a plain `w-auto` cannot override: the line then ran
+      // its full width from the left inset and crossed the sidebar's right padding.
+      className={cn("mx-2 bg-sidebar-border data-horizontal:w-auto", className)}
       {...props}
     />
   )

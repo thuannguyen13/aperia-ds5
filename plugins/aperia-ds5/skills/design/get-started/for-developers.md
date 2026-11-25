@@ -2,6 +2,44 @@
 
 Developers install aperia-ds5 in an app, import its styles once, and build every screen from its components.
 
+## Tech stack
+
+aperia-ds5 is a React library styled with Tailwind CSS. Its components come from shadcn/ui and are kept in this
+repository, restyled to the Aperia look.
+
+### What the app needs
+
+The app installs these itself, and the library uses the app's copy of each one.
+
+| Tool | Needed for |
+|---|---|
+| React 19 | Every component |
+| Tailwind CSS 4 | Every component's styles |
+| recharts 3 | Charts only |
+| TanStack Table 9 | The data table only |
+
+### What the library is built on
+
+These come with the package, so an app does not install them.
+
+| Tool | What it does in the library |
+|---|---|
+| shadcn/ui | The source of the components |
+| Radix UI | The behavior under the components, such as focus, the keyboard, and menus |
+| Lucide | Every icon |
+| Smaller libraries | One part each, such as Sonner for toasts and dnd-kit for drag and drop |
+
+### What this repository uses
+
+A developer who changes the library itself works with these.
+
+| Tool | What it does here |
+|---|---|
+| TypeScript | The language of every component |
+| tsup | Builds the package |
+| Storybook | These pages, and each component's live examples |
+| Figma Code Connect | Shows each component's code in Figma |
+
 ## Install
 
 Install the package, then set up the agent skill in the app's root:
