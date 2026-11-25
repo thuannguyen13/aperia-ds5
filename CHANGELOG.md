@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.0 (release candidate: rc.3)
+## 0.3.0
 
 The shared Aperia look moves into the library, from Sales Portal's `globals.css`, and matches the Figma library
 "Aperia Shadcn Library (Enhanced)". An app now sets only its status and chart colors.

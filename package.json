@@ -1,6 +1,6 @@
 {
   "name": "aperia-ds5",
-  "version": "0.3.0-rc.3",
+  "version": "0.3.0",
   "description": "Aperia React component library (shadcn/ui, Tailwind v4). Coding agents: run `npx aperia-ds5 init` in the app, then read plugins/aperia-ds5/skills/design/SKILL.md before writing UI.",
   "type": "module",
   "bin": {

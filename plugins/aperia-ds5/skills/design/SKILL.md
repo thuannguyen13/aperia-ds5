@@ -10,7 +10,7 @@ interactions. Apps differ in their features, not their look. This skill tells yo
 sets for itself. Defaults from shadcn/ui are not this language: where this skill and a default differ, this skill
 wins.
 
-**Version.** This skill is written for **aperia-ds5 0.3.x** (0.3.0-rc.3 and later). It is delivered separately from the
+**Version.** This skill is written for **aperia-ds5 0.3.x** (0.3.0 and later). It is delivered separately from the
 library, so first read `version` in the app's `node_modules/aperia-ds5/package.json`. If it is older, or a component
 this skill names (such as `AppSidebar` or `opensOnClick`) is not exported, tell the user to upgrade aperia-ds5 before you
 follow the component guidance; the look, copy and review rules still apply.
