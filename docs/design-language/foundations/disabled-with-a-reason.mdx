@@ -5,8 +5,10 @@ import * as FieldNoteStories from "../../../components/ui/field-note/field-note.
 import { buttonExamples } from "../examples/button"
 import { disabledExamples } from "../examples/forms-and-values"
 import { roleLimitExamples } from "../examples/behavior"
+import { disabledWithAReasonAnatomy } from "../examples/disabled-with-a-reason-anatomy"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { Captioned } from "../blocks"
 
 <Meta title="Foundations/States/Disabled With a Reason" />
 
@@ -15,11 +17,18 @@ import { PatternCode } from "../component-page"
   code={<PatternCode components={[{ name: "ReasonTooltip", stories: ReasonStories }, { name: "FieldNote", stories: FieldNoteStories }]} />}
   after={{
     ...roleLimitExamples,
-    "@intro": <Canvas of={ReasonStories.Default} sourceState="none" />,
+    Anatomy: disabledWithAReasonAnatomy,
     "What is available": (
       <>
-        <Canvas of={ReasonStories.InPicker} sourceState="none" />
-        <Canvas of={FieldNoteStories.DependentField} sourceState="none" />
+        <Captioned caption="A disabled Remove Merchant button. Pointing at it opens the reason in a tooltip.">
+          <Canvas of={ReasonStories.Default} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A picker where two queues cannot be picked. They keep their place, and pointing at one opens its reason.">
+          <Canvas of={ReasonStories.InPicker} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A Merchant field that waits on a Prospect. Its note says so until a prospect is picked.">
+          <Canvas of={FieldNoteStories.DependentField} sourceState="none" />
+        </Captioned>
       </>
     ),
     "Say why, every time": buttonExamples["Say why a button is disabled"],

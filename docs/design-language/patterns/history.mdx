@@ -2,14 +2,34 @@ import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/history.md?raw"
 import * as RecordActivity from "../recipes/record-activity.stories"
 import { SkillDoc } from "../skill-doc"
+import { historyAnatomy } from "../examples/history-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Content/History" />
 
 <SkillDoc
   source={source}
   after={{
-    "What is available": (
-      <Canvas of={RecordActivity.Default} sourceState="none" />
+    Anatomy: historyAnatomy,
+    "How it looks and behaves": (
+      <>
+        <Captioned caption="A history of 24 entries. The card shows the latest ten, and View All Activity in the header opens every entry in a sheet.">
+          <Canvas of={RecordActivity.LongHistory} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A record with no history. The card keeps its place and shows No Activity.">
+          <Canvas of={RecordActivity.Empty} sourceState="none" />
+        </Captioned>
+      </>
+    ),
+    Notes: (
+      <>
+        <Captioned caption="Notes with Add in the header. Each entry opens with the note's box, then says when and who.">
+          <Canvas of={RecordActivity.Notes} sourceState="none" />
+        </Captioned>
+        <Captioned caption="Notes with no notes yet. Add moves into the empty state.">
+          <Canvas of={RecordActivity.NotesEmpty} sourceState="none" />
+        </Captioned>
+      </>
     ),
   }}
 />

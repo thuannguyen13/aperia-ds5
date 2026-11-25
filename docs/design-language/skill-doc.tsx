@@ -9,7 +9,7 @@ import { DoDont } from "./blocks"
 import { Anatomy } from "./anatomy"
 import { COMPONENTS, componentTitle, skillTitle, storyId } from "./site"
 import { LiveColor } from "./live-color"
-import { componentsOf, pagesUsing, type Home } from "./uses"
+import { pagesUsing, type Home } from "./uses"
 
 // The skill's markdown is the source: these pages render it as it is and never copy its text.
 // Its links point at sibling files; here they open the matching page, or the file on GitHub.
@@ -237,7 +237,7 @@ const PlainCode = ({ className, ...props }: El<"code">) => (
     {...props}
   />
 )
-/** Inline code: a token (`--border`, `rounded-lg`, `shadow-md`, `text-sm`, `p-4`) is a live pill; anything else stays code. */
+/** Inline code: a token (`--border`, `rounded-lg`, `shadow-md`, `text-sm`, `p-4`) is a live chip; anything else stays code. */
 const Code = (props: El<"code">) => {
   const plain = <PlainCode {...props} />
   // A fenced block carries a language class; only inline code can be a token.
@@ -531,15 +531,15 @@ function VerdictCard({
 
 /**
  * A rule's Do and Don't, each with its half of the live pair: side by side, or stacked with the Do on top when the
- * pair is too wide for half the page (`stack` on its DoDont) and on a narrow window.
+ * pair is too wide for half the page (`stack` on its DoDont) and on a narrow window. A rule may have only one of them.
  */
 function Verdicts({
   doText,
   dontText,
   example,
 }: {
-  doText: string
-  dontText: string
+  doText?: string
+  dontText?: string
   example?: ReactNode
 }) {
   const pair =
@@ -552,73 +552,60 @@ function Verdicts({
       data-verdicts
       className={cx("my-5 grid gap-4", !pair?.stack && "sm:grid-cols-2")}
     >
-      <VerdictCard
-        verdict="do"
-        text={doText}
-        preview={pair?.good}
-        frame={pair?.className}
-      />
-      <VerdictCard
-        verdict="dont"
-        text={dontText}
-        preview={pair?.bad}
-        frame={pair?.className}
-      />
-    </div>
-  )
-}
-
-/** A row of links to pages, as outline badges. The page in view is named without a link. */
-function PageLinks({ pages, here }: { pages: Home[]; here?: string }) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {pages.map((page) =>
-        page.id === here ? (
-          <Badge key={page.id} variant="outline">
-            {page.name}
-          </Badge>
-        ) : (
-          <Badge key={page.id} variant="outline" asChild>
-            {/* Docs render in the preview iframe; the page opens in the manager around it. */}
-            <a href={`./?path=/docs/${page.id}--docs`} target="_top">
-              {page.name}
-            </a>
-          </Badge>
-        )
+      {doText && (
+        <VerdictCard
+          verdict="do"
+          text={doText}
+          preview={pair?.good}
+          frame={pair?.className}
+        />
+      )}
+      {dontText && (
+        <VerdictCard
+          verdict="dont"
+          text={dontText}
+          preview={pair?.bad}
+          frame={pair?.className}
+        />
       )}
     </div>
   )
 }
 
+/** A row of links to pages, as outline badges. */
+function PageLinks({ pages }: { pages: Home[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {pages.map((page) => (
+        <Badge key={page.id} variant="outline" asChild>
+          {/* Docs render in the preview iframe; the page opens in the manager around it. */}
+          <a href={`./?path=/docs/${page.id}--docs`} target="_top">
+            {page.name}
+          </a>
+        </Badge>
+      ))}
+    </div>
+  )
+}
+
 /**
- * The links between components and the pages that use them, generated from the source (uses.ts) so they never go
- * stale: a component's home lists the pages that use it, by section, and a skill page lists the components it uses.
+ * The pages that use a component, by section, on the component's home. The links are generated from the source
+ * (uses.ts), so they never go stale.
  */
-function Related({ component, file }: { component?: string; file: string }) {
-  const here = component ? undefined : pageOf(file)
-  const groups = component
-    ? pagesUsing(component)
-    : [{ section: "", pages: componentsOf(file) }].filter(
-        (group) => group.pages.length > 0
-      )
+function UsedIn({ component }: { component: string }) {
+  const groups = pagesUsing(component)
   if (!groups.length) return null
   return (
     <section>
-      <H2>{component ? "Used in" : "Components"}</H2>
-      <P>
-        {component
-          ? "Each page below uses this component."
-          : "This page uses each component below."}
-      </P>
+      <H2>Used in</H2>
+      <P>Each page below uses this component.</P>
       <div className="flex flex-col gap-4">
         {groups.map((group) => (
           <div key={group.section} className="flex flex-col gap-2">
-            {group.section && (
-              <span className="text-sm font-medium text-muted-foreground">
-                {group.section}
-              </span>
-            )}
-            <PageLinks pages={group.pages} here={here} />
+            <span className="text-sm font-medium text-muted-foreground">
+              {group.section}
+            </span>
+            <PageLinks pages={group.pages} />
           </div>
         ))}
       </div>
@@ -693,14 +680,20 @@ function Sections({
 }) {
   const sections = text.split(/\n(?=###? )/)
   return sections.map((section, i) => {
+    // A rule's number ("### 3. Name the count") is not part of its name, so its live example is keyed to the name alone.
     const heading =
-      intro && i === 0 ? "@intro" : section.match(/^###? (.+)/)?.[1]?.trim()
+      intro && i === 0
+        ? "@intro"
+        : section
+            .match(/^###? (.+)/)?.[1]
+            ?.replace(/^\d+\.\s+/, "")
+            .trim()
     const example = heading ? after[heading] : undefined
-    // A rule (###) with both a Do and a Don't renders them as one card each, with the live pair inside.
+    // A rule (###) shows its statement, then its Do and its Don't as one card each, with the live pair inside.
     const split = section.startsWith("### ")
       ? splitVerdicts(section)
       : undefined
-    const verdicts = split && split.do && split.dont ? split : undefined
+    const verdicts = split && (split.do || split.dont) ? split : undefined
     const paired =
       verdicts && React.isValidElement(example) && example.type === DoDont
     // An Anatomy drawing shows the section's numbered list as its legend, so the list is not shown twice.
@@ -808,11 +801,10 @@ function OnThisPage({ panel }: { panel: React.RefObject<HTMLElement | null> }) {
 /**
  * Renders a skill file as a page: its title and lead, then its sections in three tabs. Overview holds When to use, What
  * is available and Anatomy (a live drawing whose legend is the section's numbered list), Guidelines holds how it looks
- * and behaves and its rules, and Code holds In code plus `code` (a component's live stories and props). A page without the standard
+ * and behaves and its rules (each a numbered statement, with its Do and Don't as cards), and Code holds In code plus `code` (a component's live stories and props). A page without the standard
  * sections (the Overview, a getting-started page) shows as one page. A live example follows any `##` or `###` section
- * named in `after`, by its heading text, or "@intro" for the text under the title. The Overview ends with the
- * generated links: the components the page uses, or, for a component's home (`component`, its folder under
- * components/ui), the pages that use it.
+ * named in `after`, by its heading text, or "@intro" for the text under the title. On a component's home (`component`,
+ * its folder under components/ui), the Overview ends with the generated links to the pages that use the component.
  */
 export function SkillDoc({
   source,
@@ -831,15 +823,19 @@ export function SkillDoc({
       ?.slice(ROOT.length) ?? "SKILL.md"
   const body = source.replace(/^---\n[\s\S]*?\n---\n/, "")
   const [intro, ...parts] = body.split(/\n(?=## )/)
-  const tabbed = parts.some((part) => part.startsWith("## When to use"))
+  // A page of Foundations, Styles, Components, Patterns or Examples shows in tabs. Each section is optional, so the
+  // page's folder decides, not a heading: a page with no Overview section (rules only) still gets Guidelines and Code.
+  const tabbed = /^(foundations|styles|components|patterns|examples)\//.test(
+    here
+  )
   const panels: Record<Tab, string[]> = {
     overview: [],
     guidelines: [],
     code: [],
   }
-  // A screen (an Examples page) has no What is available: its Overview shows the screen itself, How it looks and
-  // behaves, so the tab is not one sentence long.
-  const screen = !parts.some((part) => part.startsWith("## What is available"))
+  // An Examples page shows a screen: its Overview shows the screen itself, How it looks and behaves, so the tab is
+  // not one sentence long.
+  const screen = here.startsWith("examples/")
   for (const part of parts) {
     const heading = part.match(/^## (.+)/)?.[1]?.trim() ?? ""
     const overview = screen && heading === "How it looks and behaves"
@@ -868,7 +864,13 @@ export function SkillDoc({
           {tabbed && tabs.length > 1 && (
             <Tabs
               value={tab}
-              onValueChange={(value) => setTab(value as Tab)}
+              onValueChange={(value) => {
+                // A framed drawing (an Anatomy `story`) that holds the focus is about to go. React would hand the
+                // focus back into its window, which is gone by then, so take the focus out first.
+                if (document.activeElement instanceof HTMLIFrameElement)
+                  document.activeElement.blur()
+                setTab(value as Tab)
+              }}
               className="skip-toc mt-6 border-b border-border"
             >
               <TabsList variant="line" className="-mb-px h-10">
@@ -889,8 +891,8 @@ export function SkillDoc({
               text={(tabbed ? panels[tab] : parts).join("\n")}
               after={after}
             />
-            {(tab === "overview" || !tabbed) && (
-              <Related component={component} file={here} />
+            {(tab === "overview" || !tabbed) && component && (
+              <UsedIn component={component} />
             )}
             {(tab === "code" || !tabbed) && code}
           </div>

@@ -1,15 +1,10 @@
 # Loading
 
-Loading states hold a page's shape in placeholder blocks while its data arrives.
-
-## When to use
-
-Use a loading state whenever a page or a card is waiting for its data. The app builds every loading state from the
-library's skeleton blocks, in the page's own shape.
+A loading state shows the shape of a page or a card in placeholder blocks while its data arrives, so nothing moves when the data lands.
 
 ## What is available
 
-A loading state comes in four layouts:
+The app builds every loading state from the library's skeleton blocks. A loading state comes in four layouts, one for each kind of page or card that waits for data:
 
 | Layout | Blocks |
 |---|---|
@@ -29,25 +24,22 @@ taller for rows with a second line.
 
 Stat tiles sit in one row once the page column is `@min-page-md` wide, as the real tiles do.
 
-The blocks are spaced like the page's sections, `gap-5` apart. A page that fills the full width loads at the full width
-too, so the column does not widen when the page lands.
+The blocks are spaced like the page's sections, `gap-5` apart. See [Page Layout](page-layout.md) for the spacing and
+width. A page that fills the full width loads at the full width too, so the column does not widen when the page lands.
+
+A list that changes while a person types keeps its last results on screen at reduced opacity while new ones load, so
+the list holds still. See [Global Search](../patterns/global-search.md) for its results and [Motion](../styles/motion.md)
+for the timing.
 
 ## Rules
 
-### Load in the page's own shape
+### 1. Load in the page's own shape
 
-- **Do:** Show blocks in the muted color where the title, toolbar, and rows will be, at their real sizes, so the page
-  does not jump when it loads.
-- **Don't:** Put a spinner in the middle of an empty page. Load in the page's own shape, so people see what is coming.
+A loading state places a block at the real size of each part, where that part will be. The page then does not jump
+when it loads, and people see what is coming.
 
-## When you can do it differently
-
-A list that changes while the user types keeps its last results, shown at reduced opacity, while new ones load. See
-[Global Search](../patterns/global-search.md) for its results.
-
-## Works with
-
-- See [Page Layout](page-layout.md) for the spacing and width it keeps.
+- **Do:** Show a table page's title, filters, and rows as muted blocks at their real widths and heights.
+- **Don't:** Put a spinner in the middle of an empty page.
 
 ## In code
 

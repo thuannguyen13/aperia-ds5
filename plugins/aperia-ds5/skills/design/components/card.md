@@ -1,11 +1,24 @@
 # Card
 
-A card is a surface that groups one kind of content under a title. See [Cards and Tiles](../patterns/cards-and-tiles.md)
-for how cards sit on a page.
+A card groups content that belongs together under a title, such as Details, Tasks, or Recent Activity. See [Cards and
+Tiles](../patterns/cards-and-tiles.md) for how cards sit on a page.
+
+## Anatomy
+
+A card has three parts, which are a header, its content, and a footer. The header holds a title, an optional figure,
+and an optional action. The footer, the figure, and the action show only on some cards. A Tasks card shows every part.
+
+1. **Header**. It is the top row of the card, and it holds the title, an optional figure, and an optional action.
+2. **Title**. It is the card's name, such as "Tasks". It is a heading, and it is semibold.
+3. **Figure** (optional). It is a small number in muted text beside the title, such as a count of 3.
+4. **Action** (optional). It is a button at the right end of the header, such as Add.
+5. **Content**. It is the body of the card, under the header. It can be a table, a list, fields, or a chart.
+6. **Footer** (optional). It is a band at the bottom of the card, under a divider. It holds a line of muted text, such
+   as when the card was last updated.
 
 ## When to use
 
-Use a card to group content that belongs together and has a name, such as Details, Tasks, or Recent Activity.
+Use a card for content that belongs together and has a name.
 
 Do not use a card for a whole page. See [Tables](../patterns/tables.md) for where a list's table sits.
 
@@ -14,21 +27,7 @@ apart inside a card instead.
 
 ## What is available
 
-A card has three parts and comes in three types, titled, collapsible, and small. Every type has the titled header.
-
-### Parts
-
-A card has three parts, listed from top to bottom:
-
-| Part | Content |
-|---|---|
-| Header | One line with the title, an optional figure such as a count, and an optional action such as Add |
-| Content | A table, a list, fields, or a chart |
-| Footer, when there is one | A band at the bottom of the card, under a divider |
-
-Each part holds its own space. The header has a fixed height, and the content and the footer have their own padding.
-The card adds no space between the parts. When a part hides, such as the content of a collapsed card or an error that
-clears, its space goes with it. The other parts stay where they were.
+A card comes in three types, titled, collapsible, and small. Every type has the titled header.
 
 ### Titled card
 
@@ -46,6 +45,9 @@ A small card has tighter padding, `p-3` instead of `p-4`, and a smaller title.
 
 ### Specs
 
+See [Border and Radius](../styles/border-and-radius.md) and [Elevation](../styles/elevation.md) for the corner, edge,
+and shadow that the table names.
+
 | | Default | Small |
 |---|---|---|
 | Corners | Extra large corner | Extra large corner |
@@ -59,10 +61,28 @@ A small card has tighter padding, `p-3` instead of `p-4`, and a smaller title.
 
 ## How it looks and behaves
 
-A card's title is a heading at level 2, so screen reader users can jump between cards.
+The card adds no space between its parts. The header has a fixed height, and the content and the footer each carry
+their padding. When a part hides, such as the content of a collapsed card or an error that
+clears, its space goes with it. The other parts stay where they were.
+
+The header is one row, the same height on every card, so the first lines of cards side by side line up. The title, the
+figure, and the action share that row. Where they do not fit side by side, as on a phone, the action drops under the
+title and stays at the right.
+
+A card's title is semibold and one step below the page title, so a page has one top heading. The title is a heading at
+level 2, so screen reader users can jump between cards.
 
 A collapsible card's title is a button. It tells a screen reader whether the card is open and which content it
 controls.
+
+A card works with other parts as follows:
+
+- **Add.** An Add button sits in the action part of the header. An empty card has no Add in its header. Add sits in the
+  middle of the empty state instead. See [Cards and Tiles](../patterns/cards-and-tiles.md) for why.
+- **Table.** A table runs flush to the card's edges, with no top border. See [Tables](../patterns/tables.md) for the
+  column headings right under the header.
+- **Empty state.** An empty state fills an empty card, so the card keeps its place. See [Empty
+  States](../foundations/empty-states.md).
 
 ### States
 
@@ -77,41 +97,29 @@ three states.
 
 ## Rules
 
-### Head every card the same way
+### 1. Head every card the same way
 
-- **Do:** Put the title, a count, and the action on one line, the same height on every card, so people find them in one
-  place.
-- **Don't:** Draw a card's header yourself, or make its title as large as the page title. Use the card's own header, so
-  cards line up.
+Every card uses the card's own header, which keeps the title, figure, and action on one row. Cards then line up, and
+people find the same parts in the same place.
 
-### Hide content with the title, not text buttons
+- **Do:** Put the title, a count, and Add on one row in the card's header.
+- **Don't:** Build a header by hand, such as a title as large as the page title with the count inside it and a button
+  under it.
 
-- **Do:** Open and close the card with its title and chevron, so every card works the same way.
-- **Don't:** Add "Show" and "Hide" buttons. Use the title and chevron, so the card takes no extra room.
+### 2. Hide content with the title, not text buttons
 
-### Put tabs inside the card
+A collapsible card opens and closes from its title and chevron, so every card works the same way and no extra button
+takes room.
 
-- **Do:** Put tabs that switch a card's content inside it, under its header, so people see what they control.
-- **Don't:** Float tabs above the card. Put them under the card's header, so it is clear what they switch.
+- **Do:** Let people select the title and chevron to hide a card's table.
+- **Don't:** Add Show and Hide buttons to the header.
 
-## When you can do it differently
+### 3. Put tabs inside the card
 
-- While a card is empty, its Add button moves from the header to the middle of the empty state.
+Tabs that switch a card's content sit inside the card, under its header, so people see what the tabs control.
 
-## Works with
-
-| Component | How it works with a card |
-|---|---|
-| Button | Add sits in the card header. |
-| Table | A table runs flush to the card's edges, with no top border. |
-| Empty State | An empty state fills an empty card. |
-| Tabs | Tabs sit inside the card, under its header. |
-| Page header | The page title is larger. A card's title is one step below it. |
-
-See [Tables](../patterns/tables.md) for running a table to the card's edges, with the column headings right under the
-card header. See [Empty States](../foundations/empty-states.md) for keeping an empty card in its place. See [Border and
-Radius](../styles/border-and-radius.md) and [Elevation](../styles/elevation.md) for the corner, edge, and shadow
-the Specs name.
+- **Do:** Put Notes and Calls tabs inside the Activity card, under its title.
+- **Don't:** Float the tabs above the card, where they look like they switch the page.
 
 ## In code
 

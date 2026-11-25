@@ -1,40 +1,40 @@
 # List Toolbar
 
-A list toolbar holds the controls that change or add to one list, such as its search, filters, Sort, and Add, in one
-row above it.
-
-## When to use
-
-Use a list toolbar above every list that people search, filter, sort, or add to, such as a table of prospects or a
-board of opportunities. A short list inside a card has no toolbar. Its Sort and Add sit in the card's header. See
-[Sort](sort.md) for Sort in a card.
-
-## What is available
-
-A list toolbar comes in one layout. Its controls are listed under Anatomy. Its filters come in two forms. Advanced
-filters are one Filter button that opens the filters in a popover. Simple filters are fixed controls on the row, for a
-list with four filters or fewer. See [Filters](filters.md) for choosing between them.
-
-The toolbar holds nothing else. The list's count sits in the footer under the list. See [Paging](paging.md) for the
-footer. While rows are selected, a selection bar takes the place of the list's actions, and the search, the filters,
-and Sort stay. See [Selecting Rows](selecting-rows.md) for that bar.
+A list toolbar gives people the controls that find, narrow, order, and add to one list, in one row above it. See
+[Global Search](global-search.md) for finding any record in the app.
 
 ## Anatomy
 
-A list toolbar needs at least one control. Every control is optional, and the controls a list shows keep this order.
-The search and the filters sit at the left end. Sort and the list's actions sit at the right end.
+A list toolbar has four parts, a search, the filters, Sort, and the list's actions. Each shows only when the list needs
+it, and a toolbar has at least one.
 
 1. **Search** (optional). It is a search box that names what it searches, such as "Search prospects", and finds rows
    in this list only.
-2. **Filters** (optional). They follow the search, as the Filter button or as fixed controls. See
-   [Filters](filters.md).
-3. **Sort** (optional). It is the Sort control. See [Sort](sort.md).
-4. **Actions** (optional). They are the list's own actions, such as Import and Add Prospect, with the primary action
-   last.
+2. **Filters** (optional). They are either one Filter button that opens the filters in a popover, or fixed controls
+   on the row. See [Filters](filters.md) for choosing between them.
+3. **Sort** (optional). It is a button that opens a panel for choosing the list's order. See [Sort](sort.md).
+4. **Actions** (optional). They are buttons for the list's own actions, such as Import and Add Prospect, with the
+   primary action last.
+
+## When to use
+
+Give a list a toolbar when people search, filter, sort, or add to it, such as a table of prospects or a board of
+opportunities. A short list inside a card has no toolbar. Its Sort and Add sit in the card's header. See
+[Sort](sort.md) for Sort in a card.
 
 ## How it looks and behaves
 
 The toolbar is a section of its own between the page header and the list, `gap-5` from each. It is one row on a desktop.
+
+An app can add a control that only it needs to the toolbar's slot, which sits before Sort. A board's Board / Table
+switch is one such control. A list that people work by moving records between states, such as opportunities by stage,
+can be a board. Its switch goes in the slot, and the board fills the full width of the page.
+
+The toolbar holds only its four parts and the slot. The list's count sits in the footer under the list. See
+[Paging](paging.md) for the footer.
+
+While rows are selected, a selection bar takes the place of the list's actions, and the search, the filters, and Sort
+stay. See [Selecting Rows](selecting-rows.md) for that bar.
 
 A search or a filter that matches nothing keeps the toolbar, and "No Results" takes the list's place. When the list
 has no records at all, the toolbar is gone, its slot's controls included. See
@@ -51,35 +51,22 @@ for every part on a phone.
 
 ## Rules
 
-### Use one toolbar in one order
+### 1. Use one toolbar in one order
 
-- **Do:** Lay out the search and the filters on the left, then Sort and the list's actions on the right, on every list,
-  so people know where everything is.
-- **Don't:** Give the app its own toolbar order, or set a search box against the page title. Use the shared toolbar, so
-  every list works the same.
+Every list uses the shared toolbar. The search and the filters sit at the left end. Sort and the list's actions sit at
+the right end, so people know where everything is on every list.
 
-### Keep the list's actions with the list
+- **Do:** Use the shared toolbar for a table and for a board.
+- **Don't:** Give the app its own toolbar order, or set a search box against the page title.
 
-- **Do:** Put the actions that add to the list or work on it, such as Add Prospect, Import, or Export, at the
-  toolbar's right end, so they sit beside the list they change.
-- **Don't:** Put the list's actions in the page header, or put a control that does not change the list, such as a
-  date or a picker of saved views, in the toolbar. Keep the toolbar to the list's own controls, so it reads the same
-  in every app.
+### 2. Keep the list's actions with the list
 
-## When you can do it differently
+The actions that add to the list or work on it sit at the toolbar's right end, beside the list they change. The toolbar
+holds only the list's own controls, so it reads the same in every app.
 
-An app can add a control that only it needs to the toolbar's slot, which sits before Sort. A board's Board / Table
-switch is one such control. A list that people work by moving records between states, such as opportunities by stage,
-can be a board, and its switch goes in the slot. The board fills the full width of the page.
-
-## Works with
-
-- See [Filters](filters.md) and [Sort](sort.md) for the toolbar's controls. The toolbar's search finds rows in this list
-  only. See [Global Search](global-search.md) for finding any record in the app.
-- See [Paging](paging.md) for the count and the pages under the list.
-- See [Tables](tables.md) for the table under the toolbar.
-- See [Page Header](page-header.md) for the header above it.
-- See [Loading](../foundations/loading.md) for the list's shape while it loads.
+- **Do:** Put Add Prospect, Import, and Export in the toolbar.
+- **Don't:** Put the list's actions in the page header. Keep out of the toolbar any control that does not change the
+  list, such as a date or a picker of saved views.
 
 ## In code
 

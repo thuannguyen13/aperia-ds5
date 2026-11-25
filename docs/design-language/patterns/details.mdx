@@ -2,14 +2,19 @@ import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/details.md?raw"
 import * as DetailSection from "../recipes/detail-section.stories"
 import { SkillDoc } from "../skill-doc"
+import { detailsAnatomy } from "../examples/details-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Content/Details" />
 
 <SkillDoc
   source={source}
   after={{
+    "Anatomy": detailsAnatomy,
     "What is available": (
-      <Canvas of={DetailSection.InCard} sourceState="none" />
+      <Captioned caption="Facts in a row. Each has a small label over its value, and two show an empty value and an empty optional field.">
+        <Canvas of={DetailSection.Facts} sourceState="none" />
+      </Captioned>
     ),
   }}
 />

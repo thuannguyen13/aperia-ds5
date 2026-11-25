@@ -2,7 +2,14 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/styles/icons.md?raw"
 import { SkillDoc } from "../skill-doc"
 import { iconsExamples } from "../examples/foundations"
+import { iconsRuleExamples } from "../examples/icons-rules"
 
 <Meta title="Styles/Icons" />
 
-<SkillDoc source={source} after={iconsExamples} />
+<SkillDoc
+  source={source}
+  after={{
+    "What is available": iconsExamples["What is available"],
+    ...iconsRuleExamples,
+  }}
+/>

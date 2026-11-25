@@ -4,6 +4,7 @@ import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.s
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
 import { listToolbarAnatomy } from "../examples/pattern-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Lists/List Toolbar" />
 
@@ -11,12 +12,16 @@ import { listToolbarAnatomy } from "../examples/pattern-anatomy"
   source={source}
   code={<PatternCode components={[{ name: "ListToolbar", stories: ListToolbar }]} />}
   after={{
-    "What is available": (
-      <Canvas of={ListToolbar.WithActions} sourceState="none" />
-    ),
     "Anatomy": listToolbarAnatomy,
-    "When you can do it differently": (
-      <Canvas of={ListToolbar.WithSlot} sourceState="none" />
+    "How it looks and behaves": (
+      <>
+        <Captioned caption="A table's toolbar with a filter on, Sort, and two actions.">
+          <Canvas of={ListToolbar.WithActions} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A board's toolbar, with the Board / Table switch in the slot before Sort.">
+          <Canvas of={ListToolbar.WithSlot} sourceState="none" />
+        </Captioned>
+      </>
     ),
   }}
 />

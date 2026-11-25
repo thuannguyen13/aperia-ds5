@@ -84,7 +84,7 @@ const KINDS: Kind[] = [
   },
 ]
 
-function serverSearch(query: string) {
+export function serverSearch(query: string) {
   const needle = query.trim()
   if (needle === "") return []
   return KINDS.map((kind) => ({
@@ -97,7 +97,7 @@ function serverSearch(query: string) {
   })).filter((kind) => kind.rows.length > 0)
 }
 
-function Marked({ text, query }: { text: string; query: string }) {
+export function Marked({ text, query }: { text: string; query: string }) {
   const range = matchRange(text, query)
   if (range === null) return text
   const [start, end] = range
@@ -112,7 +112,7 @@ function Marked({ text, query }: { text: string; query: string }) {
   )
 }
 
-function Picture({ name, square }: { name: string; square?: boolean }) {
+export function Picture({ name, square }: { name: string; square?: boolean }) {
   return (
     <Avatar size="xs" shape={square ? "square" : "circle"}>
       <AvatarFallback>{initials(name)}</AvatarFallback>
@@ -143,7 +143,7 @@ function SearchPanel() {
         <CommandInput
           value={query}
           onValueChange={setQuery}
-          placeholder="Search prospects, contacts and opportunities"
+          placeholder="Search prospects, contacts, and opportunities"
         />
         <CommandList
           className={cn(
@@ -330,7 +330,7 @@ function NotificationList({
   )
 }
 
-function NotificationsPanel() {
+export function NotificationsPanel() {
   const [notes, setNotes] = useState(NOTES)
   const unread = notes.filter((note) => !note.read)
   const open = (id: number) =>
@@ -469,7 +469,7 @@ export function SearchAndNotificationsBeforeAfter() {
             <Command shouldFilter={false} label="Search" className="h-auto">
               <CommandInput
                 aria-label="Search"
-                placeholder="Search prospects, contacts and opportunities"
+                placeholder="Search prospects, contacts, and opportunities"
                 value="nor"
                 readOnly
               />

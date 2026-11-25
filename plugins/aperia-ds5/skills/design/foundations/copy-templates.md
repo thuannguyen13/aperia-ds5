@@ -1,20 +1,16 @@
 # Message Templates
 
-Message templates give fixed wording for confirmations, errors, successes, empty states, and other messages.
-See [Copy](copy.md) for the rules behind the wording.
-
-## When to use
-
-Use a template whenever the app asks, warns, refuses, fails, succeeds, or has nothing to show.
-
-These templates are built on Aperia's User Interface Style Guide V4.3.
+Message templates give each message an app shows the same words every time it asks, warns, refuses, fails, succeeds, or
+has nothing to show. See [Copy](copy.md) for the rules behind the wording.
 
 ## What is available
 
-Templates come in eight groups, one per subsection below. Examples such as "Acme Renewal" stand for any record.
+Templates come in eight groups, one per subsection below, and follow Aperia's User Interface Style Guide V4.3. Examples such as "Acme Renewal" stand for any record.
 
-Angle brackets mark what you fill in. \<Item\> is the record as people name it in the app, which is its glossary word
-and never a table or column name. \<Action\> is a present-tense verb.
+Angle brackets mark what you fill in. \<Item\> is the record as people name it in the app. It is its glossary word and
+never a table or column name.
+
+\<Action\> is a present-tense verb.
 
 Every message is a complete sentence with its full stop, or a question with its question mark. A message uses plain
 words, with no capitals for emphasis, no contractions, no "please", and no exclamation mark. A message's title is in
@@ -80,8 +76,7 @@ A success message names the item and the action done to it.
 |---|---|
 | \<Item\> \<past-tense action\>. | Note added. · Case created. · Card status updated. · Transaction removed. |
 
-A success message is usually a toast that closes on its own. It never uses "has been", "successfully", or more than
-the result.
+A success message never uses "has been", "successfully", or more than the result.
 
 ### Empty and no results
 
@@ -121,32 +116,21 @@ Values and working states use the fixed wording in this table.
 
 ## How it looks and behaves
 
-A toast that closes on its own is only for a success. Every toast shows in one stack at the top right of the screen.
-See [Errors and Validation](errors-and-validation.md) for where an error or a failure shows, and
-[Saving and Feedback](saving-and-feedback.md) for where toasts show on a phone and how many show at once.
+A success message is usually a toast that closes on its own. A toast with a failure stays until it is closed.
+
+See [Errors and Validation](errors-and-validation.md) for where an error or a failure shows. See
+[Saving and Feedback](saving-and-feedback.md) for when a success is shown, where toasts show, and how many show at once.
 
 ## Rules
 
-### Fill in the template
+### 1. Use the template's words
 
-- **Do:** Build the message from \<Item\> \<past-tense action\> ("Note added."), so people see what happened at a
-  glance.
-- **Don't:** Write "Your note has been successfully added!" Fill in the template and stop, so the message stays quick to
-  read.
+A message that has a template uses its wording, so the same situation reads the same in every app. A screen departs from
+a template only for a business reason the app has recorded.
 
-## When you can do it differently
-
-A screen may depart from a template only for a business reason the app has recorded.
-
-## Works with
-
-- See [Errors and Validation](errors-and-validation.md) for the words of every error and where each one shows.
-- See [Copy](copy.md) for voice, case, punctuation, and formats. Copy also holds the rules for naming the action on a
-  button and for asking with the action's name.
-- See [Saving and Feedback](saving-and-feedback.md) for when a change saves, its working state, and when it offers
-  Undo.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for when an action is left out instead of disabled.
-- See [Banner Alerts](../patterns/banner-alerts.md) for where a message about the whole page sits.
+- **Do:** Write "Profile failed to update." from \<Item\> failed to \<action\>.
+- **Don't:** Write "Your note has been successfully added!" where the template gives "Note added." Rewording a template
+  makes one situation read two ways.
 
 ## In code
 

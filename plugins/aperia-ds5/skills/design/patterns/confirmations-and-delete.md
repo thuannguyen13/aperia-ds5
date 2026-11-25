@@ -1,114 +1,100 @@
 # Confirmations and Delete
 
-A confirmation is a small dialog that asks before a change that cannot be undone, such as a delete.
+A confirmation makes people approve a change that cannot be undone before the app makes it, and it is how a record is
+deleted. See [Dialog](../components/dialog.md) for the dialog it is built on.
+
+## Anatomy
+
+A confirmation has five parts, the dialog and the four parts inside it. A delete confirmation opens over a record's page
+and asks before the record is deleted. After a failed delete, an error line also shows above the buttons.
+
+1. **Dialog**. It is a small alert dialog, centered over a dimmed page, that holds focus until people choose.
+2. **Title**. It is the question that names the change, such as "Delete Prospect?".
+3. **Consequence**. It is one line of text under the title that says what will happen, such as "This permanently
+   deletes Harbor Lane Bistro and its 3 contacts."
+4. **Cancel**. It is a button that closes the dialog and changes nothing.
+5. **Action**. It is the button that makes the change. Its label names the change, such as "Delete Prospect".
 
 ## When to use
 
 Use a confirmation in three cases:
 
 - Before deleting or removing something, such as Delete Prospect, Remove Member, or Revoke Access.
-- Before a step whose consequence the user must know first, such as Apply Template, which replaces lines already there.
+- Before a step whose consequence people must know first, such as Apply Template, which replaces lines already there.
 - Before dropping what was typed in a form, with the question "Discard Changes?".
 
-Do not use a confirmation for a save. A save goes through, or is refused in place.
+Do not use a confirmation for a save, which goes through or is refused in place. Do not use one for a change that people
+can take back either, which saves at once and offers Undo. See
+[Saving and Feedback](../foundations/saving-and-feedback.md) for Undo.
+
+A status change that needs a reason uses the reason dialog, not a confirmation. It shows the change and a field for the
+reason, and its action is named after the change, such as "Change to Lost". See [Dialog](../components/dialog.md) for
+the reason dialog.
 
 ## What is available
 
-A confirmation has a title, one line on the consequence, and two buttons. The title names the change as a question,
-such as "Delete Prospect?". The line states the consequence, such as "This permanently deletes the prospect and its
-files." Cancel and the named action follow, such as "Delete Prospect".
-
 A confirmation comes in two types:
 
-| Type | Action color | Use when |
+| Type | Use when | Example |
 |---|---|---|
-| Destructive | Destructive | The usual case, because most confirmations guard something that cannot be undone |
-| Non-destructive | Primary | A step that changes content without deleting a record, such as Apply Template |
-
-Delete has one place on each record, and the confirmation repeats it as its action. A record with its own page has
-Delete last in its page header. A small record, which opens in a sheet, has Delete at the start of the sheet's footer,
-in the destructive color and away from Save. See [Tables](tables.md) for which records have a page.
+| Destructive | The change removes something or cannot be taken back. Most confirmations are this type. | Delete Prospect, Remove Member |
+| Non-destructive | The step changes content without deleting a record. | Apply Template |
 
 ## How it looks and behaves
 
-A confirmation opens, waits for a choice, and closes in this order:
+A confirmation opens from the button that starts the change, and nothing changes until people press its action. See
+[Dialog](../components/dialog.md) for how the dialog opens, holds focus, closes, and stacks its buttons on a phone. See
+[Message Templates](../foundations/copy-templates.md) for the words of the title, the line, and the buttons.
 
-1. The dialog opens centered over a dimmed page and grows in slightly.
-2. Cancel, then the action, sit at the bottom right. On a phone the buttons stack, with the action on top.
-   See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
-3. While the delete runs, the action shows a spinner beside its label, and Cancel is disabled. The confirmation stays
-   open.
-4. A failed delete shows its error above the buttons, such as "Prospect failed to delete. Try again." The
-   confirmation stays open, so people can try again or cancel.
-5. A delete that goes through closes the confirmation, and a toast states the result, such as "Prospect deleted."
-6. After a delete from a record's page, people land on the list that the record came from.
-7. A confirmation opened from a small record's sheet sits over the sheet, which stays as it was under it. Once the
+1. While the change runs, the action shows a spinner beside its label, and Cancel is disabled. Escape does not close
+   the confirmation either.
+2. A failed change shows its error above the buttons, such as "Prospect failed to delete. Try again." The confirmation
+   stays open. People can try again or cancel (Confirmations and Delete 4).
+3. A change that goes through closes the confirmation, and a toast states the result, such as "Prospect deleted." See
+   [Saving and Feedback](../foundations/saving-and-feedback.md) for toasts.
+4. After a delete from a record's page, people land on the list that the record came from.
+5. A confirmation opened from a small record's sheet sits over the sheet, which stays as it was under it. Once the
    record is deleted, the sheet closes too.
-8. Closing the confirmation by Cancel or Escape puts focus back on what opened it.
-
-A Delete that cannot be used stays on screen. It says why on hover and focus, with "This item is in use and cannot be
-deleted."
+6. A Delete that cannot be used stays on screen and says why on hover and focus. See
+   [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for when a Delete is blocked and for its words.
 
 ## Rules
 
-### Name the change, as a question
+### 1. Name the change, as a question
 
-- **Do:** Ask the change as a question ("Delete Prospect?") with a matching action ("Delete Prospect"), so people know
-  exactly what they are confirming.
-- **Don't:** Write "Are you sure?", "Confirm Delete Prospect", or a bare "Delete", "OK", or "Yes". Name the change, so
-  people read what will happen.
+The title asks the change as a question, and the action repeats it, so people read what will happen before they press.
 
-### Say the consequence in one line
+- **Do:** Ask "Delete Project?" and label the action "Delete Project".
+- **Don't:** Write "Are you sure?", "Confirm Delete Project", or a bare "Delete", "OK", or "Yes".
 
-- **Do:** Say the consequence in one line ("This permanently deletes the note."), so people decide at a glance.
-- **Don't:** Write a paragraph about what the app does next, or skip the line when the delete also removes related
-  items (such as files). Keep one plain line, so people read it.
+### 2. Use the destructive color for removal
 
-### Use the destructive color for removal
+The action's color shows the kind of change before people press it. Delete, Remove, and Revoke use the destructive
+color, and a step that deletes no record, such as Apply Template, uses the primary color. The destructive color then
+always means removal.
 
-- **Do:** Use the destructive color on Delete, Remove, and Revoke, and the primary color on a step that deletes no
-  record, so the color warns before the click.
-- **Don't:** Put Delete in the primary color, or Apply Template in the destructive color. Match the color to the action,
-  so the destructive color always means removal.
+- **Do:** Show Delete Project in the destructive color.
+- **Don't:** Show Delete in the primary color, or Apply Template in the destructive color.
 
-### Keep Delete on the record
+### 3. Keep Delete on the record
 
-- **Do:** Put Delete last in a record page's header, or first in a small record's sheet footer, so it is deliberate and
-  easy to find.
-- **Don't:** Put Delete on every table row, or beside Save in the sheet's footer. Keep it on the record, so no one
-  deletes by accident.
+A record has one Delete, where the record opens, so no one deletes it by accident from a list. A record with its own
+page has Delete last of its page header's actions, inside the More actions menu when there are four or more actions. A
+small record, which opens in a sheet, has Delete at the start of the sheet's footer, in the destructive color and away
+from Save. See [Tables](tables.md) for which records have a page.
 
-### Keep the confirmation open when a delete fails
+An entry written inside a card, such as a note, is the exception. Its author deletes it from the entry, and it still
+asks first, such as with "Delete Note?". See [Tables](tables.md) for that button.
 
-- **Do:** Show the error inside the confirmation, above its buttons ("Prospect failed to delete. Try again."), and keep
-  it open, so people can try again where they started.
-- **Don't:** Close the confirmation and show the failure in a toast, or close it with no word. Keep it open with the
-  error, so no one believes the record is gone.
+- **Don't:** Put a Delete button on every table row, or beside Save in the sheet's footer.
 
-### Say why a record cannot be deleted
+### 4. Keep the confirmation open when a delete fails
 
-- **Do:** Keep a Delete on screen that says "This item is in use and cannot be deleted." on hover and focus, so people
-  know why.
-- **Don't:** Make Delete disappear without a word, or offer one that then fails. Keep it with its reason, so nothing
-  surprises people.
+A failed delete shows its error inside the confirmation, so people can try again where they started. A closed
+confirmation tells people the record is gone.
 
-## When you can do it differently
-
-An entry that someone wrote inside a card, such as a note, can be deleted by its author from the entry itself, with a
-small delete icon. The icon shows on hover or focus, and always on touch screens. It still asks first, such as with
-"Delete Note?".
-
-A status change with a reason uses the reason dialog, with the change shown and a reason to fill in. Its action is
-named after the change, such as "Change to Lost". See [Dialog](../components/dialog.md) for the reason dialog.
-
-## Works with
-
-- See [Forms in Sheets](forms-in-sheets.md) for Delete in the sheet's footer and for Discard Changes?, which guards what
-  was typed. Forms in Sheets also holds the choice between a sheet, a dialog, and a page of its own.
-- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the in-use phrases.
-- See [Buttons and Actions](buttons-and-actions.md) for button types and labels.
-- See [Dialog](../components/dialog.md) for the dialog itself.
-- See [Saving and Feedback](../foundations/saving-and-feedback.md) for a change that offers Undo instead of asking.
+- **Do:** Show "Project failed to delete. Try again." above the buttons, with the confirmation still open.
+- **Don't:** Close the confirmation and show the failure in a toast, or close it with no word.
 
 ## In code
 

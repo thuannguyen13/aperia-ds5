@@ -1,111 +1,74 @@
 # Forms in Sheets
 
-A form in a sheet is a panel that slides in from the right to add or edit a record.
+A form in a sheet lets people add or edit a record without leaving the page they are on. See [Tables](tables.md) for which records open in a sheet and which open on a page.
+
+## Anatomy
+
+A form in a sheet has nine parts. The section and Delete show only sometimes. The parts are those of the sheet that
+edits a contact, open over the contacts list.
+
+1. **Sheet**. It is a panel that slides in from the right over the page, with the page dimmed behind it. It holds a header, the form, and a footer.
+2. **Title**. It is the text in the sheet's header that names the task, such as "Add Contact" or "Edit Prospect". A line under the header separates it from the fields.
+3. **Close button**. It is an icon button (×) at the end of the header that closes the sheet, the same as Cancel.
+4. **Section** (optional). It is a titled group of fields in a long form, such as Details or Portfolio. A line across the whole sheet sits above its title. The first section has no line, because the header already draws one.
+5. **Label**. It is the text above a field's control that names what goes there, such as "Email". An optional field's label ends with "(Optional)". See [Copy](../foundations/copy.md) for how a label and a placeholder read.
+6. **Control**. It is the input where people enter or pick the value, such as a text field or a text area.
+7. **Delete** (optional). It is a destructive button at the start of the footer. A small record that has no page of its own shows it. See [Confirmations and Delete](confirmations-and-delete.md).
+8. **Cancel**. It is a button without a fill at the right of the footer that closes the sheet. A read-only sheet shows Close in its place.
+9. **Save button**. It is the primary button at the end of the footer. Its label is a verb and its object, such as "Save Changes" or "Add Contact".
 
 ## When to use
 
-Use a form in a sheet to add a record or change one, such as Add Contact or Edit Prospect. Open it from anywhere the
-record is added or edited, such as its list, its page, a card, or a picker in another form.
-
-### A sheet, a dialog, or a page of its own
-
-Where a task opens depends on what people do in it. Tables show records, sheets edit them, and dialogs ask a short
-question. Find the situation in this table:
+A task opens in a sheet, a dialog, or a page of its own, depending on what people do in it. Find the situation in this table:
 
 | Situation | Choice | Why |
 |---|---|---|
 | Adding or editing a record, such as Add Contact or Edit Prospect | A form in a sheet from the right | Each record has one form, the same wherever the record is added or edited. |
 | Reading a record with its own related content, such as a prospect with contacts and activity | The record's own page, never a sheet or a dialog | The whole record is in view on one page of cards. |
-| Reading a small record, such as an option, a note, a line item, or a task | Its sheet, read-only when the person may not change it | The record is a few fields, so one panel holds it. See [Tables](tables.md) for which records have a page. |
-| Deleting or removing something, or a step whose consequence people must know first | A confirmation, which is a dialog | It must be answered before the change happens. See [Confirmations and Delete](confirmations-and-delete.md). |
-| Closing a sheet after typing in it | "Discard Changes?" in a dialog over the sheet | No one loses what they typed by accident. |
-| A short question that needs an answer before people go on | A dialog | It holds one decision and closes. See [Dialog](../components/dialog.md) for the four kinds of dialog. |
+| Reading a small record, such as an option, a note, a line item, or a task | Its sheet, read-only when the person may not change it | The record is a few fields, so one panel holds it. |
+| Deleting or removing something, or a step whose consequence people must know first | A confirmation, which is a dialog. See [Confirmations and Delete](confirmations-and-delete.md). | It must be answered before the change happens. |
+| A short question that needs an answer before people go on | A dialog. See [Dialog](../components/dialog.md) for the four kinds of dialog. | It holds one decision and closes. |
 | Changing a record's status with a reason | A small panel under the status from a table row, or the reason dialog from the record's page or a board drop | A status change is not a record form, so it never opens a sheet. |
-| Editing rows of amounts that add up, such as an opportunity's line items | One wider sheet, with a titled card per group | The page shows the lines read-only, so no one changes an amount by accident. |
-| Turning settings on and off, such as Notification Settings | A sheet of switches with no Save button | Each switch saves as it is flipped. See [Switches in a Grid](switches-in-a-grid.md). |
+| Turning settings on and off, such as Notification Settings | A sheet of switches with no save button. See [Switches in a Grid](switches-in-a-grid.md). | Each switch saves as it is flipped. |
 | Bringing records in from a file | A small panel under the Import button, then the review dialog | The review saves nothing, and the list refreshes when the dialog closes. |
 
 ## What is available
 
-Each record has one form. The same form adds and edits the record, wherever that happens.
+A form in a sheet comes in three kinds:
 
-A form in a sheet has four parts, listed from top to bottom:
-
-| Part | Content |
-|---|---|
-| Header | The title, such as "Add Contact" or "Edit Prospect" |
-| Fields | The form's fields, under the header |
-| Sections | Titled parts of a long form, such as Details or Portfolio, each with a line across the whole sheet above its title |
-| Footer | Cancel, then the save button (such as "Save Changes" or "Add Contact"), at the right. On a small record that has no page of its own, Delete sits at the left. See [Confirmations and Delete](confirmations-and-delete.md). |
-
-A read-only sheet serves someone who may read a small record but not change it. Its fields stay disabled. Its footer
-holds Close, plus Delete when the person may delete. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for when a
-sheet opens read-only.
+| Kind | Used for | What differs |
+|---|---|---|
+| Form sheet | Adding or editing a record | The footer holds Cancel and the save button, and Delete on a small record. |
+| Read-only sheet | A small record that the person may read but not change | The fields stay disabled. The footer holds Close in place of Cancel and the save button, plus Delete when the person may delete. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for when a sheet opens read-only. |
+| Wider sheet | Editing rows of amounts that add up, such as an opportunity's line items | It holds a titled card for each group of lines. The record's page shows the lines read-only, so no one changes an amount by accident. |
 
 ## How it looks and behaves
 
 A form in a sheet goes through these steps, from opening to closing:
 
-1. The sheet slides in from the right, set in from the window by `right-4`, with a `min-h-14` header. On a phone it fills the
-   screen. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+1. The sheet slides in from the right and sits in from the edges of the window, with rounded corners. On a phone the sheet takes the full width and height. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 2. The fields scroll between the header and the footer. The footer never scrolls away.
-3. While the save runs, the fields and the save button show the working state on
-   [Saving and Feedback](../foundations/saving-and-feedback.md).
-4. A save that goes through closes the sheet.
-5. A save that is refused leaves the sheet open with everything that was typed. See
-   [Errors and Validation](../foundations/errors-and-validation.md) for when the form is checked and where each
-   message shows.
-6. Closing after typing asks "Discard Changes?" first, and closing forgets what was typed. See
-   [Saving and Feedback](../foundations/saving-and-feedback.md) for every way a sheet closes.
+3. Pressing the save button checks the form. See [Errors and Validation](../foundations/errors-and-validation.md) for when the form is checked and where each message shows.
+4. While the save runs, the fields and the save button show the working state on [Saving and Feedback](../foundations/saving-and-feedback.md).
+5. A save that goes through closes the sheet, and a toast states the result.
+6. A save that is refused leaves the sheet open with everything that was typed.
+7. Closing after typing asks "Discard Changes?" first, and closing forgets what was typed. See [Saving and Feedback](../foundations/saving-and-feedback.md) for every way a sheet closes.
 
 ## Rules
 
-See [Saving and Feedback](../foundations/saving-and-feedback.md) for discarding a closed form's input.
+### 1. Use one form for each record
 
-### Use one form for each record
+Each record has one form. It adds and edits the record wherever that happens, such as a list, a page, or a picker, so people learn one form for each record.
 
-- **Do:** Open the same add form from a picker as from the record's list page (such as Add Prospect), so people learn
-  one form for each record.
-- **Don't:** Add a smaller "quick add" form beside the full one. Reuse the full form, so no record is saved half-filled.
+- **Do:** Open the same add form from a Prospect picker as from the prospects list.
+- **Don't:** Add a smaller "quick add" form beside the full one, so no record is saved half-filled.
 
-### Keep the sheet open when a save is refused
+### 2. Split a long form with sections
 
-- **Do:** Keep the sheet open with what was typed when a save is refused, so people fix the problem in place.
-- **Don't:** Close the sheet and show a toast saying the save failed. Keep the sheet open, so nothing typed is lost.
+A long form groups its fields under section titles, each with a line across the sheet, so the sheet stays flat and people find a group by its title. A sheet of line items is the one exception, and it uses a titled card for each group (see Wider sheet under What is available).
 
-### Mark optional fields, not required ones
-
-- **Do:** Mark only optional fields ("Phone (Optional)"), so required ones need no marker.
-- **Don't:** Put a red asterisk on every required field. Mark the optional ones, so the form carries fewer marks.
-
-### Give every field a short label
-
-- **Do:** Name the field in a short label ("Start Date") and use a placeholder only for an example ("name@example.com"),
-  so the label stays visible while typing.
-- **Don't:** Leave a field with only a placeholder, or write "Please enter the start date" as its label. Use a short
-  label, so people know what goes there.
-
-### Split a long form with sections
-
-- **Do:** Split a long form with a section title and a line across the sheet (Details, Portfolio), so it reads as parts.
-- **Don't:** Put boxes or cards inside the sheet to group fields. Use section titles, so the sheet stays flat and easy
-  to scan.
-
-## When you can do it differently
-
-A status change with a reason, rows of amounts that add up, and a settings sheet of switches each use another form.
-Each one is a row of the table under When to use.
-
-## Works with
-
-- See [Confirmations and Delete](confirmations-and-delete.md) for Delete at the footer's start and for Discard Changes?.
-- See [Pickers](pickers.md) for fields that pick a record, and for adding a missing one from the picker.
-- See [Tables](tables.md) for which records open on a page and which open in a sheet.
-- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for a field that waits on another.
-- See [Buttons and Actions](buttons-and-actions.md) for the footer's buttons.
-- See [Message Templates](../foundations/copy-templates.md) for choosing a toast, an alert, or a message on the field.
-- See [Saving and Feedback](../foundations/saving-and-feedback.md) for the working state, the toast after a save, and
-  Discard Changes?.
+- **Do:** Put a section title and a line across the sheet over each group, such as Details and Portfolio.
+- **Don't:** Put boxes or cards inside the sheet to group fields.
 
 ## In code
 

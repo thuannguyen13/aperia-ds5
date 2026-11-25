@@ -13,6 +13,7 @@ import {
 } from "aperia-ds5"
 import { DoDont, Example } from "../blocks"
 import { forceState, useForcedStates } from "../states"
+import { tableAnatomy } from "./table-anatomy"
 import { IconButton, TaskTable, TitledCard, Wide } from "./shared"
 
 const CONTACTS = [
@@ -82,7 +83,7 @@ const DEALS = [
   },
 ]
 
-function Deals({ signal }: { signal: "word" | "color" }) {
+function Deals() {
   return (
     <Table>
       <TableHeader>
@@ -103,25 +104,13 @@ function Deals({ signal }: { signal: "word" | "color" }) {
             <TableCell>
               {d.overdue == null ? (
                 <span className="text-muted-foreground">—</span>
-              ) : signal === "word" ? (
-                d.overdue > 0 ? (
-                  <span className="inline-flex items-center gap-1.5 text-destructive">
-                    <span className="size-1.5 rounded-full bg-destructive" />
-                    {d.overdue} overdue
-                  </span>
-                ) : (
-                  <span className="text-muted-foreground">None</span>
-                )
-              ) : (
-                <span
-                  className={
-                    d.overdue > 0
-                      ? "font-semibold text-destructive"
-                      : "text-green-700"
-                  }
-                >
-                  {d.overdue}
+              ) : d.overdue > 0 ? (
+                <span className="inline-flex items-center gap-1.5 text-destructive">
+                  <span className="size-1.5 rounded-full bg-destructive" />
+                  {d.overdue} overdue
                 </span>
+              ) : (
+                <span className="text-muted-foreground">None</span>
               )}
             </TableCell>
             <TableCell className="pr-4 text-right tabular-nums">
@@ -182,21 +171,22 @@ function RowStates() {
 }
 
 export const tableExamples = {
+  Anatomy: tableAnatomy,
   States: (
     <Example caption="Each row shows the state named in its first cell.">
       {inCard(<RowStates />)}
     </Example>
   ),
-  "@intro": (
-    <Example caption="Click a row, or Tab to it and press Enter: the whole row opens its record.">
+  "How it looks and behaves": (
+    <Example caption="A Prospects table. A missing overdue count is an em dash, and the volumes are right-aligned with tabular figures.">
       <div className="w-full max-w-xl">
         <TitledCard title="Prospects" figure={count}>
-          <Deals signal="word" />
+          <Deals />
         </TitledCard>
       </div>
     </Example>
   ),
-  "Open the record from the whole row": (
+  "Make the whole row open its record": (
     <DoDont
       stack
       good={inCard(<TaskTable />)}
@@ -258,26 +248,6 @@ export const tableExamples = {
           </TitledCard>
         </Wide>
       }
-    />
-  ),
-  "Pair every color with a word or an icon": (
-    <DoDont
-      stack
-      good={
-        <div className="w-full max-w-xl">
-          <TitledCard title="Prospects">
-            <Deals signal="word" />
-          </TitledCard>
-        </div>
-      }
-      bad={
-        <div className="w-full max-w-xl">
-          <TitledCard title="Prospects">
-            <Deals signal="color" />
-          </TitledCard>
-        </div>
-      }
-      badNote="a red or green number, with nothing saying what it means"
     />
   ),
   "Show contact details as plain text": (

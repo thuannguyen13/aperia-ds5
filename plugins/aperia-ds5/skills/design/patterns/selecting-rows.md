@@ -3,28 +3,6 @@
 Selecting rows lets people tick several records in a table and act on all of them at once, such as Export Selected,
 Edit Selected, or Delete Selected. See [Tables](tables.md) for the table itself.
 
-## When to use
-
-Use row selection on a list whose records people often act on together, such as exporting a set of merchants, moving
-several to one stage, or deleting old drafts. A list with no action for several records has no checkboxes.
-
-Selection is for some of a list's records. To act on every record the search and filters leave, use the list's own
-action in the toolbar, such as Export. See [List Toolbar](list-toolbar.md) for the list's actions.
-
-## What is available
-
-Row selection adds two parts to a list, a checkbox column and a selection bar. The checkbox column comes first in the
-table. The selection bar shows in the list toolbar's row while one or more rows are selected. It takes the place of
-the list's own actions, and the search, the filters, and Sort stay where they are.
-
-The selection bar offers up to three actions on the selected rows:
-
-| Action | What it does | The selection afterward |
-|---|---|---|
-| Export Selected | Downloads the selected records | Kept, so people can take another action on the same rows |
-| Edit Selected | Opens a sheet that sets one field to one value on every selected record | Kept, so people can take another action on the same rows |
-| Delete Selected | Asks first, then deletes the selected records | Cleared, because the records are gone |
-
 ## Anatomy
 
 A list with selection has four parts, from the top of the list to its rows. The selection bar shows only while a row is
@@ -36,11 +14,29 @@ selected.
 3. **Row checkbox**. It is a checkbox at the start of each row. It selects or clears that row.
 4. **Selected row**. It is a row whose checkbox is ticked, with the Muted fill of the table's Selected state.
 
+## When to use
+
+Use row selection on a list whose records people often act on together, such as exporting a set of merchants, moving
+several to one stage, or deleting old drafts.
+
+Selection is for some of a list's records. To act on every record the search and filters leave, use the list's own
+action in the toolbar, such as Export. See [List Toolbar](list-toolbar.md) for the list's actions.
+
+## What is available
+
+Row selection adds two parts to a list, a checkbox column and a selection bar. The selection bar offers up to three
+actions on the selected rows:
+
+| Action | What it does | The selection afterward |
+|---|---|---|
+| Export Selected | Downloads the selected records | Kept, so people can take another action on the same rows |
+| Edit Selected | Opens a sheet that sets one field to one value on every selected record | Kept, so people can take another action on the same rows |
+| Delete Selected | Asks first, then deletes the selected records | Cleared, because the records are gone |
+
 ## How it looks and behaves
 
-Ticking the first row swaps the list's own actions for the selection bar, at the toolbar's right end. The search, the
-filters, and Sort stay in place, so people can still narrow or reorder the list. Clearing the last row brings the
-list's actions back. The toolbar keeps its height, so the table under it does not move.
+Ticking the first row swaps the list's own actions for the selection bar. Clearing the last row brings the list's
+actions back. The toolbar keeps its height, so the table under it does not move.
 
 A checkbox keeps its own clicks. Ticking it never opens the row's record, and a click anywhere else on the row still
 opens the record. See [Table](../components/table.md) for the row's Selected state.
@@ -56,8 +52,11 @@ Select all has three looks:
 Selection works with paging, the search, and the filters in three ways:
 
 - The selection stays while people move between pages. The bar's count includes the selected rows on other pages.
-- A new search or a new filter clears the selection, so no row that is out of sight stays selected.
+- A new search or a new filter clears the selection.
 - A new sort keeps the selection, because the list holds the same records.
+
+A list that people work through one page at a time, such as a queue of records to review, can clear the selection on a
+new page too. The bar's count then always matches the rows in view.
 
 Edit Selected opens a sheet titled with the count, such as "Edit 3 Merchants". The sheet holds two fields:
 
@@ -65,10 +64,12 @@ Edit Selected opens a sheet titled with the count, such as "Edit 3 Merchants". T
 2. The second field takes the new value, with the same control that the record's own sheet uses for that field.
 
 Save Changes sets the value on every selected record. A toast then says what happened, such as "3 merchants updated."
+See [Forms in Sheets](forms-in-sheets.md) for the sheet.
 
 Delete Selected asks first, with the count in the question, such as "Delete 3 Merchants?". Once the records are gone,
 the selection clears. A toast then says what happened, such as "3 merchants deleted." See
-[Confirmations and Delete](confirmations-and-delete.md) for the confirmation.
+[Confirmations and Delete](confirmations-and-delete.md) for the confirmation. See
+[Message Templates](../foundations/copy-templates.md) for the words of the confirmation and the toast.
 
 When some of the selected records cannot be deleted, Delete Selected stays in the bar, disabled. Its reason shows on
 hover and focus, and it says how many of the records are blocked:
@@ -78,7 +79,8 @@ hover and focus, and it says how many of the records are blocked:
 | One | "1 of the selected merchants is in use and cannot be deleted." |
 | More than one | "2 of the selected merchants are in use and cannot be deleted." |
 
-People clear the blocked rows to delete the other records.
+People clear the blocked rows to delete the other records. See
+[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for how a reason shows.
 
 On a phone, the checkbox column stays first. The selection bar takes the toolbar's first row, in the place of the
 list's actions. The count and Clear Selection sit on one line, and the actions wrap onto the next when they do not fit.
@@ -88,54 +90,46 @@ A screen reader hears each row checkbox by its record's name, such as "Select Ha
 
 ## Rules
 
-### Add checkboxes only for an action on several rows
+### 1. Add checkboxes only for an action on several rows
 
-- **Do:** Add the checkbox column only when the list has an action for the selected rows, such as Delete Selected, so
-  a checkbox always leads somewhere.
-- **Don't:** Add checkboxes to a list with nothing to do with them, or tick a row to open it. Leave them out, so the
-  table stays plain and the row still opens its record.
+A list has the checkbox column only when it has an action for the selected rows, such as Delete Selected, so a checkbox
+always leads somewhere. A list with no such action has no checkboxes.
 
-### Name the count in the selection bar
+- **Do:** Bring up the actions on the selected rows as soon as a row is ticked.
+- **Don't:** Add checkboxes to a list that has nothing to do with a ticked row.
 
-- **Do:** Show a bar that says "3 selected", with Clear Selection and the actions beside it, so people see what they
-  are about to act on.
-- **Don't:** Leave Export and Delete grayed out in the toolbar until a row is ticked, or show the count only in the
-  footer. Show the bar, so the count and its actions sit together.
+### 2. Name the count in the selection bar
 
-### Keep the search, filters, and Sort in reach
+The selection bar says how many rows are selected, with Clear Selection and the actions beside the count, so people see
+what they are about to act on.
 
-- **Do:** Show the selection bar at the toolbar's right end, with the search, the filters, and Sort beside it, so people
-  can still narrow or reorder the list.
-- **Don't:** Swap the whole toolbar for the selection bar. Keep the toolbar's controls, so a new search never waits on
-  Clear Selection.
+- **Do:** Show the count and the actions together, such as "2 selected" beside Delete Selected.
+- **Don't:** Keep Export and Delete in the toolbar, grayed out until a row is ticked, or show the count only in the
+  footer. Nothing then says how many rows an action is about to change.
 
-### Select the rows on the page shown
+### 3. Keep the search, filters, and Sort in reach
 
-- **Do:** Let Select all tick the rows on the page shown, so people can see every row they act on.
-- **Don't:** Let one tick select every record on every page, out of sight. Keep Select all to the page, and use the
-  list's own action for the whole list.
+The selection bar takes the place of the list's own actions and nothing else. The search, the filters, and Sort stay
+beside the selection bar, so people can still narrow or reorder the list while rows are selected.
 
-### Clear the selection when the search or filters change
+- **Do:** Show the selection bar at the toolbar's right end, with the search beside it.
+- **Don't:** Swap the whole toolbar for the selection bar. A new search then means clearing the selection first.
 
-- **Do:** Clear the selection when people search or change a filter, so every selected row is one they can see.
-- **Don't:** Keep rows selected after a filter hides them, so that Delete Selected removes records no one can see.
-  Clear the selection, so the bar's count matches the rows in view.
+### 4. Select the rows on the page shown
 
-## When you can do it differently
+Select all ticks the rows on the page shown, so people can see every row they are about to act on.
 
-A list that people work through one page at a time, such as a queue of records to review, can clear the selection on a
-new page too. The bar's count then always matches the rows in view.
+- **Do:** Let Select all tick the rows in view, such as 4 of 57.
+- **Don't:** Let one tick select all 57 records, most of them on pages no one has opened.
 
-## Works with
+### 5. Clear the selection when the search or filters change
 
-- See [Tables](tables.md) for the table the checkboxes sit in.
-- See [List Toolbar](list-toolbar.md) for the toolbar that the selection bar sits in.
-- See [Paging](paging.md) for the footer under the list.
-- See [Forms in Sheets](forms-in-sheets.md) for the sheet that Edit Selected opens.
-- See [Confirmations and Delete](confirmations-and-delete.md) for the question before Delete Selected.
-- See [Message Templates](../foundations/copy-templates.md) for the confirmation and the toast that follows.
-- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for an action that some of the selected
-  records block.
+A new search or a new filter clears the selection, so every selected row is one people can see and the bar's count
+matches the rows in view.
+
+- **Do:** Clear the selection when a search narrows the list.
+- **Don't:** Keep rows selected after a search or a filter hides them. Delete Selected would then remove records that
+  no one can see.
 
 ## In code
 

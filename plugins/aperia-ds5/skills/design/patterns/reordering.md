@@ -1,11 +1,20 @@
 # Reordering
 
-Reordering lets people change the order of rows by dragging a grip or using the keyboard.
+Reordering lets people set the order of a list's rows by hand, by dragging a grip or using the keyboard.
+
+## Anatomy
+
+Reordering has three parts, a list, the rows in it, and a grip on each row that can move.
+
+1. **List**. It is the group of rows that move among one another, such as a table body or a stack of form rows. A row
+   never leaves its list.
+2. **Row**. It is one item of the list, such as a pipeline stage. A row holds its own content and its grip.
+3. **Grip**. It is an icon button at the start of a row. People drag it with a pointer or pick it up with the keyboard.
 
 ## When to use
 
-Use reordering for a list whose order the user chooses, such as the stages of a pipeline, the items of a template, or
-the columns of a view.
+Use reordering for a list whose order people choose, such as the stages of a pipeline, the items of a template, or the
+columns of a view.
 
 Do not use reordering to sort a list for reading. Sorting changes how rows show, not their saved order. See
 [Sort](sort.md) for sorting.
@@ -23,53 +32,48 @@ Reordering comes in two layouts:
 
 A row moves by pointer or by keyboard, and it stays inside its own list:
 
-1. Each row has a grip at its start, shown as two columns of dots, with the grab pointer.
-2. Dragging the grip moves the row up or down within its own list.
+1. The grip is drawn as two columns of dots, with the grab pointer.
+2. Dragging the grip lifts the row with a shadow and moves it up or down within its own list.
 3. From the keyboard, Tab reaches the grip. Space picks the row up. The arrow keys move it. Space drops it. Escape puts
    it back.
-4. A screen reader names the grip, such as "Reorder Demo", and reads out each step.
+4. A screen reader reads out each step, such as "Demo dropped at position 2 of 5."
 5. A held row stops at the edge of its list. It never slides sideways or over another list.
 6. Escape while a row is held only puts the row back. The sheet or dialog around the list stays open with its edits.
+
+Rows that cannot move come first. Each one has a lock icon and no grip. An example is a column that cannot be hidden in
+a view.
+
+A list of options in settings saves its new order at once, and the list itself shows the change, so no toast follows.
+On a form, the order saves with the form. See [Forms in Sheets](forms-in-sheets.md) for a reorderable list inside a
+form.
 
 On a phone, a finger on the grip drags the row, and the page holds still while the row moves. A swipe anywhere else
 on the row still scrolls the page. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ## Rules
 
-### Drag by the grip, or move from the keyboard
+### 1. Drag by the grip, or move from the keyboard
 
-- **Do:** Give each row a grip that a pointer drags and the keyboard picks up, so everyone can reorder.
-- **Don't:** Add Move Up and Move Down buttons, or arrows on every row. Use the grip, so rows stay uncluttered.
+Every row has one grip that a pointer drags and the keyboard picks up, so everyone can reorder and rows stay
+uncluttered.
 
-### Let a row's place set its order
+- **Do:** Give each row a grip and nothing else for moving.
+- **Don't:** Add Move Up and Move Down buttons, or arrows on every row.
 
-- **Do:** Let the row's place in the list be its order, so what people see is what is saved.
-- **Don't:** Add an Order or Position number field the user types into. Let them drag, so the order never falls out of
-  sync.
+### 2. Let a row's place set its order
 
-### Say "Move" only for moving
+A row's place in the list is its order, so what people see is what is saved.
 
-- **Do:** Name the grip with Reorder and the row's name (such as "Reorder Demo"), and use Move only for an action that
-  puts an item in another list or place, so each word means one thing.
-- **Don't:** Use "Move" for changing a state. Write Change ("Change to Demo"), so the word matches what happens.
+- **Don't:** Add an Order or Position number field that people type into. Typed numbers can clash or skip, and the
+  order falls out of sync with the rows.
 
-## When you can do it differently
+### 3. Say "Move" only for moving
 
-Two cases change how reordering works.
+The grip's name is Reorder and the row's name, so a screen reader says what the grip does. Move is for an action that
+puts an item in another list or place, so each word means one thing.
 
-Rows that cannot move come first. Each one has a lock icon and no grip. An example is a column that cannot be hidden
-in a view.
-
-A list of options in settings saves its new order at once, and the list itself shows the change, so no toast follows.
-On a form, the order saves with the form.
-
-## Works with
-
-Reordering works with two other patterns:
-
-- See [Forms in Sheets](forms-in-sheets.md) for a reorderable list inside a form.
-- See [Buttons and Actions](buttons-and-actions.md) for buttons in general. A reorderable row has no Move Up or Move
-  Down buttons.
+- **Do:** Name the grip "Reorder Demo".
+- **Don't:** Use "Move" for changing a state. Write "Change to Demo".
 
 ## In code
 

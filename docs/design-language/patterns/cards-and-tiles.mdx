@@ -1,9 +1,9 @@
 import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/cards-and-tiles.md?raw"
-import * as TitledCardStories from "../recipes/titled-card.stories"
 import * as StatTileStories from "../recipes/stat-tile.stories"
-import { cardExamples } from "../examples/card"
 import { cardTileExamples } from "../examples/forms-and-values"
+import { cardsAndTilesAnatomy } from "../examples/cards-and-tiles-anatomy"
+import { Captioned } from "../blocks"
 import { SkillDoc } from "../skill-doc"
 
 <Meta title="Patterns/Content/Cards and Tiles" />
@@ -11,14 +11,15 @@ import { SkillDoc } from "../skill-doc"
 <SkillDoc
   source={source}
   after={{
-    "@intro": (
-      <Canvas of={TitledCardStories.WithFigureAndAction} sourceState="none" />
-    ),
-    "What is available": (
+    Anatomy: cardsAndTilesAnatomy,
+    Tiles: (
       <>
-        <Canvas of={TitledCardStories.Collapsible} sourceState="none" />
-        <Canvas of={StatTileStories.Row} sourceState="none" />
-        <Canvas of={StatTileStories.PlainInCard} sourceState="none" />
+        <Captioned caption="A row of three tiles. One has a bar under its number, and the hints sit level at the foot of each tile.">
+          <Canvas of={StatTileStories.Row} sourceState="none" />
+        </Captioned>
+        <Captioned caption="Three tiles inside a card. The tiles have no surface of their own, and the card is the surface.">
+          <Canvas of={StatTileStories.PlainInCard} sourceState="none" />
+        </Captioned>
       </>
     ),
     "Put Add in the header, beside the records":

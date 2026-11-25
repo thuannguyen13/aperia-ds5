@@ -96,7 +96,7 @@ export const cardExamples = {
     />
   ),
   "@intro": (
-    <Example>
+    <Example caption="A Details card: a title and fields, with no figure or action.">
       <Wide>
         <TitledCard title="Details">
           <CardContent className="pb-4">
@@ -107,7 +107,7 @@ export const cardExamples = {
     </Example>
   ),
   "Titled card": (
-    <Example>
+    <Example caption="A Tasks card: a title, a count, an Add button, and a table that runs to the card's edges.">
       <Wide>
         <TitledCard title="Tasks" figure={count} action={add}>
           <TaskTable />

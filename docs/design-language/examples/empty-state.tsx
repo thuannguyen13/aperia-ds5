@@ -26,30 +26,18 @@ const addTask = (
 
 export const emptyStateExamples = {
   "An empty container": (
-    <>
-      <Example>
-        <InCard>
-          <EmptyState
-            icon={InboxIcon}
-            title="No Tasks"
-            description="No tasks assigned to you."
-            action={addTask}
-          />
-        </InCard>
-      </Example>
-      <Example>
-        <InCard>
-          <EmptyState
-            icon={CircleAlertIcon}
-            title="Failed to Load"
-            action={<Button variant="outline">Try Again</Button>}
-          />
-        </InCard>
-      </Example>
-    </>
+    <Example caption="A card whose tasks did not load: Failed to Load with an alert icon and Try Again, and no line.">
+      <InCard>
+        <EmptyState
+          icon={CircleAlertIcon}
+          title="Failed to Load"
+          action={<Button variant="outline">Try Again</Button>}
+        />
+      </InCard>
+    </Example>
   ),
   "No matches": (
-    <Example>
+    <Example caption="A list of prospects that a filter leaves empty: No Results with a search icon, a line, and Clear Filters.">
       <InCard title="Prospects">
         <EmptyState
           icon={SearchIcon}
@@ -59,6 +47,22 @@ export const emptyStateExamples = {
         />
       </InCard>
     </Example>
+  ),
+  "Move Add into an empty card": (
+    <DoDont
+      good={
+        <InCard>
+          <EmptyState icon={InboxIcon} title="No Tasks" action={addTask} />
+        </InCard>
+      }
+      bad={
+        <Wide>
+          <TitledCard title="Tasks" action={addTask}>
+            <EmptyState icon={InboxIcon} title="No Tasks" />
+          </TitledCard>
+        </Wide>
+      }
+    />
   ),
   "Say only what helps": (
     <DoDont
@@ -93,7 +97,7 @@ export const emptyStateExamples = {
       }
     />
   ),
-  "Leave out permission hints": (
+  "Never say who to ask": (
     <DoDont
       good={
         <InCard>

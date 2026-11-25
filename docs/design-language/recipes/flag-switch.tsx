@@ -3,18 +3,14 @@
 import { useId } from "react"
 import { LockIcon } from "lucide-react"
 
+import { ReasonTooltip } from "@/components/ui/reason-tooltip/reason-tooltip"
 import { Switch } from "@/components/ui/switch/switch"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip/tooltip"
 import { cn } from "@/lib/utils"
 
 /**
  * An on/off choice in a grid, such as a role's permission or a notification's channel: a small switch with its Yes or
  * No beside it, one target lit on hover. With a `reason` it can't change: locked, with a lock, and the reason in a
- * tooltip that keyboard reaches too.
+ * tooltip that shows on hover, when the keyboard lands on it, and on a tap.
  * The switch is on in the primary color, the same in every app.
  */
 export function FlagSwitch({
@@ -64,20 +60,11 @@ export function FlagSwitch({
     </label>
   )
   // Pulled out by its own padding, so the switch lines up with its column's name and only the hover reaches past it.
-  if (!reason)
-    return <span className="-mx-1.5 flex h-8 items-center">{control}</span>
+  // ReasonTooltip shows the reason on hover, when the keyboard lands on it, and on a tap; with no reason it renders the
+  // switch as it is.
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        {/* A disabled switch takes no pointer, so the tooltip hangs on the span around it, which keyboard reaches too. */}
-        <span
-          tabIndex={0}
-          className="-mx-1.5 flex h-8 w-fit items-center rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-          {control}
-        </span>
-      </TooltipTrigger>
-      <TooltipContent>{reason}</TooltipContent>
-    </Tooltip>
+    <span className="-mx-1.5 flex h-8 w-fit items-center">
+      <ReasonTooltip reason={reason}>{control}</ReasonTooltip>
+    </span>
   )
 }

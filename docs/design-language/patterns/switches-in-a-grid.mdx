@@ -2,15 +2,26 @@ import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/switches-in-a-grid.md?raw"
 import * as FlagStories from "../recipes/flag-switch.stories"
 import { switchExamples } from "../examples/forms-and-values"
+import { switchesInAGridAnatomy } from "../examples/switches-in-a-grid-anatomy"
 import { SkillDoc } from "../skill-doc"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Editing/Switches in a Grid" />
 
 <SkillDoc
   source={source}
   after={{
-    "@intro": <Canvas of={FlagStories.InATable} sourceState="none" />,
-    "What is available": <Canvas of={FlagStories.Locked} sourceState="none" />,
+    Anatomy: switchesInAGridAnatomy,
+    States: (
+      <>
+        <Captioned caption="A locked switch. It is faded, with a lock after its word, and its reason shows in a tooltip.">
+          <Canvas of={FlagStories.Locked} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A switch that is waiting. It is faded, with no lock, until the saved values load.">
+          <Canvas of={FlagStories.Loading} sourceState="none" />
+        </Captioned>
+      </>
+    ),
     "Show the word, not only the color":
       switchExamples["Show the word, not only the color"],
   }}

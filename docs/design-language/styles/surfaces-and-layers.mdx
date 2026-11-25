@@ -2,7 +2,14 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/styles/surfaces-and-layers.md?raw"
 import { SkillDoc } from "../skill-doc"
 import { surfacesExamples } from "../examples/surfaces"
+import { surfacesAndLayersAnatomy } from "../examples/surfaces-and-layers-anatomy"
 
 <Meta title="Styles/Surfaces and Layers" />
 
-<SkillDoc source={source} after={surfacesExamples} />
+<SkillDoc
+  source={source}
+  after={{
+    Anatomy: surfacesAndLayersAnatomy,
+    ...surfacesExamples,
+  }}
+/>

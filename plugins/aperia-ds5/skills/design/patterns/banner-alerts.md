@@ -1,102 +1,82 @@
 # Banner Alerts
 
-A banner alert is an alert under the page header about something that affects the whole page, such as a closed record
-or an outage.
-
-## When to use
-
-Use a banner alert when something holds for the whole page while people are on it. Find the situation in this table:
-
-| Situation | Example |
-|---|---|
-| The record is closed or locked, so it cannot be changed | "Closed opportunities cannot be changed." |
-| A warning affects every figure or record on the page | "Volume figures are from 11/22/2026. Today's figures arrive after 6:00 AM." |
-| A service the page needs is down | "The file service is not responding. Try again in a few minutes." |
-
-A role that may read a record but never change it gets no banner. The record shows without Edit or Delete. See
-[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for that case.
-
-Use something other than a banner when the message belongs to one action or one place. A result that needs nothing
-more is a toast. A wrong value is a message beside its field. See [Message Templates](../foundations/copy-templates.md)
-for choosing a toast, an alert, or a message on the field.
-
-## What is available
-
-A banner alert comes in three types, one for each weight of message:
-
-| Type | Look | Use for |
-|---|---|---|
-| Information | The card fill, the body text, and an info icon | A closed or locked record, and other states of the record that limit what people can do |
-| Warning | The app's amber status pair, and a warning icon | A risk to what the page shows, such as figures that are out of date |
-| Error | The destructive text, and an error icon | An outage or a failure that stops work on the page |
+A banner alert tells people about a state of the whole page, such as a closed record or an outage, until that state
+ends.
 
 ## Anatomy
 
-A banner alert has four parts, listed from start to end.
+A banner alert has four parts, listed from start to end. The description and the action show only sometimes. A banner
+alert with all four sits under the page header, above the page's content.
 
-1. **Icon**. It shows the type at a glance, beside the title.
-2. **Title**. It names the situation in a few words, in Title Case, such as "Closed Opportunity" or "Service Outage".
-3. **Description** (optional). One or two sentences say what happened and what people can do.
-4. **Action** (optional). One button at the end, such as Try Again or a close button (×).
+1. **Icon**. It is a small picture at the start of the banner alert. It shows the type at a glance.
+2. **Title**. It is a line of text, in Title Case, that names the situation in a few words, such as "Closed Opportunity"
+   or "Service Outage".
+3. **Description** (optional). It is one or two sentences of text under the title. It says what happened and what people
+   can do.
+4. **Action** (optional). It is one button at the end of the banner alert, such as Try Again, or a close button (×).
+
+## When to use
+
+Use a banner alert when a message is about the whole page and people need to read it while they work on the page. A
+message about one action or one place goes where that action or place is, so a banner alert always means the whole page.
+Find the message in this table:
+
+| Message | Use |
+|---|---|
+| A state holds for the whole page, such as a closed record, figures that are out of date, or a service that is down | A banner alert. |
+| The result of an action that needs nothing more, such as "Note added." | A toast. See [Saving and Feedback](../foundations/saving-and-feedback.md). |
+| One field holds a wrong value | A message under the field. See [Errors and Validation](../foundations/errors-and-validation.md). |
+| A control that saves on change is refused, such as a switch in a grid | An alert above the grid that names the row. It is an alert in one section, not a banner alert. See [Errors and Validation](../foundations/errors-and-validation.md). |
+| A role may read a record but never change it | Nothing. The record shows without Edit or Delete. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md). |
+
+## What is available
+
+A banner alert comes in three types, one for each weight of message. Apps set their own warning colors, so the library
+ships no warning look. See [Status](status.md) for the color pairs an app sets.
+
+| Type | Look | Use for |
+|---|---|---|
+| Information | The card fill, the body text, and an info icon | A state that limits what people can do, such as a closed or locked record: "Closed opportunities cannot be changed." |
+| Warning | A color pair the app sets for warnings, and a warning icon | A risk to what the page shows, such as figures that are out of date: "Volume figures are from 11/22/2026. Today's figures arrive after 6:00 AM." |
+| Error | The destructive text, and an error icon | An outage or a failure that stops work on the page: "The file service is not responding. Try again in a few minutes." |
 
 ## How it looks and behaves
 
 A banner alert is a section of its own, under the page header and above the page's content, `gap-5` from each. On a list
 page, it sits between the page header and the list toolbar. A banner alert runs the full width of the page column.
 
-A page shows one banner alert at a time. When two apply, the page shows the one that stops the most work, with an
-error first, then a warning, then information.
-
-A banner alert about a state that lasts, such as a closed record or an outage, has no close button. The banner goes
-away when the state ends. A banner alert about something people only need to read once can have a close button named "Close".
-Once closed, it stays closed until its message changes.
+A banner alert about something people only need to read once can have a close button named "Close". Once closed, it
+stays closed until its message changes. A banner alert about a state that lasts has none (Banner Alerts 3).
 
 A banner alert that shows when the page opens is read by a screen reader with the page. One that appears while people
 work, such as an outage, is announced at once.
 
 ## Rules
 
-### Show one banner alert, under the page header
+### 1. Show one banner alert, under the page header
 
-- **Do:** Put one banner alert under the page header and above the content, so people read it before they start
-  working.
-- **Don't:** Stack two banners, or put one in the top bar, above the page header, or inside a card. Show the most
-  important one in its place, so the page keeps one message at its top.
+A page shows one banner alert, under the page header and above the content, so people read it before they start
+working. When two apply, show the one that stops the most work. An error comes before a warning, and a warning comes
+before information.
 
-### Keep a banner alert for the whole page
+- **Do:** Show only the outage when a record is closed and the file service is down.
+- **Don't:** Stack two banner alerts, or put one in the top bar, above the page header, or inside a card.
 
-- **Do:** Use a banner alert for a state that holds for the whole page, such as a closed record, so people know why
-  the page behaves as it does.
-- **Don't:** Use a banner alert for a saved change ("Note added.") or for one field's error. Use a toast or a message
-  on the field, so a banner always means the whole page.
+### 2. Match the type to how much it stops
 
-### Match the type to how much it stops
+Use information for a limit on changes and a warning for a risk to what the page shows. Use an error only for something
+that is broken, so people can trust the error color.
 
-- **Do:** Use information for a closed record, a warning for figures at risk, and an error for an outage, so the
-  color says how much the message stops.
-- **Don't:** Show a closed-record notice in the destructive color, or an outage in the card fill. Match the type, so red
-  always means that something is broken.
+- **Do:** Show a closed opportunity as information.
+- **Don't:** Show a closed opportunity in the error type.
 
-### Keep a lasting state's banner alert open
+### 3. Keep a lasting state's banner alert open
 
-- **Do:** Leave out the close button while the state lasts, such as on a closed record, so people always see why they
-  cannot change it.
-- **Don't:** Let people close the banner on a record they still cannot change. Keep it on screen, so no one forgets the
-  record cannot be changed.
+A banner alert about a state that lasts, such as a closed record, has no close button. It goes away when the state ends,
+so people always see why the page behaves as it does.
 
-## When you can do it differently
-
-An alert can also sit inside a section of the page, above the part it is about. A switch in a grid that could not be
-saved is one such case. That alert is not a banner. See
-[Message Templates](../foundations/copy-templates.md) for where an error shows.
-
-## Works with
-
-- See [Page Header](page-header.md) for the header above the banner alert.
-- See [Message Templates](../foundations/copy-templates.md) for the wording and for choosing a toast, an alert, or a
-  message on the field.
-- See [Status](status.md) for the status pairs that color a warning.
-- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for a single control that cannot be used.
+- **Don't:** Add a close button to the banner alert of a closed record. The record still cannot be changed, and people
+  who closed it forget why.
 
 ## In code
 

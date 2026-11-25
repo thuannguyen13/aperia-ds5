@@ -1,42 +1,60 @@
 # Status
 
-A status shows the state a record is in, such as Draft, Active, or Overdue, as a word in a badge.
+Status shows which state a record is in, such as Draft, Active, or Overdue. See [Color](../styles/color.md) for the
+colors an app sets for it.
+
+## Anatomy
+
+A status has three parts. A state shows as one of them, so each part is optional. The parts are those of a table of
+prospects with a Stage column, a Status column, and an Import column.
+
+1. **Plain badge** (optional). It is a pill with the state's word, drawn with the outline look and the body text color,
+   for a state with no color of its own.
+2. **Colored badge** (optional). It is a pill with the state's word, drawn with one of the app's status pairs, for a
+   state that people must notice.
+3. **Dot and word** (optional). It is a small dot in the state's deep color, followed by the word in body text, for a
+   condition inside a line of text or a dense cell.
 
 ## When to use
 
-Use a status wherever a record has a state that people check, filter by, or act on, such as a prospect's stage or a
-task that is overdue. A value that is not a state, such as an amount or a date, shows as plain text.
+Use a status for a state that people check, filter by, or act on, such as a prospect's stage or a task that is
+overdue. A value that is not a state, such as an amount or a date, shows as plain text.
 
 ## What is available
 
-A status comes in three forms:
+A status comes in three forms. Find the state's situation in this table to choose the form:
 
 | Form | Look | Use when |
 |---|---|---|
 | Plain badge | The state's word in a pill with the outline look, in the body color | A state with no color of its own, such as one stage among many |
-| Colored badge | The state's word in a pill with the state's pale fill and deep text | A state people must notice, such as Overdue, Active, or Closed |
-| Dot and word | A small dot in the state's deep color, then the word in body text | A condition inside a line of text or a dense cell, such as "2 failed" in an import's summary |
+| Colored badge | The state's word in a pill with one of the app's status pairs, a pale fill and deep text | A state people must notice, such as Overdue, Active, or Closed |
+| Dot and word | A small dot in the pair's deep color, then the word in body text | A condition inside a line of text or a dense cell, such as "2 failed" in an import's summary |
+
+## How it looks and behaves
+
+A status always names the state in a word. The color helps people find a state at a glance, and the word says what it
+is. See [Accessibility](../foundations/accessibility.md) for why color is never the only signal. See
+[Copy](../foundations/copy.md) for how the word is written.
+
+### Where a status shows
 
 A status sits in one of four places, and each place has one form of it:
 
 | Place | How the status shows |
 |---|---|
-| Table | Its own column, named after the field, such as Stage or Status, with a badge in each cell |
-| Page header | A property under the title, with its label over the badge |
+| Table | Its own column, named after the field, such as Stage or Status, with a badge in each cell. See [Tables](tables.md). |
+| Page header | A property under the title, with its label over the badge. See [Page Header](page-header.md). |
 | Card | A badge after the item's name, such as a task's Overdue |
 | Board | A badge in each column's header, since every card in the column shares the state |
 
-## How it looks and behaves
+### Status colors
 
-A status always names the state in a word. The color helps people find a state at a glance, and the word says what it
-is. See [Accessibility](../foundations/accessibility.md) for why color is never the only signal.
+The library ships no status colors. Each app defines its own status pairs and their Dark values, and a colored badge
+takes its fill and text from one pair. See [Color](../styles/color.md) for what an app can change.
 
-Each state has one word, one color, and one form in the whole app. A table, the record's page header, a card, and a
-board column show the same badge for the same state. Overdue, for example, is always its badge, never red text or a red
-date.
-
-An app colors only the states that need attention and shows the others as plain badges. It picks one status pair for
-each colored state by what the state means, as in these examples:
+An app colors only the states that need attention and shows the others as plain badges. It gives each colored state one
+pair, chosen by what the state means. An app that defines a gray, blue, green, amber, and red pair could map its states
+like this:
 
 | Status pair | Example states |
 |---|---|
@@ -46,48 +64,38 @@ each colored state by what the state means, as in these examples:
 | Amber | Needs Review, Expiring |
 | Red | Overdue, Failed, Lost |
 
-The app sets its status pairs and their Dark values. The library ships none. See [Color](../styles/color.md) for what an
-app can change.
+An option list that admins edit can let them pick a color for each option, such as each stage of a pipeline. The picked
+colors still come from the app's status pairs.
+
+### Changing a status
 
 A status that people can change sits beside a small button that opens the change. The badge itself never acts as a
 button. See [Button](../components/button.md) for a state shown as a badge.
 
 ## Rules
 
-### Use one word and one color for each state
+### 1. Use one word and one color for each state
 
-- **Do:** Show a state with the same word and color on every screen, such as a red "Overdue" in a table and a header,
-  so people learn it once.
+A state has one word, one color, and one form in the whole app, so people learn it once and a state never looks like
+two. A table, the record's page header, a card, and a board column show the same badge for the same state.
+
+- **Do:** Show Overdue as the same red badge in a table and in a page header.
 - **Don't:** Write "Overdue" in one place and "Late" in another, or show Active green in the table and blue on the board.
-  Keep one word and one color, so a state never looks like two.
+  Show Overdue as a badge, never as red text or a red date.
 
-### Use status color only for state
+### 2. Use status color only for state
 
-- **Do:** Show a state as a badge in the app's status colors that names it ("In Progress"), so a status color always
-  means a state.
-- **Don't:** Tint a card, a heading, or an icon with a status color to decorate it. Keep decoration neutral, so no one
-  reads a state that is not there.
+A status color means a state and nothing else, so no one reads a state that is not there.
 
-### Give the status its own column or property
+- **Do:** Show a state as a badge in the app's status colors that names it ("In Progress").
+- **Don't:** Tint a heading or an icon with a status color to decorate it. Keep decoration neutral.
 
-- **Do:** Show the status in its own table column and as its own property in the page header, so people find it in the
-  same place on every record.
-- **Don't:** Write the status into the record's name or subtitle, such as "Acme Renewal (Closed)". Give it its own
-  place, so the name stays the name and the status can be sorted and filtered.
+### 3. Give the status its own column or property
 
-## When you can do it differently
+A status has its own place on a screen, so the record's name stays the name and the status can be sorted and filtered.
 
-An option list that admins edit can let them pick a color for each option, such as each stage of a pipeline. The
-picked colors still come from the app's status pairs.
-
-## Works with
-
-- See [Color](../styles/color.md) for the status colors an app sets.
-- See [Surfaces and Layers](../styles/surfaces-and-layers.md) for where a status color can sit.
-- See [Accessibility](../foundations/accessibility.md) for pairing every color with a word.
-- See [Tables](tables.md) for the status column.
-- See [Page Header](page-header.md) for the status as a property.
-- See [Copy](../foundations/copy.md) for how a status is worded.
+- **Do:** Show the status in its own Status column.
+- **Don't:** Write the status into the record's name or subtitle, such as "Acme Renewal (Closed)".
 
 ## In code
 

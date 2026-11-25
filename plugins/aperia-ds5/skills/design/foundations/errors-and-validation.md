@@ -1,12 +1,19 @@
 # Errors and Validation
 
-Errors and validation set when the app checks what people enter, where each error shows, and how its message reads.
-See [Message Templates](copy-templates.md) for failures, successes, and confirmations.
+Errors and validation tell people what went wrong, in the place they were working, so they can fix it. See
+[Message Templates](copy-templates.md) for failures, successes, and confirmations, and [Copy](copy.md) for the voice of
+every message.
 
-## When to use
+## Anatomy
 
-Use this page for every form, every control that saves on change, and every action that can fail. Use it also when a
-page or a card cannot load its content.
+A field in error has three parts. The message shows only while the field is in error, and the control's red border shows
+with it.
+
+1. **Label**. It is a line of text above the control that names the field, such as "Email".
+2. **Control**. It is the input, select, or other control where people enter the value. While the field is in error, its
+   border turns red and a red halo surrounds it.
+3. **Error message** (optional). It is a line of text under the control that says what to enter. It goes away as soon as
+   the value changes.
 
 ## What is available
 
@@ -16,13 +23,13 @@ went wrong at the place they were working. Find the situation in this table:
 | Situation | Where the error shows | Why |
 |---|---|---|
 | A field holds a missing or wrong value | A message under the field, and the field's border turns red | People fix the value where they typed it. |
-| A form or a dialog is refused, and no one field is at fault | A message above the buttons. No field turns red. The form or dialog stays open with what was typed. | Nothing typed is lost, and no field is blamed for a problem it did not cause. |
+| A form or a dialog is refused, and no one field is at fault | A message above the buttons. No field turns red. The form or dialog stays open with what was typed. See [Forms in Sheets](../patterns/forms-in-sheets.md). | Nothing typed is lost, and no field is blamed for a problem it did not cause. |
 | A control that saves on change is refused, such as a switch in a grid | The control returns to its saved value, and an alert above the grid names the row, such as "Pipeline: Email could not be saved. Try again." | The control shows what is saved, and the message stays beside the work. |
 | A confirmed action fails, such as a delete | A message inside the confirmation, which stays open. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). | People can try again without starting over. |
 | A file is refused in a drop zone | A message under the drop zone, beside the refused file | It stays where the file was dropped until it is read. |
 | A card or a list cannot load its content | The empty state "Failed to Load" in its place, with Try Again. See [Empty States](empty-states.md). | The rest of the page still works. |
 | Something holds for the whole page, such as an outage | A banner alert under the page header. See [Banner Alerts](../patterns/banner-alerts.md). | People read it before they start working on the page. |
-| An action fails and nothing on screen holds it, such as a background job or a page the person has left | A toast that stays until it is closed with its close button (×), names what failed, and offers the fix, such as "Report export failed. Try again." | No place is left on screen to show it. |
+| An action fails and nothing on screen holds it, such as a background job or a page the person has left | A toast that stays until it is closed with its close button (×), names what failed, and offers the fix, such as "Report export failed. Try again." See [Saving and Feedback](saving-and-feedback.md) for toasts in general. | No place is left on screen to show it. |
 
 ### Messages for a field
 
@@ -54,32 +61,27 @@ when people need it.
 | The app or a device is the cause | The problem, then the fix | The file service is not responding. Try again in a few minutes. |
 | An action did not complete | A failure message. See [Message Templates](copy-templates.md). | Failed to save changes. Try again. |
 
-Every error message follows three rules:
-
-- Write one message for each known cause, never one vague message for several causes.
-- State the problem in the third person and the passive voice. State the fix in the active imperative. Use the present
-  tense for both.
-- A dialog that stops an operation has **Cancel**. A dialog that only informs has **Close**.
+Every message follows Errors and Validation 9, 10, and 11.
 
 ## How it looks and behaves
 
 ### When the app checks
 
-The app checks a form when people press its save button, and never while they type. The save button stays enabled,
-because pressing it is what shows people what is missing.
+A form is checked in this order:
 
 1. Pressing save checks every field. Each field in error shows its message, and focus moves to the first field in
    error.
 2. A message under a field goes away as soon as the value changes.
 3. When people leave that field, the app checks it again, and the message comes back if the value is still wrong.
 4. A check that needs the server, such as whether a name is already in use, runs with the save. Its message shows
-   under the field it names, or above the buttons when it names no field.
+   under the field it names, or above the buttons when it names no field. On a long form, a check that saves people real
+   work may run when they leave the field, before the save. Whether a merchant ID is in use is an example.
 5. A form with every field correct saves, and the app shows the result as
    [Saving and Feedback](saving-and-feedback.md) says.
 
 ### Prevent the error first
 
-A control that cannot hold a wrong value needs no error message. The app prevents an error before it reports one:
+A control stops a wrong value in these ways:
 
 - A pick replaces typing wherever the values are a known list.
 - A date picker disables the dates outside the allowed range.
@@ -97,58 +99,89 @@ people type.
 
 ## Rules
 
-### Check on save, not while people type
+### 1. Check on save, not while people type
 
-- **Do:** Check a form when its save button is pressed, and check a field again as people leave it after it showed an
-  error, so people finish typing before anything turns red.
-- **Don't:** Show "Enter a valid email address." after the first letter. Wait for the save, so no one is told they are
-  wrong halfway through typing.
+The app checks a form when its save button is pressed, and checks a field again as people leave it after it showed an
+error. It never checks while people type, so no one is told they are wrong halfway through typing.
 
-### Keep the save button enabled
+- **Do:** Leave a field plain while someone types, such as "dana@north".
+- **Don't:** Show "Enter a valid email address." after the first letter.
 
-- **Do:** Keep the save button enabled, and show each missing value under its field when it is pressed, so people learn
-  what to fix.
-- **Don't:** Disable the save button until every field is filled. Keep it enabled, so no one is left guessing why
-  nothing happens.
+### 2. Keep the save button enabled
 
-### Name the field and the fix
+The save button stays enabled, because pressing it is what shows people each missing value under its field.
 
-- **Do:** Write the fix with the field's name, such as "Enter a valid email address.", so people know what to change.
-- **Don't:** Write "Invalid input." or "Something went wrong." Name the field and the fix, so the message helps.
+- **Do:** Press Save Changes with the field empty, and show what is missing under the field.
+- **Don't:** Disable the save button until every field is filled. People are left guessing why nothing happens.
 
-### Turn a field red only when it is at fault
+### 3. Prevent an error instead of reporting it
 
-- **Do:** Show a refusal that no field caused above the buttons, such as "The email or password is incorrect.", and
-  leave every field as it was, so no field is blamed.
-- **Don't:** Turn the email and the password fields both red. Show one message above the buttons, so people are not
-  sent to fix a field that is not wrong.
+A control stops a wrong value where it can, so people never have to read an error for it.
 
-### Prevent an error instead of reporting it
+- **Do:** Disable the dates outside the allowed range in a date picker.
+- **Don't:** Accept any date and refuse it when the form saves.
 
-- **Do:** Disable the dates outside the allowed range in a date picker, so a wrong date cannot be picked.
-- **Don't:** Accept any date and refuse it when the form saves. Prevent it in the control, so people do not have to
-  start again.
+### 4. Show an error where the action happened
 
-### Show an error where the action happened
+An error shows under its field, above a form's or a dialog's buttons, or above the grid for a control that saves on
+change. People see what went wrong where they were working.
 
-- **Do:** Show an error under its field, above a form's buttons, or above the grid that holds the control, so people
-  see what went wrong where they were working.
-- **Don't:** Show a toast that disappears while the form, grid, or file is still on screen. Show the error in place, so
-  no one misses it or thinks the change was saved.
+- **Do:** Name the row in an alert above a grid, such as "Pipeline: Email could not be saved. Try again."
+- **Don't:** Show a toast that disappears while the form, grid, or file is still on screen. People miss it or think the
+  change was saved.
 
-## When you can do it differently
+### 5. Turn a field red only when it is at fault
 
-A check that needs the server and saves people real work may run when they leave the field, before the save. An
-example is whether a merchant ID is already in use on a long form. Its message shows like any field error.
+A refusal that no field caused shows as one message above the buttons, and every field stays as it was. People are not
+sent to fix a field that is not wrong.
 
-## Works with
+- **Do:** Show "The email or password is incorrect." above the buttons, and leave both fields plain.
+- **Don't:** Turn the email and the password fields both red for one refusal.
 
-- See [Message Templates](copy-templates.md) for failures, successes, and Discard Changes?.
-- See [Copy](copy.md) for the voice of every message and the words that never appear in one.
-- See [Forms in Sheets](../patterns/forms-in-sheets.md) for the sheet that stays open when a save is refused.
-- See [Saving and Feedback](saving-and-feedback.md) for the working state of a save and for where toasts show.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for a control that cannot be used yet.
-- See [Banner Alerts](../patterns/banner-alerts.md) for a message about the whole page.
+### 6. Keep a refused form open with what was typed
+
+A form or a dialog that is refused stays open with everything people typed, so they fix the problem without starting
+again.
+
+- **Do:** Keep the sheet open, with its values, when the server refuses the save.
+- **Don't:** Close the form or clear its fields after a refusal.
+
+### 7. Use a toast only when nothing on screen holds the error
+
+A toast shows an error only when no place on screen is left for it, such as a background job or a page the person has
+left. The toast stays until it is closed, so no one misses it.
+
+- **Do:** Name what failed and offer the fix, such as "Report export failed. Try again."
+- **Don't:** Let an error toast close on its own.
+
+### 8. Name the field and the fix
+
+A field's message names the field and says what to enter, so people know what to change.
+
+- **Do:** Write "Enter a valid email address."
+- **Don't:** Write "Invalid input." or "Something went wrong."
+
+### 9. Write one message for each known cause
+
+Each known cause has its own message, so people learn what happened and not only that something did.
+
+- **Don't:** Show one message for several causes, such as "Something went wrong." for a refused file and a service that
+  is down.
+
+### 10. Write the problem and the fix in set voices
+
+A message states the problem in the third person and the passive voice, and the fix in the active imperative. Both use
+the present tense, so every error reads the same way and the fix is a command.
+
+- **Do:** Write "The server could not be reached. Try again."
+- **Don't:** Write "You entered the wrong password."
+
+### 11. Name a dialog's exit by what it does
+
+A dialog that stops an operation has **Cancel**. A dialog that only informs has **Close**, so the button says what it
+does.
+
+- **Don't:** Put Cancel on a dialog that only informs, since it has nothing to cancel.
 
 ## In code
 

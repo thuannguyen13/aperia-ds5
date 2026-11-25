@@ -8,8 +8,8 @@ import {
   storyId,
 } from "./site"
 
-// Which components each page uses, and which pages use each component, read from the source every time the docs load,
-// so neither list can go stale. A page uses a component when its "In code" section names one of the component's
+// Which pages use each component, read from the source every time the docs load, so the list on a component's home
+// cannot go stale. A page uses a component when its "In code" section names one of the component's
 // exports in backticks (`ListToolbar`, `TableRow`), or, for an Examples page, when its live example imports one. A name
 // belongs to the folder under components/ui that exports it.
 
@@ -133,22 +133,6 @@ const USES = USING.flatMap((section) =>
     ]
   })
 )
-
-/** The order of the components in the site map, so every list reads in the order of the Components index. */
-const ORDER = [...HOMES.keys()]
-
-/** The components a skill page uses, each with its home. Empty for a page outside Foundations, Styles, Patterns and Examples. */
-export function componentsOf(file: string): Home[] {
-  const page = USES.find((each) => each.file === file)
-  if (!page) return []
-  // Several folders can share one home, such as two pattern components on one pattern page: list that home once.
-  const homes = ORDER.filter((dir) => page.dirs.has(dir)).map(
-    (dir) => HOMES.get(dir) as Home
-  )
-  return homes.filter(
-    (home, at) => homes.findIndex((each) => each.id === home.id) === at
-  )
-}
 
 /** The pages that use a component, by section, in the site map's order. */
 export function pagesUsing(dir: string): { section: string; pages: Home[] }[] {

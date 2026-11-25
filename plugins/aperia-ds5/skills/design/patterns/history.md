@@ -1,55 +1,57 @@
 # History
 
-History lists what happened to a record, newest first, as a timeline in a card.
+History lets people see what happened to a record, such as a stage change, a new note, or a finished task, newest first.
+See [Cards and Tiles](cards-and-tiles.md) for where the card sits on a record's page.
 
-## When to use
+## Anatomy
 
-Use history for the changes, notes, and events on one record, such as a stage change, a new note, or a finished task.
-Use it on the record's page, in its own card.
+A history card has ten parts. View All, Who, Note, and Line show only sometimes. The card is a record's Activity
+card, with the first entries of a longer history.
 
-## What is available
-
-History is built from two parts:
-
-| Part | What it shows |
-|---|---|
-| Timeline | One entry per event, newest first. Each entry shows the icon of its kind, what happened, when, and who, then any note in a muted box of three lines at most. A line joins each icon to the next and stops at the last entry. |
-| History card | A titled card, such as Activity, with the latest ten entries as a timeline. View All opens every entry in a sheet. |
+1. **History card**. It is a titled card on the record's page that holds the latest entries as a timeline. See
+   [Card](../components/card.md) for the card.
+2. **Title**. It is the card's heading, such as "Activity".
+3. **View All** (optional). It is an outline button at the right end of the card's header. It opens every entry in a
+   sheet, and shows only when the history has more entries than the card shows (History 1).
+4. **Entry**. It is one item of the timeline, for one thing that happened. Entries run newest first.
+5. **Icon**. It is a small icon at the left of an entry that shows the kind of entry, such as an arrow for a stage
+   change.
+6. **What happened**. It is a sentence that says what changed, such as "Changed stage from Demo to Proposal".
+7. **When**. It is the time since the entry happened, in short form such as "3d ago", on a line under the sentence.
+8. **Who** (optional). It is the name of the person who made the change, after the When and a dot. An entry that the
+   app made, such as an import, has no person.
+9. **Note** (optional). It is a box with a muted fill under the entry that holds the text of a note, three lines at most.
+10. **Line** (optional). It is a thin vertical divider under the icon that joins the icon to the next entry's icon. The
+    last entry has none.
 
 ## How it looks and behaves
 
-The history card shows the latest ten entries. When there are more than ten, View All sits in the card's header and
-opens every entry in a sheet that scrolls on its own. The card and the sheet draw the entries in the same way.
+The card and the sheet that View All opens draw their entries in the same way.
 
 Each entry says when it happened in the short relative form, such as "3d ago", with the exact date on hover and on a
 tap. See [Copy](../foundations/copy.md) for how times are written, and [Accessibility](../foundations/accessibility.md)
 for what a tap shows on a touch screen.
 
-An entry that the app made, such as an import, has no person. A card with no entries keeps its place, with an empty state
-inside, such as "No Activity".
+A card with no entries keeps its place, with an empty state inside, such as "No Activity". See
+[Empty States](../foundations/empty-states.md) for the empty card.
 
 On a phone, View All opens the sheet over the whole screen, and every entry keeps the layout it has on a desktop.
 See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
+### Notes
+
+A record's notes use the same card, titled Notes, with their own empty state, such as "No Notes". Each entry opens with
+the note's box, then says when and who. The card's Add button sits in the header beside View All while there are
+notes, and inside the empty state while there are none.
+
 ## Rules
 
-### Show the latest ten entries, with View All
+### 1. Show the latest ten entries, with View All
 
-- **Do:** Show the latest ten in the history card, with View All opening every entry in a scrolling sheet, so the page
-  stays short.
-- **Don't:** Let a long history scroll inside its card, or run the page on for screens. Show ten and View All, so the
-  page stays easy to scroll.
+The card shows the latest ten entries. When there are more, View All opens every entry in a sheet that scrolls on its
+own, so the page keeps one scroll.
 
-## When you can do it differently
-
-Notes are the same card, titled Notes, with their own empty state. Its Add sits in the header beside View All while
-there are entries, and inside the empty state while there are none.
-
-## Works with
-
-- See [Card](../components/card.md) for the titled card.
-- See [Cards and Tiles](cards-and-tiles.md) for where the history card sits on a page.
-- See [Copy](../foundations/copy.md) for relative times.
+- **Don't:** Let a long history scroll inside its card, or run the page on for screens.
 
 ## In code
 

@@ -4,6 +4,8 @@ import * as MoneyStories from "../../../components/ui/money-input/money-input.st
 import { moneyExamples } from "../examples/forms-and-values"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { Captioned } from "../blocks"
+import { moneyAndNumbersExamples } from "../examples/money-and-numbers"
 
 <Meta title="Foundations/Content Design/Money and Numbers" />
 
@@ -11,17 +13,26 @@ import { PatternCode } from "../component-page"
   source={source}
   code={<PatternCode components={[{ name: "MoneyInput", stories: MoneyStories }]} />}
   after={{
-    "@intro": <Canvas of={MoneyStories.Labeled} sourceState="none" />,
     "What is available": (
       <>
-        <Canvas of={MoneyStories.Hidden} sourceState="none" />
-        <Canvas of={MoneyStories.InATable} sourceState="none" />
+        <Captioned caption="A money field with its label and a hint. Annual Volume holds 48000, shown as $48,000 with a $ before the number and a comma in it.">
+          <Canvas of={MoneyStories.Labeled} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A money field for an amount this viewer may not see. It is disabled, shows XX,XXX after the $, and gives the reason under it.">
+          <Canvas of={MoneyStories.Hidden} sourceState="none" />
+        </Captioned>
       </>
+    ),
+    "How it looks and behaves": (
+      <Captioned caption="A money field in a table's rate column. It is right-aligned and shows the placeholder Not priced yet while it is empty.">
+        <Canvas of={MoneyStories.InATable} sourceState="none" />
+      </Captioned>
     ),
     "Write amounts in full": moneyExamples["Write amounts in full"],
     "Use the money field for money":
       moneyExamples["Use the money field for money"],
     "Hide an amount with its shape":
       moneyExamples["Hide an amount with its shape"],
+    ...moneyAndNumbersExamples,
   }}
 />

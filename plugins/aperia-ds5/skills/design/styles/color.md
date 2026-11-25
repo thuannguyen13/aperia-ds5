@@ -1,17 +1,13 @@
 # Color
 
-Color tokens name each color by its role and hold one value for Light mode and one for Dark mode.
-
-## When to use
-
-Use a color role whenever something on screen needs a color, such as text, a fill, an edge, or a dim. Pick the role
-by its job, such as "muted text" or "control fill", not by how a color looks. The role names are the same in Figma and
-in code.
+Color gives each part of a screen its fill, text, edge, or dim by role, with one value for Light mode and one for Dark
+mode. See [Surfaces and Layers](surfaces-and-layers.md) for which fill each part sits on.
 
 ## What is available
 
-Color has seventeen roles. Each role has a Light value and a Dark value, set once in the library. In Storybook, the In
-Light and In Dark columns show each color live, with the value the browser reads.
+Color has seventeen roles, each named by its job, such as muted text or control fill. The role names are the same in
+Figma and in code. Each role has a Light value and a Dark value, set once in the library. In Storybook, the In Light
+and In Dark columns show each color live, with the value the browser reads.
 
 | Tokens | Role | In Light | In Dark |
 |---|---|---|---|
@@ -33,7 +29,9 @@ Light and In Dark columns show each color live, with the value the browser reads
 | **Sidebar** `--sidebar` | The sidebar's fill | The Aperia navy, the same in every app | The darkest neutral |
 | **Chart 1 to 6** `--chart-1` … `--chart-6` | A chart's series, in order | The app's chart palette | The same, with Chart 6 lightened |
 
-The neutrals are cool grays of one hue. The page, cards, fills, and text all use them.
+The neutrals are cool grays of one hue. The page, cards, fills, and text all use them. See
+[Typography](typography.md) for which text is foreground and which is muted, and [Border and Radius](border-and-radius.md)
+for where Border and Input draw.
 
 Status colors, such as the colors for In Progress and Overdue, are not in this table. Each app sets its own. See "What
 an app can change" below.
@@ -41,10 +39,14 @@ an app can change" below.
 ## How it looks and behaves
 
 Color frames content with neutral grays, thin borders, and one accent color, the primary blue. Content therefore has
-the most contrast on screen. Links and the focus line use the same blue in Light and a lighter blue in Dark.
+the most contrast on screen. The primary color is the same blue in Light and in Dark, with white text on it. Links and
+the focus line use the same blue in Light and a lighter blue in Dark.
+
+A color is never the only signal for a state or a chart series. See [Accessibility](../foundations/accessibility.md)
+(rule 1) for the words and icons that go with a color.
 
 Every role has a Dark value, and the whole screen switches between Light and Dark at once. Shadows deepen in Dark. See
-[Elevation](elevation.md) for the shadow steps.
+[Elevation](elevation.md) for the shadow steps and the overlay.
 
 Muted text, the destructive red, and links reach a contrast of 4.5:1 on the page, on a muted fill, and on a highlighted
 menu row, not only on white. The focus line reaches 3:1 against every fill it sits on, in Light and in Dark.
@@ -62,24 +64,23 @@ A selected row or a pressed toggle takes the Muted fill, not the primary color. 
 
 ## Rules
 
-### Use the primary color only for what it marks
+### 1. Use the primary color only for what it marks
 
-- **Do:** Use the primary color for the main button and for the mark of a chosen option, such as a ticked checkbox, so
-  people see what they can act on. Links use the Link color.
-- **Don't:** Color a heading or an icon with the primary color, or show a status as a small primary button. Keep them
-  neutral, so the real action stands out.
+The primary color marks the main button and a chosen option, such as a ticked checkbox, so people see what they can
+act on. Links take the Link color.
 
-### Pair every color with a word or an icon
+- **Do:** Use the primary color for the one main button, such as Add Task, and keep the heading neutral.
+- **Don't:** Color a heading or an icon with the primary color, or show a status as a small primary button. They pull
+  attention from the real action.
 
-- **Do:** Pair every colored badge, dot, or chart series with a word, an icon, or a legend (the Overdue badge), so it
-  reads without color.
-- **Don't:** Rely on color alone, such as a red "3". Add the word that says what it counts, so everyone can read it.
+### 2. Pick the role, not a fixed value
 
-### Pick the role, not a fixed value
+Every fill, edge, and text color comes from the role that matches its job, so it works in Light, in Dark, and on any
+surface.
 
-- **Do:** Take every hover, edge, and fill from its role (a highlighted row uses Muted), so it works in Light, in Dark,
-  and on any surface.
-- **Don't:** Pick a gray by eye for a highlight. Use the role's color instead, so it keeps its contrast in Dark.
+- **Do:** Take the highlight of a hovered row from Muted.
+- **Don't:** Pick a gray by eye for a highlight, such as `#ececec`. A fixed value keeps its Light look and loses its
+  contrast in Dark.
 
 ## What an app can change
 
@@ -101,24 +102,9 @@ Every other value is shared by all apps, in two groups.
 | Colors | The sidebar color, the primary color, the link color, the focus line, the page and card fills, the control and panel fills, the neutrals, muted text, the destructive color, and the overlay |
 | Other foundations | Radius, shadows, edges, motion, type weights, and control heights |
 
-The primary color is the same in both modes, with white text on it. An app that wants a shared value changed raises it
-in an issue on aperia-ds5. The change then applies to every app, not to one app alone.
-
-## When you can do it differently
-
-An app changes the sidebar color only after the design system team agrees to the change in an issue on aperia-ds5.
-An app never changes it only to look different. No other shared color changes per app.
-
-## Works with
-
-- See [Surfaces and Layers](surfaces-and-layers.md) for which fill each part of a screen sits on, and where a status
-  color goes.
-- See [Elevation](elevation.md) for shadows and the overlay.
-- See [Border and Radius](border-and-radius.md) for where Border and Input draw.
-- See [Typography](typography.md) for which text is foreground and which is muted.
-- See [Status](../patterns/status.md) for status color, which only ever means a state.
-- See [Charts](../patterns/charts.md) for the chart colors in order.
-- See [People and Pictures](../patterns/people-and-pictures.md) for the avatar colors.
+An app that wants a shared value changed raises it in an issue on aperia-ds5. The change then applies to every app, not
+to one app alone. The sidebar color is the one shared color an app may change for itself, and only after the design
+system team agrees to the change in that issue. An app never changes it only to look different.
 
 ## In code
 

@@ -5,16 +5,26 @@ import * as ScrollTable from "../recipes/scroll-table.stories"
 import { SkillDoc } from "../skill-doc"
 import { tableExamples } from "../examples/table"
 import { cardExamples } from "../examples/card"
+import { tablesAnatomy } from "../examples/tables-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Lists/Tables" />
 
 <SkillDoc
   source={source}
   after={{
+    "Anatomy": tablesAnatomy,
     "What is available": (
       <>
-        <Canvas of={TableGroupRow.WithLeadingAndTrailing} sourceState="none" />
-        <Canvas of={ScrollTable.InTitledCard} sourceState="none" />
+        <Captioned caption="Grouped rows. Each band names its group, with a picture before the name and a total at its end.">
+          <Canvas
+            of={TableGroupRow.WithLeadingAndTrailing}
+            sourceState="none"
+          />
+        </Captioned>
+        <Captioned caption="A wide table. It scrolls sideways inside its card, and the card stays its width.">
+          <Canvas of={ScrollTable.InTitledCard} sourceState="none" />
+        </Captioned>
       </>
     ),
     "Put the column headings right under the card header":

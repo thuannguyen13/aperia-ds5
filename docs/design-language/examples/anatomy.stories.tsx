@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react"
+import { useEffect, useRef, useState, type ComponentProps } from "react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import {
   BellIcon,
@@ -16,11 +16,21 @@ import {
   AppSidebarSearch,
   Badge,
   CardContent,
+  ListToolbar,
   PageHeader,
   SidebarInset,
   SidebarProvider,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
   type AppNavGroup,
+  type SortState,
 } from "aperia-ds5"
+import { formatDate } from "aperia-ds5/format"
+import { sortRows, type SortField } from "aperia-ds5/list"
 import { TitledCard } from "../recipes"
 
 // Compositions that lay out by the window, drawn in their own frame for an Anatomy drawing (anatomy.tsx, `story`), so
@@ -89,4 +99,102 @@ export const AppShell: Story = {
       </SidebarInset>
     </SidebarProvider>
   ),
+}
+
+type Queue = { id: number; name: string; open: number; alerted: string }
+
+const QUEUES: Queue[] = [
+  { id: 1, name: "Chargeback Review", open: 42, alerted: "2026-11-04" },
+  { id: 2, name: "High-Risk Merchants", open: 7, alerted: "2026-11-19" },
+  { id: 3, name: "Pricing Exceptions", open: 15, alerted: "2026-11-11" },
+  { id: 4, name: "Refund Spikes", open: 3, alerted: "2026-11-21" },
+]
+
+const QUEUE_SORTS: SortField<Queue>[] = [
+  { value: "name", label: "Name", read: (row) => row.name },
+  {
+    value: "open",
+    label: "Open Alerts",
+    read: (row) => row.open,
+    starts: "desc",
+  },
+  {
+    value: "alerted",
+    label: "Last Alert",
+    read: (row) => row.alerted,
+    starts: "desc",
+  },
+]
+
+function SortedList() {
+  const [query, setQuery] = useState("")
+  const [sort, setSort] = useState<SortState>({
+    by: "alerted",
+    direction: "desc",
+  })
+  // The drawing shows the panel, so it opens once on load. It is the real panel: a choice reorders the rows.
+  const root = useRef<HTMLDivElement>(null)
+  const opened = useRef(false)
+  useEffect(() => {
+    if (opened.current) return
+    opened.current = true
+    root.current
+      ?.querySelector<HTMLButtonElement>('button[aria-label^="Sort"]')
+      ?.click()
+    // The open panel takes the keyboard focus into this frame. Hand it back to the docs page around the frame.
+    const release = setTimeout(() => {
+      if (document.activeElement instanceof HTMLElement)
+        document.activeElement.blur()
+      ;(window.frameElement as HTMLElement | null)?.blur()
+    }, 100)
+    return () => clearTimeout(release)
+  }, [])
+  const rows = sortRows(
+    QUEUES.filter((row) =>
+      row.name.toLowerCase().includes(query.toLowerCase())
+    ),
+    QUEUE_SORTS,
+    sort
+  )
+  return (
+    <div ref={root} className="flex flex-col gap-5 p-6">
+      <ListToolbar
+        search={{
+          placeholder: "Search queues",
+          value: query,
+          onChange: setQuery,
+        }}
+        sort={{ fields: QUEUE_SORTS, value: sort, onChange: setSort }}
+      />
+      <div className="overflow-clip surface">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="pl-4">Name</TableHead>
+              <TableHead className="text-right">Open Alerts</TableHead>
+              <TableHead className="pr-4">Last Alert</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell className="pl-4">{row.name}</TableCell>
+                <TableCell className="text-right tabular-nums">
+                  {row.open}
+                </TableCell>
+                <TableCell className="pr-4 tabular-nums">
+                  {formatDate(row.alerted)}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  )
+}
+
+/** Sort in a list's toolbar with its panel open, sorted by Last Alert, newest first. */
+export const Sort: Story = {
+  render: () => <SortedList />,
 }

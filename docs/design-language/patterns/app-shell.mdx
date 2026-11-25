@@ -3,35 +3,42 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/app-shell
 import * as AppShell from "../../../components/ui/app-shell/app-shell.stories"
 import { SkillDoc } from "../skill-doc"
 import { appShellAnatomy } from "../examples/pattern-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Navigation/App Shell" />
 
 <SkillDoc
   source={source}
   after={{
-    "@intro": (
-      <Canvas
-        of={AppShell.List}
-        story={{ inline: false, height: "640px" }}
-        sourceState="none"
-      />
-    ),
     "Anatomy": appShellAnatomy,
     "Sidebar": (
       <div style={{ maxWidth: 400 }}>
-        <Canvas
-          of={AppShell.Phone}
-          story={{ inline: false, height: "640px" }}
-          sourceState="none"
-        />
+        <Captioned caption="The shell on a phone. The sidebar is hidden, and the top bar holds the button that opens it and the breadcrumb.">
+          <Canvas
+            of={AppShell.Phone}
+            story={{ inline: false, height: "640px" }}
+            sourceState="none"
+          />
+        </Captioned>
       </div>
     ),
     "Top bar": (
-      <Canvas
-        of={AppShell.Record}
-        story={{ inline: false, height: "640px" }}
-        sourceState="none"
-      />
+      <>
+        <Captioned caption="A section's own page. The breadcrumb shows the title alone, Prospects.">
+          <Canvas
+            of={AppShell.List}
+            story={{ inline: false, height: "640px" }}
+            sourceState="none"
+          />
+        </Captioned>
+        <Captioned caption="A record's page. The breadcrumb starts with the section, Prospects, then the record's title.">
+          <Canvas
+            of={AppShell.Record}
+            story={{ inline: false, height: "640px" }}
+            sourceState="none"
+          />
+        </Captioned>
+      </>
     ),
   }}
 />

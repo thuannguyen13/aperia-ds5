@@ -2,29 +2,36 @@ import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/forms-in-sheets.md?raw"
 import * as SheetFormStories from "../../../components/ui/sheet-form/sheet-form.stories"
 import * as FormSectionStories from "../recipes/form-section.stories"
-import { formsExamples } from "../examples/forms-and-values"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { formsInSheetsAnatomy } from "../examples/forms-in-sheets-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Editing/Forms in Sheets" />
 
 <SkillDoc
   source={source}
-  code={<PatternCode components={[{ name: "SheetForm", stories: SheetFormStories }]} />}
+  code={
+    <PatternCode
+      components={[{ name: "SheetForm", stories: SheetFormStories }]}
+    />
+  }
   after={{
-    "@intro": <Canvas of={SheetFormStories.AddContact} sourceState="none" />,
+    Anatomy: formsInSheetsAnatomy,
     "What is available": (
-      <Canvas of={SheetFormStories.EditWithDelete} sourceState="none" />
+      <Captioned caption="A read-only sheet for a contact. The fields are disabled, and the footer holds Close and Delete.">
+        <Canvas of={SheetFormStories.ReadOnly} sourceState="none" />
+      </Captioned>
     ),
-    "Keep the sheet open when a save is refused": (
-      <Canvas of={SheetFormStories.FieldErrors} sourceState="none" />
+    "How it looks and behaves": (
+      <Captioned caption="A save with nothing typed. Each message sits under its field, and focus is on the first field in error.">
+        <Canvas of={SheetFormStories.FieldErrors} sourceState="none" />
+      </Captioned>
     ),
-    "Mark optional fields, not required ones":
-      formsExamples["Mark optional fields, not required ones"],
-    "Give every field a short label":
-      formsExamples["Give every field a short label"],
     "Split a long form with sections": (
-      <Canvas of={FormSectionStories.Sections} sourceState="none" />
+      <Captioned caption="A form with two sections. The first has no line above its title, and the second has a line across the whole sheet.">
+        <Canvas of={FormSectionStories.Sections} sourceState="none" />
+      </Captioned>
     ),
   }}
 />

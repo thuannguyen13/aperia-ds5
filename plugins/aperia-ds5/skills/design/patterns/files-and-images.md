@@ -1,93 +1,104 @@
 # Files and Images
 
-File and image pickers let people attach files in a drop zone and change a logo or photo beside its preview.
+Files and images let people attach files to a record and set its logo or picture, by dropping or choosing them. See
+[People and Pictures](people-and-pictures.md) for how a chosen picture shows.
 
-## When to use
+## Anatomy
 
-Choose the part by what the file is for:
+Files and images have seven parts. The Remove button, the file with its remove button, and the hint show only
+sometimes. The parts are those of a form with an image picker for a logo and files on a form that hold one saved file.
 
-| Need | Use |
-|---|---|
-| The app reads the file itself, such as an import ("CSV or XLSX, up to 5,000 rows.") | Drop zone |
-| Attachments are saved with a record | Files on a form |
-| A logo, a cover, or the header or footer of an email | Image picker |
+1. **Preview**. It is a picture of the image as it stands. It is a square avatar for a logo, or a small wide picture for
+   an image such as an email header.
+2. **Upload button**. It is an outline button named for the image, such as "Upload Logo". It opens the file chooser.
+3. **Remove button** (optional). It is a ghost button named for the image, such as "Remove Logo". It shows once an image
+   is set, and it clears the image.
+4. **File** (optional). It is a row for one attached file, with an icon or a thumbnail, the file's name, and its size.
+   It downloads when selected.
+5. **Remove file button** (optional). It is a trash icon button at the end of a file's row. It takes that file off the
+   list.
+6. **Drop zone**. It is a box with a dashed outline and an upload icon. It takes a dropped file, or opens the file
+   chooser when selected.
+7. **Hint** (optional). It is a muted line of text under the drop zone that says what the zone accepts, such as "PDF or
+   XLSX, up to 4 MB each."
 
 ## What is available
 
-Files and images use four parts:
+Files and images come in three parts. Choose the one that matches what the file is for.
 
-| Part | What it shows |
-|---|---|
-| Drop zone | A box that takes a dropped file, or opens a file chooser when selected. What it accepts shows underneath, such as "PDF or XLSX, up to 4 MB each." |
-| Files on a form | The files, listed above the drop zone. Each file downloads when selected. Its delete button removes it. |
-| Image picker | The image's preview beside Upload and, once an image is set, Remove. The buttons name the image, such as "Upload Logo" and "Remove Logo". |
-| Preview | A logo shows as the record's square picture. A wide picture, such as an email header, shows small, `h-12` high. A picture icon holds its place until one is set. |
+| Part | Use it when | What it is |
+|---|---|---|
+| Drop zone | The app reads the file itself, such as an import ("CSV or XLSX, up to 5,000 rows.") | A box that takes a dropped file, or opens a file chooser when selected. |
+| Files on a form | Attachments are saved with a record | The list of a record's files, above a drop zone that adds more. |
+| Image picker | A logo, a cover, or the header or footer of an email | A preview of the image, beside the buttons that change it. |
 
 ## How it looks and behaves
+
+The preview shows the image as it stands. A logo shows as the record's square picture. A wide picture, such as an email
+header, shows small, `h-12` high. A picture icon holds the place of a wide picture until one is set.
 
 Files on a form and the image picker each handle a picked file in their own order.
 
 A file on a form goes through these steps:
 
-1. An empty file, a file over the size limit, or a file past the number allowed is refused before it uploads.
-2. Each other file uploads as soon as it is picked. Files upload one at a time, with a spinner while each one uploads.
-3. While any file is uploading, the form cannot be saved.
-4. A refused file stays in the list in the destructive color, with its reason, such as "Q3 report.pdf is over 4 MB.",
-   "notes.txt is empty.", or "scan.pdf could not be uploaded."
-5. Once the list is full, the drop zone gives way to a line such as "Up to 5 files."
+1. A file is refused before it uploads when it is empty, over the size limit, or past the number allowed. It gets a
+   reason, such as "Q3 report.pdf is over 4 MB." or "notes.txt is empty."
+2. Each other file uploads as soon as it is picked. Files upload one at a time. Each shows "Uploading" under its name,
+   and a spinner in place of its icon unless it is a picture, which shows its thumbnail. A file cannot be taken off
+   while it uploads.
+3. A file that the server refuses is refused the same way, with its reason, such as "scan.pdf could not be uploaded."
+4. Once the list is full, the drop zone gives way to a line such as "Up to 5 files."
 
 Sizes read with their unit, such as "812 KB" and "3.2 MB".
 
 An image picker resizes a picked image for its use, such as a logo, a cover, or an email header. The image is saved
-with the form's other fields. An image that cannot be read shows a message under the buttons. The message names the types
-the picker takes.
+with the form's other fields. See [Forms in Sheets](forms-in-sheets.md) for the form. An image that cannot be read shows
+a message under the buttons that names the types the picker takes. See
+[Errors and Validation](../foundations/errors-and-validation.md) for the words of an error.
 
 In a read-only form, files show as downloads only, and an empty list reads "No attachments". A read-only image shows
 its preview only.
+
+A form with little height shows its files as small chips side by side instead of a list.
+
+A drop zone or an image picker that cannot take a file shows its reason under it, in place of the hint. See
+[Disabled With a Reason](../foundations/disabled-with-a-reason.md).
 
 On a phone, a tap on the drop zone opens the phone's own file chooser, so people pick a file without dragging it.
 See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ## Rules
 
-### Say what the drop zone accepts
+### 1. Say what the drop zone accepts
 
-- **Do:** Say under the zone what it accepts ("PDF or XLSX, up to 4 MB each."), so people pick the right file the first
-  time.
-- **Don't:** Write a bare "Drop files here". State the types and size, so no one finds the limits by failing.
+A drop zone states the types and the size it accepts under the zone, so people pick the right file the first time.
 
-### Keep a refused file in the list, with its reason
+- **Do:** Write "CSV or XLSX, up to 5,000 rows." under an import's drop zone.
+- **Don't:** Leave only "Drop files here". People then find the limits by failing.
 
-- **Do:** Keep a refused file in the list, in the destructive color, with its reason ("Q3 report.pdf is over 4 MB."), so
-  people know what to fix.
-- **Don't:** Show a toast saying the upload failed while the file vanishes. Keep the file and its reason, so people can
-  act on it.
+### 2. Keep a refused file in the list, with its reason
 
-### Name the image on its buttons
+A refused file stays in the list in the destructive color, with its reason, so people see which file failed and what to
+fix.
 
-- **Do:** Put "Upload Logo" and "Remove Logo" beside the logo's preview, so people see what is set and what the buttons
-  change.
-- **Don't:** Label it "Choose File", or offer an upload button with no preview. Name the image and show it, so people
-  know what they are replacing.
+- **Do:** Keep "Q3 report.pdf is over 4 MB." beside the file that is too large.
+- **Don't:** Show a toast that says an upload failed while the file leaves the list. People cannot tell which file to
+  fix.
 
-### Use the shared drop zone everywhere
+### 3. Name the image on its buttons
 
-- **Do:** Use the shared drop zone, which takes a dropped file or a selection, so uploading works the same everywhere.
-- **Don't:** Draw a drop zone by hand, or use a plain file button in one place and a drop zone in another. Use the
-  shared one, so people learn it once.
+An image picker's buttons name the image, such as "Upload Logo" and "Remove Logo", so people know what the buttons
+change.
 
-## When you can do it differently
+- **Do:** Name the buttons "Upload Header" and "Upload Footer" when a form has both.
+- **Don't:** Leave "Upload Image" on both pickers of one form. People cannot tell the pickers apart.
 
-A form with little height shows its files as small chips side by side instead of a list.
+### 4. Hold the save while a file uploads
 
-## Works with
+A form cannot be saved while any file is uploading, so the record is never saved without a file that is still on its way.
 
-Files and images work with three other patterns:
-
-- See [Forms in Sheets](forms-in-sheets.md) for the form that files and images are saved with.
-- See [People and Pictures](people-and-pictures.md) for the record's square picture that shows a logo.
-- See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for the line under a drop zone or picker that
-  cannot take a file.
+- **Do:** Disable Save until every file has finished uploading.
+- **Don't:** Let Save send the form while a file shows "Uploading". The record saves without that file.
 
 ## In code
 

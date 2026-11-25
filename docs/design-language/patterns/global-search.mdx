@@ -2,10 +2,14 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/global-search.md?raw"
 import { SkillDoc } from "../skill-doc"
 import { SearchExample } from "../examples/search-and-notifications.example"
+import { globalSearchAnatomy } from "../examples/global-search-anatomy"
 
 <Meta title="Patterns/Navigation/Global Search" />
 
 <SkillDoc
   source={source}
-  after={{ "How it looks and behaves": <SearchExample /> }}
+  after={{
+    Anatomy: globalSearchAnatomy,
+    "How it looks and behaves": <SearchExample />,
+  }}
 />

@@ -3,13 +3,20 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/status.md
 import * as StatusDotStories from "../recipes/status-dot.stories"
 import { SkillDoc } from "../skill-doc"
 import { statusExamples } from "../examples/status.example"
+import { statusAnatomy } from "../examples/status-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Content/Status" />
 
 <SkillDoc
   source={source}
   after={{
+    Anatomy: statusAnatomy,
     ...statusExamples,
-    "Status dot": <Canvas of={StatusDotStories.Default} sourceState="none" />,
+    "Status dot": (
+      <Captioned caption="A status dot in the pair's deep color, beside the word 2 failed.">
+        <Canvas of={StatusDotStories.Default} sourceState="none" />
+      </Captioned>
+    ),
   }}
 />

@@ -5,22 +5,21 @@ import * as ListToolbar from "../../../components/ui/list-toolbar/list-toolbar.s
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
 import { pagingAnatomy } from "../examples/pattern-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Lists/Paging" />
 
 <SkillDoc
   source={source}
-  code={<PatternCode components={[{ name: "ListPager", stories: ListPager }]} />}
+  code={
+    <PatternCode components={[{ name: "ListPager", stories: ListPager }]} />
+  }
   after={{
-    "What is available": (
-      <>
-        <Canvas of={ListPager.Pages} sourceState="none" />
-        <Canvas of={ListPager.OnePage} sourceState="none" />
-      </>
-    ),
-    "Anatomy": pagingAnatomy,
+    Anatomy: pagingAnatomy,
     "How it looks and behaves": (
-      <Canvas of={ListToolbar.Paged} sourceState="none" />
+      <Captioned caption="A list with its footer. The count is at the left end and the pages are at the right end. A search, a filter, or a sort goes back to page 1.">
+        <Canvas of={ListToolbar.Paged} sourceState="none" />
+      </Captioned>
     ),
   }}
 />

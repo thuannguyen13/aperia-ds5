@@ -24,6 +24,7 @@ import {
 import { money } from "@/lib/format"
 import { DoDont, Example } from "../blocks"
 import { TitledCard } from "../recipes"
+import { chartsAnatomy } from "./charts-anatomy"
 
 // Charts in cards, drawn from the chart parts: the four forms, and the Do / Don't pairs for the Charts page's rules.
 
@@ -223,18 +224,10 @@ function Half({ children }: { children: ReactNode }) {
 }
 
 export const chartsExamples = {
-  "@intro": (
-    <Example caption="Point at a month, or Tab to the chart and use the arrow keys: the tooltip shows each series with its value. The total sits beside the title as text.">
-      <div className="w-full max-w-xl">
-        <ChartCard title="Opportunities by Month" figure={`${total} created`}>
-          <CreatedAndWon />
-        </ChartCard>
-      </div>
-    </Example>
-  ),
+  Anatomy: chartsAnatomy,
   "What is available": (
     <Example
-      caption="A bar chart, a line chart, a stacked bar chart, and a bar chart laid across for long group names. The funnel chart is on its own page."
+      caption="A bar chart, a line chart, a stacked bar chart, and a bar chart laid across for long group names."
       className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2"
     >
       <ChartCard title="Opportunities by Month">
@@ -260,7 +253,7 @@ export const chartsExamples = {
       </div>
     </Example>
   ),
-  "Pick the chart by the data": (
+  "Draw shares and groups as bars": (
     <DoDont
       good={
         <Half>

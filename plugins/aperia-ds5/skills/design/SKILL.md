@@ -45,10 +45,11 @@ drift.
 ## The pages
 
 Every rule lives on one page; read the page before placing what it covers. Values live only in `aperia-ds5/base.css`.
-The pages are in six sections, the same as the Storybook sidebar. Every page has the same sections in one order
-([Overview](overview.md), How a page is laid out). A component's or pattern's Anatomy lists its parts by number, each
-optional part marked "(optional)", and a component's States, under How it looks and behaves, names how it looks at
-rest, on hover, on focus, when pressed, and when disabled.
+The pages are in six sections, the same as the Storybook sidebar. Every page has the same sections in one order, and
+only the sections it has something to say in ([Overview](overview.md), How a page is laid out). A page about a thing
+with parts opens with Anatomy, which lists its parts by number, each optional part marked "(optional)". A component's
+States, under How it looks and behaves, names how it looks at rest, on hover, on focus, when pressed, and when
+disabled. Rules are numbered and cited by page and number ("Sort 2"); each has a statement with its reason.
 
 - **Get Started**: [Overview](overview.md), [For Designers](get-started/for-designers.md) and
   [For Developers](get-started/for-developers.md).
@@ -120,7 +121,7 @@ rest, on hover, on focus, when pressed, and when disabled.
    [Message Templates](foundations/copy-templates.md).
 6. **Measure alignment** in the browser (`getBoundingClientRect`). Check both themes and phone width.
 7. **Review a screenshot** of every screen you changed, in Light and Dark, against the screenshot review below.
-8. **Run the checklist** at the end. Each pattern page's Don'ts are the mistakes to look for.
+8. **Run the checklist** at the end. Each page's numbered rules are the mistakes to look for.
 
 ## Invariants
 

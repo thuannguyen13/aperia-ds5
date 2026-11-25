@@ -18,6 +18,7 @@ import { DoDont, Example } from "../blocks"
 import { DetailRow, DetailSection, IconButton, TitledCard } from "../recipes"
 import { Screen } from "./before-after"
 import { AppStatusColors } from "./app-status"
+import { bannerAlertAnatomy } from "./banner-alerts-anatomy"
 
 // Banner alerts: one Alert under the page header about the whole page, in one of three types. The warning's amber is
 // the app's own status pair, stood in for by brand.example.css.
@@ -122,7 +123,7 @@ export const bannerAlertExamples = {
   ),
   "What is available": (
     <Example
-      caption="Information, a warning in the app's amber status pair, and an error."
+      caption="The three types: information, a warning in a color pair the app sets (amber here), and an error."
       className="flex-col items-stretch"
     >
       <AppStatusColors />
@@ -131,6 +132,7 @@ export const bannerAlertExamples = {
       <Outage />
     </Example>
   ),
+  Anatomy: bannerAlertAnatomy,
   "Show one banner alert, under the page header": (
     <DoDont
       stack
@@ -150,18 +152,6 @@ export const bannerAlertExamples = {
         </Page>
       }
       badNote="two banners, stacked above the page header"
-    />
-  ),
-  "Keep a banner alert for the whole page": (
-    <DoDont
-      good={<Closed />}
-      bad={
-        <Alert>
-          <InfoIcon />
-          <AlertTitle>Note Added</AlertTitle>
-        </Alert>
-      }
-      badNote="a saved change shown as a banner, which belongs in a toast"
     />
   ),
   "Match the type to how much it stops": (

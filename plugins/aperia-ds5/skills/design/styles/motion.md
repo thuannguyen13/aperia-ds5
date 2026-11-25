@@ -1,61 +1,48 @@
 # Motion
 
-Motion defines the timing and easing that panels, menus, and loading states use to appear and disappear.
-
-## When to use
-
-Use motion whenever a panel, menu, or loading state appears or disappears. A panel that eases in shows where it came
-from. A panel that fades out shows that it is gone.
+Motion sets how fast and how smoothly dialogs, sheets, and the sidebar move, and how a list that changes while people type settles. See [Loading](../foundations/loading.md) for why a page keeps its layout when data arrives and for the last results that stay on screen, faded, while new ones load.
 
 ## What is available
 
-Motion has three movements. Each timing and curve is set once in the library. The live samples on this page print each
-one as the browser reads it, and let you open a dialog and a sheet.
+Motion has three movements. Each timing and curve is set once, as a token in the library, and a panel or a part reads it from there.
 
 | What moves | Opening | Closing |
 |---|---|---|
-| Dialog, alert dialog, sheet, and the overlay | The panel opening time, easing out (fast, then settling) | The shorter closing time, speeding up as it goes |
-| The sidebar folding to a rail, its buttons, and the page beside it | The rail time, on the same easing | The same |
-| A dialog's size | Grows from slightly under full size | Shrinks to slightly under full size |
+| A dialog, an alert dialog, a sheet, and the overlay behind each | The panel opening time (`--panel-in`) on the easing (`--rail-ease`), fast at first and then settling | The shorter panel closing time (`--panel-out`), speeding up as it goes |
+| A dialog's size | Grows from slightly under full size as it fades in | Shrinks to slightly under full size as it fades out |
+| The name row in the sidebar's header, as the sidebar folds to a rail | The rail time (`--rail-duration`) on the same easing | The same |
+
+See [Elevation](elevation.md) for the shadow of a panel and the overlay behind it, and [Dialog](../components/dialog.md) for how a dialog behaves.
 
 ## How it looks and behaves
 
-Panels open fast and settle, and they close a little faster, speeding up as they go. When a person's device asks for
-less motion, panels only fade. They do not grow or slide.
+A panel opens fast and settles, and it closes a little faster, so a person sees where it came from and sees that it is gone. A sheet slides in from its edge. A dialog grows as it fades in.
 
-Layouts do not shift when data arrives, so people keep their place.
-
-A list that changes while a person types, such as a search or a picker, follows three rules:
-
-- The list grows at once, and it shrinks only after its height has held for a moment.
-- The last results stay on screen, faded, while new ones load.
-- The "nothing found" message shows only after typing pauses.
-
-Typing never stalls while results update.
+When a person's device asks for less motion, a panel only fades. It does not grow or slide.
 
 ## Rules
 
-### Ease panels in and out
+### 1. Use the library's panel motion
 
-- **Do:** Open a panel fast and let it settle, then close it a little faster. Grow a dialog as it fades in, so people
-  see where it came from.
-- **Don't:** Pop a panel in, snap it shut, or slide it at an even speed with no easing. Use the panel's own motion, so
-  changes are easy to follow.
+A panel moves on the library's timings and easing, so every panel in every app opens and closes in the same way.
 
-## When you can do it differently
+- **Do:** Build an app's own panel from `Dialog`, `AlertDialog`, or `Sheet`, which already move this way. A panel that cannot use them reads `--panel-in`, `--panel-out`, and `--rail-ease`.
+- **Don't:** Pop a panel in, snap it shut, or slide it at an even speed with its own timing.
 
-Motion has no exceptions. Every app uses these timings and curves.
+### 2. Let a changing list settle
 
-## Works with
+A list that changes while people type, such as a search or a picker, grows at once and shrinks only after its height has held for a moment. The list shows "nothing found" only after typing pauses, so it does not jump or show an empty message in the middle of a word. Typing never stalls while results update.
 
-- See [Elevation](elevation.md) for the panels and the overlay that move.
+- **Do:** In a company picker, show more rows the moment they arrive, and keep the list at its height until the shorter result has held.
+- **Don't:** Shrink the list or show "nothing found" at every key.
 
 ## In code
 
 - The panels already move this way: `styles/base.css` sets `--panel-in`, `--panel-out`, `--rail-duration` and
   `--rail-ease` on `Dialog`, `AlertDialog`, `Sheet` and their overlays, with the closing curve beside them (Panel
   motion), and turns off scale and slide under `prefers-reduced-motion`. The dialog's scale is its `zoom-in-97` /
-  `zoom-out-97` classes.
+  `zoom-out-97` classes. `AppSidebar` reads `--rail-duration` and `--rail-ease` on the header row that holds the
+  name and the toggle.
 - Lists that change while you type have no token yet: shrink after the height holds for about 300ms, and show "nothing
   found" after typing pauses for about 400ms. Render new results in a React transition and memoize rows, so a frame
   never blocks. Aim for 60fps at normal speed.

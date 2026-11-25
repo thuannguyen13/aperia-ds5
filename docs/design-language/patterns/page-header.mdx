@@ -3,21 +3,28 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/page-head
 import * as AppShell from "../../../components/ui/app-shell/app-shell.stories"
 import * as PeopleStack from "../recipes/people-stack.stories"
 import { SkillDoc } from "../skill-doc"
+import { pageHeaderAnatomy } from "../examples/page-header-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Content/Page Header" />
 
 <SkillDoc
   source={source}
   after={{
-    "@intro": (
-      <Canvas
-        of={AppShell.Record}
-        story={{ inline: false, height: "520px" }}
-        sourceState="none"
-      />
+    Anatomy: pageHeaderAnatomy,
+    "How it looks and behaves": (
+      <Captioned caption="A record's page in the app shell. The page header's title is also the last crumb of the top bar's breadcrumb, and the page's content follows the header.">
+        <Canvas
+          of={AppShell.Record}
+          story={{ inline: false, height: "520px" }}
+          sourceState="none"
+        />
+      </Captioned>
     ),
-    "Show people as one stack": (
-      <Canvas of={PeopleStack.InHeader} sourceState="none" />
+    "The subtitle": (
+      <Captioned caption="A record's subtitle with its kind and number, its parent record, and the stacks of its products and sales reps.">
+        <Canvas of={PeopleStack.InHeader} sourceState="none" />
+      </Captioned>
     ),
   }}
 />

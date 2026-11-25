@@ -2,7 +2,11 @@ import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/styles/typography.md?raw"
 import { SkillDoc } from "../skill-doc"
 import { typographyExamples } from "../examples/foundations"
+import { typographyRuleExamples } from "../examples/typography-rules"
 
 <Meta title="Styles/Typography" />
 
-<SkillDoc source={source} after={typographyExamples} />
+<SkillDoc
+  source={source}
+  after={{ ...typographyExamples, ...typographyRuleExamples }}
+/>

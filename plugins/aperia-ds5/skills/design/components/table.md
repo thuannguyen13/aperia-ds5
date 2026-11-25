@@ -1,25 +1,51 @@
 # Table
 
-A table lists records in rows with shared columns so people can scan and compare them. See
-[Tables](../patterns/tables.md) for how tables sit on a page.
+A table lets people scan records and compare them across columns. See [Tables](../patterns/tables.md) for when to use a
+table, how it sits on a page, and its toolbar.
 
-## When to use
+## Anatomy
 
-Use a table to list records the user scans, compares, sorts, or filters.
+A table has six parts. The footer and the caption show only sometimes.
 
-See [Tables](../patterns/tables.md) for choosing a table on the page, a table in a card, or a simple list, and for
-the cases that use no table.
+1. **Table**. It is the grid that lines records up in rows under shared columns. It fills the width of its box and
+   scrolls sideways when it is wider.
+2. **Column headings**. They are the titles of the columns, in one row above the rows. A divider sits under them.
+3. **Row**. It is one record, shown as a line of values. A divider sits under it.
+4. **Cell**. It is one value of a record in one column, such as a name, a number, or a badge.
+5. **Footer** (optional). It is a row at the bottom of the table that holds totals, with a divider above it.
+6. **Caption** (optional). It is a line of muted text under the table that names what the table holds.
 
-## What is available
+## How it looks and behaves
 
-A table has four parts, listed from top to bottom:
+Headings are left-aligned, in medium weight and Title Case. Each row is separated from the next by a divider, and the
+last row has none. The heading row takes no hover. A list's toolbar sits above the table. See
+[List Toolbar](../patterns/list-toolbar.md) and [Filters](../patterns/filters.md) for it, and [Paging](../patterns/paging.md)
+for the count and page numbers below the rows.
 
-| Part | Content |
-|---|---|
-| Toolbar | Search, filters, and Sort, above the table |
-| Column headings | Headings in Title Case, with one divider under them |
-| Rows | Records separated by dividers |
-| Footer | The count, with the page numbers once the rows run past one page. See [Paging](../patterns/paging.md). |
+Values in a table follow these conventions:
+
+- A missing value is an em dash (—) in the muted text color. An em dash is different from 0. See
+  [Empty States](../foundations/empty-states.md).
+- Numbers, including amounts, are right-aligned in their column and use tabular figures, so digits line up. See
+  [Money and Numbers](../foundations/money-and-numbers.md).
+- A cell with several names shows a count. Selecting the count lists the names.
+- A band in the muted fill heads a group of rows. See [Tables](../patterns/tables.md) for grouped rows.
+- A record with a number shows the bare number in the table, such as "659". Its page shows the full name, such as
+  "Opportunity #659".
+
+A row takes the muted fill at 50% when the pointer is over it. A row that opens its record is reached with **Tab**,
+has the record's name as its label, and opens with **Enter** or **Space**. A control inside a row, such as a checkbox
+or a menu, keeps its own keys and clicks, and using it does not open the row. See
+[Selecting Rows](../patterns/selecting-rows.md) for a checkbox column.
+
+A row opens its record on the record's page, or in a sheet for a small record such as an option or a note. See
+[Tables](../patterns/tables.md) for which records open where, for where their Edit and Delete sit, and for the few rows
+that show a button.
+
+Column headings are real table headings, so a screen reader reads each cell with its column.
+
+A search or filter with no match shows the empty state "No Results". See [Filters](../patterns/filters.md) for filters
+on a phone and for their chips.
 
 ### Specs
 
@@ -29,35 +55,10 @@ A table has four parts, listed from top to bottom:
 | Cell padding | `p-2` |
 | Text | `text-sm` |
 | Row lines | The divider |
+| Footer | Muted at 50%, medium weight, with a divider above it |
+| Caption | `text-sm`, muted text, `mt-4` below the table |
 | Hover | Muted at 50% |
 | Selected | Muted |
-
-## How it looks and behaves
-
-A table shows its values in a fixed way, opens a record from its row, and filters from its toolbar.
-
-Values in a table follow five conventions:
-
-- A missing value is an em dash (—) in the muted text color. An em dash is different from 0.
-- Numbers line up in their column, with tabular figures.
-- A cell with several names shows a count. Selecting the count lists the names.
-- A band in the muted color heads a group of rows.
-- A record with a number shows the bare number in the table, such as "659". Its page shows the full name, such as
-  "Opportunity #659".
-
-A row takes the muted color at 50% when the pointer is over it. Selecting anywhere on a row opens its record. A
-keyboard user reaches a row with **Tab**. The row has the record's name as its label and opens with **Enter** or
-**Space**.
-
-A row opens its record on the record's page, or in a sheet for a small record such as an option or a note. See
-[Tables](../patterns/tables.md) for which records open where, for where their Edit and Delete sit, and for the few rows
-that show a button.
-
-Column headings are real table headings, so a screen reader reads each cell with its column.
-
-Filters sit in the toolbar. On a phone, they go behind one Filter button that counts the filters that are on. The
-button opens the filters in a sheet. Active filters show as chips, and tapping a chip clears its filter. A search or
-filter with no match shows the empty state "No Results".
 
 ### States
 
@@ -73,46 +74,29 @@ pointer and no focus.
 
 ## Rules
 
-### Open the record from the whole row
+### 1. Make the whole row open its record
 
-- **Do:** Open the record on a click anywhere on the row or on Enter, with the name in plain text, so people do not have
-  to aim.
-- **Don't:** Put an Open or View button on each row, or a link on the name only. Make the whole row open the record, so
-  the table holds no extra buttons.
+A click anywhere on a row opens its record. **Enter** and **Space** on a focused row do the same. People do not have to
+aim, and the table holds no extra buttons.
 
-### Keep table rows plain
+- **Do:** Open the Task record on a click anywhere on its row, with the task's name in plain text.
+- **Don't:** Put an Open or View button on each row, or a link on the name only.
 
-- **Do:** Separate rows with dividers and tint a row in the muted color on hover, so people can follow a row across.
-- **Don't:** Alternate row colors. Use dividers between rows, so no stripe looks like it means something.
+### 2. Keep table rows plain
 
-### Show contact details as plain text
+Rows are separated by dividers, and only the row under the pointer takes a tint. People can follow a row across, and no
+stripe looks like it means something.
 
-- **Do:** Show phone numbers, emails, and websites as plain text in the body color, like every other value, so the row
-  still opens the record.
-- **Don't:** Make contact details Primary and underlined down a column. Keep them plain in a table and link them only
-  on a record's page, so a column of contact details reads like every other value.
+- **Do:** Separate rows with dividers and tint a row in the muted fill on hover.
+- **Don't:** Alternate row colors.
 
-## When you can do it differently
+### 3. Show contact details as plain text
 
-- A control inside a row, such as a checkbox or a menu, keeps its own keys and clicks. Using it does not open the row.
-  See [Selecting Rows](../patterns/selecting-rows.md) for a checkbox column.
+Phone numbers, emails, and websites in a table are plain text in the body color, like every other value, so the row
+still opens its record. They link only on a record's page. See [Copy](../foundations/copy.md) for how they link there.
 
-## Works with
-
-| Component | How it works with a table |
-|---|---|
-| Card | A table in a card runs to the card's edges, with no top border. |
-| Empty State | An empty state shows in place of the rows when there are none. |
-| Badge | A state in a cell is a badge. See [Status](../patterns/status.md). |
-| Avatar | A person or company in a cell shows its picture beside the name. |
-| Button | A row has no button to open or edit it. A row shows a button only when its click is already taken. |
-| Page | A list table fills the page column. |
-
-See [Tables](../patterns/tables.md) for the column headings right under a card header, with no line above them, and for
-a table too wide for the page column. See [Sort](../patterns/sort.md) for sorting from the toolbar. See
-[Copy](../foundations/copy.md) for how contact details link on a record's page. See [Color](../styles/color.md) for
-pairing every color with a word or an icon. See [Border and Radius](../styles/border-and-radius.md) for the border
-the Specs name.
+- **Do:** Show "(214) 555-0142" and "dana@northwind.com" as plain text in a Contacts table.
+- **Don't:** Make a column of contact details underlined in the Link color.
 
 ## In code
 

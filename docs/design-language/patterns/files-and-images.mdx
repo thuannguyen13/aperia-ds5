@@ -3,9 +3,13 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/files-and
 import * as FilePickerStories from "../../../components/ui/file-picker/file-picker.stories"
 import * as FileDropStories from "../../../components/ui/file-drop/file-drop.stories"
 import * as ImageStories from "../../../components/ui/image-picker/image-picker.stories"
-import { fileExamples } from "../examples/forms-and-values"
+import {
+  filesAndImagesAnatomy,
+  filesAndImagesExamples,
+} from "../examples/files-and-images-anatomy"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Editing/Files and Images" />
 
@@ -13,18 +17,28 @@ import { PatternCode } from "../component-page"
   source={source}
   code={<PatternCode components={[{ name: "FileDrop", stories: FileDropStories }, { name: "FilePicker", stories: FilePickerStories }, { name: "ImagePicker", stories: ImageStories }]} />}
   after={{
-    "@intro": <Canvas of={FilePickerStories.Default} sourceState="none" />,
+    Anatomy: filesAndImagesAnatomy,
     "What is available": (
       <>
-        <Canvas of={FileDropStories.Default} sourceState="none" />
-        <Canvas of={ImageStories.Default} sourceState="none" />
-        <Canvas of={ImageStories.EmailHeader} sourceState="none" />
+        <Captioned caption="A drop zone alone, with what it takes under it.">
+          <Canvas of={FileDropStories.Default} sourceState="none" />
+        </Captioned>
+        <Captioned caption="Files on a form: two saved files above a drop zone.">
+          <Canvas of={FilePickerStories.Default} sourceState="none" />
+        </Captioned>
+        <Captioned caption="An image picker for a logo, with its monogram until an image is set.">
+          <Canvas of={ImageStories.Default} sourceState="none" />
+        </Captioned>
+        <Captioned caption="Image pickers for an email's header and footer. The footer has no image yet, so a picture icon holds its place.">
+          <Canvas of={ImageStories.EmailHeader} sourceState="none" />
+        </Captioned>
       </>
     ),
     "How it looks and behaves": (
-      <Canvas of={FilePickerStories.States} sourceState="none" />
+      <Captioned caption="Files in each state: saved, uploading, refused for size, and refused by the server.">
+        <Canvas of={FilePickerStories.States} sourceState="none" />
+      </Captioned>
     ),
-    "Say what the drop zone accepts":
-      fileExamples["Say what the drop zone accepts"],
+    ...filesAndImagesExamples,
   }}
 />

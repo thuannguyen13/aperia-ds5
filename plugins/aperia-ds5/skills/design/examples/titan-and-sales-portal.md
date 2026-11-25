@@ -1,20 +1,15 @@
 # Titan and Sales Portal
 
-This example sets three screens of two Aperia apps, Titan and Sales Portal, as each app styles them today beside the
-same screens built from aperia-ds5.
-
-## When to use
-
-Use this page to see what aperia-ds5 changes in an existing app, and to show a team why its app moves to it. Each
-screen below shows the two apps before, styled on their own, and after, built from the library. After, the two apps
-share one sidebar, one page header, one toolbar, and one table, and each keeps only its own name, logo, pages, and
-data.
+This example shows what aperia-ds5 changes in two Aperia apps, Titan and Sales Portal, on three screens of each.
 
 ## How it looks and behaves
 
-Each comparison shows one kind of screen in one app at a time, its Before above its After. Titan and Sales Portal switch
-the app, and Desktop and Phone switch the width. On a phone, Before and After sit side by side. Selecting a frame opens
-it at full size.
+Each comparison shows one kind of screen in one app, as the app styles it today (Before) and built from aperia-ds5
+(After). After, the two apps share one sidebar, one page header, one toolbar, and one table. Each app keeps only its
+own name, logo, pages, and data.
+
+Titan and Sales Portal switch the app, and Desktop and Phone switch the width. Before sits above After on a desktop,
+and beside it on a phone. Selecting a frame opens it at full size.
 
 ### The home screen
 
@@ -27,6 +22,9 @@ and boxes.
 Titan's Merchant View and Sales Portal's Prospects are both a list of records. After, both use the list toolbar, with the
 search and filters on the left and Sort on the right. Their rows open the record, and the count and pages sit under the
 table.
+
+An app keeps a control that only it needs and that does not change the list, such as Titan's report date, outside the
+list toolbar. It sits on its own row under the page header.
 
 ### A record
 
@@ -43,15 +41,6 @@ with its picture, title, facts, and actions, and their details sit in titled car
 - **After:** Both apps share one sidebar, one page header, one list toolbar, and titled cards. The list's actions sit at
   the toolbar's right end, rows open their record, and the count and pages sit under the list. On a phone, every
   screen fits its width.
-
-## Rules
-
-Each part's rules live on its pattern page, listed under Which patterns it uses.
-
-## When you can do it differently
-
-An app keeps a control that only it needs, such as Titan's report date, outside the list toolbar, on its own row
-under the page header.
 
 ## Which patterns it uses
 

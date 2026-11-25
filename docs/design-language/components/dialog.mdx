@@ -4,6 +4,7 @@ import { ComponentHome } from "../component-page"
 import { DoDont, Example } from "../blocks"
 import { StateCards } from "../states"
 import * as Panels from "../examples/dialog.stories"
+import { dialogAnatomy } from "../examples/dialog-anatomy"
 
 {/* The component's home: replaces its generated docs page (see component-page.tsx). */}
 
@@ -17,16 +18,12 @@ export const Panel = ({ of, height = "300px" }) => (
 <ComponentHome
   guide="components/dialog.md"
   after={{
-    "@intro": (
-      <Example className={frame}>
-        <Panel of={Panels.Confirmation} />
-      </Example>
-    ),
     "What is available": (
-      <Example className={frame} caption="A reason dialog: the change, then the reason for it.">
+      <Example className={frame} caption="A reason dialog. It shows the change as two badges, a field for the reason, and Cancel and the action.">
         <Panel of={Panels.ReasonDialog} height="360px" />
       </Example>
     ),
+    Anatomy: dialogAnatomy,
     "States": (
       <StateCards
         flush

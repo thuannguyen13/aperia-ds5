@@ -3,7 +3,12 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/people-an
 import * as AvatarStories from "../../../components/ui/avatar/avatar.stories"
 import * as PeopleStories from "../recipes/people-stack.stories"
 import { peopleExamples } from "../examples/forms-and-values"
+import {
+  peopleAndPicturesAnatomy,
+  peopleAndPicturesExamples,
+} from "../examples/people-and-pictures-anatomy"
 import { SkillDoc } from "../skill-doc"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Content/People and Pictures" />
 
@@ -12,17 +17,29 @@ export const frame = "block min-h-0 overflow-hidden p-0"
 <SkillDoc
   source={source}
   after={{
-    "@intro": <Canvas of={AvatarStories.ShapesAndStates} sourceState="none" />,
     "What is available": (
+      <Captioned caption="Every shape and size, in Light and Dark. A person shows a photo, initials, or the app's colors. A company shows a logo, a monogram, or neither. The last of each row is no one.">
+        <Canvas of={AvatarStories.ShapesAndStates} sourceState="none" />
+      </Captioned>
+    ),
+    Anatomy: peopleAndPicturesAnatomy,
+    "A stack of people": (
       <>
-        <Canvas of={PeopleStories.Default} sourceState="none" />
-        <Canvas of={PeopleStories.NoOne} sourceState="none" />
+        <Captioned caption="A stack of five reps. It shows three avatars and +2. Hovering or focusing it opens the card that lists everyone.">
+          <Canvas of={PeopleStories.Default} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A stack with no one. It is the empty avatar, and the card says No assignee.">
+          <Canvas of={PeopleStories.NoOne} sourceState="none" />
+        </Captioned>
       </>
     ),
     "Show people as circles and companies, products, and teams as squares":
       peopleExamples[
-        "People are circles; companies, products and teams are squares"
+        "Show people as circles and companies, products, and teams as squares"
       ],
     "Show a picture without a frame": peopleExamples["Show a picture without a frame"],
+    "Use one picture for a record everywhere":
+      peopleAndPicturesExamples["Use one picture for a record everywhere"],
+    "Show no one as no one": peopleAndPicturesExamples["Show no one as no one"],
   }}
 />

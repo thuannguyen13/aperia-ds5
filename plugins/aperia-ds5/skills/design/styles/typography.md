@@ -1,22 +1,22 @@
 # Typography
 
-Typography defines the font, type sizes, and weights used for every heading, label, and line of text.
-
-## When to use
-
-Use a step of the type scale and one of the weights whenever you set text on screen. Find the text's role, such as page
-title, card title, or body, under Roles in an Aperia app, and use the step and weight it names.
+Typography sets the font, size, and weight of every heading, label, and line of text, from one scale. See
+[Copy](../foundations/copy.md) for what the words say and how they are capitalized, and [Sizes](../foundations/sizes.md)
+for the heights the text sits in.
 
 ## What is available
 
-Typography has one font, Inter, a type scale, and a set of weights. The library offers the whole scale and every weight below.
-An Aperia app uses a few of them, one pair for each role.
+Typography has one font, a type scale, and a set of weights. The font is Inter when the app loads it, and a sans serif font
+the device provides when it does not. The library offers the whole scale and every weight below. An Aperia app uses a few of
+them, one pair for each role.
 
 ### Type scale
 
-The type scale has thirteen steps, from XS (`text-xs`) through SM, Base, LG, XL, and 2XL to 9XL (`text-9xl`). Each step
-sets a font size and the line height that goes with it. An Aperia app uses four steps, XS, SM, Base, and 2XL, and SM
-for most text. The live table on this page shows each step's size and line height as the browser reads them.
+The type scale has thirteen steps, from XS through SM, Base, LG, XL, and 2XL to 9XL. Each step sets a font size and the
+line height that goes with it. The tokens are `text-xs`, `text-sm`, `text-base`, `text-lg`, `text-xl`, `text-2xl`,
+`text-3xl`, `text-4xl`, `text-5xl`, `text-6xl`, `text-7xl`, `text-8xl`, and `text-9xl`.
+
+An Aperia app uses four steps, XS, SM, Base, and 2XL, and SM for most text. The other nine steps are not used.
 
 ### Weights
 
@@ -26,7 +26,8 @@ headings, titles, and figures. Bold (`font-bold`) appears only in the initials o
 
 ### Roles in an Aperia app
 
-Each role uses one step and one weight.
+A role is a kind of text, such as a page title or a button's label. Each role uses one step and one weight. To set text,
+find its role and use the step and weight the role names.
 
 | Role | Step | Weight |
 |---|---|---|
@@ -42,40 +43,36 @@ Each role uses one step and one weight.
 
 ## How it looks and behaves
 
-The page title is the largest text on a page. Card titles are smaller, at Base. All other text is body text, with muted
-text for labels and descriptions. Most text uses SM, which keeps tables and forms compact.
+The page title is the largest text on a page. Most text is body text at SM, which keeps tables and forms compact.
 
-Names, such as titles and buttons, use Title Case, and sentences use sentence case. See [Copy](../foundations/copy.md)
-for when to use each.
-
-Figures in tables and tiles use tabular numbers, which are digits of equal width. Amounts in a column then sit under
-each other.
-
-Muted text, in gray, is for labels, descriptions, and hints. Values a person reads use the body color.
+Muted text, in gray, is for labels, descriptions, and hints. Values a person reads use the body color. See
+[Color](color.md) for the muted text color.
 
 ## Rules
 
-### Set card titles a step below the page title
+### 1. Use only the steps and weights the roles name
 
-- **Do:** Set card titles semibold and smaller than the page title, so the page has one top heading.
-- **Don't:** Make a section title as large as the page title, or set a card title in medium weight. Use the card's own
-  title, so people see which heading leads.
+Every piece of text takes the step and weight of its role, so the same kind of text looks the same on every screen. A
+need the roles do not cover is a proposal for this page, not a size set in one place.
 
-### Line up figures
+- **Do:** Set a label in SM and Medium, as a button's or a tab's label is.
+- **Don't:** Set a label in LG or Bold, or write a size outside the scale, such as `text-[13px]`.
 
-- **Do:** Set amounts and counts in tables and tiles in tabular numbers, so figures line up for comparing.
-- **Don't:** Set figures in proportional digits. Use tabular numbers, so a column of amounts lines up.
+### 2. Set card titles a step below the page title
 
-## When you can do it differently
+A card title is semibold and sits one step below the page title among the steps an app uses. The page then has one top
+heading.
 
-An app uses only the steps and weights the roles name. A step marked Not used is there for a need the roles do not
-cover yet, and such a need is a proposal for this page.
+- **Do:** Set a card title in Base and semibold, under a page title in 2XL.
+- **Don't:** Make a card title as large as the page title, or set it in Medium.
 
-## Works with
+### 3. Line up figures
 
-- See [Copy](../foundations/copy.md) for what the words say, and for the rule on Title Case and sentence case.
-- See [Color](color.md) for text and muted text.
-- See [Sizes](../foundations/sizes.md) for the heights the text sits in.
+Figures in tables and tiles use tabular numbers, which are digits of equal width, so amounts in a column sit under each
+other and people can compare them.
+
+- **Do:** Set a column of amounts in tabular numbers, such as $1,111,111 above $8,000,000.
+- **Don't:** Leave figures in proportional digits, whose widths differ, so the amounts drift out of line.
 
 ## In code
 

@@ -1,13 +1,22 @@
 # People and Pictures
 
-Pictures represent people as circles and companies, products, and teams as squares.
+A picture beside a record's name tells people which person, company, product, or team the record is. See
+[Files and Images](files-and-images.md) for choosing and uploading a picture.
 
-## When to use
+## Anatomy
 
-Show a picture beside a record's name wherever the name shows, such as a picker row, a table cell, a page header, or a
-list of people.
+People and pictures have five parts. The empty picture and the count show only sometimes. The parts are those of an
+opportunity record with its company's picture, an owner, an assignee that is empty, and a stack of sales reps.
 
-Show an empty picture for no one, such as an unassigned owner.
+1. **Record picture**. It is a square avatar for a company, product, or team. The square shows the logo, or a monogram
+   when there is no logo.
+2. **Person picture**. It is a circle avatar that sits beside a person's name. It holds the photo, or the person's
+   initials when there is no photo.
+3. **Empty picture** (optional). It is an avatar with a dashed outline that stands for no one. "No [role]" sits beside it.
+4. **People stack**. It is a button that holds up to three overlapping avatars of the people on a record. It opens a card
+   that lists everyone.
+5. **Count** (optional). It is a circle at the end of the stack that reads "+N", the number of people the stack leaves
+   out.
 
 ## What is available
 
@@ -29,65 +38,64 @@ Pictures come in five sizes:
 | Large | `size-10` | A logo preview in an image picker |
 | Extra large | `size-12` | A page header |
 
-A page header that shows people shows up to three avatars, then "+N" for the people it leaves out. Hovering, focusing, or tapping them
-opens a card. The card lists everyone, each with their avatar, name, and role.
+A picture smaller than `size-5`, such as one in a `size-4` chip, is sized by the app.
 
 ## How it looks and behaves
+
+A picture sits beside a record's name wherever the name shows, such as a picker row (see [Pickers](pickers.md)), a table
+cell, a page header, or a list of people.
 
 A picture loads in two steps. The initials show at once. The photo or logo then fades in over them once it loads.
 Wherever the photo or logo fails to load, the initials stay.
 
-Every picture looks the same across the app. Initials and monograms take the app's avatar colors, a short set of fill and
-text pairs that the app sets. The pair is picked by the record, so it never changes between pages. See
-[Color](../styles/color.md) for the colors an app sets.
+Initials and monograms take the app's avatar colors, a short set of fill and text pairs that the app sets. The record's
+id picks the pair. See [Color](../styles/color.md) for the colors an app sets.
 
 A square's corners get smaller with its size, so a small square never reads as a circle. A picture has a thin inner
-border and no other edge.
+border. In a stack, the avatars overlap, and each one has a ring in the page's background color that separates it from
+the next.
 
 A screen reader skips a picture that sits beside its name. A picture that stands alone is named.
 
-On a phone, pictures keep the sizes they have on a desktop. A tap on a stack of pictures opens the card that lists
-everyone. See
-[Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+On a phone, pictures keep the sizes they have on a desktop. See [Screen Sizes](../foundations/screen-sizes.md) for every
+part on a phone.
+
+### A stack of people
+
+A page header that shows people shows a stack of up to three avatars, then "+N" for the people it leaves out. Hovering
+or focusing the stack opens a card, and so does a tap. The card has one row for each person, with their avatar, name, and role.
+A table cell does not hold a stack. See [Table](../components/table.md) for how it shows several names.
 
 ## Rules
 
-### Show people as circles and companies, products, and teams as squares
+### 1. Show people as circles and companies, products, and teams as squares
 
-- **Do:** Show people in circles and companies, products, and teams in squares (such as Dana Whitfield and Acme Foods),
-  so people tell them apart at a glance.
-- **Don't:** Make every picture a circle, or round a circle's corners by hand for a square. Use the shared shapes, so
-  the kind reads at once.
+A person's picture is a circle and a company's, product's, or team's is a square, so people tell the kind of record at a
+glance.
 
-### Show a picture without a frame
+- **Do:** Show Dana Whitfield in a circle and Acme Foods in a square.
+- **Don't:** Put a company in a circle, or round a circle's corners by hand to make a square.
 
-- **Do:** Show the picture as it is, with its thin inner border, so it looks the same on any surface.
-- **Don't:** Put a ring, border, or shadow around a picture. Leave it unframed, so pictures look the same everywhere.
+### 2. Show a picture without a frame
 
-### Use one picture for a record everywhere
+A picture has its thin inner border and no other edge, so it looks the same on any surface.
 
-- **Do:** Use the same picture and colors for a record on every page and in every picker, so people recognize it
-  anywhere.
-- **Don't:** Draw initials or logos differently in one place, or change colors between pages. Use the shared picture,
-  so a record never looks like two.
+- **Don't:** Add a ring, border, or shadow, such as a ring to mark the signed-in user.
 
-### Show no one as no one
+### 3. Use one picture for a record everywhere
 
-- **Do:** Show the dashed empty avatar and "No assignee", so people see no one is assigned.
-- **Don't:** Leave an empty space where the picture should be. Show the empty avatar, so it does not look broken.
+A record has the same picture, initials, and colors on every page and in every picker, so people recognize it anywhere.
 
-## When you can do it differently
+- **Do:** Pick the colors from the record's id, so a person's initials have one color on every page.
+- **Don't:** Pick the colors by position in a list or by the page, which gives one person two colors.
 
-A picture smaller than `size-5`, such as one in a `size-4` chip, is sized by the app.
+### 4. Show no one as no one
 
-## Works with
+When a role has no one, show the empty avatar with "No [role]" beside it, so a blank does not look like a picture that
+failed to load.
 
-Pictures work with these pages:
-
-- See [Pickers](pickers.md) for the record's picture on every picker row.
-- See [Files and Images](files-and-images.md) for picking a logo, which previews as the record's square.
-- See [Color](../styles/color.md) for the avatar colors, which the app sets.
-- See [Accessibility](../foundations/accessibility.md) for opening the card behind a stack of pictures with a tap.
+- **Do:** Name the role in the words, such as "No assignee" beside an empty avatar.
+- **Don't:** Leave a blank space where the picture goes.
 
 ## In code
 

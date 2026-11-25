@@ -2,19 +2,32 @@ import { Meta, Canvas } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/reordering.md?raw"
 import * as SortableStories from "../../../components/ui/sortable-list/sortable-list.stories"
 import { reorderExamples } from "../examples/forms-and-values"
+import { reorderingAnatomy } from "../examples/reordering-anatomy"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Lists/Reordering" />
 
 <SkillDoc
   source={source}
-  code={<PatternCode components={[{ name: "SortableList", stories: SortableStories }]} />}
+  code={
+    <PatternCode
+      components={[{ name: "SortableList", stories: SortableStories }]}
+    />
+  }
   after={{
-    "@intro": <Canvas of={SortableStories.InATable} sourceState="none" />,
     "What is available": (
-      <Canvas of={SortableStories.OnAForm} sourceState="none" />
+      <>
+        <Captioned caption="A reorderable table. Drag a grip, or focus it and press Space, then the arrow keys.">
+          <Canvas of={SortableStories.InATable} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A reorderable list on a form. Each row edits in place and moves by its grip.">
+          <Canvas of={SortableStories.OnAForm} sourceState="none" />
+        </Captioned>
+      </>
     ),
+    Anatomy: reorderingAnatomy,
     "Drag by the grip, or move from the keyboard":
       reorderExamples["Drag by the grip, or move from the keyboard"],
   }}

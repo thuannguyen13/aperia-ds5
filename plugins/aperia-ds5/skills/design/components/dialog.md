@@ -1,14 +1,29 @@
 # Dialog
 
-A dialog is a window over the page for one question, a search, or a review, which closes before people go on.
+A dialog lets people answer one question, search, or review many rows over the page, and it closes before they go on.
+See [Forms in Sheets](../patterns/forms-in-sheets.md) for choosing a sheet, a dialog, or a page of its own.
+
+## Anatomy
+
+A review dialog opens over a list page and has seven parts. The close button shows only in a plain dialog, and the
+content only when the task needs it.
+
+1. **Overlay**. It is a dimmed layer over the page behind the dialog. It never blurs the page.
+2. **Panel**. It is the box in the middle of the screen that holds every other part.
+3. **Title**. It is a short heading that names the change or the task, such as "Review Import".
+4. **Close button** (optional). It is an icon button with an × at the top right that closes the dialog. An alert
+   dialog has none.
+5. **Description**. It is a line of muted text below the title that says what will happen, such as "2 of 3 rows are ready
+   to save."
+6. **Content** (optional). It is whatever the task needs, such as a table of rows to review, a field, or a list of
+   results.
+7. **Footer**. It is a band across the bottom, in the muted color at 50%, that holds the buttons. Cancel comes first
+   and the action last, both at the right.
 
 ## When to use
 
 Use a dialog for a question that must be answered before people go on, for global search, or for reviewing many rows
 before they save. Every dialog is one of the four kinds under What is available.
-
-See [Forms in Sheets](../patterns/forms-in-sheets.md) for choosing a sheet, a dialog, or a page of its own, such as for
-a form that adds or edits a record.
 
 ### Dialog or alert dialog?
 
@@ -19,22 +34,14 @@ confirmation and a reason dialog are alert dialogs. Global search and a review a
 
 A dialog comes in four kinds. Each kind has its own width, its own layout on a phone, and its own component.
 
-| Kind | Use for | Width | On a phone | Component |
-|---|---|---|---|---|
-| Confirmation | Asking before a delete, a removal, or a step whose consequence people must know first, such as "Delete Project?" | Up to `max-w-sm` | `max-w-xs` wide, in the middle of the screen, with its buttons stacked | `ConfirmDialog`. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
-| Reason | Picking a new status and writing the reason for it, such as "Change to Lost?" | Up to `max-w-sm` | `max-w-xs` wide, in the middle of the screen, with its buttons stacked | The reason dialog that the app builds. |
-| Search | Finding any record in the app from the sidebar or ⌘K | Up to `max-w-xl`, a third of the way down the screen | Fills the screen | The app's search dialog. See [Global Search](../patterns/global-search.md). |
-| Review | Checking many rows in a wide table before they save, such as the rows of an imported file | Up to `max-w-6xl` | Fills the screen | One dialog for every step. |
+| Kind | Use for | Type | Width | On a phone | Component |
+|---|---|---|---|---|---|
+| Confirmation | Asking before a delete, a removal, or a step whose consequence people must know first, such as "Delete Project?" | Alert dialog | Up to `max-w-sm` | `max-w-xs` wide, in the middle of the screen, with its buttons stacked | `ConfirmDialog`. See [Confirmations and Delete](../patterns/confirmations-and-delete.md). |
+| Reason | Picking a new status and writing the reason for it, such as "Change to Lost?" | Alert dialog | Up to `max-w-sm` | `max-w-xs` wide, in the middle of the screen, with its buttons stacked | The reason dialog that the app builds. |
+| Search | Finding any record in the app from the sidebar or ⌘K | Plain dialog | Up to `max-w-xl`, a third of the way down the screen | Fills the screen | The app's search dialog, a command list inside a dialog. See [Global Search](../patterns/global-search.md). |
+| Review | Checking many rows in a wide table before they save, such as the rows of an imported file | Plain dialog | Up to `max-w-6xl` | Fills the screen | One dialog for every step. |
 
-A dialog has five parts, listed from top to bottom:
-
-| Part | Content |
-|---|---|
-| Title | A short title naming the change or the task, such as "Delete Project?" |
-| Close (×) | A close button at the top right, in a plain dialog only |
-| Description | One line on the consequence the user must know, such as "This permanently deletes the project and its files." |
-| Content | Any content the task needs, when there is any |
-| Footer | Cancel and the action at the bottom right, on a band in the muted color at 50% |
+A search dialog and a review dialog fill the screen on a phone because their lists need the whole height.
 
 ### Specs
 
@@ -43,7 +50,7 @@ A dialog has five parts, listed from top to bottom:
 | Width | Set by the dialog's kind, in the table above |
 | Corners | Extra large corner |
 | Padding | `p-4` |
-| Fill | Page background, a border in the Border color, and the Large shadow |
+| Fill | Page background, a border in the Border color, and the Large shadow. A sheet has the same fill, border, and shadow. |
 | Title | `text-base`, medium weight |
 | Footer | Muted at 50%, under a divider. Buttons at the right, stacked on phones. |
 | Overlay | The overlay, with no blur |
@@ -54,19 +61,20 @@ A dialog has five parts, listed from top to bottom:
 A dialog opens over a dimmed page, holds focus while it is open, and closes back to the page.
 
 1. The overlay dims the page behind the dialog. The page never blurs.
-2. The dialog fades in and grows from slightly under full size, over the panel opening timing. With reduced motion,
-   it only fades.
+2. The panel opens in the middle of the screen, except for global search, which sits a third of the way down. It fades
+   in and grows from slightly under full size over the panel opening timing. With reduced motion, it only fades. See
+   [Motion](../styles/motion.md) for the timings.
 3. Focus moves into the dialog. A screen reader reads the title, then the description.
 4. **Tab** moves between the dialog's controls and never leaves the dialog while it is open.
-5. An error shows in the dialog, above the buttons, and the dialog stays open. See
-   [Message Templates](../foundations/copy-templates.md) for where errors show.
-6. Cancel, the close (×), or the **Escape** key closes the dialog. Clicking outside closes a plain dialog, never an
-   alert dialog.
-7. The dialog closes over the shorter closing timing. Focus goes back to the button that opened it.
-
-A screen reader names the close (×) "Close".
-
-On a phone, the footer buttons stack, with the action on top.
+5. Cancel is an Outline button. The action is Primary, or Destructive when it removes something. See
+   [Button](button.md) for the variants.
+6. On a phone, the footer buttons stack in a column with the action first, and Cancel under it.
+7. An error shows in the dialog, above the buttons, and the dialog stays open. It never moves to a toast. See
+   [Errors and Validation](../foundations/errors-and-validation.md) for where each error shows.
+8. Cancel, the close button, or the **Escape** key closes the dialog. Clicking outside closes a plain dialog and never
+   an alert dialog, which must be answered.
+9. The dialog closes over the shorter closing timing. Focus goes back to the button that opened it.
+10. A screen reader names the close button "Close".
 
 ### States
 
@@ -80,37 +88,22 @@ A dialog has three states. Its buttons have their own states. See [Button](butto
 
 ## Rules
 
-### Open forms in a sheet
+### 1. Open forms in a sheet
 
-- **Do:** Open a form in a sheet (Add Contact opens the contact form in a sheet), so people have room to fill it in.
-- **Don't:** Squeeze a long form into a dialog. Open it in a sheet, so no one scrolls inside a small box.
+A dialog holds one decision and has no scrolling of its own, so a form with several fields runs past the screen. A
+sheet keeps its title and footer in place while its fields scroll. See [Forms in Sheets](../patterns/forms-in-sheets.md)
+for which records open in a sheet.
 
-### Open one dialog at a time
+- **Do:** Open Add Contact in a sheet, so its four fields have room and Save stays in view.
+- **Don't:** Put Add Contact's four fields in a dialog.
 
-- **Do:** Finish or close one dialog before another opens, so people know which question they are answering.
-- **Don't:** Open a dialog from a dialog. Close the first dialog before the next one opens, so people keep their place.
+### 2. Open one dialog at a time
 
-## When you can do it differently
+A second dialog opened from a dialog stacks another dimmed layer and panel over the first, so people lose which
+question they are answering.
 
-- An alert dialog has no close (×) and stays open when someone clicks outside it, because it must be answered.
-- A search dialog and a review dialog fill the screen on a phone, because their lists need the whole height.
-
-## Works with
-
-| Component | How it works with a dialog |
-|---|---|
-| Button | Cancel is Outline. The action is Primary, or Destructive when the action is destructive. |
-| Sheet | A sheet holds forms and record editing. A dialog and a sheet look alike, with the page fill, the border, and the Large shadow. |
-| Toast | A dialog's error shows in the dialog, not in a toast. |
-| Command | Global search is a command list inside a dialog. |
-
-See [Forms in Sheets](../patterns/forms-in-sheets.md) for the one form each record has, used everywhere it is added or
-edited.
-
-See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for naming the change and its consequence in a
-confirmation, and for the destructive color on removal. See [Copy](../foundations/copy.md) for asking with the action's
-name. See [Border and Radius](../styles/border-and-radius.md), [Elevation](../styles/elevation.md), and
-[Motion](../styles/motion.md) for the corner, edge, shadow, overlay, and timings the Specs name.
+- **Do:** Close the first dialog, then open the next.
+- **Don't:** Open a confirmation from inside a review dialog while the review is still open.
 
 ## In code
 

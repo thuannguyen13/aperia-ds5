@@ -1,53 +1,51 @@
 # Icons
 
-Icons are line symbols from one shared set that help people recognize actions and objects next to their names.
+Icons are line symbols from one shared set that let people recognize an action or an object by its picture. See
+[Color](color.md) for the color an icon takes and [Sizes](../foundations/sizes.md) for the size of an icon button.
 
 ## When to use
 
-Use an icon when people know an action by its picture, such as edit, delete, close, or more. Use an icon to show the
-kind of thing an empty state is missing. Use an icon only where it helps someone read or act, never as decoration.
+Use an icon alone for an action that people know by its picture, such as edit, delete, close, or more. That icon sits in
+an icon button, and [Button](../components/button.md) says how the button is named.
+
+Use an icon with a word when the picture is not widely known, or when the icon shows a state. A button can hold an icon
+before its label.
+
+Use an icon in an empty state to show the kind of thing that is missing. See [Empty States](../foundations/empty-states.md).
 
 ## What is available
 
-Icons come in three sizes, set by the components. Buttons, fields, menus, and most controls take the default size.
-Small buttons take a step smaller, and extra small buttons smaller again. The live table on this page shows each size as
-the browser reads it.
+Every icon comes from one set, Lucide, in code and in Figma.
 
-An empty state shows its icon at the default size, on a Muted tile.
-
-Every icon comes from Lucide, in Figma and in code. In code, the stroke stays Lucide's own. In Figma, every icon's
-stroke is bound to one stroke-width variable, so the stroke is the same at every size.
-
-An icon takes the color of the text beside it.
+Icons come in three sizes, set by the components, so an app never sizes an icon itself. Buttons, fields, menus, and most
+controls take the default size, `size-4`. A small button takes `size-3.5`, and an extra small button takes `size-3`. A
+badge's icon is `size-3`. An empty state shows its icon at the default size, on a Muted tile.
 
 ## How it looks and behaves
 
-An icon-only button shows a tooltip that names its action. A screen reader reads the same name. When the button is
-disabled for a reason, the tooltip says the reason instead.
+An icon takes the color of the text beside it. A disabled control dims its icon with its text.
+
+In code, the stroke stays Lucide's own, a width of 2 on the icon's 24-unit grid that scales with the icon. In Figma,
+every icon's stroke is bound to one stroke-width variable, `stroke-width/stroke-[1-25]`. Figma does not scale a stroke when
+an icon is resized, so that variable gives the same stroke at every size.
 
 ## Rules
 
-### Name every icon-only button
+### 1. Use an icon only where it helps
 
-- **Do:** Show an icon button's name when the pointer is over it or it has focus ("Delete Note"), so people can check
-  before they click.
-- **Don't:** Use an icon with no name. Give every icon-only button a name, so people and screen readers can tell what it
-  does.
+An icon that people cannot read or act on adds a shape to scan and nothing to learn. Every icon is there to help someone
+read or act.
 
-### Pair an icon with a word
+- **Do:** Put a pencil on an edit button, a picture people know.
+- **Don't:** Put the same icon beside every heading to fill the space.
 
-- **Do:** Pair an icon with a word, a badge, or a tooltip that says what it means, so everyone reads it the same way.
-- **Don't:** Use a colored dot or icon as the only sign of a state. Add the word, so people who miss the color or the
-  icon still get it.
+### 2. Pair a state's icon with a word
 
-## When you can do it differently
+An icon alone shows a state to people who know the picture and to nobody else, and a screen reader skips it. A word
+beside the icon says the same thing to everyone.
 
-Icons have no exceptions. Every app uses the Lucide set at these sizes.
-
-## Works with
-
-- See [Color](color.md) for the text color icons take, and for the rule on the primary color.
-- See [Sizes](../foundations/sizes.md) for icon button sizes.
+- **Do:** Show a state as an icon with a word, such as a warning icon with "Payment Failed" in a badge.
+- **Don't:** Show a state with only an icon or a colored dot.
 
 ## In code
 

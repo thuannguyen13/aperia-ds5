@@ -3,6 +3,8 @@ import source from "../../../plugins/aperia-ds5/skills/design/patterns/sort.md?r
 import * as SortControl from "../../../components/ui/sort-control/sort-control.stories"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { sortAnatomy } from "../examples/pattern-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Lists/Sort" />
 
@@ -10,14 +12,11 @@ import { PatternCode } from "../component-page"
   source={source}
   code={<PatternCode components={[{ name: "SortControl", stories: SortControl }]} />}
   after={{
-    "What is available": (
-      <>
-        <Canvas of={SortControl.Default} sourceState="none" />
-        <Canvas of={SortControl.Sorted} sourceState="none" />
-      </>
-    ),
+    "Anatomy": sortAnatomy,
     "How it looks and behaves": (
-      <Canvas of={SortControl.InACard} sourceState="none" />
+      <Captioned caption="Sort in a card's header, for a list inside a card. The card has no toolbar.">
+        <Canvas of={SortControl.InACard} sourceState="none" />
+      </Captioned>
     ),
   }}
 />

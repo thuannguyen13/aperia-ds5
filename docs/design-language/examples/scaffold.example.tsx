@@ -11,7 +11,7 @@ import { Badge, Button, ToggleGroup, ToggleGroupItem } from "aperia-ds5"
 import { cn } from "@/lib/utils"
 import { Screen } from "./before-after"
 
-// The Scaffold page's diagram: the screen's three kinds of region (bars, rails and panes), drawn small from the shell's
+// The Scaffold page's diagram: the screen's regions (sidebar, top bar, page column, and sheet), drawn small from the shell's
 // own tokens (the sidebar navy, the page background, the border, the overlay, the panel shadow), on a desktop and on
 // a phone. The frames are inert: a picture of a screen, not one to use.
 
@@ -84,8 +84,8 @@ function Rail({ className }: { className?: string }) {
 /** The top bar: the breadcrumb, and on a phone the button that opens the sidebar. */
 function TopBar({ phone = false }: { phone?: boolean }) {
   return (
-    // pr-12 keeps the crumbs clear of the region's label at the bar's end.
-    <div className="relative flex h-9 shrink-0 items-center gap-1.5 border-b pr-12 pl-3 text-xs font-medium">
+    // pr-16 keeps the crumbs clear of the region's label at the bar's end.
+    <div className="relative flex h-9 shrink-0 items-center gap-1.5 border-b pr-16 pl-3 text-xs font-medium">
       {phone && <PanelLeftIcon className="size-3.5 shrink-0" />}
       <span className="shrink-0 text-muted-foreground">Prospects</span>
       <span className="text-muted-foreground">/</span>
@@ -203,26 +203,24 @@ function Desktop({ layer }: { layer: Layer }) {
   return (
     <div className="relative flex h-80 overflow-hidden rounded-xl bg-background ring-[0.5px] ring-border">
       <Rail className="w-36 shrink-0" />
-      <Tag className="top-2 left-24">Rail</Tag>
+      <Tag className="bottom-12 left-2">Sidebar</Tag>
       <div className="relative flex min-w-0 flex-1 flex-col">
         <TopBar />
-        <Tag className="top-1.5 right-2">Bar</Tag>
+        <Tag className="top-1.5 right-2">Top bar</Tag>
         <PageColumn />
-        <Tag className="right-2 bottom-2">Pane</Tag>
+        <Tag className="right-2 bottom-2">Page column</Tag>
       </div>
       {(layer === "sheet" || layer === "dialog") && <Overlay />}
       {layer === "sheet" && (
         <>
           <SheetPane className="inset-y-2 right-2 w-2/5 rounded-xl ring-[0.5px] ring-border" />
-          <Tag className="top-3 right-3 z-20">Second pane</Tag>
+          <Tag className="top-3 right-3 z-20">Sheet</Tag>
         </>
       )}
       {layer === "dialog" && (
         <>
           <DialogBox className="left-1/2 w-56 -translate-x-1/2" />
-          <Tag className="top-14 left-1/2 z-20 -translate-x-1/2">
-            Above the panes
-          </Tag>
+          <Tag className="top-14 left-1/2 z-20 -translate-x-1/2">Dialog</Tag>
         </>
       )}
     </div>
@@ -233,33 +231,33 @@ function Phone({ layer }: { layer: Layer }) {
   return (
     <div className="relative mx-auto flex h-80 w-44 flex-col overflow-hidden rounded-xl bg-background ring-[0.5px] ring-border">
       <TopBar phone />
-      <Tag className="top-1.5 right-1.5">Bar</Tag>
+      <Tag className="top-1.5 right-1.5">Top bar</Tag>
       <PageColumn phone />
-      <Tag className="right-1.5 bottom-2">Pane</Tag>
+      <Tag className="right-1.5 bottom-2">Page column</Tag>
       {layer === "sheet" && (
         <>
           <SheetPane className="inset-0" />
-          <Tag className="top-1.5 right-1.5 z-20">Second pane</Tag>
+          <Tag className="top-1.5 right-1.5 z-20">Sheet</Tag>
         </>
       )}
       {(layer === "dialog" || layer === "sidebar") && <Overlay />}
       {layer === "dialog" && (
         <>
           <DialogBox phone className="inset-x-2" />
-          <Tag className="top-14 left-1/2 z-20 -translate-x-1/2">Above</Tag>
+          <Tag className="top-14 left-1/2 z-20 -translate-x-1/2">Dialog</Tag>
         </>
       )}
       {layer === "sidebar" && (
         <>
           <Rail className="absolute inset-y-0 left-0 z-10 w-36" />
-          <Tag className="top-2 left-24 z-20">Rail</Tag>
+          <Tag className="bottom-12 left-2 z-20">Sidebar</Tag>
         </>
       )}
     </div>
   )
 }
 
-/** The scaffold on a desktop and on a phone, with a sheet, a dialog, or the phone's sidebar open on request. */
+/** The regions on a desktop and on a phone, with a sheet, a dialog, or the phone's sidebar open on request. */
 export function ScaffoldDiagram() {
   const [layer, setLayer] = useState<Layer>("page")
   return (
@@ -282,7 +280,7 @@ export function ScaffoldDiagram() {
           </ToggleGroup>
         </>
       }
-      caption="Bars frame the screen, rails hold navigation and tools, and panes hold the content. A sheet is a second pane; a dialog sits above the panes."
+      caption="The regions on a desktop and on a phone. The buttons open a sheet, a dialog, or the phone's sidebar over the page."
     >
       <div
         inert

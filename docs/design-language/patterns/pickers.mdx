@@ -6,6 +6,8 @@ import { pickerExamples } from "../examples/forms-and-values"
 import * as AddOptionStories from "../../../components/ui/add-option/add-option.stories"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { pickersAnatomy } from "../examples/pickers-anatomy"
+import { Captioned } from "../blocks"
 
 <Meta title="Patterns/Editing/Pickers" />
 
@@ -13,23 +15,33 @@ import { PatternCode } from "../component-page"
   source={source}
   code={<PatternCode components={[{ name: "EntityPicker", stories: PickerStories }, { name: "PickField", stories: PickFieldStories }, { name: "AddOption", stories: AddOptionStories }]} />}
   after={{
-    "@intro": <Canvas of={PickerStories.Default} sourceState="none" />,
+    Anatomy: pickersAnatomy,
     "What is available": (
       <>
-        <Canvas of={PickerStories.Several} sourceState="none" />
-        <Canvas of={PickFieldStories.Default} sourceState="none" />
+        <Captioned caption="A record picker for several records. Each pick is a chip with its picture, and the Ask Nanci chip has no × because the record uses it.">
+          <Canvas of={PickerStories.Several} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A short list, closed. Its options are names, with no pictures.">
+          <Canvas of={PickFieldStories.Default} sourceState="none" />
+        </Captioned>
       </>
+    ),
+    "Adding a record": (
+      <Captioned caption="A record picker with an Add row. Typing a name that is not listed and picking Add Prospect opens the prospect form in a sheet.">
+        <Canvas of={PickerStories.AddFromPicker} sourceState="none" />
+      </Captioned>
+    ),
+    "A drafted item": (
+      <Captioned caption="A drafted item in an Add Prospect form. Its list offers only Add Opportunity until an opportunity is drafted.">
+        <Canvas of={PickFieldStories.Drafted} sourceState="none" />
+      </Captioned>
+    ),
+    "A picker that cannot be used yet": (
+      <Captioned caption="A Contact picker that is disabled until a prospect is picked. A line under it says why.">
+        <Canvas of={PickerStories.DisabledWithReason} sourceState="none" />
+      </Captioned>
     ),
     "Show each record's picture":
       pickerExamples["Show each record's picture"],
-    "Add a missing record from the picker": (
-      <Canvas of={PickerStories.AddFromPicker} sourceState="none" />
-    ),
-    "Say why a row or chip cannot be used": (
-      <Canvas of={PickerStories.DisabledWithReason} sourceState="none" />
-    ),
-    "When you can do it differently": (
-      <Canvas of={PickFieldStories.Drafted} sourceState="none" />
-    ),
   }}
 />

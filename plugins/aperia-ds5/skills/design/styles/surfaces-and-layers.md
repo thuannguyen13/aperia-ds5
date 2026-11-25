@@ -1,17 +1,23 @@
 # Surfaces and Layers
 
-Surfaces and layers set which fill each part of a screen sits on, how parts group into boxes, and which part leads. See
-[Color](color.md) for the value of each fill.
+Surfaces and layers show people which parts belong together and which part leads, by setting the fill each part sits on
+and how parts group into boxes. See [Color](color.md) for the value of each fill.
 
-## When to use
+## Anatomy
 
-Read this page before you style a part that no pattern or example shows, such as a list in a sheet or a box of your
-own. The other Styles pages give each value on its own. This page says how the values combine on one screen.
+A screen has four layers, each a fill that parts of the screen sit on, and the panel shows only while it is open. The
+parts are those of a Details card with a field in it and an Edit menu open over it.
+
+1. **Page**. It is the fill under the whole screen. The page column, the top bar, and the list toolbar sit on it.
+2. **Surface**. It is a box with its own fill, edge, and shadow that holds content, such as a card. A surface sits on the
+   page.
+3. **Control**. It is a part that people operate, such as a field, with a white fill in Light. It sits on a surface, on
+   the page, or in a panel.
+4. **Panel** (optional). It is a menu, popover, dialog, sheet, or drawer that opens above every other layer.
 
 ## What is available
 
-A layer is a fill that parts of a screen sit on, with the edge and the shadow that go with it. A screen has four
-layers, listed here from the bottom up.
+Pick the layer of each part from this table. A layer comes with the edge and the shadow that go with it.
 
 | Layer | Fill | Edge and shadow | What sits there |
 |---|---|---|---|
@@ -20,10 +26,7 @@ layers, listed here from the bottom up.
 | Control | Control, white in Light | A border in the Input color and the Small shadow | Fields, outline buttons, checkboxes, radios, and the chosen tab |
 | Panel | Background for a dialog, a sheet, or a drawer. Popover for a menu, a popover, or a list that opens from a field. | A border in the Border color, with the Large shadow and the overlay for a dialog or a sheet, or the Medium shadow for a menu | Dialogs, sheets, drawers, menus, popovers, and select and combobox lists |
 
-In Dark, the page, a surface, a control, and a menu each step lighter in that order. The layers keep their order
-without white.
-
-Two more fills sit inside a layer and are not layers themselves:
+Two more fills sit inside a layer and are not layers themselves.
 
 | Fill | Where it shows |
 |---|---|
@@ -34,22 +37,27 @@ Two more fills sit inside a layer and are not layers themselves:
 
 ### Layers
 
-Each part sits on the layer that the table under What is available names. A part sits only on a layer below its own.
+A part sits only on a layer below its own.
 
-- A surface sits on the page, or on a panel whose fill is the page's. A surface never sits on another surface.
+- A surface sits on the page, or on a panel that has the page's fill.
 - A control sits on any layer. Its fill and its edge make it show on the page, on a surface, and in a menu.
-- A panel floats above every other layer. A dialog or a sheet dims the page under the overlay. A menu or a popover
-  casts its shadow and dims nothing.
+- A panel floats above every other layer. A dialog or a sheet dims the page under the overlay. A menu or a popover casts
+  its shadow and dims nothing. See [Elevation](elevation.md) for the shadows and the overlay.
 
-A dialog, a sheet, and a drawer have the page's fill, so the parts inside them follow the order of the page:
+In Dark, the page, a surface, a control, and a menu each step lighter in that order. The layers keep their order
+without white.
 
-- Fields and a form's sections sit straight on the panel, because each field is already a control.
-- A list of rows goes onto one surface, with dividers between rows. The filters in a phone's filter sheet sit this
-  way.
-- A table goes onto a surface, as it does on a page.
+A dialog, a sheet, and a drawer have the page's fill, so the parts inside them follow the order of the page. Fields and
+a form's sections sit straight on the panel, because each field is already a control. A table goes onto a surface, as it
+does on a page.
 
 A menu or a popover has the Popover fill, a step above every layer under it. Its rows sit straight on that fill. A
 menu or a popover never holds a surface.
+
+A board's columns are a tint over the page, not surfaces. Its cards sit in the columns as they would on the page.
+
+A row that people drag lifts off its surface while it moves, with the Extra large shadow. The row drops back onto the
+surface when people let go. See [Reordering](../patterns/reordering.md) for dragging rows.
 
 ### Grouping
 
@@ -63,14 +71,14 @@ sits in one box, and the box sets how its parts are separated.
 | One record's values, such as its details | Space, with the values lined up in one column | No box of their own. The rows sit in the card's content. |
 | Sections of one form, or of one details card | A divider above each section, or space and a heading | No box of their own |
 
-A divider always runs from its container's left edge to its right edge. The content keeps the container's inset, and
-the divider never does. Between the rows of a list, such as a table or a list people reorder by dragging, each row
-moves and highlights as one piece, and its divider spans it. Inside a sheet, a popover, a dialog, or a card, groups are
-sections, such as a sheet's header and body, a popover's column list and its Ascending and Descending, or a card's
-footer. Each section keeps the inset, and the divider between two sections spans the container.
+In a list, such as a table or a list people reorder by dragging, each row moves and highlights as one piece. Its divider
+spans it. Inside a sheet, a popover, a dialog, or a card, groups are sections. Examples are a
+sheet's header and body, a popover's column list and its Ascending and Descending, and a card's footer. Each section
+keeps the inset.
 
 Groups with their own title and their own actions are separate cards, `gap-4` apart. Two products' line items are two
-cards, each with its own Add. See [Spacing](../foundations/spacing.md) for the gaps between cards and between sections.
+cards, each with its own Add. See [Spacing](../foundations/spacing.md) for the gaps between cards and between sections,
+and [Cards and Tiles](../patterns/cards-and-tiles.md) for the card.
 
 ### Emphasis
 
@@ -82,8 +90,8 @@ Every area has one element that leads, the element people should see first. See
 2. Muted text lowers every secondary part, such as labels, descriptions, and times.
 3. Color comes last. The primary color marks the main button and the mark of a chosen option, and nothing else. Links
    take the Link color. See [Color](color.md) for that rule.
-4. Status color sits only on a badge, on a dot beside its word, or on an alert. A card, a row, a tile's number, or a
-   switch never takes a status color.
+
+A status takes a color only through a badge, a dot, or an alert (Surfaces and Layers 4).
 
 ### States on a surface
 
@@ -107,8 +115,8 @@ its text.
 
 ### Showing what responds
 
-Anything that responds looks different at rest from something that does not. Hover can confirm that a part responds,
-but hover is never the only signal, because a touch screen has no hover and a keyboard never points.
+Hover can confirm that a part responds, but a touch screen has no hover and a keyboard never points, so each kind of
+element also shows it another way.
 
 | Element | At rest | Hover (mouse) | Keyboard |
 |---|---|---|---|
@@ -117,10 +125,69 @@ but hover is never the only signal, because a touch screen has no hover and a ke
 | A row in a list on a surface, or any row on a phone | A chevron at the row's end | The Muted fill | The focus line |
 | Something that only shows information | Nothing | No hand cursor and no fill | Not focusable |
 
-Everything clickable shows the hand cursor, including menu items and rows that open a record. Disabled controls do
-not show it.
+See [Tables](../patterns/tables.md) for the rows that open a record.
 
-### Styling something new
+## Rules
+
+### 1. Put a list of rows on a surface
+
+Rows that people act on one by one go on one surface with dividers between them. A panel has the page's fill, so a row's
+hover fill barely shows on it.
+
+- **Do:** Put the filters of a phone's filter sheet on one surface with a divider between lines, so each line has an edge
+  and its hover fill shows.
+- **Don't:** Leave the lines loose on the sheet's gray fill, where the hover barely shows.
+
+### 2. Give each group one surface
+
+A card is the one surface around its content, so a card, a surface, or an outlined box never sits inside a card. Parts
+inside a card are set apart with space, a divider, or the Muted fill, so the content does not sit in two frames.
+
+- **Do:** Set a card's values apart with space and line them up in one column, so the card stays the one frame.
+- **Don't:** Wrap a card's values in a second box, such as a surface inside the card.
+
+### 3. Run every divider edge to edge
+
+A divider runs from its container's left edge to its right edge, between rows and between sections alike. The content
+keeps the container's inset and the divider never does, so every divider marks the full width of what it separates.
+
+- **Do:** Split a popover into two sections that each keep the inset, so the divider between them spans the popover.
+- **Don't:** Draw a divider inside one padded box. It stops at the inset, leaves stubs at both ends, and reads as one
+  more row.
+
+### 4. Show a status on a badge, not a filled area
+
+A status color sits only on a badge, on a dot beside its word, or on an alert, so the color marks the state alone. A
+card, a row, a tile's number, and a switch never take a status color, so their content keeps its contrast.
+
+- **Do:** Show the state as a badge on a neutral surface.
+- **Don't:** Fill the whole card in the status color.
+
+### 5. Show what responds before the pointer reaches it
+
+Anything that responds looks different at rest from something that does not, so people see it on a touch screen and with
+a keyboard too.
+
+- **Do:** Set the name column of a table whose rows open in medium weight, as each row's title.
+- **Don't:** Leave every cell plain, so only a hover shows which rows open.
+
+### 6. Show the hand cursor on everything clickable
+
+Everything clickable shows the hand cursor, including menu items and rows that open a record. A disabled control does
+not, so the pointer never misleads.
+
+- **Do:** Show the hand over a button, a tab, a menu item, or a row that opens.
+- **Don't:** Leave the arrow on a clickable row, or show the hand over a disabled button.
+
+### 7. Let one element lead each area
+
+Each area has one lead, so people see first what matters. Two elements at the same strength, such as two primary buttons,
+leave no lead.
+
+- **Do:** Give a dialog one primary button and make the other an outline button.
+- **Don't:** Put two primary buttons side by side.
+
+## Styling something new
 
 A part that no page shows is styled in five steps:
 
@@ -139,75 +206,6 @@ The filter sheet on a phone shows the five steps at work:
    Add Filter is an action and not a line.
 4. Each line's filter name is medium weight, and its value is muted. No line uses the primary color.
 5. The card is the surface recipe. Each line takes the hover and the focus of a table row.
-
-## Rules
-
-### Put a list of rows on a surface
-
-- **Do:** Put a list of rows in a sheet or a dialog on one surface, with dividers between rows, so the rows read as
-  one group.
-- **Don't:** Leave rows loose on a panel's gray fill. Put them on a surface, so each row has an edge and its hover fill
-  shows.
-
-### Give each group one surface
-
-- **Do:** Let the card be the one surface around its content, and set parts apart with space, a divider, or the
-  Muted fill, so each group has one frame.
-- **Don't:** Put a card, a surface, or an outlined box inside a card. Remove the inner box, so the content does not sit
-  in two frames.
-
-### Run every divider edge to edge
-
-- **Do:** Run a divider from the container's edge to its edge, between rows and between sections alike. Give the inset
-  to the content instead, so every divider marks the full width of what it separates.
-- **Don't:** Stop a divider at the container's inset. A stopped divider leaves stubs at both ends and makes a group read
-  as one more row.
-
-### Show a status on a badge, not a filled area
-
-- **Do:** Show a state as a badge, or as a dot beside its word, in the app's status color, so the color marks only the
-  state.
-- **Don't:** Fill a card, a row, or a tile with a status color. Keep the fill neutral and add a badge, so the content
-  keeps its contrast.
-
-### Show what responds before the pointer reaches it
-
-- **Do:** Mark every part that responds at rest, such as a table whose name column is medium weight, so people see
-  which rows open before they point at one.
-- **Don't:** Leave a plain table where nothing marks the rows that open. Give each row its title, so the rows read as
-  records on a touch screen and with a keyboard too.
-
-### Show the hand cursor on everything clickable
-
-- **Do:** Show the hand over a button, a tab, a menu item, or a row that opens, so people know they can click it.
-- **Don't:** Leave the arrow on a clickable row, or show the hand over a disabled button. Show the hand only on what
-  responds, so the pointer never misleads.
-
-### Let one element lead each area
-
-- **Do:** Give each card, sheet, or dialog one lead, such as its title by weight and its main action as the one
-  primary button, so people see first what matters.
-- **Don't:** Make two elements compete, such as two primary buttons side by side. Lower one to an outline button or to
-  muted text, so the lead stays clear.
-
-## When you can do it differently
-
-A board's columns are a tint over the page, not surfaces. Its cards sit in the columns as they would on the page.
-
-A row that people drag lifts off its surface while it moves, with the Extra large shadow. The row drops back onto the
-surface when people let go. See [Reordering](../patterns/reordering.md) for dragging rows.
-
-## Works with
-
-- See [Color](color.md) for the value of each fill, and for the rule on the primary color.
-- See [Elevation](elevation.md) for the shadow of each layer and for the overlay.
-- See [Border and Radius](border-and-radius.md) for the borders of surfaces and controls.
-- See [Typography](typography.md) for the weights that mark the lead.
-- See [Page Layout](../foundations/page-layout.md) for lining up rows inside a surface.
-- See [Cards and Tiles](../patterns/cards-and-tiles.md) and [Card](../components/card.md) for the card.
-- See [Buttons and Actions](../patterns/buttons-and-actions.md) for one primary button per area.
-- See [Filters](../patterns/filters.md) for the filter sheet on a phone.
-- See [Tables](../patterns/tables.md) for the rows that open a record.
 
 ## In code
 

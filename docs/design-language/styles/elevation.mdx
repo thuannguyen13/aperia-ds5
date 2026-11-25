@@ -1,8 +1,20 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/styles/elevation.md?raw"
 import { SkillDoc } from "../skill-doc"
+import { Captioned } from "../blocks"
 import { elevationExamples } from "../examples/foundations"
+import { ElevationSamples } from "../examples/elevation-samples"
 
 <Meta title="Styles/Elevation" />
 
-<SkillDoc source={source} after={elevationExamples} />
+<SkillDoc
+  source={source}
+  after={{
+    ...elevationExamples,
+    "What is available": (
+      <Captioned caption="Each shadow step on a card, and the overlay over half a card, in Light on the left and Dark on the right.">
+        <ElevationSamples />
+      </Captioned>
+    ),
+  }}
+/>

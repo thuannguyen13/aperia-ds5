@@ -1,110 +1,59 @@
 # Page Header
 
-A page header sits at the top of every page and holds its title, subtitle, actions, and key facts.
+A page header tells people which page they are on, gives the page's key facts, and offers the page's actions, at the top of every page. See [App Shell](app-shell.md) for the breadcrumb that its title fills.
 
-## When to use
+## Anatomy
 
-Use a page header at the top of every page, as its first section. A record's page uses it for the record too, with the
-record's picture, kind and number, people, and record actions.
+A page header has seven parts. Only the title always shows. The picture, subtitle, actions, record actions,
+properties, and people show only when the page has them. The parts are those of a record's header that has all seven.
 
-## What is available
-
-A page header has seven parts, listed from start to end and top to bottom:
-
-| Part | Position | Content |
-|---|---|---|
-| Picture | Before the title, on a record's page | A `size-12` picture. A person is a circle, and a company or product is a square. |
-| Title | Start of the title's line | The page's name in `text-2xl` semibold. It also fills the last crumb of the breadcrumb in the top bar. |
-| Actions | End of the title's line | Other actions as outline buttons, then the page's primary action, such as Export Report. A list's actions, such as Add Prospect, sit in its toolbar instead. |
-| Record actions | End of the title's line, on a record's page | Edit, the record's other actions, then the destructive ones and Delete. |
-| Subtitle | Under the title | One line of muted text. |
-| Properties | Row under the title | A small muted label over each value, such as Owner or Stage. |
-| People | Subtitle's line, or a property | A stack of avatars. |
+1. **Picture** (optional). It is an image at the start of the title's line, on a record's page. A person's picture is a circle, and a company's or product's is a square.
+2. **Title**. It is the page's name as a heading. It is also the last crumb of the breadcrumb in the top bar.
+3. **Subtitle** (optional). It is one line of muted text under the title. A record's subtitle gives its kind and number, such as "Opportunity #659".
+4. **Actions** (optional). They are the buttons at the end of the title's line, outline buttons first and the page's primary action last, such as Export Report.
+5. **Record actions** (optional). They are the buttons and the More actions (…) menu that follow the actions on a record's page, such as Edit, Mark as Won, and Delete.
+6. **Properties** (optional). They are a row of facts under the title. Each has a small muted label over its value, such as Owner over "Dana Whitfield".
+7. **People** (optional). It is a stack of avatars that shows who works on the record, such as its sales reps. It sits in the subtitle or in a property.
 
 ## How it looks and behaves
 
-A page header keeps one height for its title's line and one order for its actions.
+A page header keeps one height for its title's line and one order for its parts. From start to end, the title's line holds the picture, the title with its subtitle, the actions, and the record actions. The properties sit in a row under that line.
 
-The title's line is at least a button's height, so a page without actions lines up with a page that has them. Buttons
-are `gap-2` apart.
+Buttons on the title's line are `gap-2` apart. See [Sizes](../foundations/sizes.md) for the height of the title's line.
 
-A record with a number leads its subtitle with its kind and number, then its parent record, then its stacks of
-pictures, such as its products and its sales reps. An example is "Opportunity #659 · Northwind Merchant Services ·
-(products) · (sales reps)". Tables keep the bare number, such as "659".
+### The subtitle
 
-People show as three avatars at most, then "+N". Pointing at the stack, focusing it, or tapping it opens a card. The
-card lists everyone with their picture, name, and role. When no one is assigned, the stack shows an empty avatar and
-"No [role]", such as "No assignee".
+A record with a number leads its subtitle with its kind and number. Its parent record follows, then its stacks of pictures, such as its products and its sales reps. An example is "Opportunity #659 · Northwind Merchant Services · (products) · (sales reps)". People in a header use the people stack. See [People and Pictures](people-and-pictures.md) for how the stack shows people and no one.
 
-On screens `--breakpoint-lg` and wider, up to three record actions are buttons. Edit comes first, then the record's other
-actions. With four or more, the rest go into More actions (…), as
-[Buttons and Actions](buttons-and-actions.md) says. Actions
-that close the record's work, such as Close as Lost, come next, set apart in the destructive color. Delete comes last.
-On narrower screens, the record actions fold into one More actions (…) button. Its menu keeps the same order, with a
-line above the destructive actions.
+### Record actions
 
-An action that is blocked on this record still shows. It is disabled and says why on hover and keyboard focus. A
-Delete that the record cannot have says "This item is in use and cannot be deleted." An action that the person's role
-can never take is left out. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for that choice.
+A record's actions follow the order and the limit on buttons in [Buttons and Actions](buttons-and-actions.md). On screens narrower than `--breakpoint-lg`, they fold into one More actions (…) button. Its menu keeps the same order, with a divider above the destructive actions.
 
-On a phone, the record actions stay on the title's line. The other buttons take a full-width row under it, with the
-primary action first. Properties sit in two columns. See [Screen Sizes](../foundations/screen-sizes.md) for every
-part on a phone.
+An action that is blocked on this record still shows. It is disabled and gives its reason on hover and keyboard focus. An action that the person's role can never take is left out. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for that choice and the words of each reason.
+
+### On a phone
+
+On a phone, the record actions stay on the title's line. The other buttons take a full-width row under it, with the primary action first. Properties sit in two columns. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ## Rules
 
-### Name the page once
+### 1. Name the page once
 
-- **Do:** Put the page's title in its header and let the breadcrumb take its last crumb from that title, so the name is
-  written in one place.
-- **Don't:** Put the title in the top bar and again on the page, or repeat it on the first card. Name the page once, so
-  the screen shows each name one time.
+A page's name is written in its header's title, and the breadcrumb takes its last crumb from that title, so the screen shows each name one time. A page may skip the page header when its own content already shows the record's name as a heading. That page still ends its breadcrumb with the record's name.
 
-### Keep the header to the page's name, actions, and facts
+- **Don't:** Put the title in the top bar and again on the page, or repeat it on the first card.
 
-- **Do:** Keep the header to the title, subtitle, actions, and properties, with tiles, toolbars, and cards
-  after it, so the header stays about the page.
-- **Don't:** Put a filter in the header, such as a label over a field. Move it to the list's toolbar, so controls stay
-  where people look for them.
+### 2. Keep the header to the page's name, actions, and facts
 
-### Lead a record with its kind and number
+The header holds the title, subtitle, actions, and properties. Tiles, toolbars, tabs, and cards come after it, so the header stays about the page. A list's filters and actions sit in its toolbar. See [List Toolbar](list-toolbar.md) for the toolbar.
 
-- **Do:** Lead the record's subtitle with its kind and number ("Opportunity #659"), so people know what they are
-  looking at.
-- **Don't:** Write "Opportunity #659" in a table's column. Show the bare number, so the column stays short.
+- **Don't:** Put a filter in the header, such as a label over a field. Move it to the list's toolbar, so controls stay where people look for them.
 
-### Show people as one stack
+### 3. Lead a record with its kind and number
 
-- **Do:** Show three avatars, then "+N", opening a card that lists everyone, so the header stays compact.
-- **Don't:** Leave a blank space when no one is assigned. Show the empty avatar and "No assignee", so people know no one
-  is on it.
+A record's subtitle starts with its kind and number, so people know what they are looking at. A table column shows the bare number, so the column stays short.
 
-### Put record actions in one order
-
-- **Do:** Put Edit, the record's other actions, then the destructive ones and Delete in the header, folding into More
-  actions on small screens, so actions keep one order.
-- **Don't:** Put Edit and Delete on table rows, or record actions in the top bar. Keep them in the header, so people
-  find them in one place.
-
-### Show a blocked action and say why
-
-- **Do:** Keep a blocked Delete in place, disabled, with "This item is in use and cannot be deleted." on hover, so
-  people know why.
-- **Don't:** Let Delete disappear without a word when the record cannot be deleted. Show it disabled with its reason,
-  so nothing seems missing.
-
-## When you can do it differently
-
-A page may skip the page header when its own content already shows the record's name as a heading. That page still
-ends its breadcrumb with the record's name.
-
-## Works with
-
-- See [App Shell](app-shell.md) for the breadcrumb the title fills.
-- See [Cards and Tiles](cards-and-tiles.md) for the tiles and cards under a record's header.
-- See [Buttons and Actions](buttons-and-actions.md) for which type each action is.
-- See [Status](status.md) for a record's status as a property.
-- See [Banner Alerts](banner-alerts.md) for an alert under the header about the whole page.
+- **Don't:** Write "Opportunity #659" in a table's column. Write "659".
 
 ## In code
 

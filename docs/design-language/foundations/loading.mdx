@@ -3,6 +3,7 @@ import source from "../../../plugins/aperia-ds5/skills/design/foundations/loadin
 import * as ListSkeleton from "../recipes/list-skeleton.stories"
 import { SkillDoc } from "../skill-doc"
 import { loadingExamples } from "../examples/page-patterns"
+import { Captioned } from "../blocks"
 
 <Meta title="Foundations/States/Loading" />
 
@@ -12,8 +13,12 @@ import { loadingExamples } from "../examples/page-patterns"
     ...loadingExamples,
     "What is available": (
       <>
-        <Canvas of={ListSkeleton.Table} sourceState="none" />
-        <Canvas of={ListSkeleton.Board} sourceState="none" />
+        <Captioned caption="A table page loading: the title, a toolbar with search, two filters, Sort, and one action, then the table's headings and rows at their real heights.">
+          <Canvas of={ListSkeleton.Table} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A board page loading: the title, six stat tiles, a toolbar with the Board / Table switch, then one column of card blocks for each stage.">
+          <Canvas of={ListSkeleton.Board} sourceState="none" />
+        </Captioned>
       </>
     ),
   }}

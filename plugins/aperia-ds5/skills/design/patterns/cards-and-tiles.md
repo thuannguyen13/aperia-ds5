@@ -1,7 +1,24 @@
 # Cards and Tiles
 
-Cards group related content under a title, and tiles each show a single number. See [Card](../components/card.md) for
-the card itself.
+Cards group a page's related content under titles, and tiles show the numbers people check at a glance. See
+[Card](../components/card.md) for a card's parts, types, and specs.
+
+## Anatomy
+
+A record's page has eight parts that belong to cards and tiles. A tile has a label, a number, and a hint. A card has a
+header and its content. A side column holds more cards. The hint and the side column show only on some pages.
+
+1. **Tile**. It is a box on a surface that shows one number. A page lays its tiles in a row under the page header.
+2. **Label**. It is the small muted text above the number. It says what the number counts, such as "Overdue Tasks".
+3. **Number**. It is the tile's figure, in larger semibold text and the body color.
+4. **Hint** (optional). It is a line of muted text under the number. It says what the number means, such as "Up 8% on
+   last quarter".
+5. **Card**. It is a surface that groups related content under a title, such as Tasks.
+6. **Card header**. It is the row at the top of a card. It holds the title, an optional figure such as a count, and an
+   optional action such as Add.
+7. **Card content**. It is what the card holds under its header, such as a table, a list, fields, or a chart.
+8. **Side column** (optional). It is a narrow column of cards beside the main column. It holds related records and
+   people.
 
 ## When to use
 
@@ -12,95 +29,72 @@ Choose by what the content is:
 | Content that belongs together and has a name, such as Details, Tasks, or Recent Activity | Card |
 | One number the user checks at a glance, such as Open Prospects or Overdue Tasks | Tile |
 
-## What is available
-
-Cards and tiles come in five parts and forms:
-
-| Part | What it shows |
-|---|---|
-| Card header | The title, an optional figure such as a count, and an action, on one line. Every card header has the same height. |
-| Collapsible card | The title and a chevron, which form one button. The button opens and closes the card. |
-| Tabs inside a card | Tabs under the card header that switch the card's content. |
-| Tile | A label above the number says what it counts. A line below the number says what it means, when that needs saying, such as "Up 8% on last quarter". A progress bar can go under the number. |
-| Tiles inside a card | The tiles drop their surface inside the card. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for why. |
-
 ## How it looks and behaves
 
-A card is built from a header and its content. A card header is one `min-h-8` row with `py-3` above and below it. Its title,
-figure, and action sit on that row. Card titles are semibold and one step smaller than the page title. On a phone, an action that does not fit
-beside the title drops under it. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+### Tiles
 
-Add sits at the right of the header. When the card's list also has Sort, Sort sits before Add. See
-[Sort](sort.md) for the Sort control. While the card is empty, Add moves to the middle of the empty state, and the
-header has none.
+Tiles sit in a row, and the tiles in a row line up. A bar can go under a tile's number to show progress. The hint is
+pinned to the foot of the tile, so the hints in a row stay level whether or not a tile has a bar. See [Money and
+Numbers](../foundations/money-and-numbers.md) for how a tile's number is written, and [Screen
+Sizes](../foundations/screen-sizes.md) for how many tiles sit in a row at each width.
 
-A card's header, content, and footer each hold their own space, so a part that hides takes its space with it. See
-[Card](../components/card.md) for the card's parts.
+A tile inside a card drops its own surface, because the card is already the surface. See [Surfaces and
+Layers](../styles/surfaces-and-layers.md) for why.
 
-Tiles sit in rows, and tiles in a row line up. The line that says what each number means is pinned to the foot of the
-tile, whether or not the tile has a bar. Tile numbers use tabular figures.
+### Cards
 
-A tile's number is always in the body color, whatever it counts. Its label says what it counts, such as Overdue Tasks,
-so the number needs no color. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for where status color goes.
+A card's header holds its title, figure, and action on one row. See [Card](../components/card.md) for the header's
+height, the title's size, collapsing a card, and tabs inside a card.
 
-A page of cards, such as a record's page, stacks the page header, a row of tiles, and the cards, `gap-5` apart. The cards
-sit in one column, or in a main column with a side column. The content decides, not the number of cards. A page gets a
-side column when it has related records or people to show beside its main work. The side column appears once the page
-is `@min-page-lg` wide. The main column takes three quarters and the side column one quarter, lined up under the tiles. A phone
-gets one column. Cards in a grid are `gap-4` apart.
+Add sits at the right end of the card header. See [Sort](sort.md) for where Sort sits beside it. While the card is
+empty, Add moves to the middle of the empty state, and the header has none. See [Empty
+States](../foundations/empty-states.md) for the empty state.
+
+A row in a card shows a button only when the row's click is already taken, such as a task whose checkbox ticks it. See
+[Tables](tables.md), Buttons on a row, for every such row. See [Tables](tables.md) for a table in a card and
+[Charts](charts.md) for a chart in a card.
+
+### A page of cards
+
+A page of cards stacks the page header, a row of tiles, and the cards, in that order. See [Page
+Layout](../foundations/page-layout.md) for the gaps between them.
+
+The cards sit in one column, or in a main column with a side column. The content decides, not the number of cards. A
+page gets a side column when it has related records or people to show beside its main work. The side column appears
+once the page is `@min-page-lg` wide. The main column takes three quarters and the side column one quarter, lined up
+under the tiles. A phone gets one column.
 
 Cards are ordered by what the user does. The main column holds the record's own content first, such as what is sold
 and its details. The work on the record follows, with two short cards side by side once both fit, such as Tasks and
-Notes. The side column holds related records and people, with the history card last. An empty card keeps its place,
-with an empty state inside.
+Notes. The side column holds related records and people, with the history card last. See [Details](details.md) and
+[History](history.md) for those two cards.
+
+An empty card keeps its place, with an empty state inside.
 
 ## Rules
 
-### Put Add in the header, beside the records
+### 1. Put Add in the header, beside the records
 
-- **Do:** Put Add at the right of the card header, or in the middle of the empty state while there is nothing, so
-  people find it beside the records.
-- **Don't:** Put Add under the list, or in both the header and the empty state. Show it in one place, so people never
-  wonder which to press.
+Add sits at the right end of the card header, so people find it beside the records. While the card has no records, Add
+moves to the middle of the empty state, so it shows in one place.
 
-### Label what a tile's number counts
+- **Do:** Put Add in the card header, beside the title and the count of Tasks.
+- **Don't:** Put Add under the list, or in both the header and the empty state.
 
-- **Do:** Label a tile's number ("Overdue Tasks" above a 3 in the body color), so people know what it counts.
-- **Don't:** Show a bare number, or color the number red or in a status color. Add the label, so the words carry the
-  meaning and color stays for badges.
+### 2. Label what a tile's number counts
 
-### Use one page of cards, not page tabs
+A tile puts a label above its number, and the number stays in the body color, so the words carry the meaning and color
+stays for badges. See [Surfaces and Layers](../styles/surfaces-and-layers.md) for where status color goes.
 
-- **Do:** Build one scrolling page of cards, with tabs that switch a card's content inside that card, so the whole
-  record is in view.
-- **Don't:** Split the record into views with tabs across the top of the page. Use one page of cards, so nothing hides
-  behind a tab.
+- **Do:** Put "Overdue Tasks" above a 3 in the body color.
+- **Don't:** Show a bare number, or color the number red.
 
-### Let each part own its space
+### 3. Use one page of cards, not page tabs
 
-- **Do:** Let the header's height and the content's padding make the space, so nothing moves when a part hides.
-- **Don't:** Add space between a card's parts on the card, or add padding back when a part hides. Let each part own its
-  space, so cards stay steady.
+A record's page is one scrolling page of cards, so people see the whole record and nothing hides behind a tab.
 
-## When you can do it differently
-
-A row in a card can show a button only when the row's click is already taken, such as a task whose checkbox ticks it.
-See [Tables](tables.md), Buttons on a row, for every such row.
-
-## Works with
-
-Cards and tiles work with these pages:
-
-- See [Card](../components/card.md) for the card's types and specs, for heading every card the same way, for tabs
-  inside the card, and for collapsing a card with its title.
-- See [Surfaces and Layers](../styles/surfaces-and-layers.md) for grouping rows inside a card, and for separate groups in
-  separate cards.
-- See [Money and Numbers](../foundations/money-and-numbers.md) for how a tile's number is written.
-- See [Buttons and Actions](buttons-and-actions.md) for Add in the header.
-- See [Empty States](../foundations/empty-states.md) for an empty card.
-- See [Tables](tables.md) for choosing a table in a card, a simple list, or a table on the page.
-- See [Charts](charts.md) for a chart in a card and its tooltip.
-- See [Details](details.md) and [History](history.md) for the cards a record's page holds.
+- **Do:** Put a record's tasks, notes, and history in separate cards on one page.
+- **Don't:** Split the record into Tasks, Notes, and History views with tabs across the top of the page.
 
 ## In code
 

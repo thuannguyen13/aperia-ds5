@@ -23,25 +23,37 @@ const rel = (p) => relative(ROOT, p)
 
 // ── The page structure ───────────────────────────────────────────────────────────────────────────────────────────────
 
-// Every page's sections, in order. "Anatomy" is optional and sits after What is available.
+// Every page's sections, in order; a "?" marks an optional one. Anatomy opens the page, right under the lead, so a
+// reader sees the thing and its parts before the choices and the specs. When to use is for a page that helps choose
+// between options, What is available for a subject that comes in types or options, and Rules for a page with a mistake
+// to prevent. There is no "When you can do it differently" and no "Works with": an exception sits with the behavior or
+// the rule it changes, and a link in the sentence that needs it.
 const STANDARD = [
-  "When to use",
-  "What is available",
   "Anatomy?",
+  "When to use?",
+  "What is available?",
   "How it looks and behaves",
-  "Rules",
-  "When you can do it differently",
-  "Works with",
+  "Rules?",
   "In code",
 ]
-// An Examples page shows a screen: it has no What is available, adds Before and after ahead of Rules, and names the
-// patterns it uses instead of Works with.
+/** Sections that pages no longer have. One that comes back is an error, not a section of the page's own. */
+const RETIRED = ["When you can do it differently", "Works with"]
+/** A rule's heading, "### 3. Name the count": its number and its name. An unnumbered rule has no match. */
+const NUMBERED = /^### (\d+)\.\s+(.+)$/
+/** A heading's text. A rule's number is not part of its name, so live examples are keyed to the name alone. */
+const nameOf = (heading) =>
+  heading
+    .replace(/^#+ /, "")
+    .replace(/^\d+\.\s+/, "")
+    .trim()
+// An Examples page shows screens: it opens on them (How it looks and behaves), sets the common mistakes beside the
+// fixed screens (Before and after), and names the patterns it uses. Its rules live on those pattern pages, so it has a
+// Rules section only when it states a rule of its own.
 const EXAMPLE = [
-  "When to use",
+  "When to use?",
   "How it looks and behaves",
   "Before and after",
-  "Rules",
-  "When you can do it differently",
+  "Rules?",
   "Which patterns it uses",
   "In code",
 ]
@@ -227,6 +239,16 @@ function examplesByPage() {
         own.push(...found.keys)
         pooled.push(...found.spreads.flatMap(resolveName))
       }
+      // The same object on one line: `after={{ ...cardExamples, Anatomy: cardAnatomy }}`.
+      const oneLine = line.match(/\bafter=\{\{(.+)\}\}/)
+      if (oneLine) {
+        for (const m of oneLine[1].matchAll(/\.\.\.([\w$]+)/g))
+          pooled.push(...resolveName(m[1]))
+        for (const m of oneLine[1].matchAll(
+          /(?:^|,)\s*(?:"([^"]+)"|'([^']+)'|([@\w$]+))\s*:/g
+        ))
+          own.push(m[1] ?? m[2] ?? m[3])
+      }
       const named = line.match(/\bafter=\{([\w$]+)\}/)
       if (named) pooled.push(...resolveName(named[1]))
     })
@@ -331,6 +353,15 @@ function checkPage(file, text, ctx) {
     let last = -1
     for (const h of h2) {
       const at = known.indexOf(h.title)
+      if (RETIRED.includes(h.title)) {
+        add(
+          h.n,
+          "error",
+          "structure",
+          `section "${h.title}" is retired: put an exception with the behavior or the rule it changes, and a link in the sentence that needs it`
+        )
+        continue
+      }
       if (at < 0) {
         add(
           h.n,
@@ -394,7 +425,9 @@ function checkPage(file, text, ctx) {
     }
   }
 
-  // Rules: each ### under Rules has a Do and a Don't, and (as a warning) a live example in the .mdx.
+  // Rules: each ### under Rules is one numbered rule, with (as a warning) a live example in the .mdx. A rule opens with
+  // its statement, and a Do and a Don't are optional under it. Numbers go up the page and are never reused, so "Sort 2"
+  // always means one rule.
   const rules = h2.find((h) => h.title === "Rules")
   if (rules && layout) {
     const end = h2.find((h) => h.n > rules.n)?.n ?? Infinity
@@ -408,23 +441,42 @@ function checkPage(file, text, ctx) {
         prose ? "warning" : "error",
         "rules",
         prose
-          ? "Rules states no rule of its own (no ### heading with a Do and a Don't)"
+          ? "Rules states no rule of its own (no ### heading)"
           : "Rules is empty"
       )
     }
     const examples = ctx.examples.get(file)
+    let lastNumber = 0
     ruleHeads.forEach((head, i) => {
       const stop = ruleHeads[i + 1]?.n ?? end
       const body = inRules.filter((l) => l.n > head.n && l.n < stop)
-      const name = head.text.slice(4).trim()
-      const has = (label) =>
-        body.some((l) => new RegExp(`^- \\*\\*${label}:\\*\\*`).test(l.text))
-      if (!has("Do") || !has("Don't"))
+      const name = nameOf(head.text)
+      const number = head.text.match(NUMBERED)?.[1]
+      const verdict = (l) => /^- \*\*(Do|Don't):\*\*/.test(l.text)
+      if (!number)
         add(
           head.n,
           "error",
           "rules",
-          `rule "${name}" needs both a **Do:** and a **Don't:**`
+          `rule "${name}" needs a number: "### ${lastNumber + 1}. ${name}"`
+        )
+      else {
+        if (Number(number) <= lastNumber)
+          add(
+            head.n,
+            "error",
+            "rules",
+            `rule ${number} does not come after rule ${lastNumber}: numbers go up the page and are never reused`
+          )
+        lastNumber = Math.max(lastNumber, Number(number))
+      }
+      const firstVerdict = body.find(verdict)?.n ?? stop
+      if (!body.some((l) => l.kind === "prose" && l.n < firstVerdict))
+        add(
+          head.n,
+          "error",
+          "rules",
+          `rule "${name}" needs a statement under its heading, before any **Do:** or **Don't:**`
         )
       if (!examples?.keys.has(name))
         add(
@@ -439,9 +491,7 @@ function checkPage(file, text, ctx) {
   // Live examples keyed to a heading the page does not have never show.
   const examples = ctx.examples.get(file)
   if (examples) {
-    const titles = new Set(
-      headings.map((l) => l.text.replace(/^#+ /, "").trim())
-    )
+    const titles = new Set(headings.map((l) => nameOf(l.text)))
     for (const key of examples.keys) {
       if (key === "@intro" || titles.has(key)) continue
       // A key the .mdx writes itself is a mistake for certain. One that comes with a shared examples object may serve

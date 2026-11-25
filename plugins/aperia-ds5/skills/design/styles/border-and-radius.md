@@ -1,68 +1,68 @@
 # Border and Radius
 
-Border and radius define the thin border and the corner radius of cards, controls, and panels.
-
-## When to use
-
-Use these borders and radii for every card, control, and panel.
+Border and radius outline every card, control, and panel in one way, so the same part looks the same on every screen. See
+[Elevation](elevation.md) for the shadow that goes with each border.
 
 ## What is available
 
-Border and radius come in two sets, radii and borders. The live tables on this page show each value as the browser
-reads it, with what uses it.
-
 ### Radius
 
-Radii come in five steps, Small, Medium, Large, Extra large, and Round, each worked out from one base radius set once in
-the library. Large is the base, for buttons, fields, dropdowns, menus, and popovers. Extra large is for cards, dialogs,
-sheets, and empty states. Round is for people's pictures, switches, and badges.
+Radii come in five steps, Small, Medium, Large, Extra large, and Round. Each is worked out from one base radius set once
+in the library, and Large is the base.
 
-A square picture, such as a company, product, or team picture, takes its radius from its size. It uses Large at the
-default size and larger, Medium when small, and Small when extra small. A checkbox has a tighter radius of its own.
+- **Large** is for buttons, fields, dropdowns, menus, and popovers.
+- **Extra large** is for cards, dialogs, sheets, and empty states.
+- **Round** is for people's pictures, switches, and badges.
+- **Medium** and **Small** are for the smaller parts that sit inside other boxes, such as menu items and tooltips.
+
+Button and Toggle take Large at the default size and larger, and Medium at the small sizes. A button inside a button
+group takes Large at every size.
+
+A square picture, such as a company, product, or team picture, takes its radius from its size. A square picture uses
+Large at the default size and larger, Medium when small, and Small when extra small. A checkbox has a tighter radius of
+its own.
 
 ### Borders
 
-Every border and divider has the same width, set once in the library. Borders come in four kinds. Border outlines cards,
-tables, dialogs, and sheets, and draws dividers. Input outlines fields, outline buttons, checkboxes, radios, and the
-chosen tab, a little stronger than Border. Focus draws a thin primary line inside any control that has keyboard focus,
-plus a primary halo. Invalid draws the same line and halo in the destructive red on a field with an error.
+Every border and divider has the same width, set once in the library. A border is the line around a card, a control, or
+a panel. A divider is a line between rows or sections. See [Surfaces and Layers](surfaces-and-layers.md) for which parts
+take the border of a surface and which take the border of a control, and where a divider runs.
+
+Borders come in four kinds. See [Color](color.md) for the Border and Input roles.
+
+- **Border** outlines cards, tables, dialogs, and sheets, and draws dividers.
+- **Input** outlines fields, outline buttons, checkboxes, radios, and the chosen tab, a little stronger than Border.
+- **Focus** draws a thin primary line inside any control that has keyboard focus, plus a primary halo.
+- **Invalid** draws the same line and halo in the destructive red on a field with an error.
 
 ## How it looks and behaves
 
-A thin border and a small shadow outline a box in place of a thick gray border. Larger boxes have larger radii, so
-a card is rounder than the button inside it.
+Larger boxes have larger radii, so a card is rounder than the button inside it.
 
-Borders never change the size of a box. Every border sits outside the box, so it never moves the box's text.
+Borders never change the size of a box. Every border sits outside the box, so it never moves the box's text. Focus and
+error lines draw inside and around the control, so nothing shifts when they appear.
 
-Focus and error lines draw inside and around the control, so nothing shifts when they appear.
+The outline Toggle, Badge, Input OTP slots, and the Switch track keep a real border. A joined toggle group relies on
+the Toggle's border.
 
-A picture has a thin see-through line inside its border and no other frame.
+A picture has a thin see-through line along its outline and no other frame.
 
 ## Rules
 
-### Use the thin border
+### 1. Use the thin border
 
-- **Do:** Give cards, fields, and tables the thin border and a small shadow, so the box shows on any fill.
-- **Don't:** Put thick gray borders on cards, fields, and tables. Use the thin border, so the content has the
-  most contrast.
+A card, a field, and a table take the thin border and a small shadow, so the box shows on any fill and its content keeps
+the most contrast.
 
-### Take the radius from the component
+- **Do:** Give a card the thin border and a small shadow.
+- **Don't:** Give a card a thick gray border, such as a plain `border-1`.
 
-- **Do:** Keep the radius each component already has, so the same thing looks the same on every screen.
-- **Don't:** Pick a radius per screen, or square a picture with a radius class by hand. Use the Avatar's square shape
-  instead, so every picture's radii match.
+### 2. Take the radius from the component
 
-## When you can do it differently
+Each component carries the radius that fits its size, so the same part looks the same on every screen.
 
-Border and radius have no exceptions. Every app uses these borders and radii.
-
-## Works with
-
-- See [Surfaces and Layers](surfaces-and-layers.md) for which parts take the surface edge and which take the control
-  edge.
-- See [Elevation](elevation.md) for the shadow that goes with each border.
-- See [Color](color.md) for the Border and Input roles.
-- See [Sizes](../foundations/sizes.md) for the heights these boxes come in.
+- **Do:** Use the Avatar's square shape for a company picture.
+- **Don't:** Pick a radius for one screen, or square a picture with a radius class by hand.
 
 ## In code
 

@@ -1,63 +1,51 @@
 # Elevation
 
-Elevation uses shadows to show how far a surface sits above the page, and an overlay to dim the page behind dialogs and
-sheets.
-
-## When to use
-
-Use a shadow step whenever a surface sits above the page, such as a card, a menu, or a dialog. The higher a surface
-sits, the deeper its shadow, so a menu reads as above the card it opened from. Use the overlay whenever a dialog, alert
-dialog, sheet, or drawer opens over the page.
+Elevation shows how far a surface sits above the page, with a shadow for each height and an overlay that dims the page
+behind a panel. See [Surfaces and Layers](surfaces-and-layers.md) for which layer each part of a screen sits on.
 
 ## What is available
 
-Elevation has four shadow steps and one overlay, each set once in the library for Light and Dark. Small is for what
-rests on the page, such as cards and fields. Medium is for menus and popovers. Large is for dialogs and sheets. Extra
-large is for a row or card while it is dragged. The live table on this page shows each one in Light and Dark.
+Elevation has four shadow steps and one overlay, each set once in the library for Light and Dark. The higher a surface
+sits, the deeper its shadow, so a menu shows as above the card it opened from.
 
-Medium, Large, and Extra large each include the Small shadow beneath them. Drawers use the overlay but no shadow
-step.
+| Step | Class | Used for |
+|---|---|---|
+| Small | `shadow-sm` | What rests on the page, such as cards, fields, outline buttons, and tables |
+| Medium | `shadow-md` | Menus, popovers, hover cards, and select lists |
+| Large | `shadow-lg` | Dialogs, alert dialogs, and sheets |
+| Extra large | `shadow-xl` | A row or card while it is dragged |
 
-The overlay dims the page behind a panel. It is a light black tint in Light and a deeper black tint in Dark. Dialogs,
-alert dialogs, sheets, and drawers all use the same overlay.
+Medium, Large, and Extra large each include the Small shadow beneath them.
+
+The overlay, `bg-overlay`, dims the page behind a dialog, an alert dialog, a sheet, or a drawer. All four use the same
+overlay. A drawer has no shadow step. A menu or a popover has a shadow
+but no overlay. See [Border and Radius](border-and-radius.md) for the border that goes with each shadow and
+[Color](color.md) for the Overlay role.
 
 ## How it looks and behaves
 
-Shadows deepen in Dark. In Light, they are a small share of the text color. In Dark, they are black and stronger, so
-they still show on dark fills.
+Shadows deepen in Dark. In Light, a shadow is a small share of the text color. In Dark, it is black and stronger, so it
+still shows on a dark fill.
 
-Dialogs, alert dialogs, and sheets share one look. Each has the page's own fill, the border, and the Large
-shadow, over the overlay.
-
-A sheet is a panel that opens on the right, inset from the window's edges, with rounded corners. On a phone, a sheet
-fills the screen. A sheet whose header holds only its title is the same height as the app's top bar. See [App
-Shell](../patterns/app-shell.md) for the top bar.
+The overlay is a light black tint in Light and a deeper black tint in Dark. It covers the whole window behind the panel,
+and the page stays sharp beneath it. See [Motion](motion.md) for how a panel and its overlay open and close.
 
 ## Rules
 
-### Use one overlay without blur
+### 1. Give each surface the shadow of its height
 
-- **Do:** Use the same dim behind every panel, with the page still sharp beneath it, so people keep their place.
-- **Don't:** Blur the backdrop, or give each kind of panel its own dim. Use the one overlay, so every panel dims the
-  page the same way.
+A surface takes the shadow step for the height it sits at, so people can tell which surface is above which.
 
-### Give dialogs and sheets the same look
+- **Do:** Give a menu that opens from a card the Medium shadow, so it shows above the card.
+- **Don't:** Give a card the Large shadow to make it stand out, or write a shadow value of your own.
 
-- **Do:** Give dialogs, alert dialogs, and sheets the page fill, the border, and the large shadow, so every
-  panel reads as one family.
-- **Don't:** Make a dialog look different from a sheet. Take the look from the component, so no one expects them to
-  behave differently.
+### 2. Use one overlay without blur
 
-## When you can do it differently
+Every panel that dims the page uses the one overlay and no blur, so people keep their place and every panel dims the
+page the same way.
 
-Elevation has no exceptions. Every app uses these shadows and the one overlay.
-
-## Works with
-
-- See [Surfaces and Layers](surfaces-and-layers.md) for which layer each part of a screen sits on.
-- See [Motion](motion.md) for how panels open and close.
-- See [Border and Radius](border-and-radius.md) for the edge that goes with each shadow.
-- See [Color](color.md) for the Overlay role.
+- **Do:** Put the same dim behind a dialog, a sheet, and a drawer, with the page still sharp beneath it.
+- **Don't:** Blur the backdrop, or give one kind of panel its own dim.
 
 ## In code
 

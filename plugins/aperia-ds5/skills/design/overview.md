@@ -25,34 +25,35 @@ Each section opens on an index of its pages, each with its one-sentence lead.
 
 ## How a page is laid out
 
-A one-sentence lead under the title defines the subject. The sections below it always come in the same order:
+A one-sentence lead under the title says what the subject is for. The sections below it always come in the same order.
+A page has a section only when it has something to say there.
 
 | Section | What it answers |
 |---|---|
-| When to use | The conditions in which the subject applies |
-| What is available | The types and options to choose from, with the names used in Figma |
-| Anatomy | On a component's or a pattern's page, a numbered list of its parts, each optional part marked "(optional)", after a sentence that says which parts are required |
+| Anatomy | On a page about a thing with parts, a numbered list of its parts, each optional part marked "(optional)". Each item says what kind of thing the part is, such as a title, a button, or a list of choices. |
+| When to use | On a page that helps choose between options, which option fits which case |
+| What is available | On a page whose subject comes in types or options, the types and options to choose from, with the names used in Figma |
 | How it looks and behaves | What people see and do, on a desktop first and then on a phone. A component's page shows its states, such as hover, focus, and disabled, under States. |
-| Rules | The constraints, each with a Do and a Don't and the reason for both |
-| When you can do it differently | The allowed exceptions and the condition for each, or a note that there are none |
-| Works with | The related pages |
+| Rules | The mistakes to avoid. Each rule has a number, a statement with its reason, and often a Do and a Don't. |
 | In code | Notes for developers and coding agents, which other readers can skip |
 
-Examples pages use a different order:
+A rule is cited by its page and its number, such as Sort 2. A rule's number never changes, and a removed rule's number
+is not used again.
+
+An Examples page uses a different order:
 
 | Section | What it answers |
 |---|---|
-| When to use | The conditions in which the screen applies |
-| Example sections | The screen itself, one section for each part shown |
-| Before and after | The common mistake beside the fixed screen |
-| Rules | The constraints, each with a Do and a Don't |
-| Which patterns it uses | The pattern pages the screen is built from |
+| How it looks and behaves | The screens themselves, one part for each screen shown |
+| Before and after | The common mistakes beside the fixed screens |
+| Which patterns it uses | The pattern pages the screens are built from |
 | In code | Notes for developers and coding agents |
 
-In Storybook, a page shows its sections in three tabs. Overview holds When to use, What is available, and Anatomy, and
-on an Examples page the screen itself. Anatomy shows a live drawing with a numbered marker on each part, above the
-numbered list. Guidelines holds every other section up to In code. Code holds In code, and on a
-component's or a pattern's page also the live examples and props of its components.
+In Storybook, a page shows its sections in three tabs. Overview holds Anatomy, When to use, and What is available, and
+on an Examples page the screens themselves. Anatomy shows a live drawing with a numbered marker on each part, above the
+numbered list. Guidelines holds How it looks and behaves and Rules. Code holds In code, and on a component's or a
+pattern's page also the live examples and props of its components. Every live example has a caption that says what it
+shows.
 
 ## One source of truth
 

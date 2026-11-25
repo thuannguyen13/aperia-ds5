@@ -4,23 +4,29 @@ import source from "../../../plugins/aperia-ds5/skills/design/foundations/saving
 import * as SheetFormStories from "../../../components/ui/sheet-form/sheet-form.stories"
 import { savingExamples } from "../examples/behavior"
 import { NotificationSettingsExample } from "../examples/roles-and-permissions.example"
+import { savingAndFeedbackAnatomy } from "../examples/saving-and-feedback-anatomy"
 import { SkillDoc } from "../skill-doc"
+import { Captioned } from "../blocks"
 
 <Meta title="Foundations/States/Saving and Feedback" />
 
 <SkillDoc
   source={source}
   after={{
-    ...savingExamples,
-    "@intro": (
-      <>
-        <Toaster />
+    Anatomy: savingAndFeedbackAnatomy,
+    // The toasts in the rule examples show in this one Toaster.
+    "Where toasts show": <Toaster />,
+    "While it saves": (
+      <Captioned caption="An Edit Contact sheet while its save runs. Every field is disabled, and the save button shows a spinner beside its label.">
         <Canvas of={SheetFormStories.Saving} sourceState="none" />
-      </>
+      </Captioned>
     ),
     "When it is refused": <NotificationSettingsExample />,
     "When a sheet closes before it saves": (
-      <Canvas of={SheetFormStories.AddContact} sourceState="none" />
+      <Captioned caption="An Add Contact sheet. Type a name and press Escape, and the sheet asks Discard Changes? before it closes.">
+        <Canvas of={SheetFormStories.AddContact} sourceState="none" />
+      </Captioned>
     ),
+    ...savingExamples,
   }}
 />

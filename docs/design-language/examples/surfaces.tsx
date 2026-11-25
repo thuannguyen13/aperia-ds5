@@ -23,7 +23,7 @@ import {
   openable,
 } from "aperia-ds5"
 import { cn } from "@/lib/utils"
-import { DoDont } from "../blocks"
+import { Captioned, DoDont } from "../blocks"
 import { DetailRow, DetailSection } from "../recipes"
 import { StateCards, forceState, useForcedStates } from "../states"
 import { TitledCard } from "./shared"
@@ -394,10 +394,12 @@ function OpeningRows({ marked }: { marked: boolean }) {
 }
 
 export const surfacesExamples = {
-  "What is available": (
-    <LightDark>
-      <Layers />
-    </LightDark>
+  Layers: (
+    <Captioned caption="A Details card with its Edit menu open, and a filter sheet over a dimmed page, in Light and in Dark. Each layer's name sits under it with the class that draws it.">
+      <LightDark>
+        <Layers />
+      </LightDark>
+    </Captioned>
   ),
   "States on a surface": (
     <StateCards

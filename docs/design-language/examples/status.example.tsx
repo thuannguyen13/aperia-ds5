@@ -12,7 +12,7 @@ import {
   opensOnClick,
 } from "aperia-ds5"
 import { DoDont, Example } from "../blocks"
-import { StatusDot, TitledCard } from "../recipes"
+import { TitledCard } from "../recipes"
 import { AppStatusColors, STATES } from "./app-status"
 
 // A record's status: a word in a badge, in the app's own status pairs (stood in for by brand.example.css), in one
@@ -91,18 +91,7 @@ function Card({ children }: { children: ReactNode }) {
 }
 
 export const statusExamples = {
-  "@intro": (
-    <Example caption="Colored badges for states people must notice, a plain badge for a stage, and a dot beside a word for a condition in a line of text.">
-      <WithColors>
-        {(Object.keys(STATES) as State[]).map((state) => (
-          <Status key={state} state={state} />
-        ))}
-        <Badge variant="outline">Proposal</Badge>
-        <StatusDot dot="bg-status-red-foreground">2 failed</StatusDot>
-      </WithColors>
-    </Example>
-  ),
-  "What is available": (
+  "Where a status shows": (
     <Example
       caption="The same status in its own table column and as a property in the record's page header."
       className="flex-col items-stretch"

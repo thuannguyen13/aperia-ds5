@@ -1,11 +1,8 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/notifications.md?raw"
 import { SkillDoc } from "../skill-doc"
-import { NotificationsExample } from "../examples/search-and-notifications.example"
+import { notificationsAnatomy } from "../examples/notifications-anatomy"
 
 <Meta title="Patterns/Navigation/Notifications" />
 
-<SkillDoc
-  source={source}
-  after={{ "How it looks and behaves": <NotificationsExample /> }}
-/>
+<SkillDoc source={source} after={{ Anatomy: notificationsAnatomy }} />

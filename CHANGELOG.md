@@ -283,8 +283,9 @@ Migrate a table:
   The Link button and badge variants and the hover color of links in Field, Item and Empty use it. Dark `--ring` is
   `oklch(0.65 0.16 259.33)` (#508DEF), at least 3:1 on the same fills. Primary stays `#0058cc` as a fill.
 - **Named widths** (after rc.2): `--container-page-md` (48rem) and `--container-page-lg` (60rem) for a page's sections
-  (`@min-page-md:grid-cols-4`), `--container-popover-sm` (16rem, so Sort's Ascending and Descending fit their labels) for Sort and a filter's value picker, and
-  `--container-popover-lg` (24rem) for a wide panel such as Notifications (`w-popover-lg`).
+  (`@min-page-md:grid-cols-4`), `--container-popover-sm` (16rem, so Sort's Ascending and Descending fit their labels)
+  for Sort and a filter's value picker, and `--container-popover-lg` (24rem) for a wide panel such as Notifications
+  (`w-popover-lg`).
 - Button and Toggle `sm` text is `text-xs` (was `text-[0.8rem]`).
 - **Toasts** (after rc.2): `Toaster` sits at the top right, and on a phone spans the top, 16px from each side. It shows
   three toasts at most. New `toast` from `aperia-ds5` (sonner's, with a close button on any toast that stays until it is

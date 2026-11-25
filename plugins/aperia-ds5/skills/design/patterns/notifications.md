@@ -1,75 +1,50 @@
 # Notifications
 
-Notifications tell people about changes to their records through a panel in the sidebar and through toasts.
+Notifications tell people about changes to their records, in a panel that opens from the sidebar and in a toast for each new one. See [Saving and Feedback](../foundations/saving-and-feedback.md) for toasts about saves and errors, and [Banner Alerts](banner-alerts.md) for banners.
 
-## When to use
+## Anatomy
 
-Use notifications in every app that tells people about changes to their records. They sit behind the Notifications
-entry in the sidebar.
+Notifications have nine parts, the sidebar entry, the panel it opens, and seven parts inside the panel. The panel has a header row over a list of notifications. The unread dot shows only on a notification that is unread.
 
-## What is available
-
-Notifications have five parts:
-
-| Part | Content |
-|---|---|
-| Sidebar entry | Notifications, with the unread count in a destructive badge. Past 99, the count reads "99+". On the collapsed rail, the count sits on the corner of the bell. |
-| Panel header | One row with two tabs, Mark All as Read, and a settings button named "Notification Settings". The Unread tab comes first with its count, then All. |
-| Notification | The picture of who did it, or a bell for a notice from the app. The sentence in muted text, with the person and the record's name in the foreground color at medium weight. The time under the sentence, such as "3d ago". A dot while it is unread. |
-| Empty tab | A bell and "No Unread Notifications" or "No Notifications". |
-| Toast | The same sentence and picture as the notification, for each new notification. |
+1. **Notifications entry**. It is a button in the sidebar that opens the panel. It shows the unread count in a destructive badge.
+2. **Panel**. It is a popover that opens beside the sidebar and holds the header row and the list of notifications.
+3. **Tabs**. They are two tabs at the start of the header row. The Unread tab comes first with its count, then the All tab.
+4. **Mark All as Read**. It is a button at the end of the header row that marks every notification read.
+5. **Notification Settings**. It is an icon button at the end of the header row that opens the notification settings.
+6. **Picture**. It is the avatar of the person who made the change, or a bell for a notice from the app.
+7. **Sentence**. It is a line of text that says what changed. It is in muted text, with the person and the record's name in the foreground color at medium weight.
+8. **Time**. It is a line of text under the sentence that says how long ago the change happened, such as "3d ago".
+9. **Unread dot** (optional). It is a small destructive-color dot at the end of a notification that is unread.
 
 ## How it looks and behaves
 
 The panel opens from the sidebar, and each notification leads to its record:
 
-1. The panel opens beside the sidebar. It is up to `max-w-popover-lg` wide and never wider than the screen. Its header row is
-   `h-12` high.
-2. The panel takes focus as it opens, so the first tab shows no focus ring after a click.
-3. Mark All as Read is disabled while nothing is unread.
-4. Opening a notification marks it read at once. It also closes the panel and opens its record.
-5. A new notification also shows as a toast that links to its record. It joins the one stack of toasts that save
-   confirmations and errors use. See [Saving and Feedback](../foundations/saving-and-feedback.md) for where the stack
-   sits and how many toasts it shows.
-6. Notification Settings opens from the settings button in the panel and from the account menu. See
-   [Switches in a Grid](switches-in-a-grid.md) for the settings grid.
+1. Past 99 unread, the count on the entry reads "99+". On the collapsed rail, the count sits on the corner of the bell.
+2. The panel opens beside the sidebar. It is up to `max-w-popover-lg` wide and never wider than the screen. Its header row is `h-12` high.
+3. The panel takes focus as it opens, so the first tab shows no focus ring after a click.
+4. Mark All as Read is disabled while nothing is unread.
+5. Opening a notification marks it read at once. It also closes the panel and opens its record.
+6. A tab with no notifications shows a bell with "No Unread Notifications" on the Unread tab, or "No Notifications" on the All tab.
+7. A new notification also shows as a toast, with the same picture and sentence, that links to its record. It joins the one stack of toasts that save confirmations and errors use. See [Saving and Feedback](../foundations/saving-and-feedback.md) for where the stack sits and how many toasts it shows.
+8. Notification Settings opens from the settings button in the panel and from the account menu. See [Switches in a Grid](switches-in-a-grid.md) for the settings grid.
 
-On a phone, Notifications sits in the sidebar's panel, which the button at the start of the top bar opens. A new
-notification's toast runs across the top of the screen. See [Screen Sizes](../foundations/screen-sizes.md) for every
-part on a phone.
+On a phone, Notifications sits in the sidebar's panel, which the button at the start of the top bar opens. A new notification's toast runs across the top of the screen. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ## Rules
 
-### Open the record from the whole notification
+### 1. Open the record from the whole notification
 
-- **Do:** Let a click anywhere on a notification mark it read and open the record, so one click gets people there.
-- **Don't:** Show only text, with a separate link or button to reach the record. Make the whole notification open it,
-  so it is easy to hit.
+A notification is one link to its record, so people reach the record with one click anywhere on it.
 
-### Mark unread with more than color
+- **Do:** Make the picture, the sentence, and the time part of the same link.
+- **Don't:** Show only text with a separate link or button inside the notification to reach the record.
 
-- **Do:** Mark unread with a dot that screen readers hear as "Unread" and an Unread tab with its count, so everyone sees
-  what is new.
-- **Don't:** Show unread only by a tinted background. Add the dot, so it reads without color.
+### 2. Mark unread with more than color
 
-### Show new notifications in the shared stack
+An unread notification shows a dot with the text "Unread" for screen readers, so people who do not see color still find what is new.
 
-- **Do:** Show a new notification as a toast in the one stack that every toast uses, so the page stays usable.
-- **Don't:** Give notifications a stack or a corner of their own. Keep one stack, so toasts never pile up in two places.
-
-## When you can do it differently
-
-This pattern has no exceptions.
-
-## Works with
-
-Notifications work with these pages:
-
-- See [App Shell](app-shell.md) for the sidebar entry that opens the panel.
-- See [Switches in a Grid](switches-in-a-grid.md) for Notification Settings.
-- See [Empty States](../foundations/empty-states.md) for the empty tabs.
-- See [Message Templates](../foundations/copy-templates.md) for when a message is a toast.
-- See [Saving and Feedback](../foundations/saving-and-feedback.md) for the stack of toasts.
+- **Don't:** Show unread only with a tinted background.
 
 ## In code
 

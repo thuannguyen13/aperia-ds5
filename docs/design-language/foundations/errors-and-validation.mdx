@@ -3,6 +3,8 @@ import source from "../../../plugins/aperia-ds5/skills/design/foundations/errors
 import * as SheetFormStories from "../../../components/ui/sheet-form/sheet-form.stories"
 import { errorsExamples } from "../examples/errors"
 import { SkillDoc } from "../skill-doc"
+import { Captioned } from "../blocks"
+import { errorsAndValidationAnatomy } from "../examples/errors-and-validation-anatomy"
 
 <Meta title="Foundations/States/Errors and Validation" />
 
@@ -10,6 +12,11 @@ import { SkillDoc } from "../skill-doc"
   source={source}
   after={{
     ...errorsExamples,
-    "@intro": <Canvas of={SheetFormStories.FieldErrors} sourceState="none" />,
+    Anatomy: errorsAndValidationAnatomy,
+    "When the app checks": (
+      <Captioned caption="A contact form after Save with nothing typed. Each message sits under its field, and focus is on the first field.">
+        <Canvas of={SheetFormStories.FieldErrors} sourceState="none" />
+      </Captioned>
+    ),
   }}
 />

@@ -1,10 +1,6 @@
 # Money and Numbers
 
-Number formats define how amounts, counts, and percentages appear in fields, tables, and tiles.
-
-## When to use
-
-Use these formats whenever a screen shows or takes a dollar amount, a count, or a percentage.
+Number formats write amounts, counts, and percentages one way on every screen, so people read and compare figures the same way in fields, tables, and tiles.
 
 ## What is available
 
@@ -12,63 +8,57 @@ Five formats cover amounts, counts, and percentages:
 
 | Format | How it reads | Example |
 |---|---|---|
-| Money field | A $ before the number, and commas in it as the user types. The saved value is the plain number. | "$1,234,567" |
-| Hidden amount | The shape of a figure, so a column keeps its width. It shows when the viewer may not see an amount. | **$XX,XXX** |
+| Money field | A $ before the number, with commas in it. | "$1,234,567" |
 | Money as text | The amount in full. A whole amount shows no cents, and an amount with cents shows two decimals. | "$1,840,000", "$12.50" |
+| Hidden amount | The shape of a figure, for an amount the viewer may not see. | **$XX,XXX** |
 | Percentage | Rounded to a whole number, with % and no space. With nothing to divide by, it is a missing value (—), not 0%. | "42%" |
 | Count | A number and its noun. | "1 prospect", "3 prospects" |
 
-A money field for a hidden amount is disabled. It shows $XX,XXX and says why under it.
-
 ## How it looks and behaves
 
-Numbers follow five display rules, from typing to reading:
-
-1. In a money field, the $ stays in front. Commas appear as the user types or pastes. Spaces and stray commas are
-   dropped.
-2. Number fields have no up and down arrows.
-3. In tables and tiles, numbers use tabular figures, so digits line up in a column. Numbers align right in a table.
-4. An amount under a dollar keeps its zero, as in $0.64. A negative amount shows in the destructive color and in
-   parentheses, as in ($125.50).
-5. A missing value reads — (an em dash) in muted text. A missing value is different from 0.
+- In a money field, the $ stays in front. Commas appear as the user types or pastes. Spaces, stray commas, and letters are dropped. The saved value is the plain number.
+- A money field for a hidden amount is disabled and empty. It shows XX,XXX after the $, says to a screen reader that the amount is hidden, and gives the reason under it.
+- Number fields have no up and down arrows.
+- An amount under a dollar keeps its zero, as in $0.64.
+- A missing amount is a muted em dash (—), never $0, because 0 is an amount. See [Empty States](empty-states.md) for how every missing value is shown.
+- A money field in a table's column is right-aligned like every other number there.
 
 ## Rules
 
-### Write amounts in full
+### 1. Write amounts in full
 
-- **Do:** Write amounts in full ($1,840,000), so people read the exact figure.
-- **Don't:** Write $1.8M, $1,840K, or "1840000 dollars". Write the full amount, so nothing is rounded or misread.
+Write an amount in full, with commas and no shortening, so people read the exact figure.
 
-### Use the money field for money
+- **Do:** Write $1,840,000 for a whole amount and $12.50 for an amount with cents.
+- **Don't:** Write $1.8M, $1,840K, $12.5, or "1840000 dollars", because a shortened amount hides digits and a missing zero reads as a different amount.
 
-- **Do:** Use the money field, which shows $ and commas and saves plain digits, so typing an amount is easy and every
-  saved amount is a number.
-- **Don't:** Use a plain number field with spin arrows, or one that saves "$1,234". Use the money field, so amounts save
-  as numbers.
+### 2. Use the money field for money
 
-### Hide an amount with its shape
+Use the money field for every amount a person types. It shows $ and commas and saves plain digits, so every saved amount is a number.
 
-- **Do:** Show $XX,XXX where the viewer may not see the amount, so the column keeps its shape.
-- **Don't:** Use a blank cell, "Hidden", or asterisks that change the column's width. Use $XX,XXX, so hidden amounts
-  look intentional.
+- **Do:** Use the money field for Monthly Volume, so the user sees $1,250,000 and the app saves 1250000.
+- **Don't:** Use a number field for money. It shows no $ or commas, and a field that saves "$1,234" stores text.
 
-### Line numbers up
+### 3. Hide an amount with its shape
 
-- **Do:** Use tabular figures, right-aligned ($48,500 over $1,840,000 digit for digit), so amounts compare at a glance.
-- **Don't:** Set figures in proportional digits that wobble down a column. Use tabular figures, so digits line up.
+An amount the viewer may not see reads $XX,XXX, so a column keeps its width and the cell never looks empty. In a sentence or a summary, where nothing lines up with the amount, it can be left out instead.
 
-## When you can do it differently
+- **Do:** Show $XX,XXX in the cell, in muted text, for an amount this viewer may not see.
+- **Don't:** Use a blank cell, "Hidden", or asterisks, which change the column's width or read as a missing value.
 
-An amount that the viewer may not see can be left out of a sentence or a summary, where nothing lines up with it. In a
-table, a hidden amount reads $XX,XXX.
+### 4. Line numbers up
 
-## Works with
+Numbers in tables and tiles use tabular figures, so every digit has the same width and digits line up in a column. A number in a table is right-aligned, so the digits of the same place sit in one line.
 
-Numbers work with three other patterns:
+- **Do:** Right-align amounts with tabular figures, so $48,500 sits over $1,840,000 digit for digit.
+- **Don't:** Left-align a column of numbers or set it in proportional digits, because the digits shift from row to row.
 
-- See [Forms in Sheets](../patterns/forms-in-sheets.md) for the money field in a form.
-- See [Cards and Tiles](../patterns/cards-and-tiles.md) for a number on a tile.
-- See [Disabled With a Reason](disabled-with-a-reason.md) for why the field of a hidden amount cannot be used.
+### 5. Write a negative amount in parentheses
+
+A negative amount is written in parentheses and in the destructive color. The parentheses carry the meaning, so it reads as negative without the color and without a minus sign.
+
+- **Do:** Write ($125.50) in the destructive color.
+- **Don't:** Write -$125.50, or show the destructive color on an amount with no parentheses.
 
 ## In code
 

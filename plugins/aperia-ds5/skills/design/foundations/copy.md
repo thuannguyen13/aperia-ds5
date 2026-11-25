@@ -1,19 +1,13 @@
 # Copy
 
-Copy rules define the voice, case, punctuation, and formats of all text on screen. See [Message
-Templates](copy-templates.md) for the wording of each message.
-
-## When to use
-
-Use these rules for any text a person sees. That includes titles, headings, labels, buttons, links, placeholders,
-hints, empty states, errors, confirmations, toasts, statuses, and tooltips. It also includes the way dates, times,
-amounts, and other values are written.
-
-These rules are built on Aperia's User Interface Style Guide V4.3.
+Copy rules make every piece of text in an Aperia app read in one voice and one format, following Aperia's User Interface
+Style Guide V4.3. See [Message Templates](copy-templates.md) for the wording of each message.
 
 ## What is available
 
-Copy rules come in twelve sets, one per subsection below.
+Copy rules apply to any text a person sees, such as titles, headings, labels, buttons, links, placeholders, hints,
+empty states, errors, confirmations, toasts, statuses, and tooltips. They also apply to the way dates, times, amounts,
+and other values are written. They come in twelve sets, one per subsection below.
 
 ### By element
 
@@ -170,11 +164,14 @@ Screen text speaks in one plain voice. The voice follows these rules:
 - Use no exclamation marks and no capitals for emphasis.
 - Never call the app "I", "me", or "we". Write "The application will be available soon."
 - Never call what someone typed wrong, bad, invalid, or illegal. State the rule or the fix instead.
-- Use one name for one thing. Take the app's own words from its glossary, and never use synonyms, such as merchant
-  account, merchant record, and merchant profile, for one record. A new word is agreed with the team and added to the
-  glossary.
+- Use one name for one thing. Take the app's own words from its glossary or its recorded copy decisions, and never use
+  synonyms, such as merchant account, merchant record, and merchant profile, for one record. A new word is agreed with
+  the team and added to the glossary.
 - Leave out marketing and chatbot phrases, such as "Let's get started", "Unlock powerful insights", "Seamlessly
   manage…", "You're all set!", "Great!", and "successfully".
+
+An app built as a conversational assistant, a persona that answers in chat, keeps its own voice in the chat. The screen
+text around the chat follows these rules.
 
 ### Case and titles
 
@@ -238,8 +235,11 @@ Never refer to a part of the screen as "below", "page", "window", "modal", "pane
 
 A link in running text uses the Link color with an underline, and no other text uses that pair. A Link button uses
 the Link color and shows its underline only under the pointer. See [Button](../components/button.md) for the
-Link button. Contact details on a record's page link the way a Link button does, as "When you can do it differently"
-says.
+Link button.
+
+Phone numbers, emails, and websites read as plain text in the body color in a table. On a record's page, they link
+to call, email, or open, in the Link color, and they underline only on hover. See [Table](../components/table.md) for
+contact details in a table.
 
 ## How it looks and behaves
 
@@ -256,67 +256,80 @@ Writing copy follows five steps.
 A copy change changes words only. It does not change the layout, data, flows, permissions, behavior, or visual design.
 Make a copy change only when the new words follow a rule on this page that the old words break.
 
+A screen departs from these rules only for a business reason the app has recorded. Without one, follow these rules, and
+bring a screen that disagrees back in line. Send questions these rules do not answer to the VP of Product Innovation
+and Design.
+
 ## Rules
 
-### Name things in Title Case and say things in sentence case
+### 1. Name things in Title Case and say things in sentence case
 
-- **Do:** Name things in Title Case and say things in sentence case ("Recent Activity", "Add Member", "No tasks assigned
-  to you."), so names stand apart from messages.
-- **Don't:** Write "Recent activity" as a heading, or "No Tasks Assigned To You." as a description. Match the case to
-  the job, so names and messages do not blur.
+Titles and names use Title Case, and sentences use sentence case, so names stand apart from messages.
 
-### Name the action
+- **Do:** Write "Recent Activity" and "Add Member" as names, and "No tasks assigned to you." as a sentence.
+- **Don't:** Write "Recent activity" as a heading, or "No Tasks Assigned To You." as a description.
 
-- **Do:** Name the action on the button ("Add Member", "Delete Note", "Change to Demo"), so people know what happens
-  before they click.
-- **Don't:** Label a button "Submit", "OK", "Continue", or "Manage", or end it with an ellipsis. Name the action and its
-  object, so no one has to guess.
+### 2. Name the action
 
-### Say what happened and what to do
+A button names its action and the object it acts on, so people know what happens before they click.
 
-- **Do:** Put the rule or the fix beside its field ("File must be smaller than 10 MB." beside the file field), so people
-  fix it where they are.
-- **Don't:** Write "Something went wrong.", or tell people they did something wrong. State the rule or the fix, so
-  people know what to do next.
+- **Do:** Write "Add Member", "Delete Note", or "Change to Demo".
+- **Don't:** Label a button "Submit", "OK", "Continue", or "Manage", or end it with an ellipsis.
 
-### Ask with the action's name
+### 3. Say what happened and what to do
 
-- **Do:** Ask with the action's name ("Delete Project?", a line on what it deletes, then Cancel and "Delete Project"),
-  so people know what they agree to.
-- **Don't:** Ask "Are you sure?" with OK, or with Yes and No. Name the action in the title and on the button, so no one
-  clicks through blind.
+An error states the rule or the fix beside its field, so people know what to do next. It never tells people they did
+something wrong. See [Errors and Validation](errors-and-validation.md) for the words of every error.
 
-### Say only what people need
+- **Do:** Put "File must be smaller than 10 MB." beside the file field.
+- **Don't:** Write "Something went wrong." with no cause and no fix.
 
-- **Do:** Keep a message to what people need ("Changes saved."), so it reads at a glance.
-- **Don't:** Write "Great! Your changes have been saved and will appear in your weekly report." Cut every word people
-  would not miss, so they get back to work.
+### 4. Ask with the action's name
 
-### Write empty as No [Items]
+A confirmation names the action in its title and on its button, so people know what they agree to. See [Message
+Templates](copy-templates.md) for the words of each confirmation.
 
-- **Do:** Write empty as No [Items] ("No Tasks"), adding a second line only when it says what the title cannot, so
-  people see at once there is nothing.
-- **Don't:** Repeat the title ("No tasks yet." under "No Tasks"), or show a bare "No data". Name the items, so people
-  know what is missing.
+- **Do:** Ask "Delete Project?", add a line on what it deletes, then offer Cancel and "Delete Project".
+- **Don't:** Ask "Are you sure?" with OK, or with Yes and No.
 
-### Use the same words as the app's other screens
+### 5. Say only what people need
 
-- **Do:** Reuse the wording a similar screen already uses for the same action, state, or message, so people recognize
-  it.
-- **Don't:** Invent a new word for something the app already names. Check how a similar screen says it, so no one
-  wonders if it is a different thing.
+A message holds only what people need to act on, so people read it at a glance and get back to work.
 
-### Keep business and legal terms as written
+- **Do:** Write "Changes saved."
+- **Don't:** Write "Great! Your changes have been saved and will appear in your weekly report." The second half says
+  what the app does next, and people would not miss it.
 
-- **Do:** Use business, product, legal, compliance, and technical terms exactly as the business does, and quote legal
-  text as written, so people who know them recognize them.
-- **Don't:** Swap a term for one that sounds better. Ask when a term is unclear, so the words keep their exact meaning.
+### 6. Write empty as No [Items]
 
-### Hide internal labels
+An empty list or card is titled "No" and the name of its items, so people see at once what is missing. A second line
+shows only when it says what the title cannot, such as whose items they are. See [Empty States](empty-states.md) for
+the empty state itself.
 
-- **Do:** Leave out what is not built yet and show demo sample data unmarked, so the screen looks like the real product.
-- **Don't:** Show "MVP", "Not in MVP", "Phase 2", "Demo Data", or "Mock" where a user can see it. Remove internal
-  labels, so people see only the product.
+- **Do:** Write "No Tasks", and add "No tasks assigned to you." because it says whose.
+- **Don't:** Repeat the title with "No tasks yet." under "No Tasks", or show a bare "No data".
+
+### 7. Use the same words as the app's other screens
+
+A screen uses the wording a similar screen already uses for the same action, state, or message, so people recognize it.
+
+- **Do:** Write "Add Contact" on a new list when the app's other lists say "Add".
+- **Don't:** Invent a new word for something the app already names, so no one wonders if it is a different thing.
+
+### 8. Keep business and legal terms as written
+
+Business, product, legal, compliance, and technical terms keep the exact words the business uses, and legal text is
+quoted as written, so people who know the terms recognize them.
+
+- **Do:** Ask when a term is unclear.
+- **Don't:** Swap a term for one that sounds better.
+
+### 9. Hide internal labels
+
+A screen shows no internal label, so people see only the product.
+
+- **Do:** Leave out what is not built yet, and show demo sample data unmarked.
+- **Don't:** Show "MVP", "Not in MVP", "Phase 2", "Demo Data", or "Mock" where a user can see it.
 
 ## Words and phrasings that confuse people
 
@@ -352,27 +365,6 @@ Each phrasing in this table confuses people. The last column gives the wording t
 | -, N/A, None, or 0 for a missing value | 0 is a value. The dash is the one sign for nothing. | "—" in gray |
 | Your Prospect Workspace, Stay on Top of Things | A slogan instead of a name | "Prospects", "Recent Activity" |
 | Permission or role names, "Ask an admin" in a no-access message | People cannot act on them | "You do not have access to \<action\>." |
-
-## When you can do it differently
-
-These rules allow four exceptions.
-
-- When the app's glossary or its recorded copy decisions name a thing, use the app's own words.
-- A screen may depart from these rules only for a business reason the app has recorded. Without one, follow these
-  rules, and bring a screen that disagrees back in line.
-- An app built as a conversational assistant, a persona that answers in chat, keeps its own voice in the chat. The
-  screen text around the chat follows these rules.
-- Phone numbers, emails, and websites read as plain text in the body color in a table. On a record's page, they link
-  to call, email, or open, in the Link color, and they underline only on hover. See [Table](../components/table.md) for
-  contact details in a table.
-
-Send questions these rules do not answer to the VP of Product Innovation and Design.
-
-## Works with
-
-- See [Message Templates](copy-templates.md) for the wording of every message.
-- See [Typography](../styles/typography.md) for Title Case and sentence case on screen.
-- See [Color](../styles/color.md) for gray in the missing-value dash and hints, and red in negative amounts.
 
 ## In code
 

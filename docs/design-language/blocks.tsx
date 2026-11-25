@@ -39,6 +39,28 @@ export function Example({
   )
 }
 
+/**
+ * A live example with a line under it that says what it shows, so no example sits unexplained. Wrap a story's
+ * `Canvas` in it; the caption sits close under the frame.
+ */
+export function Captioned({
+  caption,
+  children,
+}: {
+  caption: ReactNode
+  children: ReactNode
+}) {
+  return (
+    // Storybook sets the frame's margin outside any layer, so only an important utility can take it off.
+    <figure className="my-6 [&_.sbdocs-preview]:mb-0!">
+      {children}
+      <figcaption className="mt-2 text-sm leading-5 text-muted-foreground">
+        {caption}
+      </figcaption>
+    </figure>
+  )
+}
+
 function Verdict({ good, children }: { good: boolean; children?: ReactNode }) {
   return (
     <figcaption className="mt-2 text-sm">

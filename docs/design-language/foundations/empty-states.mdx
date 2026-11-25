@@ -4,8 +4,10 @@ import * as EmptyStateStories from "../../../components/ui/empty-state/empty-sta
 import * as EmptyValue from "../recipes/empty-value.stories"
 import { SkillDoc } from "../skill-doc"
 import { PatternCode } from "../component-page"
+import { Captioned } from "../blocks"
 import { missingValueExamples } from "../examples/page-patterns"
 import { emptyStateExamples } from "../examples/empty-state"
+import { emptyStatesAnatomy } from "../examples/empty-states-anatomy"
 
 <Meta title="Foundations/States/Empty States" />
 
@@ -13,13 +15,18 @@ import { emptyStateExamples } from "../examples/empty-state"
   source={source}
   after={{
     ...emptyStateExamples,
-    ...missingValueExamples,
+    "Show every empty value the same way": missingValueExamples["Show a missing value as a dash"],
     "A missing value": (
       <>
-        <Canvas of={EmptyValue.InTable} sourceState="none" />
-        <Canvas of={EmptyValue.InDetails} sourceState="none" />
+        <Captioned caption="A table of merchants. A missing value is a dash, 0 shows as 0, and an amount this user may not see shows as $XX,XXX.">
+          <Canvas of={EmptyValue.InTable} sourceState="none" />
+        </Captioned>
+        <Captioned caption="A record's details. A missing website is a dash, an empty priority reads No priority, and a hidden amount shows as $XX,XXX.">
+          <Canvas of={EmptyValue.InDetails} sourceState="none" />
+        </Captioned>
       </>
     ),
+    "Anatomy": emptyStatesAnatomy,
   }}
   code={<PatternCode components={[{ name: "EmptyState", stories: EmptyStateStories }]} />}
 />

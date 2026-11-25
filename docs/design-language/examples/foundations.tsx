@@ -35,7 +35,7 @@ import {
 import { cn } from "@/lib/utils"
 import { DoDont, Example } from "../blocks"
 import { DocTable, DocTD, DocTH } from "../skill-doc"
-import { EmptyState, IconButton, TaskTable, TitledCard, Wide } from "./shared"
+import { EmptyState, IconButton, TitledCard, Wide } from "./shared"
 import { AppStatusColors, STATES } from "./app-status"
 
 // Live examples for the Foundations pages, keyed by the skill files' headings. base.css is the only place a value
@@ -51,19 +51,6 @@ const cssVar =
   (name: string): Read =>
   (style) =>
     style.getPropertyValue(name).trim()
-
-/** One frame for an example, such as a spec table. A value that changes with the mode shows both samples (`InModes`). */
-function Frame({ children }: { children: ReactNode }) {
-  return (
-    <Unstyled>
-      <TooltipProvider>
-        <div className="my-4 rounded-xl bg-background p-5 text-sm text-foreground ring-[0.5px] ring-border">
-          {children}
-        </div>
-      </TooltipProvider>
-    </Unstyled>
-  )
-}
 
 const px = (value: string) => `${Math.round(parseFloat(value) * 100) / 100}px`
 
@@ -371,18 +358,6 @@ const SPACE_STEPS = [
   },
 ]
 
-function Sections({ gap }: { gap: string }) {
-  return (
-    <div className={`flex w-full max-w-2xl flex-col ${gap}`}>
-      <h3 className="text-xl font-semibold tracking-tight">Tasks</h3>
-      <Input placeholder="Search" className="max-w-56" />
-      <TitledCard title="Open">
-        <TaskTable />
-      </TitledCard>
-    </div>
-  )
-}
-
 /** A filter row: two fields and the × after them, spaced box to box (good) or with the × pulled in to its icon (bad). */
 function SpacedRow({ good }: { good: boolean }) {
   return (
@@ -428,15 +403,6 @@ export const spacingExamples = {
         />
       ))}
     </SpecTable>
-  ),
-  "Leave space between sections": (
-    <DoDont
-      stack
-      good={<Sections gap="gap-5" />}
-      bad={<Sections gap="gap-0" />}
-      goodNote="Step 5 between the title, search and card."
-      badNote="Sections touching."
-    />
   ),
 }
 
@@ -701,7 +667,7 @@ const MOTION = [
   {
     name: "Panel opening",
     token: "--panel-in",
-    use: "Dialogs, sheets, menus, and popovers as they open",
+    use: "Dialogs, alert dialogs, sheets, and their overlays as they open",
   },
   {
     name: "Panel closing",
@@ -711,12 +677,12 @@ const MOTION = [
   {
     name: "Sidebar rail",
     token: "--rail-duration",
-    use: "The sidebar folding to its rail and back",
+    use: "The sidebar header's name row as the sidebar folds to its rail and back",
   },
   {
     name: "Easing",
     token: "--rail-ease",
-    use: "Every move: fast at first, then easing out",
+    use: "Panels opening and the sidebar header's name row: fast at first, then easing out",
   },
 ]
 
@@ -735,9 +701,11 @@ export const motionExamples = {
           />
         ))}
       </SpecTable>
-      <Frame>
-        <Play />
-      </Frame>
+      <Example caption="A block moving out on the opening time and back on the shorter closing time.">
+        <div className="w-full max-w-xl">
+          <Play />
+        </div>
+      </Example>
       <Example caption="A real dialog and sheet, on the same timing.">
         <Dialog>
           <DialogTrigger asChild>
@@ -838,7 +806,7 @@ const CONTROL_SIZES = [
 ]
 
 export const sizesExamples = {
-  "What is available": (
+  "Control heights": (
     <SpecTable head={["Size", "Height", "Used for"]}>
       {CONTROL_SIZES.map((size) => (
         <SpecRow
@@ -1051,7 +1019,7 @@ function Confirm({
 
 export const templateExamples = {
   Confirmations: (
-    <Example caption="Open each to read the confirmation.">
+    <Example caption="Two confirmations, a delete in the destructive color and a change in the primary color. Press a button to open each.">
       <Confirm
         title="Delete Contact?"
         action="Delete Contact"
@@ -1066,7 +1034,7 @@ export const templateExamples = {
     </Example>
   ),
   "Unsaved changes": (
-    <Example>
+    <Example caption="The Discard Changes? confirmation for one form, with Continue Editing and Discard Changes. Press the button to open it.">
       <Confirm
         title="Discard Changes?"
         action="Discard Changes"
@@ -1076,7 +1044,10 @@ export const templateExamples = {
     </Example>
   ),
   "Empty and no results": (
-    <Example className="grid gap-6 sm:grid-cols-2">
+    <Example
+      className="grid gap-6 sm:grid-cols-2"
+      caption="An empty state titled No Tasks with its second line, and No Results with Clear Filters."
+    >
       <EmptyState
         icon={InboxIcon}
         title="No Tasks"

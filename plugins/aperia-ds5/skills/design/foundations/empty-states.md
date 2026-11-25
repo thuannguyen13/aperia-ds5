@@ -1,36 +1,34 @@
 # Empty States
 
-Empty states take the place of content that does not exist, such as a missing value, an empty list, or a search that
-matches nothing.
+Empty states tell people that a list, a card, or a value has nothing in it, and what they can do about it. See [Copy](copy.md) and [Message Templates](copy-templates.md) for the words.
 
-## When to use
+## Anatomy
 
-Use an empty state wherever content does not exist. Find the case first, because each case has its own form:
+An empty state has four parts. The line and the action show only in some cases. Most empty states sit in a card that
+has no records, so the parts are those of an empty state in a card.
 
-| Case | Where it happens | What shows |
-|---|---|---|
-| A missing value | One value in a table cell, a detail row, or a header is missing, left empty, or hidden from this user. | A muted mark where the value would be, such as — or "No priority" |
-| An empty container | A card, a list, or a page has no records yet, its content did not load, or the page cannot show. | The empty state, with an icon of what is missing, a title, and an action when there is one |
-| No matches | A search or a set of filters matches nothing. | The empty state titled "No Results" |
+1. **Icon.** It is a small picture on a rounded square that shows what is missing, such as an inbox for no tasks or a magnifying glass for no results.
+2. **Title.** It is a short line of text that says what is empty, such as "No Tasks".
+3. **Line** (optional). It is a sentence of muted text under the title that says what the title cannot, such as whose or which records are missing.
+4. **Action** (optional). It is a button that fills the empty place or gets the user out of it, such as Add Task, Clear Filters, or Try Again.
 
 ## What is available
 
-Each case has its own forms, set out below in the same order as the cases.
+Each case below says what is empty and what shows in its place.
 
 ### A missing value
 
-A missing value takes one of three forms, each shown where the value would be:
+One value in a table cell, a detail row, or a header is missing, left empty, or hidden from this user. A muted mark shows where the value would be, in one of three forms:
 
 | Form | Shows |
 |---|---|
 | Missing value | A muted em dash (—) with no spaces around it. It is different from 0. |
 | Empty optional field | "No [field]" in muted text, such as "No priority" or "No assignee". |
-| Hidden amount | "$XX,XXX" in muted text, for an amount this user may not see. The column keeps its width, and a screen reader says the amount is hidden. |
+| Hidden amount | "$XX,XXX" in muted text, for an amount this user may not see. The column keeps its width, and a screen reader says the amount is hidden. In a sentence or a summary the amount can be left out instead. See [Money and Numbers](money-and-numbers.md) for that case. |
 
 ### An empty container
 
-An empty card, list, or page shows an empty state. An empty state has four parts, which are an icon of what is
-missing, a title, an optional line, and an optional action. Each case fills the parts differently:
+A card, a list, or a page has no records yet, its content did not load, or the page cannot show. Each one shows an empty state, a block with an icon of what is missing, a title, an optional line of text, and an optional button. Each case fills the block differently:
 
 | Case | Title | Line | Action |
 |---|---|---|---|
@@ -40,99 +38,87 @@ missing, a title, an optional line, and an optional action. Each case fills the 
 
 ### No matches
 
-A search or a set of filters that matches nothing shows an empty state with a search icon:
+A search or a set of filters matches nothing. The list shows an empty state with a search icon:
 
 | Part | Content |
 |---|---|
 | Title | "No Results" |
-| Line and action | "No matching results." and Clear Filters, only where there are filters to clear |
+| Line and action | "No matching results." and Clear Filters, only where there are filters to clear. A search with no filters shows the title alone. |
+
+The app-wide search dialog shows the same title. See [Global Search](../patterns/global-search.md) for when it shows.
 
 ## How it looks and behaves
 
-An empty state sits in the place of the content it replaces and fills the space its records would have taken. The
-card or the table stays where it was, so nothing shifts when records arrive.
+An empty state sits in the place of the content it replaces and fills the space the records would have taken. A page's own empty state is a surface that fills the page.
 
-While a card is empty, its Add button moves from the card's header to the middle of the empty state.
+In an empty list, the app's own controls in the toolbar's slot, such as a Board / Table switch, do not show.
 
-A list with no records at all, such as a new app's Prospects, shows the empty state in the list's place:
-
-- The list toolbar is gone, because there is nothing to search, filter, or sort.
-- The empty state holds every action that adds records, such as Import and Add Prospect, in the toolbar's order.
-- The app's own controls in the toolbar's slot, such as a Board / Table switch, do not show.
-
-A list that has records but none that match keeps its toolbar, so people can change the search or the filters.
-
-The second line, when there is one, says what the title cannot. It says whose records are missing ("No tasks assigned
-to you.") or which records are missing ("No lost opportunities in this range.").
-
-In a search, "No Results" shows only once typing has paused, not while the user is still typing.
-
-A screen reader skips the icon, because the title and the line carry the meaning. The action is an ordinary button. A
-keyboard user reaches it with **Tab**.
+A screen reader skips the icon, because the title and the line carry the meaning. The action is an ordinary button. A keyboard user reaches it with **Tab**.
 
 ## Rules
 
-### Show a missing value as a dash
+### 1. Use the empty state, never bare text
 
-- **Do:** Show a muted em dash (—) where a value is missing, so empty cells look intentional.
-- **Don't:** Use "-", "N/A", "None", "0", or a blank cell. Use the em dash, so missing reads the same everywhere.
+Where records would be and there are none, show the empty state, so an empty place never reads as broken and every screen looks the same.
 
-### Say "No [field]" for an empty optional field
+- **Do:** Use the empty state for a card, a list, and a page, with the same layout on every screen.
+- **Don't:** Write a bare "No data" or "No results", or give a screen its own layout.
 
-- **Do:** Show "No [field]" in muted text where the value would show (such as "No priority"), so people see the field
-  was left empty by choice.
-- **Don't:** Leave an empty space, or a dash, when the user chose to leave a field empty. Say "No [field]", so the
-  choice is clear.
+### 2. Keep the card in its place
 
-### Use the empty state, never bare text
+A card with no records stays on the page with an empty state inside it, so nothing shifts when records arrive.
 
-- **Do:** Use the empty state, with its icon, title, and line in the same place on every screen, so people recognize
-  it at once.
-- **Don't:** Write a bare "No data" or "No results", or give each screen its own layout. Use the empty state, so no
-  one mistakes empty for broken.
+- **Do:** Keep the Tasks card and show No Tasks inside it.
+- **Don't:** Remove a card because it is empty.
 
-### Say only what helps
+### 3. Move Add into an empty card
 
-- **Do:** Show "No Tasks" alone when the title says it all, so people take it in at a glance.
-- **Don't:** Repeat the title ("No tasks yet." under "No Tasks"). Add a second line only when it says something new, so
-  no one reads it twice.
+While a card is empty, its Add button moves from the card's header into the empty state, so the one way to fill the card sits where people look.
 
-### Leave out permission hints
+- **Do:** Show Add Task in the middle of the empty Tasks card.
+- **Don't:** Leave Add in the header while the card is empty.
 
-- **Do:** Say only that there are none ("No Tasks"), so people see it is empty and move on.
-- **Don't:** Hint at permissions ("Ask your administrator for access to see tasks."). Say only what is empty, so no one
-  chases access they cannot act on.
+### 4. Show an empty list as an empty state alone
 
-### Keep the place
+A list with no records at all shows an empty state in place of the toolbar and the table, because there is nothing to search, filter, or sort. The empty state holds every action that adds records, in the toolbar's order.
 
-- **Do:** Let the empty state fill the card or table it replaces, so nothing shifts when records arrive.
-- **Don't:** Let a card disappear when it is empty. Keep the card with the empty state inside, so the page does not
-  jump.
+- **Do:** Put Import and Add Prospect in the empty state, left to right as the toolbar has them.
+- **Don't:** Keep the toolbar above an empty list.
 
-### Give every dead end a way out
+### 5. Keep the toolbar when nothing matches
 
-- **Do:** Say why the page cannot show (not found, no access, an error) and offer a way home, so no one is stranded.
-- **Don't:** Leave a blank page, or a message with nowhere to go. Give a way out, so people can carry on.
+A search or a set of filters that matches nothing keeps the list toolbar, so people can change the search or the filters. The list shows "No Results" in place of the table, and the footer with the count and the pages is gone.
 
-## When you can do it differently
+- **Do:** Show "No Results" under the toolbar, with Clear Filters when filters are on.
+- **Don't:** Show the empty state of a list with no records, such as "No Prospects", for a search that matches nothing.
 
-A search with no filters on shows "No Results" alone, without "No matching results." and Clear Filters.
+### 6. Say only what helps
 
-A whole page shows an empty state when it has nothing on it. The empty state fills the page and offers a way home.
+A line under the title appears only when it says something the title does not, so no one reads the same thing twice.
 
-An amount that the user may not see can be left out of a sentence or a summary. See
-[Money and Numbers](money-and-numbers.md) for that case.
+- **Do:** Show "No Tasks" alone when the title says it all.
+- **Don't:** Repeat the title, such as "No tasks yet." under "No Tasks".
 
-## Works with
+### 7. Never say who to ask
 
-- See [Cards and Tiles](../patterns/cards-and-tiles.md) for an empty card and where its Add button sits.
-- See [Tables](../patterns/tables.md) for a missing value in a table, and for a table with no rows.
-- See [List Toolbar](../patterns/list-toolbar.md) for the toolbar that an empty list hides.
-- See [Filters](../patterns/filters.md) for Clear Filters, and [Global Search](../patterns/global-search.md) for a search
-  across the app that finds nothing.
-- See [Copy](copy.md) and [Message Templates](copy-templates.md) for the fixed phrases for missing, empty, and hidden
-  values.
-- See [Money and Numbers](money-and-numbers.md) for a hidden amount.
+An empty state says only that nothing is there. It never hints at permissions or says who to ask, so no one chases access they cannot act on.
+
+- **Do:** Say "No Tasks" and stop.
+- **Don't:** Write "Ask your administrator for access to see tasks."
+
+### 8. Give every dead end a way out
+
+A page that cannot show says why and offers a way home, so no one is stranded.
+
+- **Do:** Say why the page cannot show, such as not found, no access, or an error, and add a button home.
+- **Don't:** Leave a blank page, or a message with nowhere to go.
+
+### 9. Show every empty value the same way
+
+A missing value shows as a muted em dash. An optional field that the user left empty shows "No [field]". People then tell a value that is not there from a field left empty by choice, and read both the same way in every table, detail row, and header.
+
+- **Do:** Show — for a missing website, and "No priority" for a priority left empty.
+- **Don't:** Use "-", "N/A", "None", "0", or a blank cell.
 
 ## In code
 

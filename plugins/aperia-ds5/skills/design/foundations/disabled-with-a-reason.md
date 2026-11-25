@@ -1,140 +1,145 @@
 # Disabled With a Reason
 
-A disabled control cannot be used at the moment and shows the reason why.
+Disabled With a Reason tells people why a control cannot be used right now, and when to leave an action out instead of
+disabling it. See [Message Templates](copy-templates.md) for the words of a reason.
+
+## Anatomy
+
+A disabled control with its reason has four parts in two pairs. A button, switch, row, or chip has a control and a
+tooltip, and a field has the field itself and a line under it. The tooltip and the line show only while their control
+is disabled. The parts are those of a task's page with a blocked Delete and a Contact field that waits on a Prospect.
+
+1. **Disabled control**. It is a button, switch, row, or chip that cannot be used right now. The control shows faded.
+2. **Reason tooltip** (optional). It is a small box that opens over the control and gives the reason in one sentence.
+3. **Disabled field**. It is a text field, select, or picker that cannot be used right now. The field keeps its
+   placeholder, which says what goes in it.
+4. **Field note** (optional). It is a line of text under the field that gives the reason, in place of the field's usual
+   description.
 
 ## When to use
 
-Disable a control and give its reason in three cases:
-
-- A button, row, chip, or switch cannot be used, and the user should know why. An example reason is "This item is in
-  use and cannot be deleted."
-- A field waits on another field. An example reason is "Pick a prospect first."
-- A record or option is locked because something uses it.
-
-An action that a person's role can never take is not disabled. It is left out, as the table below sets out.
-
-### Hide, disable, or show read-only
-
-Whether people see an action depends on why they cannot take it. A role that can never take an action does not see
-it. A person who cannot take it on this record, or at this moment, sees it disabled with the reason. Find the situation
-in this table:
+Whether people see an action depends on why they cannot take it. A role that can never take an action does not see it.
+A person who cannot take it on this record, or at this moment, sees it disabled with the reason. Find the situation in
+this table:
 
 | Situation | Choice | Why |
 |---|---|---|
 | The person's role can never take the action, such as a role that never deletes prospects | Leave the action out everywhere it would show, such as a header button, a menu item, an Add row in a picker, or Add in an empty state | Nothing on screen offers what the person can never do. |
 | The action is blocked on this record or at this moment, such as a record in use, a field that waits on another, or a closed record | Show the control disabled, with its reason | People learn what stands in the way, and the control works again once it clears. |
 | A rule stops this one person, such as an admin taking Roles away from their own role | Show the control locked, with its reason, such as "You cannot remove your own role's access to Roles." | The same control works on other rows, so it stays and says why it does not work here. |
+| A form's save, or an import with no row set to import, waits on input | Keep the button enabled, and refuse in place when it is pressed. See [Errors and Validation](errors-and-validation.md). | Pressing the button shows people what is missing. |
 | The person's role may read a record but never change or delete it | Show the record with no Edit, no Delete, and no banner | People read the record like anyone else, and nothing offers a change the role can never make. |
 | The person may delete a small record but not change it, such as an option | Its sheet opens read-only, with Delete | People reach Delete, and the fields show that nothing in them changes. |
 | The person may neither change nor delete an option, and its row shows everything about it | The row does not open | The sheet would hold nothing the person can use. |
 | The person reaches an action anyway, such as through a link or after their role changed | The save is refused in place with "You do not have access to \<action\>." | The message is the same for everyone. See [Message Templates](copy-templates.md). |
 
 A value that a person may not see is hidden by its shape instead, such as $XX,XXX. See
-[Money and Numbers](money-and-numbers.md) for a hidden amount.
+[Money and Numbers](money-and-numbers.md) for a hidden amount. An empty state never hints at permissions. See
+[Empty States](empty-states.md) for what it shows.
 
 ## What is available
 
 A reason shows in one of three places:
 
-| Place | Where it shows | Used for |
+| Place | Where it sits | Used for |
 |---|---|---|
-| Tooltip | Over the control, on hover and focus | A disabled button, picker row, chip, or switch |
-| Tooltip beside a menu item | Beside the item, on hover and as the keyboard lands on it | A blocked item in a menu, such as Delete in a record's More actions menu |
+| Tooltip | Over the control | A disabled button, picker row, chip, or switch |
+| Tooltip beside a menu item | Beside the item | A blocked item in a menu, such as Delete in a record's More actions menu |
 | Line under a field | Under the field, in place of its usual description | A disabled field |
-
-A control with a tooltip stays reachable from the keyboard, so keyboard and screen reader users get the reason too. A
-disabled field keeps its placeholder, which says what goes in it.
-
-Three fixed phrases cover a record or option that something uses. Use them word for word:
-
-- "This item is in use and cannot be deleted."
-- "This item is in use and cannot be changed."
-- "This item is in use and cannot be removed."
 
 ## How it looks and behaves
 
 A disabled control looks disabled and shows its reason until the reason clears:
 
-1. The control looks disabled. The not-allowed pointer shows over the whole control.
-2. In Light, a disabled field has a muted fill and muted text. In Dark, a disabled field shows at reduced opacity.
-   Every kind of field looks the same when disabled. A disabled button or switch shows at reduced opacity in both
-   modes.
-3. Hovering or focusing a button, row, chip, or switch shows the reason in a tooltip. A field shows its reason under
-   it at all times.
-4. A blocked menu item stays in its place in the menu, in muted text. The keyboard still lands on it, and selecting it
-   does nothing.
-5. Once the reason clears, such as when the field it waits on is filled, the control is enabled. The line under it
-   goes away.
-6. A control with no reason to give renders as it is, with no tooltip.
+1. The control looks disabled. A disabled button or switch shows at reduced opacity in both modes. In Light, a disabled
+   field has a muted fill and muted text. In Dark, a disabled field shows at reduced opacity. Text fields and selects
+   look the same when disabled.
+2. A disabled field, a switch, a blocked menu item, and a blocked action button show the not-allowed pointer.
+3. Hovering over, focusing, or tapping a button, row, chip, or switch opens the reason in a tooltip. On a touch screen
+   a tap opens it, and it stays open until a tap elsewhere closes it, because a finger cannot hover. A tooltip built
+   without that tap behavior opens on hover and focus only.
+4. A field shows its reason under it at all times while it is disabled.
+5. A blocked menu item stays in its place in the menu, in muted text. Its reason opens beside it, on hover, as the
+   keyboard lands on it, and on a tap. Selecting it does nothing, and the menu stays open.
+6. A Delete that is blocked stays where it would be. That is a header button, a More actions menu item, or the Delete in
+   a sheet. See [Confirmations and Delete](../patterns/confirmations-and-delete.md) and
+   [Page Header](../patterns/page-header.md).
+7. A locked switch is disabled, with a lock icon after its word and its reason in a tooltip. See
+   [Switches in a Grid](../patterns/switches-in-a-grid.md).
+8. A picker row or chip that cannot be picked or removed keeps its place and shows its reason in a tooltip. See
+   [Pickers](../patterns/pickers.md).
+9. A field that waits on another pick is disabled. Its placeholder stays. Its note says what to do first, such as
+   "Pick a prospect first." Once the pick is made, the field is enabled and its note goes away.
+10. A control with no reason to give renders as it is, with no tooltip. A read-only sheet shows no reason on its fields,
+    because Close in place of the save button says that nothing in it changes. A switch whose value is still loading is
+    disabled with no reason. See [Forms in Sheets](../patterns/forms-in-sheets.md) and
+    [Switches in a Grid](../patterns/switches-in-a-grid.md).
 
 An action that is left out leaves no gap. The actions around it close up and keep their order.
 
 ## Rules
 
-### Say why, every time
+### 1. Say why, every time
 
-- **Do:** Give every disabled control its reason (such as "This item is in use and cannot be deleted." on a disabled
-  Delete), so people know why it is off.
-- **Don't:** Leave a disabled button with no explanation. Say what is missing, so people do not have to guess.
+Every disabled control gives its reason, so people know what stands in the way.
 
-### Prefer an enabled button that refuses in place
+- **Do:** Give a disabled Delete the reason "This item is in use and cannot be deleted."
+- **Don't:** Leave a disabled Save button with no explanation. People have to guess what is missing.
 
-- **Do:** Keep Save enabled and, when it is pressed with a field missing, show the message beside that field, so
-  people see what to fix. An import button with no row set to import also stays enabled and refuses above the
-  buttons.
-- **Don't:** Show a disabled primary button waiting for input. Keep it enabled, so people learn what is
-  missing by pressing it.
+### 2. Keep a blocked control reachable
 
-### Use the fixed phrase as it is
+A control that has a reason takes the pointer and the keyboard focus, so a keyboard or screen reader user hears the
+reason too. A control disabled the plain way takes neither, so a tooltip placed on it never opens.
 
-- **Do:** Use "This item is in use and cannot be deleted." exactly, with nothing added, so the reason reads the same
-  everywhere.
-- **Don't:** Write "This item cannot be deleted because it is used by 3 opportunities", add a "so" clause, or name what
-  uses it. Use the fixed phrase, so it stays short and consistent.
+- **Do:** Show the reason through the library's own piece for it, such as the icon button's `reason`, so the control stays
+  focusable.
+- **Don't:** Put a plain tooltip on a button that has the `disabled` attribute. See [In code](#in-code) for the pieces.
 
-### Put a field's reason under it
+### 3. Use the fixed phrase as it is
 
-- **Do:** Put a field's reason under it (such as a disabled Contact field with the placeholder "Pick a contact" and
-  "Pick a prospect first." below it), so people see what to do first.
-- **Don't:** Write the reason into the placeholder, or disable a field with nothing said. Put it under the field, so it
-  stays readable.
+Three fixed phrases cover a record or option that something uses. Use them word for word, with nothing added, so the
+reason reads the same everywhere:
 
-### Leave out what a role can never do
+- "This item is in use and cannot be deleted."
+- "This item is in use and cannot be changed."
+- "This item is in use and cannot be removed."
 
-- **Do:** Leave Delete out of the record's actions for a role that never deletes, so the screen offers only what the
-  person can do.
-- **Don't:** Show a disabled Delete that says "You do not have access to delete prospects." on every record, or a
-  banner that says the record is read-only. Leave both out, so no one keeps meeting an action that never works for
-  them.
+When some of several selected records cannot be deleted, Delete Selected is disabled. Its reason gives the count of
+blocked records, in one of these two forms:
 
-### Show a record read-only to someone who cannot change it
+- "1 of the selected merchants is in use and cannot be deleted."
+- "2 of the selected merchants are in use and cannot be deleted."
 
-- **Do:** Open a small record's sheet with its fields disabled and Close in place of Save, so people read the record and see that it
-  does not change here.
-- **Don't:** Open an editable form that refuses the save ("You do not have access to edit contacts."). Open it
-  read-only, so no one types a change that cannot be saved.
+The count tells people how many to clear from the selection. See [Selecting Rows](../patterns/selecting-rows.md).
 
-## When you can do it differently
+- **Do:** Write "This item is in use and cannot be deleted." exactly.
+- **Don't:** Write "This item cannot be deleted because it is used by 3 opportunities", or add a "so" clause that names
+  what uses it.
 
-Two cases show no reason on the control.
+### 4. Put a field's reason under it
 
-A read-only sheet shows no reason on its fields. Close in place of Save says that nothing in it changes.
+A field's reason goes in a line under the field, so people read it with the field and the placeholder keeps saying what
+goes in it.
 
-A switch whose value is still loading is disabled with no reason to give. See
-[Switches in a Grid](../patterns/switches-in-a-grid.md) for the loading state.
+- **Do:** Show "Pick a prospect first." under a disabled Contact field with the placeholder "Pick a contact".
+- **Don't:** Write the reason into the placeholder, or disable a field with nothing said.
 
-## Works with
+### 5. Leave out what a role can never do
 
-A disabled control works with these other pages:
+An action that a role can never take is left out everywhere it would show, so no one keeps meeting an action that never
+works for them.
 
-- See [Confirmations and Delete](../patterns/confirmations-and-delete.md) for a Delete that cannot be used.
-- See [Page Header](../patterns/page-header.md) for a record's actions and its More actions menu.
-- See [Pickers](../patterns/pickers.md) for rows and chips that cannot be picked or removed.
-- See [Switches in a Grid](../patterns/switches-in-a-grid.md) for a locked switch.
-- See [Buttons and Actions](../patterns/buttons-and-actions.md) for icon buttons and their tooltips.
-- See [Forms in Sheets](../patterns/forms-in-sheets.md) for the read-only sheet.
-- See [Empty States](empty-states.md) for an empty state, which never hints at permissions.
-- See [Message Templates](copy-templates.md) for the words of a no-access message.
+- **Do:** Leave Delete out of the record's actions for a role that never deletes.
+- **Don't:** Show a disabled Delete that says "You do not have access to delete prospects." on every record, or a banner
+  that says the record is read-only.
+
+### 6. Show a record read-only to someone who cannot change it
+
+A small record that a person may read but not change opens in a read-only sheet. Its fields are disabled and Close takes
+the place of the save button, so no one types a change that cannot be saved.
+
+- **Do:** Open a small record's sheet with its fields disabled and Close in place of Save.
+- **Don't:** Open an editable form that refuses the save with "You do not have access to edit contacts."
 
 ## In code
 

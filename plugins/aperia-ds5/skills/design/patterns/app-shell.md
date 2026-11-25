@@ -1,48 +1,40 @@
 # App Shell
 
-An app shell frames every page with a sidebar, a top bar, and a page column.
-
-## When to use
-
-Use the app shell on every page of an app once the user is signed in. The app sets it up once, and every page sits
-inside it. A page never builds its own sidebar, top bar, or page column.
-
-## What is available
-
-An app shell comes in one layout, with a sidebar, a top bar, and a page column. Its parts are listed under Anatomy.
-
-The sidebar shows in three ways. On a desktop it is open at full width or collapsed to a rail of icons. On phones and
-tablets it is hidden and opens as a panel.
-
-The account menu shows the user's name and role, the app's own items (such as Notification Settings), Dark Theme or
-Light Theme, and Log Out.
+An app shell lets people move between the pages of an app and see where they are, through a sidebar, a top bar, and a
+page column. See [Scaffold](../foundations/scaffold.md) for where each kind of thing goes in the shell.
 
 ## Anatomy
 
-An app shell needs every part except Search and Notifications, which an app adds when it has them. The sidebar's
-parts are listed from top to bottom.
+An app shell has nine parts, a sidebar with six parts, a top bar with two, and a page column. Search and Notifications
+show only when an app has them. The sidebar's parts are listed from top to bottom.
 
-1. **Sidebar**. It runs down the left edge in the sidebar color.
-2. **Header**. It holds the app logo, the product name, and the collapse button. Selecting the logo opens the home page.
-3. **Search** (optional). It shows the search entry and its shortcut, ⌘K or Ctrl K, and opens search. See
-   [Global Search](global-search.md).
-4. **Notifications** (optional). It follows Search and shows the unread count in a badge in the destructive color. It
-   opens the notifications panel. See [Notifications](notifications.md).
-5. **Pages**. Each page shows its icon and name, in optional groups with headings. Selecting one opens the page and
-   highlights it.
-6. **Account**. It shows the user's picture, name, and role, and opens the account menu.
-7. **Top bar**. It runs across the top of the page area.
-8. **Breadcrumb**. It shows where the page sits. While the sidebar is hidden, the button that opens the sidebar sits before
-   it.
-9. **Page column**. It fills the space under the top bar and holds the page. See
+1. **Sidebar**. It is the panel down the left edge, in the sidebar color. It holds the app's navigation.
+2. **Header**. It is the top of the sidebar. It holds the app logo, the product name, and the collapse button. Selecting
+   the logo opens the home page.
+3. **Search** (optional). It is a menu entry that shows a search icon, "Search", and the shortcut ⌘K or Ctrl K. Selecting
+   the entry opens search. See [Global Search](global-search.md).
+4. **Notifications** (optional). It is a menu entry with a bell icon, and a badge in the destructive color that shows
+   the unread count. It opens the notifications panel. See [Notifications](notifications.md).
+5. **Pages**. They are the menu entries that open the app's pages, each with an icon and a name, in optional groups with
+   headings. The current page is highlighted.
+6. **Account**. It is a button at the foot of the sidebar that shows the user's picture, name, and role. Selecting the
+   button opens the account menu.
+7. **Top bar**. It is the bar across the top of the page area.
+8. **Breadcrumb**. It is a trail of links in the top bar that shows where the page sits. While the sidebar is hidden,
+   the button that opens the sidebar sits before it.
+9. **Page column**. It is the area under the top bar that holds the page. See
    [Page Layout](../foundations/page-layout.md) for how a page is laid out inside it.
 
 ## How it looks and behaves
 
 ### Sidebar
 
-The sidebar is `--sidebar-width` wide and collapses to a rail of icons, `--sidebar-width-icon` wide. It uses the sidebar color, which is the shared Aperia
-navy in Light and a dark neutral in Dark. The current page uses the sidebar's highlight color, which is white in Light.
+The sidebar is `--sidebar-width` wide and collapses to a rail of icons, `--sidebar-width-icon` wide. It uses the sidebar
+color, which is the shared Aperia navy in Light and a dark neutral in Dark. The current page uses the sidebar's
+highlight color, which is white in Light.
+
+Search comes first among the menu entries and Notifications follows it. An app whose main page is a personal work list
+may place Notifications after that page, such as To Do. New items then sit beside the work they affect.
 
 People collapse and open the sidebar in three ways:
 
@@ -51,24 +43,28 @@ People collapse and open the sidebar in three ways:
 - A click on the sidebar's edge collapses and opens it.
 - The shortcut ⌘B, or Ctrl B off a Mac, collapses and opens it.
 
-Collapsing and opening take `--rail-duration` on the ease-out curve, `--rail-ease`. The sidebar, its buttons, and the page beside it move
-together. As the rail narrows, the product name is cut off and fades. The collapse button moves with the rail's edge.
+Collapsing and opening take `--rail-duration` on the ease-out curve, `--rail-ease`. The sidebar, its buttons, and the
+page beside it move together. As the rail narrows, the product name is cut off and fades. The collapse button moves with
+the rail's edge.
 
 On the rail, each entry shows its name in a tooltip. The unread count moves to the corner of the Notifications icon.
 
 The sidebar keeps its open or collapsed state the next time the app loads.
 
-Below the width [Screen Sizes](../foundations/screen-sizes.md) gives, the sidebar is hidden. The button at the start of the top bar opens it as
-a 288px panel from the left. Opening a search result closes the panel. See
-[Screen Sizes](../foundations/screen-sizes.md) for every region at each screen size.
+The account menu shows the user's name and role, the app's own items (such as Notification Settings), Dark Theme or
+Light Theme, and Log Out.
+
+The sidebar is hidden on a phone and a tablet. The button at the start of the top bar opens it as a panel from the left,
+and the panel closes when people open a search result. See [Screen Sizes](../foundations/screen-sizes.md) for the width
+where it hides and for every region at each screen size.
 
 ### Top bar
 
 The top bar is `h-14` tall, on the page background, with a divider under it.
 
-The breadcrumb shows where the page sits. It starts with the page's section as a link, such as Prospects. It ends with
-the page's own title, which comes from the page header. A section's own page shows its title alone. A page outside
-every section shows the product name.
+The breadcrumb starts with the page's section as a link, such as Prospects. It ends with the page's own title, which
+comes from the [Page Header](page-header.md). A section's own page shows its title alone. A page outside every section
+shows the product name.
 
 A record that belongs to another record shows the parent record's page in its trail, wherever it was opened from.
 
@@ -81,37 +77,30 @@ The page column scrolls as one, under the top bar, with `p-5` around it. The col
 
 ## Rules
 
-### Keep the top bar to the breadcrumb
+### 1. Build the shell once
 
-- **Do:** Keep the top bar to the breadcrumb (such as "Prospects / Northwind Payments") and, on a phone, the sidebar
-  button, so people always know where they are.
-- **Don't:** Put a title, status chips, dates, filters, or buttons in the top bar. Put them on the page, so the top bar
-  shows only where people are.
+The app sets up one shell in its layout. Every page after sign-in sits inside it, so the sidebar, top bar, and page
+column stay the same on every page.
 
-### Use the shared sidebar
+- **Do:** Put each page's content in the page column.
+- **Don't:** Build a sidebar, a top bar, or a page column inside a page.
 
-- **Do:** Use the shared sidebar with the app's own logo and name at the top, so the sidebar works the same in every
-  Aperia app.
-- **Don't:** Build the app its own sidebar, or recolor it to look different. Keep the shared one, so its parts sit in
-  the same place in every app.
+### 2. Use the shared sidebar
 
-## When you can do it differently
+Every app uses the shared sidebar with its own logo and name in the header, so its parts sit in the same place in every
+app. Every other part of the shell is the same in every app. The design system team must agree before an app changes the
+sidebar's color. See [Color](../styles/color.md) for what an app can change.
 
-An app whose main page is a personal work list may place Notifications after that page, such as after To Do, so new
-items sit beside the work they affect.
+- **Do:** Set the app's own logo and name at the top of the shared sidebar.
+- **Don't:** Build the app its own sidebar, or recolor it to look different.
 
-An app changes the sidebar's color only after the design system team agrees to the change, never to look different.
-See [Color](../styles/color.md) for what an app can change.
+### 3. Keep the top bar to the breadcrumb
 
-Every other part of the shell is the same in every app.
+The top bar shows only where people are, so they always know where they are. It holds the breadcrumb and, on a phone,
+the button that opens the sidebar.
 
-## Works with
-
-- See [Scaffold](../foundations/scaffold.md) for the bars, rails, and panes the shell is made of, and where each kind
-  of thing goes.
-- See [Page Layout](../foundations/page-layout.md) for what goes in the page column.
-- See [Page Header](page-header.md) for the page title that fills the breadcrumb.
-- See [Global Search](global-search.md) and [Notifications](notifications.md) for what opens from the sidebar.
+- **Do:** Show "Prospects / Northwind Payments" in the top bar.
+- **Don't:** Put a title, status chips, dates, filters, or buttons in the top bar. Put them on the page.
 
 ## In code
 

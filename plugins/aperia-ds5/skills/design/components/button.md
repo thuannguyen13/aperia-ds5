@@ -1,55 +1,54 @@
 # Button
 
-A button starts an action, such as saving a form or opening a sheet. See [Buttons and
+A button lets people start an action on the current page, such as saving a form or opening a sheet. See [Buttons and
 Actions](../patterns/buttons-and-actions.md) for where buttons go.
+
+## Anatomy
+
+A button has three parts, and its icon shows only sometimes. The parts are those of an Add Task button with an icon.
+
+1. **Container**. It is the button's filled shape. It carries the type's fill, edge, and corners, and it is what people
+   press.
+2. **Label**. It is the text that names the action, such as "Add Task". An icon button has no label, and its tooltip
+   names the action instead. See [Copy](../foundations/copy.md) for how to word it.
+3. **Icon** (optional). It is a small symbol before the label, such as a plus, that hints at the action.
 
 ## When to use
 
-Use a button for an action on the current page, such as Save, Add Contact, or Delete Note.
-
-Use something else in two cases:
-
-| Need | Use instead |
-|---|---|
-| Go to another page | A Link button or a link, such as View All, or a row that opens its record |
-| Show a state, such as Active or Overdue | A badge |
+Use a button for an action on the current page, such as Save, Add Contact, or Delete Note. To go to another page, use a
+Link button or a link, or let a row open its record. To show a state such as Active or Overdue, use a badge (Button 2).
 
 ## What is available
 
-A button comes in six types and four sizes. An icon button is a button with an icon and no text.
+A button comes in six types and four sizes. An icon button is a button with an icon and no text. See [Buttons and
+Actions](../patterns/buttons-and-actions.md) for the questions that choose a type, and for what an area is.
 
 ### Primary
 
-A Primary button has a solid Primary fill. It is the one action that its area exists for, such as Save in a sheet. An
-area has one Primary button at most. A page header's Primary button sits at its end, after its Outline buttons. A sheet
-or a dialog puts it at the end of the footer, after Cancel. See [Buttons and
-Actions](../patterns/buttons-and-actions.md) for what an area is and for the questions that choose a button's type.
+Use a Primary button for the one action that its area exists for, such as Save in a sheet.
 
 ### Outline
 
-An Outline button has the control fill and a border in the Input color. Use it for every other action beside the Primary
-button, such as Cancel, Edit, or Export, and the other actions in a page header. Use it also where no action is the
-main one, such as Add in a card header.
+Use an Outline button for the other actions beside the Primary button, such as Cancel, Edit, or Export. Use it also where
+no action is the main one, such as Add in a card header.
 
 ### Ghost
 
-A Ghost button has no fill until the pointer is over it. Use it for an action that repeats or sits inside another
-component. Examples are an icon button on a row or in a toolbar, and the close (×) of a dialog or sheet.
+Use a Ghost button for an action that repeats or sits inside another component. Examples are an icon button on a row or
+in a toolbar, and the close (×) of a dialog or sheet.
 
 ### Destructive
 
-A Destructive button has Destructive text on a Destructive fill at 10%. Use it for an action that deletes or removes
-something, such as Delete, Remove, or Revoke.
+Use a Destructive button for an action that deletes or removes something, such as Delete, Remove, or Revoke.
 
 ### Link
 
-A Link button has Primary text, underlined when the pointer is over it. Use it for an action that reads as a
-destination, such as View All.
+Use a Link button for an action that reads as a destination, such as View All.
 
 ### Secondary
 
-A Secondary button has the Secondary fill. Use it only for a filter chip. A filter chip is a small, round button that
-shows an active filter and clears it when tapped. The button beside the main action is Outline, never Secondary.
+Use a Secondary button only for a filter chip. A filter chip is a small, round button that shows an active filter and
+clears it when tapped.
 
 ### Sizes
 
@@ -65,18 +64,22 @@ A button has four sizes:
 ### Icon button
 
 An icon button shows an icon with no text. Use it for an action that repeats on many rows or has a well-known icon, such
-as edit, delete, close, or more. An icon button is square and takes the height of the controls beside it. It is `size-8` in
-a toolbar beside a field, and `size-7` on a row or in a card header. It always has a tooltip that names the action.
+as edit, delete, close, or more. An icon button is square and takes the height of the controls beside it. It is `size-8`
+in a toolbar beside a field, and `size-7` on a row or in a card header.
 
 ### Specs
 
-| | Default | Small |
-|---|---|---|
-| Height | `h-8` | `h-7` |
-| Corners | Large corner | Medium corner |
-| Text | `text-sm`, medium weight | `text-xs`, medium weight |
-| Side padding | `px-2.5` | `px-2.5` |
-| Icon | `size-4`, `gap-1.5` from the text | `size-3.5`, `gap-1` from the text |
+These specs hold for every type.
+
+| | Default | Small | Extra small | Large |
+|---|---|---|---|---|
+| Corners | Large corner | Medium corner | Medium corner | Large corner |
+| Text | `text-sm`, medium weight | `text-xs`, medium weight | `text-xs`, medium weight | `text-sm`, medium weight |
+| Side padding | `px-2.5` | `px-2.5` | `px-2` | `px-2.5` |
+| Side padding next to an icon | `px-2` on the icon's side | `px-1.5` on the icon's side | `px-1.5` on the icon's side | `px-2` on the icon's side |
+| Icon | `size-4`, `gap-1.5` from the text | `size-3.5`, `gap-1` from the text | `size-3`, `gap-1` from the text | `size-4`, `gap-1.5` from the text |
+
+A Small or Extra small button inside a button group takes the Large corner. Each type has its own colors, and the Disabled row applies to any type.
 
 | Type | Fill | Text | Edge |
 |---|---|---|---|
@@ -84,16 +87,9 @@ a toolbar beside a field, and `size-7` on a row or in a card header. It always h
 | Outline | Control | Foreground | A border in the Input color and the Small shadow |
 | Ghost | None. On hover, the ghost hover tint. | Foreground | None |
 | Destructive | Destructive at 10% (20% in dark mode) | Destructive | None |
+| Link | None | The Link color | None |
+| Secondary | Secondary | Secondary foreground | None |
 | Disabled | Any type at 50% opacity | | |
-
-## Anatomy
-
-A button needs its container and its label. Its icon is optional. An icon button has the icon alone, with a tooltip
-that names the action.
-
-1. Container
-2. Label
-3. Icon (optional)
 
 ## How it looks and behaves
 
@@ -103,11 +99,17 @@ it with **Enter** or **Space**. The focus line always shows for keyboard users a
 A screen reader reads an icon button's tooltip label as its name.
 
 A button disabled for a reason stays reachable. Its tooltip says why it is disabled, so keyboard and screen reader
-users get the reason too.
+users get the reason too. See [Disabled With a Reason](../foundations/disabled-with-a-reason.md) for when a button
+is disabled and the words of each reason.
 
 A button is `h-8` tall on every screen. An icon button keeps the height of the controls beside it on every screen.
 
-On a phone, a dialog's buttons stack, with the action on top.
+An alert dialog asks before an action that cannot be undone. Its action button is Destructive when the action removes
+something or cannot be taken back, and Primary otherwise. See [Confirmations and
+Delete](../patterns/confirmations-and-delete.md) for that choice.
+
+The corners, edges, and shadows that the Specs name are on [Border and Radius](../styles/border-and-radius.md) and
+[Elevation](../styles/elevation.md).
 
 ### States
 
@@ -118,47 +120,26 @@ A button has five states. Each type shows them in its own colors.
 | Default | The type's own fill, text, and edge. |
 | Hover | Outline fills with the muted color. Ghost fills with the ghost hover tint. Destructive fill rises to 20% (30% in dark mode). Secondary fill fades to 80%. Link text is underlined. Primary keeps its fill. |
 | Focus, from the keyboard | The focus edge, a line inside the button and a halo around it. |
-| Pressed | The button moves down by one pixel. |
-| Disabled | The button shows at 50% opacity. |
+| Pressed | The button moves down by one pixel. A button that opens a menu or a panel does not move. |
+| Disabled | The button shows at 50% opacity and takes no pointer input. |
 
 ## Rules
 
-### Give every icon button a tooltip
+### 1. Give every icon button a tooltip
 
-- **Do:** Give an icon button a tooltip naming the action (Edit Task), so people can check before they click.
-- **Don't:** Show an icon alone, which some users cannot read. Add a tooltip that names the action, so everyone knows
-  what it does.
+An icon button has no text, so its tooltip is what names the action for people who cannot tell what the icon means. The
+tooltip is also the button's name for a screen reader.
 
-### Show a state as a badge, not a button
+- **Do:** Give an icon button a tooltip that names the action, such as "Edit Task".
+- **Don't:** Rely on an `aria-label` alone. It names the button for a screen reader, and sighted people get no name.
 
-- **Do:** Show a state as a badge in the state's color (Active, Overdue), so no one mistakes it for an action.
-- **Don't:** Use a small Primary button as a status pill. Show every state as a badge, so no one clicks it expecting an
-  action.
+### 2. Show a state as a badge, not a button
 
-## When you can do it differently
+A badge cannot be mistaken for an action, and a button can. A state drawn as a button gets clicked by people who expect
+something to happen.
 
-- While a card is empty, its Add button moves from the card header to the middle of the empty state.
-- On screens narrower than `--breakpoint-lg`, a page header's actions fold into a More actions (…) menu. See [Page
-  Header](../patterns/page-header.md) for that menu.
-
-## Works with
-
-| Component | How it works with a button |
-|---|---|
-| Dialog | Cancel, then the action, sit at the bottom right. The action repeats the dialog's verb, such as "Delete Project", not OK. |
-| Sheet | A fixed footer holds Cancel and Save. A small record's Delete sits at the start of the footer, away from Save. |
-| Page header | The page's actions sit on the title's line. A record's actions are Edit, then the record's other actions, then Delete in the Destructive type, with three buttons at most. |
-| Card | Add sits in the card header. |
-| Table | A row has no Open, View, or Edit button. The whole row opens its record, and editing happens there. |
-| Tooltip | Every icon button has a tooltip. |
-| Badge | A badge shows a state. A button never does. |
-| Alert Dialog | An alert dialog asks before an action that cannot be undone. Its action button is Destructive when the action removes something or cannot be taken back, and Primary otherwise. |
-
-See [Buttons and Actions](../patterns/buttons-and-actions.md) for where buttons go on a page, a sheet, and a dialog, for
-using one primary button per area, and for choosing a button's type. See [Copy](../foundations/copy.md) for naming the action on a button. See
-[Disabled With a Reason](../foundations/disabled-with-a-reason.md) for saying why a button is disabled. See [Border and
-Radius](../styles/border-and-radius.md) and [Elevation](../styles/elevation.md) for the corners, edges, and
-shadows the Specs name.
+- **Do:** Show Active and Overdue as badges.
+- **Don't:** Use a small Primary button as a status pill.
 
 ## In code
 

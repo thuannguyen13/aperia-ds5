@@ -22,14 +22,8 @@ const TYPES = [
 ] as const
 
 export const buttonExamples = {
-  "@intro": (
-    <Example>
-      <Button variant="outline">Cancel</Button>
-      <Button>Save</Button>
-    </Example>
-  ),
   Primary: (
-    <Example>
+    <Example caption="Two Primary buttons, the second with an icon.">
       <Button>Add Contact</Button>
       <Button>
         <PlusIcon />
@@ -38,7 +32,7 @@ export const buttonExamples = {
     </Example>
   ),
   Outline: (
-    <Example>
+    <Example caption="Outline buttons for Cancel, Edit with an icon, and Export.">
       <Button variant="outline">Cancel</Button>
       <Button variant="outline">
         <PencilIcon />
@@ -48,7 +42,7 @@ export const buttonExamples = {
     </Example>
   ),
   Ghost: (
-    <Example>
+    <Example caption="Ghost icon buttons for Edit and Close, and a Ghost button with text.">
       <IconButton label="Edit Task">
         <PencilIcon />
       </IconButton>
@@ -59,7 +53,7 @@ export const buttonExamples = {
     </Example>
   ),
   Destructive: (
-    <Example>
+    <Example caption="Destructive buttons for Delete, with an icon, and Remove.">
       <Button variant="destructive">
         <Trash2Icon />
         Delete
@@ -68,12 +62,12 @@ export const buttonExamples = {
     </Example>
   ),
   Link: (
-    <Example>
+    <Example caption="A Link button for View All.">
       <Button variant="link">View All</Button>
     </Example>
   ),
   Secondary: (
-    <Example>
+    <Example caption="Two filter chips, each a small, round Secondary button that clears its filter.">
       <Button variant="secondary" size="sm" className="rounded-full">
         Proposal
         <XIcon data-icon="inline-end" />
@@ -85,7 +79,7 @@ export const buttonExamples = {
     </Example>
   ),
   Sizes: (
-    <Example>
+    <Example caption="The four sizes, smallest first.">
       <Button size="xs">Extra Small</Button>
       <Button size="sm">Small</Button>
       <Button>Default</Button>
@@ -230,7 +224,7 @@ export const buttonExamples = {
       }
       goodNote="hover it"
       bad={
-        <Button aria-label="Edit Task">
+        <Button variant="ghost" size="icon-sm" aria-label="Edit Task">
           <PencilIcon />
         </Button>
       }

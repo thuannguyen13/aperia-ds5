@@ -1,8 +1,12 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/foundations/scaffold.md?raw"
 import { SkillDoc } from "../skill-doc"
+import { scaffoldAnatomy } from "../examples/scaffold-anatomy"
 import { scaffoldExamples } from "../examples/scaffold.example"
 
 <Meta title="Foundations/Layout/Scaffold" />
 
-<SkillDoc source={source} after={scaffoldExamples} />
+<SkillDoc
+  source={source}
+  after={{ Anatomy: scaffoldAnatomy, "On a phone": scaffoldExamples["@intro"] }}
+/>

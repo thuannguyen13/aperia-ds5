@@ -1,31 +1,31 @@
 # Sort
 
-Sort is one toolbar button that sets which field orders a list and in which direction.
+Sort lets people put a list in the order they need, by choosing a column and a direction.
+
+## Anatomy
+
+Sort has four parts, a button in the list's toolbar and the three parts of the panel that the button opens. Ascending
+and Descending show only once a column is chosen.
+
+1. **Sort button**. It reads "Sort" while the list is in its own order. Once a column is chosen, it names the column,
+   such as "Sort: Last Alert", with an arrow for the direction.
+2. **Sort By**. It is the panel's title, above the list of orders.
+3. **List of orders**. "Default order", the list's own order, comes first, then one choice for each column the list
+   can sort by. One is chosen at a time.
+4. **Ascending and Descending**. They are two buttons under the list of orders. They set which way the column orders
+   the list.
 
 ## When to use
 
-Use Sort on any list that people may want in another order than the one it starts in. A list has one Sort.
-
-## What is available
-
-Sort is one button that opens a panel. The panel has two parts:
-
-| Part | Content | Action |
-|---|---|---|
-| Sort By | "Default order", the list's own order, then each column the list can sort by, as a list of choices | Sets which column orders the list. |
-| Direction | Ascending and Descending, side by side under the list. They show once a column is picked. | Sets which way the column orders the list. |
-
-The button reads "Sort" while the list is in its own order. Once a column is picked, the button names it, such as
-"Sort: Last Alert", with an arrow that shows the direction.
+Give Sort to any list that people may want in another order than the one it opens in.
 
 ## How it looks and behaves
 
-Sort sits at the right end of the list's toolbar. A list inside a card has no toolbar, so its Sort sits at the right
-end of the card's header. When the card also has Add, Sort comes first and Add comes last, so Add keeps its place at
-the far end of every card.
+Sort sits at the right end of the list's toolbar. See [List Toolbar](list-toolbar.md) for the toolbar's other
+controls. A list inside a card has no toolbar, so its Sort sits at the right end of the card's header. When the card
+also has Add, Sort comes first and Add comes last, so Add keeps its place at the far end of every card.
 
-Every choice applies at once, and the panel stays open until people close it or select outside it. Picking a column
-starts in that column's own direction. Amounts and dates start highest and newest first. Names start A to Z.
+Every choice applies at once, and the panel stays open until people close it or select outside it.
 
 Items with no value count as lowest. They come first when ascending and last when descending.
 
@@ -37,34 +37,28 @@ opens the same panel. See [Screen Sizes](../foundations/screen-sizes.md) for eve
 
 ## Rules
 
-### Use one Sort per list
+### 1. Use one Sort per list
 
-- **Do:** Put one Sort control at the right end of the toolbar, the same on every list, so people find it in one place.
-- **Don't:** Make column headings sort when clicked, or build the app its own sort dropdown. Use the shared Sort, so
-  every list sorts the same way.
+A list has one Sort control, at the right end of its toolbar. Every list uses the shared control, so people find Sort
+in one place and every list sorts the same way.
 
-### Name the sort on its button
+- **Don't:** Make column headings sort when clicked, or build the app its own sort dropdown.
 
-- **Do:** Let the button name the column it sorts by, such as "Sort: Last Alert", so people see the order without
-  opening the panel.
-- **Don't:** Show a count badge on Sort. A list sorts by one column at most, so the column's name says more than a
-  number.
+### 2. Name the sort on its button
 
-### Start amounts and dates highest first
+The Sort button shows the list's order by name, so people see how the list is sorted without opening the panel.
 
-- **Do:** Start amounts and dates highest first (such as the largest Monthly Volume or the newest Created), so people
-  see what matters most first.
-- **Don't:** Start an amount with the smallest. Sort it highest first, so the user does not flip it every time.
+- **Do:** Name the column on the button, such as "Sort: Last Alert".
+- **Don't:** Show a count badge on Sort. A list sorts by one column at most, so a number says less than the column's
+  name.
 
-## When you can do it differently
+### 3. Start each column in the direction people want
 
-This pattern has no exceptions.
+Picking a column starts in the direction people most often want. Amounts and dates start highest and newest first, and
+names start A to Z, so people rarely flip the direction.
 
-## Works with
-
-- See [List Toolbar](list-toolbar.md) for the toolbar that Sort ends.
-- See [Filters](filters.md) for what narrows the list before it is sorted.
-- See [Tables](tables.md) for the rows Sort orders.
+- **Do:** Start Monthly Volume at the largest amount and Created at the newest date.
+- **Don't:** Start an amount at the smallest.
 
 ## In code
 

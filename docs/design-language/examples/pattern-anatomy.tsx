@@ -112,6 +112,21 @@ export const pagingAnatomy = (
   </Anatomy>
 )
 
+export const sortAnatomy = (
+  <Anatomy
+    story="design-language-examples-anatomy--sort"
+    title="Sort open in a list's toolbar"
+    width={720}
+    height={340}
+    targets={{
+      1: { selector: 'button[aria-label^="Sort"]', side: "top" },
+      2: { selector: "[data-slot=popover-content] p", side: "right" },
+      3: { selector: "[data-slot=radio-group]", side: "right" },
+      4: { selector: "[data-slot=toggle-group]", side: "right" },
+    }}
+  />
+)
+
 export const appShellAnatomy = (
   <Anatomy
     story="design-language-examples-anatomy--app-shell"

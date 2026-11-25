@@ -7,17 +7,31 @@ import {
 } from "react"
 import { createPortal } from "react-dom"
 import {
+  Layers2Icon,
+  MinusIcon,
+  RulerIcon,
+  MoveHorizontalIcon,
+  SplineIcon,
+  SquareRoundCornerIcon,
+  TimerIcon,
+  TypeIcon,
+  type LucideIcon,
+} from "lucide-react"
+import {
   SidebarProvider,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "aperia-ds5"
-import { cn } from "@/lib/utils"
 
-// A token named in the docs, drawn as a pill: a live thumbnail of the value, the token's name, its value beside the
-// name (so it reads on a projector or in print), the full value the browser reads on hover, and a link to the page
-// that owns it. `base.css` is the one place a value lives; the docs point at it and never repeat it.
+// A token named in the docs, drawn as a small chip in the sentence: a mark of its kind and the token's name. The value
+// the browser reads shows on hover, and the chip links to the page that owns the token. Every kind of token reads the
+// same way, on every tab: the name is what a designer picks and a developer types, and a shadow or a curve has no
+// value short enough for a sentence. The chip is quiet on purpose (the size and fill of inline code, no border), so it
+// does not break the line someone is reading. A color's mark is a live swatch, because a color has to be seen. Every
+// other kind's mark is an icon. `base.css` is the one place a value lives; the docs read it from the page and never
+// repeat it.
 //
 // Tailwind writes a theme variable to the page only when a class uses it, and a breakpoint or a container query never
 // does, so `.storybook/preview.css` lists the classes that bring the named widths and breakpoints in for these pills.
@@ -34,7 +48,7 @@ type Kind =
   | "width"
 
 /**
- * What a token is: the CSS expression that reads it, the kind of thumbnail and value it gets, its owner page's docs
+ * What a token is: the CSS expression that reads it, the kind of mark and value it gets, its owner page's docs
  * id, and, for a variable a component sets on its own element rather than on the page, that component.
  */
 type Token = { expr: string; kind: Kind; owner: string; scope?: "sidebar" }
@@ -146,38 +160,6 @@ export function tokenOf(name: string): Token | null {
 const varsOf = (expr: string) =>
   [...expr.matchAll(/var\((--[a-z0-9-]+)/g)].map((m) => m[1])
 
-let canvas: CanvasRenderingContext2D | null | undefined
-/** A color as a short hex, plus its opacity when it is see-through: `#0058cc`, `#18181b 12%`. */
-function hexOf(color: string) {
-  canvas ??= document.createElement("canvas").getContext("2d")
-  if (!canvas) return color
-  // The canvas reads any CSS color and gives it back in sRGB: `#rrggbb`, `rgba(…)` or `color(srgb …)`.
-  canvas.fillStyle = "#000"
-  canvas.fillStyle = `color(from ${color} srgb r g b / alpha)`
-  const out = String(canvas.fillStyle)
-  if (out.startsWith("#")) return out
-  const parts = out.match(/-?[\d.]+(?:e-?\d+)?/g)?.map(Number) ?? []
-  const srgb = out.startsWith("color(")
-  const [r, g, b] = parts
-    .slice(0, 3)
-    .map((v) => Math.round(Math.min(1, Math.max(0, srgb ? v : v / 255)) * 255))
-  const alpha = parts[3] ?? 1
-  const hex = `#${[r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("")}`
-  return alpha < 1 ? `${hex} ${Math.round(alpha * 100)}%` : hex
-}
-
-/** A length as whole pixels, or to two places: `16px`, `0.5px`. */
-const pxOf = (raw: string) => {
-  const n = parseFloat(raw)
-  return Number.isNaN(n) ? raw : `${Math.round(n * 100) / 100}px`
-}
-/** A duration in milliseconds: `220ms`. */
-const msOf = (raw: string) => {
-  const n = parseFloat(raw)
-  if (Number.isNaN(n)) return raw
-  return `${Math.round(raw.endsWith("ms") ? n : n * 1000)}ms`
-}
-
 /** The style that makes a probe compute `expr`, and the computed property to read back. */
 function probeOf(token: Token): {
   style: CSSProperties
@@ -202,21 +184,6 @@ function probeOf(token: Token): {
       }
     default:
       return { style: { width: token.expr }, read: (s) => s.width }
-  }
-}
-
-/** The value beside the name: a hex, pixels, or milliseconds. A shadow or a curve is too long and shows on hover only. */
-function shortOf(token: Token, raw: string) {
-  switch (token.kind) {
-    case "color":
-      return hexOf(raw)
-    case "duration":
-      return msOf(raw)
-    case "shadow":
-    case "ease":
-      return null
-    default:
-      return pxOf(raw)
   }
 }
 
@@ -279,49 +246,34 @@ function useValue(token: Token) {
   }
 }
 
-/** The thumbnail: a swatch, a corner, a raised square, a bar, or "Aa", each drawn from the token itself. */
-function Thumb({ token }: { token: Token }) {
-  const box = "size-3.5 shrink-0 bg-card ring-[0.5px] ring-border"
-  switch (token.kind) {
-    case "color":
-      return (
-        <span
-          className={cn(box, "rounded-full")}
-          style={{ background: token.expr }}
-        />
-      )
-    case "radius":
-      return (
-        <span
-          className="size-3.5 shrink-0 border-t-[1.5px] border-l-[1.5px] border-foreground/70"
-          style={{ borderTopLeftRadius: token.expr }}
-        />
-      )
-    case "shadow":
-      return (
-        <span
-          className={cn(box, "rounded-[3px]")}
-          style={{ boxShadow: token.expr }}
-        />
-      )
-    case "space":
-    case "size":
-      return (
-        <span
-          className="h-2 max-w-6 shrink-0 rounded-[2px] bg-primary/50"
-          style={{ width: token.expr }}
-        />
-      )
-    case "type":
-      return (
-        <span className="shrink-0 font-sans leading-none font-medium">Aa</span>
-      )
-    default:
-      return null
-  }
+/** The icon of each kind of token but a color. */
+const ICON: Record<Exclude<Kind, "color">, LucideIcon> = {
+  radius: SquareRoundCornerIcon,
+  shadow: Layers2Icon,
+  space: MoveHorizontalIcon,
+  size: RulerIcon,
+  type: TypeIcon,
+  duration: TimerIcon,
+  ease: SplineIcon,
+  width: MinusIcon,
 }
 
-/** A token as a pill. A name that only looks like a token, such as a class with nothing behind it, stays plain code. */
+/** The mark before the name: a live swatch for a color, and the icon of its kind for every other token. */
+function Mark({ token }: { token: Token }) {
+  if (token.kind === "color")
+    return (
+      <span
+        className="size-2.5 shrink-0 rounded-full bg-card ring-[0.5px] ring-foreground/20"
+        style={{ background: token.expr }}
+      />
+    )
+  const Icon = ICON[token.kind]
+  return (
+    <Icon aria-hidden className="size-3 shrink-0 text-muted-foreground/80" />
+  )
+}
+
+/** A token as a chip. A name that only looks like a token, such as a class with nothing behind it, stays plain code. */
 export function TokenPill({
   name,
   fallback,
@@ -351,7 +303,6 @@ function Pill({
         {fallback}
       </span>
     )
-  const short = shortOf(token, value)
   return (
     <TooltipProvider>
       <Tooltip>
@@ -359,18 +310,11 @@ function Pill({
           <a
             href={`./?path=/docs/${token.owner}--docs`}
             target="_top"
-            className="relative inline-flex translate-y-[-1px] items-center gap-1 rounded-full bg-muted py-0.5 pr-2 pl-1 align-middle font-mono text-[0.8125rem] leading-5 whitespace-nowrap text-foreground no-underline ring-[0.5px] ring-border transition-colors hover:bg-muted/70"
+            className="relative inline-flex items-center gap-1 rounded-md bg-muted/70 px-1 py-px align-baseline font-mono text-[0.8125rem] leading-5 tracking-normal whitespace-nowrap text-foreground no-underline transition-colors hover:bg-muted"
           >
             {probe}
-            <Thumb token={token} />
-            <span className="pl-0.5">{name}</span>
-            {short && (
-              <span className="text-muted-foreground">
-                <span aria-hidden> · </span>
-                <span className="sr-only">, </span>
-                {short}
-              </span>
-            )}
+            <Mark token={token} />
+            {name}
           </a>
         </TooltipTrigger>
         <TooltipContent className="font-mono">{value}</TooltipContent>

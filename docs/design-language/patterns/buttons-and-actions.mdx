@@ -1,11 +1,11 @@
 import { Meta, Canvas, Story } from "@storybook/addon-docs/blocks"
 import source from "../../../plugins/aperia-ds5/skills/design/patterns/buttons-and-actions.md?raw"
-import * as IconButtonStories from "../recipes/icon-button.stories"
 import * as AppShell from "../../../components/ui/app-shell/app-shell.stories"
 import { Example } from "../blocks"
 import * as Panels from "../examples/dialog.stories"
 import { buttonExamples } from "../examples/button"
-import { actionExamples } from "../examples/forms-and-values"
+import { buttonsAndActionsAnatomy } from "../examples/buttons-and-actions-anatomy"
+import { buttonsAndActionsExamples } from "../examples/buttons-and-actions"
 import { SkillDoc } from "../skill-doc"
 
 <Meta title="Patterns/Editing/Buttons and Actions" />
@@ -15,10 +15,7 @@ export const frame = "block min-h-0 overflow-hidden p-0"
 <SkillDoc
   source={source}
   after={{
-    "@intro": buttonExamples["@intro"],
-    "What is available": (
-      <Canvas of={IconButtonStories.Variants} sourceState="none" />
-    ),
+    Anatomy: buttonsAndActionsAnatomy,
     "How it looks and behaves": (
       <>
         <Example
@@ -44,7 +41,9 @@ export const frame = "block min-h-0 overflow-hidden p-0"
     "Use one primary button per area": buttonExamples["Use one primary button per area"],
     "Choose the type by asking the questions in order":
       buttonExamples["Choose the type by asking the questions in order"],
-    "Show at most three record actions as buttons":
+    "Order record actions the same on every record page":
+      buttonsAndActionsExamples["Order record actions the same on every record page"],
+    "Fold extra record actions into More actions":
       buttonExamples["Show at most three record actions as buttons"],
   }}
 />

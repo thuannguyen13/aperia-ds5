@@ -1,11 +1,22 @@
 # Details
 
-Details show a record's facts as labels with their values, in a card or in a page header.
+Details let people read the facts that describe one record, such as its owner, stage, phone number, and start date, as labels with their values. See [Card](../components/card.md) for the card that holds them.
+
+## Anatomy
+
+A details card with two blocks of detail rows has seven parts. The block heading and the empty value show only sometimes. A row's label and value repeat in every row. A fact has only a label and a value, so it has no parts of its own.
+
+1. **Card**. It is the panel that holds the details, with a border and a small shadow.
+2. **Card title**. It is the heading in the card's header. It names what the card holds, such as Prospect.
+3. **Block heading** (optional). It is a short heading over one block of rows, such as Details or Billing. A card shows one when it holds more than one block. Inside a tab, the tab names the block, so the block has no heading.
+4. **Detail row**. It is one fact, with its label and its value side by side.
+5. **Label**. It is muted text that names the fact, such as Owner.
+6. **Value**. It is text in the body color that gives the fact. A phone number, email, or website is a link.
+7. **Empty value** (optional). It is a muted em dash (—) that stands where a value is missing.
 
 ## When to use
 
-Use details for the facts that describe one record, such as its owner, stage, phone number, and start date. A list of
-many records shows its facts as table columns instead. See [Tables](tables.md) for the table.
+Use details for the facts of one record. A list of many records shows its facts as table columns instead, and one record's values are never put in a table. See [Tables](tables.md) for the table.
 
 ## What is available
 
@@ -16,42 +27,26 @@ Details come in two forms:
 | Detail rows | A label and its value side by side, the values lined up in one column so they read down | A details card, or a block inside any card |
 | Facts | A small label over its value, side by side in a row | A page header's facts, or a short row inside a card |
 
-A block of detail rows can have a heading, such as Details or Billing. Inside a tab, the tab names the block, so the
-block has no heading.
+See [Page Header](page-header.md) for facts in a record's header.
 
 ## How it looks and behaves
 
-The labels are muted, and the values use the body color. The label column is never wider than it needs to be, so the
-values sit close to their labels and line up down the block.
+Every label sits in one column and every value in the column after it. Every row in a block uses the same label width, so the values sit close to their labels and line up down the block. A narrow block makes the label column narrower.
 
-A value that is missing shows the empty value, a muted em dash (—), never a blank. See
-[Empty States](../foundations/empty-states.md) for missing values.
+A value that is missing shows the empty value, never a blank. See [Empty States](../foundations/empty-states.md) for missing values and [Money and Numbers](../foundations/money-and-numbers.md) for amounts.
 
-A phone number, email, or website in details is a link. Selecting it calls, writes, or opens the website in a new tab.
-The link is in the Link color, so it reads as a link at rest, and it is underlined only under the pointer. In a table,
-the same values are plain text. See [Table](../components/table.md) for values in a table, and
-[Accessibility](../foundations/accessibility.md) for contact links on a touch screen.
+A phone number, email, or website in details is a link. Selecting it calls, writes, or opens the website in a new tab. The link is in the Link color, so it reads as a link at rest, and it is underlined only under the pointer. In a table, the same values are plain text. See [Table](../components/table.md) for values in a table, and [Accessibility](../foundations/accessibility.md) for contact links on a touch screen.
 
-On a phone, each label stays beside its value. A long value wraps inside its own column, so the values still line up
-down the block. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+On a phone, each label stays beside its value. A long value wraps inside its own column, so the values still line up down the block. See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
 
 ## Rules
 
-### Line the values up in one column
+### 1. Line the values up in one column
 
-- **Do:** Give every row in a block the same label column, so the values line up and read down as one list.
-- **Don't:** Let each value start where its label ends. Use one label column, so people scan the values without
-  hunting.
+Every row in a block uses the same label column, so the values start at one left edge and read down as one list.
 
-## When you can do it differently
-
-Details have no exceptions. Every record shows its facts as detail rows or as facts.
-
-## Works with
-
-- See [Card](../components/card.md) for the card that holds the details.
-- See [Page Header](page-header.md) for facts in a record's header.
-- See [Empty States](../foundations/empty-states.md) for the empty value.
+- **Do:** Build each block from detail rows, so Stage and Last Contacted give values that start at the same edge.
+- **Don't:** Write a fact as "Label: value" text, or let each value start where its label ends.
 
 ## In code
 

@@ -3,6 +3,7 @@ import source from "../../../plugins/aperia-ds5/skills/design/foundations/screen
 import * as ScrollTable from "../recipes/scroll-table.stories"
 import { SkillDoc } from "../skill-doc"
 import { Devices } from "../examples/before-after"
+import { Captioned } from "../blocks"
 
 <Meta title="Foundations/Layout/Screen Sizes" />
 
@@ -22,7 +23,9 @@ import { Devices } from "../examples/before-after"
       />
     ),
     "Keep the page from scrolling sideways": (
-      <Canvas of={ScrollTable.InTitledCard} sourceState="none" />
+      <Captioned caption="A titled card with a Merchants table. A table wider than the card scrolls sideways inside the card, and the page stays still.">
+        <Canvas of={ScrollTable.InTitledCard} sourceState="none" />
+      </Captioned>
     ),
     "Lay out a page by its column's width": (
       <Devices

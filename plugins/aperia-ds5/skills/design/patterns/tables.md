@@ -1,16 +1,24 @@
 # Tables
 
-Tables show records in rows and columns on a page or inside a card. See [Table](../components/table.md) for the table's
-parts and specs.
+Tables let people scan and compare records by their columns, on a list page or inside a card. See
+[Table](../components/table.md) for the table's parts and specs.
+
+## Anatomy
+
+A table on a list page has five parts. The group row and the row's button show only sometimes.
+
+1. **Surface**. It is the panel that holds the table on a page, with the card fill, a thin border, and a small shadow. In
+   a card, the card is the surface.
+2. **Column headings**. They are one row of titles, one for each column, above the rows. A divider sits under them.
+3. **Group row** (optional). It is a band with a muted fill that heads a group of rows. It holds the group's name and, at
+   its end, a total or buttons.
+4. **Row**. It is one record, with one value for each column. Selecting it opens the record.
+5. **Row button** (optional). It is a button inside a row, shown only when the row's click is already taken. An
+   example is the chevron beside a status badge, which opens the status change.
 
 ## When to use
 
-Use a table for records that people scan and compare by their columns, on a list page or inside a card.
-
-### A table on the page, a table in a card, or a list
-
-Where a list of records sits depends on whose records they are and whether people compare them. Find the records in
-this table:
+Use a table for records that people scan and compare by their columns. Find the records in this table:
 
 | Situation | Choice | Why |
 |---|---|---|
@@ -19,7 +27,26 @@ this table:
 | A few items with no columns to compare, such as a record's tasks or notes | A simple list of rows in a card | A table is for comparing records by columns, and these items have none to compare. |
 | One record's own values, such as its details | Labeled values in a card, never a table | A table compares many records, and here there is one. See [Details](details.md). |
 
-### A page or a sheet for the record
+## What is available
+
+A table sits on the page or in a card, and it comes in three more forms:
+
+| Form | Use when | How it looks |
+|---|---|---|
+| Grouped rows | Rows fall into groups | A band with a muted fill heads each group. The group's name sits on the first column's line, with a picture before it when the group has one. A total or buttons sit at the band's end. |
+| Wide table | The table is wider than its box | The table scrolls sideways inside its box. Keyboard users can reach it and scroll it. |
+| Full-width table | A wide list table | The table fills the whole width beside the sidebar. |
+
+## How it looks and behaves
+
+Each row stays on one line. Numbers, including amounts, are right-aligned in their column. See
+[Table](../components/table.md) for how a cell shows a missing value or a count of several names, and for how a row
+looks on hover and when selected. See [Empty States](../foundations/empty-states.md) for missing values.
+
+On a phone, a table keeps every column and scrolls sideways inside its box, so the page never scrolls sideways.
+See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
+
+### Opening a record
 
 A row opens its record. The record opens on its own page or in a sheet, depending on how much it holds. Find the record
 in this table:
@@ -35,42 +62,10 @@ A small record is also read in its sheet. A person who may not change it gets th
 Edit and Delete sit where the record opens. A record with its own page has them in the page header. A small record has
 them in its sheet, with Delete at the start of the footer.
 
-## What is available
-
-Tables come in five forms:
-
-| Form | Use when | Content |
-|---|---|---|
-| Table on the page | A list page | The table sits on its own surface. |
-| Table in a card | Records that belong to the page's record | The table runs to the card's edges under the card's title. |
-| Grouped rows | Rows fall into groups | A band with a muted fill heads each group. The group's name sits on the first column's line, with a picture before it when the group has one. A total or buttons sit at the band's end. |
-| Wide table | The table is wider than its box | The table scrolls sideways inside its box. Keyboard users can reach it and scroll it. |
-| Full-width table | A wide list table | The table fills the whole width beside the sidebar. |
-
-## How it looks and behaves
-
-A table lines up with its card and keeps each row to one line.
-
-In a card, the column headings sit right under the card's title. The first divider is the one under the headings.
-
-The first column starts on the card title's line, `pl-4` in. The last column ends `pr-4` from the right edge.
-
-Dividers separate the rows. A row takes a muted fill under the pointer.
-
-Numbers, including amounts, line up in their column and are right-aligned.
-
-A cell with several names shows a count. Selecting the count lists the names.
-
-A missing value is a muted em dash (—). See [Empty States](../foundations/empty-states.md) for missing values.
-
-On a phone, a table keeps every column and scrolls sideways inside its box, so the page never scrolls sideways.
-See [Screen Sizes](../foundations/screen-sizes.md) for every part on a phone.
-
 ### Buttons on a row
 
-A row's click opens its record, so a row holds no button to open, view, or edit it. A row shows a button only when the
-row's click is already taken by something else. Such a button appears on hover and keyboard focus, and it stays
-visible on a touch screen. These rows are the cases of that rule:
+A row shows a button only when its click is already taken by something else. Such a button appears on hover and keyboard
+focus, and it stays visible on a touch screen. These rows are the cases:
 
 | Row | What takes the row's click | The row's button |
 |---|---|---|
@@ -81,45 +76,30 @@ visible on a touch screen. These rows are the cases of that rule:
 
 ## Rules
 
-### Put the column headings right under the card header
+### 1. Put the column headings right under the card header
 
-- **Do:** Put the column headings straight under the card header, with the first divider under the headings, so the
-  table belongs to its card.
-- **Don't:** Put a border, divider, or header line between the card's title and the table. Leave it out, so the card
-  does not look split.
+In a card, the column headings sit directly under the card's title, and the first divider is the one under the headings,
+so the table belongs to its card.
 
-### Run a table to the card's edges
+- **Do:** Start the Tasks table's headings right under the title, with the first divider under the headings.
+- **Don't:** Put a border, divider, or header line between the card's title and the headings, which makes the card look
+  split.
 
-- **Do:** Let the table fill the card's width and reach its bottom edge, its first column on the title's line, so card
-  and table read as one.
-- **Don't:** Box a bordered table inside the card. Run it edge to edge, so there is no border inside a border.
+### 2. Run a table to the card's edges
 
-### Show a count for several names
+A table in a card fills the card's width and reaches its bottom edge. Its first column starts on the title's line, so
+the card and table read as one.
 
-- **Do:** Show a count for several names ("3 reps"), listing them when clicked, so rows stay one line.
-- **Don't:** Write every name out, stretching the row or cut off at the cell's edge. Show the count, so the row stays
-  readable.
+- **Do:** Run the Tasks table edge to edge, with its first column starting on the title's line.
+- **Don't:** Box a bordered table inside the card, which puts a border inside a border.
 
-### Add a row button only when the row's click is taken
+### 3. Add a row button only when the row's click is taken
 
-- **Do:** Add a row's button only when the row's click is taken, such as a task's Edit beside its checkbox, so a click
-  on any other row opens its record.
-- **Don't:** Put an Open, View, Edit, or Delete button on a row whose click is free. Keep that click for opening the
-  record, so a row's button always means its click was taken.
+A row's click opens its record, so a row holds no button to open, view, or edit it. A button on a row means that
+something else took the row's click.
 
-## When you can do it differently
-
-This pattern has no exceptions. A row's button is one of the cases under Buttons on a row.
-
-## Works with
-
-- See [List Toolbar](list-toolbar.md) for the toolbar above a list's table.
-- See [Page Layout](../foundations/page-layout.md) for lining the first column up with the title.
-- See [Card](../components/card.md) for the titled card a table sits in.
-- See [Table](../components/table.md) for plain rows without stripes.
-- See [Selecting Rows](selecting-rows.md) for ticking rows and acting on them together.
-- See [Status](status.md) for a status column.
-- See [Forms in Sheets](forms-in-sheets.md) for the sheet that a small record opens in.
+- **Do:** Let a click on a task's row open its record, with no Open or Edit button on the row.
+- **Don't:** Put an Open, View, Edit, or Delete button on a row whose click is free.
 
 ## In code
 
